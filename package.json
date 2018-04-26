@@ -8,16 +8,27 @@
     "start": "next start"
   },
   "dependencies": {
+    "autoprefixer": "7.1.5",
+    "babel-plugin-module-resolver": "^2.7.1",
+    "babel-plugin-wrap-in-js": "^1.1.0",
     "es6-promise": "4.1.1",
     "isomorphic-unfetch": "2.0.0",
     "next": "^5.1.0",
     "next-redux-saga": "1.0.1",
     "next-redux-wrapper": "1.2.0",
+    "node-sass": "^4.8.3",
+    "normalize.css": "^8.0.0",
+    "path": "^0.12.7",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-loader": "^2.1.4",
+    "raw-loader": "^0.5.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "5.0.5",
+    "reactstrap": "^5.0.0-beta.3",
     "redux": "3.7.2",
-    "redux-saga": "0.15.4"
+    "redux-saga": "0.15.4",
+    "sass-loader": "^6.0.6"
   },
   "devDependencies": {
     "redux-devtools-extension": "2.13.2"
