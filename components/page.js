@@ -13,8 +13,17 @@ function Page ({error, lastUpdate, light, linkTo, placeholderData, title}) {
       <Clock lastUpdate={lastUpdate} light={light} />
       <AddCount />
       <nav>
-        <Link href={linkTo}>
-          <a>Navigate</a>
+        <Link href='/registration/member'>
+          <a>Member</a>
+        </Link>
+        <Link href='/registration/identity'>
+          <a>Identity</a>
+        </Link>
+        <Link href='/registration/account'>
+          <a>Account</a>
+        </Link>
+        <Link href='/registration/approvals'>
+          <a>Approvals</a>
         </Link>
       </nav>
       {placeholderData &&
