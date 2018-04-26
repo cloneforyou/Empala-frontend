@@ -1,0 +1,19 @@
+
+.menu-items {
+  list-style: none;
+  font-size: 18px;
+}
+
+.menu-items__item--active{
+  color: #98c73a;
+}
+
+.menu-items__item--active::after {
+  content: '';
+  display: inline-block;
+  width: 116px;
+  height: 2px;
+  border: solid 1px #98c73a;
+  margin-left: 20px;
+  vertical-align: middle;
+}
