@@ -8,8 +8,8 @@ const MaskedRegistrationLink = (props) => (
   </li>
 );
 
-const RegistrationContentMenuTabs = () => (
-  <div className=''>
+const ContentMenuTabs = () => (
+  <div className='menu-tabs'>
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
         <MaskedRegistrationLink name='member' tabNumber='1'/>
@@ -22,4 +22,4 @@ const RegistrationContentMenuTabs = () => (
   </div>
 );
 
-export default RegistrationContentMenuTabs
+export default ContentMenuTabs

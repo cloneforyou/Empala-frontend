@@ -1,9 +1,10 @@
 import React from 'react';
 import {getMenuItemsByPageName} from "../utils/registrationUtils";
 
-const RegistrationContentMenuItems = (props) => {
+const ContentMenuItems = (props) => {
   console.log('=======>', props)
-  const menuItems = getMenuItemsByPageName(props.url.query.name);
+  const name = props.url ? props.url.query.name : 'member';
+  const menuItems = getMenuItemsByPageName(name);
   return (
     <div className=''>
       <ul className='menu-items'>
@@ -20,4 +21,4 @@ const RegistrationContentMenuItems = (props) => {
   )
 };
 
-export default RegistrationContentMenuItems;
+export default ContentMenuItems;
