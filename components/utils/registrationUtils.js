@@ -1,7 +1,7 @@
 const memberItems = [
   {title: 'Upload your picture', key: 'picture', completed: false, active: false},
   {title: 'Basic information', key: 'basic-info', completed: false, active: false},
-  {title: 'Contact information', key: 'contact-info', completed: false, active: false},
+  {title: 'Contact information', key: 'contact-info', completed: false, active: true},
   {title: 'Home address', key: 'home-address', completed: false, active: false},
   {title: 'Username and password', key: 'name-password', completed: false, active: false},
   {title: 'Confirmation', key: 'confirmation', completed: false, active: false},
