@@ -1,9 +1,12 @@
-@import '../../node_modules/normalize.css/normalize.css';
+@import "../../node_modules/normalize.css/normalize.css";
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './modules/_header';
 @import './modules/_onboard';
 @import './modules/_footer';
 @import './modules/_uploadFile';
+@import "modules/_registration-menu";
+@import "../fonts/fonts.css";
 
 body {
+  font-family: 'Proxima Nova', Georgia, sans-serif;
 }

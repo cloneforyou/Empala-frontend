@@ -1,31 +1,25 @@
-import Link from 'next/link'
 import {connect} from 'react-redux'
+import stylesheet from '../assets/styles/main.scss'
+
+import ContentMenuTabs from '../components/registration/ContentMenuTabs';
+
 
 import AddCount from './add-count'
 import Clock from './clock'
 
+
+
 function Page ({error, lastUpdate, light, linkTo, placeholderData, title}) {
   return (
     <div>
+      <style dangerouslySetInnerHTML={{ __html: stylesheet }}/>
       <h1>
         {title}
       </h1>
+      <ContentMenuTabs />
       <Clock lastUpdate={lastUpdate} light={light} />
       <AddCount />
-      <nav>
-        <Link href='/registration/member'>
-          <a>Member</a>
-        </Link>
-        <Link href='/registration/identity'>
-          <a>Identity</a>
-        </Link>
-        <Link href='/registration/account'>
-          <a>Account</a>
-        </Link>
-        <Link href='/registration/approvals'>
-          <a>Approvals</a>
-        </Link>
-      </nav>
+
       {placeholderData &&
         <pre>
           <code>
