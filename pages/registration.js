@@ -1,14 +1,20 @@
 import React from 'react';
-import RegistrationContentMenuItems from '../components/registration/RegistrationContentMenuItems';
-import ContentMenu from '../components/registration/ContentMenu';
+import Header from '../components/registration/Header';
+import Content from '../components/registration/Content';
+import Footer from '../components/registration/Footer';
 import stylesheet from '../assets/styles/main.scss'
 
 
 const RegistrationPage = (props) => {
+  console.log('registtttt --------->>>>', props)
   return (
     <div>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }}/>
-      <ContentMenu {...props} />
+      <Header />
+      <Content {...props} />
+      <Footer />
+
+
     </div>
   )
 };

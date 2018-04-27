@@ -1,12 +1,12 @@
 import React from "react";
 import ContentMenuTabs from './ContentMenuTabs';
-import RegistrationContentMenuItems from './RegistrationContentMenuItems';
+import ContentMenuItems from './ContentMenuItems';
 
 
 const ContentMenu = (props) => (
   <div className=''>
     <ContentMenuTabs />
-    <RegistrationContentMenuItems {...props} />
+    <ContentMenuItems {...props} />
 
   </div>
 );
