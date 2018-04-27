@@ -1,4 +1,10 @@
 .header {
-  background: #000;
-  min-height: 150px;
+  background: #222425;
+  min-height: 160px;
+  &__block{
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 54px;
+    justify-content: space-between;
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {getMenuItemsByPageName} from "../utils/registrationUtils";
 
-const RegistrationContentMenuItems = (props) => {
+const ContentMenuItems = (props) => {
   const menuItems = getMenuItemsByPageName(props.name);
   return (
     <div className=''>
@@ -18,4 +18,4 @@ const RegistrationContentMenuItems = (props) => {
   )
 };
 
-export default RegistrationContentMenuItems;
+export default ContentMenuItems;

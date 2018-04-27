@@ -1,16 +1,15 @@
-const  RegistrationContent = () => (
+const  Content = () => (
     <div className='onboard'>
       <div className='onboard__container'>
-        <div className='row'>
+        <div className='row no-gutters onboard__container__col'>
           <div className='col-6'>
             TABS
           </div>
-          <div className='col-6'>
-            Form
+          <div className='col-6 onboard__right-block'>
           </div>
         </div>
       </div>
     </div>
 );
 
-export default RegistrationContent
+export default Content

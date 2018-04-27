@@ -1,0 +1,26 @@
+.upload-file{
+
+  &__img{
+    max-width: 139px;
+    min-height: 139px;
+    border: solid 2px #808895;
+  }
+  &__text{
+    font-size: 18px;
+    color: #808895;
+  }
+}
+.btn--uploading{
+  width: 140px;
+  height: 40px;
+  background-color: #808895;
+  border: none;
+  &__text{
+    font-size: 18px;
+    color: #ffffff;
+  }
+}
+.link--uploading{
+  font-size: 16px;
+  color: #808895;
+}

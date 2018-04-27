@@ -1,5 +1,5 @@
 import React from 'react';
-import RegistrationContentMenuItems from '../../components/registration/RegistrationContentMenuItems';
+import RegistrationContentMenuItems from '../../components/registration/ContentMenuItems';
 
 
 const ApprovalsPage = () => {
