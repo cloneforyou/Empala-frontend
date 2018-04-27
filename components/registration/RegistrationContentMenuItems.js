@@ -2,7 +2,8 @@ import React from 'react';
 import {getMenuItemsByPageName} from "../utils/registrationUtils";
 
 const RegistrationContentMenuItems = (props) => {
-  const menuItems = getMenuItemsByPageName(props.name);
+  console.log('=======>', props)
+  const menuItems = getMenuItemsByPageName(props.url.query.name);
   return (
     <div className=''>
       <ul className='menu-items'>

@@ -18,7 +18,7 @@ class Counter extends React.Component {
   }
 
   render () {
-    return <Page title='Index Page'  />
+    return <Page title='Empala'  />
   }
 }
 

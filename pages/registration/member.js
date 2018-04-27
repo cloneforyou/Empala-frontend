@@ -3,11 +3,11 @@ import RegistrationContentMenuItems from '../../components/registration/Registra
 import stylesheet from '../../assets/styles/main.scss'
 
 
-const MemberPage = () => {
+const MemberPage = (props) => {
   return (
     <div>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }}/>
-      <RegistrationContentMenuItems name={'member'} />
+      <RegistrationContentMenuItems name={'props.url.'} />
     </div>
   )
 };
