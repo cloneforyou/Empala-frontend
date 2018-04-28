@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {increment, loadData, startClock, tickClock} from '../actions'
-import RegisrationPage from '../pages/registration';
+import RegisrationPage from './RegistrationPage';
 import {withReduxSaga} from '../store'
 // import RegistrationLayout from '../components/RegistrationLayout'
 
@@ -24,6 +24,7 @@ class Counter extends React.Component {
     // return <Page title='Index Page' linkTo='/other' />
     // return <RegistrationLayout  />
     return <RegisrationPage />
+
   }
 }
 

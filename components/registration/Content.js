@@ -13,8 +13,12 @@ const  Content = (props) => {
             <ContentMenu {...props} />
           </div>
           <div className='col-6 onboard__right-block'>
-            <ContentFillingInformation />
-            <Button />
+            <div className="onboard__right-block--center">
+              <ContentFillingInformation />
+            </div>
+            <div className="onboard__right-block--bottom">
+              <Button />
+            </div>
           </div>
         </div>
       </div>

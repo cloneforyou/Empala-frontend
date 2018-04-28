@@ -3,9 +3,11 @@
 @import './modules/_header';
 @import './modules/_onboard';
 @import './modules/_footer';
-@import './modules/_uploadFile';
+@import 'modules/upload-file';
 @import "modules/_registration-menu";
 @import "./modules/_button";
+@import './modules/_radio-btn';
+@import './modules/_main-container';
 @import "../fonts/fonts.css";
 
 body {
@@ -13,3 +15,4 @@ body {
   font-style: normal;
   font-weight: 100;
 }
+#root div:first-child { height: 100%; width:100%; }
