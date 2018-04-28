@@ -11,6 +11,14 @@
     }
   }
   &__right-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f9fafb;
     border-left: solid 1px #e0e0e0;
+  }
+  &__left-block {
+    display: flex;
+    flex-direction: column;
   }
 }

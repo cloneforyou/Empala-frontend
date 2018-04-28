@@ -5,8 +5,11 @@
 @import './modules/_footer';
 @import './modules/_uploadFile';
 @import "modules/_registration-menu";
+@import "./modules/_button";
 @import "../fonts/fonts.css";
 
 body {
-  font-family: 'Proxima Nova', Georgia, sans-serif;
+  font-family: proxima-nova, sans-serif;
+  font-style: normal;
+  font-weight: 100;
 }

@@ -1,26 +1,42 @@
-.upload-file{
+.upload-file {
+  text-align: center;
 
-  &__img{
+  &__container {
+  }
+  &__dummy-img {
     max-width: 139px;
     min-height: 139px;
     border: solid 2px #808895;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    margin: auto;
   }
-  &__text{
+  &__img {
+  }
+  &__text {
     font-size: 18px;
     color: #808895;
   }
 }
-.btn--uploading{
+
+.dummy-img__text {
+  font-size: 55px;
+  line-height: 139px;
+  color: #808895;
+}
+
+.btn--uploading {
   width: 140px;
   height: 40px;
   background-color: #808895;
   border: none;
-  &__text{
+  &__text {
     font-size: 18px;
     color: #ffffff;
   }
 }
-.link--uploading{
+
+.link--uploading {
   font-size: 16px;
   color: #808895;
 }
