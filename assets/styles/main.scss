@@ -11,8 +11,18 @@
 @import "../fonts/fonts.css";
 
 body {
+  color: #808895;
   font-family: proxima-nova, sans-serif;
   font-style: normal;
   font-weight: 100;
 }
-#root div:first-child { height: 100%; width:100%; }
+
+.block--verticalCentered {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.relative {
+  position: relative;
+}
