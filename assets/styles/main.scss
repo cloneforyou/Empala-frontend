@@ -3,8 +3,11 @@
 @import './modules/_header';
 @import './modules/_onboard';
 @import './modules/_footer';
-@import './modules/_uploadFile';
+@import 'modules/upload-file';
 @import "modules/_registration-menu";
+@import "./modules/_button";
+@import './modules/_radio-btn';
+@import './modules/_main-container';
 @import "../fonts/fonts.css";
 
 body {

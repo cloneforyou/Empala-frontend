@@ -1,15 +1,7 @@
 import React from 'react';
 import ContentMenu from './ContentMenu';
-import ContentFillingInfo from './ContentFillingInformation';
-import Link from 'next/link';
-
-
-const NextLink = (props) => (
-    <Link as={`/registration/${props.name}/${props.tabNumber}`}
-          href={`/registration?name=${props.name}&tabNumber=${props.tabNumber}`}>
-      <button> > </button>
-    </Link>
-);
+import ContentFillingInformation from './ContentFillingInformation';
+import Button from './Button';
 
 const  Content = (props) => {
   console.log('content props -->', props)
@@ -17,17 +9,17 @@ const  Content = (props) => {
     <div className='onboard'>
       <div className='onboard__container'>
         <div className='row no-gutters onboard__container__col'>
-          <div className='col-6 relative menu-items--min-height'>
+          <div className='col-6 relative onboard__left-block menu-items--min-height'>
             <ContentMenu {...props} />
           </div>
           <div className='col-6 onboard__right-block'>
-            <ContentFillingInfo {...props} />
-            <NextLink
-              name={ props.url? props.url.query.name : 'member'}
-              tabNumber={props.url ? +props.url.query.tabNumber -1 : 1} />
-            <NextLink
-              name={ props.url? props.url.query.name : 'member'}
-              tabNumber={props.url ? +props.url.query.tabNumber +1 : 1} />
+
+            <div className="onboard__right-block--center">
+              <ContentFillingInformation {...props} />
+            </div>
+            <div className="onboard__right-block--bottom">
+              <Button {...props} />
+            </div>
           </div>
         </div>
       </div>

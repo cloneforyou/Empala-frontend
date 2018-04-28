@@ -11,7 +11,7 @@
 // }
 // for select elements
 
-const dataFields = [
+export const dataFields = [
   [
     {
       id: 'birthdate',

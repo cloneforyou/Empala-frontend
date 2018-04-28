@@ -6,5 +6,13 @@
     margin: auto;
     padding-top: 54px;
     justify-content: space-between;
+    &__right-link{
+      font-size: 17px;
+      color: #98c73a;
+    }
+    &__left-link{
+      font-size: 17px;
+      color: #ffffff;
+    }
   }
 }
