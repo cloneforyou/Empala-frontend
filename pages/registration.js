@@ -6,7 +6,6 @@ import stylesheet from '../assets/styles/main.scss'
 
 
 const RegistrationPage = (props) => {
-  console.log('registtttt --------->>>>', props)
   return (
     <div>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }}/>
