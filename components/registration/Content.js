@@ -9,15 +9,16 @@ const  Content = (props) => {
     <div className='onboard'>
       <div className='onboard__container'>
         <div className='row no-gutters onboard__container__col'>
-          <div className='col-6 onboard__left-block'>
+          <div className='col-6 relative onboard__left-block menu-items--min-height'>
             <ContentMenu {...props} />
           </div>
           <div className='col-6 onboard__right-block'>
+
             <div className="onboard__right-block--center">
-              <ContentFillingInformation />
+              <ContentFillingInformation {...props} />
             </div>
             <div className="onboard__right-block--bottom">
-              <Button />
+              <Button {...props} />
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {increment, loadData, startClock, tickClock} from '../actions'
-import RegisrationPage from './RegistrationPage';
+import RegisrationPage from './registration';
 import {withReduxSaga} from '../store'
 // import RegistrationLayout from '../components/RegistrationLayout'
 

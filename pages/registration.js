@@ -5,8 +5,7 @@ import Footer from '../components/registration/Footer';
 import stylesheet from '../assets/styles/main.scss'
 
 
-const RegistrationPage = (props) => {
-  console.log('registtttt --------->>>>', props)
+const Registration = (props) => {
   return (
     <div>
       <style dangerouslySetInnerHTML={{ __html: stylesheet }}/>
@@ -19,4 +18,4 @@ const RegistrationPage = (props) => {
   )
 };
 
-export default RegistrationPage;
+export default Registration;
