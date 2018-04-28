@@ -23,6 +23,22 @@
   vertical-align: middle;
 }
 
+.menu-items__completed-mark {
+  background-color: #98c73a;
+  border-radius: 50%;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+}
+
+.menu-items__completed-mark-wrapper,
+.menu-items__completed-mark {
+  display: inline-block;
+  height: 20px;
+  margin-right: 13px;
+  width: 20px;
+}
+
 .menu-tabs {
   margin-top: 128px;
 }

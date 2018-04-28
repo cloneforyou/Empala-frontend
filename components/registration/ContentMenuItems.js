@@ -1,5 +1,5 @@
 import React from 'react';
-import {getMenuItemsByTabName} from "../utils/registrationUtils";
+import {getMenuItemsByTabName} from "../../utils/registrationUtils";
 
 const ContentMenuItems = (props) => {
   console.log('=======>', props)
@@ -12,6 +12,9 @@ const ContentMenuItems = (props) => {
           const itemClassName = item.active ? 'menu-items__item menu-items__item--active' : 'menu-items__item';
           return (
             <li  key={item.key}>
+              <div className="menu-items__completed-mark-wrapper">
+                {item.completed && <span className="menu-items__completed-mark">✓</span>}
+              </div>
               <span className={itemClassName} > {item.title}</span>
             </li>)
         })

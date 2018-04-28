@@ -1,10 +1,12 @@
-import UploadUserFile from "../registration/UploadUserFile";
-import EmpalaInput from "../registration/member/input";
+import UploadUserFile from "../components/registration/UploadUserFile";
+import MemberInfoForm from "../components/registration/member/MemberInfoForm";
+import IdentityForm from "../components/registration/identity/IdentityForm";
+import AccountForm from "../components/registration/account/AccountForm";
 
 const menuItems = {
   member: [
     {title: 'Upload your picture', key: 'picture', completed: false, active: false},
-    {title: 'Basic information', key: 'basic-info', completed: false, active: false},
+    {title: 'Basic information', key: 'basic-info', completed: true, active: false},
     {title: 'Contact information', key: 'contact-info', completed: false, active: true},
     {title: 'Home address', key: 'home-address', completed: false, active: false},
     {title: 'Username and password', key: 'name-password', completed: false, active: false},
@@ -28,88 +30,27 @@ const menuItems = {
   ],
 };
 
-function mapDataToInputs(data) {
-  return data.map((item) => (<div>
-    <EmpalaInput
-      key={item.id}
-      id={item.id}
-      type={item.type}
-      label={item.label}
-      placeholder={item.placeholder}
-    />
-  </div>));
-}
 
 const tabContent = {
   member: [
-    <UploadUserFile/>,
-    mapDataToInputs([
-      {
-        id: 'name',
-        type: 'text',
-        label: 'Name',
-        placeholder: 'Estella',
-      },
-      {
-        id: 'last-name',
-        type: 'text',
-        label: 'Last name',
-        placeholder: 'Robbins',
-      },
-    ]),
-    mapDataToInputs([
-      {
-        id: 'email',
-        type: 'email',
-        label: 'E-mail',
-        placeholder: 'Estella',
-      },
-      {
-        id: 'mobile',
-        type: 'text',
-        label: 'Mobile phone',
-        placeholder: '+44 999999999',
-      },
-    ]),
-    mapDataToInputs([
-        {
-          id: 'Home address-line1',
-          type: 'text',
-          label: 'address-line1',
-          placeholder: '898 Candido Hollow',
-        },
-        {
-          id: 'Home address-line2',
-          type: 'text',
-          label: 'address-line2',
-          placeholder: 'Jacobson Cape',
-        },
-      {
-        id: 'city',
-        type: 'text',
-        placeholder: 'City',
-      },
-      {
-        id: 'Home address-line2',
-        type: 'number',
-        placeholder: 'Zip code',
-      },
-      {
-        id: 'country',
-        type: 'text',
-        placeholder: 'Country',
-      },
-      ]),
+    <UploadUserFile />,
+    <MemberInfoForm page={0} />,
+    <MemberInfoForm page={1} />,
+    <MemberInfoForm page={2} />,
   ],
   identity: [
-    'identity',
-    'identity',
+    <UploadUserFile />,
+    <IdentityForm page={0} />,
+    <IdentityForm page={1} />,
+    <IdentityForm page={2} />,
+    <IdentityForm page={3} />,
   ],
   account: [
-    'account',
+    <AccountForm page={0} />,
+    'DEPOSIT'
   ],
   approvals: [
-    'approvals',
+    'APPROVALS',
   ],
 };
 
@@ -128,7 +69,6 @@ export function getMenuItemsByTabName(tabName) {
 
 
 export function getTabContentByTabName(tabName, itemNumber) {
-  console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$', tabName)
   switch (tabName) {
     case 'member':
       return {
@@ -138,17 +78,17 @@ export function getTabContentByTabName(tabName, itemNumber) {
     case 'identity':
       return {
         menuItems: menuItems.identity,
-        tabContent: tabContent.member[itemNumber],
+        tabContent: tabContent.identity[itemNumber],
       };
     case 'account':
       return {
         menuItems: menuItems.account,
-        tabContent: tabContent.member[itemNumber],
+        tabContent: tabContent.account[itemNumber],
       };
     case 'approvals':
       return {
         menuItems: menuItems.approvals,
-        tabContent: tabContent.member[itemNumber],
+        tabContent: tabContent.approvals[itemNumber],
       };
 
   }

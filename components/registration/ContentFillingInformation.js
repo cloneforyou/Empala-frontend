@@ -1,5 +1,4 @@
-import UploadUserFile from './UploadUserFile';
-import { getTabContentByTabName } from "../utils/registrationUtils";
+import { getTabContentByTabName } from "../../utils/registrationUtils";
 
 
 
