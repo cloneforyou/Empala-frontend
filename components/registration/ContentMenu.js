@@ -8,14 +8,13 @@ export default class ContentMenu extends React.Component {
     console.log(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props)
-    console.log(nextProps)
-    if (this.props.tabName !== nextProps.tabName) {
-      console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-      nextProps.getMenuItems(nextProps.tabName)
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log(this.props)
+  //   console.log(nextProps)
+  //   if (this.props.tabName !== nextProps.tabName) {
+  //     nextProps.getMenuItems(nextProps.tabName)
+  //   }
+  // }
 
   render() {
     return (

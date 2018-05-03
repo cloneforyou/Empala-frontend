@@ -3,7 +3,7 @@ import MemberInfoForm from "../components/registration/member/MemberInfoForm";
 import IdentityForm from "../components/registration/identity/IdentityForm";
 import AccountForm from "../components/registration/account/AccountForm";
 
-const menuItems = {
+export const menuItems = {
   member: [
     {title: 'Upload your picture', key: 'picture', completed: false, active: false},
     {title: 'Basic information', key: 'basic-info', completed: true, active: false},
@@ -37,6 +37,8 @@ const tabContent = {
     <MemberInfoForm page={0} />,
     <MemberInfoForm page={1} />,
     <MemberInfoForm page={2} />,
+    <MemberInfoForm page={3} />,
+    'CONFIRMATION',
   ],
   identity: [
     <UploadUserFile />,
