@@ -25,41 +25,49 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-const  Content = (props) => {
+class Content extends React.PureComponent {
 
-    if (props.url) {
-      // props.setTabName(props.url.query.name);
-      // props.setTabPageIndex(props.url.query.tabNumber);
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props)
+    console.log(nextProps)
+    if (this.props.tabName !== nextProps.tabName) {
+      this.props.getMenuItems(nextProps.tabName)
     }
+  }
 
-  const pageContent = getTabContentByTabName(props.tabName, props.tabIndex-1);
+  render() {
+    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
 
-  console.log('content props -->', props.tabName)
-  console.log('content props -->', props.tabIndex-1)
-  console.log('content props -->', pageContent)
-  return(
-    <div className='onboard'>
-      <div className='onboard__container'>
-        <div className='row no-gutters onboard__container__col'>
-          <div className='col-6 relative onboard__left-block menu-items--min-height'>
-            <ContentMenu menuItems={pageContent.menuItems} tabName={props.tabName} getMenuItems={props.getMenuItems} />
-          </div>
-          <div className='col-6 onboard__right-block'>
-
-            <div className="onboard__right-block--center">
-              {/*<ContentFillingInformation {...props} />*/}
-              {pageContent.tabContent}
+    if (!this.props.menuItems || this.props.menuItems.length == 0) {
+      this.props.getMenuItems(this.props.tabName); 
+    }
+    // console.log('content props -->', props.tabName)
+    // console.log('content props -->', props.tabIndex-1)
+    // console.log('content props -->', pageContent)
+    return(
+      <div className='onboard'>
+        <div className='onboard__container'>
+          <div className='row no-gutters onboard__container__col'>
+            <div className='col-6 relative onboard__left-block menu-items--min-height'>
+              <ContentMenu menuItems={this.props.menuItems} tabIndex={this.props.tabIndex}  />
             </div>
-            <div className="onboard__right-block--bottom">
-              <Button
-                tabName={props.tabName}
-                tabIndex={props.tabIndex} />
+            <div className='col-6 onboard__right-block'>
+
+              <div className="onboard__right-block--center">
+                {/*<ContentFillingInformation {...props} />*/}
+                {pageContent.tabContent}
+              </div>
+              <div className="onboard__right-block--bottom">
+                <Button
+                  tabName={this.props.tabName}
+                  tabIndex={this.props.tabIndex} />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-);
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

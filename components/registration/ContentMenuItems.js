@@ -7,13 +7,11 @@ import  MdCheck from 'react-icons/lib/md/check'
 
 const ContentMenuItems = (props) => {
   console.log('MMMMMMMMMMEEEEENNNNUUUUU', props)
-  // const name = props.url ? props.url.query.name : 'member';
-  // const menuItems = getMenuItemsByTabName(name);
   return (
     <div className='block--verticalCentered'>
       <ul className='menu-items'>
-        {props.menuItems.map((item) => {
-          const itemClassName = item.active ? 'menu-items__item menu-items__item--active' : 'menu-items__item';
+        {props.menuItems.map((item, index) => {
+          const itemClassName = (props.tabIndex === index+1) ? 'menu-items__item menu-items__item--active' : 'menu-items__item';
           return (
             <li  key={item.key}>
               <div className="menu-items__completed-mark-wrapper">
