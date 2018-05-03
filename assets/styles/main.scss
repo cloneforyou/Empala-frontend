@@ -3,11 +3,13 @@
 @import './modules/_header';
 @import './modules/_onboard';
 @import './modules/_footer';
-@import 'modules/upload-file';
-@import "modules/_registration-menu";
-@import "./modules/_button";
+@import './modules/upload-file';
+@import 'modules/tabs-menu';
+@import './modules/_button';
 @import './modules/_radio-btn';
 @import './modules/_main-container';
+@import './modules/_input-group';
+@import './modules/_menu-items';
 @import "../fonts/fonts.css";
 
 body {
@@ -15,14 +17,4 @@ body {
   font-family: proxima-nova, sans-serif;
   font-style: normal;
   font-weight: 100;
-}
-
-.block--verticalCentered {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.relative {
-  position: relative;
 }

@@ -16,7 +16,7 @@ export default class MemberInfoForm extends React.Component {
               label={item.label}
               placeholder={item.placeholder}
             />
-) }
+          )}
         </form>
       )
   }

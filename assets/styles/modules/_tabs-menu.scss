@@ -1,0 +1,21 @@
+.tabs-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-item {
+  display: inline;
+  margin-right: 10px;
+}
+
+.tabs-item a {
+  color: #808895;
+  text-transform: capitalize;
+  margin-right: 13px;
+}
+
+.tabs-item a:hover {
+  color: #98c73a;
+  text-decoration: none;
+}

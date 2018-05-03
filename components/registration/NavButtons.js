@@ -10,19 +10,19 @@ const LeafLink = (props) => (
   </Link>
 );
 
-const Button = (props) => (
-  <div className='buttons__container'>
+const NavButtons = (props) => (
+  <div>
     <LeafLink
       name={ props.url ? props.url.query.name : 'member'}
       tabNumber={props.url ? +props.url.query.tabNumber - 1 : 1}>
-      <button type='button' className='btn--navigate btn--prev'><MdArrowBack /></button>
+      <button type='button' className='btn--navigate btn--prev'><MdArrowBack size={20} /></button>
     </LeafLink>
     <LeafLink
       name={ props.url ? props.url.query.name : 'member'}
       tabNumber={props.url ? +props.url.query.tabNumber + 1 : 1}>
-      <button type='button' className='btn--navigate btn--next'><MdArrowForward /></button>
+      <button type='button' className='btn--navigate btn--next'><MdArrowForward size={20} /></button>
     </LeafLink>
   </div>
 );
 
-export default Button
+export default NavButtons
