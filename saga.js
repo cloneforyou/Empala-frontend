@@ -5,6 +5,8 @@ import {all, call, put, take, takeLatest} from 'redux-saga/effects'
 import es6promise from 'es6-promise'
 import 'isomorphic-unfetch'
 
+import registrationSaga from './saga/registration'
+
 import {actionTypes, failure, loadDataSuccess, tickClock} from './actions'
 
 es6promise.polyfill()
@@ -30,7 +32,8 @@ function * loadDataSaga () {
 function * rootSaga () {
   yield all([
     call(runClockSaga),
-    takeLatest(actionTypes.LOAD_DATA, loadDataSaga)
+    takeLatest(actionTypes.LOAD_DATA, loadDataSaga),
+    registrationSaga(),
   ])
 }
 

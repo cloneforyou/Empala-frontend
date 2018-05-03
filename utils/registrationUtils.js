@@ -64,6 +64,8 @@ export function getMenuItemsByTabName(tabName) {
       return menuItems.account;
     case 'approvals':
       return menuItems.approvals;
+    default :
+      return menuItems.identity;
   }
 }
 

@@ -1,11 +1,9 @@
 import React from 'react'
+import { Provider } from 'react-redux';
+import RegistrationPage from './registration';
+import { withReduxSaga } from '../store'
 
-import {increment, loadData, startClock, tickClock} from '../actions'
-import RegisrationPage from './registration';
-import {withReduxSaga} from '../store'
-// import RegistrationLayout from '../components/RegistrationLayout'
-
-class Counter extends React.Component {
+class Index extends React.Component {
 //   static async getInitialProps ({store, isServer}) {
 //     store.dispatch(tickClock(isServer))
 //     store.dispatch(increment())
@@ -23,9 +21,9 @@ class Counter extends React.Component {
 
     // return <Page title='Index Page' linkTo='/other' />
     // return <RegistrationLayout  />
-    return <RegisrationPage />
+    return <RegistrationPage />
 
   }
 }
 
-export default withReduxSaga(Counter)
+export default withReduxSaga(Index)
