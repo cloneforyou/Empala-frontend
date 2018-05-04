@@ -1,0 +1,35 @@
+.information-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 83px 0 39px;
+}
+
+.information-title {
+  font-size: 32px;
+  font-weight: 500;
+}
+.information-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #222325;
+  font-size: 17px;
+  line-height: 1.22;
+  &__par1 {
+    margin: 0 164px;
+  }
+  &__par2 {
+    margin: 0 134px;
+  }
+  &__par3 {
+    margin: 0;
+  }
+  &__par4 {
+    margin: 0 52px;
+  }
+  &__par5 {
+    margin: 0 186px 87px;
+  }
+}

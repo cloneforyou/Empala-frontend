@@ -1,6 +1,6 @@
-const path = require('path')
-const glob = require('glob')
-const withImages = require('next-images')
+const path = require('path');
+const glob = require('glob');
+const withImages = require('next-images');
 
 module.exports = withImages({
   webpack: (config, { dev }) => {
