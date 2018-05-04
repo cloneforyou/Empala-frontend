@@ -1,13 +1,22 @@
 import React from 'react';
+import SelectField from 'material-ui/SelectField';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MenuItem from 'material-ui/MenuItem';
 
 const EmpalaSelect = (props) => {
 
   return(
-    <div className='input-group mb-3'>
-        <select className="custom-select border-0" value={''} >
-          <option value="" disabled selected hidden>{props.label}</option>
-          {props.options.map((option) => (<option key={Date.now()+ Math.random()} value={option.value}>{option.title}</option>))}
-        </select>
+    <div>
+      <MuiThemeProvider>
+        <SelectField
+          floatingLabelText={props.label}
+          style={{ width: '422px', fontWeight: 400, margin: 0 }}
+          underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
+          underlineFocusStyle={{ borderBottom : '2px solid red' }}
+        >
+          {props.options.map((option) => (<MenuItem key={Date.now()+ Math.random()} value={option.value}  primaryText={option.title} />))}
+        </SelectField>
+      </MuiThemeProvider>
     </div>
   )
 };

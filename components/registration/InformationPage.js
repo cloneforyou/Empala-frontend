@@ -20,7 +20,7 @@ const InformationPage = () => (
     <p className='information-text__par5'>You will also need to maintain a $25,000 minimum account value to stay live (you will continue to be able to
       close out positions if you have less than $25,000)</p>
   </div>
-  <NavButtons/>
+  <NavButtons />
 </div>
 );
 
