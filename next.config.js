@@ -1,7 +1,8 @@
 const path = require('path')
 const glob = require('glob')
+const withImages = require('next-images')
 
-module.exports = {
+module.exports = withImages({
   webpack: (config, { dev }) => {
     config.module.rules.push(
       {
@@ -33,4 +34,4 @@ module.exports = {
     )
     return config
   }
-}
+});
