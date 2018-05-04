@@ -14,60 +14,148 @@
 export const dataFields = [
   [
     {
+      id: 'member-residence',
+      label: 'Country of residence',
+      options: [
+        {
+          value: 'United States',
+          title: 'United States'
+        },
+        {
+          value: 'Albania',
+          title: 'Albania'
+        },
+        {
+          value: 'Algeria',
+          title: 'Algeria'
+        },
+      ],
+    },
+    {
+      id: 'member-prefix',
+      label: 'Prefix',
+      options: [
+        {
+          value: 'Mr',
+          title: 'Mr'
+        },
+        {
+          value: 'Mrs',
+          title: 'Mrs'
+        },
+        {
+          value: 'Ms',
+          title: 'Ms'
+        },
+        {
+          value: 'Miss',
+          title: 'Miss'
+        },
+      ],
+    },
+    {
       id: 'member-name',
       type: 'text',
-      label: 'Name',
-      placeholder: 'Estella',
+      label: 'First name',
+      placeholder: 'Iain',
     },
     {
       id: 'member-last-name',
       type: 'text',
       label: 'Last name',
-      placeholder: 'Robbins',
+      placeholder: 'Clarke',
+    },
+    {
+      id: 'member-suffix',
+      label: 'Suffix',
+      options: [
+        {
+          value: 'Jr',
+          title: 'Jr'
+        },
+        {
+          value: 'Sr',
+          title: 'Sr'
+        },
+        {
+          value: '',
+          title: ''
+        },
+      ],
     },
   ],
   [
+    {
+        id: 'member-account-no',
+        type: 'text',
+        label: 'Account no.',
+        placeholder: '0123456789',
+      },
+    {
+      id: 'member-account-type',
+      label: 'Account type',
+      options: [
+        {
+          value: 'Individual',
+          title: 'Individual'
+        },
+        {
+          value: 'Type2',
+          title: 'Type 2'
+        },
+      ],
+    },
+    {
+      id: 'member-password',
+      type: 'password',
+      label: 'Password',
+    },
+    {
+      id: 'member-password-confirm',
+      type: 'password',
+      label: 'Confirm Password',
+    },
     {
       id: 'member-email',
       type: 'email',
-      label: 'E-mail',
-      placeholder: 'Estella',
+      label: 'E-mail address',
+      placeholder: 'iainclarke@gmail.com',
     },
     {
-      id: 'member-mobile',
+      id: 'member-contact-phone',
       type: 'text',
-      label: 'Mobile phone',
+      label: 'Contact telephone no',
       placeholder: '+44 999999999',
     },
-  ],
-  [
-    {
-      id: 'member-home-address-line1',
-      type: 'text',
-      label: 'address-line1',
-      placeholder: '898 Candido Hollow',
-    },
-    {
-      id: 'member-home-address-line2',
-      type: 'text',
-      label: 'address-line2',
-      placeholder: 'Jacobson Cape',
-    },
-    {
-      id: 'member-city',
-      type: 'text',
-      placeholder: 'City',
-    },
-    {
-      id: 'member-zip-code',
-      type: 'number',
-      placeholder: 'Zip code',
-    },
-    {
-      id: 'member-country',
-      type: 'text',
-      placeholder: 'Country',
-    },
+  // ],
+  // [
+  //   {
+  //     id: 'member-home-address-line1',
+  //     type: 'text',
+  //     label: 'address-line1',
+  //     placeholder: '898 Candido Hollow',
+  //   },
+  //   {
+  //     id: 'member-home-address-line2',
+  //     type: 'text',
+  //     label: 'address-line2',
+  //     placeholder: 'Jacobson Cape',
+  //   },
+  //   {
+  //     id: 'member-city',
+  //     type: 'text',
+  //     placeholder: 'City',
+  //   },
+  //   {
+  //     id: 'member-zip-code',
+  //     type: 'number',
+  //     placeholder: 'Zip code',
+  //   },
+  //   {
+  //     id: 'member-country',
+  //     type: 'text',
+  //     placeholder: 'Country',
+  //   },
   ],
   [
     {
@@ -75,11 +163,6 @@ export const dataFields = [
       type: 'text',
       label: 'Username',
       placeholder: 'Username',
-    },
-    {
-      id: 'member-password',
-      type: 'password',
-      label: 'Password',
     },
   ],
 ];

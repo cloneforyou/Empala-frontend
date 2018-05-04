@@ -4,9 +4,13 @@
   margin: 0;
 }
 
-.tabs-item {
+.tabs-menu li {
   display: inline;
+}
+
+.tabs-item {
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .tabs-item a {
@@ -15,7 +19,8 @@
   margin-right: 13px;
 }
 
-.tabs-item a:hover {
+.tabs-item:hover,
+.tabs-item--active {
   color: #98c73a;
   text-decoration: none;
 }

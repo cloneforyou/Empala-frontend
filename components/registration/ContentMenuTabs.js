@@ -1,16 +1,17 @@
-import Link from 'next/link'
-import { withReduxSaga } from "../../store";
-import {setTabName, setTabPageIndex} from "../../actions/registration";
+// import Link from 'next/link'
+import React from 'react';
+import { withReduxSaga } from '../../store';
+import {setTabName, setTabPageIndex} from '../../actions/registration';
 import IoIosArrowRight from 'react-icons/lib/io/ios-arrow-right';
 
-const MaskedRegistrationLink = (props) => (
-  <li className="tabs-item">
-    <Link as={`/registration/${props.name}/${props.tabNumber}`}
-          href={`/registration?name=${props.name}&tabNumber=${props.tabNumber}`}>
-      <a>{props.name}</a>
-    </Link>
-  </li>
-);
+// const MaskedRegistrationLink = (props) => (
+//   <li className="tabs-item">
+//     <Link as={`/registration/${props.name}/${props.tabNumber}`}
+//           href={`/registration?name=${props.name}&tabNumber=${props.tabNumber}`}>
+//       <a>{props.name}</a>
+//     </Link>
+//   </li>
+// );
 
 const ContentMenuTabs = (props) => {
   const handleClick = (name) => {
@@ -24,10 +25,18 @@ const ContentMenuTabs = (props) => {
         {/*<MaskedRegistrationLink name='identity' tabNumber='1'/>*/}
         {/*<MaskedRegistrationLink name='account' tabNumber='1'/>*/}
         {/*<MaskedRegistrationLink name='approvals' tabNumber='1'/>*/}
-        <li className="tabs-item" onClick={() => handleClick('member')}>Member <IoIosArrowRight size={22}/></li>
-        <li className="tabs-item" onClick={() => handleClick('identity')}>Identity <IoIosArrowRight size={22}/></li>
-        <li className="tabs-item" onClick={() => handleClick('account')}>Account <IoIosArrowRight size={22}/></li>
-        <li className="tabs-item" onClick={() => handleClick('approvals')}>Approvals</li>
+        <li>
+          <span className="tabs-item" onClick={() => handleClick('member')}>Member</span>
+          <IoIosArrowRight size={22}/></li>
+        <li>
+          <span className="tabs-item" onClick={() => handleClick('identity')}>Identity</span>
+          <IoIosArrowRight size={22}/></li>
+        <li>
+          <span className="tabs-item" onClick={() => handleClick('regulatory')}>Regulatory</span>
+          <IoIosArrowRight size={22}/></li>
+        <li><span className="tabs-item" onClick={() => handleClick('profile')}>Profile</span>
+          <IoIosArrowRight size={22}/></li>
+        <li><span className="tabs-item" onClick={() => handleClick('experience')}>Experience</span></li>
       </ul>
   )
 };

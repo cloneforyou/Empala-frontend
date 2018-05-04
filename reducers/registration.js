@@ -13,7 +13,6 @@ const initialState = {
 function registration(state = initialState, action) {
   switch (action.type) {
     case GET_MENU_ITEMS:
-      console.log(action)
       return {...state, menuItems: action.items};
     case SET_TAB_NAME:
       return {...state, tabName: action.tabName};
