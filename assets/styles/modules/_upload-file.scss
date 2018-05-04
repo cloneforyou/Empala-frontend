@@ -3,6 +3,7 @@
 
   &__container {
   }
+
   &__dummy-img {
     max-width: 139px;
     min-height: 139px;
@@ -11,8 +12,10 @@
     background-color: #e0e0e0;
     margin: auto;
   }
+
   &__img {
   }
+
   &__text {
     font-size: 18px;
     color: #808895;
@@ -30,6 +33,7 @@
   height: 40px;
   background-color: #808895;
   border: none;
+
   &__text {
     font-size: 18px;
     color: #ffffff;

@@ -1,28 +1,25 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {getMenuItemsByTabName} from "../../utils/registrationUtils";
-import  MdCheck from 'react-icons/lib/md/check'
-
-
+import { getMenuItemsByTabName } from "../../utils/registrationUtils";
+import  IoCheckmarkRound from 'react-icons/lib/io/checkmark-round'
 
 const ContentMenuItems = (props) => {
   console.log('MMMMMMMMMMEEEEENNNNUUUUU', props)
+  // const name = props.url ? props.url.query.name : 'member';
+  // const menuItems = getMenuItemsByTabName(name);
   return (
-    <div className='block--verticalCentered'>
       <ul className='menu-items'>
         {props.menuItems.map((item, index) => {
           const itemClassName = (props.tabIndex === index+1) ? 'menu-items__item menu-items__item--active' : 'menu-items__item';
           return (
             <li  key={item.key}>
               <div className="menu-items__completed-mark-wrapper">
-                {item.completed && <span className="menu-items__completed-mark"><MdCheck /></span>}
+                {item.completed && <div className='menu-items__completed-mark'><IoCheckmarkRound size={10} /></div>}
               </div>
               <span className={itemClassName} > {item.title}</span>
             </li>)
         })
         }
       </ul>
-    </div>
   )
 };
 

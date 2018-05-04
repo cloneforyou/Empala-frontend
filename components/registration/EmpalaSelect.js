@@ -1,7 +1,7 @@
 import React from 'react';
 
 const EmpalaSelect = (props) => {
-  console.log('Select props -------------------', props )
+
   return(
     <div className='input-group mb-3'>
         <select className="custom-select border-0" value={''} >

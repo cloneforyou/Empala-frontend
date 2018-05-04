@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import MdArrowForward from 'react-icons/lib/md/arrow-forward';
-import {withReduxSaga} from "../../store";
-import {changeTabPage} from "../../actions/registration";
+import { withReduxSaga } from "../../store";
+import { changeTabPage } from "../../actions/registration";
 
 
 const LeafLink = (props) => (
@@ -12,17 +12,18 @@ const LeafLink = (props) => (
   </Link>
 );
 
-const Button = (props) => (
-  <div className='buttons__container'>
+
+const NavButtons = (props) => (
+  <div>
     {/*<LeafLink*/}
       {/*name={ props.tabName}*/}
       {/*tabNumber={+props.tabIndex -1 } >*/}
       {/*<button type='button' className='btn--navigate btn--prev'><MdArrowBack /></button>*/}
     {/*</LeafLink>*/}
     <button type='button' className='btn--navigate btn--prev'
-            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'backward'))}><MdArrowBack /></button>
-    <button type='button' className='btn--navigate btn--prev'
-            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'forward'))}><MdArrowForward /></button>
+            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'backward'))}><MdArrowBack size={20} /></button>
+    <button type='button' className='btn--navigate btn--next'
+            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'forward'))}><MdArrowForward size={20} /></button>
     {/*<LeafLink*/}
       {/*name={ props.tabName}*/}
       {/*tabNumber={+props.tabIndex +1 } >*/}
@@ -31,4 +32,4 @@ const Button = (props) => (
   </div>
 );
 
-export default withReduxSaga(Button);
+export default withReduxSaga(NavButtons);

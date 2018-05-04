@@ -1,16 +1,14 @@
-
 .menu-items {
   list-style: none;
-  font-size: 18px;
+  margin: 0 86px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 48px;
+  letter-spacing: 1px;
 }
 
-.menu-items__item--active,
-.registration-label {
+.menu-items__item--active {
   color: #98c73a;
-}
-
-.registration-label {
-  font-size: 12px;
 }
 
 .menu-items__item--active::after {
@@ -34,29 +32,7 @@
 .menu-items__completed-mark-wrapper,
 .menu-items__completed-mark {
   display: inline-block;
+  width: 20px;
   height: 20px;
   margin-right: 13px;
-  width: 20px;
-}
-
-.menu-tabs {
-  margin-top: 128px;
-}
-
-.menu-items--min-height {
-  min-height: 500px;
-}
-
-.breadcrumb-item + .breadcrumb-item::before {
-  content: '>';
-}
-
-.breadcrumb-item a {
-  color: #808895;
-  text-transform: capitalize;
-}
-
-.breadcrumb-item a:hover {
-  color: #98c73a;
-  text-decoration: none;
 }

@@ -1,17 +1,21 @@
 .header {
   background: #222425;
-  min-height: 160px;
-  &__block{
+  min-height: 214px;
+
+  &__block {
     max-width: 1200px;
     margin: auto;
-    padding-top: 54px;
+    padding-top: 53px;
     justify-content: space-between;
+
     &__right-link{
-      font-size: 17px;
+      font-size: 16px;
+      word-spacing: 1.2px;
       color: #98c73a;
     }
+
     &__left-link{
-      font-size: 17px;
+      font-size: 16px;
       color: #ffffff;
     }
   }

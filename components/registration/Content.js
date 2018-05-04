@@ -1,10 +1,12 @@
 import React from 'react';
 import ContentMenu from './ContentMenu';
 import ContentFillingInformation from './ContentFillingInformation';
-import Button from './Button';
+import Button from './NavButtons';
 import {getMenuItems, setTabName, setTabPageIndex} from "../../actions/registration";
 import {getMenuItemsByTabName, getTabContentByTabName} from "../../utils/registrationUtils";
 import { connect } from "react-redux";
+import ContentMenuTabs from './ContentMenuTabs';
+import ContentMenuItems from './ContentMenuItems';
 
 
 function mapStateToProps(state) {
@@ -47,9 +49,15 @@ class Content extends React.PureComponent {
     return(
       <div className='onboard'>
         <div className='onboard__container'>
-          <div className='row no-gutters onboard__container__col'>
-            <div className='col-6 relative onboard__left-block menu-items--min-height'>
-              <ContentMenu menuItems={this.props.menuItems} tabIndex={this.props.tabIndex}  />
+          <div className='row no-gutters onboard__col'>
+            <div className='col-6 onboard__left-block'>
+
+              <div className="onboard__left-block--top">
+                <ContentMenuTabs />
+              </div>
+              <div className="onboard__left-block--center">
+                <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
+              </div>
             </div>
             <div className='col-6 onboard__right-block'>
 
