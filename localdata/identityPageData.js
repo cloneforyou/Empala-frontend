@@ -17,7 +17,7 @@ export const dataFields = [
       id: 'birthdate',
       type: 'date',
       label: 'Date of birth',
-      placeholder: '11/12/1987',
+      // placeholder: '11/12/1987',
     },
     {
       id: 'ssn',

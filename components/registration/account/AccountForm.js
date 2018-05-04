@@ -9,6 +9,7 @@ export default class AccountForm extends React.Component {
     if (item.options) {
       return (
         <EmpalaSelect
+          id={item.id}
           key={item.label}
           options={item.options}
           label={item.label}

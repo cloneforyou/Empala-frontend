@@ -1,6 +1,4 @@
 import React from 'react';
-import ContentMenu from './ContentMenu';
-import ContentFillingInformation from './ContentFillingInformation';
 import Button from './NavButtons';
 import {getMenuItems, setTabName, setTabPageIndex} from "../../actions/registration";
 import {getMenuItemsByTabName, getTabContentByTabName} from "../../utils/registrationUtils";
@@ -30,8 +28,8 @@ function mapDispatchToProps(dispatch) {
 class Content extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props)
-    console.log(nextProps)
+    console.log(this.props);
+    console.log(nextProps);
     if (this.props.tabName !== nextProps.tabName) {
       this.props.getMenuItems(nextProps.tabName)
     }
@@ -43,9 +41,7 @@ class Content extends React.PureComponent {
     if (!this.props.menuItems || this.props.menuItems.length == 0) {
       this.props.getMenuItems(this.props.tabName); 
     }
-    // console.log('content props -->', props.tabName)
-    // console.log('content props -->', props.tabIndex-1)
-    // console.log('content props -->', pageContent)
+
     return(
       <div className='onboard'>
         <div className='onboard__container'>

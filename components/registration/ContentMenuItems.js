@@ -12,9 +12,9 @@ const ContentMenuItems = (props) => {
           const itemClassName = (props.tabIndex === index+1) ? 'menu-items__item menu-items__item--active' : 'menu-items__item';
           return (
             <li  key={item.key}>
-              <div className="menu-items__completed-mark-wrapper">
-                {item.completed && <div className='menu-items__completed-mark'><IoCheckmarkRound size={10} /></div>}
-              </div>
+              {/*<div className="menu-items__completed-mark-wrapper">*/}
+                {/*{item.completed && <div className='menu-items__completed-mark'><IoCheckmarkRound size={10} /></div>}*/}
+              {/*</div>*/}
               <span className={itemClassName} > {item.title}</span>
             </li>)
         })
