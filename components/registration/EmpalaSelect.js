@@ -6,7 +6,8 @@ import MenuItem from 'material-ui/MenuItem';
 const EmpalaSelect = (props) => {
 
   return(
-    <div>
+    <div className="registration-group">
+      <label className='registration-label' htmlFor={props.id}>{props.label}</label>
       <MuiThemeProvider>
         <SelectField
           floatingLabelText={props.label}
