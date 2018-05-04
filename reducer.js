@@ -1,14 +1,12 @@
-import {actionTypes} from './actions'
+import { combineReducers } from 'redux'
+import { actionTypes } from './actions'
+import registration from './reducers/registration'
 
-export const exampleInitialState = {
-  count: 0,
-  error: false,
-  lastUpdate: 0,
-  light: false,
-  placeholderData: null
-}
+export const InitialState = {
 
-function reducer (state = exampleInitialState, action) {
+};
+
+function reducer (state = InitialState, action) {
   switch (action.type) {
     case actionTypes.FAILURE:
       return {
@@ -39,4 +37,7 @@ function reducer (state = exampleInitialState, action) {
   }
 }
 
-export default reducer
+export default combineReducers({
+  reducer,
+  registration,
+});

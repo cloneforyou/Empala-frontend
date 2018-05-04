@@ -1,15 +1,15 @@
 import React from 'react'
-
-import RegisrationPage from './registration';
 import {withReduxSaga} from '../store'
+import RegistrationPage from './registration';
 
-class Counter extends React.Component {
+
+class Index extends React.Component {
 
   render () {
 
-    return <RegisrationPage />
+    return <RegistrationPage />
 
   }
 }
 
-export default withReduxSaga(Counter)
+export default withReduxSaga(Index)

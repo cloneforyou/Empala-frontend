@@ -2,38 +2,80 @@ import React from 'react';
 import ContentMenu from './ContentMenu';
 import ContentFillingInformation from './ContentFillingInformation';
 import Button from './NavButtons';
+import {getMenuItems, setTabName, setTabPageIndex} from "../../actions/registration";
+import {getMenuItemsByTabName, getTabContentByTabName} from "../../utils/registrationUtils";
+import { connect } from "react-redux";
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
 
-const  Content = (props) => {
 
-  return(
-    <div className='onboard'>
-      <div className='onboard__container'>
-        <div className='row no-gutters onboard__col'>
-
-          <div className='col-6 onboard__left-block'>
-            <div className="onboard__left-block--top">
-              <ContentMenuTabs />
-            </div>
-            <div className="onboard__left-block--center">
-             <ContentMenuItems {...props} />
-            </div>
-          </div>
-
-          <div className='col-6 onboard__right-block'>
-            <div className="onboard__right-block--center">
-              <ContentFillingInformation {...props} />
-            </div>
-            <div className="onboard__right-block--bottom">
-              <Button {...props} />
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-);
+function mapStateToProps(state) {
+  return {
+    tabName: state.registration.tabName || 'member',
+    tabIndex: state.registration.tabIndex || 1,
+    menuItems: state.registration.menuItems,
+  }
 }
 
-export default Content
+function mapDispatchToProps(dispatch) {
+  return (
+    {
+      getMenuItems: (tabName) => {dispatch(getMenuItems(getMenuItemsByTabName(tabName)))},
+      setTabName: (tabName) => dispatch(setTabName(tabName)),
+      setTabPageIndex:(tabIndex) => dispatch(setTabPageIndex(tabIndex)),
+    })
+}
+
+
+class Content extends React.PureComponent {
+
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props)
+    console.log(nextProps)
+    if (this.props.tabName !== nextProps.tabName) {
+      this.props.getMenuItems(nextProps.tabName)
+    }
+  }
+
+  render() {
+    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
+
+    if (!this.props.menuItems || this.props.menuItems.length == 0) {
+      this.props.getMenuItems(this.props.tabName); 
+    }
+    // console.log('content props -->', props.tabName)
+    // console.log('content props -->', props.tabIndex-1)
+    // console.log('content props -->', pageContent)
+    return(
+      <div className='onboard'>
+        <div className='onboard__container'>
+          <div className='row no-gutters onboard__col'>
+            <div className='col-6 onboard__left-block'>
+
+              <div className="onboard__left-block--top">
+                <ContentMenuTabs />
+              </div>
+              <div className="onboard__left-block--center">
+                <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
+              </div>
+            </div>
+            <div className='col-6 onboard__right-block'>
+
+              <div className="onboard__right-block--center">
+                {/*<ContentFillingInformation {...props} />*/}
+                {pageContent.tabContent}
+              </div>
+              <div className="onboard__right-block--bottom">
+                <Button
+                  tabName={this.props.tabName}
+                  tabIndex={this.props.tabIndex} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

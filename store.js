@@ -16,7 +16,7 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
 }
 
-export function configureStore (initialState = exampleInitialState) {
+export function configureStore (initialState = {} ) {
   const store = createStore(
     rootReducer,
     initialState,

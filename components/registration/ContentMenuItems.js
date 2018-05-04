@@ -1,15 +1,15 @@
 import React from 'react';
-import {getMenuItemsByTabName} from "../../utils/registrationUtils";
+import { getMenuItemsByTabName } from "../../utils/registrationUtils";
 import  IoCheckmarkRound from 'react-icons/lib/io/checkmark-round'
 
 const ContentMenuItems = (props) => {
-  const name = props.url ? props.url.query.name : 'member';
-  const menuItems = getMenuItemsByTabName(name);
-
+  console.log('MMMMMMMMMMEEEEENNNNUUUUU', props)
+  // const name = props.url ? props.url.query.name : 'member';
+  // const menuItems = getMenuItemsByTabName(name);
   return (
       <ul className='menu-items'>
-        {menuItems.map((item) => {
-          const itemClassName = item.active ? 'menu-items__item menu-items__item--active' : 'menu-items__item';
+        {props.menuItems.map((item, index) => {
+          const itemClassName = (props.tabIndex === index+1) ? 'menu-items__item menu-items__item--active' : 'menu-items__item';
           return (
             <li  key={item.key}>
               <div className="menu-items__completed-mark-wrapper">
