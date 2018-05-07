@@ -2,3 +2,4 @@ export const GET_MENU_ITEMS = 'GET_MENU_ITEMS';
 export const SET_TAB_NAME = 'SET_TAB_NAME';
 export const SET_TAB_PAGE_INDEX = 'SET_TAB_PAGE_INDEX';
 export const CHANGE_TAB_PAGE_INDEX = 'CHANGE_TAB_PAGE_INDEX';
+export const SET_FIELD_VALUE = 'SET_FIELD_VALUE';

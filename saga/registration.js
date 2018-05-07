@@ -18,6 +18,7 @@ import { menuItems } from '../utils/registrationUtils';
 export function* changeTabPage({tabName, tabIndex, direction}) {
   // const menuItems = yield select((state) => state.registration.menuItems);
   const nextTabs = {
+    info: 'member',
     member: 'identity',
     identity: 'regulatory',
     regulatory: 'profile',
@@ -31,7 +32,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
   };
   // console.log('SSSSSSSAAAAAAGGGGGGAAAA', tabName, tabIndex, direction, menuItems)
   if (direction === 'forward') {
-      if (tabIndex > menuItems[tabName].length-1) {
+      if (tabName === 'info'|| tabIndex > menuItems[tabName].length-1) {
         if (tabName === 'experience') {return}
         yield put(setTabName(nextTabs[tabName]));
         yield put(setTabPageIndex(1));

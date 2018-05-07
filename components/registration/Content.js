@@ -1,15 +1,16 @@
 import React from 'react';
-import Button from './NavButtons';
+import NavButtons from './NavButtons';
 import {getMenuItems, setTabName, setTabPageIndex} from "../../actions/registration";
 import {getMenuItemsByTabName, getTabContentByTabName} from "../../utils/registrationUtils";
 import { connect } from "react-redux";
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
+import InformationPage from "./InformationPage";
 
 
 function mapStateToProps(state) {
   return {
-    tabName: state.registration.tabName || 'member',
+    tabName: state.registration.tabName || 'info',
     tabIndex: state.registration.tabIndex || 1,
     menuItems: state.registration.menuItems,
   }
@@ -28,18 +29,24 @@ function mapDispatchToProps(dispatch) {
 class Content extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props);
-    console.log(nextProps);
+    // console.log(this.props);
+    // console.log(nextProps);
     if (this.props.tabName !== nextProps.tabName) {
       this.props.getMenuItems(nextProps.tabName)
     }
   }
 
   render() {
+    if (this.props.tabName === 'info') {
+      this.props.setTabName('info');
+      this.props.setTabPageIndex(1);
+      return <InformationPage />
+    }
+
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
 
-    if (!this.props.menuItems || this.props.menuItems.length == 0) {
-      this.props.getMenuItems(this.props.tabName); 
+    if (!this.props.menuItems || this.props.menuItems.length === 0) {
+      this.props.getMenuItems(this.props.tabName);
     }
 
     return(
@@ -57,12 +64,12 @@ class Content extends React.PureComponent {
             </div>
             <div className='col-6 onboard__right-block'>
 
-              <div className="onboard__right-block--center">
+              <div className="onboard__right-block--center row">
                 {/*<ContentFillingInformation {...props} />*/}
                 {pageContent.tabContent}
               </div>
               <div className="onboard__right-block--bottom">
-                <Button
+                <NavButtons
                   tabName={this.props.tabName}
                   tabIndex={this.props.tabIndex} />
               </div>

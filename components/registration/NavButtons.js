@@ -20,10 +20,14 @@ const NavButtons = (props) => (
       {/*tabNumber={+props.tabIndex -1 } >*/}
       {/*<button type='button' className='btn--navigate btn--prev'><MdArrowBack /></button>*/}
     {/*</LeafLink>*/}
-    <button type='button' className='btn--navigate btn--prev'
-            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'backward'))}><MdArrowBack size={20} /></button>
-    <button type='button' className='btn--navigate btn--next'
-            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'forward'))}><MdArrowForward size={20} /></button>
+    <button type='button'
+            className='btn--navigate btn--prev'
+            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'backward'))}
+    ><MdArrowBack size={20} /></button>
+    <button type='button'
+            className='btn--navigate btn--next'
+            onClick={()=> props.dispatch(changeTabPage(props.tabName, props.tabIndex, 'forward'))}
+    ><MdArrowForward size={20} /></button>
     {/*<LeafLink*/}
       {/*name={ props.tabName}*/}
       {/*tabNumber={+props.tabIndex +1 } >*/}
