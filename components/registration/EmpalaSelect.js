@@ -10,7 +10,6 @@ const EmpalaSelect = (props) => {
       <label className='registration-label' htmlFor={props.id}>{props.label}</label>
       <MuiThemeProvider>
         <SelectField
-          floatingLabelText={props.label}
           style={{ width: '422px', fontWeight: 400, margin: 0 }}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           underlineFocusStyle={{ borderBottom : '2px solid red' }}
