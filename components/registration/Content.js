@@ -40,7 +40,15 @@ class Content extends React.PureComponent {
     if (this.props.tabName === 'info') {
       this.props.setTabName('info');
       this.props.setTabPageIndex(1);
-      return <InformationPage />
+      return (
+        <div className='onboard'>
+          <div className='onboard__container'>
+            <div className='row no-gutters onboard__col'>
+                <InformationPage />
+            </div>
+          </div>
+        </div>
+          )
     }
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
