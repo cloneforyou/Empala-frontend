@@ -4,13 +4,36 @@
   padding: 25px 0 45px;
 }
 
-.footer__text {
+.footer--text {
   color: #808895;
   font-size: 10px;
   line-height: 13px;
-  word-spacing: -1px;
+  //word-spacing: -1px;
 }
 
-.margin-right {
+.footer--disclaimer {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer--link {
   margin-right: 20px;
+  color: #808895;
+}
+
+.text--info {
+  margin-bottom: 4px;
+}
+
+@media screen and (max-width: 1380px) {
+  .footer{
+    max-width: 992px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .footer{
+    max-width: 768px;
+  }
 }

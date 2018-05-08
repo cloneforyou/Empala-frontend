@@ -1,0 +1,83 @@
+.agreements {
+  display: flex;
+  flex-direction: column;
+  padding: 65px 40px 13px;
+  background-color: #f9fafb;
+}
+
+.agreements-info {
+  font-size: 12px;
+  border: 2px solid #e0e0e0;
+  padding: 25px 21px 6px 32px;
+}
+
+.agreements-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.list-info {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.item-info {
+}
+
+.confirmation {
+  display: flex;
+}
+
+.text-confirmation {
+  font-size: 14px;
+  margin: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  padding: 30px;
+}
+
+
+.input-confirmation {
+  width: 85%;
+  height: 45px;
+  border: 2px solid #e0e0e0;
+}
+
+.form-confirmation {
+  text-align: center;
+  padding: 20px;
+}
+
+.subtext-confirmation {
+  margin: 0;
+  font-size: 10px;
+}
+
+.width-35 {
+  width: 35%;
+}
+
+.width-65 {
+  width: 65%;
+}
+
+.btn--cancel {
+  border: 0;
+  background-color: #f9fafc;
+  margin-top: 20px;
+  width: 130px;
+  height: 34px;
+}
+
+.btn--submit {
+  width: 130px;
+  height: 34px;
+  background-color: #98c73a;
+  border: solid 1px #98c73a;
+  color: white;
+  font-weight: 100;
+  margin-left: 45px;
+  margin-top: 20px;
+}
