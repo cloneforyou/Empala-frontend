@@ -5,6 +5,9 @@ import {getMenuItemsByTabName, getTabContentByTabName} from "../../utils/registr
 import { connect } from "react-redux";
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
+import DatePickerField from './DatePickerField';
+import InformationPage from './InformationPage';
+
 
 
 function mapStateToProps(state) {
@@ -25,7 +28,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-class Content extends React.PureComponent {
+class Content extends React.Component{
+  constructor(props) {
+    super(props)
+    this.state = {checkedButton: false}
+  }
 
   componentWillReceiveProps(nextProps) {
     console.log(this.props);
@@ -33,6 +40,14 @@ class Content extends React.PureComponent {
     if (this.props.tabName !== nextProps.tabName) {
       this.props.getMenuItems(nextProps.tabName)
     }
+  }
+
+  checkButton = () => {
+    this.setState(prevState => {
+      return {
+        checkedButton: !prevState.checkedButton
+      }
+    })
   }
 
   render() {
@@ -46,27 +61,29 @@ class Content extends React.PureComponent {
       <div className='onboard'>
         <div className='onboard__container'>
           <div className='row no-gutters onboard__col'>
-            <div className='col-6 onboard__left-block'>
+            <InformationPage />
+            <DatePickerField />
+            {/*<div className='col-6 onboard__left-block'>*/}
 
-              <div className="onboard__left-block--top">
-                <ContentMenuTabs />
-              </div>
-              <div className="onboard__left-block--center">
-                <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
-              </div>
-            </div>
-            <div className='col-6 onboard__right-block'>
+              {/*<div className="onboard__left-block--top">*/}
+                {/*<ContentMenuTabs />*/}
+              {/*</div>*/}
+              {/*<div className="onboard__left-block--center">*/}
+                {/*<ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />*/}
+              {/*</div>*/}
+            {/*</div>*/}
+            {/*<div className='col-6 onboard__right-block'>*/}
 
-              <div className="onboard__right-block--center">
-                {/*<ContentFillingInformation {...props} />*/}
-                {pageContent.tabContent}
-              </div>
-              <div className="onboard__right-block--bottom">
-                <Button
-                  tabName={this.props.tabName}
-                  tabIndex={this.props.tabIndex} />
-              </div>
-            </div>
+              {/*<div className="onboard__right-block--center">*/}
+                {/*/!*<ContentFillingInformation {...props} />*!/*/}
+                {/*{pageContent.tabContent}*/}
+              {/*</div>*/}
+              {/*<div className="onboard__right-block--bottom">*/}
+                {/*<Button*/}
+                  {/*tabName={this.props.tabName}*/}
+                  {/*tabIndex={this.props.tabIndex} />*/}
+              {/*</div>*/}
+            {/*</div>*/}
           </div>
         </div>
       </div>
