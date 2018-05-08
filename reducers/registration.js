@@ -3,7 +3,6 @@ import {
 } from "../constants/registration";
 import {getMenuItemsByTabName} from "../utils/registrationUtils";
 
-
 const initialState = {
   tabName: false,
   tabIndex: false,

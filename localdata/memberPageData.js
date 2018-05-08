@@ -14,7 +14,7 @@
 export const dataFields = [
   [
     {
-      id: 'member-residence',
+      id: 'member_residence',
       label: 'Country of residence',
       options: [
         {
@@ -24,7 +24,7 @@ export const dataFields = [
       ],
     },
     {
-      id: 'member-prefix',
+      id: 'member_prefix',
       label: 'Prefix',
       options: [
         {
@@ -46,19 +46,19 @@ export const dataFields = [
       ],
     },
     {
-      id: 'member-name',
+      id: 'member_name',
       type: 'text',
       label: 'First name',
       placeholder: 'Iain',
     },
     {
-      id: 'member-last-name',
+      id: 'member_last_name',
       type: 'text',
       label: 'Last name',
       placeholder: 'Clarke',
     },
     {
-      id: 'member-suffix',
+      id: 'member_suffix',
       label: 'Suffix',
       options: [
         {
@@ -82,7 +82,7 @@ export const dataFields = [
   ],
   [
     {
-        id: 'member-account-no',
+        id: 'member_account_no',
         type: 'text',
         label: 'Account no.',
         placeholder: '0123456789',
@@ -102,23 +102,23 @@ export const dataFields = [
       ],
     },
     {
-      id: 'member-password',
+      id: 'member_password',
       type: 'password',
       label: 'Password',
     },
     {
-      id: 'member-password-confirm',
+      id: 'member_password_confirm',
       type: 'password',
       label: 'Confirm Password',
     },
     {
-      id: 'member-email',
+      id: 'member_email',
       type: 'email',
       label: 'E-mail address',
       placeholder: 'iainclarke@gmail.com',
     },
     {
-      id: 'member-contact-phone',
+      id: 'member_contact_phone',
       type: 'text',
       label: 'Contact telephone no',
       placeholder: '+1 415 123 4567',
@@ -155,7 +155,7 @@ export const dataFields = [
   ],
   [
     {
-      id: 'member-passport',
+      id: 'member_passport',
       type: 'text',
       label: 'Country of issue',
       // placeholder: 'Username',

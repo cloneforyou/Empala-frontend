@@ -1,5 +1,5 @@
 export default function request(url, options = {}) {
-  const endpoint = process.env.APP_URL + '/';
+  const endpoint = '';
   const defaultHeaders = {
     'X-Requested-With': 'XMLHttpRequest',
     Accept: 'application/json',
@@ -10,7 +10,7 @@ export default function request(url, options = {}) {
 
   const requestOptions = {
     ...options,
-    headers: Object.assign(defaultHeaders, options.headers),
+    headers: Object.assign(defaultHeaders, options.headers)
   };
 
   // Missing boundary in multipart/form-data fix https://stackoverflow.com/a/41604180/2156864
@@ -20,6 +20,7 @@ export default function request(url, options = {}) {
 
   requestOptions.withCredentials =  true;
   requestOptions.credentials = 'include';
+  requestOptions.mode = 'cors';
 
   let requestUrl = url;
   // add default endpoint only to relative urls
@@ -28,7 +29,8 @@ export default function request(url, options = {}) {
   }
 
   return new Promise((resolve, reject) => {
-    fetch(requestUrl, requestOptions)
+    console.log(' *** ', requestUrl, requestOptions);
+    fetch(`http://localhost:9000/auth/check`, requestOptions)
       .then(response => {
         if (response.status >= 200 && response.status < 400) {
           if (response.redirected === true) {

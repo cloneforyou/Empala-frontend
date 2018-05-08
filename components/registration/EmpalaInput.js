@@ -20,6 +20,7 @@ const EmpalaInput = (props) => {
           hintStyle={{ color: '#858c99'}}
           value={props.value}
           onChange={(e) => props.handleChange(e)}
+          disabled={props.disabled}
         />
       </MuiThemeProvider>
     </div>

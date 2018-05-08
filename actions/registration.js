@@ -4,7 +4,7 @@ import {
   SET_TAB_NAME,
   SET_TAB_PAGE_INDEX,
   SET_FIELD_VALUE,
-  SET_MEMBER_DOCUMENT_TYPE
+  SET_MEMBER_DOCUMENT_TYPE, VALIDATE_FIELD_SUCCESS, VALIDATE_FIELD_ERROR
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -50,5 +50,20 @@ export function setMemberDocumentType(document) {
   return  {
     type: SET_MEMBER_DOCUMENT_TYPE,
     document,
+  }
+}
+
+export function setFieldValid(fieldId) {
+  return  {
+    type: VALIDATE_FIELD_SUCCESS,
+    fieldId,
+  }
+}
+
+export function setFieldInvalid(fieldId, message) {
+  return  {
+    type: VALIDATE_FIELD_ERROR,
+    fieldId,
+    message,
   }
 }
