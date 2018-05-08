@@ -1,5 +1,5 @@
 export default function request(url, options = {}) {
-  const endpoint = process.env.APP_URL + '/';
+  const endpoint = '';
   const defaultHeaders = {
     'X-Requested-With': 'XMLHttpRequest',
     Accept: 'application/json',
@@ -28,6 +28,7 @@ export default function request(url, options = {}) {
   }
 
   return new Promise((resolve, reject) => {
+    console.log(' *** ', requestUrl, requestOptions);
     fetch(requestUrl, requestOptions)
       .then(response => {
         if (response.status >= 200 && response.status < 400) {

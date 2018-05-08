@@ -1,7 +1,8 @@
 import { call, put, takeLatest, select, takeEvery }  from 'redux-saga/effects';
-import {setTabName, setTabPageIndex} from '../actions/registration';
-import {CHANGE_TAB_PAGE_INDEX} from "../constants/registration";
+import {setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
+import {CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE} from "../constants/registration";
 import { menuItems } from '../utils/registrationUtils';
+import request from '../utils/request';
 
 
 // function* changeTabIfBiggerThanItemsQuantity(tabIndex, tabName, nextTabName) {
@@ -50,8 +51,38 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
   }
 }
 
+export function* saveData() {
+  const registrationData = yield select((state) => state.registration.registrationData);
+  localStorage.setItem('registrationData', JSON.stringify(registrationData));
+}
+
+
+export function* validateFieldOnServer({id, value}) {
+  console.log('oooooooooooo------------VAAAALIII', id, value)
+  const validatedFields = ['member_email', 'member_passport_number', 'member_drivers_license_number'];
+
+  const url = '/auth/check';
+  const options = {
+    method: 'POST',
+    data: {
+      id,
+      value,
+    }
+  };
+  if (validatedFields.includes(id)) {
+    try {
+      const result = yield call(request, url, options);
+      yield put(setFieldValid(id));
+    } catch (err) {
+      yield put(setFieldInvalid(id, err.message));
+    }
+  }
+}
+
 export default function* registrationSaga() {
   yield [
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
+    takeEvery(SET_FIELD_VALUE, saveData),
+    takeLatest(SET_FIELD_VALUE, validateFieldOnServer)
   ];
 }

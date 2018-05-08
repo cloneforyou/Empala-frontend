@@ -17,21 +17,18 @@ import DatePickerField from '../DatePickerField';
 
 
 const mapStateToProps = (state) => {
-  return (
-    {
+  return ({
       registrationData: state.registration.registrationData,
       page: state.registration.tabIndex,
-    }
-  )
+    })
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return (
-    {
+  return ({
       setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
       setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-      switchDocumentType: (e) => {console.log('VVVAL RADIO', e.target.value);
-        dispatch(setMemberDocumentType(e.target.value))}
+      switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
+      setPickedDate: (id, date) => dispatch(setPickedDate(date)),
     })
 };
 
@@ -112,10 +109,13 @@ class MemberInfoForm extends React.Component {
             disabled={!this.isRadioChecked('passport')}
           />
         <DatePickerField
+          id={'member_passport_issue_date'}
           label={'Date of issue'}
           disabled={!this.isRadioChecked('passport')}
+          handleDatePick={this.props.setPickedDate}
         />
         <DatePickerField
+          id={'member_passport_expiry_date'}
           label={'Date of Date of expiry'}
           disabled={!this.isRadioChecked('passport')}
         />
@@ -127,27 +127,29 @@ class MemberInfoForm extends React.Component {
           />
         <EmpalaInput
           key='member-drivers-license-state'
-          id='member_drivers-license_state'
+          id='member_drivers_license_state'
           type='text'
           label='State'
-          value={this.props.registrationData['member_drivers-license_state'] || ''}
+          value={this.props.registrationData['member_drivers_license_state'] || ''}
           handleChange={this.props.setInputValueById}
           disabled={!this.isRadioChecked('drivers-license')}
         />
         <EmpalaInput
           key='member-drivers-license-number'
-          id='member_drivers-license_number'
+          id='member_drivers_license_number'
           type='text'
           label='License no.'
-          value={this.props.registrationData['member_drivers-license_number'] || ''}
+          value={this.props.registrationData['member_drivers_license_number'] || ''}
           handleChange={this.props.setInputValueById}
           disabled={!this.isRadioChecked('drivers-license')}
         />
         <DatePickerField
+          id={'member_drivers_license_issue_date'}
           label={'Date of issue'}
           disabled={!this.isRadioChecked('drivers-license')}
         />
         <DatePickerField
+          id={'member_drivers_license_date'}
           label={'Date of Date of expiry'}
           disabled={!this.isRadioChecked('drivers-license')}
         />
