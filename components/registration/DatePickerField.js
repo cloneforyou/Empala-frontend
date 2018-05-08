@@ -3,7 +3,9 @@ import DatePicker from 'material-ui/DatePicker';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FaCalendarO from 'react-icons/lib/fa/calendar-o';
 
-const DatePickerField = () => (
+const DatePickerField = (props) => (
+  <div className="registration-group">
+  <label className='registration-label'>{props.label}</label>
   <MuiThemeProvider>
     <div className='date-picker__container'>
       <DatePicker
@@ -15,6 +17,7 @@ const DatePickerField = () => (
       <FaCalendarO style={{ position: 'absolute', top: '20px', left: '240px' }} />
     </div>
   </MuiThemeProvider>
+  </div>
 );
 
 export default DatePickerField;

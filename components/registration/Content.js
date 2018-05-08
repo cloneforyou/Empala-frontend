@@ -26,11 +26,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-class Content extends React.Component{
-  constructor(props) {
-    super(props)
-    this.state = {checkedButton: false}
-  }
+class Content extends React.PureComponent {
 
   componentWillReceiveProps(nextProps) {
     // console.log(this.props);
@@ -68,7 +64,7 @@ class Content extends React.Component{
             <div className='col-6 onboard__left-block'>
 
               <div className="onboard__left-block--top">
-                <ContentMenuTabs />
+                <ContentMenuTabs tabName={this.props.tabName}/>
               </div>
               <div className="onboard__left-block--center">
                 <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />

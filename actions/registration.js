@@ -1,8 +1,11 @@
-import { CHANGE_TAB_PAGE_INDEX,
+import {
+  CHANGE_TAB_PAGE_INDEX,
   GET_MENU_ITEMS,
   SET_TAB_NAME,
   SET_TAB_PAGE_INDEX,
-  SET_FIELD_VALUE } from "../constants/registration";
+  SET_FIELD_VALUE,
+  SET_MEMBER_DOCUMENT_TYPE
+} from "../constants/registration";
 
 export function getMenuItems(items) {
   return  {
@@ -40,5 +43,12 @@ export function setInputFieldValueById(id, value) {
     type: SET_FIELD_VALUE,
     id,
     value,
+  }
+}
+
+export function setMemberDocumentType(document) {
+  return  {
+    type: SET_MEMBER_DOCUMENT_TYPE,
+    document,
   }
 }
