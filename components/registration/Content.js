@@ -44,11 +44,11 @@ class Content extends React.PureComponent {
         <div className='onboard'>
           <div className='onboard__container'>
             <div className='row no-gutters onboard__col'>
-                <InformationPage />
+              <InformationPage />
             </div>
           </div>
         </div>
-          )
+      )
     }
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
