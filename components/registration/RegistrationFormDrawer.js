@@ -1,8 +1,7 @@
 import React from 'react';
 import EmpalaInput from "./EmpalaInput";
 import EmpalaSelect from "./EmpalaSelect";
-import { dataFields  as memberDataFields } from "../../localdata/memberPageData";
-import { dataFields  as identityDataFields } from "../../localdata/identityPageData";
+import {withReduxSaga} from "../../store";
 
 
 
@@ -25,30 +24,19 @@ export default class RegistrationFormDrawer extends React.Component {
         id={item.id}
         type={item.type}
         label={item.label}
+        value={"тупо значение"}
         placeholder={item.placeholder}
       />
     )
   };
 
-  getDataFieldByTabName(tabName) {
-    switch (tabName) {
-      case 'member':
-        return memberDataFields;
-      case 'identity':
-        return identityDataFields;
-      default:
-        return [];
-    }
-  };
-
 
   render() {
-    const fields = this.getDataFieldByTabName(this.props.tabName)[this.props.page];
     return (
       <div>
-        {fields ? fields.map((item) => this.mappingComponent(item))
-        : this.props.tabName.toUpperCase()}
+        {this.props.fields ? this.props.fields.map((item) => this.mappingComponent(item))
+        : "NULL"}
       </div>
     )
   }
-}
+};

@@ -125,7 +125,7 @@ export const dataFields = [
       id: 'member-contact-phone',
       type: 'text',
       label: 'Contact telephone no',
-      placeholder: '+44 999999999',
+      placeholder: '+1 415 123 4567',
     },
   // ],
   // [
@@ -159,10 +159,10 @@ export const dataFields = [
   ],
   [
     {
-      id: 'member-username',
+      id: 'member-passport',
       type: 'text',
-      label: 'Username',
-      placeholder: 'Username',
+      label: 'Country of issue',
+      // placeholder: 'Username',
     },
   ],
 ];

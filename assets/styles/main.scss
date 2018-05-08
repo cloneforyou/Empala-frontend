@@ -12,9 +12,11 @@
 @import './modules/_menu-items';
 @import './modules/_information-page';
 @import './modules/_review-page';
+@import './modules/_date-picker';
 @import "../fonts/fonts.css";
 
 body {
+  background-color: #f7f7f8;
   color: #808895;
   font-family: proxima-nova, sans-serif;
   font-style: normal;

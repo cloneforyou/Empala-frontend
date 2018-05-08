@@ -24,6 +24,7 @@ export const menuItems = {
     // {title: 'Work address', key: 'work-address', completed: false, active: false},
     {title: 'Residential Address', key: 'residential-address', completed: false, active: false},
     {title: 'Mailing Address', key: 'mailing-address', completed: false, active: false},
+    {title: 'Trusted Contact', key: 'trusted-contact', completed: false, active: false},
     {title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false},
 
   ],
@@ -48,41 +49,21 @@ export const menuItems = {
 };
 
 
-// const tabContent = {
-//   member: [
-//     //<UploadUserFile />,
-//     <MemberInfoForm page={0} />,
-//     <MemberInfoForm page={1} />,
-//     <MemberInfoForm page={2} />,
-//     {/*<MemberInfoForm page={3} />,*/}
-//     // 'CONFIRMATION',
-//   ],
-//   identity: [
-//     //<UploadUserFile />,
-//     <IdentityForm page={0} />,
-//     <IdentityForm page={1} />,
-//     <IdentityForm page={2} />,
-//     <IdentityForm page={3} />,
-//   ],
-//   // account: [
-//   //   <AccountForm page={0} />,
-//   //   'DEPOSIT'
-//   // ],
-//   // approvals: [
-//   //   'APPROVALS',
-//   // ],
-//   regulatory: [
-//     'IDENTIFICATION',
-//     'FAMILY'
-//   ],
-//   profile: [
-//     'EMPLOYMENT',
-//     'FINANCIALS',
-//   ],
-//   experience: [
-//     'INVESTMENT EXPERIENCE',
-//   ],
-// };
+const tabContent = {
+  member: <MemberInfoForm />,
+  identity: <IdentityForm />,
+  regulatory: [
+    'IDENTIFICATION',
+    'FAMILY'
+  ],
+  profile: [
+    'EMPLOYMENT',
+    'FINANCIALS',
+  ],
+  experience: [
+    'INVESTMENT EXPERIENCE',
+  ],
+};
 
 export function getMenuItemsByTabName(tabName) {
   switch (tabName) {
@@ -109,8 +90,8 @@ export function getMenuItemsByTabName(tabName) {
 export function getTabContentByTabName(tabName, pageIndex) {
   return {
     menuItems: menuItems[tabName],
-    // tabContent: tabContent[tabName][itemNumber],
-    tabContent: <RegistrationFormDrawer tabName={tabName} page={pageIndex} />,
+    tabContent: tabContent[tabName],
+    // tabContent: <RegistrationFormDrawer tabName={tabName} page={pageIndex} />,
   }
 
 }
