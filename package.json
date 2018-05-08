@@ -2,6 +2,7 @@
   "name": "EMPALA-CLIENT-APP",
   "version": "1.0.0",
   "license": "MIT",
+  "author": "Dunice Team",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -42,5 +43,12 @@
   },
   "devDependencies": {
     "redux-devtools-extension": "2.13.2"
+  },
+  "engines": {
+    "node": "10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dts-alex-sk/Empala-frontend.git"
   }
 }
