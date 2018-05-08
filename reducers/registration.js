@@ -1,5 +1,5 @@
 import {
-  GET_MENU_ITEMS, SET_TAB_NAME, SET_TAB_PAGE_INDEX,
+  GET_MENU_ITEMS, SET_FIELD_VALUE, SET_TAB_NAME, SET_TAB_PAGE_INDEX,
 } from "../constants/registration";
 import {getMenuItemsByTabName} from "../utils/registrationUtils";
 
@@ -8,6 +8,7 @@ const initialState = {
   tabName: false,
   tabIndex: false,
   menuItems: [],
+  registrationData: {}
 };
 
 function registration(state = initialState, action) {
@@ -18,6 +19,8 @@ function registration(state = initialState, action) {
       return {...state, tabName: action.tabName};
     case SET_TAB_PAGE_INDEX:
       return {...state, tabIndex: action.pageIndex};
+    case SET_FIELD_VALUE:
+      return {...state, registrationData: {...state.registrationData, [action.id]: action.value}}
     default:
       return state;
   }

@@ -37,7 +37,8 @@
     "redux": "3.7.2",
     "redux-saga": "0.15.4",
     "sass-loader": "^6.0.6",
-    "url-loader": "^1.0.1"
+    "url-loader": "^1.0.1",
+    "yarn": "^1.6.0"
   },
   "devDependencies": {
     "redux-devtools-extension": "2.13.2"

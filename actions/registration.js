@@ -1,4 +1,8 @@
-import {CHANGE_TAB_PAGE_INDEX, GET_MENU_ITEMS, SET_TAB_NAME, SET_TAB_PAGE_INDEX} from "../constants/registration";
+import { CHANGE_TAB_PAGE_INDEX,
+  GET_MENU_ITEMS,
+  SET_TAB_NAME,
+  SET_TAB_PAGE_INDEX,
+  SET_FIELD_VALUE } from "../constants/registration";
 
 export function getMenuItems(items) {
   return  {
@@ -27,5 +31,14 @@ export function changeTabPage(tabName, tabIndex, direction) {
     tabName,
     tabIndex,
     direction,
+  }
+}
+
+
+export function setInputFieldValueById(id, value) {
+  return  {
+    type: SET_FIELD_VALUE,
+    id,
+    value,
   }
 }

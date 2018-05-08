@@ -9,6 +9,8 @@ const EmpalaSelect = (props) => {
     <div className="">
       <MuiThemeProvider>
         <SelectField
+          id={props.id}
+          value={props.value}
           floatingLabelText={props.label}
           floatingLabelFixed={true}
           floatingLabelStyle={{color: '#98c73a'}}
@@ -19,8 +21,15 @@ const EmpalaSelect = (props) => {
           iconStyle={{ top: '-40px', right: '-16px', fill: '#7f8794' }}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           underlineFocusStyle={{ borderBottom : '2px solid #98c73a' }}
+          onChange={(e, i, v) => {props.handleChange(props.id ,v)}}
         >
-          {props.options.map((option) => (<MenuItem key={Date.now()+ Math.random()} value={option.value}  primaryText={option.title} />))}
+          {props.options.map((option) => (
+            <MenuItem
+              key={Date.now()+ Math.random()}
+              value={option.value}
+              primaryText={option.title}
+            />
+          ))}
         </SelectField>
       </MuiThemeProvider>
     </div>

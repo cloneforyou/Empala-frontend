@@ -1,6 +1,6 @@
 import NavButtons from './NavButtons';
 
-const InformationPage = () => (
+const InformationPage = (props) => (
 <div className='information-container'>
   <div className='information-text'>
     <p className='information-title'>IMPORTANT INFORMATION</p>
@@ -20,7 +20,10 @@ const InformationPage = () => (
     <p className='information-text__par6'>You will also need to maintain a $25,000 minimum account value to stay live (you will continue to be able to<br/>
       close out positions if you have less than $25,000)</p>
   </div>
-  <NavButtons />
+  <NavButtons
+    tabName='info'
+    tabIndex={1}
+  />
 </div>
 );
 

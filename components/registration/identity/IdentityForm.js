@@ -2,36 +2,68 @@ import React from 'react';
 import EmpalaInput from '../EmpalaInput';
 import EmpalaSelect from '../EmpalaSelect';
 import { dataFields } from '../../../localdata/identityPageData';
+import {connect} from "react-redux";
 
 
-export default class IdentityForm extends React.Component {
 
-  mappingComponent = (item) => {
-    if (this.props.page === 1 || this.props.page === 2) {
+const mapStateToProps = (state) => {
+  return (
+    {
+      registrationData: state.registration.registrationData,
+      page: state.registration.tabIndex,
+    }
+  )
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return (
+    {
+      setInputValueById: (e) => {
+        console.log(e.target.id, e.target.value);
+        dispatch(setInputFieldValueById(e.target.id, e.target.value))
+      },
+    })
+};
+
+
+class IdentityForm extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.mappingComponent = (item) => {
+      if (item.options) {
+        return (
+          <EmpalaSelect
+            id={item.id}
+            key={item.label}
+            options={item.options}
+            label={item.label}
+            value={this.props.registrationData[item.id] || ''}
+          />
+        )
+      }
       return (
-        <EmpalaSelect
-          key={item.label}
-          options={item.options}
+        <EmpalaInput
+          key={item.id}
+          id={item.id}
+          type={item.type}
           label={item.label}
+          value={this.props.registrationData[item.id] || ''}
+          placeholder={item.placeholder}
+          handleChange={this.props.setInputValueById}
         />
       )
-    }
-    return (
-      <EmpalaInput
-        key={item.id}
-        id={item.id}
-        type={item.type}
-        label={item.label}
-        placeholder={item.placeholder}
-    />
-    )
-  };
+    };
+  }
 
   render() {
     return (
       <div>
-        {dataFields[this.props.page].map((item) => this.mappingComponent(item))}
+        {dataFields[this.props.page-1].map((item) => this.mappingComponent(item))}
       </div>
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(IdentityForm)
