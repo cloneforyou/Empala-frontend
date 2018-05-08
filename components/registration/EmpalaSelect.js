@@ -17,8 +17,8 @@ const EmpalaSelect = (props) => {
           hintText={props.label}
           hintStyle={{ color: '#858c99'}}
           style={{ width: '422px', margin: 0 }}
-          menuStyle={{ top: '51px' }}
-          iconStyle={{ top: '-40px', right: '-16px', fill: '#7f8794' }}
+          // menuStyle={{ top: '51px' }}
+          // iconStyle={{ top: '-40px', right: '-16px', fill: '#7f8794' }}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           underlineFocusStyle={{ borderBottom : '2px solid #98c73a' }}
           onChange={(e, i, v) => {props.handleChange(props.id ,v)}}
