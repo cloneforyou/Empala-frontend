@@ -112,15 +112,45 @@ class MemberInfoForm extends React.Component {
             disabled={!this.isRadioChecked('passport')}
           />
         <DatePickerField
-          label={'Date of issue'}/>
+          label={'Date of issue'}
+          disabled={!this.isRadioChecked('passport')}
+        />
         <DatePickerField
-          label={'Date of Date of expiry'}/>
+          label={'Date of Date of expiry'}
+          disabled={!this.isRadioChecked('passport')}
+        />
           <RadioButton
             value='drivers-license'
             label='Drivers License'
             onClick={this.props.switchDocumentType}
             checked={this.isRadioChecked('drivers-license')}
           />
+        <EmpalaInput
+          key='member-drivers-license-state'
+          id='member_drivers-license_state'
+          type='text'
+          label='State'
+          value={this.props.registrationData['member_drivers-license_state'] || ''}
+          handleChange={this.props.setInputValueById}
+          disabled={!this.isRadioChecked('drivers-license')}
+        />
+        <EmpalaInput
+          key='member-drivers-license-number'
+          id='member_drivers-license_number'
+          type='text'
+          label='License no.'
+          value={this.props.registrationData['member_drivers-license_number'] || ''}
+          handleChange={this.props.setInputValueById}
+          disabled={!this.isRadioChecked('drivers-license')}
+        />
+        <DatePickerField
+          label={'Date of issue'}
+          disabled={!this.isRadioChecked('drivers-license')}
+        />
+        <DatePickerField
+          label={'Date of Date of expiry'}
+          disabled={!this.isRadioChecked('drivers-license')}
+        />
         {/*</RadioButtonGroup>*/}
       </MuiThemeProvider>
     </div>

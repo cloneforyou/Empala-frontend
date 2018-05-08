@@ -13,6 +13,7 @@ const DatePickerField = (props) => (
         locale="en-US"
         underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
         firstDayOfWeek={0}
+        disabled={props.disabled}
       />
       <FaCalendarO style={{ position: 'absolute', top: '20px', left: '240px' }} />
     </div>
