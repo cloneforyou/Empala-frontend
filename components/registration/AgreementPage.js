@@ -1,19 +1,19 @@
-const ReviewPage = () => (
-  <div className='review-container'>
-    <p className='review-title'>Before We Can Proceed You Are Required to Review and Consent to All of the Following Documents and Information</p>
-    <div className='agreements-container'>
+const AgreementPage = () => (
+  <div className='agreements'>
+    <p className='agreements-title'>Before We Can Proceed You Are Required to Review and Consent to All of the Following Documents and Information</p>
 
-      <p className='agreements-title'>THE LEGAL AGREEMENTS I AM AGREEING TO</p>
+    <div className='agreements-info'>
+      <p className='title-info'>THE LEGAL AGREEMENTS I AM AGREEING TO</p>
 
-      <ul className='agreements-list'>
-        <li>- Empala Customer Agreement</li>
-        <li>- Empala Privacy Statement</li>
-        <li>- Empala Securities Terms and Conditions</li>
-        <li>- APEX Customer Agreements</li>
-        <li>- Empala Securities Use and Risk Disclosures</li>
-        <li>- Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow)</li>
-        <li>- Empala Business Continuity Plan</li>
-        <li>- FINRA Public Disclosure Program (BrokerCheck)</li>
+      <ul className='list-info'>
+        <li className='item-info'>- <ins>Empala Customer Agreement</ins></li>
+        <li className='item-info'>- <ins>Empala Privacy Statement</ins></li>
+        <li className='item-info'>- <ins>Empala Securities Terms and Conditions</ins></li>
+        <li className='item-info'>- <ins>APEX Customer Agreements</ins></li>
+        <li className='item-info'>- <ins>Empala Securities Use and Risk Disclosures</ins></li>
+        <li className='item-info'>- <ins>Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow)</ins></li>
+        <li className='item-info'>- <ins>Empala Business Continuity Plan</ins></li>
+        <li className='item-info'>- <ins>FINRA Public Disclosure Program (BrokerCheck)</ins></li>
       </ul>
 
       <p>By clicking the “Submit Application” button, I agree to this Empala Application Agreement (this “Application Agreement”). I also agree to the terms of the Empala Customer Agreement, Empala Privacy
@@ -26,27 +26,25 @@ const ReviewPage = () => (
         agreements, I am accepting the terms of the revised agreements and I will be legally bound by their terms and conditions.  If I request other services provided by Empala that require me to agree to
         specific terms and conditions electronically (through clicks or other actions) or otherwise, such terms and conditions will be deemed an amendment and will be incorporated into and made part of
         these agreements.</p>
-
     </div>
-    <div className='row'>
 
-      <div className='col-5'>
-        <p className='review-text'>Under penalty of perjury I attest that I am of legal age
-          and also that all the information I have provided is true
-          and also that I have carefully reviewed, understand and
-          agree to the termsand provisions of the
-          Empala Customer Agreement.</p>
-      </div>
+    <div className='confirmation'>
+      <p className='text-confirmation width-35'>
+          Under penalty of perjury I attest that I am of legal age<br/>
+          and also that all the information I have provided is true<br/>
+          and also that I have carefully reviewed, understand and<br/>
+          agree to the termsand provisions of the<br/>
+          Empala Customer Agreement.
+      </p>
 
-      <div className='col-7 review-form'>
-        <div className='review-form__submit-field'>
-          <input type="text" className='review-input' />
-
+      <div className='width-65'>
+        <div className='form-confirmation'>
+          <div><input type="text" className='input-confirmation' /></div>
           <button className='btn--cancel'>Cancel</button>
           <button className='btn--submit'>Submit</button>
         </div>
 
-        <p className='review-form__subtext'>By clicking the “Submit” button above I agree to this Application Agreement and all additonal agreements and disclaimers which have been incorporated
+        <p className='subtext-confirmation'>By clicking the “Submit” button above I agree to this Application Agreement and all additonal agreements and disclaimers which have been incorporated
           by reference and constitute part of this Application Agreement, agree to receive all future account information electronically, explicitly agree in advance
           to arbitrate any controversies which may arise between or among me and Empala in accordance with the Predispute Arbitration Clause contained in the
           Empala Customer Agreement, and agree to notify Empala promptly regarding any change in the information provided on this application.</p>
@@ -55,4 +53,4 @@ const ReviewPage = () => (
   </div>
 );
 
-export default ReviewPage;
+export default AgreementPage;
