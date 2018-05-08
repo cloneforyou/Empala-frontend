@@ -40,19 +40,19 @@ class Content extends React.Component{
     }
   }
 
-  checkButton = () => {
-    this.setState(prevState => {
-      return {
-        checkedButton: !prevState.checkedButton
-      }
-    })
-  }
-
   render() {
     if (this.props.tabName === 'info') {
       this.props.setTabName('info');
       this.props.setTabPageIndex(1);
-      return <InformationPage />
+      return (
+        <div className='onboard'>
+          <div className='onboard__container'>
+            <div className='row no-gutters onboard__col'>
+              <InformationPage />
+            </div>
+          </div>
+        </div>
+      )
     }
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
@@ -65,18 +65,16 @@ class Content extends React.Component{
       <div className='onboard'>
         <div className='onboard__container'>
           <div className='row no-gutters onboard__col'>
-            <InformationPage />
-            <DatePickerField />
-            {/*<div className='col-6 onboard__left-block'>*/}
+            <div className='col-6 onboard__left-block'>
 
-              {/*<div className="onboard__left-block--top">*/}
-                {/*<ContentMenuTabs />*/}
-              {/*</div>*/}
-              {/*<div className="onboard__left-block--center">*/}
-                {/*<ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />*/}
-              {/*</div>*/}
-            {/*</div>*/}
-            {/*<div className='col-6 onboard__right-block'>*/}
+              <div className="onboard__left-block--top">
+                <ContentMenuTabs />
+              </div>
+              <div className="onboard__left-block--center">
+                <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
+              </div>
+            </div>
+            <div className='col-6 onboard__right-block'>
 
               <div className="onboard__right-block--center row">
                 {/*<ContentFillingInformation {...props} />*/}
