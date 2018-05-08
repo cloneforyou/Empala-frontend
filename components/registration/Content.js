@@ -26,7 +26,11 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-class Content extends React.PureComponent {
+class Content extends React.Component{
+  constructor(props) {
+    super(props)
+    this.state = {checkedButton: false}
+  }
 
   componentWillReceiveProps(nextProps) {
     // console.log(this.props);
@@ -34,6 +38,14 @@ class Content extends React.PureComponent {
     if (this.props.tabName !== nextProps.tabName) {
       this.props.getMenuItems(nextProps.tabName)
     }
+  }
+
+  checkButton = () => {
+    this.setState(prevState => {
+      return {
+        checkedButton: !prevState.checkedButton
+      }
+    })
   }
 
   render() {
@@ -53,16 +65,18 @@ class Content extends React.PureComponent {
       <div className='onboard'>
         <div className='onboard__container'>
           <div className='row no-gutters onboard__col'>
-            <div className='col-6 onboard__left-block'>
+            <InformationPage />
+            <DatePickerField />
+            {/*<div className='col-6 onboard__left-block'>*/}
 
-              <div className="onboard__left-block--top">
-                <ContentMenuTabs />
-              </div>
-              <div className="onboard__left-block--center">
-                <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
-              </div>
-            </div>
-            <div className='col-6 onboard__right-block'>
+              {/*<div className="onboard__left-block--top">*/}
+                {/*<ContentMenuTabs />*/}
+              {/*</div>*/}
+              {/*<div className="onboard__left-block--center">*/}
+                {/*<ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />*/}
+              {/*</div>*/}
+            {/*</div>*/}
+            {/*<div className='col-6 onboard__right-block'>*/}
 
               <div className="onboard__right-block--center row">
                 {/*<ContentFillingInformation {...props} />*/}

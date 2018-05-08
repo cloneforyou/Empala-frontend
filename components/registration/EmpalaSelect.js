@@ -6,16 +6,21 @@ import MenuItem from 'material-ui/MenuItem';
 const EmpalaSelect = (props) => {
 
   return(
-    <div className="registration-group">
-      <label className='registration-label' htmlFor={props.id}>{props.label}</label>
+    <div className="">
       <MuiThemeProvider>
         <SelectField
           id={props.id}
           value={props.value}
           floatingLabelText={props.label}
-          style={{ fontWeight: 400, margin: 0 }}
+          floatingLabelFixed={true}
+          floatingLabelStyle={{color: '#98c73a'}}
+          hintText={props.label}
+          hintStyle={{ color: '#858c99'}}
+          style={{ width: '422px', margin: 0 }}
+          menuStyle={{ top: '51px' }}
+          iconStyle={{ top: '-40px', right: '-16px', fill: '#7f8794' }}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
-          underlineFocusStyle={{ borderBottom : '2px solid red' }}
+          underlineFocusStyle={{ borderBottom : '2px solid #98c73a' }}
           onChange={(e, i, v) => {props.handleChange(props.id ,v)}}
         >
           {props.options.map((option) => (
