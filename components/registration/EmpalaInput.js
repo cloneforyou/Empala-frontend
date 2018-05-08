@@ -12,12 +12,13 @@ const EmpalaInput = (props) => {
       <label className='registration-label' htmlFor={props.id}>{props.label}</label>
       <MuiThemeProvider >
         <TextField
+          id={props.id}
+          type={props.type}
+          hintText={props.placeholder}
           style={{ width: '422px' }}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
-          hintText={props.placeholder}
-          id={props.id}
+          hintStyle={{ color: '#858c99'}}
           value={props.value}
-          type={props.type}
           onChange={(e) => props.handleChange(e)}
         />
       </MuiThemeProvider>
