@@ -21,14 +21,6 @@ export const dataFields = [
           value: 'United States',
           title: 'United States'
         },
-        {
-          value: 'Albania',
-          title: 'Albania'
-        },
-        {
-          value: 'Algeria',
-          title: 'Algeria'
-        },
       ],
     },
     {
@@ -48,8 +40,8 @@ export const dataFields = [
           title: 'Ms'
         },
         {
-          value: 'Miss',
-          title: 'Miss'
+          value: 'Dr',
+          title: 'Dr'
         },
       ],
     },
@@ -78,8 +70,12 @@ export const dataFields = [
           title: 'Sr'
         },
         {
-          value: '',
-          title: ''
+          value: 'II',
+          title: 'II'
+        },
+        {
+          value: 'III',
+          title: 'III'
         },
       ],
     },

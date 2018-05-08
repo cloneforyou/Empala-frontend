@@ -56,7 +56,7 @@ class Content extends React.PureComponent {
             <div className='col-6 onboard__left-block'>
 
               <div className="onboard__left-block--top">
-                <ContentMenuTabs />
+                <ContentMenuTabs tabName={this.props.tabName}/>
               </div>
               <div className="onboard__left-block--center">
                 <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
