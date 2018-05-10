@@ -95,10 +95,6 @@ export const dataFields = [
           value: 'Individual',
           title: 'Individual'
         },
-        {
-          value: 'Type2',
-          title: 'Type 2'
-        },
       ],
     },
     {
@@ -123,35 +119,6 @@ export const dataFields = [
       label: 'Contact telephone no',
       placeholder: '+1 415 123 4567',
     },
-  // ],
-  // [
-  //   {
-  //     id: 'member-home-address-line1',
-  //     type: 'text',
-  //     label: 'address-line1',
-  //     placeholder: '898 Candido Hollow',
-  //   },
-  //   {
-  //     id: 'member-home-address-line2',
-  //     type: 'text',
-  //     label: 'address-line2',
-  //     placeholder: 'Jacobson Cape',
-  //   },
-  //   {
-  //     id: 'member-city',
-  //     type: 'text',
-  //     placeholder: 'City',
-  //   },
-  //   {
-  //     id: 'member-zip-code',
-  //     type: 'number',
-  //     placeholder: 'Zip code',
-  //   },
-  //   {
-  //     id: 'member-country',
-  //     type: 'text',
-  //     placeholder: 'Country',
-  //   },
   ],
   [
     {

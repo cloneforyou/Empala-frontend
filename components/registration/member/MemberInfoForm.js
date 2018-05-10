@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
   return ({
       registrationData: state.registration.registrationData,
       page: state.registration.tabIndex,
+      fieldsErrors: state.registration.fieldsErrors,
     })
 };
 
@@ -33,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-class MemberInfoForm extends React.Component {
+class MemberInfoForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -59,6 +60,7 @@ class MemberInfoForm extends React.Component {
           value={this.props.registrationData[item.id] || ''}
           placeholder={item.placeholder}
           handleChange={this.props.setInputValueById}
+          errorText={this.props.fieldsErrors[item.id]}
         />
       )
     };
@@ -68,7 +70,7 @@ class MemberInfoForm extends React.Component {
 
 
   render() {
-    console.log('---------XXXXXXXXXXX----------------->>>>>>>>', this.props)
+    // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
     return (
       <form>
@@ -109,12 +111,14 @@ class MemberInfoForm extends React.Component {
           label={'Date of issue'}
           disabled={!this.isRadioChecked('passport')}
           handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_passport_issue_date'] || ''}
         />
         <DatePickerField
           id={'member_passport_expiry_date'}
           label={'Date of Date of expiry'}
           disabled={!this.isRadioChecked('passport')}
           handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_passport_expiry_date'] || ''}
         />
           <RadioButton
             value='drivers-license'
@@ -145,12 +149,14 @@ class MemberInfoForm extends React.Component {
           label={'Date of issue'}
           disabled={!this.isRadioChecked('drivers-license')}
           handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_drivers_license_issue_date'] || ''}
         />
         <DatePickerField
-          id={'member_drivers_license_date'}
+          id={'member_drivers_license_expiry_date'}
           label={'Date of Date of expiry'}
           disabled={!this.isRadioChecked('drivers-license')}
           handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
         />
       </MuiThemeProvider>
     </div>

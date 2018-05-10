@@ -21,6 +21,7 @@ const EmpalaInput = (props) => {
           value={props.value}
           onChange={(e) => props.handleChange(e)}
           disabled={props.disabled}
+          errorText={props.errorText}
         />
       </MuiThemeProvider>
     </div>
