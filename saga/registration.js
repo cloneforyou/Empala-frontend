@@ -64,10 +64,10 @@ export function* validateFieldOnServer({id, value}) {
   const url = '/auth/check';
   const options = {
     method: 'POST',
-    data: {
+    data: JSON.stringify({
       id,
       value,
-    }
+    })
   };
   if (validatedFields.includes(id)) {
     try {
