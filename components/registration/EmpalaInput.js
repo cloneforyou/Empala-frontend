@@ -1,15 +1,16 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
-
+import '../../assets/styles/modules/_input-group.scss'
 
 const EmpalaInput = (props) => {
-  console.log('-- props', props.id, props);
-  return(
-    <div className="registration-group">
-      <label className='registration-label' htmlFor={props.id}>{props.label}</label>
+  const col = props.col ? props.col : '';
+  return (
+    <div className='registration-group'>
+      <label className='registration-label'
+             htmlFor={props.id}>
+        {props.label}
+      </label>
       <MuiThemeProvider >
         <TextField
           id={props.id}
@@ -21,6 +22,7 @@ const EmpalaInput = (props) => {
           value={props.value}
           onChange={(e) => props.handleChange(e)}
           disabled={props.disabled}
+          errorText={props.errorText}
         />
       </MuiThemeProvider>
     </div>

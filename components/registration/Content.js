@@ -1,6 +1,6 @@
 import React from 'react';
 import NavButtons from './NavButtons';
-import {getMenuItems, setTabName, setTabPageIndex} from "../../actions/registration";
+import {getMenuItems, getRegistrationDataFromCache, setTabName, setTabPageIndex} from "../../actions/registration";
 import {getMenuItemsByTabName, getTabContentByTabName} from "../../utils/registrationUtils";
 import { connect } from "react-redux";
 import ContentMenuTabs from './ContentMenuTabs';
@@ -14,6 +14,7 @@ function mapStateToProps(state) {
     tabName: state.registration.tabName || 'info',
     tabIndex: state.registration.tabIndex || 1,
     menuItems: state.registration.menuItems,
+    registrationData: state.registration.registrationData
   }
 }
 
@@ -23,6 +24,7 @@ function mapDispatchToProps(dispatch) {
       getMenuItems: (tabName) => {dispatch(getMenuItems(getMenuItemsByTabName(tabName)))},
       setTabName: (tabName) => dispatch(setTabName(tabName)),
       setTabPageIndex:(tabIndex) => dispatch(setTabPageIndex(tabIndex)),
+      getRegistrationDataFromCache: () => dispatch(getRegistrationDataFromCache())
     })
 }
 
@@ -34,6 +36,15 @@ class Content extends React.PureComponent {
     // console.log(nextProps);
     if (this.props.tabName !== nextProps.tabName) {
       this.props.getMenuItems(nextProps.tabName)
+    }
+  }
+
+  componentDidMount() {
+    console.log(' *** state', this.props.registrationData);
+    if (localStorage.getItem('registrationData')) {
+      console.log(' *** ***');
+      this.props.getRegistrationDataFromCache();
+
     }
   }
 
