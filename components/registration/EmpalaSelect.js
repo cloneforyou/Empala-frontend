@@ -4,9 +4,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MenuItem from 'material-ui/MenuItem';
 
 const EmpalaSelect = (props) => {
+  console.log('-- props for select', props);
 
   return(
-    <div className="">
+    <div className={props.col ? `registration-group col-md-${props.col}` : "registration-group"}>
       <MuiThemeProvider>
         <SelectField
           id={props.id}
@@ -14,7 +15,7 @@ const EmpalaSelect = (props) => {
           floatingLabelText={props.label}
           floatingLabelFixed={true}
           floatingLabelStyle={{color: '#98c73a'}}
-          hintText={props.label}
+          hintText={props.hint || props.label}
           hintStyle={{ color: '#858c99'}}
           style={{ width: '422px', margin: 0 }}
           // menuStyle={{ top: '51px' }}

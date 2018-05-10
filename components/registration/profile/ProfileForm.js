@@ -2,8 +2,8 @@ import React from 'react';
 import EmpalaInput from '../EmpalaInput';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import {dataFields} from '../../../localdata/profilePageData';
-import {connect} from 'react-redux';
+import { dataFields } from '../../../localdata/profilePageData';
+import { connect } from 'react-redux';
 import {
   getMenuItems,
   setInputFieldValueById,
@@ -15,11 +15,11 @@ import EmpalaSelect from '../EmpalaSelect';
 import DatePickerField from '../DatePickerField';
 
 
-
 const mapStateToProps = (state) => {
   return ({
     registrationData: state.registration.registrationData,
     page: state.registration.tabIndex,
+    fieldsErrors: state.registration.fieldsErrors,
   })
 };
 
@@ -28,12 +28,12 @@ const mapDispatchToProps = (dispatch) => {
     setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
-    setPickedDate: (id, date) => dispatch(setPickedDate(date)),
+    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
   })
 };
 
 
-class ProfileForm extends React.Component {
+class ProfileForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -47,6 +47,8 @@ class ProfileForm extends React.Component {
             label={item.label}
             value={this.props.registrationData[item.id] || ''}
             handleChange={this.props.setSelectedValueById}
+            col={item.col}
+            hint={item.hint || item.label}
           />
         )
       }
@@ -57,18 +59,18 @@ class ProfileForm extends React.Component {
           type={item.type}
           label={item.label}
           value={this.props.registrationData[item.id] || ''}
-          placeholder={item.placeholder}
           handleChange={this.props.setInputValueById}
+          errorText={this.props.fieldsErrors[item.id]}
+          placeholder={item.placeholder}
+          col={item.col}
         />
       )
     };
-
     this.isRadioChecked = (name) => (this.props.registrationData.memberDocument === name);
   }
 
-
   render() {
-    console.log('---------XXXXXXXXXXX----------------->>>>>>>>', this.props)
+    // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
       return (
         <form>
@@ -80,10 +82,6 @@ class ProfileForm extends React.Component {
     return (
       <div>
         <MuiThemeProvider >
-          {/*<RadioButtonGroup*/}
-          {/*name='registrationDocument'*/}
-          {/*defaultSelected={this.props.registrationData.memberDocument}*/}
-          {/*onChange={this.props.switchDocumentType}>*/}
           <RadioButton
             value='passport'
             label='Passport'
@@ -113,11 +111,14 @@ class ProfileForm extends React.Component {
             label={'Date of issue'}
             disabled={!this.isRadioChecked('passport')}
             handleDatePick={this.props.setPickedDate}
+            value={this.props.registrationData['member_passport_issue_date'] || ''}
           />
           <DatePickerField
             id={'member_passport_expiry_date'}
-            label={'Date of Date of expiry'}
+            label={'Date of expiry'}
             disabled={!this.isRadioChecked('passport')}
+            handleDatePick={this.props.setPickedDate}
+            value={this.props.registrationData['member_passport_expiry_date'] || ''}
           />
           <RadioButton
             value='drivers-license'
@@ -147,16 +148,18 @@ class ProfileForm extends React.Component {
             id={'member_drivers_license_issue_date'}
             label={'Date of issue'}
             disabled={!this.isRadioChecked('drivers-license')}
+            handleDatePick={this.props.setPickedDate}
+            value={this.props.registrationData['member_drivers_license_issue_date'] || ''}
           />
           <DatePickerField
-            id={'member_drivers_license_date'}
-            label={'Date of Date of expiry'}
+            id={'member_drivers_license_expiry_date'}
+            label={'Date of expiry'}
             disabled={!this.isRadioChecked('drivers-license')}
+            handleDatePick={this.props.setPickedDate}
+            value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
           />
-          {/*</RadioButtonGroup>*/}
         </MuiThemeProvider>
       </div>
-
     )
   }
 }

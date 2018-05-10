@@ -1,21 +1,10 @@
-// Data fields for page input elements
-// obj {
-//       id: '',
-//       type: '',
-//       placeholder: '',
-//     }
-// for <input> elements
-// {
-//   label: '',
-//     options: [],
-// }
-// for select elements
-
 export const dataFields = [
+  // basic information
   [
     {
-      id: 'member_residence',
+      id: 'member_basic_information_residence',
       label: 'Country of residence',
+      hint: 'Please select',
       options: [
         {
           value: 'United States',
@@ -23,8 +12,10 @@ export const dataFields = [
         },
       ],
     },
+
     {
-      id: 'member_prefix',
+      id: 'member_basic_information_prefix',
+      hint: 'Please select',
       label: 'Prefix',
       options: [
         {
@@ -45,21 +36,25 @@ export const dataFields = [
         },
       ],
     },
+
     {
-      id: 'member_name',
+      id: 'member_basic_information_first_name',
       type: 'text',
       label: 'First name',
       placeholder: 'Iain',
     },
+
     {
-      id: 'member_last_name',
+      id: 'member_basic_information_last_name',
       type: 'text',
       label: 'Last name',
       placeholder: 'Clarke',
     },
+
     {
-      id: 'member_suffix',
+      id: 'member_basic_information_suffix',
       label: 'Suffix',
+      hint: 'Please select',
       options: [
         {
           value: 'Jr',
@@ -78,18 +73,22 @@ export const dataFields = [
           title: 'III'
         },
       ],
-    },
+    }
   ],
+
+  // account
   [
     {
-        id: 'member_account_no',
-        type: 'text',
-        label: 'Account no.',
-        placeholder: '0123456789',
-      },
+      id: 'member_account_account_no',
+      type: 'text',
+      label: 'Account no.',
+      placeholder: '0123456789',
+    },
+
     {
-      id: 'member-account-type',
+      id: 'member_account_account_type',
       label: 'Account type',
+      hint: 'Please select',
       options: [
         {
           value: 'individual',
@@ -109,35 +108,36 @@ export const dataFields = [
         },
       ],
     },
+
     {
-      id: 'member_password',
+      id: 'member_account_password',
       type: 'password',
       label: 'Password',
     },
+
     {
-      id: 'member_password_confirm',
+      id: 'member_account_password_confirm',
       type: 'password',
       label: 'Confirm Password',
     },
+
     {
-      id: 'member_email',
+      id: 'member_account_email',
       type: 'email',
       label: 'E-mail address',
       placeholder: 'iainclarke@gmail.com',
     },
+
     {
-      id: 'member_contact_phone',
+      id: 'member_account_contact_phone',
       type: 'text',
       label: 'Contact telephone no',
       placeholder: '+1 415 123 4567',
     },
   ],
+
+  // identification
   [
-    {
-      id: 'member_passport',
-      type: 'text',
-      label: 'Country of issue',
-      // placeholder: 'Username',
-    },
+
   ],
 ];
