@@ -6,9 +6,11 @@
 }
 
 .agreements-info {
+  max-height: 335px;
   font-size: 12px;
   border: 2px solid #e0e0e0;
   padding: 25px 21px 6px 32px;
+  overflow-y: auto;
 }
 
 .agreements-title {
@@ -38,6 +40,13 @@
   padding: 30px;
 }
 
+.label-confirmation {
+  display: flex;
+  font-size: 12px;
+  color: #98c73a;
+  text-align: start;
+  margin-left: 41px;
+}
 
 .input-confirmation {
   width: 85%;
@@ -74,10 +83,15 @@
 .btn--submit {
   width: 130px;
   height: 34px;
-  background-color: #98c73a;
-  border: solid 1px #98c73a;
+  background-color: gray;
+  border: solid 1px gray;
   color: white;
   font-weight: 100;
   margin-left: 45px;
   margin-top: 20px;
+}
+
+.btn--active {
+  background-color: #98c73a;
+  border: solid 1px #98c73a;
 }

@@ -23,18 +23,20 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     member: 'identity',
     identity: 'regulatory',
     regulatory: 'profile',
-    profile: 'experience'
+    profile: 'experience',
+    experience: 'agreement'
   };
   const prevTabs = {
     identity: 'member',
     regulatory: 'identity',
     profile: 'regulatory',
-    experience: 'profile'
+    experience: 'profile',
+    agreement: 'experience'
   };
   // console.log('SSSSSSSAAAAAAGGGGGGAAAA', tabName, tabIndex, direction, menuItems)
   if (direction === 'forward') {
       if (tabName === 'info'|| tabIndex > menuItems[tabName].length-1) {
-        if (tabName === 'experience') {return}
+        if (tabName === 'agreement') {return}
         yield put(setTabName(nextTabs[tabName]));
         yield put(setTabPageIndex(1));
       } else {

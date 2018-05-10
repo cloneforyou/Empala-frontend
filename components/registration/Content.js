@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
 import InformationPage from "./InformationPage";
+import AgreementPage from "./AgreementPage";
 
 
 function mapStateToProps(state) {
@@ -49,6 +50,17 @@ class Content extends React.PureComponent {
           </div>
         </div>
       )
+    } else if (this.props.tabName === 'agreement') {
+      this.props.setTabName('agreement');
+      this.props.setTabPageIndex(1);
+      return (
+        <div className='onboard'>
+          <div className='onboard__container'>
+            <div className='row no-gutters onboard__col'>
+              <AgreementPage />
+            </div>
+          </div>
+        </div> )
     }
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
