@@ -1,4 +1,13 @@
-.date-picker__container {
-  display: inline-block;
-  position: relative;
+.date-picker {
+  &__container {
+    position: relative;
+  }
+  &__block {
+    & > div:first-child {
+      width: 100% !important;
+    }
+    svg {
+      left: 0;
+    }
+  }
 }

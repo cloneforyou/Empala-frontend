@@ -2,8 +2,8 @@ import React from 'react';
 import EmpalaInput from '../EmpalaInput';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import {dataFields} from '../../../localdata/memberPageData';
-import {connect} from 'react-redux';
+import { dataFields } from '../../../localdata/memberPageData';
+import { connect } from 'react-redux';
 import {
   getMenuItems,
   setInputFieldValueById,
@@ -13,7 +13,6 @@ import {
 } from '../../../actions/registration';
 import EmpalaSelect from '../EmpalaSelect';
 import DatePickerField from '../DatePickerField';
-
 
 
 const mapStateToProps = (state) => {
@@ -72,12 +71,12 @@ class MemberInfoForm extends React.PureComponent {
   render() {
     // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
-    return (
-      <form>
-        {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
-      </form>
-    )
-  }
+      return (
+        <form>
+          {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
+        </form>
+      )
+    }
 
   return (
     <div>
@@ -160,9 +159,8 @@ class MemberInfoForm extends React.PureComponent {
         />
       </MuiThemeProvider>
     </div>
-
-)
-    }
+    )
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberInfoForm)
