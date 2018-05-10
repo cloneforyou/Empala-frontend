@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
       setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
       setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
       switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
-      setPickedDate: (id, date) => dispatch(setPickedDate(date)),
+      setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
     })
 };
 
@@ -80,10 +80,6 @@ class MemberInfoForm extends React.Component {
   return (
     <div>
       <MuiThemeProvider >
-        {/*<RadioButtonGroup*/}
-          {/*name='registrationDocument'*/}
-          {/*defaultSelected={this.props.registrationData.memberDocument}*/}
-          {/*onChange={this.props.switchDocumentType}>*/}
           <RadioButton
             value='passport'
             label='Passport'
@@ -118,6 +114,7 @@ class MemberInfoForm extends React.Component {
           id={'member_passport_expiry_date'}
           label={'Date of Date of expiry'}
           disabled={!this.isRadioChecked('passport')}
+          handleDatePick={this.props.setPickedDate}
         />
           <RadioButton
             value='drivers-license'
@@ -147,13 +144,14 @@ class MemberInfoForm extends React.Component {
           id={'member_drivers_license_issue_date'}
           label={'Date of issue'}
           disabled={!this.isRadioChecked('drivers-license')}
+          handleDatePick={this.props.setPickedDate}
         />
         <DatePickerField
           id={'member_drivers_license_date'}
           label={'Date of Date of expiry'}
           disabled={!this.isRadioChecked('drivers-license')}
+          handleDatePick={this.props.setPickedDate}
         />
-        {/*</RadioButtonGroup>*/}
       </MuiThemeProvider>
     </div>
 
