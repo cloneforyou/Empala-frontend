@@ -2,8 +2,8 @@ import React from 'react';
 import EmpalaInput from '../EmpalaInput';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import { dataFields } from '../../../localdata/memberPageData';
-import { connect } from 'react-redux';
+import {dataFields} from '../../../localdata/regulatoryPageData';
+import {connect} from 'react-redux';
 import {
   getMenuItems,
   setInputFieldValueById,
@@ -13,6 +13,7 @@ import {
 } from '../../../actions/registration';
 import EmpalaSelect from '../EmpalaSelect';
 import DatePickerField from '../DatePickerField';
+
 
 
 const mapStateToProps = (state) => {
@@ -32,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-class MemberInfoForm extends React.Component {
+class RegulatoryForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -67,6 +68,7 @@ class MemberInfoForm extends React.Component {
 
 
   render() {
+    console.log('---------XXXXXXXXXXX----------------->>>>>>>>', this.props)
     if (this.props.page !== 3) {
       return (
         <form>
@@ -77,7 +79,7 @@ class MemberInfoForm extends React.Component {
 
     return (
       <div>
-        <MuiThemeProvider>
+        <MuiThemeProvider >
           {/*<RadioButtonGroup*/}
           {/*name='registrationDocument'*/}
           {/*defaultSelected={this.props.registrationData.memberDocument}*/}
@@ -106,21 +108,17 @@ class MemberInfoForm extends React.Component {
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('passport')}
           />
-          <div className='row'>
-            <DatePickerField
-              id={'member_passport_issue_date'}
-              label={'Date of issue'}
-              disabled={!this.isRadioChecked('passport')}
-              handleDatePick={this.props.setPickedDate}
-              col={6}
-            />
-            <DatePickerField
-              id={'member_passport_expiry_date'}
-              label={'Date of Date of expiry'}
-              disabled={!this.isRadioChecked('passport')}
-              col={6}
-            />
-          </div>
+          <DatePickerField
+            id={'member_passport_issue_date'}
+            label={'Date of issue'}
+            disabled={!this.isRadioChecked('passport')}
+            handleDatePick={this.props.setPickedDate}
+          />
+          <DatePickerField
+            id={'member_passport_expiry_date'}
+            label={'Date of Date of expiry'}
+            disabled={!this.isRadioChecked('passport')}
+          />
           <RadioButton
             value='drivers-license'
             label='Drivers License'
@@ -163,4 +161,4 @@ class MemberInfoForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MemberInfoForm)
+export default connect(mapStateToProps, mapDispatchToProps)(RegulatoryForm)

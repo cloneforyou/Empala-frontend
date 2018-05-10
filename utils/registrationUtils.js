@@ -1,6 +1,9 @@
 import UploadUserFile from "../components/registration/UploadUserFile";
 import MemberInfoForm from "../components/registration/member/MemberInfoForm";
 import IdentityForm from "../components/registration/identity/IdentityForm";
+import ExperienceForm from "../components/registration/experience/ExperienceForm";
+import RegulatoryForm from "../components/registration/regulatory/RegulatoryForm";
+import ProfileForm from "../components/registration/profile/ProfileForm";
 import AccountForm from "../components/registration/account/AccountForm";
 import RegistrationFormDrawer from "../components/registration/RegistrationFormDrawer";
 
@@ -52,17 +55,9 @@ export const menuItems = {
 const tabContent = {
   member: <MemberInfoForm />,
   identity: <IdentityForm />,
-  regulatory: [
-    'IDENTIFICATION',
-    'FAMILY'
-  ],
-  profile: [
-    'EMPLOYMENT',
-    'FINANCIALS',
-  ],
-  experience: [
-    'INVESTMENT EXPERIENCE',
-  ],
+  regulatory: <RegulatoryForm />,
+  profile: <ProfileForm />,
+  experience: <ExperienceForm />,
 };
 
 export function getMenuItemsByTabName(tabName) {

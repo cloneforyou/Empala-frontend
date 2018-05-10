@@ -5,7 +5,6 @@ export default function request(url, options = {}) {
     Accept: 'application/json',
     // Accept: '*/*',
     'Content-Type': 'application/json',
-    'Current-Version': 'v1',
   };
 
   const requestOptions = {
