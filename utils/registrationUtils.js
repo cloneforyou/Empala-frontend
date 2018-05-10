@@ -6,6 +6,8 @@ import RegulatoryForm from "../components/registration/regulatory/RegulatoryForm
 import ProfileForm from "../components/registration/profile/ProfileForm";
 import AccountForm from "../components/registration/account/AccountForm";
 import RegistrationFormDrawer from "../components/registration/RegistrationFormDrawer";
+import _ from 'lodash';
+import {dataFields as memberPageData} from '../localdata/memberPageData';
 
 export const menuItems = {
   member: [
@@ -81,6 +83,31 @@ export function getMenuItemsByTabName(tabName) {
   }
 }
 
+export function getPageFieldNames(tabName, tabIndex) {
+  let pageFields = [];
+
+  switch(tabName) {
+    case 'member':
+      pageFields = _.cloneDeep(memberPageData[tabIndex - 1]);
+      break;
+    default:
+      break;
+  }
+
+  // pageFields.forEach((item, i) => {
+  //   console.log(' *** item', item);
+  //   if (item.options) {
+  //     pageFields.splice(i, 1);
+  //   }
+  // });
+
+  let fieldNames = pageFields.map(item => {
+    return item.id
+  });
+
+  console.log('>*', fieldNames);
+  return fieldNames;
+}
 
 export function getTabContentByTabName(tabName, pageIndex) {
   return {
