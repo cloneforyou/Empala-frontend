@@ -2,25 +2,21 @@
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.tabs-menu li {
-  display: inline;
-}
-
-.tabs-item {
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.tabs-item a {
-  color: #808895;
-  text-transform: capitalize;
-  margin-right: 13px;
-}
-
-.tabs-item:hover,
-.tabs-item--active {
-  color: #98c73a;
-  text-decoration: none;
+  &__item {
+    display: inline;
+    span {
+      cursor: pointer;
+    }
+    &_active, &:hover {
+      span {
+        color: #98c73a;
+      }
+    }
+    &:not(:last-child){
+      &:after{
+        content: '>';
+        margin: 0 15px;
+      }
+    }
+  }
 }
