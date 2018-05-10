@@ -92,8 +92,20 @@ export const dataFields = [
       label: 'Account type',
       options: [
         {
-          value: 'Individual',
+          value: 'individual',
           title: 'Individual'
+        },
+        {
+          value: 'joint',
+          title: 'Joint'
+        },
+        {
+          value: 'custodial',
+          title: 'Custodial'
+        },
+        {
+          value: 'traditional-ira',
+          title: 'Traditional IRA'
         },
       ],
     },

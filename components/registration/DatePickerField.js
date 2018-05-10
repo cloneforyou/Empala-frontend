@@ -18,7 +18,7 @@ const DatePickerField = (props) => (
         underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
         firstDayOfWeek={0}
         disabled={props.disabled}
-        style={{display: 'inline-block'}}
+        // style={{display: 'inline-block'}}
         onChange={(none = null, date) => props.handleDatePick(props.id, date)}
         value={props.value}
       />

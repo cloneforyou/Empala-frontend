@@ -1,4 +1,5 @@
 import {
+  GET_DATA_FROM_CACHE,
   GET_MENU_ITEMS,
   SET_FIELD_VALUE,
   SET_MEMBER_DOCUMENT_TYPE,
@@ -32,11 +33,11 @@ function registration(state = initialState, action) {
     case SET_FIELD_VALUE:
       return {...state, registrationData: {...state.registrationData, [action.id]: action.value}};
       case VALIDATE_FIELD_ERROR:
-        console.log(' passwords mismatch' );
       return {...state, fieldsErrors: {...state.fieldsErrors, [action.fieldId]: action.message}};
       case VALIDATE_FIELD_SUCCESS:
-        console.log(' passwords equal' );
       return {...state, fieldsErrors: {...state.fieldsErrors, [action.fieldId]: ''}};
+      case GET_DATA_FROM_CACHE:
+      return {...state, registrationData: JSON.parse(localStorage.getItem('registrationData'))};
     default:
       return state;
   }

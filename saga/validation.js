@@ -1,5 +1,5 @@
-import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
-import {setFieldInvalid, setFieldValid} from '../actions/registration';
+import { call, put, select } from 'redux-saga/effects';
+import { setFieldInvalid, setFieldValid } from '../actions/registration';
 import request from '../utils/request';
 
 function* validatePasswordField({id, value}) {
@@ -42,8 +42,17 @@ function* validateFieldOnServer({id, value}) {
   }
 }
 
+
+// Add your validation function here
+
+
+// Spawns validation function according to fieldId
 export default function* validationSaga({id, value}) {
-  const validatedFields = ['member_email', 'member_passport_number', 'member_drivers_license_number'];
+  const validatedFields = [
+    'member_email',
+    'member_passport_number',
+    'member_drivers_license_number'
+  ];
   if (validatedFields.includes(id)) {
     yield validateFieldOnServer({id, value});
   } else if (id === 'member_password_confirm' || id === 'member_password' ) {
