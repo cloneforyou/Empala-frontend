@@ -7,7 +7,7 @@ import stylesheet from '../assets/styles/main.scss'
 import { getMenuItems } from "../actions/registration";
 import { getMenuItemsByTabName } from "../utils/registrationUtils";
 import { withReduxSaga } from "../store";
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Registration extends React.PureComponent {
 
@@ -22,12 +22,14 @@ class Registration extends React.PureComponent {
   render() {
     console.log('//////////////////////////////', this.props)
     return (
-      <div>
-        <style dangerouslySetInnerHTML={{__html: stylesheet}}/>
-        <Header/>
-        <Content {...this.props} />
-        <Footer/>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <style dangerouslySetInnerHTML={{__html: stylesheet}}/>
+          <Header/>
+          <Content {...this.props} />
+          <Footer/>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

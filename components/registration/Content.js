@@ -95,11 +95,11 @@ class Content extends React.PureComponent {
             </div>
             <div className='col-6 onboard__right-block'>
 
-              <div className="onboard__right-block--center row">
+              <div className='onboard__right-block--center'>
                 {/*<ContentFillingInformation {...props} />*/}
                 {pageContent.tabContent}
               </div>
-              <div className="onboard__right-block--bottom">
+              <div className='onboard__right-block--bottom'>
                 <NavButtons
                   tabName={this.props.tabName}
                   tabIndex={this.props.tabIndex} />
