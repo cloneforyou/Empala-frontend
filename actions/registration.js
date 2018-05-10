@@ -4,7 +4,7 @@ import {
   SET_TAB_NAME,
   SET_TAB_PAGE_INDEX,
   SET_FIELD_VALUE,
-  SET_MEMBER_DOCUMENT_TYPE, VALIDATE_FIELD_SUCCESS, VALIDATE_FIELD_ERROR
+  SET_MEMBER_DOCUMENT_TYPE, VALIDATE_FIELD_SUCCESS, VALIDATE_FIELD_ERROR, GET_DATA_FROM_CACHE
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -65,5 +65,11 @@ export function setFieldInvalid(fieldId, message) {
     type: VALIDATE_FIELD_ERROR,
     fieldId,
     message,
+  }
+}
+
+export function getRegistrationDataFromCache() {
+  return  {
+    type: GET_DATA_FROM_CACHE,
   }
 }

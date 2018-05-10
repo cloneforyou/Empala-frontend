@@ -17,22 +17,23 @@ import DatePickerField from '../DatePickerField';
 
 const mapStateToProps = (state) => {
   return ({
-    registrationData: state.registration.registrationData,
-    page: state.registration.tabIndex,
-  })
+      registrationData: state.registration.registrationData,
+      page: state.registration.tabIndex,
+      fieldsErrors: state.registration.fieldsErrors,
+    })
 };
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
-    setPickedDate: (id, date) => dispatch(setPickedDate(date)),
-  })
+      setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
+      setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+      switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
+      setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+    })
 };
 
 
-class MemberInfoForm extends React.Component {
+class MemberInfoForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -58,6 +59,7 @@ class MemberInfoForm extends React.Component {
           value={this.props.registrationData[item.id] || ''}
           placeholder={item.placeholder}
           handleChange={this.props.setInputValueById}
+          errorText={this.props.fieldsErrors[item.id]}
         />
       )
     };
@@ -67,6 +69,7 @@ class MemberInfoForm extends React.Component {
 
 
   render() {
+    // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
       return (
         <form>
@@ -75,13 +78,9 @@ class MemberInfoForm extends React.Component {
       )
     }
 
-    return (
-      <div>
-        <MuiThemeProvider>
-          {/*<RadioButtonGroup*/}
-          {/*name='registrationDocument'*/}
-          {/*defaultSelected={this.props.registrationData.memberDocument}*/}
-          {/*onChange={this.props.switchDocumentType}>*/}
+  return (
+    <div>
+      <MuiThemeProvider >
           <RadioButton
             value='passport'
             label='Passport'
@@ -106,59 +105,60 @@ class MemberInfoForm extends React.Component {
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('passport')}
           />
-          <div className='row'>
-            <DatePickerField
-              id={'member_passport_issue_date'}
-              label={'Date of issue'}
-              disabled={!this.isRadioChecked('passport')}
-              handleDatePick={this.props.setPickedDate}
-              col={6}
-            />
-            <DatePickerField
-              id={'member_passport_expiry_date'}
-              label={'Date of Date of expiry'}
-              disabled={!this.isRadioChecked('passport')}
-              col={6}
-            />
-          </div>
+        <DatePickerField
+          id={'member_passport_issue_date'}
+          label={'Date of issue'}
+          disabled={!this.isRadioChecked('passport')}
+          handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_passport_issue_date'] || ''}
+        />
+        <DatePickerField
+          id={'member_passport_expiry_date'}
+          label={'Date of Date of expiry'}
+          disabled={!this.isRadioChecked('passport')}
+          handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_passport_expiry_date'] || ''}
+        />
           <RadioButton
             value='drivers-license'
             label='Drivers License'
             onClick={this.props.switchDocumentType}
             checked={this.isRadioChecked('drivers-license')}
           />
-          <EmpalaInput
-            key='member-drivers-license-state'
-            id='member_drivers_license_state'
-            type='text'
-            label='State'
-            value={this.props.registrationData['member_drivers_license_state'] || ''}
-            handleChange={this.props.setInputValueById}
-            disabled={!this.isRadioChecked('drivers-license')}
-          />
-          <EmpalaInput
-            key='member-drivers-license-number'
-            id='member_drivers_license_number'
-            type='text'
-            label='License no.'
-            value={this.props.registrationData['member_drivers_license_number'] || ''}
-            handleChange={this.props.setInputValueById}
-            disabled={!this.isRadioChecked('drivers-license')}
-          />
-          <DatePickerField
-            id={'member_drivers_license_issue_date'}
-            label={'Date of issue'}
-            disabled={!this.isRadioChecked('drivers-license')}
-          />
-          <DatePickerField
-            id={'member_drivers_license_date'}
-            label={'Date of Date of expiry'}
-            disabled={!this.isRadioChecked('drivers-license')}
-          />
-          {/*</RadioButtonGroup>*/}
-        </MuiThemeProvider>
-      </div>
-
+        <EmpalaInput
+          key='member-drivers-license-state'
+          id='member_drivers_license_state'
+          type='text'
+          label='State'
+          value={this.props.registrationData['member_drivers_license_state'] || ''}
+          handleChange={this.props.setInputValueById}
+          disabled={!this.isRadioChecked('drivers-license')}
+        />
+        <EmpalaInput
+          key='member-drivers-license-number'
+          id='member_drivers_license_number'
+          type='text'
+          label='License no.'
+          value={this.props.registrationData['member_drivers_license_number'] || ''}
+          handleChange={this.props.setInputValueById}
+          disabled={!this.isRadioChecked('drivers-license')}
+        />
+        <DatePickerField
+          id={'member_drivers_license_issue_date'}
+          label={'Date of issue'}
+          disabled={!this.isRadioChecked('drivers-license')}
+          handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_drivers_license_issue_date'] || ''}
+        />
+        <DatePickerField
+          id={'member_drivers_license_expiry_date'}
+          label={'Date of Date of expiry'}
+          disabled={!this.isRadioChecked('drivers-license')}
+          handleDatePick={this.props.setPickedDate}
+          value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
+        />
+      </MuiThemeProvider>
+    </div>
     )
   }
 }

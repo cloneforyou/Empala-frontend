@@ -22,7 +22,7 @@ const EmpalaInput = (props) => {
           value={props.value}
           onChange={(e) => props.handleChange(e)}
           disabled={props.disabled}
-          errorText={props.error ? 'This field is required' : ''}
+          errorText={props.errorText}
         />
       </MuiThemeProvider>
     </div>
