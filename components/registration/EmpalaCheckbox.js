@@ -69,7 +69,8 @@ class EmpalaCheckbox extends React.Component {
           style={ this.styles.checkBoxStyle }
           onClick={this.checkBtn}
         />
-        <ModalWindow handleClose={this.handleClose} open={this.state.open}/>
+        <ModalWindow handleClose={this.handleClose}
+                     open={this.state.open}/>
       </div>
     )
   }
