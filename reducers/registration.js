@@ -1,10 +1,11 @@
 import {
+  CLOSE_IDENTITY_MODAL,
   GET_DATA_FROM_CACHE,
   GET_MENU_ITEMS,
   SET_FIELD_VALUE,
   SET_MEMBER_DOCUMENT_TYPE,
   SET_TAB_NAME,
-  SET_TAB_PAGE_INDEX,
+  SET_TAB_PAGE_INDEX, SHOW_IDENTITY_MODAL, TOGGLE_CHECKBOX, TOGGLE_IDENTITY_MODAL,
   VALIDATE_FIELD_ERROR,
   VALIDATE_FIELD_SUCCESS,
 } from "../constants/registration";
@@ -13,6 +14,7 @@ import {getMenuItemsByTabName} from "../utils/registrationUtils";
 const initialState = {
   tabName: false,
   tabIndex: false,
+  showIdentityModal: false,
   menuItems: [],
   registrationData: {
     memberDocument: 'passport'
@@ -38,6 +40,12 @@ function registration(state = initialState, action) {
       return {...state, fieldsErrors: {...state.fieldsErrors, [action.fieldId]: ''}};
       case GET_DATA_FROM_CACHE:
       return {...state, registrationData: JSON.parse(localStorage.getItem('registrationData'))};
+      case TOGGLE_CHECKBOX:
+      return {...state, [action.id]: !state[action.id]};
+      case SHOW_IDENTITY_MODAL:
+      return {...state, showIdentityModal: true};
+      case CLOSE_IDENTITY_MODAL:
+      return {...state, showIdentityModal: false};
     default:
       return state;
   }

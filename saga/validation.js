@@ -1,5 +1,5 @@
 import { call, put, select } from 'redux-saga/effects';
-import { setFieldInvalid, setFieldValid } from '../actions/registration';
+import {setFieldInvalid, setFieldValid, showIdentityModal} from '../actions/registration';
 import request from '../utils/request';
 
 function* validatePasswordField({id, value}) {
@@ -43,6 +43,13 @@ function* validateFieldOnServer({id, value}) {
 }
 
 
+export function* validateCheckbox(action) {
+  const isChecked = yield select((state) => state.registration[action.id]);
+  if (/identity_checkbox/.test(action.id) &&  isChecked) {
+    console.log(' *** 999', isChecked );
+    yield put(showIdentityModal());
+  }
+}
 // Add your validation function here
 
 

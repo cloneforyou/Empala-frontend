@@ -5,20 +5,22 @@ import EmpalaCheckbox from '../EmpalaCheckbox';
 import { dataFields } from '../../../localdata/identityPageData';
 import {connect} from "react-redux";
 import {
+  closeIdentityModal,
   getMenuItems,
   setInputFieldValueById,
   setMemberDocumentType,
   setTabName,
-  setTabPageIndex
+  setTabPageIndex, toggleCheckboxById
 } from '../../../actions/registration';
-
+import ModalWindow from '../ModalWindow';
 
 const mapStateToProps = (state) => {
   return (
     {
       registrationData: state.registration.registrationData,
       page: state.registration.tabIndex,
-    }
+      showModal: state.registration.showIdentityModal,
+     }
   )
 };
 
@@ -30,7 +32,13 @@ const mapDispatchToProps = (dispatch) => {
         console.log(e.target.id, e.target.value);
         dispatch(setInputFieldValueById(e.target.id, e.target.value))
       },
-    })
+      toggleCheckboxById: (e, checked) => {
+        console.log('---------->>>>>>>>>>>>>>>>', e.target.id)
+        dispatch(toggleCheckboxById(e.target.id));
+      },
+      closeModal: () => dispatch(closeIdentityModal()),
+    }
+  )
 };
 
 
@@ -72,6 +80,7 @@ class IdentityForm extends React.Component {
                 key={item.id}
                 id={item.id}
                 label={item.label}
+                handleCheck={this.props.toggleCheckboxById}
               />
           )
       }
@@ -79,17 +88,14 @@ class IdentityForm extends React.Component {
   }
 
   render() {
-    if (this.props.tabIndex === 1) {
-      return (
-        <div>
-
-        </div>
-      )
-    }
 
     return (
       <form>
         {dataFields[this.props.page-1].map((item) => this.mappingComponent(item))}
+        <ModalWindow
+          open={this.props.showModal}
+          handleClose={this.props.closeModal}
+        />
       </form>
     )
   }

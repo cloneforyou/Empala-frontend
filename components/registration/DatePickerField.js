@@ -16,7 +16,7 @@ const DatePickerField = (props) => (
           disabled={props.disabled}
           textFieldStyle={{ width: '100%' }}
           onChange={(none = null, date) => props.handleDatePick(props.id, date)}
-          value={new Date(props.value)}
+          value={props.value ? new Date(props.value): null}
         />
         <FaCalendarO style={{ position: 'absolute', top: '20px', right: '0', color: '#98c73a' }} />
       </div>
