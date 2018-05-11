@@ -36,7 +36,7 @@ export const dataFields = [
 
     {
       label: 'No. of dependents',
-      id: 'regulatory_family__dependents',
+      id: 'regulatory_family_dependents',
       type: 'number',
       placeholder: '',
     },

@@ -24,7 +24,8 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     identity: 'regulatory',
     regulatory: 'profile',
     profile: 'experience',
-    experience: 'agreement'
+    experience: 'final_review',
+    final_review: 'agreement'
   };
   const prevTabs = {
     member: 'info',
@@ -32,7 +33,8 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     regulatory: 'identity',
     profile: 'regulatory',
     experience: 'profile',
-    agreement: 'experience'
+    final_review: 'experience',
+    agreement: 'final_review'
   };
   if (direction === 'forward') {
     if (tabName === 'info') {
