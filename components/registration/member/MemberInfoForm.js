@@ -80,7 +80,6 @@ class MemberInfoForm extends React.PureComponent {
 
     return (
       <div>
-        <MuiThemeProvider >
           <RadioButton
             value='passport'
             label='Passport'
@@ -159,7 +158,6 @@ class MemberInfoForm extends React.PureComponent {
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
           />
-        </MuiThemeProvider>
       </div>
     )
   }
