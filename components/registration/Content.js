@@ -95,8 +95,11 @@ class Content extends React.PureComponent {
     let fieldNames = getPageFieldNames(this.props.tabName, this.props.tabIndex);
     if (this.props.tabName === 'member' && this.props.tabIndex === 3) {
       fieldNames = fieldNames.filter((fieldName) => {
-        console.log('-----', fieldName)
         return fieldName.includes(this.props.registrationData.memberDocument)})
+    } else if (this.props.tabName === 'identity' && this.props.tabIndex === 1 ) {
+      fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_residential_address_same_mailing_address_checkbox')
+    } else if (this.props.tabName === 'identity' && this.props.tabIndex === 3) {
+      fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox')
     }
 
     console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);

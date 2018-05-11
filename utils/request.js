@@ -23,6 +23,8 @@ export default function request(url, options = {}) {
     if (err.response && err.response.status === 401) {
       if (err.response.data.info === 'INVALID_VALUE') {
         return 'Already in use';
+      } else if (err.response.data.info === 'MISSING_CHECK_TYPE') {
+        return 'Validation failed'
       }
     }
   }
