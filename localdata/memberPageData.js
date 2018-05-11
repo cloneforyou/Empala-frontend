@@ -131,7 +131,7 @@ export const dataFields = [
     {
       id: 'member_account_contact_phone',
       type: 'text',
-      label: 'Contact telephone no',
+      label: 'Contact telephone no.',
       placeholder: '+1 415 123 4567',
     },
   ],

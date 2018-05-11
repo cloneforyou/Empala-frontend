@@ -68,8 +68,12 @@ class IdentityForm extends React.Component {
   }
 
   render() {
-    if (this.props.tabIndex === 3) {
-      return
+    if (this.props.tabIndex === 1) {
+      return (
+        <div>
+
+        </div>
+      )
     }
 
     return (
