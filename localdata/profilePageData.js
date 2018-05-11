@@ -2,30 +2,36 @@ export const dataFields = [
   // employment
   [
     {
+      id: 'profile_employment_employment_type',
       label: 'Employment type',
-      id: 'employment_type',
       type: 'text',
       placeholder: '',
     },
+
     {
+      id: 'profile_employment_employment_country',
       label: 'Employment country',
-      id: 'employment_country',
       type: 'text',
       placeholder: '',
     },
+
     {
+      id: 'profile_employment_employer_name',
       label: 'Employer name',
-      id: 'employment_employer_name',
       type: 'text',
       placeholder: '',
     },
+
     {
       label: 'Zip code',
       id: 'employment_zip_code',
       type: 'number',
       placeholder: '',
     },
+
     {
+      id: 'profile_employment_state',
+      hint: 'Please select',
       label: 'State',
       options: [
         {
@@ -47,6 +53,8 @@ export const dataFields = [
       ],
     },
     {
+      id: 'profile_employment_city',
+      hint: 'Please select',
       label: 'City',
       options: [
         {
@@ -64,9 +72,12 @@ export const dataFields = [
       ],
     },
   ],
+
   // Financials
   [
     {
+      id: 'profile_financials_annual_income',
+      hint: 'Please select',
       label: 'Annual income',
       options: [
         {
@@ -91,21 +102,25 @@ export const dataFields = [
         },
       ],
     },
+
     {
       label: 'Total net worth',
-      id: 'financials_total_net_worth',
+      id: 'profile_financials_total_net_worth',
       type: 'text',
       placeholder: '',
     },
+
     {
       label: 'Liquid net worth',
-      id: 'financials_liquid_net_worth',
+      id: 'profile_financials_liquid_net_worth',
       type: 'text',
       placeholder: '',
     },
+
     {
-      id: 'financials_tax_rate_profile',
+      id: 'profile_financials_tax_rate_profile',
       label: 'Tax rate profile',
+      hint: 'Please select',
       options: [
         {
           value: 'Low',
@@ -117,7 +132,10 @@ export const dataFields = [
         },
       ],
     },
+
     {
+      id: 'profile_financials_investment_objectives',
+      hint: 'Please select',
       label: 'Investment objectives',
       options: [
         {

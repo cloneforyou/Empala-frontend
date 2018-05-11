@@ -2,19 +2,21 @@ export const dataFields = [
   // residential address
   [
     {
+      id: 'identity_residential_address_residential_address_line_1',
       field: 'input',
       label: 'Residential address line 1',
-      id: 'identity_residential_address_line_1',
       type: 'text',
       placeholder: '',
     },
+
     {
+      id: 'identity_residential_address_residential_address_line_2',
       field: 'input',
       label: 'Residential address line 2',
-      id: 'identity_residential_address_line_2',
       type: 'text',
       placeholder: '',
     },
+
     {
       field: 'input',
       label: 'Zip code',
@@ -22,7 +24,10 @@ export const dataFields = [
       type: 'number',
       placeholder: '',
     },
+
     {
+      id: 'identity_residential_address_residential_address_state',
+      hint: 'Please select',
       field: 'select',
       label: 'State',
       id: 'identity_state_residential',
@@ -45,7 +50,10 @@ export const dataFields = [
         },
       ],
     },
+
     {
+      id: 'identity_residential_address_residential_address_city',
+      hint: 'Please select',
       field: 'select',
       label: 'City',
       id: 'identity_city_residential',
@@ -64,7 +72,10 @@ export const dataFields = [
         },
       ],
     },
+
     {
+      id: 'identity_residential_address_residential_address_country',
+      hint: 'Please select',
       field: 'select',
       label: 'Country',
       id: 'identity_country_residential',
@@ -76,30 +87,36 @@ export const dataFields = [
       ],
     },
   ],
+
   // mailing address
   [
     {
+      id: 'identity_mailing_address_residential_address_line_1',
       field: 'input',
       label: 'Mailing address line 1',
-      id: 'identity_residential_address_line_1',
       type: 'text',
       placeholder: '',
     },
+
     {
+      id: 'identity_mailing_address_residential_address_line_2',
       field: 'input',
       label: 'Mailing address line 2',
-      id: 'identity_residential_address_line_2',
       type: 'text',
       placeholder: '',
     },
+
     {
+      id: 'identity_mailing_address_zip_code',
       field: 'input',
       label: 'Zip code',
-      id: 'identity_zip_code',
       type: 'number',
       placeholder: '',
     },
+
     {
+      id: 'identity_mailing_address_state',
+      hint: 'Please select',
       field: 'select',
       label: 'State',
       id: 'identity_state_mailing',
@@ -123,6 +140,8 @@ export const dataFields = [
       ],
     },
     {
+      id: 'identity_mailing_address_city',
+      hint: 'Please select',
       field: 'select',
       label: 'City',
       id: 'identity_city_mailing',
@@ -142,6 +161,8 @@ export const dataFields = [
       ],
     },
     {
+      id: 'identity_mailing_address_country',
+      hint: 'Please select',
       field: 'select',
       label: 'Country',
       id: 'identity_country_mailing',
@@ -153,6 +174,7 @@ export const dataFields = [
       ],
     },
   ],
+
   // trusted contact person
   [
     {
@@ -191,6 +213,7 @@ export const dataFields = [
       placeholder: '',
     },
   ],
+
   // regulatory questions
   [
     {

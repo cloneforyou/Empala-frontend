@@ -4,9 +4,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../../assets/styles/modules/_input-group.scss'
 
 const EmpalaInput = (props) => {
-  const col = props.col ? props.col : '';
   return (
-    <div className='registration-group'>
+    <div className={props.col ? `registration-group col-md-${props.col}` : "registration-group"}>
       <label className='registration-label'
              htmlFor={props.id}>
         {props.label}
