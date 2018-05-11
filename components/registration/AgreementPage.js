@@ -5,8 +5,8 @@ import {connect} from "react-redux";
 
 function mapStateToProps(state) {
   return {
-    firstName: state.registration.registrationData.member_name || '',
-    lastName: state.registration.registrationData.member_last_name || '',
+    firstName: state.registration.registrationData.member_basic_information_first_name || '',
+    lastName: state.registration.registrationData.member_basic_information_last_name || '',
   }
 }
 
