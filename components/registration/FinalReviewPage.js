@@ -18,10 +18,19 @@ function mapDispatchToProps(dispatch) {
   })
 }
 
+
 class FinalReviewPage extends React.PureComponent {
 
   constructor(props){
     super(props);
+  }
+
+  convertDate(date) {
+    const createDate = new Date(date);
+    const month = createDate.getMonth() ? createDate.getMonth() + 1 : 1;
+    const year = createDate.getFullYear() ? createDate.getFullYear() : 1970;
+    const day = createDate.getDate() ? createDate.getDate() : 1;
+    return `${month}/${day}/${year}`
   }
 
   render() {
@@ -109,12 +118,14 @@ class FinalReviewPage extends React.PureComponent {
                   <FieldComponent
                     width={97}
                     label={'Date of issue'}
-                    value={data.member_passport_issue_date || empty}
+                    value={data.member_passport_issue_date
+                      && this.convertDate(data.member_passport_issue_date) || empty}
                   />
                   <FieldComponent
                     width={97}
                     label={'Date of expiry'}
-                    value={data.member_passport_expiry_date || empty}
+                    value={data.member_passport_expiry_date
+                      && this.convertDate(data.member_passport_expiry_date) || empty}
                   />
                 </div>
               </div>
@@ -136,12 +147,14 @@ class FinalReviewPage extends React.PureComponent {
                   <FieldComponent
                     width={97}
                     label={'Date of issue'}
-                    value={data.member_drivers_license_issue_date || empty}
+                    value={data.member_drivers_license_issue_date
+                      && this.convertDate(data.member_drivers_license_issue_date) || empty}
                   />
                   <FieldComponent
                     width={97}
                     label={'Date of expiry'}
-                    value={data.member_drivers_license_expiry_date || empty}
+                    value={data.member_drivers_license_expiry_date
+                      && this.convertDate(data.member_drivers_license_expiry_date) || empty}
                   />
                 </div>
               </div>
@@ -265,7 +278,8 @@ class FinalReviewPage extends React.PureComponent {
                 <FieldComponent
                   width={215}
                   label={'Date of birth'}
-                  value={data.identity_trusted_contact_person_first_name || empty}
+                  value={data.identity_trusted_contact_person_first_name
+                  && this.convertDate(data.identity_trusted_contact_person_first_name) || empty}
                 />
                 <FieldComponent
                   width={215}

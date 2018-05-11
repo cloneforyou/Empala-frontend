@@ -73,3 +73,9 @@
 .final-review__navigation {
     margin: 20px auto;
 }
+
+@media screen and (max-width: 1100px) {
+  .final-review__inner-wrap {
+    width: 477px;
+  }
+}
