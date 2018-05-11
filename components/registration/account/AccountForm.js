@@ -13,6 +13,7 @@ export default class AccountForm extends React.Component {
           key={item.label}
           options={item.options}
           label={item.label}
+          col={item.col}
         />
       )
     }
@@ -23,13 +24,14 @@ export default class AccountForm extends React.Component {
         type={item.type}
         label={item.label}
         placeholder={item.placeholder}
+        col={item.col}
       />
     )
   };
 
   render() {
     return (
-      <div>
+      <div className='row'>
         {dataFields[this.props.page].map((item) => this.mappingComponent(item))}
       </div>
     )

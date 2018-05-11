@@ -113,12 +113,14 @@ export const dataFields = [
       id: 'member_account_password',
       type: 'password',
       label: 'Password',
+      col: 6,
     },
 
     {
       id: 'member_account_password_confirm',
       type: 'password',
       label: 'Confirm Password',
+      col: 6,
     },
 
     {
@@ -140,11 +142,11 @@ export const dataFields = [
   [
     {id :'member_passport_countryOfIssue'},
     {id :'member_passport_number'},
-    {id :'member_passport_issue_date'},
-    {id :'member_passport_expiry_date'},
+    {id :'member_passport_issue_date', col: 6},
+    {id :'member_passport_expiry_date', col: 6},
     {id :'member_drivers_license_state'},
     {id :'member_drivers_license_number'},
-    {id :'member_drivers_license_issue_date'},
-    {id :'member_drivers_license_expiry_date'},
+    {id :'member_drivers_license_issue_date', col: 6},
+    {id :'member_drivers_license_expiry_date', col: 6},
   ],
 ];

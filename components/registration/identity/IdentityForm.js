@@ -59,6 +59,7 @@ class IdentityForm extends React.Component {
               value={this.props.registrationData[item.id] || ''}
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
+              col={item.col}
             />
           );
         case 'select':
@@ -90,7 +91,7 @@ class IdentityForm extends React.Component {
   render() {
 
     return (
-      <form>
+      <form className='row'>
         {dataFields[this.props.page-1].map((item) => this.mappingComponent(item))}
         <ModalWindow
           open={this.props.showModal}

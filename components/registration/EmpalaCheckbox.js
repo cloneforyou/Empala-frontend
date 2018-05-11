@@ -2,7 +2,6 @@ import React from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import MdCheckCircle from 'react-icons/lib/md/check-circle';
 import MdPanoramaFishEye from 'react-icons/lib/md/panorama-fish-eye';
-import ModalWindow from './ModalWindow';
 
 class EmpalaCheckbox extends React.Component {
 
@@ -58,7 +57,6 @@ class EmpalaCheckbox extends React.Component {
 
   render() {
     return (
-      <div>
         <Checkbox
           id={this.props.id}
           label={this.props.label}
@@ -70,9 +68,6 @@ class EmpalaCheckbox extends React.Component {
           // onClick={this.props.handleClick}
           onCheck = {this.props.handleCheck}
         />
-        {/*<ModalWindow handleClose={this.handleClose}*/}
-                     {/*open={this.state.open}/>*/}
-      </div>
     )
   }
 }

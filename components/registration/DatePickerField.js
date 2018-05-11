@@ -4,7 +4,7 @@ import FaCalendarO from 'react-icons/lib/fa/calendar-o';
 
 
 const DatePickerField = (props) => (
-  <div className={props.col ? `registration-group col-md-${props.col}` : "registration-group"}>
+  <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
     <label className='registration-label'>{props.label}</label>
       <div className='date-picker__container'>
         <DatePicker
