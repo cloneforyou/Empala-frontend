@@ -30,7 +30,6 @@ export const dataFields = [
       hint: 'Please select',
       field: 'select',
       label: 'State',
-      id: 'identity_state_residential',
       options: [
         {
           value: 'Alabama',
@@ -56,7 +55,6 @@ export const dataFields = [
       hint: 'Please select',
       field: 'select',
       label: 'City',
-      id: 'identity_city_residential',
       options: [
         {
           value: 'Boston',
@@ -78,7 +76,6 @@ export const dataFields = [
       hint: 'Please select',
       field: 'select',
       label: 'Country',
-      id: 'identity_country_residential',
       options: [
         {
           value: 'United States',
@@ -119,7 +116,6 @@ export const dataFields = [
       hint: 'Please select',
       field: 'select',
       label: 'State',
-      id: 'identity_state_mailing',
       options: [
         {
           value: 'Alabama',
@@ -144,7 +140,6 @@ export const dataFields = [
       hint: 'Please select',
       field: 'select',
       label: 'City',
-      id: 'identity_city_mailing',
       options: [
         {
           value: 'Boston',
@@ -165,7 +160,6 @@ export const dataFields = [
       hint: 'Please select',
       field: 'select',
       label: 'Country',
-      id: 'identity_country_mailing',
       options: [
         {
           value: 'United States',

@@ -1,6 +1,5 @@
 import React from 'react';
 import EmpalaInput from '../EmpalaInput';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { dataFields } from '../../../localdata/memberPageData';
 import { connect } from 'react-redux';

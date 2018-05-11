@@ -1,6 +1,6 @@
 import React from 'react';
 import EmpalaInput from '../EmpalaInput';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import {dataFields} from '../../../localdata/regulatoryPageData';
 import {connect} from 'react-redux';
@@ -78,7 +78,7 @@ class RegulatoryForm extends React.Component {
 
     return (
       <div>
-        <MuiThemeProvider >
+        {/*<MuiThemeProvider >*/}
           {/*<RadioButtonGroup*/}
           {/*name='registrationDocument'*/}
           {/*defaultSelected={this.props.registrationData.memberDocument}*/}
@@ -153,7 +153,7 @@ class RegulatoryForm extends React.Component {
             disabled={!this.isRadioChecked('drivers-license')}
           />
           {/*</RadioButtonGroup>*/}
-        </MuiThemeProvider>
+        {/*</MuiThemeProvider>*/}
       </div>
 
     )
