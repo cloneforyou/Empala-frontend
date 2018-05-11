@@ -68,6 +68,10 @@ class IdentityForm extends React.Component {
   }
 
   render() {
+    if (this.props.tabIndex === 3) {
+      return
+    }
+
     return (
       <div>
         {dataFields[this.props.page-1].map((item) => this.mappingComponent(item))}
