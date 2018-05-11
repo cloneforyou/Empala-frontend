@@ -15,9 +15,6 @@ import {
 import ModalWindow from '../ModalWindow';
 
 const mapStateToProps = (state) => {
-  // const identityCheckboxes = Object.getOwnPropertyNames(state['registration']).filter(name => /identity_checkbox/.test(name));
-  // const showModal = identityCheckboxes.some(item => state['registration'][item]);
-  // console.log(' ***88888 ', state, identityCheckboxes, showModal);
   return (
     {
       registrationData: state.registration.registrationData,
@@ -91,23 +88,15 @@ class IdentityForm extends React.Component {
   }
 
   render() {
-    // if (this.props.tabIndex === 4) {
-    //
-    //   return (
-    //     <div>
-    //       <ModalWindow open={this.props.showModal}/>
-    //     </div>
-    //   )
-    // }
 
     return (
-      <div>
+      <form>
         {dataFields[this.props.page-1].map((item) => this.mappingComponent(item))}
         <ModalWindow
           open={this.props.showModal}
           handleClose={this.props.closeModal}
         />
-      </div>
+      </form>
     )
   }
 }

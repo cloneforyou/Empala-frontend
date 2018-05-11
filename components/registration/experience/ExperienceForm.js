@@ -1,6 +1,5 @@
 import React from 'react';
 import EmpalaInput from '../EmpalaInput';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { connect } from 'react-redux';
 import { setInputFieldValueById } from '../../../actions/registration';

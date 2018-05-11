@@ -1,6 +1,6 @@
 import React from 'react';
 import EmpalaInput from '../EmpalaInput';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { dataFields } from '../../../localdata/profilePageData';
 import { connect } from 'react-redux';
@@ -81,7 +81,7 @@ class ProfileForm extends React.PureComponent {
 
     return (
       <div>
-        <MuiThemeProvider >
+        {/*<MuiThemeProvider >*/}
           <RadioButton
             value='passport'
             label='Passport'
@@ -158,7 +158,7 @@ class ProfileForm extends React.PureComponent {
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
           />
-        </MuiThemeProvider>
+        {/*</MuiThemeProvider>*/}
       </div>
     )
   }

@@ -1,6 +1,5 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import '../../assets/styles/modules/_input-group.scss'
 
 const EmpalaInput = (props) => {
@@ -10,21 +9,20 @@ const EmpalaInput = (props) => {
              htmlFor={props.id}>
         {props.label}
       </label>
-      <MuiThemeProvider >
         <TextField
           id={props.id}
           type={props.type}
           hintText={props.placeholder}
-          style={{ width: '422px' }}
+          style={{ width: '100%' }}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
-          hintStyle={{ color: '#858c99'}}
+          hintStyle={{ color: '#858c99' }}
+          inputStyle={{ color: '#858c99' }}
           value={props.value}
           onChange={(e) => props.handleChange(e)}
           disabled={props.disabled}
           errorText={props.errorText}
           //required={true}
         />
-      </MuiThemeProvider>
     </div>
   )
 };
