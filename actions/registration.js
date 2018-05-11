@@ -4,7 +4,12 @@ import {
   SET_TAB_NAME,
   SET_TAB_PAGE_INDEX,
   SET_FIELD_VALUE,
-  SET_MEMBER_DOCUMENT_TYPE, VALIDATE_FIELD_SUCCESS, VALIDATE_FIELD_ERROR, GET_DATA_FROM_CACHE
+  SET_MEMBER_DOCUMENT_TYPE,
+  VALIDATE_FIELD_SUCCESS,
+  VALIDATE_FIELD_ERROR,
+  GET_DATA_FROM_CACHE,
+  TOGGLE_CHECKBOX,
+  TOGGLE_IDENTITY_MODAL, SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -71,5 +76,24 @@ export function setFieldInvalid(fieldId, message) {
 export function getRegistrationDataFromCache() {
   return  {
     type: GET_DATA_FROM_CACHE,
+  }
+
+}
+
+export function toggleCheckboxById(id) {
+  return  {
+    type: TOGGLE_CHECKBOX,
+    id,
+  }
+}
+export function showIdentityModal() {
+  return  {
+    type: SHOW_IDENTITY_MODAL,
+  }
+}
+
+export function closeIdentityModal() {
+  return  {
+    type: CLOSE_IDENTITY_MODAL,
   }
 }

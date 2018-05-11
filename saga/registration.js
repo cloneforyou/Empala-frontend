@@ -1,19 +1,10 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import {setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
-import {CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE} from "../constants/registration";
+import {CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX} from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga from './validation';
-
-
-// function* changeTabIfBiggerThanItemsQuantity(tabIndex, tabName, nextTabName) {
-//   if (tabIndex > menuItems[tabName].length-1) {
-//     yield put(setTabName(nextTabName));
-//     yield put(setTabPageIndex(1));
-//   } else {
-//     yield put(setTabPageIndex(+tabIndex + 1));
-//   }
-// }
+import { validateCheckbox } from './validation'
 
 
 export function* changeTabPage({tabName, tabIndex, direction}) {
@@ -121,6 +112,7 @@ export default function* registrationSaga() {
   yield all ([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
     takeEvery(SET_FIELD_VALUE, saveData),
+    takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     // takeLatest(SET_FIELD_VALUE, validateFieldOnServer),
     // takeLatest(SET_FIELD_VALUE, validatePasswordField),
     takeLatest(SET_FIELD_VALUE, validationSaga),

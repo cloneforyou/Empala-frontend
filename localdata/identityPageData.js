@@ -85,7 +85,7 @@ export const dataFields = [
     },
 
     {
-      id: 'identity_residential_address_same_mailing_address',
+      id: 'identity_residential_address_same_mailing_address_checkbox',
       field: 'checkbox',
       label: `Mailing address is the same.`,
     }
