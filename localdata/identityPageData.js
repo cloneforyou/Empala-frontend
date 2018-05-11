@@ -83,6 +83,12 @@ export const dataFields = [
         },
       ],
     },
+
+    {
+      id: 'identity_residential_address_same_mailing_address',
+      field: 'checkbox',
+      label: `Mailing address is the same.`,
+    }
   ],
 
   // mailing address
@@ -171,6 +177,12 @@ export const dataFields = [
 
   // trusted contact person
   [
+    {
+      id: 'identity_trusted_contact_person_trusted_contact_checkbox',
+      field: 'checkbox',
+      label: `Trusted contact`,
+    },
+
     {
       field: 'input',
       label: 'First name',
