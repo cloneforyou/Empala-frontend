@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
-    setPickedDate: (id, date) => dispatch(setPickedDate(date)),
+    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
   })
 };
 
@@ -68,7 +68,6 @@ class RegulatoryForm extends React.Component {
 
 
   render() {
-    console.log('---------XXXXXXXXXXX----------------->>>>>>>>', this.props)
     if (this.props.page !== 3) {
       return (
         <form>

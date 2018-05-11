@@ -1,12 +1,14 @@
 import React from 'react';
 import NavButtons from './NavButtons';
 import {getMenuItems, getRegistrationDataFromCache, setTabName, setTabPageIndex} from "../../actions/registration";
-import {getMenuItemsByTabName, getTabContentByTabName} from "../../utils/registrationUtils";
+import {getMenuItemsByTabName, getPageFieldNames, getTabContentByTabName} from "../../utils/registrationUtils";
 import { connect } from "react-redux";
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
 import InformationPage from "./InformationPage";
 import AgreementPage from "./AgreementPage";
+import { dataFields as memberPageData } from '../../localdata/memberPageData';
+
 
 
 function mapStateToProps(state) {
@@ -19,8 +21,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return (
-    {
+  return ({
       getMenuItems: (tabName) => {dispatch(getMenuItems(getMenuItemsByTabName(tabName)))},
       setTabName: (tabName) => dispatch(setTabName(tabName)),
       setTabPageIndex:(tabIndex) => dispatch(setTabPageIndex(tabIndex)),
@@ -42,7 +43,6 @@ class Content extends React.PureComponent {
   componentDidMount() {
     console.log(' *** state', this.props.registrationData);
     if (localStorage.getItem('registrationData')) {
-      console.log(' *** ***');
       this.props.getRegistrationDataFromCache();
 
     }
@@ -80,6 +80,15 @@ class Content extends React.PureComponent {
       this.props.getMenuItems(this.props.tabName);
     }
 
+    let fieldNames = getPageFieldNames(this.props.tabName, this.props.tabIndex);
+    if (this.props.tabName === 'member' && this.props.tabIndex === 3) {
+      fieldNames = fieldNames.filter((fieldName) => {
+        console.log('-----', fieldName)
+        return fieldName.includes(this.props.registrationData.memberDocument)})
+    }
+
+    console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
+
     return(
       <div className='onboard'>
         <div className='onboard__container'>
@@ -95,14 +104,16 @@ class Content extends React.PureComponent {
             </div>
             <div className='col-6 onboard__right-block'>
 
-              <div className="onboard__right-block--center row">
+              <div className='onboard__right-block--center'>
                 {/*<ContentFillingInformation {...props} />*/}
                 {pageContent.tabContent}
               </div>
-              <div className="onboard__right-block--bottom">
+              <div className='onboard__right-block--bottom'>
                 <NavButtons
                   tabName={this.props.tabName}
-                  tabIndex={this.props.tabIndex} />
+                  tabIndex={this.props.tabIndex}
+                  fieldNames={fieldNames}
+                  registrationData={this.props.registrationData}/>
               </div>
             </div>
           </div>

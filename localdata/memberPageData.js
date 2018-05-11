@@ -138,6 +138,13 @@ export const dataFields = [
 
   // identification
   [
-
+    {id :'member_passport_countryOfIssue'},
+    {id :'member_passport_number'},
+    {id :'member_passport_issue_date'},
+    {id :'member_passport_expiry_date'},
+    {id :'member_drivers_license_state'},
+    {id :'member_drivers_license_number'},
+    {id :'member_drivers_license_issue_date'},
+    {id :'member_drivers_license_expiry_date'},
   ],
 ];

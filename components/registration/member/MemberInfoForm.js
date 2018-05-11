@@ -87,6 +87,7 @@ class MemberInfoForm extends React.PureComponent {
             label='Passport'
             onClick={this.props.switchDocumentType}
             checked={this.isRadioChecked('passport')}
+            labelStyle={this.isRadioChecked('passport') ? {color: '#98c73a'} : {}}
           />
           <EmpalaInput
             key='member-passport-countryOfIssue'
@@ -121,10 +122,11 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_passport_expiry_date'] || ''}
           />
           <RadioButton
-            value='drivers-license'
+            value='drivers_license'
             label='Drivers License'
             onClick={this.props.switchDocumentType}
-            checked={this.isRadioChecked('drivers-license')}
+            checked={this.isRadioChecked('drivers_license')}
+            labelStyle={this.isRadioChecked('drivers_license') ? {color: '#98c73a'} : {}}
           />
           <EmpalaInput
             key='member-drivers-license-state'
