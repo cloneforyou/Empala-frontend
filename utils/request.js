@@ -14,8 +14,18 @@ export default function request(url, options = {}) {
       console.log(' *** res', response);
     })
     .catch(err => {
-      console.log(' *** err', err);
+      console.log(' *** ------------> SERVER RESPOND ERROR', JSON.stringify(err));
+      const error = new Error(setErrorText(err));
+      throw error
     });
+
+  function setErrorText(err) {
+    if (err.response && err.response.status === 401) {
+      if (err.response.data.info === 'INVALID_VALUE') {
+        return 'Already in use';
+      }
+    }
+  }
 
   // const endpoint = '';
   // const defaultHeaders = {
