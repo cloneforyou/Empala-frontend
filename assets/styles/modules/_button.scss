@@ -2,8 +2,8 @@
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  border: solid 2px #98c73a;
-  color: #98c73a;
+  border: solid 2px #707070;
+  color: #707070;
   padding: 0;
   cursor: pointer;
   &:focus {
@@ -12,6 +12,11 @@
   svg {
     margin-top: -2px;
   }
+}
+
+.btn--navigate--active {
+  color: #98c73a;
+  border-color: #98c73a;
 }
 
 .btn--next {
