@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
 import InformationPage from "./InformationPage";
+import FinalReviewPage from "./FinalReviewPage";
 import AgreementPage from "./AgreementPage";
 import { dataFields as memberPageData } from '../../localdata/memberPageData';
 
@@ -61,6 +62,17 @@ class Content extends React.PureComponent {
           </div>
         </div>
       )
+    } else if (this.props.tabName === 'final_review') {
+      this.props.setTabName('final_review');
+      this.props.setTabPageIndex(1);
+      return (
+        <div className='onboard'>
+          <div className='onboard__container'>
+            <div className='row no-gutters onboard__col'>
+              <FinalReviewPage />
+            </div>
+          </div>
+        </div> )
     } else if (this.props.tabName === 'agreement') {
       this.props.setTabName('agreement');
       this.props.setTabPageIndex(1);
