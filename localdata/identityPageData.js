@@ -1,39 +1,31 @@
-// Data fields for page input elements
-// obj {
-//       id: '',
-//       type: '',
-//       placeholder: '',
-//     }
-// for <input> elements
-// {
-//   label: '',
-//     options: [],
-// }
-// for select elements
-
 export const dataFields = [
   // residential address
   [
     {
+      field: 'input',
       label: 'Residential address line 1',
       id: 'identity_residential_address_line_1',
       type: 'text',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Residential address line 2',
       id: 'identity_residential_address_line_2',
       type: 'text',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Zip code',
       id: 'identity_zip_code',
       type: 'number',
       placeholder: '',
     },
     {
+      field: 'select',
       label: 'State',
+      id: 'identity_state_residential',
       options: [
         {
           value: 'Alabama',
@@ -54,7 +46,9 @@ export const dataFields = [
       ],
     },
     {
+      field: 'select',
       label: 'City',
+      id: 'identity_city_residential',
       options: [
         {
           value: 'Boston',
@@ -71,7 +65,9 @@ export const dataFields = [
       ],
     },
     {
+      field: 'select',
       label: 'Country',
+      id: 'identity_country_residential',
       options: [
         {
           value: 'United States',
@@ -79,40 +75,34 @@ export const dataFields = [
         },
       ],
     },
-    // {
-    //   id: 'birthdate',
-    //   type: 'date',
-    //   label: 'Date of birth',
-    //   // placeholder: '11/12/1987',
-    // },
-    // {
-    //   id: 'ssn',
-    //   type: 'number',
-    //   placeholder: 'SSN (Social Security Number)',
-    // },
   ],
   // mailing address
   [
     {
+      field: 'input',
       label: 'Mailing address line 1',
       id: 'identity_residential_address_line_1',
       type: 'text',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Mailing address line 2',
       id: 'identity_residential_address_line_2',
       type: 'text',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Zip code',
       id: 'identity_zip_code',
       type: 'number',
       placeholder: '',
     },
     {
+      field: 'select',
       label: 'State',
+      id: 'identity_state_mailing',
       options: [
         {
           value: 'Alabama',
@@ -133,7 +123,9 @@ export const dataFields = [
       ],
     },
     {
+      field: 'select',
       label: 'City',
+      id: 'identity_city_mailing',
       options: [
         {
           value: 'Boston',
@@ -150,7 +142,9 @@ export const dataFields = [
       ],
     },
     {
+      field: 'select',
       label: 'Country',
+      id: 'identity_country_mailing',
       options: [
         {
           value: 'United States',
@@ -158,199 +152,79 @@ export const dataFields = [
         },
       ],
     },
-    // {
-    //   label: 'Investor experience',
-    //   options: [
-    //     {
-    //       value: '0',
-    //       title: 'Option 1'
-    //     },
-    //     {
-    //       value: '2',
-    //       title: 'Option 2'
-    //     },
-    //     {
-    //       value: '3',
-    //       title: 'Option 3'
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: 'Years experience',
-    //   options: [
-    //     {
-    //       value: '0',
-    //       title: 'No experience'
-    //     },
-    //     {
-    //       value: '1',
-    //       title: 'One year'
-    //     },
-    //     {
-    //       value: '2',
-    //       title: 'Up to three years'
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: 'Citizenship',
-    //   options: [
-    //     {
-    //       value: 'Afghans',
-    //       title: 'Afghans'
-    //     },
-    //     {
-    //       value: 'Albanians',
-    //       title: 'Albanians'
-    //     },
-    //     {
-    //       value: 'Algerians',
-    //       title: 'Algerians'
-    //     },
-    //     {
-    //       value: 'Americans',
-    //       title: 'Americans'
-    //     },
-    //   ],
-    // },
   ],
   // trusted contact person
   [
     {
+      field: 'input',
       label: 'First name',
       id: 'identity_trusted_contact_person_first_name',
       type: 'text',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Last name',
       id: 'identity_trusted_contact_person_last_name',
       type: 'text',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Email',
       id: 'identity_trusted_contact_person_email',
       type: 'email',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Contact phone no.',
       id: 'identity_trusted_contact_person_phone',
       type: 'text',
       placeholder: '',
     },
     {
+      field: 'input',
       label: 'Relationship',
       id: 'identity_trusted_contact_person_relationship',
       type: 'text',
       placeholder: '',
     },
-    // {
-    //   label: 'Annual income',
-    //   options: [
-    //     {
-    //       value: 30000,
-    //       title: '< 30 000$'
-    //     },
-    //     {
-    //       value: 50000,
-    //       title: '30 000 - 50 000$'
-    //     },
-    //     {
-    //       value: 100000,
-    //       title: '50 000$ - 100 000$'
-    //     },
-    //     {
-    //       value: 2000000,
-    //       title: '> 100 000$'
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: 'Marital status',
-    //   options: [
-    //     {
-    //       value: 'married',
-    //       title: 'Married'
-    //     },
-    //     {
-    //       value: 'unmarried',
-    //       title: 'Unmarried'
-    //     },
-    //     {
-    //       value: 'divorced',
-    //       title: 'Divorced'
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: 'Primary objective',
-    //   options: [
-    //     {
-    //       value: 'value1',
-    //       title: 'Objective 1'
-    //     },
-    //     {
-    //       value: 'value2',
-    //       title: 'Objective 2'
-    //     },
-    //     {
-    //       value: 'value3',
-    //       title: 'Objective 3'
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: 'Employment status',
-    //   options: [
-    //     {
-    //       value: 'part time employee',
-    //       title: 'Part time employee'
-    //     },
-    //     {
-    //       value: 'full time employee',
-    //       title: 'Full time employee'
-    //     },
-    //     {
-    //       value: 'employer',
-    //       title: 'Employer'
-    //     },
-    //   ],
-    // },
   ],
   // regulatory questions
   [
-    // {
-    //   id: 'employers-name',
-    //   type: 'text',
-    //   placeholder: 'Employers name',
-    // },
-    // {
-    //   id: 'address-line1',
-    //   type: 'number',
-    //   placeholder: 'Address line 1',
-    // },
-    // {
-    //   id: 'address-line2',
-    //   type: 'number',
-    //   placeholder: 'Address line 1',
-    // },
-    // {
-    //   id: 'city',
-    //   type: 'text',
-    //   placeholder: 'City',
-    // },
-    // {
-    //   id: 'zip-code',
-    //   type: 'number',
-    //   placeholder: 'Zip code',
-    // },
-    // {
-    //   id: 'country',
-    //   type: 'text',
-    //   placeholder: 'Country',
-    // },
-
+    {
+      field: 'checkbox',
+      label: `I am (or a an immediate family member who resides
+      in the same household as me is) employed by or a
+      member of a registered broker-dealer, securities or
+      futures exchange, futures commission merchant, retail
+      foreign exchange dealer, or securities or futures industry
+      regulatory  body (e.g. FINRA, NFA).`,
+      id: 'identity_checkbox_1',
+    },
+    {
+      field: 'checkbox',
+      label: `I am a director, policy maker, or a senior officer of 
+      a publicly traded company.`,
+      id: 'identity_checkbox_2',
+    },
+    {
+      field: 'checkbox',
+      label: `I am a 10% shareholder of a publicly traded company.`,
+      id: 'identity_checkbox_3',
+    },
+    {
+      field: 'checkbox',
+      label: `I am a senior military, governmental or political official
+      in a non-US country.`,
+      id: 'identity_checkbox_4',
+    },
+    {
+      field: 'checkbox',
+      label: `I have been notified by the IRS that I am subject to 
+      backup withholding.`,
+      id: 'identity_checkbox_5',
+    },
   ],
 ];
