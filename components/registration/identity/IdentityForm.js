@@ -4,6 +4,13 @@ import EmpalaSelect from '../EmpalaSelect';
 import EmpalaCheckbox from '../EmpalaCheckbox';
 import { dataFields } from '../../../localdata/identityPageData';
 import {connect} from "react-redux";
+import {
+  getMenuItems,
+  setInputFieldValueById,
+  setMemberDocumentType,
+  setTabName,
+  setTabPageIndex
+} from '../../../actions/registration';
 
 
 const mapStateToProps = (state) => {
@@ -18,6 +25,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return (
     {
+      setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
       setInputValueById: (e) => {
         console.log(e.target.id, e.target.value);
         dispatch(setInputFieldValueById(e.target.id, e.target.value))
@@ -49,10 +57,13 @@ class IdentityForm extends React.Component {
           return (
             <EmpalaSelect
               id={item.id}
-              key={item.label}
+              key={item.id}
               options={item.options}
               label={item.label}
               value={this.props.registrationData[item.id] || ''}
+              handleChange={this.props.setSelectedValueById}
+              col={item.col}
+              hint={item.hint || item.label}
             />
           );
         case 'checkbox':

@@ -42,7 +42,7 @@ class MemberInfoForm extends React.PureComponent {
         return (
           <EmpalaSelect
             id={item.id}
-            key={item.label}
+            key={item.id}
             options={item.options}
             label={item.label}
             value={this.props.registrationData[item.id] || ''}
