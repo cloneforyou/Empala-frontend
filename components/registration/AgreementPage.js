@@ -107,7 +107,7 @@ class AgreementPage extends React.PureComponent {
             Under penalty of perjury I attest that I am of legal age<br/>
             and also that all the information I have provided is true<br/>
             and also that I have carefully reviewed, understand and<br/>
-            agree to the termsand provisions of the<br/>
+            agree to the terms and provisions of the<br/>
             Empala Customer Agreement.
           </p>
 
