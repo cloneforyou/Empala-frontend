@@ -1,6 +1,5 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MenuItem from 'material-ui/MenuItem';
 
 const EmpalaSelect = (props) => {
@@ -8,7 +7,6 @@ const EmpalaSelect = (props) => {
 
   return(
     <div className={props.col ? `registration-group col-md-${props.col}` : "registration-group"}>
-      <MuiThemeProvider>
         <SelectField
           id={props.id}
           value={props.value}
@@ -17,9 +15,11 @@ const EmpalaSelect = (props) => {
           floatingLabelStyle={{color: '#98c73a'}}
           hintText={props.hint || props.label}
           hintStyle={{ color: '#858c99'}}
-          style={{ width: '422px', margin: 0 }}
-          // menuStyle={{ top: '51px' }}
-          // iconStyle={{ top: '-40px', right: '-16px', fill: '#7f8794' }}
+          labelStyle={{ color: '#858c99'}}
+          style={{ width: '100%', margin: 0 }}
+          iconStyle={{ right: '0', fill: '#7f8794' }}
+          menuItemStyle={{ color: '#858c99' }}
+          selectedMenuItemStyle={{ color: '#98c73a'}}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           underlineFocusStyle={{ borderBottom : '2px solid #98c73a' }}
           onChange={(e, i, v) => {props.handleChange(props.id ,v)}}
@@ -32,7 +32,6 @@ const EmpalaSelect = (props) => {
             />
           ))}
         </SelectField>
-      </MuiThemeProvider>
     </div>
   )
 };

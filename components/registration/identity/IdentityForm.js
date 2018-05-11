@@ -88,9 +88,9 @@ class IdentityForm extends React.Component {
     }
 
     return (
-      <div>
+      <form>
         {dataFields[this.props.page-1].map((item) => this.mappingComponent(item))}
-      </div>
+      </form>
     )
   }
 }

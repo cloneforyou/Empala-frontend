@@ -35,11 +35,18 @@ class ModalWindow extends React.Component {
         fontSize: '12px',
       },
       actionsContainer: {
-        textAlign: 'center'
+        textAlign: 'center',
+        padding: '20px',
       },
       contentStyle: {
-        textAlign: 'center'
-      }
+        textAlign: 'center',
+        border: '1px solid #000000',
+        width: '600px',
+      },
+      // style: {
+      //   maxWidth: '600px',
+      //   marginLeft: '50%',
+      // }
     }
   }
 
@@ -61,7 +68,6 @@ class ModalWindow extends React.Component {
     ];
 
     return (
-      <div>
         <Dialog
           actions={actions}
           modal={false}
@@ -69,11 +75,12 @@ class ModalWindow extends React.Component {
           onRequestClose={this.handleClose}
           actionsContainerStyle={ this.styles.actionsContainer }
           contentStyle={ this.styles.contentStyle }
+          overlayStyle={{backgroundColor: 'transparent'}}
+          // style={this.styles.style}
         >
           Sorry we are not yet able to open accounts with
           this characteristic but we are working on it.
         </Dialog>
-      </div>
     );
   }
 }
