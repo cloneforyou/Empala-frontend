@@ -1,5 +1,10 @@
 import { call, put, select } from 'redux-saga/effects';
-import {setFieldInvalid, setFieldValid, showIdentityModal} from '../actions/registration';
+import {
+  copyMailingAddress,
+  setFieldInvalid,
+  setFieldValid,
+  showIdentityModal
+} from '../actions/registration';
 import request from '../utils/request';
 
 function* validatePasswordField({id, value}) {
@@ -22,7 +27,6 @@ function* validatePasswordField({id, value}) {
 }
 
 function* validateFieldOnServer({id, value}) {
-  const validatedFields = ['member_account_email', 'member_passport_number', 'member_drivers_license_number'];
 
   const url = '/auth/check';
   const options = {
@@ -31,15 +35,12 @@ function* validateFieldOnServer({id, value}) {
       [id]: value
     }
   };
-  // console.log(' *** options', options);
-  if (validatedFields.includes(id)) {
     try {
       const result = yield call(request, url, options);
       yield put(setFieldValid(id));
     } catch (err) {
       yield put(setFieldInvalid(id, err.message));
     }
-  }
 }
 
 
@@ -48,6 +49,9 @@ export function* validateCheckbox(action) {
   if (/identity_checkbox/.test(action.id) &&  isChecked) {
     console.log(' *** 999', isChecked );
     yield put(showIdentityModal());
+  }
+  if (action.id === 'identity_residential_address_same_mailing_address_checkbox' && isChecked) {
+    put (copyMailingAddress())
   }
 }
 // Add your validation function here
@@ -58,7 +62,8 @@ export default function* validationSaga({id, value}) {
   const validatedFields = [
     'member_account_email',
     'member_passport_number',
-    'member_drivers_license_number'
+    'member_drivers_license_number',
+    'regulatory_identification_ssn'
   ];
   if (validatedFields.includes(id)) {
     yield validateFieldOnServer({id, value});

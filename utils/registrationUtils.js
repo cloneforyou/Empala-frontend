@@ -8,6 +8,7 @@ import AccountForm from "../components/registration/account/AccountForm";
 import RegistrationFormDrawer from "../components/registration/RegistrationFormDrawer";
 import _ from 'lodash';
 import {dataFields as memberPageData} from '../localdata/memberPageData';
+import {dataFields as regulatoryPageData} from '../localdata/regulatoryPageData';
 
 export const menuItems = {
   member: [
@@ -85,10 +86,12 @@ export function getMenuItemsByTabName(tabName) {
 
 export function getPageFieldNames(tabName, tabIndex) {
   let pageFields = [];
-
   switch(tabName) {
     case 'member':
       pageFields = _.cloneDeep(memberPageData[tabIndex - 1]);
+      break;
+    case 'regulatory':
+      pageFields = _.cloneDeep(regulatoryPageData[tabIndex - 1]);
       break;
     default:
       break;

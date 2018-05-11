@@ -9,7 +9,7 @@ import {
   VALIDATE_FIELD_ERROR,
   GET_DATA_FROM_CACHE,
   TOGGLE_CHECKBOX,
-  TOGGLE_IDENTITY_MODAL, SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL
+  TOGGLE_IDENTITY_MODAL, SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL, COPY_MAILING_ADDRESS, CLEAN_MAILING_ADDRESS
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -95,5 +95,17 @@ export function showIdentityModal() {
 export function closeIdentityModal() {
   return  {
     type: CLOSE_IDENTITY_MODAL,
+  }
+}
+
+export function copyMailingAddress() {
+  console.log(' *** COPY', );
+  return  {
+    type: COPY_MAILING_ADDRESS,
+  }
+}
+export function cleanMailingAddress() {
+  return  {
+    type: CLEAN_MAILING_ADDRESS,
   }
 }

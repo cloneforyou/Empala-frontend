@@ -1,5 +1,5 @@
 import {
-  CLOSE_IDENTITY_MODAL,
+  CLOSE_IDENTITY_MODAL, COPY_MAILING_ADDRESS,
   GET_DATA_FROM_CACHE,
   GET_MENU_ITEMS,
   SET_FIELD_VALUE,
@@ -17,7 +17,8 @@ const initialState = {
   showIdentityModal: false,
   menuItems: [],
   registrationData: {
-    memberDocument: 'passport'
+    memberDocument: 'passport',
+    regulatory_family_dependents: 0
   },
   fieldsErrors: {}
 };
@@ -46,6 +47,15 @@ function registration(state = initialState, action) {
       return {...state, showIdentityModal: true};
       case CLOSE_IDENTITY_MODAL:
       return {...state, showIdentityModal: false};
+      case COPY_MAILING_ADDRESS:
+      return {
+        ...state,
+        registrationData: {
+          ...state.registrationData,
+          ['identity_mailing_address_residential_address_line_1']:
+            state.registration.registrationData['identity_residential_address_residential_address_line_1'],
+        }
+      };
     default:
       return state;
   }

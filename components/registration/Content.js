@@ -83,7 +83,6 @@ class Content extends React.PureComponent {
     let fieldNames = getPageFieldNames(this.props.tabName, this.props.tabIndex);
     if (this.props.tabName === 'member' && this.props.tabIndex === 3) {
       fieldNames = fieldNames.filter((fieldName) => {
-        console.log('-----', fieldName)
         return fieldName.includes(this.props.registrationData.memberDocument)})
     }
 

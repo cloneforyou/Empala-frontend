@@ -11,6 +11,7 @@ function isFieldsFilled(fieldNames, fields) {
 
 const NavButtons = (props) => {
   let disabled = !isFieldsFilled(props.fieldNames, props.registrationData);
+  console.log(' *** disabled',disabled, props.fieldNames );
   if (props.tabName === 'member' &&
     props.registrationData['member_account_password_confirm'] !== props.registrationData['member_account_password'])
   { disabled = true;}
