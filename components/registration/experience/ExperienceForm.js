@@ -1,6 +1,4 @@
 import React from 'react';
-import EmpalaInput from '../EmpalaInput';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { connect } from 'react-redux';
 import { setInputFieldValueById } from '../../../actions/registration';
 import EmpalaSelect from '../EmpalaSelect';
@@ -43,7 +41,7 @@ class ExperienceForm extends React.Component {
 
   render() {
     return (
-      <form>
+      <form className='row'>
         { dataFields[this.props.page - 1].map((item) => this.mappingComponent(item)) }
       </form>
     )

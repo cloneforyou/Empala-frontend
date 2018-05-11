@@ -1,6 +1,7 @@
 import React from 'react';
 import EmpalaInput from '../EmpalaInput';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
+import EmpalaRadioButton from '../EmpalaRadioButton';
 import { dataFields } from '../../../localdata/memberPageData';
 import { connect } from 'react-redux';
 import {
@@ -72,15 +73,15 @@ class MemberInfoForm extends React.PureComponent {
     // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
       return (
-        <form>
+        <form className='row'>
           {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
         </form>
       )
     }
 
     return (
-      <div>
-          <RadioButton
+      <div className='row'>
+          <EmpalaRadioButton
             value='passport'
             label='Passport'
             onClick={this.props.switchDocumentType}
@@ -111,6 +112,7 @@ class MemberInfoForm extends React.PureComponent {
             disabled={!this.isRadioChecked('passport')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_passport_issue_date'] || ''}
+            col={6}
           />
           <DatePickerField
             id={'member_passport_expiry_date'}
@@ -118,14 +120,16 @@ class MemberInfoForm extends React.PureComponent {
             disabled={!this.isRadioChecked('passport')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_passport_expiry_date'] || ''}
+            col={6}
           />
-          <RadioButton
-            value='drivers_license'
-            label='Drivers License'
-            onClick={this.props.switchDocumentType}
-            checked={this.isRadioChecked('drivers_license')}
-            labelStyle={this.isRadioChecked('drivers_license') ? {color: '#98c73a'} : {}}
-          />
+        <EmpalaRadioButton
+          value='drivers_license'
+          label='Drivers License'
+          onClick={this.props.switchDocumentType}
+          checked={this.isRadioChecked('drivers_license')}
+          labelStyle={this.isRadioChecked('drivers_license') ? {color: '#98c73a'} : {}}
+          style={{ marginTop: '20px'}}
+        />
           <EmpalaInput
             key='member-drivers-license-state'
             id='member_drivers_license_state'
@@ -150,6 +154,7 @@ class MemberInfoForm extends React.PureComponent {
             disabled={!this.isRadioChecked('drivers_license')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_issue_date'] || ''}
+            col={6}
           />
           <DatePickerField
             id={'member_drivers_license_expiry_date'}
@@ -157,6 +162,7 @@ class MemberInfoForm extends React.PureComponent {
             disabled={!this.isRadioChecked('drivers_license')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
+            col={6}
           />
       </div>
     )

@@ -6,7 +6,7 @@ const EmpalaSelect = (props) => {
   console.log('-- props for select', props);
 
   return(
-    <div className={props.col ? `registration-group col-md-${props.col}` : "registration-group"}>
+    <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
         <SelectField
           id={props.id}
           value={props.value}
