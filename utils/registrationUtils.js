@@ -9,6 +9,10 @@ import RegistrationFormDrawer from "../components/registration/RegistrationFormD
 import _ from 'lodash';
 import {dataFields as memberPageData} from '../localdata/memberPageData';
 import {dataFields as regulatoryPageData} from '../localdata/regulatoryPageData';
+import {dataFields as identityPageData} from '../localdata/identityPageData';
+import {dataFields as experiencePageData} from '../localdata/experiencePageData';
+import {dataFields as profilePageData} from '../localdata/profilePageData';
+
 
 export const menuItems = {
   member: [
@@ -92,6 +96,15 @@ export function getPageFieldNames(tabName, tabIndex) {
       break;
     case 'regulatory':
       pageFields = _.cloneDeep(regulatoryPageData[tabIndex - 1]);
+      break;
+    case 'identity':
+      pageFields = _.cloneDeep(identityPageData[tabIndex - 1]);
+      break;
+    case 'experience':
+      pageFields = _.cloneDeep(experiencePageData[tabIndex - 1]);
+      break;
+    case 'profile':
+      pageFields = _.cloneDeep(profilePageData[tabIndex - 1]);
       break;
     default:
       break;

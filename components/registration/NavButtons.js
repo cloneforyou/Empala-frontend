@@ -14,7 +14,11 @@ const NavButtons = (props) => {
   console.log(' *** disabled',disabled, props.fieldNames );
   if (props.tabName === 'member' &&
     props.registrationData['member_account_password_confirm'] !== props.registrationData['member_account_password'])
-  { disabled = true;}
+  {
+    disabled = true;
+  } else if (props.tabName === 'identity' && props.tabIndex === 4) {
+    disabled = false;
+  }
     return (
     <div>
       <button

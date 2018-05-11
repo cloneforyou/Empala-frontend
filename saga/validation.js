@@ -51,7 +51,7 @@ export function* validateCheckbox(action) {
     yield put(showIdentityModal());
   }
   if (action.id === 'identity_residential_address_same_mailing_address_checkbox' && isChecked) {
-    put (copyMailingAddress())
+    yield put (copyMailingAddress())
   }
 }
 // Add your validation function here

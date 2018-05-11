@@ -99,11 +99,11 @@ export function closeIdentityModal() {
 }
 
 export function copyMailingAddress() {
-  console.log(' *** COPY', );
   return  {
-    type: COPY_MAILING_ADDRESS,
+   type: COPY_MAILING_ADDRESS,
   }
 }
+
 export function cleanMailingAddress() {
   return  {
     type: CLEAN_MAILING_ADDRESS,
