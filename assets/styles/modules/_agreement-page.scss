@@ -1,11 +1,12 @@
 .agreements {
   display: flex;
   flex-direction: column;
-  padding: 65px 40px 13px;
+  padding: 19px 40px 13px;
   background-color: #f9fafb;
   &__title {
     text-align: center;
     margin-bottom: 30px;
+    font-weight: 600;
   }
 }
 
@@ -40,6 +41,7 @@
   }
   &__text {
     font-size: 14px;
+    font-weight: 500;
     margin: 0;
     padding: 0 30px;
     display: flex;
@@ -66,6 +68,7 @@
 .label-confirmation {
   width: 85%;
   font-size: 12px;
+  font-weight: 400;
   color: #98c73a;
   text-align: start;
 }
