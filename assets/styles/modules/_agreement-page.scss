@@ -1,7 +1,7 @@
 .agreements {
   display: flex;
   flex-direction: column;
-  padding: 65px 40px 13px;
+  padding: 19px 40px 13px;
   background-color: #f9fafb;
 }
 
@@ -16,7 +16,9 @@
 
 .agreements-title {
   text-align: center;
+  font-weight: 600;
   margin-bottom: 30px;
+  font-stretch: normal;
 }
 
 .list-info {

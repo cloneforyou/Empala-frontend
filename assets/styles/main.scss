@@ -1,3 +1,7 @@
+@import 'modules/fonts';
+
+$ProximaNova: 'Proxima Nova';
+
 @import "../../node_modules/normalize.css/normalize.css";
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './modules/_header';
@@ -15,10 +19,6 @@
 @import 'modules/agreement-page';
 @import './modules/_date-picker';
 @import 'modules/fields-group';
-@import 'modules/fonts';
-
-$ProximaNova: 'Proxima Nova';
-
 body {
   background-color: #ffffff;
   color: #808895;
