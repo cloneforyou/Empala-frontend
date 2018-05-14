@@ -9,7 +9,8 @@ import {
   VALIDATE_FIELD_ERROR,
   GET_DATA_FROM_CACHE,
   TOGGLE_CHECKBOX,
-  TOGGLE_IDENTITY_MODAL, SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL, COPY_MAILING_ADDRESS, CLEAN_MAILING_ADDRESS
+  TOGGLE_IDENTITY_MODAL, SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL, COPY_MAILING_ADDRESS, CLEAN_MAILING_ADDRESS,
+  REGISTRATION_SUBMIT_REQUEST, REGISTRATION_SUBMIT_FAIL
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -107,5 +108,18 @@ export function copyMailingAddress() {
 export function cleanMailingAddress() {
   return  {
     type: CLEAN_MAILING_ADDRESS,
+  }
+}
+
+export function sendRegistrationForm() {
+  return  {
+    type: REGISTRATION_SUBMIT_REQUEST,
+  }
+}
+
+export function registrationFail(err) {
+  return  {
+    type: REGISTRATION_SUBMIT_FAIL,
+    err
   }
 }

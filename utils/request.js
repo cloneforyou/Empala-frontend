@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default function request(url, options = {}) {
   return axios({
-    method: 'POST',
+    method: options.method,
     url: `http://localhost:9000${url}`,
     data: options.data,
     headers: options.headers,
