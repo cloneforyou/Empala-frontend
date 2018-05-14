@@ -1,7 +1,7 @@
 import React from 'react';
 import {withReduxSaga} from "../../store";
-import {changeTabPage} from "../../actions/registration";
-import {connect} from "react-redux";
+import { changeTabPage, sendRegistrationForm } from "../../actions/registration";
+import { connect } from "react-redux";
 
 function mapStateToProps(state) {
   return {
@@ -14,6 +14,7 @@ function mapDispatchToProps(dispatch) {
   return (
     {
       changeTabPage:() => dispatch(changeTabPage('agreement', 1, 'backward')),
+      submitRegistration: () => dispatch(sendRegistrationForm()),
     })
 }
 
@@ -144,7 +145,12 @@ class AgreementPage extends React.PureComponent {
                 <input type="text" className='input-confirmation form-control' value={`${this.props.firstName} ${this.props.lastName}`} readOnly />
               </div>
               <button className='btn--cancel' onClick={this.props.changeTabPage}>Cancel</button>
-              <button id='submit' className={`btn--submit ${!this.state.disabled && 'btn--active'}`} disabled={this.state.disabled} >Submit</button>
+              <button
+                id='submit'
+                className={`btn--submit ${!this.state.disabled && 'btn--active'}`}
+                disabled={this.state.disabled}
+                onClick={this.props.submitRegistration}
+              >Submit</button>
             </div>
 
             <p className='confirmation__subtext'>By clicking the “Submit” button above I agree to this Application
