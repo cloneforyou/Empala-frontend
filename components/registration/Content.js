@@ -17,7 +17,8 @@ function mapStateToProps(state) {
     tabName: state.registration.tabName || 'info',
     tabIndex: state.registration.tabIndex || 1,
     menuItems: state.registration.menuItems,
-    registrationData: state.registration.registrationData
+    registrationData: state.registration.registrationData,
+    trustedContactActive: state.registration.identity_trusted_contact_person_trusted_contact_checkbox,
   }
 }
 
@@ -97,10 +98,19 @@ class Content extends React.PureComponent {
       fieldNames = fieldNames.filter((fieldName) => {
         return fieldName.includes(this.props.registrationData.memberDocument)})
     } else if (this.props.tabName === 'identity' && this.props.tabIndex === 1 ) {
-      fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_residential_address_same_mailing_address_checkbox')
+      fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_residential_address_same_mailing_address_checkbox');
     } else if (this.props.tabName === 'identity' && this.props.tabIndex === 3) {
-      fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox')
+      if (!this.props.trustedContactActive) {
+        fieldNames = [];
+      } else {
+        fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox');
+      }
+    } else if(this.props.tabName === 'profile' && this.props.tabIndex === 1 &&
+        this.props.registrationData['profile_employment_employment_type'] !== 'Employed') {
+      fieldNames = ['profile_employment_employment_type'];
     }
+
+    // console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
 
     return(
       <div className='onboard'>
