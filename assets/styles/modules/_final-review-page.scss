@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  max-width: 954px;
+  max-width: 987px;
   padding: 61px 20px 0;
   margin: 0 auto;
 }
@@ -48,13 +48,6 @@
 }
 
 .frc-block {
-  width: 450px;
-  &__title {
-    color: #98c73a;
-    font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
   &__fields {
     justify-content: space-between;
     flex-wrap: wrap;
@@ -64,11 +57,12 @@
   }
   &__field-label {
     font-size: 12px;
+    letter-spacing: .5;
     color: #98c73a;
   }
   &__field-value {
     border-bottom: 1px solid #e2e2e2;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 300;
   }
   &__no-title {
