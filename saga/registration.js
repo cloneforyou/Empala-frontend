@@ -87,7 +87,7 @@ export default function* registrationSaga() {
     takeEvery(SET_FIELD_VALUE, saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
-    takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm)
+    takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields)
   ]);
 }
