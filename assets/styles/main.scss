@@ -27,3 +27,40 @@ body {
   font-weight: 300;
   min-width: 768px;
 }
+
+.index_placeholder {
+  display: flex;
+  flex-direction: row;
+  width: 1280px;
+  margin: -56px auto 0 auto;
+  height: calc(100vh - 382px);
+  min-height: 260px;
+  justify-content: center;
+  background-color: #ffffff;
+  border: solid 1px #e0e0e0;
+  font-size: 32px;
+  font-weight: 300;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__link {
+    color: #98c73a;
+  }
+  &__link:hover {
+    color: #729c35;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.noselect {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}

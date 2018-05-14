@@ -4,13 +4,30 @@ export const dataFields = [
     {
       id: 'profile_employment_employment_type',
       label: 'Employment type',
-      type: 'text',
-      placeholder: '',
+      hint: 'Please select',
+      options: [
+        {
+          value: 'Employed',
+          title: 'Employed'
+        },
+        {
+          value: 'Self-employed',
+          title: 'Self-employed'
+        },
+        {
+          value: 'Not employed',
+          title: 'Not employed'
+        },
+        {
+          value: 'Retired',
+          title: 'Retired'
+        },
+      ],
     },
 
     {
       id: 'profile_employment_employment_country',
-      label: 'Employment country',
+      label: 'Employment Country',
       type: 'text',
       placeholder: '',
     },
@@ -26,6 +43,7 @@ export const dataFields = [
       label: 'Zip code',
       id: 'profile_employment_zip_code',
       type: 'number',
+      col: 6,
       placeholder: '',
     },
 
@@ -33,6 +51,7 @@ export const dataFields = [
       id: 'profile_employment_state',
       hint: 'Please select',
       label: 'State',
+      col: 6,
       options: [
         {
           value: 'Alabama',
@@ -81,24 +100,28 @@ export const dataFields = [
       label: 'Annual income',
       options: [
         {
-          value: '<100000',
-          title: 'Less than 100,000'
+          value: '0 - 50,000',
+          title: '0 – 50,000'
         },
         {
-          value: '100000-250000',
-          title: '100,000 - 250,000'
+          value: '50,001 – 100,000',
+          title: '50,001 – 100,000'
         },
         {
-          value: '250000-500000',
-          title: '250,000 - 500,000'
+          value: '100,001 – 200,000',
+          title: '100,001 – 200,000'
         },
         {
-          value: '500000-1000000',
-          title: '500,000 - 1,000,000'
+          value: '200,001 – 500,000',
+          title: '200,001 – 500,000'
         },
         {
-          value: '>1000000',
-          title: 'More than 1,000,000'
+          value: '500,001 – 5,000,000',
+          title: '500,001 – 5,000,000'
+        },
+        {
+          value: 'Greater than 5,000,000',
+          title: 'Greater than 5,000,000'
         },
       ],
     },
@@ -106,15 +129,65 @@ export const dataFields = [
     {
       label: 'Total net worth',
       id: 'profile_financials_total_net_worth',
-      type: 'text',
-      placeholder: '',
+      hint: 'Please select',
+      options: [
+        {
+          value: '0 – 100,000',
+          title: '0 – 100,000'
+        },
+        {
+          value: '100,001 – 200,000',
+          title: '100,001 – 200,000'
+        },
+        {
+          value: '200,001 – 400,000',
+          title: '200,001 – 400,000'
+        },
+        {
+          value: '400,001 – 1,000,000',
+          title: '400,001 – 1,000,000'
+        },
+        {
+          value: '1,000,001 – 10,000,000',
+          title: '1,000,001 – 10,000,000'
+        },
+        {
+          value: 'Greater than 10,000,000',
+          title: 'Greater than 10,000,000'
+        },
+      ],
     },
 
     {
       label: 'Liquid net worth',
       id: 'profile_financials_liquid_net_worth',
-      type: 'text',
-      placeholder: '',
+      hint: 'Please select',
+      options: [
+        {
+          value: '0 – 100,000',
+          title: '0 – 100,000'
+        },
+        {
+          value: '100,001 – 200,000',
+          title: '100,001 – 200,000'
+        },
+        {
+          value: '200,001 – 400,000',
+          title: '200,001 – 400,000'
+        },
+        {
+          value: '400,001 – 1,000,000',
+          title: '400,001 – 1,000,000'
+        },
+        {
+          value: '1,000,001 – 10,000,000',
+          title: '1,000,001 – 10,000,000'
+        },
+        {
+          value: 'Greater than 10,000,000',
+          title: 'Greater than 10,000,000'
+        },
+      ],
     },
 
     {
@@ -125,6 +198,10 @@ export const dataFields = [
         {
           value: 'Low',
           title: 'Low'
+        },
+        {
+          value: 'Medium',
+          title: 'Medium'
         },
         {
           value: 'High',
@@ -139,7 +216,23 @@ export const dataFields = [
       label: 'Investment objectives',
       options: [
         {
-          value: 'Speculation',
+          value: 'Capital preservation (low risk)',
+          title: 'Capital preservation (low risk)'
+        },
+        {
+          value: 'Income (low-medium risk)',
+          title: 'Income (low-medium risk)'
+        },
+        {
+          value: 'Growth & income (medium risk)',
+          title: 'Growth & income (medium risk)'
+        },
+        {
+          value: 'Growth (medium-high risk)',
+          title: 'Growth (medium-high risk)'
+        },
+        {
+          value: 'Speculation (high risk)',
           title: 'Speculation (high risk)'
         },
       ],

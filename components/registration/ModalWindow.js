@@ -1,6 +1,7 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import Link from 'next/link';
 
 class ModalWindow extends React.Component {
 
@@ -52,12 +53,14 @@ class ModalWindow extends React.Component {
 
   render() {
     const actions = [
-      <FlatButton
-        label='Cancel Registration'
-        onClick={this.props.handleClose}
-        style={ this.styles.cancelBtn }
-        labelStyle={ this.styles.labelCancelBtn }
-      />,
+      <Link href='/'>
+        <FlatButton
+          label='Cancel Registration'
+          onClick={ this.handleCancel }
+          style={ this.styles.cancelBtn }
+          labelStyle={ this.styles.labelCancelBtn }
+        />
+      </Link>,
       <FlatButton
         label='Return'
         keyboardFocused={true}
