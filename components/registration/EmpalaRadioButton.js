@@ -34,17 +34,19 @@ class EmpalaRadioButton extends React.Component {
 
   render() {
     return (
-      <RadioButton
-        value={this.props.value}
-        label={this.props.label}
-        onClick={this.props.onClick}
-        checked={this.props.checked}
-        labelStyle={this.props.labelStyle}
-        uncheckedIcon={<MdPanoramaFishEye style={ this.styles.panoramaFishEyeIcon }/>}
-        checkedIcon={<MdCheckCircle style={ this.styles.checkCircleIcon }/>}
-        inputStyle={ this.styles.inputStyle }
-        style={ this.props.style }
-      />
+      <div className='check-container'>
+        <RadioButton
+          value={this.props.value}
+          label={this.props.label}
+          onClick={this.props.onClick}
+          checked={this.props.checked}
+          labelStyle={this.props.labelStyle}
+          uncheckedIcon={<MdPanoramaFishEye style={this.styles.panoramaFishEyeIcon}/>}
+          checkedIcon={<MdCheckCircle style={this.styles.checkCircleIcon}/>}
+          inputStyle={this.styles.inputStyle}
+          style={this.props.style}
+        />
+      </div>
     )
   }
 }

@@ -101,7 +101,7 @@ class IdentityForm extends React.Component {
     // const disabled = !this.props.trustedContactActive && this.props.page === 3;
 
     return (
-      <form className='row no-gutters'>
+      <form className='row'>
         {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
         <ModalWindow
           open={this.props.showModal}
