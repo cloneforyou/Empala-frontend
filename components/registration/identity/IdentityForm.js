@@ -3,7 +3,7 @@ import EmpalaInput from '../EmpalaInput';
 import EmpalaSelect from '../EmpalaSelect';
 import EmpalaCheckbox from '../EmpalaCheckbox';
 import { dataFields } from '../../../localdata/identityPageData';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import {
   closeIdentityModal,
   getMenuItems,
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
       page: state.registration.tabIndex,
       showModal: state.registration.showIdentityModal,
       trustedContactActive: state.registration.identity_trusted_contact_person_trusted_contact_checkbox,
-     }
+    }
   )
 };
 
@@ -62,7 +62,7 @@ class IdentityForm extends React.Component {
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
               col={item.col}
-              disabled = {!this.props.trustedContactActive && this.props.page === 3}
+              disabled={!this.props.trustedContactActive && this.props.page === 3}
             />
           );
         case 'select':
@@ -76,17 +76,20 @@ class IdentityForm extends React.Component {
               handleChange={this.props.setSelectedValueById}
               col={item.col}
               hint={item.hint || item.label}
-              disabled = {!this.props.trustedContactActive && this.props.page === 3}
+              disabled={!this.props.trustedContactActive && this.props.page === 3}
             />
           );
         case 'checkbox':
           return (
+            <div className='check-container'>
               <EmpalaCheckbox
                 key={item.id}
                 id={item.id}
                 label={item.label}
                 handleCheck={this.props.toggleCheckboxById}
               />
+            </div>
+
           )
       }
     };
@@ -98,8 +101,8 @@ class IdentityForm extends React.Component {
     // const disabled = !this.props.trustedContactActive && this.props.page === 3;
 
     return (
-      <form className='row'>
-        {dataFields[this.props.page-1].map((item) => this.mappingComponent(item))}
+      <form className='row no-gutters'>
+        {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
         <ModalWindow
           open={this.props.showModal}
           handleClose={this.props.closeModal}

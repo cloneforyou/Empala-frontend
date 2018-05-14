@@ -11,51 +11,33 @@
 
 @font-face {
   font-family: 'Proxima Nova';
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Bold-webfont.eot');
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Bold-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Bold-webfont.woff2') format('woff2'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Bold-webfont.woff') format('woff'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Bold-webfont.ttf') format('truetype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Bold-webfont.svg#proxima_nova_altbold') format('svg');
+  src: url('../../../static/fonts/ProximaNova-Bold.eot');
+  src: url('../../../static/fonts/ProximaNova-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../../../static/fonts/ProximaNova-Bold.woff') format('woff'),
+  url('../../../static/fonts/ProximaNova-Bold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
-
 }
 
 @font-face {
-  font-family: 'Proxima Nova';
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova Semibold-webfont.eot');
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova Semibold-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Semibold-webfont.woff2') format('woff2'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Semibold-webfont.ttf') format('truetype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Semibold-webfont.svg#proxima_nova_altbold') format('svg');
+  font-family: 'Proxima Nova Semibold';
+  src: url('../../../static/fonts/ProximaNova-Semibold.eot');
+  src: url('../../../static/fonts/ProximaNova-Semibold.eot?#iefix') format('embedded-opentype'),
+  url('../../../static/fonts/ProximaNova-Semibold.woff') format('woff'),
+  url('../../../static/fonts/ProximaNova-Semibold.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
-
 }
+
 @font-face {
   font-family: 'Proxima Nova';
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Regular-webfont.eot');
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Regular-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Regular-webfont.woff') format('woff'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Regular-webfont.ttf') format('truetype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova Alt Regular-webfont.svg#proxima_nova_altregular') format('svg');
+  src: url('../../../static/fonts/ProximaNova-Regular.eot');
+  src: url('../../../static/fonts/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../../../static/fonts/ProximaNova-Regular.woff') format('woff'),
+  url('../../../static/fonts/ProximaNova-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
-
-@font-face {
-  font-family: 'Proxima Nova';
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova ScOsf Thin-webfont.eot');
-  src: url('../../../static/fonts/Mark Simonson - Proxima Nova ScOsf Thin-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova ScOsf Thin-webfont.woff') format('woff'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova ScOsf Thin-webfont.ttf') format('truetype'),
-  url('../../../static/fonts/Mark Simonson - Proxima Nova ScOsf Thin-webfont.svg#proxima_nova_scosfthin') format('svg');
-  font-weight: 100;
-  font-style: normal;
-
-}
-
 
 @font-face {
   font-family: 'Proxima Nova';
