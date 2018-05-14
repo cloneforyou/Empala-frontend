@@ -14,17 +14,17 @@
 @import './modules/_information-page';
 @import 'modules/agreement-page';
 @import './modules/_date-picker';
-@import "../fonts/fonts.css";
-@import "modules/fields-group";
+@import 'modules/fields-group';
+@import 'modules/fonts';
 
-$ProximaNova: 'Proxima Nova', sans-serif;
+$ProximaNova: 'Proxima Nova';
 
 body {
   background-color: #ffffff;
   color: #808895;
   font-family: $ProximaNova;
   font-style: normal;
-  font-weight: 100;
+  font-weight: 300;
   min-width: 768px;
 }
 

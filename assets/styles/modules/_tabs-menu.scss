@@ -6,6 +6,7 @@
     display: inline-block;
     span {
       cursor: pointer;
+      font-weight: normal;
     }
     &_active, &:hover {
       span {
