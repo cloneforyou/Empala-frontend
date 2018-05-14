@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
       registrationData: state.registration.registrationData,
       page: state.registration.tabIndex,
       showModal: state.registration.showIdentityModal,
+      trustedContactActive: state.registration.identity_trusted_contact_person_trusted_contact_checkbox,
      }
   )
 };
@@ -47,6 +48,7 @@ class IdentityForm extends React.Component {
   constructor(props) {
     super(props);
 
+
     this.mappingComponent = (item) => {
       switch (item.field) {
         case 'input':
@@ -60,6 +62,7 @@ class IdentityForm extends React.Component {
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
               col={item.col}
+              disabled = {!this.props.trustedContactActive && this.props.page === 3}
             />
           );
         case 'select':
@@ -73,6 +76,7 @@ class IdentityForm extends React.Component {
               handleChange={this.props.setSelectedValueById}
               col={item.col}
               hint={item.hint || item.label}
+              disabled = {!this.props.trustedContactActive && this.props.page === 3}
             />
           );
         case 'checkbox':
@@ -86,9 +90,12 @@ class IdentityForm extends React.Component {
           )
       }
     };
+
+
   }
 
   render() {
+    // const disabled = !this.props.trustedContactActive && this.props.page === 3;
 
     return (
       <form className='row'>
