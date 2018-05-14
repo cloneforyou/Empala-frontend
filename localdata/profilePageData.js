@@ -4,13 +4,30 @@ export const dataFields = [
     {
       id: 'profile_employment_employment_type',
       label: 'Employment type',
-      type: 'text',
-      placeholder: '',
+      hint: 'Please select',
+      options: [
+        {
+          value: 'Employed',
+          title: 'Employed'
+        },
+        {
+          value: 'Self-employed',
+          title: 'Self-employed'
+        },
+        {
+          value: 'Not employed',
+          title: 'Not employed'
+        },
+        {
+          value: 'Retired',
+          title: 'Retired'
+        },
+      ],
     },
 
     {
       id: 'profile_employment_employment_country',
-      label: 'Employment country',
+      label: 'Employment Country',
       type: 'text',
       placeholder: '',
     },
@@ -26,6 +43,7 @@ export const dataFields = [
       label: 'Zip code',
       id: 'profile_employment_zip_code',
       type: 'number',
+      col: 6,
       placeholder: '',
     },
 
@@ -33,6 +51,7 @@ export const dataFields = [
       id: 'profile_employment_state',
       hint: 'Please select',
       label: 'State',
+      col: 6,
       options: [
         {
           value: 'Alabama',
