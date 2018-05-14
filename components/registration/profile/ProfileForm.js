@@ -38,6 +38,8 @@ class ProfileForm extends React.PureComponent {
     super(props);
 
     this.mappingComponent = (item) => {
+      const disabled = this.props.registrationData['profile_employment_employment_type'] !== 'Employed'
+          && this.props.page === 1 && item.id !== 'profile_employment_employment_type';
       if (item.options) {
         return (
           <EmpalaSelect
@@ -49,6 +51,7 @@ class ProfileForm extends React.PureComponent {
             handleChange={this.props.setSelectedValueById}
             col={item.col}
             hint={item.hint || item.label}
+            disabled={disabled}
           />
         )
       }
@@ -63,6 +66,7 @@ class ProfileForm extends React.PureComponent {
           errorText={this.props.fieldsErrors[item.id]}
           placeholder={item.placeholder}
           col={item.col}
+          disabled={disabled}
         />
       )
     };

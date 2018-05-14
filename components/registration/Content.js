@@ -105,9 +105,12 @@ class Content extends React.PureComponent {
       } else {
         fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox');
       }
+    } else if(this.props.tabName === 'profile' && this.props.tabIndex === 1 &&
+        this.props.registrationData['profile_employment_employment_type'] !== 'Employed') {
+      fieldNames = ['profile_employment_employment_type'];
     }
 
-    console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
+    // console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
 
     return(
       <div className='onboard'>
