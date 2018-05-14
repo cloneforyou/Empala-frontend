@@ -1,10 +1,13 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
-import {CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX, REGISTRATION_SUBMIT_REQUEST} from "../constants/registration";
+import {
+  CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
+  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST
+} from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga from './validation';
-import { validateCheckbox } from './validation'
+import { validateCheckbox, validateEmptyFields } from './validation'
 
 
 export function* changeTabPage({tabName, tabIndex, direction}) {
@@ -33,8 +36,8 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
       return
     }
     if (tabName !== 'info'  && tabIndex > menuItems[tabName].length - 1) {
-      if (tabName === 'agreement') { 
-        return 
+      if (tabName === 'agreement') {
+        return
     }
       yield put(setTabName(nextTabs[tabName]));
       yield put(setTabPageIndex(1));
@@ -85,5 +88,6 @@ export default function* registrationSaga() {
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm)
+    takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields)
   ]);
 }

@@ -8,7 +8,7 @@ import {
   SET_TAB_NAME,
   SET_TAB_PAGE_INDEX, SHOW_IDENTITY_MODAL, TOGGLE_CHECKBOX,
   VALIDATE_FIELD_ERROR,
-  VALIDATE_FIELD_SUCCESS,
+  VALIDATE_FIELD_SUCCESS, VALIDATE_FIELDS_BLANK,
 } from "../constants/registration";
 import {getMenuItemsByTabName} from "../utils/registrationUtils";
 
@@ -38,6 +38,8 @@ function registration(state = initialState, action) {
       return {...state, registrationData: {...state.registrationData, [action.id]: action.value}};
     case VALIDATE_FIELD_ERROR:
       return {...state, fieldsErrors: {...state.fieldsErrors, [action.fieldId]: action.message}};
+    case VALIDATE_FIELDS_BLANK:
+      return {...state,  fieldsErrors: {...action.fields}};
     case VALIDATE_FIELD_SUCCESS:
       return {...state, fieldsErrors: {...state.fieldsErrors, [action.fieldId]: ''}};
     case GET_DATA_FROM_CACHE:
@@ -49,7 +51,6 @@ function registration(state = initialState, action) {
     case CLOSE_IDENTITY_MODAL:
       return {...state, showIdentityModal: false};
     case COPY_MAILING_ADDRESS:
-      console.log(' *** COOOPPPPY ');
       return {
         ...state,
         registrationData: {

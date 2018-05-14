@@ -11,6 +11,11 @@ import {
   TOGGLE_CHECKBOX,
   TOGGLE_IDENTITY_MODAL, SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL, COPY_MAILING_ADDRESS, CLEAN_MAILING_ADDRESS,
   REGISTRATION_SUBMIT_REQUEST, REGISTRATION_SUBMIT_FAIL
+  SHOW_IDENTITY_MODAL,
+  CLOSE_IDENTITY_MODAL,
+  COPY_MAILING_ADDRESS,
+  CLEAN_MAILING_ADDRESS,
+  VALIDATE_FIELDS_BLANK,
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -42,7 +47,6 @@ export function changeTabPage(tabName, tabIndex, direction) {
     direction,
   }
 }
-
 
 export function setInputFieldValueById(id, value) {
   return  {
@@ -121,5 +125,13 @@ export function registrationFail(err) {
   return  {
     type: REGISTRATION_SUBMIT_FAIL,
     err
+  }
+}
+export function validateFieldsBlank(fields) {
+  // const fields = {};
+  // fieldsArray.forEach(fieldName => fields[fieldName] = 'This ia s required field');
+  return  {
+    type: VALIDATE_FIELDS_BLANK,
+    fields,
   }
 }

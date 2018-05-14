@@ -1,3 +1,7 @@
+@import 'modules/fonts';
+
+$ProximaNova: 'Proxima Nova';
+
 @import "../../node_modules/normalize.css/normalize.css";
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './modules/_header';
@@ -14,17 +18,13 @@
 @import './modules/_information-page';
 @import 'modules/agreement-page';
 @import './modules/_date-picker';
-@import "../fonts/fonts.css";
-@import "modules/fields-group";
-
-$ProximaNova: 'Proxima Nova', sans-serif;
-
+@import 'modules/fields-group';
 body {
   background-color: #ffffff;
   color: #808895;
   font-family: $ProximaNova;
   font-style: normal;
-  font-weight: 100;
+  font-weight: 300;
   min-width: 768px;
 }
 

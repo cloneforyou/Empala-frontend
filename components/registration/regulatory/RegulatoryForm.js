@@ -81,7 +81,7 @@ class RegulatoryForm extends React.Component {
 
   render() {
     return (
-      <form>
+      <form className='row'>
         {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
       </form>
     )

@@ -33,6 +33,7 @@
 .final-review__title {
   font-size: 22px;
   color: #98c73a;
+  font-weight: normal;
   margin-bottom: 30px;
 }
 
@@ -57,13 +58,13 @@
   }
   &__field-label {
     font-size: 12px;
-    letter-spacing: .5;
+    font-weight: normal;
     color: #98c73a;
   }
   &__field-value {
     border-bottom: 1px solid #e2e2e2;
     font-size: 16px;
-    font-weight: 300;
+    font-weight: normal;
   }
   &__no-title {
     height: 20px;

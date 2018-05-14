@@ -47,6 +47,7 @@ class MemberInfoForm extends React.PureComponent {
             label={item.label}
             value={this.props.registrationData[item.id] || ''}
             handleChange={this.props.setSelectedValueById}
+            errorText={this.props.fieldsErrors[item.id]}
             col={item.col}
             hint={item.hint || item.label}
           />
@@ -73,14 +74,14 @@ class MemberInfoForm extends React.PureComponent {
     // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
       return (
-        <form className='row no-gutters'>
+        <form className='row'>
           {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
         </form>
       )
     }
 
     return (
-      <div className='row no-gutters'>
+      <div className='row'>
           <EmpalaRadioButton
             value='passport'
             label='Passport'
@@ -96,6 +97,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_passport_countryOfIssue'] || ''}
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('passport')}
+            errorText={this.props.fieldsErrors['member-passport-countryOfIssue']}
           />
           <EmpalaInput
             key='member-passport-number'
@@ -105,6 +107,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_passport_number'] || ''}
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('passport')}
+            errorText={this.props.fieldsErrors['member-passport-number']}
           />
           <DatePickerField
             id={'member_passport_issue_date'}
@@ -138,6 +141,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_drivers_license_state'] || ''}
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('drivers_license')}
+            errorText={this.props.fieldsErrors['member-drivers-license-state']}
           />
           <EmpalaInput
             key='member-drivers-license-number'
@@ -147,6 +151,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_drivers_license_number'] || ''}
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('drivers_license')}
+            errorText={this.props.fieldsErrors['member-drivers-license-number']}
           />
           <DatePickerField
             id={'member_drivers_license_issue_date'}
@@ -154,6 +159,7 @@ class MemberInfoForm extends React.PureComponent {
             disabled={!this.isRadioChecked('drivers_license')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_issue_date'] || ''}
+            errorText={this.props.fieldsErrors['member_drivers_license_issue_date']}
             col={6}
           />
           <DatePickerField
@@ -162,6 +168,7 @@ class MemberInfoForm extends React.PureComponent {
             disabled={!this.isRadioChecked('drivers_license')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
+            errorText={this.props.fieldsErrors['member_drivers_license_expiry_date']}
             col={6}
           />
       </div>

@@ -37,23 +37,6 @@ class EmpalaCheckbox extends React.Component {
     }
   }
 
-  // checkBtn = () => {
-  //   this.setState(prevState => {
-  //     return {
-  //       check: !prevState.check
-  //     }
-  //   }, this.handleOpen)
-  // };
-  //
-  // handleClose = () => {
-  //   this.setState({open: false})
-  // };
-  //
-  // handleOpen = () => {
-  //   if (this.state.check) {
-  //     this.setState({open: true})
-  //   }
-  // };
 
   render() {
     return (
@@ -65,7 +48,6 @@ class EmpalaCheckbox extends React.Component {
           inputStyle={ this.styles.inputStyle }
           labelStyle={ this.styles.labelStyle }
           style={ this.styles.checkBoxStyle }
-          // onClick={this.props.handleClick}
           onCheck = {this.props.handleCheck}
         />
     )
