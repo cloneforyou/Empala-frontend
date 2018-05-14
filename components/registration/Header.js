@@ -1,26 +1,29 @@
-import React from "react";
+import React from 'react';
+import Link from 'next/link'
 import IoIosArrowThinLeft from 'react-icons/lib/io/ios-arrow-thin-left';
 import logo from '../../assets/img/logo.png';
 
 const Header = () => (
     <div className='header'>
-      <div className='row no-gutters header__block'>
+      <div className='row no-gutters header__block noselect'>
 
         <div className='header__block__left-side'>
-          <a href='#'
-             className="header__block__left-link">
-            <IoIosArrowThinLeft size={52} />
-            <span>Back</span>
-          </a>
+          <Link href="/">
+            <a className="header__block__left-link">
+              <IoIosArrowThinLeft size={52} />
+              <span>Back</span>
+            </a>
+          </Link>
         </div>
 
         <div className='header__block__center'>
-          <a href='#'>
-            <img src={logo}
-                 alt="EMPALA"
-                 style={{ width: '182px' }}
-            />
-          </a>
+          <Link href="/">
+              <img src={logo}
+                   alt="EMPALA"
+                   style={{ width: '182px' }}
+                   className='pointer'
+              />
+          </Link>
         </div>
 
         <div className='header__block__right-side'>
