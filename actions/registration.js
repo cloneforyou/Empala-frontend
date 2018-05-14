@@ -9,7 +9,11 @@ import {
   VALIDATE_FIELD_ERROR,
   GET_DATA_FROM_CACHE,
   TOGGLE_CHECKBOX,
-  TOGGLE_IDENTITY_MODAL, SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL, COPY_MAILING_ADDRESS, CLEAN_MAILING_ADDRESS
+  SHOW_IDENTITY_MODAL,
+  CLOSE_IDENTITY_MODAL,
+  COPY_MAILING_ADDRESS,
+  CLEAN_MAILING_ADDRESS,
+  VALIDATE_FIELDS_BLANK,
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -41,7 +45,6 @@ export function changeTabPage(tabName, tabIndex, direction) {
     direction,
   }
 }
-
 
 export function setInputFieldValueById(id, value) {
   return  {
@@ -107,5 +110,14 @@ export function copyMailingAddress() {
 export function cleanMailingAddress() {
   return  {
     type: CLEAN_MAILING_ADDRESS,
+  }
+}
+
+export function validateFieldsBlank(fields) {
+  // const fields = {};
+  // fieldsArray.forEach(fieldName => fields[fieldName] = 'This ia s required field');
+  return  {
+    type: VALIDATE_FIELDS_BLANK,
+    fields,
   }
 }
