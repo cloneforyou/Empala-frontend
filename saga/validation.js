@@ -1,4 +1,4 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put, select, all } from 'redux-saga/effects';
 import {
   copyMailingAddress,
   setFieldInvalid,
@@ -54,6 +54,15 @@ export function* validateCheckbox(action) {
     yield put (copyMailingAddress())
   }
 }
+
+export function* validateEmptyFields(action) {
+  if (action.fields) {
+    const data = yield select((state) => state.registration.registrationData);
+    const blankFields = action.fields.filter((field) => (!data[field] && data[field] === ''));
+    console.log('******* blank ===>', blankFields)
+    yield all(blankFields.map(field => put(setFieldInvalid(field, 'This ia s required field'))));
+  }
+}
 // Add your validation function here
 
 
@@ -65,6 +74,7 @@ export default function* validationSaga({id, value}) {
     'member_drivers_license_number',
     'regulatory_identification_ssn'
   ];
+  yield put(setFieldValid(id));
   if (validatedFields.includes(id)) {
     yield validateFieldOnServer({id, value});
   } else if (id === 'member_account_password_confirm' || id === 'member_account_password' ) {
