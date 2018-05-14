@@ -73,14 +73,14 @@ class MemberInfoForm extends React.PureComponent {
     // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
       return (
-        <form className='row'>
+        <form className='row no-gutters'>
           {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
         </form>
       )
     }
 
     return (
-      <div className='row'>
+      <div className='row no-gutters'>
           <EmpalaRadioButton
             value='passport'
             label='Passport'
