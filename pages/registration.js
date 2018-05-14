@@ -20,7 +20,6 @@ class Registration extends React.PureComponent {
 
 
   render() {
-    console.log('//////////////////////////////', this.props)
     return (
       <MuiThemeProvider>
         <div>
