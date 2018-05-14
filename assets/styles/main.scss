@@ -15,11 +15,15 @@
 @import 'modules/agreement-page';
 @import './modules/_date-picker';
 @import "../fonts/fonts.css";
+@import "modules/fields-group";
+
+$ProximaNova: 'Proxima Nova', sans-serif;
 
 body {
-  background-color: #f7f7f8;
+  background-color: #ffffff;
   color: #808895;
-  font-family: proxima-nova, sans-serif;
+  font-family: $ProximaNova;
   font-style: normal;
   font-weight: 100;
+  min-width: 768px;
 }

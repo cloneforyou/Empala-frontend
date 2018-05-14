@@ -102,8 +102,6 @@ class Content extends React.PureComponent {
       fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox')
     }
 
-    console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
-
     return(
       <div className='onboard'>
         <div className='onboard__container'>
