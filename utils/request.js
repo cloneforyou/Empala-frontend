@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export default function request(url, options = {}) {
+  console.log('------------------------------', url, options)
   return axios({
     method: options.method,
     url: `http://localhost:9000${url}`,

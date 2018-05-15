@@ -1,5 +1,6 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import _ from 'lodash';
+import { js2xml } from 'xml-js';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
@@ -88,17 +89,59 @@ export function* sendRegistrationForm() {
   }
 }
 
-export function* getAddressInfoByZIP({zipCode}) {
-  const url = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
+export function* getAddressInfoByZIP(zipCode) {
+  const urlBase = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
   const clientId = '018EMPAL1274';
   const data = {
+    "elements": [
+      {
+        "type": "element",
+        "name": "CityStateLookupRequest",
+        "attributes": { USERID: clientId },
+        "elements": [
+          {
+            "type": "element",
+            "name": "ZipCode",
+            'attributes': {ID:0},
+            "elements": [
+              {
+                "type": "element",
+                "name": "Zip5",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": `90210`
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
 
+  };
+  const url = `${urlBase}${js2xml(data)}`;
+  // const result = js2xml(data);
+  console.log('**** url *****',  url)
+  try {
+    // const result = yield call(request, url, {method: 'GET'})
+    fetch(url).then(
+        (res) => res.text()
+            .then((text) => console.log('**** XMLXMLXML *****', text))
+    );
+    // console.log('**** XMLXMLXML *****', result)
   }
+  catch(err) {
+    console.log(err)
+  }
+
 }
 
 export default function* registrationSaga() {
   yield all ([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
+    takeEvery(CHANGE_TAB_PAGE_INDEX, getAddressInfoByZIP),
     takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
