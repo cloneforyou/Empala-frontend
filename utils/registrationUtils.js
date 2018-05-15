@@ -2,7 +2,7 @@ import UploadUserFile from "../components/registration/UploadUserFile";
 import MemberInfoForm from "../components/registration/member/MemberInfoForm";
 import IdentityForm from "../components/registration/identity/IdentityForm";
 import ExperienceForm from "../components/registration/experience/ExperienceForm";
-import RegulatoryForm from "../components/registration/regulatory/RegulatoryForm";
+import RegulatoryForm from "../components/registrationForms/RegulatoryForm";
 import ProfileForm from "../components/registration/profile/ProfileForm";
 import AccountForm from "../components/registration/account/AccountForm";
 import RegistrationFormDrawer from "../components/registration/RegistrationFormDrawer";

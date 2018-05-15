@@ -1,6 +1,6 @@
 import React from 'react';
-import EmpalaInput from '../EmpalaInput';
-import {dataFields} from '../../../localdata/regulatoryPageData';
+import EmpalaInput from '../registration/EmpalaInput';
+import {dataFields} from '../../localdata/regulatoryPageData';
 import {connect} from 'react-redux';
 import {
   getMenuItems,
@@ -8,9 +8,9 @@ import {
   setMemberDocumentType,
   setTabName,
   setTabPageIndex
-} from '../../../actions/registration';
-import EmpalaSelect from '../EmpalaSelect';
-import DatePickerField from '../DatePickerField';
+} from '../../actions/registration';
+import EmpalaSelect from '../registration/EmpalaSelect';
+import DatePickerField from '../registration/DatePickerField';
 
 
 const mapStateToProps = (state) => {

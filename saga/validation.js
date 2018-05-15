@@ -52,7 +52,7 @@ export function* validateCheckbox(action) {
   }
   if (action.id === 'identity_residential_address_same_mailing_address_checkbox' && isChecked) {
     yield put(copyMailingAddress());
-    // yield put(setTabPageIndex(3))
+
   }
 }
 

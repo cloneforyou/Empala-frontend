@@ -2,7 +2,7 @@ import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects'
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
-  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST
+  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS
 } from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -64,6 +64,8 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
 
 export function* saveData() {
   const registrationData = yield select((state) => state.registration.registrationData);
+  registrationData['member_account_password'] = '';
+  registrationData['member_account_password_confirm'] = '';
   localStorage.setItem('registrationData', JSON.stringify(registrationData));
 }
 
@@ -88,7 +90,7 @@ export function* sendRegistrationForm() {
 export default function* registrationSaga() {
   yield all ([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
-    takeEvery(SET_FIELD_VALUE, saveData),
+    takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
