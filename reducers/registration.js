@@ -19,7 +19,7 @@ const initialState = {
   menuItems: [],
   registrationData: {
     memberDocument: 'passport',
-    regulatory_family_dependents: 0
+    regulatory_family_dependents: '0',
   },
   fieldsErrors: {}
 };

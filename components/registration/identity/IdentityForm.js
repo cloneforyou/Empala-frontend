@@ -21,6 +21,7 @@ const mapStateToProps = (state) => {
       page: state.registration.tabIndex,
       showModal: state.registration.showIdentityModal,
       trustedContactActive: state.registration.identity_trusted_contact_person_trusted_contact_checkbox,
+      fieldsErrors: state.registration.fieldsErrors,
     }
   )
 };
@@ -34,7 +35,6 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(setInputFieldValueById(e.target.id, e.target.value))
       },
       toggleCheckboxById: (e, checked) => {
-        console.log('---------->>>>>>>>>>>>>>>>', e.target.id)
         dispatch(toggleCheckboxById(e.target.id));
       },
       closeModal: () => dispatch(closeIdentityModal()),
@@ -63,6 +63,7 @@ class IdentityForm extends React.Component {
               handleChange={this.props.setInputValueById}
               col={item.col}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
+              errorText={this.props.fieldsErrors[item.id]}
             />
           );
         case 'select':
@@ -77,6 +78,7 @@ class IdentityForm extends React.Component {
               col={item.col}
               hint={item.hint || item.label}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
+              errorText={this.props.fieldsErrors[item.id]}
             />
           );
         case 'checkbox':
@@ -98,7 +100,7 @@ class IdentityForm extends React.Component {
   }
 
   render() {
-    // const disabled = !this.props.trustedContactActive && this.props.page === 3;
+
 
     return (
       <form className='row'>

@@ -24,7 +24,6 @@ const EmpalaInput = (props) => {
           onChange={(e) => props.handleChange(e)}
           disabled={props.disabled}
           errorText={props.errorText}
-          //required={true}
         />
     </div>
   )
