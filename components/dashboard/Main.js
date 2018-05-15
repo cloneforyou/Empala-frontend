@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Main extends Component {
   constructor(props) {
@@ -6,8 +7,9 @@ class Main extends Component {
   }
 
   render() {
+    const { sidebarCollapsed } = this.props
     return (
-      <div className='dashboard dashboard_light'>
+      <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
         <div className='chartjs-size-monitor'>
           <div className="table-responsive">
             <table className="table table-striped table-sm">
@@ -142,4 +144,8 @@ class Main extends Component {
   }
 }
 
-export default Main
+export default connect((state) => {
+  return {
+    sidebarCollapsed: state.dashboard.sidebarCollapsed
+  }
+})(Main)

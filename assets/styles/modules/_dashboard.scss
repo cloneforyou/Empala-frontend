@@ -3,7 +3,11 @@
   display: block;
   width: 100%;
   padding-top: 74px;
+  transition: .4s;
   &_light{
     background: #f7f7f8;
+  }
+  &_full{
+    margin-left: 80px;
   }
 }

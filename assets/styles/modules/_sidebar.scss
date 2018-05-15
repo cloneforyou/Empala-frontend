@@ -2,10 +2,11 @@
   position: fixed;
   top: 0;
   bottom: 0;
+  left: 0;
   z-index: 100;
   padding: 74px 0 0;
-  width: 180px;
-  left: -180px;
+  width: 80px;
+  transition: .4s;
   &_black {
     background: $dark-grey;
   }
@@ -14,6 +15,6 @@
     text-transform: uppercase;
   }
   &_collapsed {
-    left: 0;
+    width: 180px;
   }
 }
