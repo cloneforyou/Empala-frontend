@@ -8,7 +8,6 @@ import ContentMenuItems from './ContentMenuItems';
 import InformationPage from "./InformationPage";
 import FinalReviewPage from "./FinalReviewPage";
 import AgreementPage from "./AgreementPage";
-import { dataFields as memberPageData } from '../../localdata/memberPageData';
 
 
 

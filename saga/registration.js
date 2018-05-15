@@ -1,4 +1,5 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
+import _ from 'lodash';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
@@ -63,7 +64,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
 }
 
 export function* saveData() {
-  const registrationData = yield select((state) => state.registration.registrationData);
+  const registrationData = yield select((state) => _.cloneDeep(state.registration.registrationData));
   registrationData['member_account_password'] = '';
   registrationData['member_account_password_confirm'] = '';
   localStorage.setItem('registrationData', JSON.stringify(registrationData));

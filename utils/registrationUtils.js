@@ -1,10 +1,10 @@
 import UploadUserFile from "../components/registration/UploadUserFile";
-import MemberInfoForm from "../components/registration/member/MemberInfoForm";
-import IdentityForm from "../components/registration/identity/IdentityForm";
-import ExperienceForm from "../components/registration/experience/ExperienceForm";
+import MemberInfoForm from "../components/registrationForms/MemberInfoForm";
+import IdentityForm from "../components/registrationForms/IdentityForm";
+import ExperienceForm from "../components/registrationForms/ExperienceForm";
 import RegulatoryForm from "../components/registrationForms/RegulatoryForm";
-import ProfileForm from "../components/registration/profile/ProfileForm";
-import AccountForm from "../components/registration/account/AccountForm";
+import ProfileForm from "../components/registrationForms/ProfileForm";
+import AccountForm from "../components/registrationForms/AccountForm";
 import RegistrationFormDrawer from "../components/registration/RegistrationFormDrawer";
 import _ from 'lodash';
 import {dataFields as memberPageData} from '../localdata/memberPageData';

@@ -1,8 +1,8 @@
 import React from 'react';
-import EmpalaInput from '../EmpalaInput';
-import EmpalaSelect from '../EmpalaSelect';
-import EmpalaCheckbox from '../EmpalaCheckbox';
-import { dataFields } from '../../../localdata/identityPageData';
+import EmpalaInput from '../registration/EmpalaInput';
+import EmpalaSelect from '../registration/EmpalaSelect';
+import EmpalaCheckbox from '../registration/EmpalaCheckbox';
+import { dataFields } from '../../localdata/identityPageData';
 import { connect } from "react-redux";
 import {
   closeIdentityModal,
@@ -11,8 +11,8 @@ import {
   setMemberDocumentType,
   setTabName,
   setTabPageIndex, toggleCheckboxById
-} from '../../../actions/registration';
-import ModalWindow from '../ModalWindow';
+} from '../../actions/registration';
+import ModalWindow from '../registration/ModalWindow';
 
 const mapStateToProps = (state) => {
   return (

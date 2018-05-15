@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setInputFieldValueById } from '../../../actions/registration';
-import EmpalaSelect from '../EmpalaSelect';
-import { dataFields } from '../../../localdata/experiencePageData';
+import { setInputFieldValueById } from '../../actions/registration';
+import EmpalaSelect from '../registration/EmpalaSelect';
+import { dataFields } from '../../localdata/experiencePageData';
 
 const mapStateToProps = (state) => {
   return ({

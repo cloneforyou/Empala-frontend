@@ -1,7 +1,7 @@
 import React from 'react';
-import EmpalaInput from "../EmpalaInput";
-import EmpalaSelect from "../EmpalaSelect";
-import { dataFields } from "../../../localdata/accountPageData";
+import EmpalaInput from "../registration/EmpalaInput";
+import EmpalaSelect from "../registration/EmpalaSelect";
+import { dataFields } from "../../localdata/accountPageData";
 
 export default class AccountForm extends React.Component {
 

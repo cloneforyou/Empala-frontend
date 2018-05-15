@@ -1,8 +1,8 @@
 import React from 'react';
-import EmpalaInput from '../EmpalaInput';
+import EmpalaInput from '../registration/EmpalaInput';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import EmpalaRadioButton from '../EmpalaRadioButton';
-import { dataFields } from '../../../localdata/memberPageData';
+import EmpalaRadioButton from '../registration/EmpalaRadioButton';
+import { dataFields } from '../../localdata/memberPageData';
 import { connect } from 'react-redux';
 import {
   getMenuItems,
@@ -10,9 +10,9 @@ import {
   setMemberDocumentType,
   setTabName,
   setTabPageIndex
-} from '../../../actions/registration';
-import EmpalaSelect from '../EmpalaSelect';
-import DatePickerField from '../DatePickerField';
+} from '../../actions/registration';
+import EmpalaSelect from '../registration/EmpalaSelect';
+import DatePickerField from '../registration/DatePickerField';
 
 
 const mapStateToProps = (state) => {

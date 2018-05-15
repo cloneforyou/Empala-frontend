@@ -69,14 +69,14 @@ export function* validateEmptyFields(action) {
 
 // Spawns validation function according to fieldId
 export default function* validationSaga({id, value}) {
-  const validatedFields = [
+  const serverValidatedFields = [
     'member_account_email',
     'member_passport_number',
     'member_drivers_license_number',
     'regulatory_identification_ssn'
   ];
   yield put(setFieldValid(id));
-  if (validatedFields.includes(id)) {
+  if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({id, value});
   } else if (id === 'member_account_password_confirm' || id === 'member_account_password' ) {
     yield validatePasswordField({id, value});
