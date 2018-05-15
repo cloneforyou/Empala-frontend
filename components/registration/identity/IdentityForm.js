@@ -20,7 +20,8 @@ const mapStateToProps = (state) => {
       registrationData: state.registration.registrationData,
       page: state.registration.tabIndex,
       showModal: state.registration.showIdentityModal,
-      trustedContactActive: state.registration.identity_trusted_contact_person_trusted_contact_checkbox,
+      trustedContactActive: state.registration['identity_trusted_contact_person_trusted_contact_checkbox'],
+      mailingAddressCheckboxChecked: state.registration['identity_residential_address_same_mailing_address_checkbox'],
       fieldsErrors: state.registration.fieldsErrors,
     }
   )
@@ -82,6 +83,12 @@ class IdentityForm extends React.Component {
             />
           );
         case 'checkbox':
+          let checked = false;
+          if (item.id === 'identity_trusted_contact_person_trusted_contact_checkbox') {
+            checked = this.props.trustedContactActive;
+          } else if (item.id === 'identity_residential_address_same_mailing_address_checkbox') {
+            checked = this.props.mailingAddressCheckboxChecked;
+          }
           return (
             <div className='check-container'>
               <EmpalaCheckbox
@@ -89,7 +96,7 @@ class IdentityForm extends React.Component {
                 id={item.id}
                 label={item.label}
                 handleCheck={this.props.toggleCheckboxById}
-                checked={this.props.trustedContactActive}
+                checked={checked}
               />
             </div>
 

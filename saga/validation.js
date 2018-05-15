@@ -2,7 +2,7 @@ import { call, put, select, all } from 'redux-saga/effects';
 import {
   copyMailingAddress,
   setFieldInvalid,
-  setFieldValid,
+  setFieldValid, setTabPageIndex,
   showIdentityModal
 } from '../actions/registration';
 import request from '../utils/request';
@@ -47,11 +47,12 @@ function* validateFieldOnServer({id, value}) {
 export function* validateCheckbox(action) {
   const isChecked = yield select((state) => state.registration[action.id]);
   if (/identity_checkbox/.test(action.id) &&  isChecked) {
-    console.log(' *** 999', isChecked );
+    // console.log(' *** 999', isChecked );
     yield put(showIdentityModal());
   }
   if (action.id === 'identity_residential_address_same_mailing_address_checkbox' && isChecked) {
-    yield put (copyMailingAddress())
+    yield put(copyMailingAddress());
+    // yield put(setTabPageIndex(3))
   }
 }
 
@@ -59,7 +60,7 @@ export function* validateEmptyFields(action) {
   if (action.fields) {
     const data = yield select((state) => state.registration.registrationData);
     const blankFields = action.fields.filter((field) => (!data[field] || data[field] === ''));
-    console.log('******* blank ===>', blankFields)
+    // console.log('******* blank ===>', blankFields)
     yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
