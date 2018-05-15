@@ -22,7 +22,8 @@ const EmpalaSelect = (props) => {
           underlineFocusStyle={{ borderBottom : '2px solid #98c73a' }}
           onChange={(e, i, v) => {props.handleChange(props.id ,v)}}
           disabled={props.disabled}
-          errorText={props.errorText}
+          errorText={props.disabled ? '' : props.errorText}
+
         >
           {props.options.map((option) => (
             <MenuItem

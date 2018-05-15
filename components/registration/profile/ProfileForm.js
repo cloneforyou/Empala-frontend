@@ -52,6 +52,7 @@ class ProfileForm extends React.PureComponent {
             col={item.col}
             hint={item.hint || item.label}
             disabled={disabled}
+            errorText={this.props.fieldsErrors[item.id]}
           />
         )
       }

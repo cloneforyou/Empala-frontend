@@ -89,6 +89,7 @@ class IdentityForm extends React.Component {
                 id={item.id}
                 label={item.label}
                 handleCheck={this.props.toggleCheckboxById}
+                checked={this.props.trustedContactActive}
               />
             </div>
 
