@@ -62,6 +62,7 @@ class IdentityForm extends React.Component {
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
               col={item.col}
+              numberField={item.numberField}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
             />
           );

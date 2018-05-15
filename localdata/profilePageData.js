@@ -42,7 +42,8 @@ export const dataFields = [
     {
       label: 'Zip code',
       id: 'profile_employment_zip_code',
-      type: 'number',
+      type: 'text',
+      numberField: true,
       col: 6,
       placeholder: '',
     },

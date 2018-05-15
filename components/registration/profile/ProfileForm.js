@@ -66,6 +66,7 @@ class ProfileForm extends React.PureComponent {
           errorText={this.props.fieldsErrors[item.id]}
           placeholder={item.placeholder}
           col={item.col}
+          numberField={item.numberField}
           disabled={disabled}
         />
       )

@@ -60,7 +60,7 @@ export function* validateEmptyFields(action) {
     const data = yield select((state) => state.registration.registrationData);
     const blankFields = action.fields.filter((field) => (!data[field] && data[field] === ''));
     console.log('******* blank ===>', blankFields)
-    yield all(blankFields.map(field => put(setFieldInvalid(field, 'This ia s required field'))));
+    yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
 // Add your validation function here

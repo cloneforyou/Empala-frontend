@@ -56,6 +56,7 @@ class RegulatoryForm extends React.Component {
               key={item.id}
               id={item.id}
               type={item.type}
+              numberField={item.numberField}
               label={item.label}
               value={this.props.registrationData[item.id] || ''}
               placeholder={item.placeholder}

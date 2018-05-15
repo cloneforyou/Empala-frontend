@@ -25,6 +25,7 @@ export default class AccountForm extends React.Component {
         label={item.label}
         placeholder={item.placeholder}
         col={item.col}
+        numberField={item.numberField}
       />
     )
   };

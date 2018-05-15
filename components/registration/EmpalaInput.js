@@ -2,32 +2,42 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import '../../assets/styles/modules/_input-group.scss'
 
-const EmpalaInput = (props) => {
-  return (
-    <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
-      {/*<label className='registration-label'*/}
-             {/*htmlFor={props.id}>*/}
-        {/*{props.label}*/}
-      {/*</label>*/}
+class EmpalaInput extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  checkRegistrationField = (e) => {
+    if ((/^\d*$/).test(e.target.value) && this.props.numberField) {
+      this.props.handleChange(e)
+    } else if (!this.props.numberField) {
+      this.props.handleChange(e)
+    }
+  };
+
+  render() {
+    return (
+      <div className={this.props.col ? `registration-group col-md-${this.props.col}` : 'registration-group col-12'}>
         <TextField
-          id={props.id}
-          type={props.type}
-          floatingLabelText={props.label}
+          id={this.props.id}
+          type={this.props.type}
+          floatingLabelText={this.props.label}
           floatingLabelFixed={true}
-          floatingLabelStyle={ {color: '#98c73a' }}
-          hintText={props.placeholder}
-          style={{ width: '100%' }}
-          underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
-          hintStyle={{ color: '#c5c5c5' }}
-          inputStyle={{ color: '#858c99' }}
-          value={props.value}
-          onChange={(e) => props.handleChange(e)}
-          disabled={props.disabled}
-          errorText={props.errorText}
-          //required={true}
+          floatingLabelStyle={{color: '#98c73a'}}
+          hintText={this.props.placeholder}
+          style={{width: '100%'}}
+          underlineStyle={{borderBottom: '2px solid #e0e0e0'}}
+          hintStyle={{color: '#c5c5c5'}}
+          inputStyle={{color: '#858c99'}}
+          value={this.props.value}
+          onChange={this.checkRegistrationField}
+          disabled={this.props.disabled}
+          errorText={this.props.errorText}
         />
-    </div>
-  )
-};
+      </div>
+    )
+  }
+
+}
 
 export default EmpalaInput;
