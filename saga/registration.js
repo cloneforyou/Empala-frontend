@@ -88,6 +88,14 @@ export function* sendRegistrationForm() {
   }
 }
 
+export function* getAddressInfoByZIP({zipCode}) {
+  const url = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
+  const clientId = '018EMPAL1274';
+  const data = {
+
+  }
+}
+
 export default function* registrationSaga() {
   yield all ([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
