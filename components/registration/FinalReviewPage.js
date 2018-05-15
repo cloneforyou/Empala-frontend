@@ -159,7 +159,7 @@ class FinalReviewPage extends React.PureComponent {
             <div className='fields-group__row row'>
               <div className='col-md-6'>
                 <div className='fields-group__title'>
-                  Residental Address
+                  Residential Address
                 </div>
                 <div className='row'>
                   <FieldComponent
@@ -175,22 +175,22 @@ class FinalReviewPage extends React.PureComponent {
                   <FieldComponent
                     col={12}
                     label={'City'}
-                    value={data.identity_residential_address_city || empty}
+                    value={data.identity_residential_address_residential_address_city || empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Zip code'}
-                    value={data.identity_residential_address_zip_code || empty}
+                    value={data.identity_zip_code || empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'State'}
-                    value={data.identity_residential_address_state || empty}
+                    value={data.identity_residential_address_residential_address_state || empty}
                   />
                   <FieldComponent
                     col={12}
                     label={'Country'}
-                    value={data.identity_residential_address_country || empty}
+                    value={data.identity_residential_address_residential_address_country || empty}
                   />
                 </div>
               </div>

@@ -8,7 +8,6 @@ import ContentMenuItems from './ContentMenuItems';
 import InformationPage from "./InformationPage";
 import FinalReviewPage from "./FinalReviewPage";
 import AgreementPage from "./AgreementPage";
-import { dataFields as memberPageData } from '../../localdata/memberPageData';
 
 
 
@@ -87,7 +86,7 @@ class Content extends React.PureComponent {
         </div> )
     }
 
-    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
+
 
     if (!this.props.menuItems || this.props.menuItems.length === 0) {
       this.props.getMenuItems(this.props.tabName);
@@ -110,7 +109,7 @@ class Content extends React.PureComponent {
       fieldNames = ['profile_employment_employment_type'];
     }
 
-    // console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
+    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
 
     return(
       <div className='onboard'>
@@ -122,7 +121,10 @@ class Content extends React.PureComponent {
                   <ContentMenuTabs tabName={this.props.tabName}/>
                 </div>
                 <div className="onboard__left-block--center">
-                  <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
+                  <ContentMenuItems
+                    menuItems={this.props.menuItems}
+                    tabIndex={this.props.tabIndex}
+                  />
                 </div>
               </div>
             </div>
