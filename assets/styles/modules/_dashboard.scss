@@ -4,10 +4,11 @@
   width: 100%;
   padding-top: 74px;
   transition: .4s;
-  &_light{
-    background: #f7f7f8;
+  min-height: 100%;
+  &_light {
+    background: #f9fafa;
   }
-  &_full{
+  &_full {
     margin-left: 80px;
   }
 }

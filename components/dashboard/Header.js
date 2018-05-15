@@ -19,8 +19,9 @@ class Header extends Component {
 
 
   render() {
+    const { sidebarCollapsed } = this.state
     return (
-      <div className="navbar fixed-top flex-md-nowrap p-0 dashboard-header">
+      <div className={sidebarCollapsed? "navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_collapsed" : "navbar fixed-top flex-md-nowrap p-0 dashboard-header"}>
         <a className="navbar-brand mr-0 dashboard-header__logo" href="#">
           <img src={logo} alt=""/>
         </a>
