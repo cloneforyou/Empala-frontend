@@ -1,0 +1,19 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 74px 0 0;
+  width: 180px;
+  left: -180px;
+  &_black {
+    background: $dark-grey;
+  }
+  &__part-title {
+    color: $green;
+    text-transform: uppercase;
+  }
+  &_collapsed {
+    left: 0;
+  }
+}

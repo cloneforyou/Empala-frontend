@@ -1,0 +1,19 @@
+.dashboard-header {
+  background: $white;
+  &__logo {
+    width: 180px;
+    background: #222325;
+    padding: 22px 15px;
+    img {
+      max-width: 100%;
+    }
+  }
+  &__main {
+    width: calc(100% - 180px);
+  }
+  &__toogler{
+    span{
+      background: $green;
+    }
+  }
+}

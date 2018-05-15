@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import registration from './reducers/registration'
+import dashboard from './reducers/dashboard'
 
 export const InitialState = {
 
@@ -15,4 +16,5 @@ function reducer (state = InitialState, action) {
 export default combineReducers({
   reducer,
   registration,
+  dashboard,
 });
