@@ -1,3 +1,5 @@
+import { uniqueId } from 'lodash';
+
 export const widgetFinancialCapital = {
   title: 'Financial capital',
   tables: [
@@ -26,6 +28,26 @@ export const widgetFinancialCapital = {
         {
           title: 'Foreign',
           align: 'left',
+        },
+      ],
+      data: [
+        {
+          id: uniqueId(),
+          exposure: 'Total a / c value',
+          value: '9, 999, 999, 999',
+          dayChg: '999.9',
+          allocation: 'EMARA & MM',
+          domestic: '9, 999, 999, 999',
+          foreign: '9, 999, 999, 999',
+        },
+        {
+          id: uniqueId(),
+          exposure: 'Total a / c value',
+          value: '9, 999, 999, 999',
+          dayChg: '999.9',
+          allocation: 'EMARA & MM',
+          domestic: '9, 999, 999, 999',
+          foreign: '9, 999, 999, 999',
         },
       ],
     },

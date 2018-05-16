@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { values } from 'lodash';
 
 class WidgetTable extends Component {
   constructor(props) {
@@ -10,23 +11,30 @@ class WidgetTable extends Component {
     const { table } = this.props;
     return (
       <div>
-        <table className="table table-borderless">
+        <table className="table table-borderless ">
           <thead>
-            <tr>
-              {table.headers.map((header, j) => (
-                <th scope="col" className={`text-${header.align}`}>{header.title}</th>
+          <tr>
+            {table.headers.map((header, i) => (
+              <th scope="col" className={`text-${header.align}`} key={i}>{header.title}</th>
             ))}
-            </tr>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Total a/c value</td>
-              <td>9,999,999,999</td>
-              <td>999.9</td>
-              <td>EMARA & MM</td>
-              <td>9,999,999,999</td>
-              <td>9,999,999,999</td>
-            </tr>
+          {
+            table.data && table.data.length > 0 && table.data.map((row, i) => (
+              <tr key={row.id}>
+                {
+                  values(row).map((item, index) => {
+                    if (index > 0) {
+                      return (
+                        <td>{item}</td>
+                      );
+                    }
+                  })
+                }
+              </tr>
+            ))
+          }
           </tbody>
         </table>
       </div>
