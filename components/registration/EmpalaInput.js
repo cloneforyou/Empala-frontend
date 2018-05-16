@@ -16,6 +16,8 @@ class EmpalaInput extends React.Component {
   };
 
   render() {
+    const errorText = this.props.disabled ? '' : this.props.errorText;
+
     return (
       <div className={this.props.col ? `registration-group col-md-${this.props.col}` : 'registration-group col-12'}>
         <TextField
@@ -32,7 +34,7 @@ class EmpalaInput extends React.Component {
           value={this.props.value}
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}
-          errorText={this.props.errorText}
+          errorText={errorText}
         />
       </div>
     )
