@@ -1,8 +1,9 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
+import _ from 'lodash';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
-  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST
+  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS
 } from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -12,6 +13,7 @@ import { validateCheckbox, validateEmptyFields } from './validation'
 
 export function* changeTabPage({tabName, tabIndex, direction}) {
   // const menuItems = yield select((state) => state.registration.menuItems);
+  const mailingAddressSameAsResidential = yield select((state) => state.registration['identity_residential_address_same_mailing_address_checkbox']);
   const nextTabs = {
     info: 'member',
     member: 'identity',
@@ -31,13 +33,17 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     agreement: 'final_review'
   };
   if (direction === 'forward') {
+    if (tabName === 'identity' && tabIndex === 1 && mailingAddressSameAsResidential) {
+      yield put(setTabPageIndex(3));
+      return false
+    }
     if (tabName === 'info' || tabName === 'final_review') {
       yield put(setTabName(nextTabs[tabName]));
-      return
+      return false
     }
     if (tabName !== 'info'  && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
-        return
+        return false
     }
       yield put(setTabName(nextTabs[tabName]));
       yield put(setTabPageIndex(1));
@@ -47,7 +53,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
   } else if (direction === 'backward') {
     if (tabIndex <= 1) {
       if (tabName === 'info') {
-        return
+        return false
     }
       yield put(setTabName(prevTabs[tabName]));
       yield put(setTabPageIndex((tabName === 'member' || tabName === 'agreement') ? 1 : menuItems[prevTabs[tabName]].length));
@@ -58,13 +64,14 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
 }
 
 export function* saveData() {
-  const registrationData = yield select((state) => state.registration.registrationData);
+  const registrationData = yield select((state) => _.cloneDeep(state.registration.registrationData));
+  registrationData['member_account_password'] = '';
+  registrationData['member_account_password_confirm'] = '';
   localStorage.setItem('registrationData', JSON.stringify(registrationData));
 }
 
 
 export function* sendRegistrationForm() {
-  console.log('-- REGISTRATION');
   const registrationData = yield select((state) => state.registration.registrationData);
   const url = '/auth/register';
   const options = {
@@ -81,10 +88,18 @@ export function* sendRegistrationForm() {
   }
 }
 
+export function* getAddressInfoByZIP({zipCode}) {
+  const url = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
+  const clientId = '018EMPAL1274';
+  const data = {
+
+  }
+}
+
 export default function* registrationSaga() {
   yield all ([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
-    takeEvery(SET_FIELD_VALUE, saveData),
+    takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),

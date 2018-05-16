@@ -2,7 +2,7 @@ import { call, put, select, all } from 'redux-saga/effects';
 import {
   copyMailingAddress,
   setFieldInvalid,
-  setFieldValid,
+  setFieldValid, setTabPageIndex,
   showIdentityModal
 } from '../actions/registration';
 import request from '../utils/request';
@@ -35,31 +35,32 @@ function* validateFieldOnServer({id, value}) {
       [id]: value
     }
   };
-    try {
-      const result = yield call(request, url, options);
-      yield put(setFieldValid(id));
-    } catch (err) {
-      yield put(setFieldInvalid(id, err.message));
-    }
+  try {
+    const result = yield call(request, url, options);
+    yield put(setFieldValid(id));
+  } catch (err) {
+    yield put(setFieldInvalid(id, err.message));
+  }
 }
 
 
 export function* validateCheckbox(action) {
   const isChecked = yield select((state) => state.registration[action.id]);
   if (/identity_checkbox/.test(action.id) &&  isChecked) {
-    console.log(' *** 999', isChecked );
+    // console.log(' *** 999', isChecked );
     yield put(showIdentityModal());
   }
   if (action.id === 'identity_residential_address_same_mailing_address_checkbox' && isChecked) {
-    yield put (copyMailingAddress())
+    yield put(copyMailingAddress());
+
   }
 }
 
 export function* validateEmptyFields(action) {
   if (action.fields) {
     const data = yield select((state) => state.registration.registrationData);
-    const blankFields = action.fields.filter((field) => (!data[field] && data[field] === ''));
-    console.log('******* blank ===>', blankFields)
+    const blankFields = action.fields.filter((field) => (!data[field] || data[field] === ''));
+    // console.log('******* blank ===>', blankFields)
     yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
@@ -68,14 +69,14 @@ export function* validateEmptyFields(action) {
 
 // Spawns validation function according to fieldId
 export default function* validationSaga({id, value}) {
-  const validatedFields = [
+  const serverValidatedFields = [
     'member_account_email',
     'member_passport_number',
     'member_drivers_license_number',
     'regulatory_identification_ssn'
   ];
   yield put(setFieldValid(id));
-  if (validatedFields.includes(id)) {
+  if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({id, value});
   } else if (id === 'member_account_password_confirm' || id === 'member_account_password' ) {
     yield validatePasswordField({id, value});
