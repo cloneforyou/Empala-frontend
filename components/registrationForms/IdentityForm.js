@@ -91,7 +91,6 @@ class IdentityForm extends React.Component {
             checked = this.props.mailingAddressCheckboxChecked;
           }
           return (
-            <div className='check-container'>
               <EmpalaCheckbox
                 key={item.id}
                 id={item.id}
@@ -99,8 +98,6 @@ class IdentityForm extends React.Component {
                 handleCheck={this.props.toggleCheckboxById}
                 checked={checked}
               />
-            </div>
-
           )
       }
     };
