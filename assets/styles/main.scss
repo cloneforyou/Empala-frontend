@@ -1,6 +1,6 @@
 @import 'modules/fonts';
 @import 'variables';
-@import "mixins";
+@import 'mixins';
 @import "../../node_modules/normalize.css/normalize.css";
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import 'modules/header';
@@ -23,6 +23,7 @@
 @import 'modules/sidebar';
 @import 'modules/details';
 @import 'modules/widget';
+@import 'modules/emp-table';
 
 html {
   height: 100%;
