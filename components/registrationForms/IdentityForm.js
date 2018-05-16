@@ -1,18 +1,16 @@
 import React from 'react';
-import EmpalaInput from '../EmpalaInput';
-import EmpalaSelect from '../EmpalaSelect';
-import EmpalaCheckbox from '../EmpalaCheckbox';
-import { dataFields } from '../../../localdata/identityPageData';
+import EmpalaInput from '../registration/EmpalaInput';
+import EmpalaSelect from '../registration/EmpalaSelect';
+import EmpalaCheckbox from '../registration/EmpalaCheckbox';
+import { dataFields } from '../../localdata/identityPageData';
 import { connect } from "react-redux";
 import {
   closeIdentityModal,
-  getMenuItems,
+  getInfoByZipCode,
   setInputFieldValueById,
-  setMemberDocumentType,
-  setTabName,
-  setTabPageIndex, toggleCheckboxById
-} from '../../../actions/registration';
-import ModalWindow from '../ModalWindow';
+  toggleCheckboxById
+} from '../../actions/registration';
+import ModalWindow from '../registration/ModalWindow';
 
 const mapStateToProps = (state) => {
   return (
@@ -20,7 +18,9 @@ const mapStateToProps = (state) => {
       registrationData: state.registration.registrationData,
       page: state.registration.tabIndex,
       showModal: state.registration.showIdentityModal,
-      trustedContactActive: state.registration.identity_trusted_contact_person_trusted_contact_checkbox,
+      trustedContactActive: state.registration['identity_trusted_contact_person_trusted_contact_checkbox'],
+      mailingAddressCheckboxChecked: state.registration['identity_residential_address_same_mailing_address_checkbox'],
+      fieldsErrors: state.registration.fieldsErrors,
     }
   )
 };
@@ -30,11 +30,14 @@ const mapDispatchToProps = (dispatch) => {
     {
       setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
       setInputValueById: (e) => {
-        console.log(e.target.id, e.target.value);
-        dispatch(setInputFieldValueById(e.target.id, e.target.value))
+        const {id, value} = e.target;
+        // console.log(e.target.id, e.target.value);
+        if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
+          dispatch(getInfoByZipCode(id, value))
+        }
+        dispatch(setInputFieldValueById(id, value))
       },
       toggleCheckboxById: (e, checked) => {
-        console.log('---------->>>>>>>>>>>>>>>>', e.target.id)
         dispatch(toggleCheckboxById(e.target.id));
       },
       closeModal: () => dispatch(closeIdentityModal()),
@@ -63,6 +66,7 @@ class IdentityForm extends React.Component {
               handleChange={this.props.setInputValueById}
               col={item.col}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
+              errorText={this.props.fieldsErrors[item.id]}
             />
           );
         case 'select':
@@ -77,9 +81,16 @@ class IdentityForm extends React.Component {
               col={item.col}
               hint={item.hint || item.label}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
+              errorText={this.props.fieldsErrors[item.id]}
             />
           );
         case 'checkbox':
+          let checked = false;
+          if (item.id === 'identity_trusted_contact_person_trusted_contact_checkbox') {
+            checked = this.props.trustedContactActive;
+          } else if (item.id === 'identity_residential_address_same_mailing_address_checkbox') {
+            checked = this.props.mailingAddressCheckboxChecked;
+          }
           return (
             <div className='check-container'>
               <EmpalaCheckbox
@@ -87,6 +98,7 @@ class IdentityForm extends React.Component {
                 id={item.id}
                 label={item.label}
                 handleCheck={this.props.toggleCheckboxById}
+                checked={checked}
               />
             </div>
 
@@ -98,7 +110,7 @@ class IdentityForm extends React.Component {
   }
 
   render() {
-    // const disabled = !this.props.trustedContactActive && this.props.page === 3;
+
 
     return (
       <form className='row'>

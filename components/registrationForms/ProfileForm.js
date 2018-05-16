@@ -1,18 +1,19 @@
 import React from 'react';
-import EmpalaInput from '../EmpalaInput';
+import EmpalaInput from '../registration/EmpalaInput';
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import { dataFields } from '../../../localdata/profilePageData';
+import { dataFields } from '../../localdata/profilePageData';
 import { connect } from 'react-redux';
 import {
+  getInfoByZipCode,
   getMenuItems,
   setInputFieldValueById,
   setMemberDocumentType,
   setTabName,
   setTabPageIndex
-} from '../../../actions/registration';
-import EmpalaSelect from '../EmpalaSelect';
-import DatePickerField from '../DatePickerField';
+} from '../../actions/registration';
+import EmpalaSelect from '../registration/EmpalaSelect';
+import DatePickerField from '../registration/DatePickerField';
 
 
 const mapStateToProps = (state) => {
@@ -25,7 +26,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
+    setInputValueById: (e) => {
+      const {id, value} = e.target;
+      if (value.length === 5 && (id === 'profile_employment_zip_code')) {
+        dispatch(getInfoByZipCode(id, value))
+      }
+      dispatch(setInputFieldValueById(id, value))
+    },
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
@@ -52,6 +59,7 @@ class ProfileForm extends React.PureComponent {
             col={item.col}
             hint={item.hint || item.label}
             disabled={disabled}
+            errorText={this.props.fieldsErrors[item.id]}
           />
         )
       }

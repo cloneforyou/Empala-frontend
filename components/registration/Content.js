@@ -8,7 +8,6 @@ import ContentMenuItems from './ContentMenuItems';
 import InformationPage from "./InformationPage";
 import FinalReviewPage from "./FinalReviewPage";
 import AgreementPage from "./AgreementPage";
-import { dataFields as memberPageData } from '../../localdata/memberPageData';
 
 
 
@@ -87,7 +86,7 @@ class Content extends React.PureComponent {
         </div> )
     }
 
-    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
+
 
     if (!this.props.menuItems || this.props.menuItems.length === 0) {
       this.props.getMenuItems(this.props.tabName);
@@ -110,33 +109,38 @@ class Content extends React.PureComponent {
       fieldNames = ['profile_employment_employment_type'];
     }
 
-    // console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
+    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
 
     return(
       <div className='onboard'>
         <div className='onboard__container'>
           <div className='row no-gutters onboard__col'>
-            <div className='col-6 onboard__left-block'>
-
-              <div className="onboard__left-block--top">
-                <ContentMenuTabs tabName={this.props.tabName}/>
-              </div>
-              <div className="onboard__left-block--center">
-                <ContentMenuItems menuItems={this.props.menuItems} tabIndex={this.props.tabIndex} />
+            <div className='col-6'>
+              <div className='onboard__left-block'>
+                <div className="onboard__left-block--top">
+                  <ContentMenuTabs tabName={this.props.tabName}/>
+                </div>
+                <div className="onboard__left-block--center">
+                  <ContentMenuItems
+                    menuItems={this.props.menuItems}
+                    tabIndex={this.props.tabIndex}
+                  />
+                </div>
               </div>
             </div>
-            <div className='col-6 onboard__right-block'>
-
-              <div className='onboard__right-block--center'>
-                {/*<ContentFillingInformation {...props} />*/}
-                {pageContent.tabContent}
-              </div>
-              <div className='onboard__right-block--bottom'>
-                <NavButtons
-                  tabName={this.props.tabName}
-                  tabIndex={this.props.tabIndex}
-                  fieldNames={fieldNames}
-                  registrationData={this.props.registrationData}/>
+            <div className='col-6'>
+              <div className='onboard__right-block'>
+                <div className='onboard__right-block--center'>
+                  {pageContent.tabContent}
+                </div>
+                <div className='onboard__right-block--bottom'>
+                  <NavButtons
+                    tabName={this.props.tabName}
+                    tabIndex={this.props.tabIndex}
+                    fieldNames={fieldNames}
+                    registrationData={this.props.registrationData}
+                  />
+                </div>
               </div>
             </div>
           </div>

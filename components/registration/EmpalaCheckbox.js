@@ -49,6 +49,7 @@ class EmpalaCheckbox extends React.Component {
           labelStyle={ this.styles.labelStyle }
           style={ this.styles.checkBoxStyle }
           onCheck = {this.props.handleCheck}
+          checked={this.props.checked}
         />
     )
   }

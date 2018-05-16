@@ -1,10 +1,10 @@
 import UploadUserFile from "../components/registration/UploadUserFile";
-import MemberInfoForm from "../components/registration/member/MemberInfoForm";
-import IdentityForm from "../components/registration/identity/IdentityForm";
-import ExperienceForm from "../components/registration/experience/ExperienceForm";
-import RegulatoryForm from "../components/registration/regulatory/RegulatoryForm";
-import ProfileForm from "../components/registration/profile/ProfileForm";
-import AccountForm from "../components/registration/account/AccountForm";
+import MemberInfoForm from "../components/registrationForms/MemberInfoForm";
+import IdentityForm from "../components/registrationForms/IdentityForm";
+import ExperienceForm from "../components/registrationForms/ExperienceForm";
+import RegulatoryForm from "../components/registrationForms/RegulatoryForm";
+import ProfileForm from "../components/registrationForms/ProfileForm";
+import AccountForm from "../components/registrationForms/AccountForm";
 import RegistrationFormDrawer from "../components/registration/RegistrationFormDrawer";
 import _ from 'lodash';
 import {dataFields as memberPageData} from '../localdata/memberPageData';
@@ -58,6 +58,67 @@ export const menuItems = {
   ],
 };
 
+export const usStatesList = [
+  'Alabama',
+  'Alaska',
+  'American Samoa',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'District of Columbia',
+  'Federated Stated of Micronesia',
+  'Florida',
+  'Georgia',
+  'Guam',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Marshall Islands',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Northern Mariana Islands',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Palau',
+  'Pennsylvania',
+  'Puerto Rico',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virgin Islands',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming'
+];
 
 const tabContent = {
   member: <MemberInfoForm />,
@@ -131,5 +192,15 @@ export function getTabContentByTabName(tabName, pageIndex) {
     tabContent: tabContent[tabName],
     // tabContent: <RegistrationFormDrawer tabName={tabName} page={pageIndex} />,
   }
-
 }
+
+
+export function getValuesForSelectField(list) {
+  return list.map((el) => {
+    return {
+      value: el,
+      title: el
+    }
+  });
+}
+

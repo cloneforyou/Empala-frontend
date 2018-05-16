@@ -9,9 +9,14 @@ import {
   VALIDATE_FIELD_ERROR,
   GET_DATA_FROM_CACHE,
   TOGGLE_CHECKBOX,
-  SHOW_IDENTITY_MODAL, CLOSE_IDENTITY_MODAL, COPY_MAILING_ADDRESS, CLEAN_MAILING_ADDRESS,
-  REGISTRATION_SUBMIT_REQUEST, REGISTRATION_SUBMIT_FAIL,
+  SHOW_IDENTITY_MODAL,
+  CLOSE_IDENTITY_MODAL,
+  COPY_MAILING_ADDRESS,
+  CLEAN_MAILING_ADDRESS,
+  REGISTRATION_SUBMIT_REQUEST,
+  REGISTRATION_SUBMIT_FAIL,
   VALIDATE_FIELDS_BLANK,
+  ADDRESS_INFO_REQUEST,
 } from "../constants/registration";
 
 export function getMenuItems(items) {
@@ -123,11 +128,18 @@ export function registrationFail(err) {
     err
   }
 }
+
 export function validateFieldsBlank(fields) {
-  // const fields = {};
-  // fieldsArray.forEach(fieldName => fields[fieldName] = 'This ia s required field');
   return  {
     type: VALIDATE_FIELDS_BLANK,
     fields,
+  }
+
+
+}export function getInfoByZipCode(fieldId, zipCode) {
+  return  {
+    type: ADDRESS_INFO_REQUEST,
+    fieldId,
+    zipCode,
   }
 }

@@ -1,0 +1,7 @@
+.widget {
+  background: $white;
+  &__title {
+    @include fontSize(15px);
+    color: $green;
+  }
+}
