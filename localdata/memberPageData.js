@@ -82,6 +82,7 @@ export const dataFields = [
       id: 'member_account_account_no',
       type: 'text',
       label: 'Account no.',
+      numberField: true,
       placeholder: '0123456789',
     },
 
