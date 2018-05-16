@@ -28,7 +28,7 @@ function* validatePasswordField({id, value}) {
 
 function* validateFieldOnServer({id, value}) {
 
-  const url = '/auth/check';
+  const url = '/api/auth/check';
   const options = {
     method: 'POST',
     data: {
