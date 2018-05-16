@@ -1,6 +1,6 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import _ from 'lodash';
-import { js2xml } from 'xml-js';
+import {js2xml, xml2js} from 'xml-js';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
@@ -9,7 +9,8 @@ import {
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga from './validation';
-import { validateCheckbox, validateEmptyFields } from './validation'
+import {validateCheckbox, validateEmptyFields} from './validation'
+import {getAddressInfoByZIP} from "./sideServices";
 
 
 export function* changeTabPage({tabName, tabIndex, direction}) {
@@ -42,10 +43,10 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
       yield put(setTabName(nextTabs[tabName]));
       return false
     }
-    if (tabName !== 'info'  && tabIndex > menuItems[tabName].length - 1) {
+    if (tabName !== 'info' && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
         return false
-    }
+      }
       yield put(setTabName(nextTabs[tabName]));
       yield put(setTabPageIndex(1));
     } else {
@@ -55,7 +56,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     if (tabIndex <= 1) {
       if (tabName === 'info') {
         return false
-    }
+      }
       yield put(setTabName(prevTabs[tabName]));
       yield put(setTabPageIndex((tabName === 'member' || tabName === 'agreement') ? 1 : menuItems[prevTabs[tabName]].length));
     } else {
@@ -84,64 +85,16 @@ export function* sendRegistrationForm() {
     const response = yield call(request, url, options);
     location.assign('/home');
   }
-  catch(err) {
+  catch (err) {
     yield put(registrationFail(err));
   }
 }
 
-export function* getAddressInfoByZIP(zipCode) {
-  const urlBase = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
-  const clientId = '018EMPAL1274';
-  const data = {
-    "elements": [
-      {
-        "type": "element",
-        "name": "CityStateLookupRequest",
-        "attributes": { USERID: clientId },
-        "elements": [
-          {
-            "type": "element",
-            "name": "ZipCode",
-            'attributes': {ID:0},
-            "elements": [
-              {
-                "type": "element",
-                "name": "Zip5",
-                "elements": [
-                  {
-                    "type": "text",
-                    "text": `90210`
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-
-  };
-  const url = `${urlBase}${js2xml(data)}`;
-  // const result = js2xml(data);
-  console.log('**** url *****',  url)
-  try {
-    // const result = yield call(request, url, {method: 'GET'})
-    fetch(url).then(
-        (res) => res.text()
-            .then((text) => console.log('**** XMLXMLXML *****', text))
-    );
-    // console.log('**** XMLXMLXML *****', result)
-  }
-  catch(err) {
-    console.log(err)
-  }
-
-}
 
 export default function* registrationSaga() {
-  yield all ([
+  yield all([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
-    takeEvery(CHANGE_TAB_PAGE_INDEX, getAddressInfoByZIP),
+    // takeEvery(CHANGE_TAB_PAGE_INDEX, getAddressInfoByZIP),
     takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
@@ -149,3 +102,6 @@ export default function* registrationSaga() {
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields)
   ]);
 }
+
+
+
