@@ -1,9 +1,13 @@
 import axios from 'axios';
+import { serverOrigins } from "./config";
+
 
 export default function request(url, options = {}) {
+  // console.log('-- PROCESS', BACKEND_URL);
+  console.log('------------------------------', url, options)
   return axios({
     method: options.method,
-    url: `http://localhost:9000${url}`,
+    url: `${serverOrigins.local}${url}`,
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,

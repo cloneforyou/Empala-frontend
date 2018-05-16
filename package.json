@@ -4,7 +4,8 @@
   "license": "MIT",
   "author": "Dunice Team",
   "scripts": {
-    "dev": "next",
+    "dev": "SERVER='dev' next",
+    "stage": "SERVER='stage' next",
     "build": "next build",
     "start": "next start"
   },

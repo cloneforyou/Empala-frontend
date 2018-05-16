@@ -1,14 +1,16 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import _ from 'lodash';
+import {js2xml, xml2js} from 'xml-js';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
-  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS
+  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS, ADDRESS_INFO_REQUEST
 } from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga from './validation';
-import { validateCheckbox, validateEmptyFields } from './validation'
+import {validateCheckbox, validateEmptyFields} from './validation'
+import {getAddressInfoByZIP} from "./sideServices";
 
 
 export function* changeTabPage({tabName, tabIndex, direction}) {
@@ -41,10 +43,10 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
       yield put(setTabName(nextTabs[tabName]));
       return false
     }
-    if (tabName !== 'info'  && tabIndex > menuItems[tabName].length - 1) {
+    if (tabName !== 'info' && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
         return false
-    }
+      }
       yield put(setTabName(nextTabs[tabName]));
       yield put(setTabPageIndex(1));
     } else {
@@ -54,7 +56,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     if (tabIndex <= 1) {
       if (tabName === 'info') {
         return false
-    }
+      }
       yield put(setTabName(prevTabs[tabName]));
       yield put(setTabPageIndex((tabName === 'member' || tabName === 'agreement') ? 1 : menuItems[prevTabs[tabName]].length));
     } else {
@@ -83,22 +85,16 @@ export function* sendRegistrationForm() {
     const response = yield call(request, url, options);
     location.assign('/home');
   }
-  catch(err) {
+  catch (err) {
     yield put(registrationFail(err));
   }
 }
 
-export function* getAddressInfoByZIP({zipCode}) {
-  const url = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
-  const clientId = '018EMPAL1274';
-  const data = {
-
-  }
-}
 
 export default function* registrationSaga() {
-  yield all ([
+  yield all([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
+    takeEvery(ADDRESS_INFO_REQUEST, getAddressInfoByZIP),
     takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
@@ -106,3 +102,6 @@ export default function* registrationSaga() {
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields)
   ]);
 }
+
+
+
