@@ -40,6 +40,7 @@ class EmpalaCheckbox extends React.Component {
 
   render() {
     return (
+      <div className='check-container'>
         <Checkbox
           id={this.props.id}
           label={this.props.label}
@@ -51,6 +52,7 @@ class EmpalaCheckbox extends React.Component {
           onCheck = {this.props.handleCheck}
           checked={this.props.checked}
         />
+      </div>
     )
   }
 }

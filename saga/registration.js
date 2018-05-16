@@ -46,7 +46,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     if (tabName !== 'info' && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
         return false
-      }
+    }
       yield put(setTabName(nextTabs[tabName]));
       yield put(setTabPageIndex(1));
     } else {
@@ -56,7 +56,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
     if (tabIndex <= 1) {
       if (tabName === 'info') {
         return false
-      }
+    }
       yield put(setTabName(prevTabs[tabName]));
       yield put(setTabPageIndex((tabName === 'member' || tabName === 'agreement') ? 1 : menuItems[prevTabs[tabName]].length));
     } else {
@@ -91,6 +91,13 @@ export function* sendRegistrationForm() {
   }
 }
 
+export function* getAddressInfoByZIP({zipCode}) {
+  const url = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
+  const clientId = '018EMPAL1274';
+  const data = {
+
+  }
+}
 
 export default function* registrationSaga() {
   yield all([
