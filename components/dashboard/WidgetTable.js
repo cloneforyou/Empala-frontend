@@ -11,23 +11,23 @@ class WidgetTable extends Component {
     const { table } = this.props;
     return (
       <div>
-        <table className="table table-borderless ">
+        <table className="table table-borderless emp-table">
           <thead>
-          <tr>
-            {table.headers.map((header, i) => (
-              <th scope="col" className={`text-${header.align}`} key={i}>{header.title}</th>
+            <tr>
+              {table.headers.map((header, i) => (
+                <th scope="col" className={`emp-table__th`} key={i}>{header.title}</th>
             ))}
-          </tr>
+            </tr>
           </thead>
           <tbody>
-          {
+            {
             table.data && table.data.length > 0 && table.data.map((row, i) => (
-              <tr key={row.id}>
+              <tr key={row.id} className="emp-table__tr">
                 {
                   values(row).map((item, index) => {
                     if (index > 0) {
                       return (
-                        <td>{item}</td>
+                        <td className="emp-table__td">{item}</td>
                       );
                     }
                   })

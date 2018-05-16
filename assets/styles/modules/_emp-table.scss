@@ -1,0 +1,17 @@
+.emp-table {
+  &__th {
+    @include fontSize(12px);
+    font-weight: normal;
+    color: $dark-grey;
+    padding: 0 0 11px !important;
+  }
+  &__td {
+    @include fontSize(12px);
+    padding: 0 !important;
+    font-weight: normal;
+    color: $main-color-text-grey;
+  }
+  &__tr {
+
+  }
+}
