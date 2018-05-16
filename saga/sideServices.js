@@ -1,4 +1,6 @@
+import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import {js2xml, xml2js} from "xml-js";
+import {setInputFieldValueById} from "../actions/registration";
 
 const statesAbbvs = {
   AL: 'Alabama',
@@ -68,7 +70,7 @@ const statesAbbvs = {
   // AP: 'Armed Forces Pacific',
 };
 
-export function* getAddressInfoByZIP(zipCode) {
+export function* getAddressInfoByZIP({fieldId, zipCode}) {
   const urlBase = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
   const clientId = '018EMPAL1274';
   const data = {
@@ -98,23 +100,32 @@ export function* getAddressInfoByZIP(zipCode) {
         ]
       }
     ]
-
   };
   const url = `${urlBase}${js2xml(data)}`;
-  // const result = js2xml(data);
-  console.log('**** url *****', url)
   try {
-    fetch(url).then(
+    const info = {};
+    yield fetch(url).then(
         (res) => res.text()
             .then((text) => {
               const result = xml2js(text, {compact: true}).CityStateLookupResponse.ZipCode;
               // console.log('**** CITY *****', result);
-              return({
-                city: result.City._text,
-                state: statesAbbvs[result.State._text],
-              })
-            })
-    );
+              if (!result.Error) {
+                    info.city = result.City._text;
+                    info.state = statesAbbvs[result.State._text];
+              }
+            }
+            ));
+    if (fieldId === 'identity_zip_code') {
+      yield put(setInputFieldValueById('identity_residential_address_residential_address_state', info.state));
+      yield put(setInputFieldValueById('identity_residential_address_residential_address_city', info.city));
+    } else if (fieldId === 'identity_mailing_address_zip_code') {
+      yield put(setInputFieldValueById('identity_mailing_address_state', info.state));
+      yield put(setInputFieldValueById('identity_mailing_address_city', info.city));
+    } else if (fieldId === 'profile_employment_zip_code') {
+      yield put(setInputFieldValueById('profile_employment_state', info.state));
+      yield put(setInputFieldValueById('profile_employment_city', info.city));
+    }
+
   }
   catch (err) {
     console.log(err)

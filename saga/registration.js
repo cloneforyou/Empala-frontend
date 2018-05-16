@@ -4,7 +4,7 @@ import {js2xml, xml2js} from 'xml-js';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
-  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS
+  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS, ADDRESS_INFO_REQUEST
 } from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -94,7 +94,7 @@ export function* sendRegistrationForm() {
 export default function* registrationSaga() {
   yield all([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
-    // takeEvery(CHANGE_TAB_PAGE_INDEX, getAddressInfoByZIP),
+    takeEvery(ADDRESS_INFO_REQUEST, getAddressInfoByZIP),
     takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
