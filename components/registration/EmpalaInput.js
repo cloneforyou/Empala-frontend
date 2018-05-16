@@ -17,6 +17,14 @@ class EmpalaInput extends React.Component {
 
   render() {
     const errorText = this.props.disabled ? '' : this.props.errorText;
+    const style={
+      inputStyle: {
+        color: '#858c99'
+      },
+      inputStyleDisabled: {
+        color: 'rgb(208, 210, 212)'
+      },
+    };
 
     return (
       <div className={this.props.col ? `registration-group col-md-${this.props.col}` : 'registration-group col-12'}>
@@ -30,7 +38,8 @@ class EmpalaInput extends React.Component {
           style={{width: '100%'}}
           underlineStyle={{borderBottom: '2px solid #e0e0e0'}}
           hintStyle={{color: '#c5c5c5'}}
-          inputStyle={{color: '#858c99'}}
+          inputStyle={this.props.disabled ? style.inputStyleDisabled : style.inputStyle}
+          underlineDisabledStyle={{borderBottom: '2px dotted rgba(0, 0, 0, 0.3)'}}
           value={this.props.value}
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}

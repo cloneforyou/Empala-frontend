@@ -3,6 +3,15 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 const EmpalaSelect = (props) => {
+  const style={
+    inputStyle: {
+      color: '#858c99'
+    },
+    inputStyleDisabled: {
+      color: 'rgb(208, 210, 212)'
+    },
+  };
+
   return(
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
         <SelectField
@@ -14,11 +23,12 @@ const EmpalaSelect = (props) => {
           floatingLabelStyle={{color: '#98c73a'}}
           hintText={props.hint || props.label}
           hintStyle={{ color: '#c5c5c5' }}
-          labelStyle={{ color: '#858c99' }}
+          labelStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
           style={{ width: '100%', margin: 0 }}
           iconStyle={{ right: '0', fill: '#7f8794' }}
           menuItemStyle={{ color: '#858c99' }}
           selectedMenuItemStyle={{ color: '#98c73a' }}
+          underlineDisabledStyle={{borderBottom: '2px dotted rgba(0, 0, 0, 0.3)'}}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           underlineFocusStyle={{ borderBottom : '2px solid #98c73a' }}
           onChange={(e, i, v) => {props.handleChange(props.id ,v)}}

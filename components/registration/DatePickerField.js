@@ -8,6 +8,15 @@ const underlineStyle = {
 
 const DatePickerField = (props) => {
   const errorText = props.disabled ? '' : props.errorText;
+  const style={
+    inputStyle: {
+      color: '#858c99'
+    },
+    inputStyleDisabled: {
+      color: 'rgb(208, 210, 212)'
+    },
+  };
+
   return (
       <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
         <label className='registration-label'>
@@ -19,10 +28,11 @@ const DatePickerField = (props) => {
               locale="en-US"
               underlineStyle={underlineStyle}
               errorText={errorText}
-              inputStyle={{color: '#858c99'}}
+              inputStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
               firstDayOfWeek={0}
               disabled={props.disabled}
               textFieldStyle={{width: '100%'}}
+              underlineDisabledStyle={{borderBottom: '2px dotted rgba(0, 0, 0, 0.3)'}}
               onChange={(none = null, date) => props.handleDatePick(props.id, date)}
               value={props.value ? new Date(props.value) : null}
           />
