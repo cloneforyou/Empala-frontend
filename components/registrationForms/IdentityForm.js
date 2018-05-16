@@ -6,11 +6,9 @@ import { dataFields } from '../../localdata/identityPageData';
 import { connect } from "react-redux";
 import {
   closeIdentityModal,
-  getMenuItems,
+  getInfoByZipCode,
   setInputFieldValueById,
-  setMemberDocumentType,
-  setTabName,
-  setTabPageIndex, toggleCheckboxById
+  toggleCheckboxById
 } from '../../actions/registration';
 import ModalWindow from '../registration/ModalWindow';
 
@@ -32,8 +30,12 @@ const mapDispatchToProps = (dispatch) => {
     {
       setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
       setInputValueById: (e) => {
-        console.log(e.target.id, e.target.value);
-        dispatch(setInputFieldValueById(e.target.id, e.target.value))
+        const {id, value} = e.target;
+        // console.log(e.target.id, e.target.value);
+        if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
+          dispatch(getInfoByZipCode(id, value))
+        }
+        dispatch(setInputFieldValueById(id, value))
       },
       toggleCheckboxById: (e, checked) => {
         dispatch(toggleCheckboxById(e.target.id));

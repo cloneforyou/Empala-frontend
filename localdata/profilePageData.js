@@ -1,3 +1,69 @@
+import { getValuesForSelectField } from '../utils/registrationUtils';
+
+const usStatesList = [
+  'Alabama',
+  'Alaska',
+  'American Samoa',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'District of Columbia',
+  'Federated Stated of Micronesia',
+  'Florida',
+  'Georgia',
+  'Guam',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Marshall Islands',
+  'Maryland',
+  'Massachusetts',
+  'Michigan',
+  'Minnesota',
+  'Mississippi',
+  'Missouri',
+  'Montana',
+  'Nebraska',
+  'Nevada',
+  'New Hampshire',
+  'New Jersey',
+  'New Mexico',
+  'New York',
+  'North Carolina',
+  'North Dakota',
+  'Northern Mariana Islands',
+  'Ohio',
+  'Oklahoma',
+  'Oregon',
+  'Palau',
+  'Pennsylvania',
+  'Puerto Rico',
+  'Rhode Island',
+  'South Carolina',
+  'South Dakota',
+  'Tennessee',
+  'Texas',
+  'Utah',
+  'Vermont',
+  'Virgin Islands',
+  'Virginia',
+  'Washington',
+  'West Virginia',
+  'Wisconsin',
+  'Wyoming'
+];
+
+const usStates = getValuesForSelectField(usStatesList);
+
 export const dataFields = [
   // employment
   [
@@ -52,43 +118,13 @@ export const dataFields = [
       hint: 'Please select',
       label: 'State',
       col: 6,
-      options: [
-        {
-          value: 'Alabama',
-          title: 'Alabama'
-        },
-        {
-          value: 'California',
-          title: 'California'
-        },
-        {
-          value: 'Dakota',
-          title: 'Dakota'
-        },
-        {
-          value: 'Missouri',
-          title: 'Missouri'
-        },
-      ],
+      options: usStates,
     },
     {
       id: 'profile_employment_city',
-      hint: 'Please select',
+      field: 'input',
       label: 'City',
-      options: [
-        {
-          value: 'Boston',
-          title: 'Boston'
-        },
-        {
-          value: 'New York',
-          title: 'New York'
-        },
-        {
-          value: 'San Francisco',
-          title: 'San Francisco'
-        },
-      ],
+      type: 'text'
     },
   ],
 
