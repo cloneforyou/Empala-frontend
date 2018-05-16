@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import WidgetTable from './WidgetTable';
+import Footer from './Footer'
 import { widgets } from '../../localdata/dashboardWidgets';
 
 class Main extends Component {
@@ -41,6 +42,7 @@ class Main extends Component {
 
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
