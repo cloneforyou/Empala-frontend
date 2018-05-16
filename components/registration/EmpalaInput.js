@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
+import InputMask from 'react-input-mask';
 import '../../assets/styles/modules/_input-group.scss'
 
 const EmpalaInput = (props) => {
@@ -24,7 +25,9 @@ const EmpalaInput = (props) => {
           onChange={(e) => props.handleChange(e)}
           disabled={props.disabled}
           errorText={props.disabled ? '' : props.errorText}
-        />
+        >
+          {props.mask && <InputMask mask={props.mask} maskChar=" " value={props.value}/>}
+        </TextField>
     </div>
   )
 };

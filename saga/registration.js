@@ -83,8 +83,9 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
-    localStorage.setItem('tokens', JSON.stringify(response.data.data.tokens));
-    location.assign('/home');
+    localStorage.setItem('accessToken', response.data.data.tokens['accsess']);
+    localStorage.setItem('refreshToken', response.data.data.tokens['refresh']);
+    location.assign('/dashboard');
   }
   catch (err) {
     yield put(registrationFail(err));
