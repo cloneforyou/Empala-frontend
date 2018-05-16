@@ -15,3 +15,9 @@
   user-select: none;
 }
 
+.main-text {
+  font-family: Helvetica;
+  &_12 {
+    @include fontSize(12px)
+  }
+}
