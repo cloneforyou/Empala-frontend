@@ -75,7 +75,7 @@ export function* saveData() {
 
 export function* sendRegistrationForm() {
   const registrationData = yield select((state) => state.registration.registrationData);
-  const url = '/auth/register';
+  const url = '/api/auth/register';
   const options = {
     method: 'POST',
     data: registrationData,
@@ -83,6 +83,7 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
+    localStorage.setItem('tokens', JSON.stringify(response.data.data.tokens));
     location.assign('/home');
   }
   catch (err) {
