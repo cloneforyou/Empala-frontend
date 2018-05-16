@@ -12,9 +12,17 @@
   }
   &__part-title {
     color: $green;
+    font-weight: 600;
     text-transform: uppercase;
+    @include fontSize(12px);
   }
   &_collapsed {
     width: 180px;
   }
+  &__nav-group{
+
+  }
+}
+.nav-group{
+
 }

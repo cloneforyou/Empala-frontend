@@ -10,14 +10,9 @@ class Main extends Component {
     const { sidebarCollapsed } = this.props
     return (
       <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
-
       </div>
     )
   }
 }
 
-export default connect((state) => {
-  return {
-    sidebarCollapsed: state.dashboard.sidebarCollapsed
-  }
-})(Main)
+export default connect((state) => ({}))(Main)

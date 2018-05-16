@@ -8,11 +8,12 @@ class Body extends Component {
   }
 
   render() {
+    const { sidebarCollapsed } = this.props
     return (
       <div className='container-fluid'>
         <div className='row'>
-          <Sidebar/>
-          <Main/>
+          <Sidebar sidebarCollapsed={sidebarCollapsed}/>
+          <Main sidebarCollapsed={sidebarCollapsed}/>
         </div>
       </div>
     )

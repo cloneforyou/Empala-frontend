@@ -12,7 +12,7 @@ class Sidebar extends Component {
       <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_black' : 'sidebar sidebar_black'}>
         <div className='sidebar-sticky'>
           <div className='sidebar__part-title'>Dashboard</div>
-          <ul className='nav flex-column sidebar__nav'>
+          <ul className='nav flex-column sidebar__nav-group nav-group'>
             <li>
               <a href="">Overview</a>
             </li>
@@ -23,10 +23,5 @@ class Sidebar extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    sidebarCollapsed: state.dashboard.sidebarCollapsed
-  }
-}
 
-export default connect(mapStateToProps)(Sidebar)
+export default connect((state)=>({}))(Sidebar)

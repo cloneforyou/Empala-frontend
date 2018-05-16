@@ -5,23 +5,39 @@ import Header from '../components/dashboard/Header';
 import Body from '../components/dashboard/Body';
 import stylesheet from '../assets/styles/main.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Link from 'next/link'
+import * as dashboardActions from '../actions/dashboard'
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      sidebarCollapsed: props.sidebarCollapsed
+    }
+  }
 
-  componentDidMount() {
-
+  collapseMenu = () => {
+    const sidebarCollapsed = !this.state.sidebarCollapsed
+    this.setState({ sidebarCollapsed })
+    this.props.collapseSidebar(sidebarCollapsed)
   }
 
   render() {
+    const { sidebarCollapsed } = this.state
     return (
       <MuiThemeProvider>
         <style dangerouslySetInnerHTML={{ __html: stylesheet }}/>
-        <Header/>
-        <Body/>
+        <Header
+          sidebarCollapsed={sidebarCollapsed}
+          collapseMenu={this.collapseMenu}
+        />
+        <Body sidebarCollapsed={sidebarCollapsed}/>
       </MuiThemeProvider>
     )
   }
 }
 
-export default withReduxSaga(Home)
+export default withReduxSaga(connect((state) => ({
+  sidebarCollapsed: state.dashboard.sidebarCollapsed
+}), (dispatch) => ({
+  collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool))
+}))(Home))
