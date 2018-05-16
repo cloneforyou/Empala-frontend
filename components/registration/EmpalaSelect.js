@@ -8,6 +8,7 @@ const EmpalaSelect = (props) => {
         <SelectField
           id={props.id}
           value={props.value}
+          autoWidth={props.autoWidth}
           floatingLabelText={props.label}
           floatingLabelFixed={true}
           floatingLabelStyle={{color: '#98c73a'}}
