@@ -21,6 +21,8 @@
 @import 'modules/dashboard';
 @import 'modules/dashboard-header';
 @import 'modules/sidebar';
+@import 'modules/details';
+@import 'modules/widget';
 
 html {
   height: 100%;
@@ -37,22 +39,5 @@ body {
   color: $main-color-text-grey;
   font-family: $ProximaNova;
   min-width: 768px;
-}
-
-#__next {
-  position: relative;
-  min-height: 100%;
-}
-
-.pointer {
-  cursor: pointer;
-}
-
-.noselect {
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  user-select: none;
 }
 
