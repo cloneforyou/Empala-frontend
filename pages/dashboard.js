@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { withReduxSaga } from '../store'
 import { connect } from 'react-redux';
 import Header from '../components/dashboard/Header';
@@ -7,7 +7,7 @@ import stylesheet from '../assets/styles/main.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as dashboardActions from '../actions/dashboard'
 
-class Home extends React.Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -40,4 +40,4 @@ export default withReduxSaga(connect((state) => ({
   sidebarCollapsed: state.dashboard.sidebarCollapsed
 }), (dispatch) => ({
   collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool))
-}))(Home))
+}))(Dashboard))

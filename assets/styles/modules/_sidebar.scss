@@ -12,17 +12,38 @@
   }
   &__part-title {
     color: $green;
-    font-weight: 600;
+    font-weight: 300;
     text-transform: uppercase;
+    margin-bottom: 14px;
     @include fontSize(12px);
   }
   &_collapsed {
     width: 180px;
+    .nav-group__item {
+      a {
+        display: block;
+      }
+    }
   }
-  &__nav-group{
+  &__nav-group {
 
   }
 }
-.nav-group{
 
+.nav-group {
+  &__item {
+    margin-bottom: 9px;
+    @include fontSize(14px);
+    a {
+      color: $main-color-text-grey;
+      display: none;
+      font-weight: 300;
+    }
+    &_active, &:hover {
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+  }
 }
