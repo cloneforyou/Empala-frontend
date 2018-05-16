@@ -38,6 +38,11 @@ class MemberInfoForm extends React.PureComponent {
     super(props);
 
     this.mappingComponent = (item) => {
+      let mask ='';
+      const  phoneMask = '+9 999 999-9999';
+      if (item.id.includes('phone')){
+        mask = phoneMask;
+      }
       if (item.options) {
         return (
           <EmpalaSelect
@@ -62,8 +67,9 @@ class MemberInfoForm extends React.PureComponent {
           value={this.props.registrationData[item.id] || ''}
           handleChange={this.props.setInputValueById}
           errorText={this.props.fieldsErrors[item.id]}
-          placeholder={item.placeholder}
+          // placeholder={item.placeholder}
           col={item.col}
+          mask={mask}
           numberField={item.numberField}
         />
       )

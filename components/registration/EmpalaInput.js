@@ -1,5 +1,6 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
+import InputMask from 'react-input-mask';
 import '../../assets/styles/modules/_input-group.scss'
 
 class EmpalaInput extends React.Component {
@@ -34,21 +35,21 @@ class EmpalaInput extends React.Component {
           floatingLabelText={this.props.label}
           floatingLabelFixed={true}
           floatingLabelStyle={{color: '#98c73a'}}
-          hintText={this.props.placeholder}
-          style={{width: '100%'}}
-          underlineStyle={{borderBottom: '2px solid #e0e0e0'}}
+          hintText={props.placeholder}
+          style={{ width: '100%' }}
+          underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           hintStyle={{color: '#c5c5c5'}}
           inputStyle={this.props.disabled ? style.inputStyleDisabled : style.inputStyle}
-          underlineDisabledStyle={{borderBottom: '2px dotted rgba(0, 0, 0, 0.3)'}}
           value={this.props.value}
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}
           errorText={errorText}
-        />
-      </div>
-    )
-  }
-
+        >
+          {props.mask && <InputMask mask={props.mask} maskChar=" " value={props.value}/>}
+        </TextField>
+    </div>
+  )
+  };
 }
 
 export default EmpalaInput;

@@ -53,6 +53,11 @@ class IdentityForm extends React.Component {
 
 
     this.mappingComponent = (item) => {
+      let mask ='';
+      const  phoneMask = '+9 999 999-9999';
+      if (item.id.includes('phone')){
+        mask = phoneMask;
+      }
       switch (item.field) {
         case 'input':
           return (
@@ -68,6 +73,7 @@ class IdentityForm extends React.Component {
               numberField={item.numberField}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
               errorText={this.props.fieldsErrors[item.id]}
+              mask={mask}
             />
           );
         case 'select':

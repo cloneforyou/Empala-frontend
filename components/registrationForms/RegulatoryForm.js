@@ -36,6 +36,11 @@ class RegulatoryForm extends React.Component {
     super(props);
 
     this.mappingComponent = (item) => {
+      let mask ='';
+      const  ssnMask = '999-99-9999';
+      if (item.id.includes('ssn')){
+        mask = ssnMask;
+      }
       switch (item.field) {
         case 'select':
           return (
@@ -61,6 +66,7 @@ class RegulatoryForm extends React.Component {
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
               errorText={this.props.fieldsErrors[item.id]}
+              mask={mask}
             />
           );
         case 'date':
