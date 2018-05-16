@@ -35,12 +35,12 @@ function* validateFieldOnServer({id, value}) {
       [id]: value
     }
   };
-    try {
-      const result = yield call(request, url, options);
-      yield put(setFieldValid(id));
-    } catch (err) {
-      yield put(setFieldInvalid(id, err.message));
-    }
+  try {
+    const result = yield call(request, url, options);
+    yield put(setFieldValid(id));
+  } catch (err) {
+    yield put(setFieldInvalid(id, err.message));
+  }
 }
 
 

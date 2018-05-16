@@ -82,6 +82,7 @@ export const dataFields = [
       id: 'member_account_account_no',
       type: 'text',
       label: 'Account no.',
+      numberField: true,
       placeholder: '0123456789',
     },
 
@@ -140,13 +141,13 @@ export const dataFields = [
 
   // identification
   [
-    {id :'member_passport_countryOfIssue'},
-    {id :'member_passport_number'},
-    {id :'member_passport_issue_date', col: 6},
-    {id :'member_passport_expiry_date', col: 6},
-    {id :'member_drivers_license_state'},
-    {id :'member_drivers_license_number'},
-    {id :'member_drivers_license_issue_date', col: 6},
-    {id :'member_drivers_license_expiry_date', col: 6},
+    { id: 'member_passport_countryOfIssue' },
+    { id: 'member_passport_number' },
+    { id: 'member_passport_issue_date', col: 6 },
+    { id: 'member_passport_expiry_date', col: 6 },
+    { id: 'member_drivers_license_state' },
+    { id: 'member_drivers_license_number' },
+    { id: 'member_drivers_license_issue_date', col: 6 },
+    { id: 'member_drivers_license_expiry_date', col: 6 },
   ],
 ];

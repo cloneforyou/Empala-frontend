@@ -111,34 +111,36 @@ class Content extends React.PureComponent {
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
 
-    // console.log(' *** >>>>>>>>>>', fieldNames, this.props.registrationData.memberDocument);
-
     return(
       <div className='onboard'>
         <div className='onboard__container'>
           <div className='row no-gutters onboard__col'>
-            <div className='col-6 onboard__left-block'>
-
-              <div className="onboard__left-block--top">
-                <ContentMenuTabs tabName={this.props.tabName}/>
-              </div>
-              <div className="onboard__left-block--center">
-                <ContentMenuItems
+            <div className='col-6'>
+              <div className='onboard__left-block'>
+                <div className="onboard__left-block--top">
+                  <ContentMenuTabs tabName={this.props.tabName}/>
+                </div>
+                <div className="onboard__left-block--center">
+                  <ContentMenuItems
                     menuItems={this.props.menuItems}
-                    tabIndex={this.props.tabIndex} />
+                    tabIndex={this.props.tabIndex}
+                  />
+                </div>
               </div>
             </div>
-            <div className='col-6 onboard__right-block'>
-
-              <div className='onboard__right-block--center'>
-                {pageContent.tabContent}
-              </div>
-              <div className='onboard__right-block--bottom'>
-                <NavButtons
-                  tabName={this.props.tabName}
-                  tabIndex={this.props.tabIndex}
-                  fieldNames={fieldNames}
-                  registrationData={this.props.registrationData}/>
+            <div className='col-6'>
+              <div className='onboard__right-block'>
+                <div className='onboard__right-block--center'>
+                  {pageContent.tabContent}
+                </div>
+                <div className='onboard__right-block--bottom'>
+                  <NavButtons
+                    tabName={this.props.tabName}
+                    tabIndex={this.props.tabIndex}
+                    fieldNames={fieldNames}
+                    registrationData={this.props.registrationData}
+                  />
+                </div>
               </div>
             </div>
           </div>

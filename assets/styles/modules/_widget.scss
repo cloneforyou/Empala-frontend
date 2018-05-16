@@ -1,0 +1,18 @@
+.widget {
+  background: $white;
+  padding: 13px 20px;
+  margin-bottom: 15px;
+  &__head {
+    margin-bottom: 8px;
+  }
+
+  &__title {
+    @include fontSize(15px);
+    color: $green;
+    margin: 0;
+    font-weight: normal;
+  }
+  &_body {
+
+  }
+}

@@ -1,8 +1,12 @@
 .tabs-menu {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
+  text-align: center;
   &__item {
+    color: #808895;
+    font-size: 14px;
+    position: relative;
     display: inline-block;
     span {
       cursor: pointer;
@@ -13,10 +17,10 @@
         color: #98c73a;
       }
     }
-    &:not(:last-child){
-      &:after{
+    &:not(:last-child) {
+      &:after {
         content: '>';
-        margin: 0 15px;
+        margin: 0 23px;
       }
     }
   }

@@ -1,0 +1,17 @@
+.dashboard {
+  margin-left: 180px;
+  display: block;
+  width: 100%;
+  padding-top: 74px;
+  transition: .4s;
+  min-height: 100%;
+  &_light {
+    background: #f9fafa;
+  }
+  &_full {
+    margin-left: 80px;
+  }
+  &__footer{
+
+  }
+}

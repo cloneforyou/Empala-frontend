@@ -33,6 +33,7 @@ class ExperienceForm extends React.Component {
           handleChange={this.props.setSelectedValueById}
           col={item.col}
           hint={item.hint || item.label}
+          autoWidth={item.autoWidth}
         />
       )
     };
