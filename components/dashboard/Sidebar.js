@@ -13,16 +13,15 @@ class Sidebar extends Component {
     return (
       <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_black' : 'sidebar sidebar_black'}>
         <div className="sidebar-sticky">
-
           {
             sidebarItems.map((part, index) => (
-              <div key={index}>
+              <div className="sidebar__part-nav" key={index}>
                 <div className="sidebar__part-title">{part.title}</div>
-                <ul className="nav flex-column sidebar__nav-group nav-group">
+                <ul className="nav flex-column sidebar__nav-list nav-list">
                   {
                     part.items.map((item, j) => (
-                      <li className="nav-group__item" key={j}>
-                        <a href="">{item.label}</a>
+                      <li className="nav-list__item" key={j}>
+                        <a href="#">{item.label}</a>
                       </li>
                     ))
                   }
@@ -30,6 +29,9 @@ class Sidebar extends Component {
               </div>
             ))
           }
+          <div className="sidebar__user-status user-status user-status_online">
+            <span>Online</span>
+          </div>
         </div>
       </div>
     );
