@@ -2,14 +2,14 @@
   background: $white;
   &_collapsed {
     .dashboard-header__logo {
-      width: 80px;
+      width: 180px;
     }
     .dashboard-header__main {
-      width: calc(100% - 80px);
+      width: calc(100% - 180px);
     }
   }
   &__logo {
-    width: 180px;
+    width: 80px;
     background: #222325;
     padding: 22px 15px;
     transition: .4s;
@@ -18,7 +18,7 @@
     }
   }
   &__main {
-    width: calc(100% - 180px);
+    width: calc(100% - 80px);
     transition: .4s;
   }
   &__toogler {

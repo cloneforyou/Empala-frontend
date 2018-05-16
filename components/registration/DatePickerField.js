@@ -6,33 +6,28 @@ const underlineStyle = {
   borderBottom : '2px solid #e0e0e0'
 };
 
+const underlineErrorStyle = {
+  borderBottom : '2px solid rgb(244, 67, 54)'
+};
+
 const DatePickerField = (props) => {
   const errorText = props.disabled ? '' : props.errorText;
-  const style={
-    inputStyle: {
-      color: '#858c99'
-    },
-    inputStyleDisabled: {
-      color: 'rgb(208, 210, 212)'
-    },
-  };
-
   return (
       <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
-        <label className='registration-label'>
-          {props.label}
+        <label className={errorText ? 'registration-label registration-label-error' : 'registration-label'}>
+          {props.label} {errorText}
         </label>
         <div className='date-picker__container'>
           <DatePicker
               id={props.id}
+              hintText="calendar"
               locale="en-US"
-              underlineStyle={underlineStyle}
-              errorText={errorText}
-              inputStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
+              underlineStyle={errorText ?
+                  underlineErrorStyle :
+                  underlineStyle}
               firstDayOfWeek={0}
               disabled={props.disabled}
               textFieldStyle={{width: '100%'}}
-              underlineDisabledStyle={{borderBottom: '2px dotted rgba(0, 0, 0, 0.3)'}}
               onChange={(none = null, date) => props.handleDatePick(props.id, date)}
               value={props.value ? new Date(props.value) : null}
           />

@@ -20,7 +20,7 @@
 }
 
 @font-face {
-  font-family: 'Proxima Nova Semibold';
+  font-family: 'Proxima Nova';
   src: url('../../../static/fonts/ProximaNova-Semibold.eot');
   src: url('../../../static/fonts/ProximaNova-Semibold.eot?#iefix') format('embedded-opentype'),
   url('../../../static/fonts/ProximaNova-Semibold.woff') format('woff'),
@@ -36,6 +36,16 @@
   url('../../../static/fonts/ProximaNova-Regular.woff') format('woff'),
   url('../../../static/fonts/ProximaNova-Regular.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../../../static/fonts/ProximaNova-Light.eot');
+  src: url('../../../static/fonts/ProximaNova-Light.eot?#iefix') format('embedded-opentype'),
+  url('../../../static/fonts/ProximaNova-Light.woff') format('woff'),
+  url('../../../static/fonts/ProximaNova-Light.ttf') format('truetype');
+  font-weight: 300;
   font-style: normal;
 }
 

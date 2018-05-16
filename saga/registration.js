@@ -1,14 +1,16 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import _ from 'lodash';
+import {js2xml, xml2js} from 'xml-js';
 import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
-  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS
+  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS, ADDRESS_INFO_REQUEST
 } from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga from './validation';
-import { validateCheckbox, validateEmptyFields } from './validation'
+import {validateCheckbox, validateEmptyFields} from './validation'
+import {getAddressInfoByZIP} from "./sideServices";
 
 
 export function* changeTabPage({tabName, tabIndex, direction}) {
@@ -41,7 +43,7 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
       yield put(setTabName(nextTabs[tabName]));
       return false
     }
-    if (tabName !== 'info'  && tabIndex > menuItems[tabName].length - 1) {
+    if (tabName !== 'info' && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
         return false
     }
@@ -73,7 +75,7 @@ export function* saveData() {
 
 export function* sendRegistrationForm() {
   const registrationData = yield select((state) => state.registration.registrationData);
-  const url = '/auth/register';
+  const url = '/api/auth/register';
   const options = {
     method: 'POST',
     data: registrationData,
@@ -81,9 +83,10 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
+    localStorage.setItem('tokens', JSON.stringify(response.data.data.tokens));
     location.assign('/home');
   }
-  catch(err) {
+  catch (err) {
     yield put(registrationFail(err));
   }
 }
@@ -97,8 +100,9 @@ export function* getAddressInfoByZIP({zipCode}) {
 }
 
 export default function* registrationSaga() {
-  yield all ([
+  yield all([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
+    takeEvery(ADDRESS_INFO_REQUEST, getAddressInfoByZIP),
     takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeLatest(SET_FIELD_VALUE, validationSaga),
@@ -106,3 +110,6 @@ export default function* registrationSaga() {
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields)
   ]);
 }
+
+
+

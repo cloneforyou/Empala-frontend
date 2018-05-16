@@ -1,0 +1,17 @@
+#__next, .full-height-wrap {
+  position: relative;
+  min-height: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.noselect {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+

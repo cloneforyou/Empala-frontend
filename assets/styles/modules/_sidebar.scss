@@ -10,11 +10,85 @@
   &_black {
     background: $dark-grey;
   }
+  &__part-nav {
+    padding: 0 14px;
+    margin-bottom: 15px;
+  }
   &__part-title {
     color: $green;
+    font-weight: 400;
     text-transform: uppercase;
+    margin-bottom: 10px;
+    @include fontSize(12px);
   }
   &_collapsed {
     width: 180px;
+    .nav-list__item {
+      a {
+        display: block;
+      }
+    }
+  }
+  &__nav-list {
+
+  }
+  &__user-status {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.nav-list {
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+    @include fontSize(14px);
+    a {
+      color: $main-color-text-grey;
+      display: none;
+      font-weight: 300;
+    }
+    &_active, &:hover {
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.user-status {
+  background: #3b3e42;
+  text-align: center;
+  padding: 15px 0;
+  & > span {
+    position: relative;
+    color: #f7f7f8;
+    @include fontSize(12px);
+    &:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      position: absolute;
+      left: -20px;
+      top: 3px;
+    }
+  }
+  &_online {
+    & > span {
+      &:before {
+        background: $green;
+      }
+    }
+  }
+  &_offline {
+    & > span {
+      &:before {
+        background: $light-red;
+      }
+    }
   }
 }

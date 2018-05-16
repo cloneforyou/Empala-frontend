@@ -5,6 +5,7 @@ import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import { dataFields } from '../../localdata/profilePageData';
 import { connect } from 'react-redux';
 import {
+  getInfoByZipCode,
   getMenuItems,
   setInputFieldValueById,
   setMemberDocumentType,
@@ -25,7 +26,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return ({
-    setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
+    setInputValueById: (e) => {
+      const {id, value} = e.target;
+      if (value.length === 5 && (id === 'profile_employment_zip_code')) {
+        dispatch(getInfoByZipCode(id, value))
+      }
+      dispatch(setInputFieldValueById(id, value))
+    },
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
