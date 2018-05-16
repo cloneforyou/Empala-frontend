@@ -1,56 +1,45 @@
 @import 'modules/fonts';
-
-$ProximaNova: 'Proxima Nova';
-
+@import 'variables';
 @import "../../node_modules/normalize.css/normalize.css";
 @import '../../node_modules/bootstrap/scss/bootstrap';
-@import './modules/_header';
-@import './modules/_onboard';
-@import './modules/_final-review-page';
-@import './modules/_footer';
-@import './modules/upload-file';
+@import 'modules/header';
+@import 'modules/onboard';
+@import 'modules/final-review-page';
+@import 'modules/footer';
+@import 'modules/upload-file';
 @import 'modules/tabs-menu';
-@import './modules/_button';
-@import './modules/_radio-btn';
-@import './modules/_main-container';
-@import './modules/_input-group';
-@import './modules/_menu-items';
-@import './modules/_information-page';
+@import 'modules/button';
+@import 'modules/radio-btn';
+@import 'modules/main-container';
+@import 'modules/input-group';
+@import 'modules/menu-items';
+@import 'modules/information-page';
 @import 'modules/agreement-page';
-@import './modules/_date-picker';
+@import 'modules/date-picker';
 @import 'modules/fields-group';
+@import 'modules/dashboard';
+@import 'modules/dashboard-header';
+@import 'modules/sidebar';
+
+html {
+  height: 100%
+}
+
+html, body {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background-color: #ffffff;
-  color: #808895;
+  color: $main-color-text-grey;
   font-family: $ProximaNova;
-  font-style: normal;
-  font-weight: 300;
   min-width: 768px;
 }
 
-.index_placeholder {
-  display: flex;
-  flex-direction: row;
-  width: 1280px;
-  margin: -56px auto 0 auto;
-  height: calc(100vh - 382px);
-  min-height: 260px;
-  justify-content: center;
-  background-color: #ffffff;
-  border: solid 1px #e0e0e0;
-  font-size: 32px;
-  font-weight: 300;
-  &__inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  &__link {
-    color: #98c73a;
-  }
-  &__link:hover {
-    color: #729c35;
-  }
+#__next {
+  position: relative;
+  min-height: 100%;
 }
 
 .pointer {
@@ -63,9 +52,5 @@ body {
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
-}
-
-@media (max-width: 992px) {
-
 }
 
