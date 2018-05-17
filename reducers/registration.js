@@ -21,7 +21,8 @@ const initialState = {
     memberDocument: 'passport',
     regulatory_family_dependents: '0',
   },
-  fieldsErrors: {}
+  fieldsErrors: {},
+  checkboxes: {}
 };
 
 function registration(state = initialState, action) {
@@ -45,7 +46,7 @@ function registration(state = initialState, action) {
     case GET_DATA_FROM_CACHE:
       return {...state, registrationData: JSON.parse(localStorage.getItem('registrationData'))};
     case TOGGLE_CHECKBOX:
-      return {...state, [action.id]: !state[action.id]};
+      return {...state,  checkboxes: {...state.checkboxes, [action.id]: !state.checkboxes[action.id]}};
     case SHOW_IDENTITY_MODAL:
       return {...state, showIdentityModal: true};
     case CLOSE_IDENTITY_MODAL:

@@ -63,10 +63,11 @@ export const dataFields = [
     },
 
     {
-      label: 'No. of dependents',
+      label: 'No of dependents',
       id: 'regulatory_family_dependents',
       field: 'input',
-      type: 'number',
+      type: 'text',
+      numberField: true,
     },
 
     {
