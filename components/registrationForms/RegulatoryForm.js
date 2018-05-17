@@ -78,6 +78,7 @@ class RegulatoryForm extends React.Component {
               value={this.props.registrationData[item.id] || ''}
               handleDatePick={this.props.setPickedDate}
               errorText={this.props.fieldsErrors[item.id]}
+              birthDay={item.birthDay}
             />
           );
       }
