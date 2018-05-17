@@ -10,7 +10,7 @@ class ModalWindow extends React.Component {
 
     this.styles = {
       cancelBtn: {
-        backgroundColor: '#98c73a',
+        backgroundColor: '#f80a2e',
         width: '130px',
         height: '48px',
         lineHeight: '15px',
@@ -18,7 +18,7 @@ class ModalWindow extends React.Component {
         margin: '0 20px',
       },
       returnBtn: {
-        backgroundColor: '#f80a2e',
+        backgroundColor: '#98c73a',
         width: '130px',
         height: '48px',
         lineHeight: '15px',
@@ -44,10 +44,6 @@ class ModalWindow extends React.Component {
         border: '1px solid #000000',
         width: '600px',
       },
-      // style: {
-      //   maxWidth: '600px',
-      //   marginLeft: '50%',
-      // }
     }
   }
 
@@ -63,7 +59,6 @@ class ModalWindow extends React.Component {
       </Link>,
       <FlatButton
         label='Return'
-        keyboardFocused={true}
         onClick={this.props.handleClose}
         style={ this.styles.returnBtn }
         labelStyle={ this.styles.labelReturnBtn }

@@ -78,7 +78,6 @@ class MemberInfoForm extends React.PureComponent {
   }
 
   render() {
-    // console.log('*** member page props', this.props);
     if (this.props.page !== 3) {
       return (
         <form className='row'>
@@ -124,6 +123,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_passport_issue_date'] || ''}
             errorText={this.props.fieldsErrors['member_passport_issue_date']}
             col={6}
+            dateIssue
           />
           <DatePickerField
             id={'member_passport_expiry_date'}
@@ -133,6 +133,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_passport_expiry_date'] || ''}
             errorText={this.props.fieldsErrors['member_passport_expiry_date']}
             col={6}
+            dateExpiry
           />
         <EmpalaRadioButton
           value='drivers_license'
@@ -170,6 +171,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_drivers_license_issue_date'] || ''}
             errorText={this.props.fieldsErrors['member_drivers_license_issue_date']}
             col={6}
+            dateIssue
           />
           <DatePickerField
             id={'member_drivers_license_expiry_date'}
@@ -179,6 +181,7 @@ class MemberInfoForm extends React.PureComponent {
             value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
             errorText={this.props.fieldsErrors['member_drivers_license_expiry_date']}
             col={6}
+            dateExpiry
           />
       </div>
     )

@@ -4,6 +4,7 @@ export const dataFields = [
     id: 'regulatory_identification_dateOfBirth',
     field: 'date',
     label: 'Date of birth',
+    birthDay: true,
   },
     {
       id: 'regulatory_identification_ssn',
