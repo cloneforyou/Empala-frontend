@@ -86,7 +86,7 @@ export const dataFields = [
     {
       field: 'input',
       label: 'Zip code',
-      id: 'identity_residential_zip_code',
+      id: 'identity_zip_code',
       type: 'text',
       numberField: true,
       placeholder: '',

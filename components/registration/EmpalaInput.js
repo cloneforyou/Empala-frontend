@@ -35,7 +35,7 @@ class EmpalaInput extends React.Component {
           floatingLabelText={this.props.label}
           floatingLabelFixed={true}
           floatingLabelStyle={{color: '#98c73a'}}
-          hintText={props.placeholder}
+          hintText={this.props.placeholder}
           style={{ width: '100%' }}
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           hintStyle={{color: '#c5c5c5'}}
@@ -45,7 +45,10 @@ class EmpalaInput extends React.Component {
           disabled={this.props.disabled}
           errorText={errorText}
         >
-          {props.mask && <InputMask mask={props.mask} maskChar=" " value={props.value}/>}
+          {this.props.mask && <InputMask mask={this.props.mask}
+            maskChar=" "
+            value={this.props.value}
+          />}
         </TextField>
     </div>
   )

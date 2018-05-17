@@ -67,7 +67,7 @@ class MemberInfoForm extends React.PureComponent {
           value={this.props.registrationData[item.id] || ''}
           handleChange={this.props.setInputValueById}
           errorText={this.props.fieldsErrors[item.id]}
-          // placeholder={item.placeholder}
+          placeholder={item.placeholder}
           col={item.col}
           mask={mask}
           numberField={item.numberField}

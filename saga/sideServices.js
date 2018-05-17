@@ -1,4 +1,4 @@
-import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
+import {put} from 'redux-saga/effects';
 import {js2xml, xml2js} from "xml-js";
 import {setInputFieldValueById} from "../actions/registration";
 
@@ -71,6 +71,7 @@ const statesAbbvs = {
 };
 
 export function* getAddressInfoByZIP({fieldId, zipCode}) {
+  console.log(' ** ZZZZIIIIPP' );
   const urlBase = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
   const clientId = '018EMPAL1274';
   const data = {
