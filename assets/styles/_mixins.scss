@@ -6,3 +6,25 @@
 @mixin fontSize($size) {
   font-size: calculateRem($size);
 }
+
+@mixin iconDashboard($iconName) {
+  &:before {
+    content: '';
+    mask: url($path-to-dashboard-icon + 'icon-' + $iconName +'.svg');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+  }
+}
+
+@mixin colorfulMenuItem($color) {
+  .nav-list__icon {
+    &:before {
+      background-color: $color !important;
+    }
+  }
+  &:hover, &:focus  {
+    a {
+      color: $color;
+    }
+  }
+}

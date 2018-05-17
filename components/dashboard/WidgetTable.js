@@ -15,7 +15,7 @@ class WidgetTable extends Component {
           <thead>
             <tr>
               {table.headers.map((header, i) => (
-                <th scope="col" className={`emp-table__th`} key={i}>{header.title}</th>
+                <th scope="col" className="emp-table__th" key={Math.random()}>{header.title}</th>
             ))}
             </tr>
           </thead>
@@ -27,7 +27,7 @@ class WidgetTable extends Component {
                   values(row).map((item, index) => {
                     if (index > 0) {
                       return (
-                        <td className="emp-table__td">{item}</td>
+                        <td className="emp-table__td" key={Math.random()}>{item}</td>
                       );
                     }
                   })

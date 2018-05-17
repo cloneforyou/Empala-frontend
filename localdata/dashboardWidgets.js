@@ -5,8 +5,10 @@ export const widgets = [
     id: uniqueId(),
     title: 'Financial capital',
     col: 4,
+    height: 390,
     tables: [
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Exposure',
@@ -64,6 +66,7 @@ export const widgets = [
         ],
       },
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'ST performance',
@@ -108,8 +111,10 @@ export const widgets = [
     id: uniqueId(),
     title: 'Social capital',
     col: 3,
+    height: 390,
     tables: [
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Network',
@@ -153,6 +158,7 @@ export const widgets = [
         ],
       },
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Get',
@@ -201,8 +207,10 @@ export const widgets = [
     id: uniqueId(),
     title: 'Financial capital',
     col: 5,
+    height: 390,
     tables: [
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Exposure',
@@ -260,6 +268,7 @@ export const widgets = [
         ],
       },
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'ST performance',

@@ -2,6 +2,12 @@
   background: $white;
   padding: 13px 20px;
   margin-bottom: 15px;
+  overflow: auto;
+  border: 1px solid #EDEDED;
+  &_h-390 {
+    height: 390px;
+  }
+
   &__head {
     margin-bottom: 8px;
   }

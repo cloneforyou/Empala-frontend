@@ -41,6 +41,8 @@
 
 .nav-list {
   &__item {
+    position: relative;
+    padding-left: 35px;
     &:not(:last-child) {
       margin-bottom: 5px;
     }
@@ -55,7 +57,38 @@
         color: $white;
         text-decoration: none;
       }
+      .nav-list__icon {
+        &:before {
+          background-color: $white;
+        }
+      }
     }
+    &_red {
+      @include colorfulMenuItem($light-red)
+    }
+    &_blue {
+      @include colorfulMenuItem($blue)
+    }
+    &_yellow {
+      @include colorfulMenuItem($yellow)
+    }
+  }
+  &__icon {
+    &:before {
+      background-color: $main-color-text-grey;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+    }
+    @each $item in $listItemsSidebar {
+      &_#{$item} {
+        @include iconDashboard($item);
+      }
+    }
+
   }
 }
 
