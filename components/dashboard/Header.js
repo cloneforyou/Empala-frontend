@@ -7,10 +7,18 @@ import avatar from '../../static/images/avatar-user.svg';
 class Header extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      menuAvatarShow: false,
+    };
+  }
+
+  toogleMenu = () => {
+    this.setState({ menuAvatarShow: !this.state.menuAvatarShow })
   }
 
   render() {
-    const {sidebarCollapsed} = this.props;
+    const { sidebarCollapsed } = this.props;
+    const { menuAvatarShow } = this.state;
     return (
       <div
         className={sidebarCollapsed ?
@@ -54,10 +62,15 @@ class Header extends Component {
               </a>
             </li>
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle">
+              <button
+                className="nav-link dropdown-toggle"
+                onClick={this.toogleMenu}
+              >
                 <img src={avatar} alt="" />
-              </a>
-              <div className="dropdown-menu">
+              </button>
+              <div
+                className={(menuAvatarShow === false) ? 'dropdown-menu dropdown-menu-right' : 'dropdown-menu dropdown-menu-right show'}
+              >
                 <a className="dropdown-item" href="#">Action</a>
                 <a className="dropdown-item" href="#">Another action</a>
                 <a className="dropdown-item" href="#">Something else here</a>
