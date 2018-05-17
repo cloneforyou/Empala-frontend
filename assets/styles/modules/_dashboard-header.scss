@@ -94,3 +94,31 @@
   }
 
 }
+
+.dashboard-search {
+  display: flex;
+  justify-content: center;
+  &__btn {
+    border: none;
+    position: relative;
+    background: transparent;
+  }
+  &__icon {
+    position: relative;
+    display: block;
+    &:before {
+      content: '';
+      background-color: $main-color-text-grey;
+      mask: url($path-to-dashboard-icon + 'icon-search.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      width: 20px;
+      height: 19px;
+
+      display: block;
+    }
+  }
+  &__input {
+    border: none;
+  }
+}

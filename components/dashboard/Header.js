@@ -32,7 +32,16 @@ class Header extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <input className="form-control col" type="text" placeholder="Search" aria-label="Search" />
+          <div className="col dashboard-search">
+            <button className="dashboard-search__btn">
+              <i className="dashboard-search__icon" />
+            </button>
+            <input
+              className="form-control dashboard-search__input"
+              type="text"
+              placeholder="Search"
+            />
+          </div>
           <ul className="nav user-nav align-items-center">
             <li className="nav-item">
               <a className="nav-link user-nav__link" href="#">
