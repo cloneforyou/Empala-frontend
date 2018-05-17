@@ -21,6 +21,7 @@ class Sidebar extends Component {
                   {
                     part.items.map((item, j) => (
                       <li className="nav-list__item" key={j}>
+                        <i className={`nav-list__icon nav-list__icon_${item.icon}`}/>
                         <a href="#">{item.label}</a>
                       </li>
                     ))

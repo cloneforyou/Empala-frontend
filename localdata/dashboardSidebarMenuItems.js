@@ -2,53 +2,116 @@ export const sidebarItems = [
   {
     title: 'Dashboard',
     items: [
-      { label: 'Overflow' },
+      {
+        label: 'Overflow',
+        icon: 'chart',
+      },
     ],
 
   },
   {
     title: 'Financial capital',
     items: [
-      { label: 'Positions' },
-      { label: 'Performance' },
-      { label: 'Cash' },
-      { label: 'Orders' },
+      {
+        label: 'Positions',
+        icon: 'user',
+      },
+      {
+        label: 'Performance',
+        icon: 'perform',
+      },
+      {
+        label: 'Cash',
+        icon: 'case',
+      },
+      {
+        label: 'Orders',
+        icon: 'chart',
+      },
     ],
   },
   {
     title: 'MARKET ACCESS',
     items: [
-      { label: 'Americas' },
-      { label: 'EMEA' },
-      { label: 'Asia-Pacific' },
-      { label: 'Peer-to-peer' },
+      {
+        label: 'Americas',
+        icon: 'chart',
+      },
+      {
+        label: 'EMEA',
+        icon: 'chart',
+      },
+      {
+        label: 'Asia-Pacific',
+        icon: 'chart',
+      },
+      {
+        label: 'Peer-to-peer',
+        icon: 'chart',
+      },
     ],
   },
   {
     title: 'MEMBER PROFILE',
     items: [
-      { label: 'Investing' },
-      { label: 'Funding' },
-      { label: 'Informing' },
-      { label: 'Facilitating' },
+      {
+        label: 'Investing',
+        icon: 'chart',
+      },
+      {
+        label: 'Funding',
+        icon: 'chart',
+      },
+      {
+        label: 'Informing',
+        icon: 'chart',
+      },
+      {
+        label: 'Facilitating',
+        icon: 'chart',
+      },
     ],
   },
   {
     title: 'GLOBAL NETWORK',
     items: [
-      { label: 'Timeline' },
-      { label: 'Community' },
-      { label: 'Groups' },
-      { label: 'Blogs' },
+      {
+        label: 'Timeline',
+        icon: 'chart',
+      },
+      {
+        label: 'Community',
+        icon: 'chart',
+      },
+      {
+        label: 'Groups',
+        icon: 'chart',
+      },
+      {
+        label: 'Blogs',
+        icon: 'chart',
+      },
     ],
   },
   {
     title: 'SERVICE CENTER',
     items: [
-      { label: 'Help' },
-      { label: 'Information' },
-      { label: 'Resources' },
-      { label: 'External' },
+      {
+        label: 'Help',
+        icon: 'chart',
+      },
+      {
+        label: 'Information',
+        icon: 'chart',
+      },
+      {
+        label: 'Resources',
+        icon: 'chart',
+      },
+      {
+        label: 'External',
+        icon: 'chart',
+      },
     ],
   },
 ];
