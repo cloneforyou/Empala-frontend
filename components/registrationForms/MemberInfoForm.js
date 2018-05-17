@@ -40,9 +40,10 @@ class MemberInfoForm extends React.PureComponent {
     this.mappingComponent = (item) => {
       let mask ='';
       const  phoneMask = '+9 999 999-9999';
-      if (item.id.includes('phone')){
+      if (item.id.includes('phone')) {
         mask = phoneMask;
       }
+
       if (item.options) {
         return (
           <EmpalaSelect
@@ -115,6 +116,7 @@ class MemberInfoForm extends React.PureComponent {
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('passport')}
             errorText={this.props.fieldsErrors['member_passport_number']}
+            mask='A999999999'
           />
           <DatePickerField
             id={'member_passport_issue_date'}
