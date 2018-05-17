@@ -2,8 +2,6 @@ import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects'
 import _ from 'lodash';
 import {
   registrationFail,
-  setFieldInvalid,
-  setFieldValid,
   setTabName,
   setTabPageIndex
 } from '../actions/registration';
@@ -93,7 +91,7 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
-    localStorage.setItem('accessToken', response.data.data.tokens['accsess']);
+    localStorage.setItem('accessToken', response.data.data.tokens['access']);
     localStorage.setItem('refreshToken', response.data.data.tokens['refresh']);
     location.assign('/dashboard');
   }

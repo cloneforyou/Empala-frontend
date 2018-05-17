@@ -93,12 +93,6 @@ class IdentityForm extends React.Component {
             />
           );
         case 'checkbox':
-          let checked = false;
-          // if (item.id === 'identity_trusted_contact_person_trusted_contact_checkbox') {
-          //   checked = this.props.trustedContactActive;
-          // } else if (item.id === 'identity_residential_address_same_mailing_address_checkbox') {
-          //   checked = this.props.mailingAddressCheckboxChecked;
-          // }
           return (
               <EmpalaCheckbox
                 key={item.id}
