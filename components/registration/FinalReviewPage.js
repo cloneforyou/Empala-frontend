@@ -275,8 +275,8 @@ class FinalReviewPage extends React.PureComponent {
                   <FieldComponent
                     col={6}
                     label={'Date of birth'}
-                    value={data.identity_trusted_contact_person_first_name
-                    && this.convertDate(data.identity_trusted_contact_person_first_name) || empty}
+                    value={data.regulatory_identification_dateOfBirth
+                    && this.convertDate(data.regulatory_identification_dateOfBirth) || empty}
                   />
                   <FieldComponent
                     col={6}
