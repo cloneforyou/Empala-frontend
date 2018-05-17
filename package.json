@@ -1,7 +1,8 @@
 {
   "name": "EMPALA-CLIENT-APP",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "license": "MIT",
+  "description": "Client for the EMPALA project",
   "author": "Dunice Team",
   "scripts": {
     "dev": "SERVER='dev' next",
@@ -56,7 +57,7 @@
     "redux-devtools-extension": "2.13.2"
   },
   "engines": {
-    "node": "10.0.0"
+    "node": "10.1.0"
   },
   "repository": {
     "type": "git",
