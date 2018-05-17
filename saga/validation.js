@@ -45,9 +45,8 @@ function* validateFieldOnServer({id, value}) {
 
 
 export function* validateCheckbox(action) {
-  const isChecked = yield select((state) => state.registration[action.id]);
+  const isChecked = yield select((state) => state.registration.checkboxes[action.id]);
   if (/identity_checkbox/.test(action.id) &&  isChecked) {
-    // console.log(' *** 999', isChecked );
     yield put(showIdentityModal());
   }
   if (action.id === 'identity_residential_address_same_mailing_address_checkbox' && isChecked) {
