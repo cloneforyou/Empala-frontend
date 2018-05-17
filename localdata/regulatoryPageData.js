@@ -24,10 +24,11 @@ export const dataFields = [
           value: 'United States',
           title: 'United States'
         },
-        {
-          value: 'United Kingdom',
-          title: 'United Kingdom'
-        },
+        // temporary lock only on US
+        // {
+        //   value: 'United Kingdom',
+        //   title: 'United Kingdom'
+        // },
       ],
     },
   ],

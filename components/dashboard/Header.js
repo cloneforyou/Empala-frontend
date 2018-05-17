@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import logo from '../../assets/img/logo.png';
+import logo from '../../static/images/logo.png';
 
 class Header extends Component {
   constructor(props) {

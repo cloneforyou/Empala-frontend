@@ -1,18 +1,18 @@
 import React from 'react';
 import EmpalaInput from '../registration/EmpalaInput';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import EmpalaRadioButton from '../registration/EmpalaRadioButton';
 import { dataFields } from '../../localdata/memberPageData';
 import { connect } from 'react-redux';
 import {
-  getMenuItems,
   setInputFieldValueById,
   setMemberDocumentType,
-  setTabName,
-  setTabPageIndex
 } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import DatePickerField from '../registration/DatePickerField';
+import { usStatesList } from '../../localdata/usStatesList';
+import {getValuesForSelectField} from "../../utils/registrationUtils";
+
+const usStates = getValuesForSelectField(usStatesList);
 
 
 const mapStateToProps = (state) => {
@@ -67,7 +67,7 @@ class MemberInfoForm extends React.PureComponent {
           value={this.props.registrationData[item.id] || ''}
           handleChange={this.props.setInputValueById}
           errorText={this.props.fieldsErrors[item.id]}
-          // placeholder={item.placeholder}
+          placeholder={item.placeholder}
           col={item.col}
           mask={mask}
           numberField={item.numberField}
@@ -143,16 +143,17 @@ class MemberInfoForm extends React.PureComponent {
           labelStyle={this.isRadioChecked('drivers_license') ? {color: '#98c73a'} : {}}
           style={{ marginTop: '20px'}}
         />
-          <EmpalaInput
-            key='member-drivers-license-state'
-            id='member_drivers_license_state'
-            type='text'
-            label='State'
-            value={this.props.registrationData['member_drivers_license_state'] || ''}
-            handleChange={this.props.setInputValueById}
-            disabled={!this.isRadioChecked('drivers_license')}
-            errorText={this.props.fieldsErrors['member_drivers_license_state']}
-          />
+        <EmpalaSelect
+          id='member_drivers_license_state'
+          key='member_drivers_license_state'
+          options={usStates}
+          label='State'
+          value={this.props.registrationData['member_drivers_license_state'] || ''}
+          handleChange={this.props.setSelectedValueById}
+          errorText={this.props.fieldsErrors['member_drivers_license_state']}
+          disabled={!this.isRadioChecked('drivers_license')}
+          hint='Please select'
+        />
           <EmpalaInput
             key='member-drivers-license-number'
             id='member_drivers_license_number'

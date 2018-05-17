@@ -83,7 +83,6 @@ export function getRegistrationDataFromCache() {
   return  {
     type: GET_DATA_FROM_CACHE,
   }
-
 }
 
 export function toggleCheckboxById(id) {
@@ -92,6 +91,7 @@ export function toggleCheckboxById(id) {
     id,
   }
 }
+
 export function showIdentityModal() {
   return  {
     type: SHOW_IDENTITY_MODAL,

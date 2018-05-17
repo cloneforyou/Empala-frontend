@@ -1,10 +1,18 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import _ from 'lodash';
-import {js2xml, xml2js} from 'xml-js';
-import {registrationFail, setFieldInvalid, setFieldValid, setTabName, setTabPageIndex} from '../actions/registration';
 import {
-  CHANGE_TAB_PAGE_INDEX, SET_FIELD_VALUE, TOGGLE_CHECKBOX,
-  VALIDATE_FIELDS_BLANK, REGISTRATION_SUBMIT_REQUEST, COPY_MAILING_ADDRESS, ADDRESS_INFO_REQUEST
+  registrationFail,
+  setTabName,
+  setTabPageIndex
+} from '../actions/registration';
+import {
+  CHANGE_TAB_PAGE_INDEX,
+  SET_FIELD_VALUE,
+  TOGGLE_CHECKBOX,
+  VALIDATE_FIELDS_BLANK,
+  REGISTRATION_SUBMIT_REQUEST,
+  COPY_MAILING_ADDRESS,
+  ADDRESS_INFO_REQUEST
 } from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -14,8 +22,8 @@ import {getAddressInfoByZIP} from "./sideServices";
 
 
 export function* changeTabPage({tabName, tabIndex, direction}) {
-  // const menuItems = yield select((state) => state.registration.menuItems);
-  const mailingAddressSameAsResidential = yield select((state) => state.registration['identity_residential_address_same_mailing_address_checkbox']);
+  const mailingAddressSameAsResidential = yield select((state) =>
+    state.registration.checkboxes['identity_residential_address_same_mailing_address_checkbox']);
   const nextTabs = {
     info: 'member',
     member: 'identity',
@@ -83,7 +91,7 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
-    localStorage.setItem('accessToken', response.data.data.tokens['accsess']);
+    localStorage.setItem('accessToken', response.data.data.tokens['access']);
     localStorage.setItem('refreshToken', response.data.data.tokens['refresh']);
     location.assign('/dashboard');
   }

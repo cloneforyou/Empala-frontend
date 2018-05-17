@@ -46,7 +46,10 @@ class EmpalaInput extends React.Component {
           disabled={this.props.disabled}
           errorText={errorText}
         >
-          {this.props.mask && <InputMask mask={this.props.mask} maskChar=" " value={this.props.value}/>}
+          {this.props.mask && <InputMask mask={this.props.mask}
+            maskChar=" "
+            value={this.props.value}
+          />}
         </TextField>
     </div>
   )

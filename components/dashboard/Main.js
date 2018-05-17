@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import WidgetTable from './WidgetTable';
-import Footer from './Footer'
+import Footer from './Footer';
 import { widgets } from '../../localdata/dashboardWidgets';
 
 class Main extends Component {
@@ -9,11 +9,6 @@ class Main extends Component {
     super(props);
   }
 
-  renderTables = () => {
-    widgetFinancialCapital.tables.map((table, index) => {
-      return (<WidgetTable table={table} key={index}/>)
-    })
-  }
 
   render() {
     const { sidebarCollapsed } = this.props;
@@ -22,18 +17,17 @@ class Main extends Component {
         <div className="container-fluid">
           <div className="row">
             {
-              widgets.map((widget) => (
-                <div className={`col-md-${widget.col}`}>
-                  <div className="widget">
+              widgets.map(widget => (
+                <div className={`col-lg-${widget.col}`} key={widget.id}>
+                  <div className={`widget widget_h-${widget.height}`}>
                     <div className="widget__head">
                       <h3 className="widget__title">{widget.title}</h3>
                     </div>
                     <div className="widget__body">
                       {
-                        widget.tables.map((table, index) => (
-                            <WidgetTable table={table} key={index}/>
-                          )
-                        )}
+                        widget.tables.map((table) => (
+                          <WidgetTable table={table} key={table.id} />
+                          ))}
                     </div>
                   </div>
                 </div>
@@ -42,7 +36,7 @@ class Main extends Component {
 
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     );
   }

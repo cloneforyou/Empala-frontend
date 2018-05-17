@@ -2,53 +2,119 @@ export const sidebarItems = [
   {
     title: 'Dashboard',
     items: [
-      { label: 'Overflow' },
+      {
+        label: 'Overflow',
+        icon: 'chart',
+      },
     ],
 
   },
   {
     title: 'Financial capital',
     items: [
-      { label: 'Positions' },
-      { label: 'Performance' },
-      { label: 'Cash' },
-      { label: 'Orders' },
+      {
+        label: 'Positions',
+        icon: 'user',
+      },
+      {
+        label: 'Performance',
+        icon: 'perform',
+      },
+      {
+        label: 'Cash',
+        icon: 'case',
+      },
+      {
+        label: 'Orders',
+        icon: 'file',
+      },
     ],
   },
   {
     title: 'MARKET ACCESS',
     items: [
-      { label: 'Americas' },
-      { label: 'EMEA' },
-      { label: 'Asia-Pacific' },
-      { label: 'Peer-to-peer' },
+      {
+        label: 'Americas',
+        icon: 'marker',
+        color: 'red',
+      },
+      {
+        label: 'EMEA',
+        icon: 'marker',
+        color: 'blue',
+      },
+      {
+        label: 'Asia-Pacific',
+        icon: 'marker',
+        color: 'yellow',
+      },
+      {
+        label: 'Peer-to-peer',
+        icon: 'peer',
+      },
     ],
   },
   {
     title: 'MEMBER PROFILE',
     items: [
-      { label: 'Investing' },
-      { label: 'Funding' },
-      { label: 'Informing' },
-      { label: 'Facilitating' },
+      {
+        label: 'Investing',
+        icon: 'invest',
+      },
+      {
+        label: 'Funding',
+        icon: 'funding',
+      },
+      {
+        label: 'Informing',
+        icon: 'informing',
+      },
+      {
+        label: 'Facilitating',
+        icon: 'facilitating',
+      },
     ],
   },
   {
     title: 'GLOBAL NETWORK',
     items: [
-      { label: 'Timeline' },
-      { label: 'Community' },
-      { label: 'Groups' },
-      { label: 'Blogs' },
+      {
+        label: 'Timeline',
+        icon: 'timeline',
+      },
+      {
+        label: 'Community',
+        icon: 'community',
+      },
+      {
+        label: 'Groups',
+        icon: 'groups',
+      },
+      {
+        label: 'Blogs',
+        icon: 'blogs',
+      },
     ],
   },
   {
     title: 'SERVICE CENTER',
     items: [
-      { label: 'Help' },
-      { label: 'Information' },
-      { label: 'Resources' },
-      { label: 'External' },
+      {
+        label: 'Help',
+        icon: 'help',
+      },
+      {
+        label: 'Information',
+        icon: 'information',
+      },
+      {
+        label: 'Resources',
+        icon: 'resources',
+      },
+      {
+        label: 'External',
+        icon: 'external',
+      },
     ],
   },
 ];
