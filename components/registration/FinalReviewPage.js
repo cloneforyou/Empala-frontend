@@ -33,7 +33,7 @@ class FinalReviewPage extends React.PureComponent {
 
   render() {
     const data = this.props.registrationData;
-    const empty = 'Missing data';
+    const empty = ' ';
     return (
       <div className='final-review__outer-wrap'>
         <div className='final-review__inner-wrap'>

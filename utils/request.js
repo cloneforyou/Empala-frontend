@@ -3,11 +3,10 @@ import { serverOrigins } from "./config";
 
 
 export default function request(url, options = {}) {
-  // console.log('-- PROCESS', BACKEND_URL);
   console.log('------------------------------', url, options)
   return axios({
     method: options.method,
-    url: `${serverOrigins.local}${url}`,
+    url: `${serverOrigins.aws}${url}`,
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,

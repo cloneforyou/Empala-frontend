@@ -9,7 +9,7 @@ import { getMenuItemsByTabName } from "../utils/registrationUtils";
 import { withReduxSaga } from "../store";
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-//const env = 'undefined' !== process ? process.env.ABC : null
+const env = 'undefined' !== process ? process.env.SERVER : null;
 
 class Registration extends React.PureComponent {
 
@@ -18,8 +18,8 @@ class Registration extends React.PureComponent {
     const tabName = store.registration ? store.registration.tabName : 'member';
     const tabIndex = store.registration ? store.registration.tabIndex : 1 ;
     store.dispatch(getMenuItems(getMenuItemsByTabName(tabName)));
-    // if(isServer)store.dispatch('',env)
-    // return {env}
+    //if(isServer)store.dispatch('',env)
+    return { env }
   }
 
   render() {
