@@ -40,6 +40,7 @@ class EmpalaInput extends React.Component {
           underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
           hintStyle={{color: '#c5c5c5'}}
           inputStyle={this.props.disabled ? style.inputStyleDisabled : style.inputStyle}
+          underlineDisabledStyle={{borderBottom: '2px dotted rgba(0, 0, 0, 0.3)'}}
           value={this.props.value}
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}
