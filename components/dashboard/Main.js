@@ -18,8 +18,8 @@ class Main extends Component {
           <div className="row">
             {
               widgets.map(widget => (
-                <div className={`col-md-${widget.col}`} key={widget.id}>
-                  <div className="widget">
+                <div className={`col-lg-${widget.col}`} key={widget.id}>
+                  <div className={`widget widget_h-${widget.height}`}>
                     <div className="widget__head">
                       <h3 className="widget__title">{widget.title}</h3>
                     </div>

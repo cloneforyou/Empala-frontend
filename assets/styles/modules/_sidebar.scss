@@ -83,27 +83,12 @@
       top: 50%;
       left: 0;
     }
-    &_chart {
-      @include iconDashboard('chart');
+    @each $item in $listItemsSidebar {
+      &_#{$item} {
+        @include iconDashboard($item);
+      }
     }
-    &_user {
-      @include iconDashboard('user');
-    }
-    &_perform {
-      @include iconDashboard('perform');
-    }
-    &_case {
-      @include iconDashboard('case');
-    }
-    &_file {
-      @include iconDashboard('file');
-    }
-    &_marker {
-      @include iconDashboard('marker');
-    }
-    &_peer {
-      @include iconDashboard('peer')
-    }
+
   }
 }
 

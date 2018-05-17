@@ -59,19 +59,19 @@ export const sidebarItems = [
     items: [
       {
         label: 'Investing',
-        icon: 'chart',
+        icon: 'invest',
       },
       {
         label: 'Funding',
-        icon: 'chart',
+        icon: 'funding',
       },
       {
         label: 'Informing',
-        icon: 'chart',
+        icon: 'informing',
       },
       {
         label: 'Facilitating',
-        icon: 'chart',
+        icon: 'facilitating',
       },
     ],
   },
@@ -80,19 +80,19 @@ export const sidebarItems = [
     items: [
       {
         label: 'Timeline',
-        icon: 'chart',
+        icon: 'timeline',
       },
       {
         label: 'Community',
-        icon: 'chart',
+        icon: 'community',
       },
       {
         label: 'Groups',
-        icon: 'chart',
+        icon: 'groups',
       },
       {
         label: 'Blogs',
-        icon: 'chart',
+        icon: 'blogs',
       },
     ],
   },
@@ -101,19 +101,19 @@ export const sidebarItems = [
     items: [
       {
         label: 'Help',
-        icon: 'chart',
+        icon: 'help',
       },
       {
         label: 'Information',
-        icon: 'chart',
+        icon: 'information',
       },
       {
         label: 'Resources',
-        icon: 'chart',
+        icon: 'resources',
       },
       {
         label: 'External',
-        icon: 'chart',
+        icon: 'external',
       },
     ],
   },

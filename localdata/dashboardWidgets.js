@@ -5,6 +5,7 @@ export const widgets = [
     id: uniqueId(),
     title: 'Financial capital',
     col: 4,
+    height: 390,
     tables: [
       {
         id: uniqueId(),
@@ -110,6 +111,7 @@ export const widgets = [
     id: uniqueId(),
     title: 'Social capital',
     col: 3,
+    height: 390,
     tables: [
       {
         id: uniqueId(),
@@ -205,6 +207,7 @@ export const widgets = [
     id: uniqueId(),
     title: 'Financial capital',
     col: 5,
+    height: 390,
     tables: [
       {
         id: uniqueId(),
