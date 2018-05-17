@@ -41,6 +41,8 @@
 
 .nav-list {
   &__item {
+    position: relative;
+    padding-left: 35px;
     &:not(:last-child) {
       margin-bottom: 5px;
     }
@@ -55,14 +57,52 @@
         color: $white;
         text-decoration: none;
       }
+      .nav-list__icon {
+        &:before {
+          background-color: $white;
+        }
+      }
+    }
+    &_red {
+      @include colorfulMenuItem($light-red)
+    }
+    &_blue {
+      @include colorfulMenuItem($blue)
+    }
+    &_yellow {
+      @include colorfulMenuItem($yellow)
     }
   }
   &__icon {
-    width: 40px;
-    height: 40px;
-    display: block;
+    &:before {
+      background-color: $main-color-text-grey;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+    }
     &_chart {
-      background: url($path-to-dashboard-icon + 'icon-chart.svg');
+      @include iconDashboard('chart');
+    }
+    &_user {
+      @include iconDashboard('user');
+    }
+    &_perform {
+      @include iconDashboard('perform');
+    }
+    &_case {
+      @include iconDashboard('case');
+    }
+    &_file {
+      @include iconDashboard('file');
+    }
+    &_marker {
+      @include iconDashboard('marker');
+    }
+    &_peer {
+      @include iconDashboard('peer')
     }
   }
 }

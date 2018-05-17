@@ -7,6 +7,7 @@ export const widgets = [
     col: 4,
     tables: [
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Exposure',
@@ -64,6 +65,7 @@ export const widgets = [
         ],
       },
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'ST performance',
@@ -110,6 +112,7 @@ export const widgets = [
     col: 3,
     tables: [
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Network',
@@ -153,6 +156,7 @@ export const widgets = [
         ],
       },
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Get',
@@ -203,6 +207,7 @@ export const widgets = [
     col: 5,
     tables: [
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'Exposure',
@@ -260,6 +265,7 @@ export const widgets = [
         ],
       },
       {
+        id: uniqueId(),
         headers: [
           {
             title: 'ST performance',

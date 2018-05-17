@@ -26,7 +26,7 @@ export const sidebarItems = [
       },
       {
         label: 'Orders',
-        icon: 'chart',
+        icon: 'file',
       },
     ],
   },
@@ -35,19 +35,22 @@ export const sidebarItems = [
     items: [
       {
         label: 'Americas',
-        icon: 'chart',
+        icon: 'marker',
+        color: 'red',
       },
       {
         label: 'EMEA',
-        icon: 'chart',
+        icon: 'marker',
+        color: 'blue',
       },
       {
         label: 'Asia-Pacific',
-        icon: 'chart',
+        icon: 'marker',
+        color: 'yellow',
       },
       {
         label: 'Peer-to-peer',
-        icon: 'chart',
+        icon: 'peer',
       },
     ],
   },
