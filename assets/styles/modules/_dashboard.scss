@@ -2,9 +2,19 @@
   margin-left: 180px;
   display: block;
   width: 100%;
-  padding-top: 74px;
+  padding-top: 84px;
   transition: .4s;
   min-height: 100%;
+  .container-fluid {
+    padding: 0 7.5px;
+    & > .row {
+      margin-left: -7.5px;
+      margin-right: -7.5px;
+    }
+  }
+  .widget-col {
+    padding: 0 7.5px;
+  }
   &_light {
     background: #f9fafa;
   }

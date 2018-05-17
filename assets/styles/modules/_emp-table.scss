@@ -7,7 +7,7 @@
   }
   &__td {
     @include fontSize(12px);
-    padding: 0 !important;
+    padding: 0 2px !important;
     font-weight: normal;
     color: $main-color-text-grey;
   }
