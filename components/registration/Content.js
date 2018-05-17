@@ -17,7 +17,7 @@ function mapStateToProps(state) {
     tabIndex: state.registration.tabIndex || 1,
     menuItems: state.registration.menuItems,
     registrationData: state.registration.registrationData,
-    trustedContactActive: state.registration.identity_trusted_contact_person_trusted_contact_checkbox,
+    trustedContactActive: state.registration.checkboxes['identity_trusted_contact_person_trusted_contact_checkbox'],
   }
 }
 
