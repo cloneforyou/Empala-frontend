@@ -27,6 +27,16 @@ class Main extends Component {
                 <WidgetNews widget={widget} />
               ))
             }
+            <div className="widget-col col-lg-5">
+              <div className="widget" style={{ height: `324px` }}>
+                <div className="widget__head">
+                  <h3 className="widget__title">Advertisement</h3>
+                </div>
+                <div className="widget__body">
+                  <img src="../../static/images/advertisement.svg" alt="" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <Footer />
