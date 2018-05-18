@@ -5,7 +5,6 @@ import ContentMenuItems from './ContentMenuItems';
 export default class ContentMenu extends React.Component {
 
   componentWillMount() {
-    console.log(this.props)
   }
 
   // componentWillReceiveProps(nextProps) {
