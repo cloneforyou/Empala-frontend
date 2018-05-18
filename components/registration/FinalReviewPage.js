@@ -35,19 +35,19 @@ class FinalReviewPage extends React.PureComponent {
     const data = this.props.registrationData;
     const empty = ' ';
     return (
-      <div className='final-review__outer-wrap'>
-        <div className='final-review__inner-wrap'>
-          <div className='final-review__title'>
-            Final Review before submission
+      <div className="final-review__outer-wrap">
+        <div className="final-review__inner-wrap">
+          <div className="final-review__title">
+            Final review before submission
           </div>
 
-          <div className='fields-group'>
-            <div className='fields-group__row row'>
-              <div className='col-md-6'>
-                <div className='fields-group__title'>
+          <div className="fields-group">
+            <div className="fields-group__row row">
+              <div className="col-md-6">
+                <div className="fields-group__title">
                   Member
                 </div>
-                <div className='row'>
+                <div className="row">
                   <FieldComponent
                     col={2}
                     label={'Prefix'}
@@ -80,7 +80,7 @@ class FinalReviewPage extends React.PureComponent {
                   />
                   <FieldComponent
                     col={3}
-                    label={'Account no.'}
+                    label={'Membership no.'}
                     value={data.member_account_account_no || empty}
                   />
                   <FieldComponent
@@ -95,11 +95,11 @@ class FinalReviewPage extends React.PureComponent {
                   />
                 </div>
               </div>
-              <div className='col-md-3'>
-                <div className='fields-group__title'>
+              <div className="col-md-3">
+                <div className="fields-group__title">
                   Passport
                 </div>
-                <div className='row'>
+                <div className="row">
                   <FieldComponent
                     col={12}
                     label={'Country of issue'}
@@ -124,11 +124,11 @@ class FinalReviewPage extends React.PureComponent {
                   />
                 </div>
               </div>
-              <div className='col-md-3'>
-                <div className='fields-group__title'>
+              <div className="col-md-3">
+                <div className="fields-group__title">
                   Drivers License
                 </div>
-                <div className='row'>
+                <div className="row">
                   <FieldComponent
                     col={12}
                     label={'Country of issue'}
@@ -155,13 +155,13 @@ class FinalReviewPage extends React.PureComponent {
               </div>
             </div>
           </div>
-          <div className='fields-group'>
-            <div className='fields-group__row row'>
-              <div className='col-md-6'>
-                <div className='fields-group__title'>
+          <div className="fields-group">
+            <div className="fields-group__row row">
+              <div className="col-md-6">
+                <div className="fields-group__title">
                   Residential Address
                 </div>
-                <div className='row'>
+                <div className="row">
                   <FieldComponent
                     col={12}
                     label={'Residental address line 1'}
@@ -194,11 +194,11 @@ class FinalReviewPage extends React.PureComponent {
                   />
                 </div>
               </div>
-              <div className='col-md-6'>
-                <div className='fields-group__title'>
+              <div className="col-md-6">
+                <div className="fields-group__title">
                   Mailing Address
                 </div>
-                <div className='row'>
+                <div className="row">
                   <FieldComponent
                     col={12}
                     label={'Residental address line 1'}
@@ -233,13 +233,13 @@ class FinalReviewPage extends React.PureComponent {
               </div>
             </div>
           </div>
-          <div className='fields-group'>
-            <div className='fields-group__row row'>
-              <div className='col-md-6'>
-                <div className='fields-group__title'>
+          <div className="fields-group">
+            <div className="fields-group__row row">
+              <div className="col-md-6">
+                <div className="fields-group__title">
                   Trusted Contact Person
                 </div>
-                <div className='row'>
+                <div className="row">
                   <FieldComponent
                     col={6}
                     label={'First name'}
@@ -267,11 +267,11 @@ class FinalReviewPage extends React.PureComponent {
                   />
                 </div>
               </div>
-              <div className='col-md-6'>
-                <div className='fields-group__title'>
+              <div className="col-md-6">
+                <div className="fields-group__title">
                   Identification
                 </div>
-                <div className='row'>
+                <div className="row">
                   <FieldComponent
                     col={6}
                     label={'Date of birth'}
@@ -307,13 +307,13 @@ class FinalReviewPage extends React.PureComponent {
               </div>
             </div>
           </div>
-          <div className='fields-group'>
-            <div className='fields-group__title'>
+          <div className="fields-group">
+            <div className="fields-group__title">
               Employment
             </div>
-            <div className='fields-group__row row'>
-              <div className='col-md-6'>
-                <div className='row'>
+            <div className="fields-group__row row">
+              <div className="col-md-6">
+                <div className="row">
                   <FieldComponent
                     col={12}
                     label={'Employment type'}
@@ -346,22 +346,22 @@ class FinalReviewPage extends React.PureComponent {
                   />
                 </div>
               </div>
-              <div className='col-md-6'>
-                <div className='row'>
+              <div className="col-md-6">
+                <div className="row">
                   <FieldComponent
                     col={12}
                     label={'Annual income'}
-                    value={data.profile_financials_annual_income && '$' + data.profile_financials_annual_income || empty}
+                    value={data.profile_financials_annual_income && data.profile_financials_annual_income || empty}
                   />
                   <FieldComponent
                     col={12}
                     label={'Total net worth'}
-                    value={data.profile_financials_total_net_worth && '$' + data.profile_financials_total_net_worth || empty}
+                    value={data.profile_financials_total_net_worth && data.profile_financials_total_net_worth || empty}
                   />
                   <FieldComponent
                     col={12}
                     label={'Liquid net worth'}
-                    value={data.profile_financials_liquid_net_worth && '$' + data.profile_financials_liquid_net_worth || empty}
+                    value={data.profile_financials_liquid_net_worth && data.profile_financials_liquid_net_worth || empty}
                   />
                   <FieldComponent
                     col={12}
@@ -377,76 +377,76 @@ class FinalReviewPage extends React.PureComponent {
               </div>
             </div>
           </div>
-          <div className='fields-group'>
-            <div className='fields-group__title'>
+          <div className="fields-group">
+            <div className="fields-group__title">
               Investment experience
             </div>
-            <div className='fields-group__row row'>
-              <div className='col-md-6'>
-                <div className='row'>
+            <div className="fields-group__row row">
+              <div className="col-md-6">
+                <div className="row">
                   <FieldComponent
                     col={6}
                     label={'Equities'}
-                    value={data.investment_experience_equities || empty}
+                    value={data.investment_experience_equities + (data.investment_experience_equities !== 'None' ? ' years' : '') || empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Currencies'}
-                    value={data.investment_experience_margin_currencies || empty}
+                    value={data.investment_experience_margin_currencies + (data.investment_experience_margin_currencies !== 'None' ? ' years' : '') || empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Options'}
-                    value={data.investment_experience_options || empty}
+                    value={(data.investment_experience_options + (data.investment_experience_options !== 'None' && ' years')) || empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Futures'}
-                    value={data.investment_experience_futures || empty}
+                    value={data.investment_experience_futures + (data.investment_experience_futures !== 'None' ? ' years' : '') || empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Bonds'}
-                    value={data.investment_experience_bonds || empty}
+                    value={data.investment_experience_bonds + (data.investment_experience_bonds !== 'None' ? ' years' : '') || empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Foreign markets'}
-                    value={data.investment_experience_foreign_markets || empty}
+                    value={data.investment_experience_foreign_markets + (data.investment_experience_foreign_markets !== 'None' ? ' years' : '') || empty}
                   />
                 </div>
               </div>
-              <div className='col-md-6'>
-                <div className='row'>
+              <div className="col-md-6">
+                <div className="row">
                   <FieldComponent
                     col={6}
                     label={'Cryptocurrencies'}
-                    value={data.investment_experience_cryptocurrencies || empty}
+                    value={data.investment_experience_cryptocurrencies + (data.investment_experience_cryptocurrencies !== 'None' ? ' years' : '')|| empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Private Equity'}
-                    value={data.investment_experience_private_equity || empty}
+                    value={data.investment_experience_private_equity + (data.investment_experience_private_equity !== 'None' ? ' years' : '')|| empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Margin accounts'}
-                    value={data.investment_experience_margin_accounts || empty}
+                    value={data.investment_experience_margin_accounts + (data.investment_experience_margin_accounts !== 'None' ? ' years' : '')|| empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Borrowing money'}
-                    value={data.investment_experience_borrowing_money || empty}
+                    value={data.investment_experience_borrowing_money + (data.investment_experience_borrowing_money !== 'None' ? ' years' : '')|| empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Lending money'}
-                    value={data.investment_experience_lending_money || empty}
+                    value={data.investment_experience_lending_money + (data.investment_experience_lending_money !== 'None' ? ' years' : '')|| empty}
                   />
                   <FieldComponent
                     col={6}
                     label={'Exotics'}
-                    value={data.investment_experience_exotics || empty}
+                    value={data.investment_experience_exotics + (data.investment_experience_exotics !== 'None' ? ' years' : '')|| empty}
                   />
                 </div>
               </div>
@@ -454,9 +454,9 @@ class FinalReviewPage extends React.PureComponent {
           </div>
         </div>
 
-        <div className='final-review__navigation'>
+        <div className="final-review__navigation">
           <NavButtons
-            tabName='final_review'
+            tabName="final_review"
             tabIndex={1}
           />
         </div>
