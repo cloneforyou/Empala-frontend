@@ -90,7 +90,8 @@ class AgreementPage extends React.PureComponent {
             </li>
           </ul>
 
-          <p>By clicking the “Submit Application” button, I agree to this Empala Application Agreement (this
+          <p>
+            By clicking the “Submit Application” button, I agree to this Empala Application Agreement (this
             “Application Agreement”). I also agree to the terms of the Empala Customer Agreement, Empala Privacy
             Statement, Empala Securities Terms and Conditions, APEX Customer Agreement, Empala Securities Use and Risk
             Disclosures, Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow),
