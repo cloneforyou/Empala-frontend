@@ -135,11 +135,7 @@ class Content extends React.PureComponent {
                 </div>
                 <div className='onboard__right-block--bottom'>
                   <NavButtons
-                    tabName={this.props.tabName}
-                    tabIndex={this.props.tabIndex}
                     fieldNames={fieldNames}
-                    registrationData={this.props.registrationData}
-                    errors={this.props.errors}
                   />
                 </div>
               </div>
