@@ -621,4 +621,46 @@ export const widgets = [
     ],
   },
 ];
+export const widgetNews = [
+  {
+    id: uniqueId(),
+    title: 'News',
+    col: 4,
+    height: 365,
+    data: [
+      {
+        id: uniqueId(),
+        title: 'BBC News',
+        date: new Date(),
+        description: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
+        rating: 4,
+        image: 'news-image.svg',
+      },
+      {
+        id: uniqueId(),
+        title: 'BBC News',
+        date: new Date(),
+        description: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
+        rating: 4,
+        image: 'news-image.svg',
+      },
+      {
+        id: uniqueId(),
+        title: 'BBC News',
+        date: new Date(),
+        description: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
+        rating: 4,
+        image: 'news-image.svg',
+      },
+      {
+        id: uniqueId(),
+        title: 'BBC News',
+        date: new Date(),
+        description: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
+        rating: 4,
+        image: 'news-image.svg',
+      },
+    ],
+  },
+];
 
