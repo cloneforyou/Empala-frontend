@@ -4,7 +4,7 @@ const InformationPage = (props) => (
 <div className='information-container'>
   <div className='information-text'>
     <p className='information-title'>IMPORTANT INFORMATION</p>
-    <p className='information-text__par1'>PLEASE CAREFULLY REVIEW OUR FEES WHICH CAN BE FOUND ON OUR <ins>EMPALA FEES</ins> PAGE.<br/>
+    <p className='information-text__par1'>PLEASE CAREFULLY REVIEW OUR FEES WHICH CAN BE FOUND ON OUR <ins>EMPALA COMMISSIONS AND FEES SCHEDULE</ins> PAGE.<br/>
       EMPALA DOES NOT MARK UP ANY FEES.  EMPALA PASSES THROUGH TO MEMBERS VARIOUS EXECUTION,<br/>
       CLEARING, REGULATORY AND OTHER CHARGES INCURRED OR REVENUES RECEIVED FROM ACCOUNT<br/>
       POSITIONS AND ACTIVITY.</p>
