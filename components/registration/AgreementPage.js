@@ -1,92 +1,92 @@
-import React from 'react';
-import {withReduxSaga} from "../../store";
-import { changeTabPage, sendRegistrationForm } from "../../actions/registration";
-import { connect } from "react-redux";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+
+import { changeTabPage, sendRegistrationForm } from '../../actions/registration';
 
 function mapStateToProps(state) {
   return {
     firstName: state.registration.registrationData.member_basic_information_first_name || '',
     lastName: state.registration.registrationData.member_basic_information_last_name || '',
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return (
     {
-      changeTabPage:() => dispatch(changeTabPage('agreement', 1, 'backward')),
+      changeTabPage: () => dispatch(changeTabPage('agreement', 1, 'backward')),
       submitRegistration: () => dispatch(sendRegistrationForm()),
-    })
+    });
 }
 
-class AgreementPage extends React.PureComponent {
-
-  constructor(props){
+class AgreementPage extends PureComponent {
+  constructor(props) {
     super(props);
     this.state = {
-      disabled: true
+      disabled: true,
     };
     this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
     this.containerInfo.addEventListener('scroll', this.handleScroll);
-  };
+  }
 
   componentWillUnmount() {
     this.containerInfo.removeEventListener('scroll', this.handleScroll);
-  };
+  }
 
   handleScroll(event) {
-    let scroll = event.target.scrollTop;
-    let height = event.target.scrollHeight - event.target.clientHeight;
+    const scroll = event.target.scrollTop;
+    const height = event.target.scrollHeight - event.target.clientHeight;
     if (height === scroll) {
       this.setState({
-        disabled: false
+        disabled: false,
       });
     }
-  };
+  }
 
   render() {
     return (
-      <div className='agreements'>
-        <p className='agreements__title'>Before We Can Proceed You Are Required to Review and Consent to All of the
-          Following Documents and Information</p>
+      <div className="agreements">
+        <p className="agreements__title">Before we can proceed you are required to review and consent to all of the
+          following documents and information
+        </p>
 
-        <div className='agreements-info' ref={ node => this.containerInfo = node }>
-          <p className='agreements-info__title'>THE LEGAL AGREEMENTS I AM AGREEING TO</p>
+        <div className="agreements-info" ref={node => this.containerInfo = node}>
+          <p className="agreements-info__title">THE LEGAL AGREEMENTS I AM AGREEING TO</p>
 
-          <ul className='list-info'>
-            <li className='list-info__item'>
+          <ul className="list-info">
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>Empala Customer Agreement</ins></a>
+              <a href="#" className="link-decoration"><ins>Empala Customer Agreement</ins></a>
             </li>
-            <li className='list-info__item'>
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>Empala Privacy Statement</ins></a>
+              <a href="#" className="link-decoration"><ins>Empala Privacy Statement</ins></a>
             </li>
-            <li className='list-info__item'>
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>Empala Securities Terms and Conditions</ins></a>
+              <a href="#" className="link-decoration"><ins>Empala Securities Terms and Conditions</ins></a>
             </li>
-            <li className='list-info__item'>
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>APEX Customer Agreements</ins></a>
+              <a href="#" className="link-decoration"><ins>APEX Customer Agreements</ins></a>
             </li>
-            <li className='list-info__item'>
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>Empala Securities Use and Risk Disclosures</ins></a>
+              <a href="#" className="link-decoration"><ins>Empala Securities Use and Risk Disclosures</ins></a>
             </li>
-            <li className='list-info__item'>
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow)</ins></a>
+              <a href="#" className="link-decoration"><ins>Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow)</ins></a>
             </li>
-            <li className='list-info__item'>
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>Empala Business Continuity Plan</ins></a>
+              <a href="#" className="link-decoration"><ins>Empala Business Continuity Plan</ins></a>
             </li>
-            <li className='list-info__item'>
+            <li className="list-info__item">
               <span>- </span>
-              <a href='#' className='link-decoration'><ins>FINRA Public Disclosure Program (BrokerCheck)</ins></a>
+              <a href="#" className="link-decoration"><ins>FINRA Public Disclosure Program (BrokerCheck)</ins></a>
             </li>
           </ul>
 
@@ -129,42 +129,44 @@ class AgreementPage extends React.PureComponent {
             original form, accompanied by English versions from the 1914 translation by H. Rackham.
           </p>
         </div>
-        <div className='confirmation row'>
-          <div className='confirmation__text col-lg-4'>
+        <div className="confirmation row">
+          <div className="confirmation__text col-lg-4">
             <span>Under penalty of perjury I attest that I am of legal age
             and also that all the information I have provided is true
             and also that I have carefully reviewed, understand and
             agree to the terms and provisions of the </span>
-            <a href='#' className='confirmation__text_link'>Empala Customer Agreement.</a>
+            <a href="#" className="confirmation__text_link">Empala Customer Agreement.</a>
           </div>
 
-          <div className='col-lg-8'>
-            <div className='confirmation__form-submission'>
-              <div className='form-group form--centering'>
-                <label className='label-confirmation'>Signature</label>
-                <input type="text" className='input-confirmation form-control' value={`${this.props.firstName} ${this.props.lastName}`} readOnly />
+          <div className="col-lg-8">
+            <div className="confirmation__form-submission">
+              <div className="form-group form--centering">
+                <label className="label-confirmation">Signature</label>
+                <input type="text" className="input-confirmation form-control" value={`${this.props.firstName} ${this.props.lastName}`} readOnly />
               </div>
-              <button className='btn--cancel' onClick={this.props.changeTabPage}>Cancel</button>
+              <button className="btn--cancel" onClick={this.props.changeTabPage}>Cancel</button>
               <button
-                id='submit'
+                id="submit"
                 className={`btn--submit ${!this.state.disabled && 'btn--active'}`}
                 disabled={this.state.disabled}
                 onClick={this.props.submitRegistration}
-              >Submit</button>
+              >Submit
+              </button>
             </div>
 
-            <p className='confirmation__subtext'>By clicking the “Submit” button above I agree to this Application
+            <p className="confirmation__subtext">By clicking the “Submit” button above I agree to this Application
               Agreement and all additonal agreements and disclaimers which have been incorporated
               by reference and constitute part of this Application Agreement, agree to receive all future account
               information electronically, explicitly agree in advance
               to arbitrate any controversies which may arise between or among me and Empala in accordance with the
               Predispute Arbitration Clause contained in the
               Empala Customer Agreement, and agree to notify Empala promptly regarding any change in the information
-              provided on this application.</p>
+              provided on this application.
+            </p>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

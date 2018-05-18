@@ -37,6 +37,7 @@ export const dataFields = [
       field: 'select',
       label: 'State',
       options: usStates,
+      autoWidth: true,
     },
 
     {
@@ -44,7 +45,7 @@ export const dataFields = [
       hint: 'Please select',
       field: 'input',
       label: 'City',
-      type: 'text'
+      type: 'text',
     },
 
     {
@@ -55,7 +56,7 @@ export const dataFields = [
       options: [
         {
           value: 'United States',
-          title: 'United States'
+          title: 'United States',
         },
       ],
     },
@@ -64,7 +65,7 @@ export const dataFields = [
       id: 'identity_residential_address_same_mailing_address_checkbox',
       field: 'checkbox',
       label: `Mailing address is the same.`,
-    }
+    },
   ],
 
   // mailing address
@@ -105,7 +106,7 @@ export const dataFields = [
       id: 'identity_mailing_address_city',
       field: 'input',
       label: 'City',
-      type: 'text'
+      type: 'text',
     },
     {
       id: 'identity_mailing_address_country',
@@ -115,7 +116,7 @@ export const dataFields = [
       options: [
         {
           value: 'United States',
-          title: 'United States'
+          title: 'United States',
         },
       ],
     },
