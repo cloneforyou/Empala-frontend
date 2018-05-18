@@ -4,7 +4,6 @@ import { usStatesList } from './usStatesList';
 const usStates = getValuesForSelectField(usStatesList);
 
 export const dataFields = [
-  // residential address
   [
     {
       id: 'identity_residential_address_residential_address_line_1',
@@ -13,7 +12,6 @@ export const dataFields = [
       type: 'text',
       placeholder: '',
     },
-
     {
       id: 'identity_residential_address_residential_address_line_2',
       field: 'input',
@@ -21,7 +19,6 @@ export const dataFields = [
       type: 'text',
       placeholder: '',
     },
-
     {
       field: 'input',
       label: 'Zip code',
@@ -30,7 +27,6 @@ export const dataFields = [
       numberField: true,
       placeholder: '',
     },
-
     {
       id: 'identity_residential_address_residential_address_state',
       hint: 'Please select',
@@ -39,7 +35,6 @@ export const dataFields = [
       options: usStates,
       autoWidth: true,
     },
-
     {
       id: 'identity_residential_address_residential_address_city',
       hint: 'Please select',
@@ -47,7 +42,6 @@ export const dataFields = [
       label: 'City',
       type: 'text',
     },
-
     {
       id: 'identity_residential_address_residential_address_country',
       hint: 'Please select',
@@ -60,15 +54,12 @@ export const dataFields = [
         },
       ],
     },
-
     {
       id: 'identity_residential_address_same_mailing_address_checkbox',
       field: 'checkbox',
-      label: `Mailing address is the same.`,
+      label: 'Mailing address is the same.',
     },
   ],
-
-  // mailing address
   [
     {
       id: 'identity_mailing_address_residential_address_line_1',
@@ -121,15 +112,12 @@ export const dataFields = [
       ],
     },
   ],
-
-  // trusted contact person
   [
     {
       id: 'identity_trusted_contact_person_trusted_contact_checkbox',
       field: 'checkbox',
-      label: `Trusted contact`,
+      label: 'Trusted contact',
     },
-
     {
       field: 'input',
       label: 'First name',
@@ -146,14 +134,14 @@ export const dataFields = [
     },
     {
       field: 'input',
-      label: 'Email',
+      label: 'Email address',
       id: 'identity_trusted_contact_person_email',
       type: 'email',
       placeholder: '',
     },
     {
       field: 'input',
-      label: 'Contact phone no.',
+      label: 'Contact telephone no.',
       id: 'identity_trusted_contact_person_phone',
       type: 'text',
       placeholder: '',
@@ -166,8 +154,6 @@ export const dataFields = [
       placeholder: '',
     },
   ],
-
-  // regulatory questions
   [
     {
       field: 'checkbox',
@@ -181,19 +167,17 @@ export const dataFields = [
     },
     {
       field: 'checkbox',
-      label: `I am a director, policy maker, or a senior officer of 
-      a publicly traded company.`,
+      label: 'I am a director, policy maker, or a senior officer of a publicly traded company.',
       id: 'identity_checkbox_2',
     },
     {
       field: 'checkbox',
-      label: `I am a 10% shareholder of a publicly traded company.`,
+      label: 'I am a 10% shareholder of a publicly traded company.',
       id: 'identity_checkbox_3',
     },
     {
       field: 'checkbox',
-      label: `I am a senior military, governmental or political official
-      in a non-US country.`,
+      label: 'I am a senior military, governmental or political official in a non-US country.',
       id: 'identity_checkbox_4',
     },
     {
@@ -204,3 +188,5 @@ export const dataFields = [
     },
   ],
 ];
+
+export { dataFields as default };

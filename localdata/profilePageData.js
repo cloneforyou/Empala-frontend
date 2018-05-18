@@ -4,7 +4,6 @@ import { usStatesList } from './usStatesList';
 const usStates = getValuesForSelectField(usStatesList);
 
 export const dataFields = [
-  // employment
   [
     {
       id: 'profile_employment_employment_type',
@@ -68,8 +67,6 @@ export const dataFields = [
       type: 'text',
     },
   ],
-
-  // Financials
   [
     {
       id: 'profile_financials_annual_income',
@@ -186,7 +183,6 @@ export const dataFields = [
         },
       ],
     },
-
     {
       id: 'profile_financials_investment_objectives',
       hint: 'Please select',
@@ -216,3 +212,5 @@ export const dataFields = [
     },
   ],
 ];
+
+export { dataFields as default };
