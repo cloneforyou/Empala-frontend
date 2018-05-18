@@ -1,7 +1,6 @@
-import {countriesList} from "./countriesList";
+import { countriesList } from './countriesList';
 
 export const dataFields = [
-  // identification
   [
     {
       id: 'regulatory_identification_dateOfBirth',
@@ -16,7 +15,6 @@ export const dataFields = [
       field: 'input',
       placeholder: '',
     },
-
     {
       id: 'regulatory_identification_citizenship',
       label: 'Country of citizenship',
@@ -25,8 +23,6 @@ export const dataFields = [
       options: countriesList,
     },
   ],
-
-  // family
   [
     {
       id: 'regulatory_family_martial_status',
@@ -36,35 +32,33 @@ export const dataFields = [
       options: [
         {
           value: 'Single',
-          title: 'Single'
+          title: 'Single',
         },
         {
           value: 'Married',
-          title: 'Married'
+          title: 'Married',
         },
         {
           value: 'Domestic Partner',
-          title: 'Domestic Partner'
+          title: 'Domestic Partner',
         },
         {
           value: 'Divorced',
-          title: 'Divorced'
+          title: 'Divorced',
         },
         {
           value: 'Widowed',
-          title: 'Widowed'
+          title: 'Widowed',
         },
       ],
     },
-
     {
-      label: 'No. of dependents',
+      label: 'No of dependents',
       id: 'regulatory_family_dependents',
       field: 'input',
       type: 'text',
       numberField: true,
     },
-
     {
       id: 'regulatory_family_investment_experience',
       hint: 'Please select',
@@ -73,22 +67,23 @@ export const dataFields = [
       options: [
         {
           value: 'None',
-          title: 'None'
+          title: 'None',
         },
         {
           value: 'Limited',
-          title: 'Limited'
+          title: 'Limited',
         },
         {
           value: 'Good',
-          title: 'Good'
+          title: 'Good',
         },
         {
           value: 'Excellent',
-          title: 'Excellent'
+          title: 'Excellent',
         },
       ],
-    }
-
-  ]
+    },
+  ],
 ];
+
+export { dataFields as default };
