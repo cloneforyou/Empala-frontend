@@ -79,7 +79,14 @@
   color: #808895;
   background-color: #ffffff;
   border-radius: 0;
+}
+
+.border-default {
   border: 2px solid #e0e0e0;
+}
+
+.border-error {
+  border: 2px solid #ff0405;
 }
 
 .form-control:disabled, .form-control[readonly] {
@@ -106,4 +113,8 @@
 .btn--active {
   background-color: #98c73a;
   border: solid 1px #98c73a;
+}
+
+.text--error {
+  color: #ff0405;
 }
