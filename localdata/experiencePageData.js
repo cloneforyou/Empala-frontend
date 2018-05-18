@@ -5,7 +5,7 @@ const options = [
   },
   {
     value: '<1',
-    title: 'Less than 1 year'
+    title: '< 1 year'
   },
   {
     value: '1-2',
@@ -17,7 +17,7 @@ const options = [
   },
   {
     value: '>5',
-    title: 'More than 5 years'
+    title: '> 5 years'
   },
 ];
 

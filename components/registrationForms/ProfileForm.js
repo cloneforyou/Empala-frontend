@@ -44,7 +44,7 @@ class ProfileForm extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.mappingComponent = (item) => {
+    this.mappingComponent = (item, options) => {
       const disabled = this.props.registrationData['profile_employment_employment_type'] !== 'Employed'
           && this.props.page === 1 && item.id !== 'profile_employment_employment_type';
       if (item.options) {
@@ -52,7 +52,7 @@ class ProfileForm extends React.PureComponent {
           <EmpalaSelect
             id={item.id}
             key={item.label}
-            options={item.options}
+            options={options || item.options}
             label={item.label}
             value={this.props.registrationData[item.id] || ''}
             handleChange={this.props.setSelectedValueById}
@@ -85,7 +85,17 @@ class ProfileForm extends React.PureComponent {
   render() {
       return (
         <form className='row'>
-          {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
+          {dataFields[this.props.page - 1].map((item) => {
+            if (item.id === 'profile_financials_liquid_net_worth') {
+              let filteredOptions = item.options.filter(option => {
+                return (option.value.length < this.props.registrationData['profile_financials_total_net_worth'].length ||
+                  (option.value.length === this.props.registrationData['profile_financials_total_net_worth'].length &&
+               option.value[0] <= this.props.registrationData['profile_financials_total_net_worth'][0]))
+              });
+              return this.mappingComponent(item, filteredOptions)
+            }
+            return this.mappingComponent(item)
+          })}
         </form>
       )
   }

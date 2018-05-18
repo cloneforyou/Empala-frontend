@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {Component} from 'react';
 import RadioButton from 'material-ui/RadioButton';
 import MdCheckCircle from 'react-icons/lib/md/check-circle';
 import MdPanoramaFishEye from 'react-icons/lib/md/panorama-fish-eye';
 
+import style from './RegistrationFieldsStyle';
 
-class EmpalaRadioButton extends React.Component {
 
+class EmpalaRadioButton extends Component {
   constructor(props) {
     super(props);
 
@@ -13,23 +14,6 @@ class EmpalaRadioButton extends React.Component {
       open: false,
       check: false
     };
-
-    this.styles = {
-      panoramaFishEyeIcon: {
-        height: '25px',
-        width: '25px',
-        fill: '#808895',
-      },
-      checkCircleIcon: {
-        height: '25px',
-        width: '25px',
-        fill: '#98c73a',
-      },
-      inputStyle: {
-        height: '25px',
-        width: '25px',
-      }
-    }
   }
 
   render() {
@@ -41,9 +25,9 @@ class EmpalaRadioButton extends React.Component {
           onClick={this.props.onClick}
           checked={this.props.checked}
           labelStyle={this.props.labelStyle}
-          uncheckedIcon={<MdPanoramaFishEye style={this.styles.panoramaFishEyeIcon}/>}
-          checkedIcon={<MdCheckCircle style={this.styles.checkCircleIcon}/>}
-          inputStyle={this.styles.inputStyle}
+          uncheckedIcon={<MdPanoramaFishEye style={style.panoramaFishEyeIcon}/>}
+          checkedIcon={<MdCheckCircle style={style.checkCircleIcon}/>}
+          inputStyle={style.inputSwitchesStyle}
           style={this.props.style}
         />
       </div>
