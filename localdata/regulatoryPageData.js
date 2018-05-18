@@ -1,3 +1,5 @@
+import {countriesList} from "./countriesList";
+
 export const dataFields = [
   // identification
   [
@@ -20,17 +22,7 @@ export const dataFields = [
       label: 'Country of citizenship',
       hint: 'Please select',
       field: 'select',
-      options: [
-        {
-          value: 'United States',
-          title: 'United States'
-        },
-        // temporary lock only on US
-        // {
-        //   value: 'United Kingdom',
-        //   title: 'United Kingdom'
-        // },
-      ],
+      options: countriesList,
     },
   ],
 
@@ -66,7 +58,7 @@ export const dataFields = [
     },
 
     {
-      label: 'No of dependents',
+      label: 'No. of dependents',
       id: 'regulatory_family_dependents',
       field: 'input',
       type: 'text',
