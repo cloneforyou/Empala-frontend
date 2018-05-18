@@ -1,9 +1,8 @@
 import React from 'react';
-import EmpalaInput from '../registration/EmpalaInput';
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
-import { dataFields } from '../../localdata/profilePageData';
 import { connect } from 'react-redux';
+
+import EmpalaInput from '../registration/EmpalaInput';
+import { dataFields } from '../../localdata/profilePageData';
 import {
   getInfoByZipCode,
   getMenuItems,
@@ -13,30 +12,28 @@ import {
   setTabPageIndex
 } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
-import DatePickerField from '../registration/DatePickerField';
-
 
 const mapStateToProps = (state) => {
   return ({
     registrationData: state.registration.registrationData,
     page: state.registration.tabIndex,
     fieldsErrors: state.registration.fieldsErrors,
-  })
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return ({
     setInputValueById: (e) => {
-      const {id, value} = e.target;
+      const { id, value } = e.target;
       if (value.length === 5 && (id === 'profile_employment_zip_code')) {
-        dispatch(getInfoByZipCode(id, value))
+        dispatch(getInfoByZipCode(id, value));
       }
-      dispatch(setInputFieldValueById(id, value))
+      dispatch(setInputFieldValueById(id, value));
     },
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  })
+  });
 };
 
 
@@ -60,8 +57,9 @@ class ProfileForm extends React.PureComponent {
             hint={item.hint || item.label}
             disabled={disabled}
             errorText={this.props.fieldsErrors[item.id]}
+            autoWidth={item.autoWidth}
           />
-        )
+        );
       }
       return (
         <EmpalaInput
@@ -77,27 +75,27 @@ class ProfileForm extends React.PureComponent {
           numberField={item.numberField}
           disabled={disabled}
         />
-      )
+      );
     };
     this.isRadioChecked = (name) => (this.props.registrationData.memberDocument === name);
   }
 
   render() {
-      return (
-        <form className='row'>
-          {dataFields[this.props.page - 1].map((item) => {
-            if (item.id === 'profile_financials_liquid_net_worth') {
-              let filteredOptions = item.options.filter(option => {
-                return (option.value.length < this.props.registrationData['profile_financials_total_net_worth'].length ||
-                  (option.value.length === this.props.registrationData['profile_financials_total_net_worth'].length &&
-               option.value[0] <= this.props.registrationData['profile_financials_total_net_worth'][0]))
-              });
-              return this.mappingComponent(item, filteredOptions)
-            }
-            return this.mappingComponent(item)
-          })}
-        </form>
-      )
+    return (
+      <form className='row'>
+        {dataFields[this.props.page - 1].map((item) => {
+          if (item.id === 'profile_financials_liquid_net_worth') {
+            let filteredOptions = item.options.filter(option => {
+              return (option.value.length < this.props.registrationData['profile_financials_total_net_worth'].length ||
+              (option.value.length === this.props.registrationData['profile_financials_total_net_worth'].length &&
+              option.value[0] <= this.props.registrationData['profile_financials_total_net_worth'][0]))
+            });
+            return this.mappingComponent(item, filteredOptions)
+          }
+          return this.mappingComponent(item)
+        })}
+      </form>
+    );
   }
 }
 

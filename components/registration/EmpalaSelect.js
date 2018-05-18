@@ -26,6 +26,7 @@ const EmpalaSelect = (props) => {
         underlineDisabledStyle={style.underlineDisabledStyle}
         underlineStyle={style.underlineStyle}
         underlineFocusStyle={style.underlineFocusStyle}
+        maxHeight={300}
         onChange={(e, i, v) => {
           props.handleChange(props.id, v)
         }}
@@ -42,7 +43,7 @@ const EmpalaSelect = (props) => {
         ))}
       </SelectField>
     </div>
-  )
+  );
 };
 
 export default EmpalaSelect;

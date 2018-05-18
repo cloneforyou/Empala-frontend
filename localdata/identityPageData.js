@@ -33,6 +33,7 @@ export const dataFields = [
       field: 'select',
       label: 'State',
       options: usStates,
+      autoWidth: true,
     },
     {
       id: 'identity_residential_address_residential_address_city',
@@ -49,7 +50,7 @@ export const dataFields = [
       options: [
         {
           value: 'United States',
-          title: 'United States'
+          title: 'United States',
         },
       ],
     },

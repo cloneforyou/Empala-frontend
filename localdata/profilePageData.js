@@ -58,6 +58,7 @@ export const dataFields = [
       label: 'State',
       col: 6,
       options: usStates,
+      autoWidth: true,
     },
     {
       id: 'profile_employment_city',

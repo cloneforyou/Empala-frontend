@@ -39,8 +39,6 @@ function registration(state = initialState, action) {
       return {...state, registrationData: {...state.registrationData, [action.id]: action.value}};
     case VALIDATE_FIELD_ERROR:
       return {...state, fieldsErrors: {...state.fieldsErrors, [action.fieldId]: action.message}};
-    case VALIDATE_FIELDS_BLANK:
-      return {...state,  fieldsErrors: {...action.fields}};
     case VALIDATE_FIELD_SUCCESS:
       return {...state, fieldsErrors: {...state.fieldsErrors, [action.fieldId]: ''}};
     case GET_DATA_FROM_CACHE:

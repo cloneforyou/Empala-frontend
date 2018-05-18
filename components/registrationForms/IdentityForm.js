@@ -1,14 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import EmpalaCheckbox from '../registration/EmpalaCheckbox';
 import { dataFields } from '../../localdata/identityPageData';
-import { connect } from "react-redux";
 import {
   closeIdentityModal,
   getInfoByZipCode,
   setInputFieldValueById,
-  toggleCheckboxById
+  toggleCheckboxById,
 } from '../../actions/registration';
 import ModalWindow from '../registration/ModalWindow';
 
@@ -21,9 +22,9 @@ const mapStateToProps = (state) => {
       trustedContactActive: state.registration.checkboxes['identity_trusted_contact_person_trusted_contact_checkbox'],
       mailingAddressCheckboxChecked: state.registration['identity_residential_address_same_mailing_address_checkbox'],
       fieldsErrors: state.registration.fieldsErrors,
-      checkboxes:state.registration.checkboxes,
+      checkboxes: state.registration.checkboxes,
       }
-  )
+  );
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -31,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
       setInputValueById: (e) => {
-        const {id, value} = e.target;
+        const { id, value } = e.target;
         if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
           dispatch(getInfoByZipCode(id, value))
         }
@@ -42,7 +43,7 @@ const mapDispatchToProps = (dispatch) => {
       },
       closeModal: () => dispatch(closeIdentityModal()),
     }
-  )
+  );
 };
 
 
@@ -53,9 +54,9 @@ class IdentityForm extends React.Component {
 
 
     this.mappingComponent = (item) => {
-      let mask ='';
-      const  phoneMask = '+9 999 999-9999';
-      if (item.id.includes('phone')){
+      let mask = '';
+      const phoneMask = '+9 999 999-9999';
+      if (item.id.includes('phone')) {
         mask = phoneMask;
       }
       switch (item.field) {
@@ -89,6 +90,7 @@ class IdentityForm extends React.Component {
               hint={item.hint || item.label}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
               errorText={this.props.fieldsErrors[item.id]}
+              autoWidth={item.autoWidth}
             />
           );
         case 'checkbox':
@@ -100,25 +102,23 @@ class IdentityForm extends React.Component {
                 handleCheck={this.props.toggleCheckboxById}
                 checked={this.props.checkboxes[item.id]}
               />
-          )
+          );
       }
     };
-
-
   }
 
   render() {
 
 
     return (
-      <form className='row'>
+      <form className="row">
         {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
         <ModalWindow
           open={this.props.showModal}
           handleClose={this.props.closeModal}
         />
       </form>
-    )
+    );
   }
 }
 
