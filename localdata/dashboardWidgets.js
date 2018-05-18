@@ -625,6 +625,7 @@ export const widgetNews = [
   {
     id: uniqueId(),
     title: 'News',
+    type: 'All',
     col: 4,
     height: 324,
     news: [
@@ -659,6 +660,36 @@ export const widgetNews = [
         title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
         rating: 4,
         image: 'news-image.svg',
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Empala internal news',
+    type: 'Empala',
+    col: 3,
+    height: 324,
+    news: [
+      {
+        id: uniqueId(),
+        date: new Date(),
+        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
+        rating: 4,
+        image: 'news-image2.svg',
+      },
+      {
+        id: uniqueId(),
+        date: new Date(),
+        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
+        rating: 4,
+        image: 'news-image2.svg',
+      },
+      {
+        id: uniqueId(),
+        date: new Date(),
+        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
+        rating: 4,
+        image: 'news-image2.svg',
       },
     ],
   },
