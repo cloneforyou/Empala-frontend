@@ -188,22 +188,26 @@ class AgreementPage extends PureComponent {
           <div className="col-lg-8">
             <div className="confirmation__form-submission">
               <div className="form-group form--centering">
-                <label className="label-confirmation">Signature</label>
-                <input type="text"
-                       className={`input-confirmation form-control border-default ${(!this.state.signed && this.state.submitted) && 'border-error'}`}
-                       onChange={this.checkRegistrationName} />
-                {(!this.state.signed && this.state.submitted) &&
-                <div className="text--error">Please make sure that you provided the correct First name and Last name</div>}
+                <div>
+                  <label className="label-confirmation">Signature</label>
+                  <input type="text"
+                         className={`input-confirmation form-control border-default ${(!this.state.signed && this.state.submitted) && 'border-error'}`}
+                         onChange={this.checkRegistrationName} />
+                  {(!this.state.signed && this.state.submitted) &&
+                  <p className="text--error">Please make sure that you provided the correct First name and Last name</p>}
+                </div>
               </div>
-              <button className="btn--cancel" onClick={this.props.changeTabPage}>Cancel</button>
-              <button
-                id="submit"
-                className={`btn--submit ${(!this.state.disabled && this.state.signed) && 'btn--active'}`}
-                onClick={() => {
-                  this.handleSubmit();
-                }}
-              >Submit
-              </button>
+              <div className="group-buttons">
+                <button className="btn--cancel" onClick={this.props.changeTabPage}>Cancel</button>
+                <button
+                  id="submit"
+                  className={`btn--submit ${(!this.state.disabled && this.state.signed) && 'btn--active'}`}
+                  onClick={() => {
+                    this.handleSubmit();
+                  }}
+                >Submit
+                </button>
+              </div>
             </div>
 
             <p className="confirmation__subtext">By clicking the “Submit” button above I agree to this Application

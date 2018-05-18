@@ -36,7 +36,6 @@
 .confirmation {
   display: flex;
   &__form-submission {
-    text-align: center;
     margin-bottom: 20px;
   }
   &__text {
@@ -60,21 +59,23 @@
 }
 
 .form--centering {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.group-buttons {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .label-confirmation {
-  width: 85%;
   font-size: 12px;
   font-weight: 400;
   color: #98c73a;
-  text-align: start;
 }
 
 .input-confirmation {
-  width: 85%;
   height: 45px;
   color: #808895;
   background-color: #ffffff;
