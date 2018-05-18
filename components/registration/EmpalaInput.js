@@ -1,9 +1,12 @@
-import React from 'react';
-import TextField from 'material-ui/TextField';
+import React, {Component} from 'react';
 import InputMask from 'react-input-mask';
-import '../../assets/styles/modules/_input-group.scss'
+import TextField from 'material-ui/TextField';
 
-class EmpalaInput extends React.Component {
+import '../../assets/styles/modules/_input-group.scss';
+import style from './RegistrationFieldsStyle';
+
+
+class EmpalaInput extends Component {
   constructor(props) {
     super(props)
   }
@@ -18,14 +21,6 @@ class EmpalaInput extends React.Component {
 
   render() {
     const errorText = this.props.disabled ? '' : this.props.errorText;
-    const style={
-      inputStyle: {
-        color: '#858c99'
-      },
-      inputStyleDisabled: {
-        color: 'rgb(208, 210, 212)'
-      },
-    };
 
     return (
       <div className={this.props.col ? `registration-group col-md-${this.props.col}` : 'registration-group col-12'}>
@@ -34,25 +29,27 @@ class EmpalaInput extends React.Component {
           type={this.props.type}
           floatingLabelText={this.props.label}
           floatingLabelFixed={true}
-          floatingLabelStyle={{color: '#98c73a'}}
+          floatingLabelStyle={style.floatingLabelStyle}
           hintText={this.props.placeholder}
-          style={{ width: '100%' }}
-          underlineStyle={{ borderBottom : '2px solid #e0e0e0' }}
-          hintStyle={{color: '#c5c5c5'}}
+          style={style.textFieldStyle}
+          underlineStyle={style.underlineStyle}
+          hintStyle={style.hintStyle}
           inputStyle={this.props.disabled ? style.inputStyleDisabled : style.inputStyle}
-          underlineDisabledStyle={{borderBottom: '2px dotted rgba(0, 0, 0, 0.3)'}}
+          underlineFocusStyle={style.underlineFocusStyle}
+          underlineDisabledStyle={style.underlineDisabledStyle}
           value={this.props.value}
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}
           errorText={errorText}
         >
-          {this.props.mask && <InputMask mask={this.props.mask}
-            maskChar=" "
-            value={this.props.value}
+          {this.props.mask &&
+          <InputMask mask={this.props.mask}
+                     maskChar=" "
+                     value={this.props.value}
           />}
         </TextField>
-    </div>
-  )
+      </div>
+    )
   };
 }
 

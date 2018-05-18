@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 import MdCheckCircle from 'react-icons/lib/md/check-circle';
 import MdPanoramaFishEye from 'react-icons/lib/md/panorama-fish-eye';
 
-class EmpalaCheckbox extends React.Component {
+import style from './RegistrationFieldsStyle';
+
+
+class EmpalaCheckbox extends Component {
 
   constructor(props) {
     super(props);
@@ -12,31 +15,7 @@ class EmpalaCheckbox extends React.Component {
       open: false,
       check: false
     };
-
-    this.styles = {
-      panoramaFishEyeIcon: {
-        height: '25px',
-        width: '25px',
-        fill: '#808895',
-      },
-      checkCircleIcon: {
-        height: '25px',
-        width: '25px',
-        fill: '#98c73a',
-      },
-      inputStyle: {
-        height: '25px',
-        width: '25px',
-      },
-      labelStyle: {
-        color: '#808895'
-      },
-      checkBoxStyle: {
-        marginBottom: '20px'
-      }
-    }
   }
-
 
   render() {
     return (
@@ -44,11 +23,11 @@ class EmpalaCheckbox extends React.Component {
         <Checkbox
           id={this.props.id}
           label={this.props.label}
-          uncheckedIcon={<MdPanoramaFishEye style={ this.styles.panoramaFishEyeIcon }/>}
-          checkedIcon={<MdCheckCircle style={ this.styles.checkCircleIcon }/>}
-          inputStyle={ this.styles.inputStyle }
-          labelStyle={ this.styles.labelStyle }
-          style={ this.styles.checkBoxStyle }
+          uncheckedIcon={<MdPanoramaFishEye style={ style.panoramaFishEyeIcon }/>}
+          checkedIcon={<MdCheckCircle style={ style.checkCircleIcon }/>}
+          inputStyle={ style.inputSwitchesStyle }
+          labelStyle={ style.labelCheckboxStyle }
+          style={ style.checkBoxStyle }
           onCheck = {this.props.handleCheck}
           checked={this.props.checked}
         />
