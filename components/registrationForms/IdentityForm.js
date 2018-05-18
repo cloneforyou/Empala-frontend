@@ -32,7 +32,6 @@ const mapDispatchToProps = (dispatch) => {
       setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
       setInputValueById: (e) => {
         const {id, value} = e.target;
-        console.log(id, value);
         if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
           dispatch(getInfoByZipCode(id, value))
         }

@@ -42,7 +42,6 @@ class Content extends React.PureComponent {
   }
 
   componentDidMount() {
-    console.log(' *** state', this.props.registrationData);
     if (localStorage.getItem('registrationData')) {
       this.props.getRegistrationDataFromCache();
 

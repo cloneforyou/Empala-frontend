@@ -83,7 +83,6 @@ class ProfileForm extends React.PureComponent {
   }
 
   render() {
-    // console.log('*** profile page props', this.props);
       return (
         <form className='row'>
           {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
