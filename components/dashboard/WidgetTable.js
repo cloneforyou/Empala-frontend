@@ -10,7 +10,7 @@ class WidgetTable extends Component {
   render() {
     const { table } = this.props;
     return (
-      <div>
+      <div className="table-responsive">
         <table className="table table-borderless emp-table">
           <thead>
             <tr>

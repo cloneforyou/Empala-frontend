@@ -10,6 +10,9 @@
     padding: 0 2px !important;
     font-weight: normal;
     color: $main-color-text-grey;
+    @media (max-width: 1600px) {
+      @include fontSize(10px);
+    }
   }
   &__tr {
 

@@ -1,11 +1,13 @@
 .widget {
   background: $white;
-  padding: 18px 26px;
+  padding: 18px 20px;
   margin-bottom: 15px;
-  overflow: auto;
   border: 1px solid #EDEDED;
   &_h-390 {
     height: 390px;
+  }
+  &_h-287 {
+    height: 287px;
   }
 
   &__head {
@@ -18,7 +20,9 @@
     margin: 0;
     font-weight: normal;
   }
-  &_body {
-
+  &__body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 87%;
   }
 }
