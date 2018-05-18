@@ -57,9 +57,9 @@ export function* validateCheckbox(action) {
   if (action.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && !isChecked) {
     const data = yield select((state) => state.registration.registrationData);
     const trustedContactFields = Object.keys(data).filter((key) => (/identity_trusted_contact/.test(key)));
-    console.log(' ** ', trustedContactFields);
     yield all(trustedContactFields.map(field => put(setInputFieldValueById(field, ''))));
   }
+
 }
 
 export function* validateEmptyFields(action) {

@@ -57,6 +57,10 @@ export const dataFields = [
       hint: 'Please select',
       options: [
         {
+          value: ' ',
+          title: 'No suffix'
+        },
+        {
           value: 'Jr',
           title: 'Jr'
         },
@@ -81,7 +85,7 @@ export const dataFields = [
     {
       id: 'member_account_account_no',
       type: 'text',
-      label: 'Account no.',
+      label: 'Membership no.',
       numberField: true,
       placeholder: '0123456789',
     },
@@ -95,18 +99,19 @@ export const dataFields = [
           value: 'individual',
           title: 'Individual'
         },
-        {
-          value: 'joint',
-          title: 'Joint'
-        },
-        {
-          value: 'custodial',
-          title: 'Custodial'
-        },
-        {
-          value: 'traditional-ira',
-          title: 'Traditional IRA'
-        },
+        // blocked for MVP
+        // {
+        //   value: 'joint',
+        //   title: 'Joint'
+        // },
+        // {
+        //   value: 'custodial',
+        //   title: 'Custodial'
+        // },
+        // {
+        //   value: 'traditional-ira',
+        //   title: 'Traditional IRA'
+        // },
       ],
     },
 

@@ -42,10 +42,15 @@ class EmpalaInput extends Component {
           disabled={this.props.disabled}
           errorText={errorText}
         >
-          {this.props.mask &&
-          <InputMask mask={this.props.mask}
-                     maskChar=" "
-                     value={this.props.value}
+          {this.props.mask && <InputMask mask={this.props.mask}
+              maskChar="_"
+              formatChars={{
+                '9': '[0-9]',
+                'a': '[A-Za-z]',
+                'A': '[A-Z]',
+                '*': '[A-Za-z0-9]'
+              }}
+              value={this.props.value}
           />}
         </TextField>
       </div>

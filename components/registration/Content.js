@@ -18,6 +18,7 @@ function mapStateToProps(state) {
     menuItems: state.registration.menuItems,
     registrationData: state.registration.registrationData,
     trustedContactActive: state.registration.checkboxes['identity_trusted_contact_person_trusted_contact_checkbox'],
+    errors: state.fieldsErrors,
   }
 }
 
@@ -138,6 +139,7 @@ class Content extends React.PureComponent {
                     tabIndex={this.props.tabIndex}
                     fieldNames={fieldNames}
                     registrationData={this.props.registrationData}
+                    errors={this.props.errors}
                   />
                 </div>
               </div>
