@@ -10,7 +10,7 @@ class Widget extends Component {
     const { widget } = this.props;
     return (
       <div className={`widget-col col-lg-${widget.col}`} key={widget.id}>
-        <div className={`widget widget_h-${widget.height}`}>
+        <div className="widget" style={{ height: `${widget.height}px`}}>
           <div className="widget__head">
             {
               widget.icon && <i className={`widget__icon widget__icon_${widget.icon}`} />

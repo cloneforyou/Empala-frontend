@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Widget from './Widget';
 import Footer from './Footer';
 import { widgets, widgetNews } from '../../localdata/dashboardWidgets';
+import WidgetNews from "./Widget/WidgetNews";
 
 class Main extends Component {
   constructor(props) {
@@ -21,7 +22,11 @@ class Main extends Component {
                 <Widget widget={widget} />
               ))
             }
-            
+            {
+              widgetNews.map(widget => (
+                <WidgetNews widget={widget} />
+              ))
+            }
           </div>
         </div>
         <Footer />
