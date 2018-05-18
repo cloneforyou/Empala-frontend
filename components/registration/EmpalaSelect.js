@@ -35,7 +35,7 @@ const EmpalaSelect = (props) => {
       >
         {props.options.map((option) => (
           <MenuItem
-            key={Date.now() + Math.random()}
+            key={option.value}
             value={option.value}
             primaryText={option.title}
           />

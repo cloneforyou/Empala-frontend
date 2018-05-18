@@ -32,7 +32,7 @@ export const dataFields = [
 
     {
       id: 'profile_employment_employment_country',
-      label: 'Employment Country',
+      label: 'Employment сountry',
       type: 'text',
       placeholder: '',
     },
