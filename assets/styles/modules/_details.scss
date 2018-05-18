@@ -15,9 +15,29 @@
   user-select: none;
 }
 
-.main-text {
-  font-family: Helvetica;
+.main-text-helvetica {
+  font-family: Helvetica, serif;
+  color: #000;
   &_12 {
     @include fontSize(12px)
+  }
+}
+
+.list-horizontal {
+  padding-left: 0;
+  &__item {
+    list-style: none;
+    display: inline-block;
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+  &__link {
+    color: #000;
+    font-family: Helvetica, serif;
+    @include fontSize(12px);
+    &:hover, &:focus {
+      color: $green;
+    }
   }
 }

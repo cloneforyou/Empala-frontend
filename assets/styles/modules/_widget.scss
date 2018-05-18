@@ -1,15 +1,30 @@
 .widget {
   background: $white;
-  padding: 13px 20px;
+  padding: 25px 10px 25px 20px;
   margin-bottom: 15px;
-  overflow: auto;
   border: 1px solid #EDEDED;
-  &_h-390 {
-    height: 390px;
-  }
 
   &__head {
-    margin-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  &__icon {
+    position: relative;
+    display: inline-block;
+    float: left;
+    margin-right: 7px;
+    &:before {
+      background-color: $green;
+      width: 16px;
+      height: 16px;
+      position: relative;
+      display: block;
+    }
+    @each $item in $listIconsTitleWidgets {
+      &_#{$item} {
+        @include iconDashboard($item);
+      }
+    }
   }
 
   &__title {
@@ -18,7 +33,10 @@
     margin: 0;
     font-weight: normal;
   }
-  &_body {
-
+  &__body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 87%;
+    padding-right: 10px;
   }
 }

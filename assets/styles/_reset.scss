@@ -1,0 +1,12 @@
+a {
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
+button, input {
+  &:focus, &:active {
+    outline: none !important;
+    box-shadow: none;
+  }
+}

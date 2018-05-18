@@ -1,6 +1,7 @@
 @import 'modules/fonts';
 @import 'variables';
 @import 'mixins';
+@import "reset";
 @import "../../node_modules/normalize.css/normalize.css";
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import 'modules/header';
@@ -24,7 +25,7 @@
 @import 'modules/details';
 @import 'modules/widget';
 @import 'modules/emp-table';
-
+@import "modules/news-card";
 
 html {
   height: 100%;

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import WidgetTable from './WidgetTable';
+import Widget from './Widget';
 import Footer from './Footer';
-import { widgets } from '../../localdata/dashboardWidgets';
+import { widgets, widgetNews } from '../../localdata/dashboardWidgets';
+import WidgetNews from "./Widget/WidgetNews";
 
 class Main extends Component {
   constructor(props) {
@@ -18,22 +19,24 @@ class Main extends Component {
           <div className="row">
             {
               widgets.map(widget => (
-                <div className={`col-lg-${widget.col}`} key={widget.id}>
-                  <div className={`widget widget_h-${widget.height}`}>
-                    <div className="widget__head">
-                      <h3 className="widget__title">{widget.title}</h3>
-                    </div>
-                    <div className="widget__body">
-                      {
-                        widget.tables.map((table) => (
-                          <WidgetTable table={table} key={table.id} />
-                          ))}
-                    </div>
-                  </div>
-                </div>
+                <Widget widget={widget} />
               ))
             }
-
+            {
+              widgetNews.map(widget => (
+                <WidgetNews widget={widget} />
+              ))
+            }
+            <div className="widget-col col-lg-5">
+              <div className="widget" style={{ height: `324px` }}>
+                <div className="widget__head">
+                  <h3 className="widget__title">Advertisement</h3>
+                </div>
+                <div className="widget__body">
+                  <img src="../../static/images/advertisement.svg" alt="" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <Footer />

@@ -1,5 +1,6 @@
 .dashboard-header {
   background: $white;
+  border: none;
   &_collapsed {
     .dashboard-header__logo {
       width: 180px;
@@ -11,8 +12,9 @@
   &__logo {
     width: 80px;
     background: #222325;
-    padding: 22px 15px;
+    padding: 23px 15px;
     transition: .4s;
+    text-align: center;
     img {
       max-width: 100%;
     }
@@ -20,10 +22,104 @@
   &__main {
     width: calc(100% - 80px);
     transition: .4s;
+    margin: 0;
   }
   &__toogler {
-    span {
-      background: $green;
+    &:focus {
+      outline: none !important;
     }
+    span {
+      position: relative;
+      &:before {
+        content: '';
+        mask: url($path-to-dashboard-icon + 'icon-humburger.svg');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        background-color: $main-color-text-grey;
+        width: 20px;
+        height: 14px;
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
+        left: 0;
+      }
+    }
+  }
+}
+
+.user-nav {
+  &__link {
+    position: relative;
+    &_active, &:hover {
+      .user-nav__icon {
+        &:before {
+          background-color: $green;
+        }
+      }
+    }
+  }
+  &__icon {
+    position: relative;
+    display: block;
+    &:before {
+      content: '';
+      background-color: $main-color-text-grey;
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      left: 0;
+    }
+    &_chat {
+      width: 22px;
+      height: 21px;
+      &:before {
+        mask: url($path-to-dashboard-icon + 'icon-chat.svg');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        width: 20px;
+        height: 21px;
+
+      }
+    }
+    &_notification {
+      width: 16px;
+      height: 20px;
+      &:before {
+        mask: url($path-to-dashboard-icon + 'icon-notification.svg');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        width: 16px;
+        height: 20px;
+      }
+    }
+  }
+
+}
+
+.dashboard-search {
+  display: flex;
+  justify-content: center;
+  &__btn {
+    border: none;
+    position: relative;
+    background: transparent;
+  }
+  &__icon {
+    position: relative;
+    display: block;
+    &:before {
+      content: '';
+      background-color: $main-color-text-grey;
+      mask: url($path-to-dashboard-icon + 'icon-search.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      width: 20px;
+      height: 19px;
+
+      display: block;
+    }
+  }
+  &__input {
+    border: none;
   }
 }

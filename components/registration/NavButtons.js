@@ -1,18 +1,15 @@
 import { connect } from "react-redux";
+import React from 'react';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import MdArrowForward from 'react-icons/lib/md/arrow-forward';
-import {
-  changeTabPage,
-  validateFieldsBlank
-} from "../../actions/registration";
-import _ from 'lodash';
+import { changeTabPage, validateFieldsBlank } from "../../actions/registration";
+import { every } from 'lodash';
 
 function isFieldsFilled(fieldNames, fields) {
-  return _.every(fieldNames, (name) => {return (fields[name] && fields[name] !== '')})
+  return every(fieldNames, name => (fields[name] && fields[name] !== ''));
 }
 
 function isFieldError(fieldsList, errorsList) {
-  console.log(' ** ERRRRRR ', fieldsList, errorsList);
   return fieldsList.filter((field) => errorsList[field]).length > 0;
 }
 
@@ -41,35 +38,36 @@ const NavButtons = (props) => {
   let disabled = !isFieldsFilled(props.fieldNames, props.registrationData) ||
     (props.fieldNames && props.errors && isFieldError(props.fieldNames, props.errors));
   if (props.tabName === 'member' &&
-    props.registrationData['member_account_password_confirm'] !== props.registrationData['member_account_password'])
-  {
+    props.registrationData['member_account_password_confirm'] !== props.registrationData['member_account_password']) {
     disabled = true;
   } else if (props.tabName === 'identity' && props.tabIndex === 4) {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
   }
 
-    return (
+  return (
     <div>
       <button
-        type='button'
-        className='btn--navigate btn--prev '
+        type="button"
+        className="btn--navigate btn--prev "
         onClick={() => props.changeTabPage(props.tabName, props.tabIndex, 'backward')}
       >
-        <MdArrowBack size={20}/>
+        <MdArrowBack size={20} />
       </button>
-      <div style={{display: 'inline-block'}}
-           onClick={()=>props.validateFieldsBlank(props.fieldNames)}>
-      <button
-        type='button'
-        className={`btn--navigate btn--next ${disabled ? '' : 'btn--navigate--active'}`}
-        onClick={() => props.changeTabPage(props.tabName, props.tabIndex, 'forward')}
-        disabled={disabled}
+      <div
+        style={{ display: 'inline-block' }}
+        onClick={() => props.validateFieldsBlank(props.fieldNames)}
       >
-        <MdArrowForward size={20}/>
-      </button>
-    </div>
+        <button
+          type="button"
+          className={`btn--navigate btn--next ${disabled ? '' : 'btn--navigate--active'}`}
+          onClick={() => props.changeTabPage(props.tabName, props.tabIndex, 'forward')}
+          disabled={disabled}
+        >
+          <MdArrowForward size={20} />
+        </button>
+      </div>
     </div>
   );
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(NavButtons);
+export default connect(mapStateToProps, mapDispatchToProps)(NavButtons);
