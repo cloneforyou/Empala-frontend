@@ -3,7 +3,6 @@ import { getMenuItemsByTabName } from "../../utils/registrationUtils";
 import  IoCheckmarkRound from 'react-icons/lib/io/checkmark-round'
 
 const ContentMenuItems = (props) => {
-  console.log('MMMMMMMMMMEEEEENNNNUUUUU', props)
   // const name = props.url ? props.url.query.name : 'member';
   // const menuItems = getMenuItemsByTabName(name);
   return (
