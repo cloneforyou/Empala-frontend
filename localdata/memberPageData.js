@@ -1,5 +1,4 @@
 export const dataFields = [
-  // basic information
   [
     {
       id: 'member_basic_information_residence',
@@ -8,11 +7,10 @@ export const dataFields = [
       options: [
         {
           value: 'United States',
-          title: 'United States'
+          title: 'United States',
         },
       ],
     },
-
     {
       id: 'member_basic_information_prefix',
       hint: 'Please select',
@@ -20,37 +18,34 @@ export const dataFields = [
       options: [
         {
           value: 'Mr',
-          title: 'Mr'
+          title: 'Mr',
         },
         {
           value: 'Mrs',
-          title: 'Mrs'
+          title: 'Mrs',
         },
         {
           value: 'Ms',
-          title: 'Ms'
+          title: 'Ms',
         },
         {
           value: 'Dr',
-          title: 'Dr'
+          title: 'Dr',
         },
       ],
     },
-
     {
       id: 'member_basic_information_first_name',
       type: 'text',
       label: 'First name',
-      placeholder: 'Iain',
+      placeholder: '',
     },
-
     {
       id: 'member_basic_information_last_name',
       type: 'text',
       label: 'Last name',
-      placeholder: 'Clarke',
+      placeholder: '',
     },
-
     {
       id: 'member_basic_information_suffix',
       label: 'Suffix',
@@ -58,38 +53,35 @@ export const dataFields = [
       options: [
         {
           value: ' ',
-          title: 'No suffix'
+          title: 'No suffix',
         },
         {
           value: 'Jr',
-          title: 'Jr'
+          title: 'Jr',
         },
         {
           value: 'Sr',
-          title: 'Sr'
+          title: 'Sr',
         },
         {
           value: 'II',
-          title: 'II'
+          title: 'II',
         },
         {
           value: 'III',
-          title: 'III'
+          title: 'III',
         },
       ],
-    }
+    },
   ],
-
-  // account
   [
     {
       id: 'member_account_account_no',
       type: 'text',
       label: 'Membership no.',
       numberField: true,
-      placeholder: '0123456789',
+      placeholder: '',
     },
-
     {
       id: 'member_account_account_type',
       label: 'Account type',
@@ -97,7 +89,7 @@ export const dataFields = [
       options: [
         {
           value: 'individual',
-          title: 'Individual'
+          title: 'Individual',
         },
         // blocked for MVP
         // {
@@ -114,37 +106,31 @@ export const dataFields = [
         // },
       ],
     },
-
     {
       id: 'member_account_password',
       type: 'password',
       label: 'Password',
       col: 6,
     },
-
     {
       id: 'member_account_password_confirm',
       type: 'password',
       label: 'Confirm Password',
       col: 6,
     },
-
     {
       id: 'member_account_email',
       type: 'email',
       label: 'E-mail address',
-      placeholder: 'iainclarke@gmail.com',
+      placeholder: '',
     },
-
     {
       id: 'member_account_contact_phone',
       type: 'text',
       label: 'Contact telephone no.',
-      placeholder: '+1 415 123 4567',
+      placeholder: '',
     },
   ],
-
-  // identification
   [
     { id: 'member_passport_countryOfIssue' },
     { id: 'member_passport_number' },
@@ -156,3 +142,5 @@ export const dataFields = [
     { id: 'member_drivers_license_expiry_date', col: 6 },
   ],
 ];
+
+export { dataFields as default };

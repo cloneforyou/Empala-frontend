@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withReduxSaga } from '../../store';
 import { setTabName, setTabPageIndex } from '../../actions/registration';
-import { connect } from 'react-redux';
 import NavButtons from './NavButtons';
 import '../../assets/styles/modules/_final-review-page.scss';
 import FieldComponent from './FieldComponent';
