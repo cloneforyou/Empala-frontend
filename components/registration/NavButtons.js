@@ -11,12 +11,17 @@ function isFieldsFilled(fieldNames, fields) {
   return _.every(fieldNames, (name) => {return (fields[name] && fields[name] !== '')})
 }
 
+function isFieldError(fieldsList, errorsList) {
+  console.log(' ** ERRRRRR ', fieldsList, errorsList);
+  return fieldsList.filter((field) => errorsList[field]).length > 0;
+}
+
 function mapStateToProps(state) {
   return {
     tabName: state.registration.tabName || 'info',
     tabIndex: state.registration.tabIndex || 1,
     registrationData: state.registration.registrationData,
-    errors: state.fieldsErrors,
+    errors: state.registration.fieldsErrors,
     checkboxes: state.registration.checkboxes,
   }
 }
@@ -33,7 +38,8 @@ function filterActiveCheckboxes(checkboxesList) {
 }
 
 const NavButtons = (props) => {
-  let disabled = !isFieldsFilled(props.fieldNames, props.registrationData);
+  let disabled = !isFieldsFilled(props.fieldNames, props.registrationData) ||
+    (props.fieldNames && props.errors && isFieldError(props.fieldNames, props.errors));
   if (props.tabName === 'member' &&
     props.registrationData['member_account_password_confirm'] !== props.registrationData['member_account_password'])
   {
@@ -41,6 +47,7 @@ const NavButtons = (props) => {
   } else if (props.tabName === 'identity' && props.tabIndex === 4) {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
   }
+
     return (
     <div>
       <button
