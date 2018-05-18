@@ -49,9 +49,11 @@ class AgreementPage extends PureComponent {
     });
 
     if (prints.indexOf(fullName) > -1) {
-      this.setState({
-        signed: true
-      })
+      if (fullName.length === prints.length) {
+        this.setState({
+          signed: true
+        })
+      }
     }
   };
 
@@ -187,15 +189,16 @@ class AgreementPage extends PureComponent {
             <div className="confirmation__form-submission">
               <div className="form-group form--centering">
                 <label className="label-confirmation">Signature</label>
-                <input type="text" className="input-confirmation form-control" onChange={this.checkRegistrationName}/>
-                {(!this.props.signed && this.props.submitted) &&
-                <div>Please make sure that you provided the correct First name and Last name</div>}
+                <input type="text"
+                       className={`input-confirmation form-control border-default ${(!this.state.signed && this.state.submitted) && 'border-error'}`}
+                       onChange={this.checkRegistrationName} />
+                {(!this.state.signed && this.state.submitted) &&
+                <div className="text--error">Please make sure that you provided the correct First name and Last name</div>}
               </div>
               <button className="btn--cancel" onClick={this.props.changeTabPage}>Cancel</button>
               <button
                 id="submit"
                 className={`btn--submit ${(!this.state.disabled && this.state.signed) && 'btn--active'}`}
-                disabled={(this.state.disabled || !this.state.signed)}
                 onClick={() => {
                   this.handleSubmit();
                 }}
