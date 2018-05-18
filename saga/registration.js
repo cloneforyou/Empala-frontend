@@ -1,7 +1,7 @@
 import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
 import _ from 'lodash';
 import {
-  registrationFail,
+  registrationFail, setInputFieldValueById,
   setTabName,
   setTabPageIndex
 } from '../actions/registration';
@@ -12,7 +12,8 @@ import {
   VALIDATE_FIELDS_BLANK,
   REGISTRATION_SUBMIT_REQUEST,
   COPY_MAILING_ADDRESS,
-  ADDRESS_INFO_REQUEST
+  ADDRESS_INFO_REQUEST,
+  SET_MEMBER_DOCUMENT_TYPE
 } from "../constants/registration";
 import {menuItems} from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -73,6 +74,17 @@ export function* changeTabPage({tabName, tabIndex, direction}) {
   }
 }
 
+export function* clearMemberDocumentInfo({document}) {
+  const data = yield select((state) => state.registration.registrationData);
+  let clearedFields = [];
+  if (document === 'passport') {
+    clearedFields = Object.keys(data).filter((key) => (/member_drivers_license/.test(key)));
+  } else if (document === 'drivers_license') {
+    clearedFields = Object.keys(data).filter((key) => (/member_passport/.test(key)));
+  }
+  yield all(clearedFields.map(field => put(setInputFieldValueById(field, ''))));
+}
+
 export function* saveData() {
   const registrationData = yield select((state) => _.cloneDeep(state.registration.registrationData));
   registrationData['member_account_password'] = '';
@@ -106,6 +118,7 @@ export default function* registrationSaga() {
     takeEvery(ADDRESS_INFO_REQUEST, getAddressInfoByZIP),
     takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
+    takeEvery(SET_MEMBER_DOCUMENT_TYPE, clearMemberDocumentInfo),
     takeLatest(SET_FIELD_VALUE, validationSaga),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields)

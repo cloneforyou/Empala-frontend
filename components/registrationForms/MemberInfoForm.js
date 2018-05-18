@@ -115,7 +115,7 @@ class MemberInfoForm extends React.PureComponent {
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('passport')}
             errorText={this.props.fieldsErrors['member_passport_number']}
-            mask='A999999999'
+            mask='a999999999'
           />
           <DatePickerField
             id={'member_passport_issue_date'}

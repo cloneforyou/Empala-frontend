@@ -47,7 +47,7 @@ class EmpalaInput extends React.Component {
           errorText={errorText}
         >
           {this.props.mask && <InputMask mask={this.props.mask}
-             maskChar=" "
+               maskChar="_"
              formatChars= {{'9': '[0-9]',
              'a': '[A-Za-z]',
              'A': '[A-Z]',
