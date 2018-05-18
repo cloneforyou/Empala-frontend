@@ -14,6 +14,25 @@
     margin-bottom: 20px;
   }
 
+  &__icon {
+    position: relative;
+    display: inline-block;
+    float: left;
+    margin-right: 7px;
+    &:before {
+      background-color: $green;
+      width: 16px;
+      height: 16px;
+      position: relative;
+      display: block;
+    }
+    @each $item in $listIconsTitleWidgets {
+      &_#{$item} {
+        @include iconDashboard($item);
+      }
+    }
+  }
+
   &__title {
     @include fontSize(15px);
     color: $green;

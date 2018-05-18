@@ -4,6 +4,7 @@ export const widgets = [
   {
     id: uniqueId(),
     title: 'Financial capital',
+    icon: 'community',
     col: 4,
     height: 390,
     tables: [
@@ -110,6 +111,7 @@ export const widgets = [
   {
     id: uniqueId(),
     title: 'Social capital',
+    icon: 'groups',
     col: 3,
     height: 390,
     tables: [
@@ -205,7 +207,8 @@ export const widgets = [
   },
   {
     id: uniqueId(),
-    title: 'Financial capital',
+    title: 'Environmental capital',
+    icon: 'environmental',
     col: 5,
     height: 390,
     tables: [
@@ -213,57 +216,39 @@ export const widgets = [
         id: uniqueId(),
         headers: [
           {
-            title: 'Exposure',
+            title: 'Size & growth',
             align: 'left',
           },
           {
-            title: 'Value',
-            align: 'right',
-          },
-          {
-            title: 'Day chg',
-            align: 'center',
-          },
-          {
-            title: 'Allocation',
-            align: 'left',
-          },
-          {
-            title: 'Domestic',
-            align: 'left',
-          },
-          {
-            title: 'Foreign',
+            title: 'No.',
             align: 'left',
           },
         ],
         data: [
           {
             id: uniqueId(),
-            exposure: 'Total a / c value',
-            value: '9,999,999,999',
-            dayChg: '999.9',
-            allocation: 'EMARA & MM',
-            domestic: '9,999,999,999',
-            foreign: '9,999,999,999',
+            size: 'Community assets',
+            no: '9,999,999,999',
           },
           {
             id: uniqueId(),
-            exposure: 'Total a / c value',
-            value: '9,999,999,999',
-            dayChg: '999.9',
-            allocation: 'Currencies & MM',
-            domestic: '9,999,999,999',
-            foreign: '9,999,999,999',
+            size: 'Community assets',
+            no: '9,999,999,999',
           },
           {
             id: uniqueId(),
-            exposure: 'Total a / c value',
-            value: '9,999,999,999',
-            dayChg: '999.9',
-            allocation: 'Currencies & MM',
-            domestic: '9,999,999,999',
-            foreign: '9,999,999,999',
+            size: 'Community assets',
+            no: '9,999,999,999',
+          },
+          {
+            id: uniqueId(),
+            size: 'Community assets',
+            no: '9,999,999,999',
+          },
+          {
+            id: uniqueId(),
+            size: 'Community assets',
+            no: '9,999,999,999',
           },
         ],
       },
@@ -271,39 +256,29 @@ export const widgets = [
         id: uniqueId(),
         headers: [
           {
-            title: 'ST performance',
+            title: 'Opinions',
             align: 'left',
           },
           {
-            title: '% change',
-            align: 'center',
-          },
-          {
-            title: 'Vs indexes',
-            align: 'center',
-          },
-          {
-            title: 'LT Performance',
+            title: 'No.',
             align: 'left',
-          },
-          {
-            title: '% change',
-            align: 'center',
-          },
-          {
-            title: 'Vs indexes',
-            align: 'center',
           },
         ],
         data: [
           {
             id: uniqueId(),
-            STperformance: '1 Week',
-            change1: '000.0',
-            indexes: '000.0',
-            LTperformance: '1 Year',
-            change2: '9,999.9',
-            indexe2: '9,999.9',
+            opinion: 'Votes completed',
+            no: '999,999',
+          },
+          {
+            id: uniqueId(),
+            opinion: 'Votes completed',
+            no: '999,999',
+          },
+          {
+            id: uniqueId(),
+            opinion: 'Votes completed',
+            no: '999,999',
           },
         ],
       },

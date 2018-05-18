@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import WidgetTable from './WidgetTable';
+import WidgetTable from './Widget/WidgetTable';
 import Footer from './Footer';
 import { widgets } from '../../localdata/dashboardWidgets';
 
@@ -21,6 +21,9 @@ class Main extends Component {
                 <div className={`widget-col col-lg-${widget.col}`} key={widget.id}>
                   <div className={`widget widget_h-${widget.height}`}>
                     <div className="widget__head">
+                      {
+                        widget.icon && <i className={`widget__icon widget__icon_${widget.icon}`} />
+                      }
                       <h3 className="widget__title">{widget.title}</h3>
                     </div>
                     <div className="widget__body">
@@ -33,7 +36,6 @@ class Main extends Component {
                 </div>
               ))
             }
-
           </div>
         </div>
         <Footer />
