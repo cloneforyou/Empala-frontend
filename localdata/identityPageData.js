@@ -68,7 +68,6 @@ export const dataFields = [
       type: 'text',
       placeholder: '',
     },
-
     {
       id: 'identity_mailing_address_residential_address_line_2',
       field: 'input',
@@ -76,7 +75,6 @@ export const dataFields = [
       type: 'text',
       placeholder: '',
     },
-
     {
       id: 'identity_mailing_address_zip_code',
       field: 'input',
@@ -85,7 +83,6 @@ export const dataFields = [
       numberField: true,
       placeholder: '',
     },
-
     {
       id: 'identity_mailing_address_state',
       hint: 'Please select',
@@ -182,8 +179,7 @@ export const dataFields = [
     },
     {
       field: 'checkbox',
-      label: `I have been notified by the IRS that I am subject to 
-      backup withholding.`,
+      label: 'I have been notified by the IRS that I am subject to backup withholding.',
       id: 'identity_checkbox_5',
     },
   ],
