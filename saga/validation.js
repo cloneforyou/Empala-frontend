@@ -66,7 +66,6 @@ export function* validateEmptyFields(action) {
   if (action.fields) {
     const data = yield select((state) => state.registration.registrationData);
     const blankFields = action.fields.filter((field) => (!data[field] || data[field] === ''));
-    // console.log('******* blank ===>', blankFields)
     yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
@@ -80,7 +79,6 @@ export default function* validationSaga({id, value}) {
     'member_passport_number',
     'member_drivers_license_number',
     'regulatory_identification_ssn',
-    'identity_trusted_contact_person_email',
   ];
   yield put(setFieldValid(id));
   if (serverValidatedFields.includes(id)) {
