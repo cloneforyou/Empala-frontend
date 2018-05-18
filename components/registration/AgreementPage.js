@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 
-import { changeTabPage, sendRegistrationForm } from '../../actions/registration';
+import {changeTabPage, sendRegistrationForm} from '../../actions/registration';
 
 function mapStateToProps(state) {
   return {
@@ -23,6 +23,8 @@ class AgreementPage extends PureComponent {
     super(props);
     this.state = {
       disabled: true,
+      signed: false,
+      submitted: false,
     };
     this.handleScroll = this.handleScroll.bind(this);
   }
@@ -35,6 +37,24 @@ class AgreementPage extends PureComponent {
     this.containerInfo.removeEventListener('scroll', this.handleScroll);
   }
 
+  checkRegistrationName = (e) => {
+    const firstName = this.props.firstName.split(' ').join(' ');
+    const lastName = this.props.lastName.split(' ').join(' ');
+    const fullName = firstName + ' ' + lastName;
+    let prints = e.target.value.split(' ').join(' ');
+
+    this.setState({
+      submitted: false,
+      signed: false,
+    });
+
+    if (prints.indexOf(fullName) > -1) {
+      this.setState({
+        signed: true
+      })
+    }
+  };
+
   handleScroll(event) {
     const scroll = event.target.scrollTop;
     const height = event.target.scrollHeight - event.target.clientHeight;
@@ -43,6 +63,14 @@ class AgreementPage extends PureComponent {
         disabled: false,
       });
     }
+  }
+
+  handleSubmit() {
+    this.setState({
+      submitted: true,
+    });
+
+    if (this.state.signed && !this.state.disabled) this.props.submitRegistration();
   }
 
   render() {
@@ -58,35 +86,51 @@ class AgreementPage extends PureComponent {
           <ul className="list-info">
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>Empala Customer Agreement</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>Empala Customer Agreement</ins>
+              </a>
             </li>
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>Empala Privacy Statement</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>Empala Privacy Statement</ins>
+              </a>
             </li>
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>Empala Securities Terms and Conditions</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>Empala Securities Terms and Conditions</ins>
+              </a>
             </li>
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>APEX Customer Agreements</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>APEX Customer Agreements</ins>
+              </a>
             </li>
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>Empala Securities Use and Risk Disclosures</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>Empala Securities Use and Risk Disclosures</ins>
+              </a>
             </li>
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow)</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow)</ins>
+              </a>
             </li>
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>Empala Business Continuity Plan</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>Empala Business Continuity Plan</ins>
+              </a>
             </li>
             <li className="list-info__item">
               <span>- </span>
-              <a href="#" className="link-decoration"><ins>FINRA Public Disclosure Program (BrokerCheck)</ins></a>
+              <a href="#" className="link-decoration">
+                <ins>FINRA Public Disclosure Program (BrokerCheck)</ins>
+              </a>
             </li>
           </ul>
 
@@ -142,14 +186,18 @@ class AgreementPage extends PureComponent {
             <div className="confirmation__form-submission">
               <div className="form-group form--centering">
                 <label className="label-confirmation">Signature</label>
-                <input type="text" className="input-confirmation form-control" value={`${this.props.firstName} ${this.props.lastName}`} readOnly />
+                <input type="text" className="input-confirmation form-control" onChange={this.checkRegistrationName}/>
+                {(!this.props.signed && this.props.submitted) &&
+                <div>Please make sure that you provided the correct First name and Last name</div>}
               </div>
               <button className="btn--cancel" onClick={this.props.changeTabPage}>Cancel</button>
               <button
                 id="submit"
-                className={`btn--submit ${!this.state.disabled && 'btn--active'}`}
-                disabled={this.state.disabled}
-                onClick={this.props.submitRegistration}
+                className={`btn--submit ${(!this.state.disabled && this.state.signed) && 'btn--active'}`}
+                disabled={(this.state.disabled || !this.state.signed)}
+                onClick={() => {
+                  this.handleSubmit();
+                }}
               >Submit
               </button>
             </div>
