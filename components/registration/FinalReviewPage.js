@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { withReduxSaga } from '../../store';
+
 import { setTabName, setTabPageIndex } from '../../actions/registration';
 import NavButtons from './NavButtons';
 import '../../assets/styles/modules/_final-review-page.scss';
 import FieldComponent from './FieldComponent';
 
-class FinalReviewPage extends React.PureComponent {
+class FinalReviewPage extends PureComponent {
   constructor(props) {
     super(props);
   }

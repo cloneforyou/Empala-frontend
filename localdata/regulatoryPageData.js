@@ -21,6 +21,7 @@ export const dataFields = [
       hint: 'Please select',
       field: 'select',
       options: countriesList,
+      autoWidth: true,
     },
   ],
   [
@@ -53,7 +54,7 @@ export const dataFields = [
       ],
     },
     {
-      label: 'No. of dependents',
+      label: 'No of dependents',
       id: 'regulatory_family_dependents',
       field: 'input',
       type: 'text',

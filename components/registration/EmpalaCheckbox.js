@@ -13,26 +13,26 @@ class EmpalaCheckbox extends Component {
 
     this.state = {
       open: false,
-      check: false
+      check: false,
     };
   }
 
   render() {
     return (
-      <div className='check-container'>
+      <div className="check-container">
         <Checkbox
           id={this.props.id}
           label={this.props.label}
-          uncheckedIcon={<MdPanoramaFishEye style={ style.panoramaFishEyeIcon }/>}
-          checkedIcon={<MdCheckCircle style={ style.checkCircleIcon }/>}
-          inputStyle={ style.inputSwitchesStyle }
-          labelStyle={ style.labelCheckboxStyle }
-          style={ style.checkBoxStyle }
-          onCheck = {this.props.handleCheck}
+          uncheckedIcon={<MdPanoramaFishEye style={style.panoramaFishEyeIcon}/>}
+          checkedIcon={<MdCheckCircle style={style.checkCircleIcon } />}
+          inputStyle={style.inputSwitchesStyle}
+          labelStyle={style.labelCheckboxStyle}
+          style={style.checkBoxStyle}
+          onCheck={this.props.handleCheck}
           checked={this.props.checked}
         />
       </div>
-    )
+    );
   }
 }
 
