@@ -5,10 +5,10 @@
   "description": "Client for the EMPALA project",
   "author": "Dunice Team",
   "scripts": {
-    "dev": "SERVER='dev' next",
-    "stage": "SERVER='stage' next",
+    "dev": "SERVER=dev next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "stage": "SERVER=stage NODE_ENV=production node server.js"
   },
   "dependencies": {
     "autoprefixer": "7.1.5",
