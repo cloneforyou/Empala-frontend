@@ -71,6 +71,11 @@ class WidgetNews extends Component {
                     <div className="news-card__foot">
                       <div className="news-card__rating">
                         <span>Rating:</span>
+                        <div className="stars">
+                          <div className="stars__empty">
+                            <div className={`stars__fill stars__fill_${card.rating}`} />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

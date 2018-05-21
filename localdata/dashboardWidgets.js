@@ -693,7 +693,7 @@ export const widgetNews = [
         creator: 'BBC News',
         date: new Date(2018, 13, 1),
         title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
+        rating: 3,
         image: 'news-image.svg',
       },
       {
@@ -701,7 +701,7 @@ export const widgetNews = [
         creator: 'BBC News',
         date: new Date(2014, 13, 1),
         title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
+        rating: 5,
         image: 'news-image.svg',
       },
       {
@@ -709,7 +709,7 @@ export const widgetNews = [
         creator: 'BBC News',
         date: new Date(2013, 13, 1),
         title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
+        rating: 2,
         image: 'news-image.svg',
       },
     ],
