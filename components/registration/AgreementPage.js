@@ -187,7 +187,7 @@ class AgreementPage extends PureComponent {
 
           <div className="col-lg-8">
             <div className="confirmation__form-submission">
-              <div className="form-group form--centering">
+              <div className="form-group form-centering">
                 <div>
                   <label className="label-confirmation">Signature</label>
                   <input type="text"

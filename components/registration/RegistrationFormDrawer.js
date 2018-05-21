@@ -1,11 +1,9 @@
-import React from 'react';
-import EmpalaInput from "./EmpalaInput";
-import EmpalaSelect from "./EmpalaSelect";
-import {withReduxSaga} from "../../store";
+import React, { Component } from 'react';
 
+import EmpalaInput from './EmpalaInput';
+import EmpalaSelect from './EmpalaSelect';
 
-
-export default class RegistrationFormDrawer extends React.Component {
+export default class RegistrationFormDrawer extends Component {
 
   mappingComponent = (item) => {
     if (item.options) {

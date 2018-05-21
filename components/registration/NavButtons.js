@@ -1,5 +1,6 @@
-import { connect } from 'react-redux';
 import React from 'react';
+import { connect } from 'react-redux';
+import { every } from 'lodash';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import MdArrowForward from 'react-icons/lib/md/arrow-forward';
 import { changeTabPage, validateFieldsBlank } from '../../actions/registration';
