@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { values } from 'lodash';
+import Table from './Table';
 
 class WidgetTable extends Component {
   constructor(props) {
@@ -8,35 +7,24 @@ class WidgetTable extends Component {
   }
 
   render() {
-    const { table } = this.props;
+    const { widget } = this.props;
     return (
-      <div className="table-responsive">
-        <table className="table table-borderless emp-table">
-          <thead>
-            <tr>
-              {table.headers.map((header, i) => (
-                <th scope="col" className="emp-table__th" key={Math.random()}>{header.title}</th>
-            ))}
-            </tr>
-          </thead>
-          <tbody>
+      <div className={`widget-col col-lg-${widget.col}`} key={widget.id}>
+        <div className="widget" style={{ height: `${widget.height}px` }}>
+          <div className="widget__head">
             {
-            table.data && table.data.length > 0 && table.data.map((row, i) => (
-              <tr key={row.id} className="emp-table__tr">
-                {
-                  values(row).map((item, index) => {
-                    if (index > 0) {
-                      return (
-                        <td className="emp-table__td" key={Math.random()}>{item}</td>
-                      );
-                    }
-                  })
-                }
-              </tr>
-            ))
-          }
-          </tbody>
-        </table>
+              widget.icon && <i className={`widget__icon widget__icon_${widget.icon}`} />
+            }
+            <h3 className="widget__title">{widget.title}</h3>
+          </div>
+          <div className="widget__body">
+            {
+              widget.tables && widget.tables.map(table => (
+                <Table table={table} key={table.id} />
+              ))
+            }
+          </div>
+        </div>
       </div>
     );
   }

@@ -627,7 +627,7 @@ export const widgetNews = [
     title: 'News',
     type: 'All',
     col: 4,
-    height: 324,
+    height: 365,
     news: [
       {
         id: uniqueId(),
@@ -668,7 +668,7 @@ export const widgetNews = [
     title: 'Empala internal news',
     type: 'Empala',
     col: 3,
-    height: 324,
+    height: 365,
     news: [
       {
         id: uniqueId(),

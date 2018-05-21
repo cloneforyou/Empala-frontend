@@ -1,6 +1,6 @@
 .news-card {
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 28px;
   }
   &__wrap-image {
     overflow: hidden;
@@ -14,9 +14,6 @@
       width: 69px;
     }
   }
-  /*  &__image {
-
-    }*/
   &__head {
     @include fontSize(10px);
   }

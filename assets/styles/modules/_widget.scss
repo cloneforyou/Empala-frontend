@@ -34,9 +34,52 @@
     font-weight: normal;
   }
   &__body {
+    position: relative;
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 87%;
     padding-right: 10px;
+
+  }
+}
+
+.widget-adv-img {
+  max-height: 88%;
+  height: 100%;
+  display: block;
+  position: relative;
+  padding-right: 15px;
+  img {
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.widget-menu {
+  position: relative;
+  float: right;
+  margin-top: -20px;
+  margin-right: 13px;
+  &__btn {
+    background: none;
+    border: none;
+    height: 18px;
+    width: 4px;
+    position: relative;
+    padding: 0;
+    cursor: pointer;
+    &:before {
+      height: 18px;
+      width: 4px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: $main-color-text-grey;
+    }
+    @include iconDashboard('dots')
+  }
+  &__list{
+
   }
 }
