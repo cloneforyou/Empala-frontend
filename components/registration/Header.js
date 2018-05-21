@@ -1,13 +1,14 @@
 import React from 'react';
-import Link from 'next/link'
+import Link from 'next/link';
 import IoIosArrowThinLeft from 'react-icons/lib/io/ios-arrow-thin-left';
+
 import logo from '../../static/images/logo.png';
 
 const Header = () => (
-    <div className='header'>
-      <div className='row no-gutters header__block noselect'>
+    <div className="header">
+      <div className="row no-gutters header__block noselect">
 
-        <div className='header__block__left-side'>
+        <div className="header__block__left-side">
           <Link href="/">
             <a className="header__block__left-link">
               <IoIosArrowThinLeft size={52} />
@@ -16,17 +17,17 @@ const Header = () => (
           </Link>
         </div>
 
-        <div className='header__block__center'>
+        <div className="header__block__center">
           <Link href="/">
               <img src={logo}
                    alt="EMPALA"
                    style={{ width: '182px' }}
-                   className='pointer'
+                   className="pointer"
               />
           </Link>
         </div>
 
-        <div className='header__block__right-side'>
+        <div className="header__block__right-side">
           <a href='#'
              className="header__block__right-link">
             I have an account (Login)

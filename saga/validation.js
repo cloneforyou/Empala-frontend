@@ -69,6 +69,17 @@ export function* validateEmptyFields(action) {
     yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
+
+
+export function* validateLiquidWorth({value}) {
+  const data = yield select((state) => state.registration.registrationData);
+  const liquidNetWorth = data['profile_financials_liquid_net_worth'];
+  if (value.length < liquidNetWorth.length ||
+    (value.length === liquidNetWorth.length && value[0] <= liquidNetWorth[0])) {
+    yield put(setInputFieldValueById('profile_financials_liquid_net_worth', ''));
+  }
+}
+
 // Add your validation function here
 
 
@@ -85,5 +96,7 @@ export default function* validationSaga({id, value}) {
     yield validateFieldOnServer({id, value});
   } else if (id === 'member_account_password_confirm' || id === 'member_account_password' ) {
     yield validatePasswordField({id, value});
+  } else if (id === 'profile_financials_total_net_worth') {
+    yield  validateLiquidWorth({value})
   }
 };

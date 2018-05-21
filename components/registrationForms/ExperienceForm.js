@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { setInputFieldValueById } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import { dataFields } from '../../localdata/experiencePageData';
@@ -8,13 +9,13 @@ const mapStateToProps = (state) => {
   return ({
     registrationData: state.registration.registrationData,
     page: state.registration.tabIndex,
-  })
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return ({
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value))
-  })
+  });
 };
 
 
@@ -35,17 +36,19 @@ class ExperienceForm extends React.Component {
           hint={item.hint || item.label}
           autoWidth={item.autoWidth}
         />
-      )
+      );
     };
     this.isRadioChecked = (name) => (this.props.registrationData.memberDocument === name);
   }
 
   render() {
     return (
-      <form className='row'>
-        { dataFields[this.props.page - 1].map((item) => this.mappingComponent(item)) }
-      </form>
-    )
+      <div className="container-fluid">
+        <form className="row">
+          { dataFields[this.props.page - 1].map((item) => this.mappingComponent(item)) }
+        </form>
+      </div>
+    );
   }
 }
 

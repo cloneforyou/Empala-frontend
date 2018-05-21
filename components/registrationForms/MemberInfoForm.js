@@ -10,8 +10,8 @@ import {
 import EmpalaSelect from '../registration/EmpalaSelect';
 import DatePickerField from '../registration/DatePickerField';
 import { usStatesList } from '../../localdata/usStatesList';
-import { getValuesForSelectField } from "../../utils/registrationUtils";
-import { countriesList } from "../../localdata/countriesList";
+import { getValuesForSelectField } from '../../utils/registrationUtils';
+import { countriesList } from '../../localdata/countriesList';
 
 const usStates = getValuesForSelectField(usStatesList);
 
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
     registrationData: state.registration.registrationData,
     page: state.registration.tabIndex,
     fieldsErrors: state.registration.fieldsErrors,
-  })
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  })
+  });
 };
 
 
@@ -58,7 +58,7 @@ class MemberInfoForm extends React.PureComponent {
             col={item.col}
             hint={item.hint || item.label}
           />
-        )
+        );
       }
       return (
         <EmpalaInput
@@ -74,7 +74,7 @@ class MemberInfoForm extends React.PureComponent {
           mask={mask}
           numberField={item.numberField}
         />
-      )
+      );
     };
     this.isRadioChecked = (name) => (this.props.registrationData.memberDocument === name);
   }
@@ -110,6 +110,7 @@ class MemberInfoForm extends React.PureComponent {
             disabled={!this.isRadioChecked('passport')}
             errorText={this.props.fieldsErrors['member_passport_countryOfIssue']}
             hint="Please select"
+            autoWidth
           />
           <EmpalaInput
             key="member-passport-number"
@@ -147,7 +148,7 @@ class MemberInfoForm extends React.PureComponent {
             label="Drivers License"
             onClick={this.props.switchDocumentType}
             checked={this.isRadioChecked('drivers_license')}
-            labelStyle={this.isRadioChecked('drivers_license') ? { color: '#98c73a' } : {}}
+            labelStyle={this.isRadioChecked('drivers_license') ? {color: '#98c73a'} : {}}
             style={{ marginTop: '20px' }}
           />
           <EmpalaSelect
@@ -193,7 +194,7 @@ class MemberInfoForm extends React.PureComponent {
           />
         </div>
       </div>
-    )
+    );
   }
 }
 

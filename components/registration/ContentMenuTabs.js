@@ -8,7 +8,7 @@ const ContentMenuTabs = (props) => {
     props.dispatch(setTabPageIndex(1));
   };
   return (
-    <ul className='tabs-menu'>
+    <ul className="tabs-menu">
       <li className={props.tabName === 'member' ? 'tabs-menu__item tabs-menu__item_active' : 'tabs-menu__item'}>
         <span onClick={() => handleClick('member')}>Member</span>
       </li>

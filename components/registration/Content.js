@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+
 import NavButtons from './NavButtons';
-import {getMenuItems, getRegistrationDataFromCache, setTabName, setTabPageIndex} from "../../actions/registration";
-import {getMenuItemsByTabName, getPageFieldNames, getTabContentByTabName} from "../../utils/registrationUtils";
-import { connect } from "react-redux";
+import { getMenuItems, getRegistrationDataFromCache, setTabName, setTabPageIndex } from '../../actions/registration';
+import { getMenuItemsByTabName, getPageFieldNames, getTabContentByTabName } from '../../utils/registrationUtils';
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
-import InformationPage from "./InformationPage";
-import FinalReviewPage from "./FinalReviewPage";
-import AgreementPage from "./AgreementPage";
-
-
+import InformationPage from './InformationPage';
+import FinalReviewPage from './FinalReviewPage';
+import AgreementPage from './AgreementPage';
 
 function mapStateToProps(state) {
   return {
@@ -19,28 +18,22 @@ function mapStateToProps(state) {
     registrationData: state.registration.registrationData,
     trustedContactActive: state.registration.checkboxes['identity_trusted_contact_person_trusted_contact_checkbox'],
     errors: state.fieldsErrors,
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return ({
-      getMenuItems: (tabName) => {dispatch(getMenuItems(getMenuItemsByTabName(tabName)))},
-      setTabName: (tabName) => dispatch(setTabName(tabName)),
-      setTabPageIndex:(tabIndex) => dispatch(setTabPageIndex(tabIndex)),
-      getRegistrationDataFromCache: () => dispatch(getRegistrationDataFromCache())
-    })
+    getMenuItems: (tabName) => {
+      dispatch(getMenuItems(getMenuItemsByTabName(tabName)));
+    },
+    setTabName: (tabName) => dispatch(setTabName(tabName)),
+    setTabPageIndex: (tabIndex) => dispatch(setTabPageIndex(tabIndex)),
+    getRegistrationDataFromCache: () => dispatch(getRegistrationDataFromCache()),
+  });
 }
 
 
-class Content extends React.PureComponent {
-
-  componentWillReceiveProps(nextProps) {
-    // console.log(this.props);
-    // console.log(nextProps);
-    if (this.props.tabName !== nextProps.tabName) {
-      this.props.getMenuItems(nextProps.tabName)
-    }
-  }
+class Content extends PureComponent {
 
   componentDidMount() {
     if (localStorage.getItem('registrationData')) {
@@ -49,14 +42,22 @@ class Content extends React.PureComponent {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    // console.log(this.props);
+    // console.log(nextProps);
+    if (this.props.tabName !== nextProps.tabName) {
+      this.props.getMenuItems(nextProps.tabName);
+    }
+  }
+
   render() {
     if (this.props.tabName === 'info') {
       this.props.setTabName('info');
       this.props.setTabPageIndex(1);
       return (
-        <div className='onboard'>
-          <div className='onboard__container'>
-            <div className='row no-gutters onboard__col'>
+        <div className="onboard">
+          <div className="onboard__container">
+            <div className="row no-gutters onboard__col">
               <InformationPage />
             </div>
           </div>
@@ -66,26 +67,25 @@ class Content extends React.PureComponent {
       this.props.setTabName('final_review');
       this.props.setTabPageIndex(1);
       return (
-        <div className='onboard'>
-          <div className='onboard__container'>
-            <div className='row no-gutters onboard__col'>
+        <div className="onboard">
+          <div className="onboard__container">
+            <div className="row no-gutters onboard__col">
               <FinalReviewPage />
             </div>
           </div>
-        </div> )
+        </div>);
     } else if (this.props.tabName === 'agreement') {
       this.props.setTabName('agreement');
       this.props.setTabPageIndex(1);
       return (
-        <div className='onboard'>
-          <div className='onboard__container'>
-            <div className='row no-gutters onboard__col'>
+        <div className="onboard">
+          <div className="onboard__container">
+            <div className="row no-gutters onboard__col">
               <AgreementPage />
             </div>
           </div>
-        </div> )
+        </div>);
     }
-
 
 
     if (!this.props.menuItems || this.props.menuItems.length === 0) {
@@ -95,7 +95,7 @@ class Content extends React.PureComponent {
     let fieldNames = getPageFieldNames(this.props.tabName, this.props.tabIndex);
     if (this.props.tabName === 'member' && this.props.tabIndex === 3) {
       fieldNames = fieldNames.filter((fieldName) => {
-        return fieldName.includes(this.props.registrationData.memberDocument)})
+        return fieldName.includes(this.props.registrationData.memberDocument)});
     } else if (this.props.tabName === 'identity' && this.props.tabIndex === 1 ) {
       fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_residential_address_same_mailing_address_checkbox');
     } else if (this.props.tabName === 'identity' && this.props.tabIndex === 3) {
@@ -111,14 +111,14 @@ class Content extends React.PureComponent {
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
 
-    return(
-      <div className='onboard'>
-        <div className='onboard__container'>
-          <div className='row no-gutters onboard__col'>
-            <div className='col-6'>
-              <div className='onboard__left-block'>
+    return (
+      <div className="onboard">
+        <div className="onboard__container">
+          <div className="row no-gutters onboard__col">
+            <div className="col-6">
+              <div className="onboard__left-block">
                 <div className="onboard__left-block--top">
-                  <ContentMenuTabs tabName={this.props.tabName}/>
+                  <ContentMenuTabs tabName={this.props.tabName} />
                 </div>
                 <div className="onboard__left-block--center">
                   <ContentMenuItems
@@ -128,12 +128,12 @@ class Content extends React.PureComponent {
                 </div>
               </div>
             </div>
-            <div className='col-6'>
-              <div className='onboard__right-block'>
-                <div className='onboard__right-block--center'>
+            <div className="col-6">
+              <div className="onboard__right-block">
+                <div className="onboard__right-block--center">
                   {pageContent.tabContent}
                 </div>
-                <div className='onboard__right-block--bottom'>
+                <div className="onboard__right-block--bottom">
                   <NavButtons
                     fieldNames={fieldNames}
                   />

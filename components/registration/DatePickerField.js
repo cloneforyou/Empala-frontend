@@ -38,7 +38,7 @@ const DatePickerField = (props) => {
         <FaCalendarO style={style.calendarIcon}/>
       </div>
     </div>
-  )
+  );
 };
 
 export default DatePickerField;
