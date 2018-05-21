@@ -41,9 +41,8 @@ class RightBlock extends Component {
                 'dropdown-menu dropdown-menu-right user-nav__dropdown-menu' :
                 'dropdown-menu dropdown-menu-right show user-nav__dropdown-menu'}
             >
-              <a className="dropdown-item" href="#">Action</a>
-              <a className="dropdown-item" href="#">Another action</a>
-              <a className="dropdown-item" href="#">Something else here</a>
+              <a className="dropdown-item" href="#">Profile</a>
+              <a className="dropdown-item" href="#">Logout</a>
             </div>
           </li>
         </ul>
