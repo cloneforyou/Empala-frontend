@@ -1,9 +1,9 @@
-import {call, put, takeLatest, select, takeEvery, all} from 'redux-saga/effects';
+import { call, put, takeLatest, select, takeEvery, all } from 'redux-saga/effects';
 import request from '../utils/request';
-import {setUserData} from "../actions/dashboard";
+import { setUserData } from '../actions/dashboard';
 
 
-export function* authenticate({login, password}) {
+export function* authenticate({ login, password }) {
   const url = '/api/auth/login';
   const options = {
     method: 'GET',
@@ -13,10 +13,9 @@ export function* authenticate({login, password}) {
     },
   };
   try {
-
-  }
-  catch(err) {
-
+    yield call(request, url, options);
+  } catch (err) {
+    console.log(' ** ', err);
   }
 }
 
@@ -31,14 +30,13 @@ export function* getUserData() {
   };
 
   try {
-    const data = yield call (request, url, options);
+    const data = yield call(request, url, options);
     yield put(setUserData(data.data));
-  }
-  catch(err) {
+  } catch (err) {
     // console.log(' ** DASHBOARD ERROR =======>', err);
     if (err.message === 'Missing refresh token' || err.message === 'Refresh token expired') {
       location.assign('/');
-    } else if (err.message === 'Missing access token' || err.message === 'Token expired' ) {
+    } else if (err.message === 'Missing access token' || err.message === 'Token expired') {
       yield refreshTokens();
     }
   }
@@ -48,20 +46,20 @@ export function* getUserData() {
 export function* refreshTokens() {
   const refreshToken = localStorage.getItem('refreshToken');
   try {
-    const tokens = yield call(request,
+    const tokens = yield call(
+      request,
       '/api/auth/refresh',
       {
         method: 'GET',
         headers:
-          {'x-refresh-token': refreshToken},
-      }
+          { 'x-refresh-token': refreshToken },
+      },
     );
 
-    localStorage.setItem('accessToken', tokens.data.tokens['access']);
-    localStorage.setItem('refreshToken',tokens.data.tokens['refresh']);
+    localStorage.setItem('accessToken', tokens.data.tokens.access);
+    localStorage.setItem('refreshToken', tokens.data.tokens.refresh);
     location.assign('/dashboard');
-  }
-  catch(err) {
+  } catch (err) {
     location.assign('/');
   }
 }

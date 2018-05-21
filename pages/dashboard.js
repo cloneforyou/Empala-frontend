@@ -20,6 +20,7 @@ function mapDispatchToProps(dispatch) {
   return {
     collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool)),
     getUserData: () => dispatch(dashboardActions.getUserData()),
+    startSocket: () => dispatch(dashboardActions.startSocket()),
   }
 }
 
@@ -39,9 +40,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.props.getUserData();
-    const socket = openSocket(serverOrigins.aws, {
-        query: { token: localStorage.getItem('accessToken') }
-      });
+    this.props.startSocket();
   }
 
   render() {

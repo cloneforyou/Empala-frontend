@@ -1,38 +1,44 @@
 import {
   GET_USER_DATA_FAIL, GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
-  REFRESH_TOKEN_REQUEST
-} from "../constants/dashboard";
+  REFRESH_TOKEN_REQUEST, START_WEBSOCKET,
+} from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
-  return  {
+  return {
     type: 'COLLAPSE_SIDEBAR',
     sidebarCollapsed: bool,
-  }
+  };
 }
 
 export function getUserData() {
   return {
     type: GET_USER_DATA_REQUEST,
-  }
+  };
 }
 
 export function setUserData(data) {
   return {
     type: GET_USER_DATA_SUCCESS,
     data,
-  }
+  };
 }
 
 export function setUserError(err) {
   return {
     type: GET_USER_DATA_FAIL,
     err,
-  }
+  };
 }
 
 export function refreshTokens() {
-  return  {
+  return {
     type: REFRESH_TOKEN_REQUEST,
-  }
+  };
+}
+
+export function startSocket() {
+  return {
+    type: START_WEBSOCKET,
+  };
 }
 
