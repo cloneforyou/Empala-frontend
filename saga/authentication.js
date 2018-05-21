@@ -25,8 +25,8 @@ export function* getUserData() {
   const options = {
     method: 'GET',
     headers: {
-      'x-access-token': localStorage.getItem('accessToken'),
-      'x-refresh-token': localStorage.getItem('refreshToken'),
+      'X-Access-Token': localStorage.getItem('accessToken'),
+      'X-Refresh-Token': localStorage.getItem('refreshToken'),
     },
   };
 

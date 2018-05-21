@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { withReduxSaga } from '../store'
 import { connect } from 'react-redux';
+import openSocket from 'socket.io-client';
 import Header from '../components/dashboard/Header';
 import Body from '../components/dashboard/Body';
 import stylesheet from '../assets/styles/main.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import * as dashboardActions from '../actions/dashboard'
+import * as dashboardActions from '../actions/dashboard';
+import { serverOrigins } from "../utils/config";
 
 
 function mapStateToProps(state) {
@@ -37,6 +39,9 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.props.getUserData();
+    const socket = openSocket(serverOrigins.aws, {
+        query: { token: localStorage.getItem('accessToken') }
+      });
   }
 
   render() {
