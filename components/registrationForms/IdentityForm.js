@@ -95,29 +95,29 @@ class IdentityForm extends React.Component {
           );
         case 'checkbox':
           return (
-              <EmpalaCheckbox
-                key={item.id}
-                id={item.id}
-                label={item.label}
-                handleCheck={this.props.toggleCheckboxById}
-                checked={this.props.checkboxes[item.id]}
-              />
+            <EmpalaCheckbox
+              key={item.id}
+              id={item.id}
+              label={item.label}
+              handleCheck={this.props.toggleCheckboxById}
+              checked={this.props.checkboxes[item.id]}
+            />
           );
       }
     };
   }
 
   render() {
-
-
     return (
-      <form className="row">
-        {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
-        <ModalWindow
-          open={this.props.showModal}
-          handleClose={this.props.closeModal}
-        />
-      </form>
+      <div className="container-fluid">
+        <form className="row">
+          {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
+          <ModalWindow
+            open={this.props.showModal}
+            handleClose={this.props.closeModal}
+          />
+        </form>
+      </div>
     );
   }
 }

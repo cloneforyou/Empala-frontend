@@ -37,7 +37,7 @@ class RegulatoryForm extends React.Component {
 
     this.mappingComponent = (item) => {
       let mask = '';
-      const  ssnMask = '999-99-9999';
+      const ssnMask = '999-99-9999';
       if (item.id.includes('ssn')) {
         mask = ssnMask;
       }
@@ -91,9 +91,11 @@ class RegulatoryForm extends React.Component {
 
   render() {
     return (
-      <form className="row">
-        {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
-      </form>
+      <div className="container-fluid">
+        <form className="row">
+          {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
+        </form>
+      </div>
     );
   }
 }
