@@ -232,6 +232,7 @@ export const widgets = [
     tables: [
       {
         id: uniqueId(),
+        group: 1,
         headers: [
           {
             title: 'Size & growth',
@@ -272,6 +273,7 @@ export const widgets = [
       },
       {
         id: uniqueId(),
+        group: 1,
         headers: [
           {
             title: 'Opinions',
@@ -297,6 +299,37 @@ export const widgets = [
             id: uniqueId(),
             opinion: 'Votes completed',
             no: '999,999',
+          },
+        ],
+      },
+      {
+        id: uniqueId(),
+        group: 2,
+        headers: [
+          {
+            title: 'Sentiments',
+            align: 'left',
+          },
+          {
+            title: '',
+            align: 'left',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            sentiments: 'Equities',
+            chart: 'sentim-chart1.svg',
+          },
+          {
+            id: uniqueId(),
+            sentiments: 'Equities',
+            chart: 'sentim-chart2.svg',
+          },
+          {
+            id: uniqueId(),
+            sentiments: 'Equities',
+            chart: 'sentim-chart1.svg',
           },
         ],
       },

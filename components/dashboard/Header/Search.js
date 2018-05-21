@@ -9,10 +9,7 @@ class Search extends Component {
   render() {
     return (
       <div className="col dashboard-search justify-content-left">
-        <button
-          className="dashboard-search__btn"
-          // onClick={this.openSearch}
-        >
+        <button className="dashboard-search__btn">
           <i className="dashboard-search__icon" />
         </button>
         <input

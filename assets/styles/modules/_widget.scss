@@ -1,8 +1,8 @@
 .widget {
   background: $white;
   padding: 25px 10px 25px 20px;
-  margin-bottom: 15px;
   border: 1px solid #EDEDED;
+  height: 100%;
 
   &__head {
     margin-bottom: 20px;
@@ -79,7 +79,7 @@
     }
     @include iconDashboard('dots')
   }
-  &__list{
+  &__list {
 
   }
 }
