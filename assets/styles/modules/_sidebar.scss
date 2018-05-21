@@ -39,6 +39,9 @@
         left: 0;
       }
     }
+    .user-status > span:before {
+      left: -20px;
+    }
   }
   &__user-status {
     position: absolute;
@@ -120,7 +123,7 @@
       height: 8px;
       border-radius: 50%;
       position: absolute;
-      left: -20px;
+      left: -13px;
       top: 3px;
     }
   }
