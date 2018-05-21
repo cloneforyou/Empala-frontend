@@ -25,6 +25,15 @@ class Table extends Component {
                 {
                   values(row).map((item, index) => {
                     if (index > 0) {
+                      if (row.status === item) {
+                        return (
+                          <td
+                            className={ item !== 'Active' ? item !== 'Action' ? 'emp-table__td' : 'emp-table__td red' : 'emp-table__td green'}
+                            key={Math.random()}
+                          >{item}
+                          </td>
+                        );
+                      }
                       return (
                         <td className="emp-table__td" key={Math.random()}>{item}</td>
                       );

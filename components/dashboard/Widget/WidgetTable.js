@@ -30,4 +30,4 @@ class WidgetTable extends Component {
   }
 }
 
-export default WidgetTable;
+export default WidgetTable ;
