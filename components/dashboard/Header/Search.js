@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 
 class Search extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
+
 
   render() {
     return (
-      <div className="col dashboard-search">
-        <button className="dashboard-search__btn">
+      <div className="col dashboard-search justify-content-left">
+        <button
+          className="dashboard-search__btn"
+          // onClick={this.openSearch}
+        >
           <i className="dashboard-search__icon" />
         </button>
         <input
@@ -17,7 +21,8 @@ class Search extends Component {
           placeholder="Search"
         />
       </div>
-    )
+    );
   }
 }
-export default Search
+
+export default Search;

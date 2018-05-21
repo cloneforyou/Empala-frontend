@@ -110,11 +110,14 @@
 
 .dashboard-search {
   display: flex;
-  justify-content: center;
   &__btn {
     border: none;
-    position: relative;
+    position: absolute;
     background: transparent;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 0;
   }
   &__icon {
     position: relative;
@@ -127,11 +130,25 @@
       mask-repeat: no-repeat;
       width: 20px;
       height: 19px;
-
       display: block;
     }
   }
   &__input {
     border: none;
+    outline: none !important;
+    box-shadow: none !important;
+    opacity: 0;
+    transition: .3s;
+    width: 34px;
+    position: relative;
+    cursor: pointer;
+    &:focus{
+      cursor: text;
+      width: 100%;
+      opacity: 1;
+      background: #fff;
+      z-index: 3;
+    }
   }
+
 }

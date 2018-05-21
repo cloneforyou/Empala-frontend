@@ -16,11 +16,13 @@
     &_up {
       &:before {
         content: '\25B4';
+        margin-right: 3px;
       }
     }
     &_down {
       &:before {
         content: '\25BE';
+        margin-right: 3px;
       }
     }
   }
