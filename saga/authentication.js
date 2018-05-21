@@ -32,11 +32,36 @@ export function* getUserData() {
 
   try {
     const data = yield call (request, url, options);
-    yield put(setUserData(data))
+    yield put(setUserData(data.data));
   }
   catch(err) {
-    console.log(' ** DASHBOARD ERROR =======>', err);
+    // console.log(' ** DASHBOARD ERROR =======>', err);
+    if (err.message === 'Missing refresh token' || err.message === 'Refresh token expired') {
+      location.assign('/');
+    } else if (err.message === 'Missing access token' || err.message === 'Token expired' ) {
+      yield refreshTokens();
+    }
   }
 }
 
 
+export function* refreshTokens() {
+  const refreshToken = localStorage.getItem('refreshToken');
+  try {
+    const tokens = yield call(request,
+      '/api/auth/refresh',
+      {
+        method: 'GET',
+        headers:
+          {'x-refresh-token': refreshToken},
+      }
+    );
+
+    localStorage.setItem('accessToken', tokens.data.tokens['access']);
+    localStorage.setItem('refreshToken',tokens.data.tokens['refresh']);
+    location.assign('/dashboard');
+  }
+  catch(err) {
+    location.assign('/');
+  }
+}

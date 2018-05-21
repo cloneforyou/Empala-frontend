@@ -23,24 +23,24 @@ function mapDispatchToProps(dispatch) {
 
 class Dashboard extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       sidebarCollapsed: props.sidebarCollapsed
     }
   }
 
   collapseMenu = () => {
-    const sidebarCollapsed = !this.state.sidebarCollapsed
-    this.setState({ sidebarCollapsed })
+    const sidebarCollapsed = !this.state.sidebarCollapsed;
+    this.setState({ sidebarCollapsed });
     this.props.collapseSidebar(sidebarCollapsed)
-  }
+  };
 
   componentDidMount() {
     this.props.getUserData();
   }
 
   render() {
-    const { sidebarCollapsed } = this.state
+    const { sidebarCollapsed } = this.state;
     return (
       <MuiThemeProvider>
         <div className="full-height-wrap">

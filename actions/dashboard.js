@@ -1,4 +1,7 @@
-import {GET_USER_DATA_FAIL, GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS} from "../constants/dashboard";
+import {
+  GET_USER_DATA_FAIL, GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
+  REFRESH_TOKEN_REQUEST
+} from "../constants/dashboard";
 
 export function collapseSidebar(bool) {
   return  {
@@ -26,3 +29,10 @@ export function setUserError(err) {
     err,
   }
 }
+
+export function refreshTokens() {
+  return  {
+    type: REFRESH_TOKEN_REQUEST,
+  }
+}
+
