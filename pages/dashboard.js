@@ -7,6 +7,20 @@ import stylesheet from '../assets/styles/main.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as dashboardActions from '../actions/dashboard'
 
+
+function mapStateToProps(state) {
+  return {
+    sidebarCollapsed: state.dashboard.sidebarCollapsed,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool)),
+    getUserData: () => dispatch(dashboardActions.getUserData()),
+  }
+}
+
 class Dashboard extends Component {
   constructor(props) {
     super(props)
@@ -19,6 +33,10 @@ class Dashboard extends Component {
     const sidebarCollapsed = !this.state.sidebarCollapsed
     this.setState({ sidebarCollapsed })
     this.props.collapseSidebar(sidebarCollapsed)
+  }
+
+  componentDidMount() {
+    this.props.getUserData();
   }
 
   render() {
@@ -38,8 +56,4 @@ class Dashboard extends Component {
   }
 }
 
-export default withReduxSaga(connect((state) => ({
-  sidebarCollapsed: state.dashboard.sidebarCollapsed
-}), (dispatch) => ({
-  collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool))
-}))(Dashboard))
+export default withReduxSaga(connect(mapStateToProps,mapDispatchToProps)(Dashboard))
