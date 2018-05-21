@@ -45,6 +45,11 @@
     bottom: 0;
     width: 100%;
   }
+  .sidebar-sticky {
+    overflow-y: auto;
+    height: 100%;
+    padding-bottom: 40px;
+  }
 }
 
 .nav-list {
