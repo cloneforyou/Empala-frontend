@@ -13,6 +13,16 @@
     @media (max-width: 1600px) {
       @include fontSize(10px);
     }
+    &_up {
+      &:before {
+        content: '\25B4';
+      }
+    }
+    &_down {
+      &:before {
+        content: '\25BE';
+      }
+    }
   }
   &__tr {
 

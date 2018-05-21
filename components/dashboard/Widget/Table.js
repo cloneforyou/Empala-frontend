@@ -25,18 +25,30 @@ class Table extends Component {
                 {
                   values(row).map((item, index) => {
                     if (index > 0) {
-                      if (row.status === item) {
+                      if (row.status && row.status === item) {
                         return (
                           <td
-                            className={ item !== 'Active' ? item !== 'Action' ? 'emp-table__td' : 'emp-table__td red' : 'emp-table__td green'}
+                            className={item !== 'Active' ? item !== 'Action' ? 'emp-table__td' : 'emp-table__td red' : 'emp-table__td green'}
                             key={Math.random()}
                           >{item}
                           </td>
                         );
+                      } else if (row.dayChg && row.dayChg.data === item.data) {
+                        return (
+                          <td
+                            className={item.position !== 'up' ? item.position !== 'down' ?
+                              'emp-table__td' :
+                              'emp-table__td_down  emp-table__td red' :
+                              'emp-table__td_up  emp-table__td green'
+                            }
+                            key={Math.random()}
+                          >{item.data}
+                          </td>
+                        );
                       }
-                      return (
-                        <td className="emp-table__td" key={Math.random()}>{item}</td>
-                      );
+                        return (
+                          <td className="emp-table__td" key={Math.random()}>{item}</td>
+                        );
                     }
                   })
                 }
