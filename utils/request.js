@@ -3,7 +3,7 @@ import { serverOrigins } from "./config";
 
 
 export default function request(url, options = {}) {
-  console.log('------------------------------', url, options)
+  // console.log('------------------------------', url, options)
   return axios({
     method: options.method,
     url: `${serverOrigins.aws}${url}`,
