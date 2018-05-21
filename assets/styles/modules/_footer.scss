@@ -2,27 +2,24 @@
   max-width: 1600px;
   margin: 0 auto;
   padding: 25px 15px 45px;
+  &__text {
+    color: #808895;
+    font-size: 10px;
+    line-height: 13px;
+    &_info {
+      margin-bottom: 4px;
+    }
+    &_disclaimer {
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+
+      .footer-link {
+        margin-right: 20px;
+        color: #808895;
+      }
+    }
+  }
 }
 
-.footer--text {
-  color: #808895;
-  font-size: 10px;
-  line-height: 13px;
-  //word-spacing: -1px;
-}
-
-.footer--disclaimer {
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.footer--link {
-  margin-right: 20px;
-  color: #808895;
-}
-
-.text--info {
-  margin-bottom: 4px;
-}
 

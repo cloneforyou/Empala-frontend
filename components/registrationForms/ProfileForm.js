@@ -82,7 +82,7 @@ class ProfileForm extends React.PureComponent {
 
   render() {
     return (
-      <form className='row'>
+      <form className="row">
         {dataFields[this.props.page - 1].map((item) => {
           if (item.id === 'profile_financials_liquid_net_worth') {
             let filteredOptions = item.options.filter(option => {
@@ -90,13 +90,13 @@ class ProfileForm extends React.PureComponent {
               (option.value.length === this.props.registrationData['profile_financials_total_net_worth'].length &&
               option.value[0] <= this.props.registrationData['profile_financials_total_net_worth'][0]))
             });
-            return this.mappingComponent(item, filteredOptions)
+            return this.mappingComponent(item, filteredOptions);
           }
-          return this.mappingComponent(item)
+          return this.mappingComponent(item);
         })}
       </form>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

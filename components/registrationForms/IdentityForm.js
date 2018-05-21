@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
       mailingAddressCheckboxChecked: state.registration['identity_residential_address_same_mailing_address_checkbox'],
       fieldsErrors: state.registration.fieldsErrors,
       checkboxes: state.registration.checkboxes,
-      }
+    }
   );
 };
 
@@ -34,9 +34,9 @@ const mapDispatchToProps = (dispatch) => {
       setInputValueById: (e) => {
         const { id, value } = e.target;
         if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
-          dispatch(getInfoByZipCode(id, value))
+          dispatch(getInfoByZipCode(id, value));
         }
-        dispatch(setInputFieldValueById(id, value))
+        dispatch(setInputFieldValueById(id, value));
       },
       toggleCheckboxById: (e, checked) => {
         dispatch(toggleCheckboxById(e.target.id));
@@ -122,4 +122,4 @@ class IdentityForm extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IdentityForm)
+export default connect(mapStateToProps, mapDispatchToProps)(IdentityForm);

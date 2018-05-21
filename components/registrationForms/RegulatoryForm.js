@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import EmpalaInput from '../registration/EmpalaInput';
-import {dataFields} from '../../localdata/regulatoryPageData';
-import {connect} from 'react-redux';
+import { dataFields } from '../../localdata/regulatoryPageData';
 import {
   getMenuItems,
   setInputFieldValueById,
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
     registrationData: state.registration.registrationData,
     page: state.registration.tabIndex,
     fieldsErrors: state.registration.fieldsErrors,
-  })
+  });
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -27,7 +27,7 @@ const mapDispatchToProps = (dispatch) => {
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  })
+  });
 };
 
 
@@ -36,9 +36,9 @@ class RegulatoryForm extends React.Component {
     super(props);
 
     this.mappingComponent = (item) => {
-      let mask ='';
+      let mask = '';
       const  ssnMask = '999-99-9999';
-      if (item.id.includes('ssn')){
+      if (item.id.includes('ssn')) {
         mask = ssnMask;
       }
       switch (item.field) {
@@ -52,8 +52,9 @@ class RegulatoryForm extends React.Component {
               value={this.props.registrationData[item.id] || ''}
               handleChange={this.props.setSelectedValueById}
               errorText={this.props.fieldsErrors[item.id]}
+              autoWidth={item.autoWidth}
             />
-          )
+          );
         case 'input':
           return (
             <EmpalaInput
@@ -90,10 +91,10 @@ class RegulatoryForm extends React.Component {
 
   render() {
     return (
-      <form className='row'>
+      <form className="row">
         {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
       </form>
-    )
+    );
   }
 }
 
