@@ -4,7 +4,6 @@ import { every } from 'lodash';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import MdArrowForward from 'react-icons/lib/md/arrow-forward';
 import { changeTabPage, validateFieldsBlank } from '../../actions/registration';
-import { every } from 'lodash';
 
 function isFieldsFilled(fieldNames, fields) {
   return every(fieldNames, name => (fields[name] && fields[name] !== ''));
