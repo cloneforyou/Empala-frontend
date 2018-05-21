@@ -28,3 +28,10 @@
     }
   }
 }
+
+@mixin iconFlags($country) {
+  &:before {
+    content: '';
+    background: url($path-to-dashboard-icon + 'flag-' + $country +'.svg') no-repeat;
+  }
+}

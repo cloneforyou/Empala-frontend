@@ -42,6 +42,9 @@
     .user-status > span:before {
       left: -20px;
     }
+    & + .side-menu {
+      left: 180px;
+    }
   }
   &__user-status {
     position: absolute;
