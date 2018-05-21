@@ -31,13 +31,15 @@ class RightBlock extends Component {
           </li>
           <li className="nav-item dropdown">
             <button
-              className="nav-link dropdown-toggle"
+              className="nav-link user-nav__dropdown-btn"
               onClick={this.toggleMenu}
             >
               <img src={avatar} alt="" />
             </button>
             <div
-              className={(menuAvatarShow === false) ? 'dropdown-menu dropdown-menu-right' : 'dropdown-menu dropdown-menu-right show'}
+              className={(menuAvatarShow === false) ?
+                'dropdown-menu dropdown-menu-right user-nav__dropdown-menu' :
+                'dropdown-menu dropdown-menu-right show user-nav__dropdown-menu'}
             >
               <a className="dropdown-item" href="#">Action</a>
               <a className="dropdown-item" href="#">Another action</a>

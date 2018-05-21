@@ -29,7 +29,7 @@ class Header extends Component {
         </a>
         <div className="dashboard-header__main row justify-content-between">
           <button
-            className="navbar-toggler collapsed dashboard-header__toogler"
+            className="navbar-toggler collapsed dashboard-header__toggle"
             onClick={this.props.collapseMenu}
           >
             <span className="navbar-toggler-icon" />
