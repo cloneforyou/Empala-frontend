@@ -8,9 +8,21 @@ import CountryMenu from './CountryMenu';
 class Sidebar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      secondSideMenu: {
+        open: false,
+        label: '',
+      },
+    };
+  }
+
+  openMenu = (label) => {
+    const { open } = this.state.secondSideMenu;
+    this.setState({ secondSideMenu: { open: !open, label } })
   }
 
   render() {
+    const { secondSideMenu } = this.state;
     const { sidebarCollapsed } = this.props;
     return (
       <div>
@@ -26,6 +38,7 @@ class Sidebar extends Component {
                         <li
                           className={item.color ? `nav-list__item nav-list__item_${item.color}` : 'nav-list__item'}
                           key={j}
+                          onFocus={this.openMenu(item.label)}
                         >
                           <i
                             className={`nav-list__icon nav-list__icon_${item.icon}`}
@@ -45,7 +58,12 @@ class Sidebar extends Component {
         </div>
         {
           listContries.map(group => (
-            <CountryMenu country={group} key={Math.random()} />
+            <CountryMenu
+              country={group}
+              key={Math.random()}
+              open={secondSideMenu.open}
+              label={secondSideMenu.label}
+            />
           ))
         }
       </div>

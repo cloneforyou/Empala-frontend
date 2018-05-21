@@ -1,6 +1,7 @@
 export const listContries = [
   {
     title: 'Americas',
+    label: 'Americas',
     color: 'red',
     list: [
       {
