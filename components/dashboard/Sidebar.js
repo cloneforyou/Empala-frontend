@@ -28,6 +28,16 @@ class Sidebar extends Component {
     });
   }
 
+  closeMenu = () => {
+    this.setState({
+      secondSideMenu: {
+        open: false,
+        label: ''
+      }
+    })
+  }
+
+
   render() {
     const { secondSideMenu } = this.state;
     const { sidebarCollapsed, selectedGroup } = this.props;
@@ -46,6 +56,7 @@ class Sidebar extends Component {
                           className={item.color ? `nav-list__item nav-list__item_${item.color}` : 'nav-list__item'}
                           key={j}
                           onClick={() => this.openMenu(item.label)}
+                          onBlur={this.closeMenu}
                         >
                           <i
                             className={`nav-list__icon nav-list__icon_${item.icon}`}
@@ -64,7 +75,7 @@ class Sidebar extends Component {
           </div>
         </div>
         {
-          secondSideMenu.open && selectedGroup.list && <CountryMenu country={selectedGroup}/>
+          secondSideMenu.open && selectedGroup.list && <CountryMenu country={selectedGroup} />
         }
       </div>
     );
