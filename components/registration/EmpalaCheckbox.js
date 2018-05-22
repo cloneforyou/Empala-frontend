@@ -26,7 +26,7 @@ class EmpalaCheckbox extends Component {
           uncheckedIcon={<MdPanoramaFishEye style={style.panoramaFishEyeIcon}/>}
           checkedIcon={<MdCheckCircle style={style.checkCircleIcon } />}
           inputStyle={style.inputSwitchesStyle}
-          labelStyle={style.labelCheckboxStyle}
+          labelStyle={this.props.active ? style.labelActiveCheckboxStyle : style.labelCheckboxStyle}
           style={style.checkBoxStyle}
           onCheck={this.props.handleCheck}
           checked={this.props.checked}
