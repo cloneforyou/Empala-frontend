@@ -113,7 +113,7 @@ export const dataFields = [
     {
       id: 'identity_trusted_contact_person_trusted_contact_checkbox',
       field: 'checkbox',
-      label: 'Trusted contact',
+      label: 'Trusted contact person',
     },
     {
       field: 'input',

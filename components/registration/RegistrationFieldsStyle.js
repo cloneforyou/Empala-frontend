@@ -63,6 +63,9 @@ const style = {
   labelCheckboxStyle: {
     color: MAIN_COLOR_TEXT_GRAY,
   },
+  labelActiveCheckboxStyle: {
+    color: GREEN,
+  },
   checkBoxStyle: {
     marginBottom: '20px',
   },
