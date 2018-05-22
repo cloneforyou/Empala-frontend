@@ -9,6 +9,16 @@
   transition: .4s;
   &_black {
     background: $dark-grey;
+    .user-status {
+      background: #3b3e42;
+    }
+  }
+  &_blue {
+    background: $dark-blue;
+    .user-status {
+      background: #31304c;
+    }
+
   }
   &__part-nav {
     padding: 0 5px;
@@ -113,7 +123,6 @@
 }
 
 .user-status {
-  background: #3b3e42;
   text-align: center;
   padding: 15px 0;
   & > span {

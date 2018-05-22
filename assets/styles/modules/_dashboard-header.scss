@@ -1,5 +1,4 @@
 .dashboard-header {
-  background: $white;
   border: none;
   &_collapsed {
     .dashboard-header__logo {
@@ -11,7 +10,6 @@
   }
   &__logo {
     width: 80px;
-    background: #222325;
     padding: 23px 15px;
     transition: .4s;
     text-align: center;
@@ -46,6 +44,32 @@
         left: 0;
       }
     }
+  }
+  &_light {
+    background: $white;
+    .dashboard-header__logo {
+      background: #222325;
+    }
+    .user-nav__dropdown-menu {
+      background: $white;
+    }
+
+  }
+  &_dark {
+    background: #25243e;
+    .dashboard-header__logo {
+      background: $dark-blue;
+    }
+    .user-nav__dropdown-menu {
+      background: #383757;
+      .dropdown-item {
+        color: $main-color-text-grey;
+        &:hover, &:focus {
+          background: #46456b
+        }
+      }
+    }
+
   }
 }
 
