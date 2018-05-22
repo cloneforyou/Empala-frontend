@@ -5,10 +5,10 @@
   "description": "Client for the EMPALA project",
   "author": "Dunice Team",
   "scripts": {
-    "dev": "SERVER='dev' next",
-    "stage": "SERVER='stage' next",
+    "dev": "SERVER=dev NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "stage": "SERVER=stage NODE_ENV=production node server.js"
   },
   "dependencies": {
     "autoprefixer": "7.1.5",
@@ -45,6 +45,9 @@
     "redux": "3.7.2",
     "redux-saga": "0.15.4",
     "sass-loader": "^6.0.6",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
+    "socket.io-react": "^1.2.0",
     "url-loader": "^1.0.1",
     "xml-js": "^1.6.2",
     "yarn": "^1.6.0"

@@ -77,7 +77,6 @@ class ProfileForm extends React.PureComponent {
         />
       );
     };
-    this.isRadioChecked = (name) => (this.props.registrationData.memberDocument === name);
   }
 
   render() {
