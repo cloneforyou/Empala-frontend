@@ -24,7 +24,7 @@ export const dataFields = [
       label: 'Zip code',
       id: 'identity_zip_code',
       type: 'text',
-      numberField: true,
+      typeField: 'numberField',
       placeholder: '',
     },
     {
@@ -80,7 +80,7 @@ export const dataFields = [
       field: 'input',
       label: 'Zip code',
       type: 'text',
-      numberField: true,
+      typeField: 'numberField',
       placeholder: '',
     },
     {

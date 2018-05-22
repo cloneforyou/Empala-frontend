@@ -12,9 +12,9 @@ class EmpalaInput extends Component {
   }
 
   checkRegistrationField = (e) => {
-    if ((/^\d*$/).test(e.target.value) && this.props.numberField) {
+    if ((/^\d*$/).test(e.target.value) && this.props.typeField) {
       this.props.handleChange(e)
-    } else if (!this.props.numberField) {
+    } else if (!this.props.typeField) {
       this.props.handleChange(e)
     }
   };

@@ -4,7 +4,7 @@ import {
   setFieldInvalid,
   setFieldValid,
   setInputFieldValueById,
-  showIdentityModal
+  showIdentityModal,
 } from '../actions/registration';
 import request from '../utils/request';
 
@@ -18,7 +18,7 @@ function* validatePasswordField({id, value}) {
       yield put(setFieldInvalid(id, 'Passwords mismatch: check password and confirm password fields.'));
     }
   } else if (id === 'member_account_password') {
-    if (password.length < 8 || !/[A-Z]+/.test(password) || !/\d+/.test(password) ) {
+    if (password.length < 8 || !/[A-Z]+/.test(password) || !/\d+/.test(password)) {
       yield put(setFieldInvalid(id, 'Passwords must contain at least 8 characters and have at least one Capital letter and numerical digit.'));
     } else {
       yield put(setFieldValid(id));
@@ -33,8 +33,8 @@ function* validateFieldOnServer({id, value}) {
   const options = {
     method: 'POST',
     data: {
-      [id]: value
-    }
+      [id]: value,
+    },
   };
   try {
     const result = yield call(request, url, options);
@@ -46,7 +46,6 @@ function* validateFieldOnServer({id, value}) {
 
 
 export function* validateCheckbox(action) {
-
   const isChecked = yield select((state) => state.registration.checkboxes[action.id]);
   if (/identity_checkbox/.test(action.id) &&  isChecked) {
     yield put(showIdentityModal());
@@ -59,7 +58,6 @@ export function* validateCheckbox(action) {
     const trustedContactFields = Object.keys(data).filter((key) => (/identity_trusted_contact/.test(key)));
     yield all(trustedContactFields.map(field => put(setInputFieldValueById(field, ''))));
   }
-
 }
 
 export function* validateEmptyFields(action) {
@@ -70,6 +68,13 @@ export function* validateEmptyFields(action) {
   }
 }
 
+export function* validateFieldValue ({fieldId, fieldValue}) {
+  if (fieldId === 'identity_residential_address_residential_address_line_1' || fieldId === 'identity_residential_address_residential_address_line_2') {
+    if (fieldValue.toLowerCase().replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '') === 'pobox') {
+      yield put(setFieldInvalid(fieldId, 'PO Box is not allowed in residential address'));
+    }
+  }
+}
 
 export function* validateLiquidWorth({value}) {
   const data = yield select((state) => state.registration.registrationData);
@@ -97,6 +102,6 @@ export default function* validationSaga({id, value}) {
   } else if (id === 'member_account_password_confirm' || id === 'member_account_password' ) {
     yield validatePasswordField({id, value});
   } else if (id === 'profile_financials_total_net_worth') {
-    yield  validateLiquidWorth({value})
+    yield validateLiquidWorth({value});
   }
 };

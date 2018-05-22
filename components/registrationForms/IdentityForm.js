@@ -10,6 +10,7 @@ import {
   getInfoByZipCode,
   setInputFieldValueById,
   toggleCheckboxById,
+  validateFieldValue,
 } from '../../actions/registration';
 import ModalWindow from '../registration/ModalWindow';
 
@@ -37,6 +38,9 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(getInfoByZipCode(id, value));
         }
         dispatch(setInputFieldValueById(id, value));
+        if (id === 'identity_residential_address_residential_address_line_1' || id === 'identity_residential_address_residential_address_line_2') {
+          dispatch(validateFieldValue(id, value));
+        }
       },
       toggleCheckboxById: (e, checked) => {
         dispatch(toggleCheckboxById(e.target.id));
@@ -71,7 +75,7 @@ class IdentityForm extends React.Component {
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
               col={item.col}
-              numberField={item.numberField}
+              typeField={item.typeField}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
               errorText={this.props.fieldsErrors[item.id]}
               mask={mask}

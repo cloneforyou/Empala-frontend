@@ -73,7 +73,7 @@ class MemberInfoForm extends React.PureComponent {
           placeholder={item.placeholder}
           col={item.col}
           mask={mask}
-          numberField={item.numberField}
+          typeField={item.typeField}
         />
       );
     };

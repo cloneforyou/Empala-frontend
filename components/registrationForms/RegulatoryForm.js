@@ -67,6 +67,7 @@ class RegulatoryForm extends React.Component {
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
               errorText={this.props.fieldsErrors[item.id]}
+              typeField={item.typeField}
               mask={mask}
             />
           );

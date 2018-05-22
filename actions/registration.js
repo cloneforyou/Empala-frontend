@@ -17,6 +17,7 @@ import {
   REGISTRATION_SUBMIT_FAIL,
   VALIDATE_FIELDS_BLANK,
   ADDRESS_INFO_REQUEST,
+  VALIDATE_FIELD_VALUE,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -141,5 +142,13 @@ export function getInfoByZipCode(fieldId, zipCode) {
     type: ADDRESS_INFO_REQUEST,
     fieldId,
     zipCode,
+  };
+}
+
+export function validateFieldValue(fieldId, fieldValue) {
+  return {
+    type: VALIDATE_FIELD_VALUE,
+    fieldId,
+    fieldValue,
   };
 }
