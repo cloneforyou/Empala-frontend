@@ -1,39 +1,36 @@
-import React from 'react'
-import {withReduxSaga} from '../store'
-import { connect } from 'react-redux';
+import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Link from 'next/link';
+import { withReduxSaga } from '../store';
 import Header from '../components/registration/Header';
 import Footer from '../components/registration/Footer';
-import stylesheet from '../assets/styles/main.scss'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Link from 'next/link'
-
+import stylesheet from '../assets/styles/main.scss';
 
 class Index extends React.Component {
-
   render() {
     return (
       <MuiThemeProvider>
         <div>
-          <style dangerouslySetInnerHTML={{__html: stylesheet}}/>
-          <Header/>
-          <div className='index_placeholder noselect'>
-            <div className='index_placeholder__inner'>
+          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+          <Header />
+          <div className="index_placeholder noselect">
+            <div className="index_placeholder__inner">
               <div>
                 <Link href="/registration">
-                  <a className='index_placeholder__link'>Registration</a>
+                  <a className="index_placeholder__link">Registration</a>
                 </Link>
                 {'  /  '}
                 <Link href="#">
-                  <a className='index_placeholder__link'>Log in</a>
+                  <a className="index_placeholder__link">Log in</a>
                 </Link>
               </div>
             </div>
           </div>
-          <Footer/>
+          <Footer />
         </div>
       </MuiThemeProvider>
-    )
+    );
   }
 }
 
-export default withReduxSaga(Index)
+export default withReduxSaga(Index);
