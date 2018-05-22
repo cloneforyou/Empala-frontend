@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
-import { listContries } from '../../localdata/marketAccesLists';
 import CountryMenu from './CountryMenu';
+import { setGroupCountry } from '../../actions/dashboard'
 
 
 class Sidebar extends Component {
@@ -11,19 +11,26 @@ class Sidebar extends Component {
     this.state = {
       secondSideMenu: {
         open: false,
-        label: '',
+        label: props.selectedGroup.label || '',
       },
     };
   }
 
-  openMenu = (label) => {
-    const { open } = this.state.secondSideMenu;
-    this.setState({ secondSideMenu: { open: !open, label } })
+  openMenu = (nextLabel) => {
+    const { open, label } = this.state.secondSideMenu;
+    this.setState({
+      secondSideMenu: {
+        open: nextLabel === label ? !open : true,
+        label: nextLabel
+      }
+    }, () => {
+      this.props.setGroupCountry(nextLabel)
+    });
   }
 
   render() {
     const { secondSideMenu } = this.state;
-    const { sidebarCollapsed } = this.props;
+    const { sidebarCollapsed, selectedGroup } = this.props;
     return (
       <div>
         <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_black' : 'sidebar sidebar_black'}>
@@ -38,7 +45,7 @@ class Sidebar extends Component {
                         <li
                           className={item.color ? `nav-list__item nav-list__item_${item.color}` : 'nav-list__item'}
                           key={j}
-                          onFocus={this.openMenu(item.label)}
+                          onClick={() => this.openMenu(item.label)}
                         >
                           <i
                             className={`nav-list__icon nav-list__icon_${item.icon}`}
@@ -57,14 +64,7 @@ class Sidebar extends Component {
           </div>
         </div>
         {
-          listContries.map(group => (
-            <CountryMenu
-              country={group}
-              key={Math.random()}
-              open={secondSideMenu.open}
-              label={secondSideMenu.label}
-            />
-          ))
+          secondSideMenu.open && selectedGroup.list && <CountryMenu country={selectedGroup}/>
         }
       </div>
     );
@@ -72,4 +72,8 @@ class Sidebar extends Component {
 }
 
 
-export default connect(state => ({}))(Sidebar);
+export default connect(state => ({
+  selectedGroup: state.dashboard.selectedGroup
+}), {
+  setGroupCountry,
+})(Sidebar);

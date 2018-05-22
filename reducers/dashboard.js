@@ -1,5 +1,6 @@
 const initialState = {
-  sidebarCollapsed: true
+  sidebarCollapsed: true,
+  selectedGroup: {},
 };
 
 function dashboard(state = initialState, action) {
@@ -8,10 +9,15 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         sidebarCollapsed: action.sidebarCollapsed,
-      }
+      };
+    case 'CHOOSE_GROUP_COUNTRY':
+      return {
+        ...state,
+        selectedGroup: action.selectedGroup,
+      };
     default:
       return state;
   }
 }
 
-export default dashboard
+export default dashboard;
