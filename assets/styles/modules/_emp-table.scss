@@ -13,6 +13,22 @@
     @media (max-width: 1600px) {
       @include fontSize(10px);
     }
+    &_up {
+      &:before {
+        content: '\25B4';
+        margin-right: 3px;
+      }
+    }
+    &_down {
+      &:before {
+        content: '\25BE';
+        margin-right: 3px;
+      }
+    }
+    &_chart {
+      padding-bottom: 12px !important;
+    }
+
   }
   &__tr {
 

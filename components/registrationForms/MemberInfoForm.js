@@ -1,9 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaRadioButton from '../registration/EmpalaRadioButton';
 import { dataFields } from '../../localdata/memberPageData';
+import { connect } from 'react-redux';
 import {
   setInputFieldValueById,
   setMemberDocumentType,

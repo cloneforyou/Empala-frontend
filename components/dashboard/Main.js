@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Widget from './Widget';
+import WidgetTable from './Widget/WidgetTable';
 import Footer from './Footer';
 import { widgets, widgetNews } from '../../localdata/dashboardWidgets';
-import WidgetNews from "./Widget/WidgetNews";
+import WidgetNews from './Widget/WidgetNews';
+import WidgetAdvertisement from './Widget/WidgetAdvertisement';
 
 class Main extends Component {
   constructor(props) {
     super(props);
   }
-
 
   render() {
     const { sidebarCollapsed } = this.props;
@@ -19,24 +19,15 @@ class Main extends Component {
           <div className="row">
             {
               widgets.map(widget => (
-                <Widget widget={widget} />
+                <WidgetTable widget={widget} key={widget.id} />
               ))
             }
             {
               widgetNews.map(widget => (
-                <WidgetNews widget={widget} />
+                <WidgetNews widget={widget} key={widget.id} />
               ))
             }
-            <div className="widget-col col-lg-5">
-              <div className="widget" style={{ height: `324px` }}>
-                <div className="widget__head">
-                  <h3 className="widget__title">Advertisement</h3>
-                </div>
-                <div className="widget__body">
-                  <img src="../../static/images/advertisement.svg" alt="" />
-                </div>
-              </div>
-            </div>
+            <WidgetAdvertisement />
           </div>
         </div>
         <Footer />

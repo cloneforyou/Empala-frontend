@@ -41,7 +41,7 @@ export const widgets = [
             id: uniqueId(),
             exposure: 'Total a / c value',
             value: '9,999,999,999',
-            dayChg: '999.9',
+            dayChg: { data: 999.9, position: 'up' },
             allocation: 'EMARA & MM',
             domestic: '9,999,999,999',
             foreign: '9,999,999,999',
@@ -50,7 +50,7 @@ export const widgets = [
             id: uniqueId(),
             exposure: 'Total a / c value',
             value: '9,999,999,999',
-            dayChg: '999.9',
+            dayChg: { data: 999.9, position: 'down' },
             allocation: 'Currencies & MM',
             domestic: '9,999,999,999',
             foreign: '9,999,999,999',
@@ -59,7 +59,25 @@ export const widgets = [
             id: uniqueId(),
             exposure: 'Total a / c value',
             value: '9,999,999,999',
-            dayChg: '999.9',
+            dayChg: { data: 999.9, position: 'up' },
+            allocation: 'EMARA & MM',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Total a / c value',
+            value: '9,999,999,999',
+            dayChg: { data: 999.9, position: 'up' },
+            allocation: 'EMARA & MM',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Total a / c value',
+            value: '9,999,999,999',
+            dayChg: { data: 999.9, position: 'down' },
             allocation: 'Currencies & MM',
             domestic: '9,999,999,999',
             foreign: '9,999,999,999',
@@ -214,6 +232,7 @@ export const widgets = [
     tables: [
       {
         id: uniqueId(),
+        group: 1,
         headers: [
           {
             title: 'Size & growth',
@@ -254,6 +273,7 @@ export const widgets = [
       },
       {
         id: uniqueId(),
+        group: 1,
         headers: [
           {
             title: 'Opinions',
@@ -279,6 +299,37 @@ export const widgets = [
             id: uniqueId(),
             opinion: 'Votes completed',
             no: '999,999',
+          },
+        ],
+      },
+      {
+        id: uniqueId(),
+        group: 2,
+        headers: [
+          {
+            title: 'Sentiments',
+            align: 'left',
+          },
+          {
+            title: '',
+            align: 'left',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            sentiments: 'Equities',
+            chart: 'sentim-chart1.svg',
+          },
+          {
+            id: uniqueId(),
+            sentiments: 'Equities',
+            chart: 'sentim-chart2.svg',
+          },
+          {
+            id: uniqueId(),
+            sentiments: 'Equities',
+            chart: 'sentim-chart1.svg',
           },
         ],
       },
@@ -627,7 +678,7 @@ export const widgetNews = [
     title: 'News',
     type: 'All',
     col: 4,
-    height: 324,
+    height: 365,
     news: [
       {
         id: uniqueId(),
@@ -642,7 +693,7 @@ export const widgetNews = [
         creator: 'BBC News',
         date: new Date(2018, 13, 1),
         title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
+        rating: 3,
         image: 'news-image.svg',
       },
       {
@@ -650,7 +701,7 @@ export const widgetNews = [
         creator: 'BBC News',
         date: new Date(2014, 13, 1),
         title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
+        rating: 5,
         image: 'news-image.svg',
       },
       {
@@ -658,7 +709,7 @@ export const widgetNews = [
         creator: 'BBC News',
         date: new Date(2013, 13, 1),
         title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
+        rating: 2,
         image: 'news-image.svg',
       },
     ],
@@ -668,7 +719,7 @@ export const widgetNews = [
     title: 'Empala internal news',
     type: 'Empala',
     col: 3,
-    height: 324,
+    height: 365,
     news: [
       {
         id: uniqueId(),

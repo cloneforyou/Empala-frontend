@@ -1,0 +1,13 @@
+.icon-flag {
+  &:before {
+    width: 25px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: text-bottom;
+  }
+  @each $item in $listCounties {
+    &_#{$item} {
+      @include iconFlags($item);
+    }
+  }
+}
