@@ -43,7 +43,7 @@ class Sidebar extends Component {
     const { sidebarCollapsed, selectedGroup } = this.props;
     return (
       <div>
-        <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_blue' : 'sidebar sidebar_blue'}>
+        <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_black' : 'sidebar sidebar_black'}>
           <div className="sidebar-sticky">
             {
               sidebarItems.map((part, index) => (

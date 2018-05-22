@@ -8,7 +8,7 @@ class CountryMenu extends Component {
   render() {
     const { country } = this.props;
     return (
-      <div className={`side-menu side-menu_dark side-menu_${country.color}`}>
+      <div className={`side-menu side-menu_light side-menu_${country.color}`}>
         <h3 className={`side-menu__title ${country.color}`}>{country.title}</h3>
         <ul className="side-menu__list">
           {

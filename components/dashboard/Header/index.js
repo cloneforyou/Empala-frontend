@@ -16,8 +16,8 @@ class Header extends Component {
     return (
       <div
         className={sidebarCollapsed ?
-          'navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_dark dashboard-header_collapsed' :
-          'navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_dark'
+          'navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_light dashboard-header_collapsed' :
+          'navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_light'
         }
       >
         <a className="navbar-brand mr-0 dashboard-header__logo" href="#">

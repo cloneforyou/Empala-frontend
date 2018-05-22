@@ -14,7 +14,7 @@ class Main extends Component {
   render() {
     const { sidebarCollapsed } = this.props;
     return (
-      <div className={sidebarCollapsed ? 'dashboard dashboard_dark' : 'dashboard dashboard_full dashboard_dark'}>
+      <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
         <div className="container-fluid">
           <div className="row">
             {
