@@ -53,7 +53,7 @@ export const dataFields = [
       options: [
         {
           value: ' ',
-          title: 'No suffix',
+          title: ' ',
         },
         {
           value: 'Jr',
