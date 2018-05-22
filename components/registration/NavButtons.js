@@ -1,5 +1,7 @@
+/* eslint-disable max-len,react/forbid-prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { every } from 'lodash';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import MdArrowForward from 'react-icons/lib/md/arrow-forward';
@@ -65,6 +67,21 @@ const NavButtons = (props) => {
       </div>
     </div>
   );
+};
+
+NavButtons.propTypes = {
+  tabName: PropTypes.string,
+  tabIndex: PropTypes.number,
+  registrationData: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  checkboxes: PropTypes.object.isRequired,
+  fieldNames: PropTypes.array,
+};
+
+NavButtons.defaultProps = {
+  tabIndex: 1,
+  tabName: 'info',
+  fieldNames: [],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavButtons);

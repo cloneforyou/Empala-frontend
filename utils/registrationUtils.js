@@ -4,8 +4,6 @@ import IdentityForm from '../components/registrationForms/IdentityForm';
 import ExperienceForm from '../components/registrationForms/ExperienceForm';
 import RegulatoryForm from '../components/registrationForms/RegulatoryForm';
 import ProfileForm from '../components/registrationForms/ProfileForm';
-import AccountForm from '../components/registrationForms/AccountForm';
-import RegistrationFormDrawer from '../components/registration/RegistrationFormDrawer';
 import _ from 'lodash';
 import { dataFields as memberPageData } from '../localdata/memberPageData';
 import { dataFields as regulatoryPageData } from '../localdata/regulatoryPageData';
