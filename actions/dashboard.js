@@ -45,7 +45,7 @@ export function startSocket() {
 }
 
 
-export const setGroupCountry = (label) => {
+export function setGroupCountry(label) {
   let group = {};
   listContries.forEach((item) => {
     if (item.label === label) {
@@ -56,7 +56,8 @@ export const setGroupCountry = (label) => {
     type: 'CHOOSE_GROUP_COUNTRY',
     selectedGroup: group,
   };
-};
+}
+
 
 export const setActivePage = page => ({
   type: SET_ACTIVE_PAGE,
