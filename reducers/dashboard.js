@@ -4,9 +4,10 @@ import {
 } from "../constants/dashboard";
 
 const initialState = {
+  sidebarCollapsed: true,
+  selectedGroup: {},
   loading: false,
   error: false,
-  sidebarCollapsed: true,
   userData: false,
 };
 
@@ -16,6 +17,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         sidebarCollapsed: action.sidebarCollapsed,
+      };
+    case 'CHOOSE_GROUP_COUNTRY':
+      return {
+        ...state,
+        selectedGroup: action.selectedGroup,
       };
     case GET_USER_DATA_REQUEST:
       return {
@@ -34,4 +40,4 @@ function dashboard(state = initialState, action) {
   }
 }
 
-export default dashboard
+export default dashboard;

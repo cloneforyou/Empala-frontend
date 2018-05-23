@@ -1,16 +1,14 @@
+/* eslint-disable max-len */
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setTabName, setTabPageIndex } from '../../actions/registration';
+import { setTabName, setTabPageIndex, goBackToPart } from '../../actions/registration';
 import NavButtons from './NavButtons';
 import '../../assets/styles/modules/_final-review-page.scss';
 import FieldComponent from './FieldComponent';
 
 class FinalReviewPage extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   convertDate(date) {
     const createDate = new Date(date);
     const month = createDate.getMonth() ? createDate.getMonth() + 1 : 1;
@@ -19,9 +17,10 @@ class FinalReviewPage extends PureComponent {
     return `${month}/${day}/${year}`;
   }
 
-  goBack(tabName, tabIndex, direction) {
-    this.props.setTabName(tabName, tabIndex, direction);
+  goBack(tabName, tabIndex ) {
+    this.props.setTabName(tabName);
     this.props.setTabPageIndex(tabIndex);
+    this.props.goBackToPart(true);
   }
 
   render() {
@@ -494,7 +493,15 @@ function mapDispatchToProps(dispatch) {
   return ({
     setTabPageIndex: (index) => dispatch(setTabPageIndex(index)),
     setTabName: (tabName) => dispatch(setTabName(tabName)),
+    goBackToPart: (status) => dispatch(goBackToPart(status)),
   });
 }
+
+FinalReviewPage.propTypes = {
+  registrationData: PropTypes.object.isRequired,
+  setTabName: PropTypes.func.isRequired,
+  setTabPageIndex: PropTypes.func.isRequired,
+
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FinalReviewPage);

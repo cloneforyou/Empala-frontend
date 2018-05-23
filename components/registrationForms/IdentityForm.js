@@ -14,19 +14,17 @@ import {
 } from '../../actions/registration';
 import ModalWindow from '../registration/ModalWindow';
 
-const mapStateToProps = (state) => {
-  return (
-    {
-      registrationData: state.registration.registrationData,
-      page: state.registration.tabIndex,
-      showModal: state.registration.showIdentityModal,
-      trustedContactActive: state.registration.checkboxes['identity_trusted_contact_person_trusted_contact_checkbox'],
-      mailingAddressCheckboxChecked: state.registration['identity_residential_address_same_mailing_address_checkbox'],
-      fieldsErrors: state.registration.fieldsErrors,
-      checkboxes: state.registration.checkboxes,
-    }
-  );
-};
+const mapStateToProps = state => (
+  {
+    registrationData: state.registration.registrationData,
+    page: state.registration.tabIndex,
+    showModal: state.registration.showIdentityModal,
+    trustedContactActive: state.registration.checkboxes.identity_trusted_contact_person_trusted_contact_checkbox,
+    mailingAddressCheckboxChecked: state.registration.identity_residential_address_same_mailing_address_checkbox,
+    fieldsErrors: state.registration.fieldsErrors,
+    checkboxes: state.registration.checkboxes,
+  }
+);
 
 const mapDispatchToProps = (dispatch) => {
   return (
@@ -50,9 +48,7 @@ const mapDispatchToProps = (dispatch) => {
   );
 };
 
-
 class IdentityForm extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -105,6 +101,7 @@ class IdentityForm extends React.Component {
               label={item.label}
               handleCheck={this.props.toggleCheckboxById}
               checked={this.props.checkboxes[item.id]}
+              active={item.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
             />
           );
       }
@@ -115,7 +112,7 @@ class IdentityForm extends React.Component {
     return (
       <div className="container-fluid">
         <form className="row">
-          {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
+          {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
           <ModalWindow
             open={this.props.showModal}
             handleClose={this.props.closeModal}

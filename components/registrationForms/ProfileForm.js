@@ -9,32 +9,29 @@ import {
   setInputFieldValueById,
   setMemberDocumentType,
   setTabName,
-  setTabPageIndex
+  setTabPageIndex,
 } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
+import { statesAbbvs } from '../../localdata/usStatesList';
 
-const mapStateToProps = (state) => {
-  return ({
-    registrationData: state.registration.registrationData,
-    page: state.registration.tabIndex,
-    fieldsErrors: state.registration.fieldsErrors,
-  });
-};
+const mapStateToProps = state => ({
+  registrationData: state.registration.registrationData,
+  page: state.registration.tabIndex,
+  fieldsErrors: state.registration.fieldsErrors,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return ({
-    setInputValueById: (e) => {
-      const { id, value } = e.target;
-      if (value.length === 5 && (id === 'profile_employment_zip_code')) {
-        dispatch(getInfoByZipCode(id, value));
-      }
-      dispatch(setInputFieldValueById(id, value));
-    },
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
-    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  });
-};
+const mapDispatchToProps = dispatch => ({
+  setInputValueById: (e) => {
+    const { id, value } = e.target;
+    if (value.length === 5 && (id === 'profile_employment_zip_code')) {
+      dispatch(getInfoByZipCode(id, value));
+    }
+    dispatch(setInputFieldValueById(id, value));
+  },
+  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  switchDocumentType: e => dispatch(setMemberDocumentType(e.target.value)),
+  setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+});
 
 
 class ProfileForm extends React.PureComponent {
@@ -42,7 +39,7 @@ class ProfileForm extends React.PureComponent {
     super(props);
 
     this.mappingComponent = (item, options) => {
-      const disabled = this.props.registrationData['profile_employment_employment_type'] !== 'Employed'
+      const disabled = this.props.registrationData.profile_employment_employment_type !== 'Employed'
           && this.props.page === 1 && item.id !== 'profile_employment_employment_type';
       if (item.options) {
         return (
@@ -85,12 +82,15 @@ class ProfileForm extends React.PureComponent {
         <form className="row">
           {dataFields[this.props.page - 1].map((item) => {
             if (item.id === 'profile_financials_liquid_net_worth') {
-              let filteredOptions = item.options.filter(option => {
-                return (option.value.length < this.props.registrationData['profile_financials_total_net_worth'].length ||
-                (option.value.length === this.props.registrationData['profile_financials_total_net_worth'].length &&
-                option.value[0] <= this.props.registrationData['profile_financials_total_net_worth'][0]))
-              });
+              const filteredOptions = item.options.filter(option =>
+                (option.value.length < this.props.registrationData.profile_financials_total_net_worth.length ||
+                (option.value.length === this.props.registrationData.profile_financials_total_net_worth.length &&
+                option.value[0] <= this.props.registrationData.profile_financials_total_net_worth[0])));
               return this.mappingComponent(item, filteredOptions);
+            } else if (item.id === 'profile_employment_state') {
+              const states = Object.keys(statesAbbvs);
+              const selectOptions = item.options.map((option, index) => ({ value: option.value, title: option.value, label: states[index] }));
+              return this.mappingComponent(item, selectOptions);
             }
             return this.mappingComponent(item);
           })}

@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import Link from 'next/link';
-
 import style from './RegistrationFieldsStyle';
 
 const ModalWindow = (props) => {
@@ -37,6 +37,11 @@ const ModalWindow = (props) => {
       this characteristic but we are working on it.
     </Dialog>
   );
+};
+
+ModalWindow.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
 };
 
 export default ModalWindow;

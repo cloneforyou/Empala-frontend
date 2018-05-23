@@ -1,0 +1,52 @@
+.side-menu {
+  padding: 137px 30px 20px;
+  position: fixed;
+  height: 100%;
+  left: 80px;
+  top: 0;
+  width: 246px;
+  transition: .4s;
+  border-left: 5px solid;
+  z-index: 2000;
+  &_light{
+    background: rgba(255, 255, 255, 0.95);
+  }
+  &_dark{
+    background: rgba(41, 40, 68, 0.85);
+  }
+  &_red {
+    border-color: $light-red;
+  }
+  &_blue {
+    border-color: $blue;
+  }
+  &_yellow {
+    border-color: $yellow;
+  }
+  &__title {
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    @include fontSize(15px);
+  }
+  &__list {
+    margin: 0;
+    padding: 0;
+  }
+  &__item {
+    list-style: none;
+    position: relative;
+    margin-bottom: 20px;
+    & > a {
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
+    i {
+      margin-right: 10px;
+    }
+    span {
+      color: $main-color-text-grey;
+      @include fontSize(15px);
+    }
+  }
+}

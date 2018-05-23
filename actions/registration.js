@@ -18,6 +18,7 @@ import {
   VALIDATE_FIELDS_BLANK,
   ADDRESS_INFO_REQUEST,
   VALIDATE_FIELD_VALUE,
+  EDITABLE_PART,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -150,5 +151,12 @@ export function validateFieldValue(fieldId, fieldValue) {
     type: VALIDATE_FIELD_VALUE,
     fieldId,
     fieldValue,
+  };
+}
+
+export function goBackToPart(bool) {
+  return {
+    type: EDITABLE_PART,
+    status: bool,
   };
 }

@@ -39,6 +39,7 @@ const EmpalaSelect = (props) => {
             key={option.value}
             value={option.value}
             primaryText={option.title}
+            label={option.label}
           />
         ))}
       </SelectField>

@@ -1,29 +1,33 @@
-import UploadUserFile from "../components/registration/UploadUserFile";
-import MemberInfoForm from "../components/registrationForms/MemberInfoForm";
-import IdentityForm from "../components/registrationForms/IdentityForm";
-import ExperienceForm from "../components/registrationForms/ExperienceForm";
-import RegulatoryForm from "../components/registrationForms/RegulatoryForm";
-import ProfileForm from "../components/registrationForms/ProfileForm";
-import AccountForm from "../components/registrationForms/AccountForm";
-import RegistrationFormDrawer from "../components/registration/RegistrationFormDrawer";
+import UploadUserFile from '../components/registration/UploadUserFile';
+import MemberInfoForm from '../components/registrationForms/MemberInfoForm';
+import IdentityForm from '../components/registrationForms/IdentityForm';
+import ExperienceForm from '../components/registrationForms/ExperienceForm';
+import RegulatoryForm from '../components/registrationForms/RegulatoryForm';
+import ProfileForm from '../components/registrationForms/ProfileForm';
 import _ from 'lodash';
-import {dataFields as memberPageData} from '../localdata/memberPageData';
-import {dataFields as regulatoryPageData} from '../localdata/regulatoryPageData';
-import {dataFields as identityPageData} from '../localdata/identityPageData';
-import {dataFields as experiencePageData} from '../localdata/experiencePageData';
-import {dataFields as profilePageData} from '../localdata/profilePageData';
+import { dataFields as memberPageData } from '../localdata/memberPageData';
+import { dataFields as regulatoryPageData } from '../localdata/regulatoryPageData';
+import { dataFields as identityPageData } from '../localdata/identityPageData';
+import { dataFields as experiencePageData } from '../localdata/experiencePageData';
+import { dataFields as profilePageData } from '../localdata/profilePageData';
 
 
 export const menuItems = {
   member: [
     // {title: 'Upload your picture', key: 'picture', completed: false, active: false},
-    {title: 'Basic information', key: 'basic-info', completed: true, active: false},
+    {
+      title: 'Basic information', key: 'basic-info', completed: true, active: false,
+    },
     // {title: 'Contact information', key: 'contact-info', completed: false, active: true},
     // {title: 'Home address', key: 'home-address', completed: false, active: false},
     // {title: 'Username and password', key: 'name-password', completed: false, active: false},
     // {title: 'Confirmation', key: 'confirmation', completed: false, active: false},
-    {title: 'Account', key: 'account', completed: false, active: false},
-    {title: 'Identification', key: 'identification', completed: false, active: false},
+    {
+      title: 'Account', key: 'account', completed: false, active: false,
+    },
+    {
+      title: 'Identification', key: 'identification', completed: false, active: false,
+    },
 
   ],
   identity: [
@@ -32,10 +36,18 @@ export const menuItems = {
     // {title: 'Investment Experience', key: 'investment', completed: false, active: false},
     // {title: 'Employment Status', key: 'employment-status', completed: false, active: false},
     // {title: 'Work address', key: 'work-address', completed: false, active: false},
-    {title: 'Residential Address', key: 'residential-address', completed: false, active: false},
-    {title: 'Mailing Address', key: 'mailing-address', completed: false, active: false},
-    {title: 'Trusted Contact', key: 'trusted-contact', completed: false, active: false},
-    {title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false},
+    {
+      title: 'Residential Address', key: 'residential-address', completed: false, active: false,
+    },
+    {
+      title: 'Mailing Address', key: 'mailing-address', completed: false, active: false,
+    },
+    {
+      title: 'Trusted Contact', key: 'trusted-contact', completed: false, active: false,
+    },
+    {
+      title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false,
+    },
 
   ],
   // account: [
@@ -46,15 +58,25 @@ export const menuItems = {
   //   {title: 'Approvals', key: 'approvals', completed: false, active: false},
   // ],
   regulatory: [
-    {title: 'Identification', key: 'identification', completed: false, active: false},
-    {title: 'Family', key: 'family', completed: false, active: false},
+    {
+      title: 'Identification', key: 'identification', completed: false, active: false,
+    },
+    {
+      title: 'Family', key: 'family', completed: false, active: false,
+    },
   ],
   profile: [
-    {title: 'Employment', key: 'employment', completed: false, active: false},
-    {title: 'Financials', key: 'financials', completed: false, active: false},
+    {
+      title: 'Employment', key: 'employment', completed: false, active: false,
+    },
+    {
+      title: 'Financials', key: 'financials', completed: false, active: false,
+    },
   ],
   experience: [
-    {title: 'Investment Experience', key: 'investment-experience', completed: false, active: false},
+    {
+      title: 'Investment Experience', key: 'investment-experience', completed: false, active: false,
+    },
   ],
 };
 
@@ -117,7 +139,7 @@ export const usStatesList = [
   'Washington',
   'West Virginia',
   'Wisconsin',
-  'Wyoming'
+  'Wyoming',
 ];
 
 const tabContent = {
@@ -139,19 +161,19 @@ export function getMenuItemsByTabName(tabName) {
     // case 'approvals':
     //   return menuItems.approvals;
     case 'regulatory':
-          return menuItems.regulatory;
+      return menuItems.regulatory;
     case 'profile':
-          return menuItems.profile;
+      return menuItems.profile;
     case 'experience':
-          return menuItems.experience;
-    default :
+      return menuItems.experience;
+    default:
       return menuItems.member;
   }
 }
 
 export function getPageFieldNames(tabName, tabIndex) {
   let pageFields = [];
-  switch(tabName) {
+  switch (tabName) {
     case 'member':
       pageFields = _.cloneDeep(memberPageData[tabIndex - 1]);
       break;
@@ -170,20 +192,7 @@ export function getPageFieldNames(tabName, tabIndex) {
     default:
       break;
   }
-
-  // pageFields.forEach((item, i) => {
-  //   console.log(' *** item', item);
-  //   if (item.options) {
-  //     pageFields.splice(i, 1);
-  //   }
-  // });
-
-  let fieldNames = pageFields.map(item => {
-    return item.id
-  });
-
-  console.log('>*', fieldNames);
-  return fieldNames;
+  return pageFields.map(item => item.id);
 }
 
 export function getTabContentByTabName(tabName, pageIndex) {
@@ -191,16 +200,14 @@ export function getTabContentByTabName(tabName, pageIndex) {
     menuItems: menuItems[tabName],
     tabContent: tabContent[tabName],
     // tabContent: <RegistrationFormDrawer tabName={tabName} page={pageIndex} />,
-  }
+  };
 }
 
 
 export function getValuesForSelectField(list) {
-  return list.map((el) => {
-    return {
-      value: el,
-      title: el
-    }
-  });
+  return list.map(el => ({
+    value: el,
+    title: el,
+  }));
 }
 

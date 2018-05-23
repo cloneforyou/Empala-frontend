@@ -1,3 +1,5 @@
+import { listContries } from '../localdata/marketAccesLists';
+
 import {
   GET_USER_DATA_FAIL, GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
   REFRESH_TOKEN_REQUEST, START_WEBSOCKET,
@@ -41,4 +43,18 @@ export function startSocket() {
     type: START_WEBSOCKET,
   };
 }
+
+
+export const setGroupCountry = (label) => {
+  let group = {};
+  listContries.forEach((item) => {
+    if (item.label === label) {
+      group = item;
+    }
+  });
+  return {
+    type: 'CHOOSE_GROUP_COUNTRY',
+    selectedGroup: group,
+  };
+};
 
