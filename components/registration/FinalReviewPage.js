@@ -36,7 +36,7 @@ class FinalReviewPage extends PureComponent {
             <div className="fields-group__row row">
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 1)}
                 >
                   Member
@@ -91,7 +91,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-3">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
                 >
                   Passport
@@ -123,7 +123,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-3">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
                 >
                   Drivers License
@@ -159,7 +159,7 @@ class FinalReviewPage extends PureComponent {
             <div className="fields-group__row row">
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 1)}
                 >
                   Residential Address
@@ -199,7 +199,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 2)}
                 >
                   Mailing Address
@@ -243,7 +243,7 @@ class FinalReviewPage extends PureComponent {
             <div className="fields-group__row row">
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 3)}
                 >
                   Trusted Contact Person
@@ -278,7 +278,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('regulatory', 1)}
                 >
                   Identification
@@ -321,7 +321,7 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="fields-group">
             <div
-              className="fields-group__title"
+              className="fields-group__title pointer"
               onClick={() => this.goBack('profile', 1)}
             >
               Employment
@@ -394,7 +394,7 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="fields-group">
             <div
-              className="fields-group__title"
+              className="fields-group__title pointer"
               onClick={() => this.goBack('experience', 1)}
             >
               Investment experience

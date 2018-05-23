@@ -53,7 +53,7 @@ export const dataFields = [
       options: [
         {
           value: ' ',
-          title: 'No suffix',
+          title: ' ',
         },
         {
           value: 'Jr',
@@ -79,7 +79,7 @@ export const dataFields = [
       id: 'member_account_account_no',
       type: 'text',
       label: 'Membership no.',
-      numberField: true,
+      typeField: 'numberField',
       placeholder: '',
     },
     {
