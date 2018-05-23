@@ -5,7 +5,7 @@ import {
   setFieldInvalid,
   setFieldValid,
   setInputFieldValueById,
-  showIdentityModal
+  showIdentityModal,
 } from '../actions/registration';
 import request from '../utils/request';
 
@@ -57,7 +57,6 @@ export function* validateCheckbox(action) {
     const trustedContactFields = Object.keys(data).filter((key) => (/identity_trusted_contact/.test(key)));
     yield all(trustedContactFields.map(field => put(setInputFieldValueById(field, ''))));
   }
-
 }
 
 export function* validateEmptyFields(action) {
@@ -68,10 +67,17 @@ export function* validateEmptyFields(action) {
   }
 }
 
+export function* validateFieldValue ({fieldId, fieldValue}) {
+  if (fieldId === 'identity_residential_address_residential_address_line_1' || fieldId === 'identity_residential_address_residential_address_line_2') {
+    if (fieldValue.toLowerCase().replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '') === 'pobox') {
+      yield put(setFieldInvalid(fieldId, 'PO Box is not allowed in residential address'));
+    }
+  }
+}
 
 export function* validateLiquidWorth({ value }) {
   const data = yield select((state) => state.registration.registrationData);
-  const liquidNetWorth = data['profile_financials_liquid_net_worth'];
+  const liquidNetWorth = data['profile_financials_liquid_net_worth'] || '';
   if (value.length < liquidNetWorth.length ||
     (value.length === liquidNetWorth.length && value[0] <= liquidNetWorth[0])) {
     yield put(setInputFieldValueById('profile_financials_liquid_net_worth', ''));

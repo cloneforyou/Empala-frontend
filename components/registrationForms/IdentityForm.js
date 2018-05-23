@@ -1,6 +1,7 @@
+/* eslint-disable react/forbid-prop-types,max-len */
 import React from 'react';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import EmpalaCheckbox from '../registration/EmpalaCheckbox';
@@ -10,6 +11,7 @@ import {
   getInfoByZipCode,
   setInputFieldValueById,
   toggleCheckboxById,
+  validateFieldValue,
 } from '../../actions/registration';
 import ModalWindow from '../registration/ModalWindow';
 
@@ -19,29 +21,32 @@ const mapStateToProps = state => (
     page: state.registration.tabIndex,
     showModal: state.registration.showIdentityModal,
     trustedContactActive: state.registration.checkboxes.identity_trusted_contact_person_trusted_contact_checkbox,
-    mailingAddressCheckboxChecked: state.registration.identity_residential_address_same_mailing_address_checkbox,
     fieldsErrors: state.registration.fieldsErrors,
     checkboxes: state.registration.checkboxes,
   }
 );
 
-const mapDispatchToProps = dispatch => (
-  {
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    setInputValueById: (e) => {
-      const { id, value } = e.target;
-      if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
-        dispatch(getInfoByZipCode(id, value));
-      }
-      dispatch(setInputFieldValueById(id, value));
-    },
-    toggleCheckboxById: (e, checked) => {
-      dispatch(toggleCheckboxById(e.target.id));
-    },
-    closeModal: () => dispatch(closeIdentityModal()),
-  }
-);
-
+const mapDispatchToProps = (dispatch) => {
+  return (
+    {
+      setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+      setInputValueById: (e) => {
+        const { id, value } = e.target;
+        if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
+          dispatch(getInfoByZipCode(id, value));
+        }
+        dispatch(setInputFieldValueById(id, value));
+        if (id === 'identity_residential_address_residential_address_line_1' || id === 'identity_residential_address_residential_address_line_2') {
+          dispatch(validateFieldValue(id, value));
+        }
+      },
+      toggleCheckboxById: (e, checked) => {
+        dispatch(toggleCheckboxById(e.target.id));
+      },
+      closeModal: () => dispatch(closeIdentityModal()),
+    }
+  );
+};
 
 class IdentityForm extends React.Component {
   constructor(props) {
@@ -66,7 +71,7 @@ class IdentityForm extends React.Component {
               placeholder={item.placeholder}
               handleChange={this.props.setInputValueById}
               col={item.col}
-              numberField={item.numberField}
+              typeField={item.typeField}
               disabled={!this.props.trustedContactActive && this.props.page === 3}
               errorText={this.props.fieldsErrors[item.id]}
               mask={mask}
@@ -99,6 +104,7 @@ class IdentityForm extends React.Component {
               active={item.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
             />
           );
+        default: return null;
       }
     };
   }
@@ -117,5 +123,25 @@ class IdentityForm extends React.Component {
     );
   }
 }
+
+IdentityForm.propTypes = {
+  page: PropTypes.number,
+  registrationData: PropTypes.object.isRequired,
+  fieldsErrors: PropTypes.object,
+  checkboxes: PropTypes.object.isRequired,
+  showModal: PropTypes.bool,
+  trustedContactActive: PropTypes.bool,
+  setInputValueById: PropTypes.func.isRequired,
+  setSelectedValueById: PropTypes.func.isRequired,
+  toggleCheckboxById: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
+
+IdentityForm.defaultProps = {
+  page: 1,
+  fieldsErrors: {},
+  showModal: false,
+  trustedContactActive: false,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(IdentityForm);

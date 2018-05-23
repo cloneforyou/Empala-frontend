@@ -1,6 +1,7 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import { setInputFieldValueById } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import { dataFields } from '../../localdata/experiencePageData';
@@ -45,5 +46,15 @@ class ExperienceForm extends React.Component {
     );
   }
 }
+
+ExperienceForm.propTypes = {
+  page: PropTypes.number,
+  registrationData: PropTypes.object.isRequired,
+  setSelectedValueById: PropTypes.func.isRequired,
+};
+
+ExperienceForm.defaultProps = {
+  page: 1,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExperienceForm);

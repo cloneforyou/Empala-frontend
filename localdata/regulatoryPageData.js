@@ -58,7 +58,7 @@ export const dataFields = [
       id: 'regulatory_family_dependents',
       field: 'input',
       type: 'text',
-      numberField: true,
+      typeField: 'numberField',
     },
     {
       id: 'regulatory_family_investment_experience',

@@ -1,9 +1,10 @@
-/* eslint-disable dot-notation,react/prop-types */
+/* eslint-disable dot-notation,react/forbid-prop-types */
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaRadioButton from '../registration/EmpalaRadioButton';
 import { dataFields } from '../../localdata/memberPageData';
-import { connect } from 'react-redux';
 import {
   setInputFieldValueById,
   setMemberDocumentType,
@@ -69,7 +70,7 @@ class MemberInfoForm extends React.PureComponent {
           placeholder={item.placeholder}
           col={item.col}
           mask={mask}
-          numberField={item.numberField}
+          typeField={item.typeField}
         />
       );
     };
@@ -194,5 +195,20 @@ class MemberInfoForm extends React.PureComponent {
     );
   }
 }
+
+MemberInfoForm.propTypes = {
+  page: PropTypes.number,
+  registrationData: PropTypes.object.isRequired,
+  fieldsErrors: PropTypes.object,
+  setInputValueById: PropTypes.func.isRequired,
+  setSelectedValueById: PropTypes.func.isRequired,
+  switchDocumentType: PropTypes.func.isRequired,
+  setPickedDate: PropTypes.func.isRequired,
+};
+
+MemberInfoForm.defaultProps = {
+  page: 1,
+  fieldsErrors: {},
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberInfoForm);
