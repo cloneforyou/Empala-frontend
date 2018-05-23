@@ -16,6 +16,7 @@ class Sidebar extends Component {
     };
   }
 
+
   openMenu = (nextLabel) => {
     const { open, label } = this.state.secondSideMenu;
     this.setState({
@@ -26,7 +27,7 @@ class Sidebar extends Component {
     }, () => {
       this.props.setGroupCountry(nextLabel)
     });
-  }
+  };
 
   closeMenu = () => {
     this.setState({
@@ -35,7 +36,7 @@ class Sidebar extends Component {
         label: ''
       }
     })
-  }
+  };
 
 
   render() {
@@ -51,19 +52,39 @@ class Sidebar extends Component {
                   <div className="sidebar__part-title">{part.title}</div>
                   <ul className="nav flex-column sidebar__nav-list nav-list">
                     {
-                      part.items.map((item, j) => (
-                        <li
-                          className={item.color ? `nav-list__item nav-list__item_${item.color}` : 'nav-list__item'}
-                          key={j}
-                          onClick={() => this.openMenu(item.label)}
-                          onBlur={this.closeMenu}
-                        >
-                          <i
-                            className={`nav-list__icon nav-list__icon_${item.icon}`}
-                          />
-                          <a href="#">{item.label}</a>
-                        </li>
-                      ))
+                      part.items.map((item, j) => {
+                        if (item.type && item.type === 'button') {
+                          return (
+                            <li
+                              className={item.color ? `nav-list__item nav-list__item_${item.color}` : 'nav-list__item'}
+                              key={j}
+                            >
+                              <button
+                                className="invisible-btn"
+                                onClick={() => this.openMenu(item.label)}
+                                onBlur={this.closeMenu}
+                              >
+                                <i
+                                  className={`nav-list__icon nav-list__icon_${item.icon}`}
+                                />
+                                <span className="nav-list__link">{item.label}</span>
+                              </button>
+                            </li>
+                          )
+                        } else {
+                          return (
+                            <li
+                              className={item.color ? `nav-list__item nav-list__item_${item.color}` : 'nav-list__item'}
+                              key={j}
+                            >
+                              <i
+                                className={`nav-list__icon nav-list__icon_${item.icon}`}
+                              />
+                              <span className="nav-list__link">{item.label}</span>
+                            </li>
+                          )
+                        }
+                      })
                     }
                   </ul>
                 </div>
