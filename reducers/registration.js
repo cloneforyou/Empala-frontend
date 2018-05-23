@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key,dot-notation,max-len */
 import {
   CLOSE_IDENTITY_MODAL,
   COPY_MAILING_ADDRESS,

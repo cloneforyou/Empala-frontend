@@ -82,6 +82,8 @@ NavButtons.propTypes = {
   errors: PropTypes.object.isRequired,
   checkboxes: PropTypes.object.isRequired,
   fieldNames: PropTypes.array,
+  changeTabPage: PropTypes.func.isRequired,
+  validateFieldsBlank: PropTypes.func.isRequired,
 };
 
 NavButtons.defaultProps = {

@@ -19,6 +19,28 @@ export function* authenticate({ login, password }) {
   }
 }
 
+export function* refreshTokens() {
+  const refreshToken = localStorage.getItem('refreshToken');
+  try {
+    const tokens = yield call(
+      request,
+      '/api/auth/refresh',
+      {
+        method: 'GET',
+        headers:
+          { 'x-refresh-token': refreshToken },
+      },
+    );
+
+    localStorage.setItem('accessToken', tokens.data.tokens.access);
+    localStorage.setItem('refreshToken', tokens.data.tokens.refresh);
+    location.assign('/dashboard');
+  } catch (err) {
+    console.log(' ** ', err);
+    // location.assign('/');
+  }
+}
+
 export function* getUserData() {
   const url = '/api/dashboard';
   const options = {
@@ -42,24 +64,3 @@ export function* getUserData() {
   }
 }
 
-
-export function* refreshTokens() {
-  const refreshToken = localStorage.getItem('refreshToken');
-  try {
-    const tokens = yield call(
-      request,
-      '/api/auth/refresh',
-      {
-        method: 'GET',
-        headers:
-          { 'x-refresh-token': refreshToken },
-      },
-    );
-
-    localStorage.setItem('accessToken', tokens.data.tokens.access);
-    localStorage.setItem('refreshToken', tokens.data.tokens.refresh);
-    location.assign('/dashboard');
-  } catch (err) {
-    location.assign('/');
-  }
-}
