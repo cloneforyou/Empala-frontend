@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import WidgetTable from './Widget/WidgetTable';
+import Overflow from './Pages/Overflow';
+import Positions from './Pages/Positions';
 import Footer from './Footer';
-import { widgets, widgetNews } from '../../localdata/dashboardWidgets';
-import WidgetNews from './Widget/WidgetNews';
-import WidgetAdvertisement from './Widget/WidgetAdvertisement';
 
 class Main extends Component {
   constructor(props) {
@@ -12,23 +10,14 @@ class Main extends Component {
   }
 
   render() {
-    const { sidebarCollapsed } = this.props;
+    const { sidebarCollapsed, activePageDashboard } = this.props;
     return (
       <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
         <div className="container-fluid">
-          <div className="row">
-            {
-              widgets.map(widget => (
-                <WidgetTable widget={widget} key={widget.id} />
-              ))
-            }
-            {
-              widgetNews.map(widget => (
-                <WidgetNews widget={widget} key={widget.id} />
-              ))
-            }
-            <WidgetAdvertisement />
-          </div>
+          {
+            activePageDashboard === 'Overflow' ? <Overflow /> :
+              activePageDashboard === 'Positions' ? <Positions /> : ''
+          }
         </div>
         <Footer />
       </div>
@@ -36,4 +25,6 @@ class Main extends Component {
   }
 }
 
-export default connect(state => ({}))(Main);
+export default connect(state => ({
+  activePageDashboard: state.dashboard.activePageDashboard,
+}))(Main);

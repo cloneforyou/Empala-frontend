@@ -1,7 +1,7 @@
 import {
   COLLAPSE_SIDEBAR,
-  GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
-} from "../constants/dashboard";
+  GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS, SET_ACTIVE_PAGE,
+} from '../constants/dashboard';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   error: false,
   userData: false,
+  activePageDashboard: 'Overflow',
 };
 
 function dashboard(state = initialState, action) {
@@ -33,7 +34,13 @@ function dashboard(state = initialState, action) {
         ...state,
         loading: false,
         userData: action.data,
-      }
+      };
+    }
+    case SET_ACTIVE_PAGE: {
+      return {
+        ...state,
+        activePageDashboard: action.page,
+      };
     }
     default:
       return state;

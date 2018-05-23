@@ -37,16 +37,19 @@ export const sidebarItems = [
         label: 'Americas',
         icon: 'marker',
         color: 'red',
+        type: 'button',
       },
       {
         label: 'EMEA',
         icon: 'marker',
         color: 'blue',
+        type: 'button',
       },
       {
         label: 'Asia-Pacific',
         icon: 'marker',
         color: 'yellow',
+        type: 'button',
       },
       {
         label: 'Peer-to-peer',
