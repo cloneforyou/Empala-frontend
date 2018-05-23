@@ -1,6 +1,7 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import EmpalaCheckbox from '../registration/EmpalaCheckbox';
@@ -19,7 +20,6 @@ const mapStateToProps = state => (
     page: state.registration.tabIndex,
     showModal: state.registration.showIdentityModal,
     trustedContactActive: state.registration.checkboxes.identity_trusted_contact_person_trusted_contact_checkbox,
-    mailingAddressCheckboxChecked: state.registration.identity_residential_address_same_mailing_address_checkbox,
     fieldsErrors: state.registration.fieldsErrors,
     checkboxes: state.registration.checkboxes,
   }
@@ -35,7 +35,7 @@ const mapDispatchToProps = dispatch => (
       }
       dispatch(setInputFieldValueById(id, value));
     },
-    toggleCheckboxById: (e, checked) => {
+    toggleCheckboxById: (e) => {
       dispatch(toggleCheckboxById(e.target.id));
     },
     closeModal: () => dispatch(closeIdentityModal()),
@@ -99,6 +99,7 @@ class IdentityForm extends React.Component {
               active={item.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
             />
           );
+        default: return null;
       }
     };
   }
@@ -117,5 +118,25 @@ class IdentityForm extends React.Component {
     );
   }
 }
+
+IdentityForm.propTypes = {
+  page: PropTypes.number,
+  registrationData: PropTypes.object.isRequired,
+  fieldsErrors: PropTypes.object,
+  checkboxes: PropTypes.object.isRequired,
+  showModal: PropTypes.bool,
+  trustedContactActive: PropTypes.bool,
+  setInputValueById: PropTypes.func.isRequired,
+  setSelectedValueById: PropTypes.func.isRequired,
+  toggleCheckboxById: PropTypes.func.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};
+
+IdentityForm.defaultProps = {
+  page: 1,
+  fieldsErrors: {},
+  showModal: false,
+  trustedContactActive: false,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(IdentityForm);

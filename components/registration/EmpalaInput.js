@@ -6,7 +6,7 @@ import '../../assets/styles/modules/_input-group.scss';
 import style from './RegistrationFieldsStyle';
 
 
-class EmpalaInput extends Component {
+export default class EmpalaInput extends Component {
   constructor(props) {
     super(props)
   }
@@ -57,5 +57,3 @@ class EmpalaInput extends Component {
     )
   };
 }
-
-export default EmpalaInput;
