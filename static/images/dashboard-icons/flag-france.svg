@@ -1,0 +1,22 @@
+
+<svg width="25px" height="18px" viewBox="0 0 25 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="25" height="18"></rect>
+    </defs>
+    <g id="Dashboard_light_10x-fonts" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="EMP100---EMEA-Overview-Dashboard" transform="translate(-224.000000, -151.000000)">
+            <g id="Sub-menu" transform="translate(186.000000, -1.000000)">
+                <g id="FR" transform="translate(38.000000, 152.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <rect stroke="#F5F5F5" stroke-width="0.5" x="0.25" y="0.25" width="24.5" height="17.5"></rect>
+                    <rect id="Mask" fill="#F44653" mask="url(#mask-2)" x="16.6666667" y="0" width="8.33333333" height="18"></rect>
+                    <rect id="Rectangle-2" fill="#1035BB" mask="url(#mask-2)" x="0" y="0" width="8.33333333" height="18"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

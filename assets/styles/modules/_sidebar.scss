@@ -9,6 +9,16 @@
   transition: .4s;
   &_black {
     background: $dark-grey;
+    .user-status {
+      background: #3b3e42;
+    }
+  }
+  &_blue {
+    background: $dark-blue;
+    .user-status {
+      background: #31304c;
+    }
+
   }
   &__part-nav {
     padding: 0 5px;
@@ -39,11 +49,22 @@
         left: 0;
       }
     }
+    .user-status > span:before {
+      left: -20px;
+    }
+    & + .side-menu {
+      left: 180px;
+    }
   }
   &__user-status {
     position: absolute;
     bottom: 0;
     width: 100%;
+  }
+  .sidebar-sticky {
+    overflow-y: auto;
+    height: 100%;
+    padding-bottom: 40px;
   }
 }
 
@@ -102,7 +123,6 @@
 }
 
 .user-status {
-  background: #3b3e42;
   text-align: center;
   padding: 15px 0;
   & > span {
@@ -115,7 +135,7 @@
       height: 8px;
       border-radius: 50%;
       position: absolute;
-      left: -20px;
+      left: -13px;
       top: 3px;
     }
   }

@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 
 class Search extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
+
 
   render() {
     return (
-      <div className="col dashboard-search">
+      <div className="col dashboard-search justify-content-left">
         <button className="dashboard-search__btn">
           <i className="dashboard-search__icon" />
         </button>
@@ -17,7 +18,8 @@ class Search extends Component {
           placeholder="Search"
         />
       </div>
-    )
+    );
   }
 }
-export default Search
+
+export default Search;

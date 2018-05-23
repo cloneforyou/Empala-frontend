@@ -13,6 +13,10 @@ class RightBlock extends Component {
     this.setState({ menuAvatarShow: !this.state.menuAvatarShow })
   };
 
+  closeMenu = () => {
+    this.setState({ menuAvatarShow: false })
+  }
+
   render() {
 
     const { menuAvatarShow } = this.state;
@@ -31,17 +35,19 @@ class RightBlock extends Component {
           </li>
           <li className="nav-item dropdown">
             <button
-              className="nav-link dropdown-toggle"
+              className="nav-link user-nav__dropdown-btn"
               onClick={this.toggleMenu}
+              onBlur={this.closeMenu}
             >
               <img src={avatar} alt="" />
             </button>
             <div
-              className={(menuAvatarShow === false) ? 'dropdown-menu dropdown-menu-right' : 'dropdown-menu dropdown-menu-right show'}
+              className={(menuAvatarShow === false) ?
+                'dropdown-menu dropdown-menu-right user-nav__dropdown-menu' :
+                'dropdown-menu dropdown-menu-right show user-nav__dropdown-menu'}
             >
-              <a className="dropdown-item" href="#">Action</a>
-              <a className="dropdown-item" href="#">Another action</a>
-              <a className="dropdown-item" href="#">Something else here</a>
+              <a className="dropdown-item" href="#">Profile</a>
+              <a className="dropdown-item" href="#">Logout</a>
             </div>
           </li>
         </ul>

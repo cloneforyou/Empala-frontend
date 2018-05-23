@@ -17,129 +17,137 @@ import {
   REGISTRATION_SUBMIT_FAIL,
   VALIDATE_FIELDS_BLANK,
   ADDRESS_INFO_REQUEST,
-} from "../constants/registration";
+  EDITABLE_PART,
+} from '../constants/registration';
 
 export function getMenuItems(items) {
-  return  {
+  return {
     type: GET_MENU_ITEMS,
     items,
-  }
+  };
 }
 
 export function setTabName(tabName) {
-  return  {
+  return {
     type: SET_TAB_NAME,
     tabName,
-  }
+  };
 }
 
 export function setTabPageIndex(pageIndex) {
-  return  {
+  return {
     type: SET_TAB_PAGE_INDEX,
     pageIndex,
-  }
+  };
 }
 
 export function changeTabPage(tabName, tabIndex, direction) {
-  return  {
+  return {
     type: CHANGE_TAB_PAGE_INDEX,
     tabName,
     tabIndex,
     direction,
-  }
+  };
 }
 
 export function setInputFieldValueById(id, value) {
-  return  {
+  return {
     type: SET_FIELD_VALUE,
     id,
     value,
-  }
+  };
 }
 
 export function setMemberDocumentType(document) {
-  return  {
+  return {
     type: SET_MEMBER_DOCUMENT_TYPE,
     document,
-  }
+  };
 }
 
 export function setFieldValid(fieldId) {
-  return  {
+  return {
     type: VALIDATE_FIELD_SUCCESS,
     fieldId,
-  }
+  };
 }
 
 export function setFieldInvalid(fieldId, message) {
-  return  {
+  return {
     type: VALIDATE_FIELD_ERROR,
     fieldId,
     message,
-  }
+  };
 }
 
 export function getRegistrationDataFromCache() {
-  return  {
+  return {
     type: GET_DATA_FROM_CACHE,
-  }
+  };
 }
 
 export function toggleCheckboxById(id) {
-  return  {
+  return {
     type: TOGGLE_CHECKBOX,
     id,
-  }
+  };
 }
 
 export function showIdentityModal() {
-  return  {
+  return {
     type: SHOW_IDENTITY_MODAL,
-  }
+  };
 }
 
 export function closeIdentityModal() {
-  return  {
+  return {
     type: CLOSE_IDENTITY_MODAL,
-  }
+  };
 }
 
 export function copyMailingAddress() {
-  return  {
-   type: COPY_MAILING_ADDRESS,
-  }
+  return {
+    type: COPY_MAILING_ADDRESS,
+  };
 }
 
 export function cleanMailingAddress() {
-  return  {
+  return {
     type: CLEAN_MAILING_ADDRESS,
-  }
+  };
 }
 
 export function sendRegistrationForm() {
-  return  {
+  return {
     type: REGISTRATION_SUBMIT_REQUEST,
-  }
+  };
 }
 
 export function registrationFail(err) {
-  return  {
+  return {
     type: REGISTRATION_SUBMIT_FAIL,
-    err
-  }
+    err,
+  };
 }
 
 export function validateFieldsBlank(fields) {
-  return  {
+  return {
     type: VALIDATE_FIELDS_BLANK,
     fields,
-  }
+  };
+}
 
-
-}export function getInfoByZipCode(fieldId, zipCode) {
-  return  {
+export function getInfoByZipCode(fieldId, zipCode) {
+  return {
     type: ADDRESS_INFO_REQUEST,
     fieldId,
     zipCode,
-  }
+  };
+}
+
+export function goBackToPart(bool) {
+  return {
+    type: EDITABLE_PART,
+    status: bool,
+  };
 }

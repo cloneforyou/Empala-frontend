@@ -28,3 +28,21 @@
     }
   }
 }
+
+@mixin iconFlags($country) {
+  &:before {
+    content: '';
+    background: url($path-to-dashboard-icon + 'flag-' + $country +'.svg') no-repeat;
+  }
+}
+@mixin styledButtonsByColor($color, $name) {
+  transition: .3s;
+  &_#{$name} {
+    color: $color;
+    border-color: $color;
+  }
+  &:hover, &:focus{
+    background: $color;
+    color: #fff;
+  }
+}
