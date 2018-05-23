@@ -11,7 +11,7 @@ export default class EmpalaInput extends Component {
     super(props);
   }
 
-  checkRegistrationField(e) {
+  checkRegistrationField = (e) => {
     if ((/^\d*$/).test(e.target.value) && this.props.numberField) {
       this.props.handleChange(e);
     } else if (!this.props.numberField) {
