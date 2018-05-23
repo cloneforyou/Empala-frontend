@@ -11,6 +11,9 @@ const style = {
   underlineStyle: {
     borderBottom: `2px solid ${ALTO}`,
   },
+  underlineErrorStyle: {
+    borderBottom: '2px solid red',
+  },
   underlineFocusStyle: {
     borderBottom: `2px solid ${GREEN}`,
   },
