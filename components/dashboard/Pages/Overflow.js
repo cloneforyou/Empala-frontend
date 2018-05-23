@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { widgets, widgetNews } from '../../localdata/dashboardWidgets';
-import WidgetTable from './Widget/WidgetTable';
-import WidgetNews from './Widget/WidgetNews';
-import WidgetAdvertisement from './Widget/WidgetAdvertisement';
+import { widgetsOverflow, widgetNews } from '../../../localdata/dashboardWidgets';
+import WidgetTable from '../Widget/WidgetTable';
+import WidgetNews from '../Widget/WidgetNews';
+import WidgetAdvertisement from '../Widget/WidgetAdvertisement';
 
 class Overflow extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Overflow extends Component {
     return (
       <div className="row">
         {
-          widgets.map(widget => (
+          widgetsOverflow.map(widget => (
             <WidgetTable widget={widget} key={widget.id} />
           ))
         }

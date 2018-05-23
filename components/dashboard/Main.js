@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Overflow from './Overflow'
+import Overflow from './Pages/Overflow';
 import Footer from './Footer';
 
 class Main extends Component {

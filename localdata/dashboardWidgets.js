@@ -1,6 +1,6 @@
 import { uniqueId } from 'lodash';
 
-export const widgets = [
+export const widgetsOverflow = [
   {
     id: uniqueId(),
     title: 'Financial capital',
