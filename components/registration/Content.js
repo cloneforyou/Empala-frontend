@@ -38,13 +38,17 @@ class Content extends PureComponent {
   componentDidMount() {
     if (localStorage.getItem('registrationData')) {
       this.props.getRegistrationDataFromCache();
+    }
+  }
 
+  componentWillMount() {
+    if (['info', 'final_review', 'agreement'].includes(this.props.tabName)) {
+      this.props.setTabName(this.props.tabName);
+      this.props.setTabPageIndex(1);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log(this.props);
-    // console.log(nextProps);
     if (this.props.tabName !== nextProps.tabName) {
       this.props.getMenuItems(nextProps.tabName);
     }
@@ -52,8 +56,6 @@ class Content extends PureComponent {
 
   render() {
     if (this.props.tabName === 'info') {
-      this.props.setTabName('info');
-      this.props.setTabPageIndex(1);
       return (
         <div className="onboard">
           <div className="onboard__container">
@@ -62,10 +64,8 @@ class Content extends PureComponent {
             </div>
           </div>
         </div>
-      )
+      );
     } else if (this.props.tabName === 'final_review') {
-      this.props.setTabName('final_review');
-      this.props.setTabPageIndex(1);
       return (
         <div className="onboard">
           <div className="onboard__container">
@@ -75,8 +75,6 @@ class Content extends PureComponent {
           </div>
         </div>);
     } else if (this.props.tabName === 'agreement') {
-      this.props.setTabName('agreement');
-      this.props.setTabPageIndex(1);
       return (
         <div className="onboard">
           <div className="onboard__container">
