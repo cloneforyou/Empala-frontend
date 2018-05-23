@@ -746,3 +746,89 @@ export const widgetNews = [
   },
 ];
 
+export const widgetsPositions = [
+  {
+    id: uniqueId(),
+    title: 'Position',
+    col: 5,
+    height: 'auto',
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Exposure',
+          },
+          {
+            title: 'Value',
+          },
+          {
+            title: 'Day chg',
+          },
+          {
+            title: 'Allocation',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Foreign',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Total a / c value',
+            value: '9,999,999,999',
+            dayChg: { data: 999.9, position: 'up' },
+            allocation: 'EMARA & MM',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Position portfolio',
+    col: 9,
+    height: 'auto',
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Exposure',
+          },
+          {
+            title: 'Value',
+          },
+          {
+            title: 'Day chg',
+          },
+          {
+            title: 'Allocation',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Foreign',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Total a / c value',
+            value: '9,999,999,999',
+            dayChg: { data: 999.9, position: 'up' },
+            allocation: 'EMARA & MM',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+          },
+        ],
+      },
+    ],
+  },
+];

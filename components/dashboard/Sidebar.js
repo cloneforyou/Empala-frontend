@@ -38,10 +38,14 @@ class Sidebar extends Component {
     })
   };
 
+  handleClick = (label) => {
+    this.props.handleChangePage(label)
+  };
+
 
   render() {
     const { secondSideMenu } = this.state;
-    const { sidebarCollapsed, selectedGroup } = this.props;
+    const { sidebarCollapsed, selectedGroup, activePageDashboard, } = this.props;
     return (
       <div>
         <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_black' : 'sidebar sidebar_black'}>
@@ -74,8 +78,9 @@ class Sidebar extends Component {
                         } else {
                           return (
                             <li
-                              className={item.color ? `nav-list__item nav-list__item_${item.color}` : 'nav-list__item'}
+                              className={(item.label === activePageDashboard) ? 'nav-list__item nav-list__item_active' : 'nav-list__item'}
                               key={j}
+                              onClick={() => this.handleClick(item.label)}
                             >
                               <i
                                 className={`nav-list__icon nav-list__icon_${item.icon}`}

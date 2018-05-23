@@ -9,7 +9,7 @@ class Main extends Component {
   }
 
   render() {
-    const { sidebarCollapsed } = this.props;
+    const { sidebarCollapsed, activePageDashboard } = this.props;
     return (
       <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
         <div className="container-fluid">
