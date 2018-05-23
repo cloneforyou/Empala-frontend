@@ -81,7 +81,7 @@ class ProfileForm extends React.PureComponent {
       <div className="container-fluid">
         <form className="row">
           {dataFields[this.props.page - 1].map((item) => {
-            if (item.id === 'profile_financials_liquid_net_worth') {
+            if (item.id === 'profile_financials_liquid_net_worth' && this.props.registrationData.profile_financials_total_net_worth) {
               const filteredOptions = item.options.filter(option =>
                 (option.value.length < this.props.registrationData.profile_financials_total_net_worth.length ||
                 (option.value.length === this.props.registrationData.profile_financials_total_net_worth.length &&

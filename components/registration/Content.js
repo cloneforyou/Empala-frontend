@@ -1,5 +1,7 @@
+/* eslint-disable react/require-default-props */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import NavButtons from './NavButtons';
 import { getMenuItems, getRegistrationDataFromCache, setTabName, setTabPageIndex } from '../../actions/registration';
@@ -38,7 +40,6 @@ class Content extends PureComponent {
   componentDidMount() {
     if (localStorage.getItem('registrationData')) {
       this.props.getRegistrationDataFromCache();
-
     }
   }
 
@@ -62,7 +63,7 @@ class Content extends PureComponent {
             </div>
           </div>
         </div>
-      )
+      );
     } else if (this.props.tabName === 'final_review') {
       this.props.setTabName('final_review');
       this.props.setTabPageIndex(1);
@@ -104,7 +105,7 @@ class Content extends PureComponent {
       } else {
         fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox');
       }
-    } else if(this.props.tabName === 'profile' && this.props.tabIndex === 1 &&
+    } else if (this.props.tabName === 'profile' && this.props.tabIndex === 1 &&
         this.props.registrationData['profile_employment_employment_type'] !== 'Employed') {
       fieldNames = ['profile_employment_employment_type'];
     }
@@ -146,5 +147,14 @@ class Content extends PureComponent {
     );
   }
 }
+
+Content.propTypes = {
+  getRegistrationDataFromCache: PropTypes.func,
+  tabName: PropTypes.string,
+  setTabName: PropTypes.func,
+  setTabPageIndex: PropTypes.func,
+  getMenuItems: PropTypes.func,
+  tabIndex: PropTypes.number,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
