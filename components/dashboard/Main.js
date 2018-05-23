@@ -5,10 +5,41 @@ import Footer from './Footer';
 import { widgets, widgetNews } from '../../localdata/dashboardWidgets';
 import WidgetNews from './Widget/WidgetNews';
 import WidgetAdvertisement from './Widget/WidgetAdvertisement';
+import GlobalNetworkPage from './Pages/GlobalNetworkPage';
+
+function mapStateToProps(state) {
+  return {
+    currentPage: state.dashboard.currentPage || 'widgets',
+  };
+}
 
 class Main extends Component {
   constructor(props) {
     super(props);
+
+    this.mapPageToComponent = function mapPageToComponent(page) {
+      console.log(' ** PAGECHANGE', page );
+      switch (page) {
+        case 'timeline':
+          return <GlobalNetworkPage />;
+        default:
+          return (
+            <div className="row">
+              {
+                widgets.map(widget => (
+                  <WidgetTable widget={widget} key={widget.id} />
+                ))
+              }
+              {
+                widgetNews.map(widget => (
+                  <WidgetNews widget={widget} key={widget.id} />
+                ))
+              }
+              <WidgetAdvertisement />
+            </div>
+          );
+      }
+    };
   }
 
   render() {
@@ -16,19 +47,7 @@ class Main extends Component {
     return (
       <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
         <div className="container-fluid">
-          <div className="row">
-            {
-              widgets.map(widget => (
-                <WidgetTable widget={widget} key={widget.id} />
-              ))
-            }
-            {
-              widgetNews.map(widget => (
-                <WidgetNews widget={widget} key={widget.id} />
-              ))
-            }
-            <WidgetAdvertisement />
-          </div>
+          {this.mapPageToComponent(this.props.currentPage)}
         </div>
         <Footer />
       </div>
@@ -36,4 +55,4 @@ class Main extends Component {
   }
 }
 
-export default connect(state => ({}))(Main);
+export default connect(mapStateToProps, null)(Main);

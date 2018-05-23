@@ -1,9 +1,13 @@
 import {
+  CHANGE_CURRENT_PAGE,
+  CHOOSE_GROUP_COUNTRY,
   COLLAPSE_SIDEBAR,
-  GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
-} from "../constants/dashboard";
+  GET_USER_DATA_REQUEST,
+  GET_USER_DATA_SUCCESS,
+} from '../constants/dashboard';
 
 const initialState = {
+  currentPage: false,
   sidebarCollapsed: true,
   selectedGroup: {},
   loading: false,
@@ -18,7 +22,7 @@ function dashboard(state = initialState, action) {
         ...state,
         sidebarCollapsed: action.sidebarCollapsed,
       };
-    case 'CHOOSE_GROUP_COUNTRY':
+    case CHOOSE_GROUP_COUNTRY:
       return {
         ...state,
         selectedGroup: action.selectedGroup,
@@ -28,13 +32,17 @@ function dashboard(state = initialState, action) {
         ...state,
         loading: true,
       };
-    case GET_USER_DATA_SUCCESS: {
+    case GET_USER_DATA_SUCCESS:
       return {
         ...state,
         loading: false,
         userData: action.data,
-      }
-    }
+      };
+    case CHANGE_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.page,
+      };
     default:
       return state;
   }

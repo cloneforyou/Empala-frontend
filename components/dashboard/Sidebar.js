@@ -2,8 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import { setGroupCountry } from '../../actions/dashboard'
+import {changeCurrentPage, setGroupCountry} from '../../actions/dashboard'
 
+function mapStateToProps(state) {
+  return {
+    selectedGroup: state.dashboard.selectedGroup,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setGroupCountry: () => dispatch(setGroupCountry()),
+    changeCurrentPage: (page) => dispatch(changeCurrentPage(page)),
+  }
+}
 
 class Sidebar extends Component {
   constructor(props) {
@@ -61,7 +73,9 @@ class Sidebar extends Component {
                           <i
                             className={`nav-list__icon nav-list__icon_${item.icon}`}
                           />
-                          <a href="#">{item.label}</a>
+                          <a
+                            href="#"
+                          onClick={() => this.props.changeCurrentPage(item.label.toLowerCase())}>{item.label}</a>
                         </li>
                       ))
                     }
@@ -83,8 +97,4 @@ class Sidebar extends Component {
 }
 
 
-export default connect(state => ({
-  selectedGroup: state.dashboard.selectedGroup
-}), {
-  setGroupCountry,
-})(Sidebar);
+export default connect(mapStateToProps,mapDispatchToProps)(Sidebar);
