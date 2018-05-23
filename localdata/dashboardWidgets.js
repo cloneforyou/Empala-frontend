@@ -792,7 +792,7 @@ export const widgetsPositions = [
   {
     id: uniqueId(),
     title: 'Position portfolio',
-    col: 9,
+    col: 7,
     height: 'auto',
     tables: [
       {

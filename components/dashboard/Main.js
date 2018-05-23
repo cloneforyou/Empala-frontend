@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Overflow from './Pages/Overflow';
+import Positions from './Pages/Positions';
 import Footer from './Footer';
 
 class Main extends Component {
@@ -13,7 +14,10 @@ class Main extends Component {
     return (
       <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
         <div className="container-fluid">
-          <Overflow />
+          {
+            activePageDashboard === 'Overflow' ? <Overflow /> :
+              activePageDashboard === 'Positions' ? <Positions /> : ''
+          }
         </div>
         <Footer />
       </div>
@@ -21,4 +25,6 @@ class Main extends Component {
   }
 }
 
-export default connect(state => ({}))(Main);
+export default connect(state => ({
+  activePageDashboard: state.dashboard.activePageDashboard,
+}))(Main);

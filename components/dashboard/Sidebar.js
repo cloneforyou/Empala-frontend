@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import { setGroupCountry } from '../../actions/dashboard'
+import { setGroupCountry, setActivePage } from '../../actions/dashboard'
 
 
 class Sidebar extends Component {
@@ -39,13 +39,13 @@ class Sidebar extends Component {
   };
 
   handleClick = (label) => {
-    this.props.handleChangePage(label)
+    this.props.setActivePage(label)
   };
 
 
   render() {
     const { secondSideMenu } = this.state;
-    const { sidebarCollapsed, selectedGroup, activePageDashboard, } = this.props;
+    const { sidebarCollapsed, selectedGroup, activePageDashboard } = this.props;
     return (
       <div>
         <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_black' : 'sidebar sidebar_black'}>
@@ -110,7 +110,8 @@ class Sidebar extends Component {
 
 
 export default connect(state => ({
-  selectedGroup: state.dashboard.selectedGroup
+  selectedGroup: state.dashboard.selectedGroup,
+  activePageDashboard: state.dashboard.activePageDashboard,
 }), {
-  setGroupCountry,
+  setGroupCountry,setActivePage
 })(Sidebar);
