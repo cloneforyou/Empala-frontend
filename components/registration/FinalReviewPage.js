@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setTabName, setTabPageIndex } from '../../actions/registration';
+import { setTabName, setTabPageIndex, goBackToPart } from '../../actions/registration';
 import NavButtons from './NavButtons';
 import '../../assets/styles/modules/_final-review-page.scss';
 import FieldComponent from './FieldComponent';
@@ -17,9 +17,10 @@ class FinalReviewPage extends PureComponent {
     return `${month}/${day}/${year}`;
   }
 
-  goBack(tabName, tabIndex, direction) {
-    this.props.setTabName(tabName, tabIndex, direction);
+  goBack(tabName, tabIndex ) {
+    this.props.setTabName(tabName);
     this.props.setTabPageIndex(tabIndex);
+    this.props.goBackToPart(true);
   }
 
   render() {
@@ -35,7 +36,7 @@ class FinalReviewPage extends PureComponent {
             <div className="fields-group__row row">
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 1)}
                 >
                   Member
@@ -90,7 +91,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-3">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
                 >
                   Passport
@@ -122,7 +123,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-3">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
                 >
                   Drivers License
@@ -158,7 +159,7 @@ class FinalReviewPage extends PureComponent {
             <div className="fields-group__row row">
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 1)}
                 >
                   Residential Address
@@ -198,7 +199,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 2)}
                 >
                   Mailing Address
@@ -242,7 +243,7 @@ class FinalReviewPage extends PureComponent {
             <div className="fields-group__row row">
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 3)}
                 >
                   Trusted Contact Person
@@ -277,7 +278,7 @@ class FinalReviewPage extends PureComponent {
               </div>
               <div className="col-md-6">
                 <div
-                  className="fields-group__title"
+                  className="fields-group__title pointer"
                   onClick={() => this.goBack('regulatory', 1)}
                 >
                   Identification
@@ -320,7 +321,7 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="fields-group">
             <div
-              className="fields-group__title"
+              className="fields-group__title pointer"
               onClick={() => this.goBack('profile', 1)}
             >
               Employment
@@ -393,7 +394,7 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="fields-group">
             <div
-              className="fields-group__title"
+              className="fields-group__title pointer"
               onClick={() => this.goBack('experience', 1)}
             >
               Investment experience
@@ -490,8 +491,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return ({
-    setTabPageIndex: index => dispatch(setTabPageIndex(index)),
-    setTabName: tabName => dispatch(setTabName(tabName)),
+    setTabPageIndex: (index) => dispatch(setTabPageIndex(index)),
+    setTabName: (tabName) => dispatch(setTabName(tabName)),
+    goBackToPart: (status) => dispatch(goBackToPart(status)),
   });
 }
 

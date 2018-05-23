@@ -4,9 +4,9 @@ import { withReduxSaga } from '../store';
 import Header from '../components/registration/Header';
 import Footer from '../components/registration/Footer';
 import stylesheet from '../assets/styles/main.scss';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Link from 'next/link';
-
 
 function Index() {
   return (

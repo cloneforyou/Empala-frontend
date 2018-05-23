@@ -10,6 +10,7 @@ import {
   SET_TAB_PAGE_INDEX, SHOW_IDENTITY_MODAL, TOGGLE_CHECKBOX,
   VALIDATE_FIELD_ERROR,
   VALIDATE_FIELD_SUCCESS,
+  EDITABLE_PART,
 } from '../constants/registration';
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   },
   fieldsErrors: {},
   checkboxes: {},
+  userBackToPart: false,
 };
 
 function registration(state = initialState, action) {
@@ -61,6 +63,11 @@ function registration(state = initialState, action) {
           ['identity_mailing_address_city']: state.registrationData['identity_residential_address_residential_address_city'],
           ['identity_mailing_address_country']: state.registrationData['identity_residential_address_residential_address_country'],
         },
+      };
+    case EDITABLE_PART:
+      return {
+        ...state,
+        userBackToPart: action.status,
       };
     default:
       return state;

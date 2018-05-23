@@ -13,6 +13,10 @@ class RightBlock extends Component {
     this.setState({ menuAvatarShow: !this.state.menuAvatarShow })
   };
 
+  closeMenu = () => {
+    this.setState({ menuAvatarShow: false })
+  }
+
   render() {
 
     const { menuAvatarShow } = this.state;
@@ -33,6 +37,7 @@ class RightBlock extends Component {
             <button
               className="nav-link user-nav__dropdown-btn"
               onClick={this.toggleMenu}
+              onBlur={this.closeMenu}
             >
               <img src={avatar} alt="" />
             </button>
