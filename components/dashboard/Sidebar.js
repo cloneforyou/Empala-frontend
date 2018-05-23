@@ -9,33 +9,22 @@ class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      secondSideMenu: {
-        open: false,
-        label: props.selectedGroup.label || '',
-      },
+      countryMenuIsOpen: false,
     };
   }
 
 
   openMenu = (nextLabel) => {
-    const { open, label } = this.state.secondSideMenu;
-    this.setState({
-      secondSideMenu: {
-        open: nextLabel === label ? !open : true,
-        label: nextLabel
-      }
-    }, () => {
+    console.log('nextLabel -==> ', nextLabel);
+    const { countryMenuIsOpen } = this.state
+    this.setState({ countryMenuIsOpen: !countryMenuIsOpen }, () => {
       this.props.setGroupCountry(nextLabel)
     });
   };
 
   closeMenu = () => {
-    this.setState({
-      secondSideMenu: {
-        open: false,
-        label: ''
-      }
-    })
+    const { countryMenuIsOpen } = this.state;
+    this.setState({ countryMenuIsOpen: !countryMenuIsOpen })
   };
 
   handleClick = (label) => {
@@ -44,7 +33,7 @@ class Sidebar extends Component {
 
 
   render() {
-    const { secondSideMenu } = this.state;
+    const { countryMenuIsOpen } = this.state;
     const { sidebarCollapsed, selectedGroup, activePageDashboard } = this.props;
     return (
       <div>
@@ -101,7 +90,7 @@ class Sidebar extends Component {
           </div>
         </div>
         {
-          secondSideMenu.open && selectedGroup.list && <CountryMenu country={selectedGroup} />
+          countryMenuIsOpen && selectedGroup.list && <CountryMenu country={selectedGroup} />
         }
       </div>
     );
@@ -113,5 +102,5 @@ export default connect(state => ({
   selectedGroup: state.dashboard.selectedGroup,
   activePageDashboard: state.dashboard.activePageDashboard,
 }), {
-  setGroupCountry,setActivePage
+  setGroupCountry, setActivePage
 })(Sidebar);
