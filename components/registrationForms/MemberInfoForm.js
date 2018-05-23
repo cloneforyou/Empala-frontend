@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation,react/prop-types */
 import React from 'react';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaRadioButton from '../registration/EmpalaRadioButton';
@@ -16,22 +17,18 @@ import { countriesList } from '../../localdata/countriesList';
 const usStates = getValuesForSelectField(usStatesList);
 
 
-const mapStateToProps = (state) => {
-  return ({
-    registrationData: state.registration.registrationData,
-    page: state.registration.tabIndex,
-    fieldsErrors: state.registration.fieldsErrors,
-  });
-};
+const mapStateToProps = state => ({
+  registrationData: state.registration.registrationData,
+  page: state.registration.tabIndex,
+  fieldsErrors: state.registration.fieldsErrors,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return ({
-    setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
-    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  });
-};
+const mapDispatchToProps = dispatch => ({
+  setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
+  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  switchDocumentType: e => dispatch(setMemberDocumentType(e.target.value)),
+  setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+});
 
 
 class MemberInfoForm extends React.PureComponent {
@@ -76,7 +73,7 @@ class MemberInfoForm extends React.PureComponent {
         />
       );
     };
-    this.isRadioChecked = (name) => (this.props.registrationData.memberDocument === name);
+    this.isRadioChecked = name => (this.props.registrationData.memberDocument === name);
   }
 
   render() {
@@ -84,7 +81,7 @@ class MemberInfoForm extends React.PureComponent {
       return (
         <div className="container-fluid">
           <form className="row">
-            {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
+            {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
           </form>
         </div>
       );
@@ -124,8 +121,8 @@ class MemberInfoForm extends React.PureComponent {
             mask="a999999999"
           />
           <DatePickerField
-            id={'member_passport_issue_date'}
-            label={'Date of issue'}
+            id="member_passport_issue_date"
+            label="Date of issue"
             disabled={!this.isRadioChecked('passport')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_passport_issue_date'] || ''}
@@ -134,8 +131,8 @@ class MemberInfoForm extends React.PureComponent {
             dateIssue
           />
           <DatePickerField
-            id={'member_passport_expiry_date'}
-            label={'Date of expiry'}
+            id="member_passport_expiry_date"
+            label="Date of expiry"
             disabled={!this.isRadioChecked('passport')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_passport_expiry_date'] || ''}
@@ -148,7 +145,7 @@ class MemberInfoForm extends React.PureComponent {
             label="Drivers License"
             onClick={this.props.switchDocumentType}
             checked={this.isRadioChecked('drivers_license')}
-            labelStyle={this.isRadioChecked('drivers_license') ? {color: '#98c73a'} : {}}
+            labelStyle={this.isRadioChecked('drivers_license') ? { color: '#98c73a' } : {}}
             style={{ marginTop: '20px' }}
           />
           <EmpalaSelect
@@ -173,8 +170,8 @@ class MemberInfoForm extends React.PureComponent {
             errorText={this.props.fieldsErrors['member_drivers_license_number']}
           />
           <DatePickerField
-            id={'member_drivers_license_issue_date'}
-            label={'Date of issue'}
+            id="member_drivers_license_issue_date"
+            label="Date of issue"
             disabled={!this.isRadioChecked('drivers_license')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_issue_date'] || ''}
@@ -183,8 +180,8 @@ class MemberInfoForm extends React.PureComponent {
             dateIssue
           />
           <DatePickerField
-            id={'member_drivers_license_expiry_date'}
-            label={'Date of expiry'}
+            id="member_drivers_license_expiry_date"
+            label="Date of expiry"
             disabled={!this.isRadioChecked('drivers_license')}
             handleDatePick={this.props.setPickedDate}
             value={this.props.registrationData['member_drivers_license_expiry_date'] || ''}
@@ -198,4 +195,4 @@ class MemberInfoForm extends React.PureComponent {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MemberInfoForm)
+export default connect(mapStateToProps, mapDispatchToProps)(MemberInfoForm);
