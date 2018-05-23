@@ -71,7 +71,7 @@ export function* validateEmptyFields(action) {
 
 export function* validateLiquidWorth({ value }) {
   const data = yield select((state) => state.registration.registrationData);
-  const liquidNetWorth = data['profile_financials_liquid_net_worth'];
+  const liquidNetWorth = data['profile_financials_liquid_net_worth'] || '';
   if (value.length < liquidNetWorth.length ||
     (value.length === liquidNetWorth.length && value[0] <= liquidNetWorth[0])) {
     yield put(setInputFieldValueById('profile_financials_liquid_net_worth', ''));
