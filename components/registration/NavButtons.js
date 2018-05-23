@@ -5,7 +5,13 @@ import PropTypes from 'prop-types';
 import { every } from 'lodash';
 import MdArrowBack from 'react-icons/lib/md/arrow-back';
 import MdArrowForward from 'react-icons/lib/md/arrow-forward';
-import { changeTabPage, validateFieldsBlank } from '../../actions/registration';
+import {
+  changeTabPage,
+  validateFieldsBlank,
+  goBackToPart,
+  setTabName,
+  setTabPageIndex
+} from '../../actions/registration';
 
 function isFieldsFilled(fieldNames, fields) {
   return every(fieldNames, name => (fields[name] && fields[name] !== ''));
@@ -15,32 +21,23 @@ function isFieldError(fieldsList, errorsList) {
   return fieldsList.filter(field => errorsList[field]).length > 0;
 }
 
-function mapStateToProps(state) {
-  return {
-    tabName: state.registration.tabName || 'info',
-    tabIndex: state.registration.tabIndex || 1,
-    registrationData: state.registration.registrationData,
-    errors: state.registration.fieldsErrors,
-    checkboxes: state.registration.checkboxes,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return ({
-    validateFieldsBlank: fieldNames => dispatch(validateFieldsBlank(fieldNames)),
-    changeTabPage: (tabName, tabIndex, direction) => dispatch(changeTabPage(tabName, tabIndex, direction)),
-  });
-}
 
 function filterActiveCheckboxes(checkboxesList) {
   return Object.keys(checkboxesList).filter(key => (/identity_checkbox/.test(key)) && checkboxesList[key]);
 }
+
 
 const NavButtons = (props) => {
   let disabled = !isFieldsFilled(props.fieldNames, props.registrationData) ||
     (props.fieldNames && props.errors && isFieldError(props.fieldNames, props.errors));
   if (props.tabName === 'identity' && props.tabIndex === 4) {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
+  }
+
+  function goBackToReview() {
+    props.setTabName('final_review');
+    props.setTabPageIndex(0);
+    props.goBackToPart(false);
   }
 
   return (
@@ -65,6 +62,15 @@ const NavButtons = (props) => {
           <MdArrowForward size={20} />
         </button>
       </div>
+      {
+        props.userBackToPart &&
+        <button
+          className="btn-default btn-default_green"
+          onClick={goBackToReview}
+        >
+          Go back to Review
+        </button>
+      }
     </div>
   );
 };
@@ -85,5 +91,26 @@ NavButtons.defaultProps = {
   tabName: 'info',
   fieldNames: [],
 };
+
+function mapStateToProps(state) {
+  return {
+    tabName: state.registration.tabName || 'info',
+    tabIndex: state.registration.tabIndex || 1,
+    registrationData: state.registration.registrationData,
+    errors: state.registration.fieldsErrors,
+    checkboxes: state.registration.checkboxes,
+    userBackToPart: state.registration.userBackToPart,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return ({
+    validateFieldsBlank: fieldNames => dispatch(validateFieldsBlank(fieldNames)),
+    changeTabPage: (tabName, tabIndex, direction) => dispatch(changeTabPage(tabName, tabIndex, direction)),
+    setTabPageIndex: (index) => dispatch(setTabPageIndex(index)),
+    setTabName: (tabName) => dispatch(setTabName(tabName)),
+    goBackToPart: (status) => dispatch(goBackToPart(status)),
+  });
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavButtons);

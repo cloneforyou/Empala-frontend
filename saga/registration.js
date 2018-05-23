@@ -14,10 +14,11 @@ import {
   COPY_MAILING_ADDRESS,
   ADDRESS_INFO_REQUEST,
   SET_MEMBER_DOCUMENT_TYPE,
+  VALIDATE_FIELD_VALUE,
 } from '../constants/registration';
 import { menuItems } from '../utils/registrationUtils';
 import request from '../utils/request';
-import validationSaga, { validateCheckbox, validateEmptyFields } from './validation';
+import validationSaga, { validateCheckbox, validateEmptyFields, validateFieldValue } from './validation';
 import { getAddressInfoByZIP } from './sideServices';
 
 
@@ -117,6 +118,7 @@ export default function* registrationSaga() {
     takeEvery([SET_FIELD_VALUE, COPY_MAILING_ADDRESS], saveData),
     takeEvery(TOGGLE_CHECKBOX, validateCheckbox),
     takeEvery(SET_MEMBER_DOCUMENT_TYPE, clearMemberDocumentInfo),
+    takeEvery(VALIDATE_FIELD_VALUE, validateFieldValue),
     takeLatest(SET_FIELD_VALUE, validationSaga),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields),

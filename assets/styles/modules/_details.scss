@@ -17,7 +17,6 @@
 
 .main-text-helvetica {
   font-family: Helvetica, serif;
-  color: #000;
   &_12 {
     @include fontSize(12px)
   }
@@ -33,7 +32,6 @@
     }
   }
   &__link {
-    color: #000;
     font-family: Helvetica, serif;
     @include fontSize(12px);
     &:hover, &:focus {
@@ -56,4 +54,15 @@
 
 .yellow {
   color: $yellow !important;
+}
+
+.btn-default {
+  background: none;
+  border: 2px solid;
+  padding: 5px 15px;
+  border-radius: 25px;
+  margin-left: 15px;
+  cursor: pointer;
+
+  @include styledButtonsByColor($green, 'green')
 }

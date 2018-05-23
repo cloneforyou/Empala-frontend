@@ -10,20 +10,6 @@ import * as dashboardActions from '../actions/dashboard';
 import { serverOrigins } from "../utils/config";
 
 
-function mapStateToProps(state) {
-  return {
-    sidebarCollapsed: state.dashboard.sidebarCollapsed,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool)),
-    getUserData: () => dispatch(dashboardActions.getUserData()),
-    startSocket: () => dispatch(dashboardActions.startSocket()),
-  }
-}
-
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -57,6 +43,20 @@ class Dashboard extends Component {
         </div>
       </MuiThemeProvider>
     )
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    sidebarCollapsed: state.dashboard.sidebarCollapsed,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool)),
+    getUserData: () => dispatch(dashboardActions.getUserData()),
+    startSocket: () => dispatch(dashboardActions.startSocket()),
   }
 }
 
