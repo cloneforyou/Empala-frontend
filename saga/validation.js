@@ -67,10 +67,15 @@ export function* validateEmptyFields(action) {
   }
 }
 
-export function* validateFieldValue ({fieldId, fieldValue}) {
+export function* validateFieldValue({ fieldId, fieldValue }) {
   if (fieldId === 'identity_residential_address_residential_address_line_1' || fieldId === 'identity_residential_address_residential_address_line_2') {
     if (fieldValue.toLowerCase().replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '') === 'pobox') {
       yield put(setFieldInvalid(fieldId, 'PO Box is not allowed in residential address'));
+    }
+    if (['identity_zip_code', 'identity_mailing_address_zip_code', 'profile_employment_zip_code'].includes(fieldId)) {
+      if (fieldValue.length !== 5) {
+        yield put(setFieldInvalid(fieldId, 'Invalid ZIP-code'));
+      }
     }
   }
 }
@@ -88,14 +93,14 @@ export function* validateLiquidWorth({ value }) {
 
 
 // Spawns validation function according to fieldId
-export default function* validationSaga({id, value}) {
+export default function* validationSaga({ id, value }) {
   const serverValidatedFields = [
     'member_account_email',
     'member_passport_number',
     'member_drivers_license_number',
     'regulatory_identification_ssn',
   ];
-  yield put(setFieldValid(id));
+  // yield put(setFieldValid(id));
   if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({ id, value });
   } else if (id === 'member_account_password_confirm' || id === 'member_account_password' ) {

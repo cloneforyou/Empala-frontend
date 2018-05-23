@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects';
 import { js2xml, xml2js } from 'xml-js';
-import { setInputFieldValueById } from '../actions/registration';
+import {setFieldInvalid, setFieldValid, setInputFieldValueById} from '../actions/registration';
 import { statesAbbvs } from '../localdata/usStatesList';
 
 export function* getAddressInfoByZIP({ fieldId, zipCode }) {
@@ -57,6 +57,9 @@ export function* getAddressInfoByZIP({ fieldId, zipCode }) {
         yield put(setInputFieldValueById('profile_employment_state', info.state));
         yield put(setInputFieldValueById('profile_employment_city', info.city));
       }
+      yield put(setFieldValid(fieldId));
+    } else {
+      yield put(setFieldInvalid(fieldId, 'Invalid ZIP-code'));
     }
   } catch (err) {
     console.log(err);
