@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key,dot-notation,max-len */
 import {
   CLOSE_IDENTITY_MODAL,
   COPY_MAILING_ADDRESS,
@@ -43,7 +44,7 @@ function registration(state = initialState, action) {
     case GET_DATA_FROM_CACHE:
       return { ...state, registrationData: JSON.parse(localStorage.getItem('registrationData')) };
     case TOGGLE_CHECKBOX:
-      return { ...state,  checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] } };
+      return { ...state, checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] } };
     case SHOW_IDENTITY_MODAL:
       return { ...state, showIdentityModal: true };
     case CLOSE_IDENTITY_MODAL:

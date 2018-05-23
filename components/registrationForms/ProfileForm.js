@@ -1,15 +1,12 @@
+/* eslint-disable max-len,react/forbid-prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import EmpalaInput from '../registration/EmpalaInput';
 import { dataFields } from '../../localdata/profilePageData';
 import {
   getInfoByZipCode,
-  getMenuItems,
   setInputFieldValueById,
-  setMemberDocumentType,
-  setTabName,
-  setTabPageIndex,
 } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import { statesAbbvs } from '../../localdata/usStatesList';
@@ -29,8 +26,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setInputFieldValueById(id, value));
   },
   setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-  switchDocumentType: e => dispatch(setMemberDocumentType(e.target.value)),
-  setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
 });
 
 
@@ -99,5 +94,18 @@ class ProfileForm extends React.PureComponent {
     );
   }
 }
+
+ProfileForm.propTypes = {
+  page: PropTypes.number,
+  registrationData: PropTypes.object.isRequired,
+  fieldsErrors: PropTypes.object,
+  setInputValueById: PropTypes.func.isRequired,
+  setSelectedValueById: PropTypes.func.isRequired,
+};
+
+ProfileForm.defaultProps = {
+  page: 1,
+  fieldsErrors: {},
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);

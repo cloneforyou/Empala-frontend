@@ -1,34 +1,25 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import EmpalaInput from '../registration/EmpalaInput';
 import { dataFields } from '../../localdata/regulatoryPageData';
-import {
-  getMenuItems,
-  setInputFieldValueById,
-  setMemberDocumentType,
-  setTabName,
-  setTabPageIndex
-} from '../../actions/registration';
+import { setInputFieldValueById } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import DatePickerField from '../registration/DatePickerField';
 
 
-const mapStateToProps = (state) => {
-  return ({
-    registrationData: state.registration.registrationData,
-    page: state.registration.tabIndex,
-    fieldsErrors: state.registration.fieldsErrors,
-  });
-};
+const mapStateToProps = state => ({
+  registrationData: state.registration.registrationData,
+  page: state.registration.tabIndex,
+  fieldsErrors: state.registration.fieldsErrors,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return ({
-    setInputValueById: (e) => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    switchDocumentType: (e) => dispatch(setMemberDocumentType(e.target.value)),
-    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  });
-};
+const mapDispatchToProps = dispatch => ({
+  setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
+  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+});
 
 
 class RegulatoryForm extends React.Component {
@@ -82,10 +73,11 @@ class RegulatoryForm extends React.Component {
               birthDay={item.birthDay}
             />
           );
+        default: return null;
       }
     };
 
-    this.isRadioChecked = (name) => (this.props.registrationData.memberDocument === name);
+    this.isRadioChecked = name => (this.props.registrationData.memberDocument === name);
   }
 
 
@@ -93,11 +85,25 @@ class RegulatoryForm extends React.Component {
     return (
       <div className="container-fluid">
         <form className="row">
-          {dataFields[this.props.page - 1].map((item) => this.mappingComponent(item))}
+          {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
         </form>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegulatoryForm)
+RegulatoryForm.propTypes = {
+  page: PropTypes.number,
+  registrationData: PropTypes.object.isRequired,
+  fieldsErrors: PropTypes.object,
+  setInputValueById: PropTypes.func.isRequired,
+  setSelectedValueById: PropTypes.func.isRequired,
+  setPickedDate: PropTypes.func.isRequired,
+};
+
+RegulatoryForm.defaultProps = {
+  page: 1,
+  fieldsErrors: {},
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegulatoryForm);
