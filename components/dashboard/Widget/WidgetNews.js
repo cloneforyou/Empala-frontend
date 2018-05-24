@@ -65,7 +65,7 @@ class WidgetNews extends Component {
                           {
                             widget.id === 'external_news' ?
                               <Moment date={card.pubDate} fromNow /> :
-                              <Moment date={card.pubDate} format="DD-MM-YYY" />
+                              <Moment date={card.pubDate} format="MM-DD-YYYY" />
                           }
 
                         </span>
@@ -73,16 +73,16 @@ class WidgetNews extends Component {
                       <a className="news-card__link" target="_blank" href={card.link}>{card.title}</a>
                       <p className="m-0">{card.description}</p>
                     </div>
-                    <div className="news-card__foot">
-                      <div className="news-card__rating">
-                        <span>Rating:</span>
-                        <div className="stars">
-                          <div className="stars__empty">
-                            <div className={`stars__fill stars__fill_${card.rating}`} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {/*<div className="news-card__foot">*/}
+                      {/*<div className="news-card__rating">*/}
+                        {/*<span>Rating:</span>*/}
+                        {/*<div className="stars">*/}
+                          {/*<div className="stars__empty">*/}
+                            {/*<div className={`stars__fill stars__fill_${card.rating}`} />*/}
+                          {/*</div>*/}
+                        {/*</div>*/}
+                      {/*</div>*/}
+                    {/*</div>*/}
                   </div>
                 </div>
               ))
