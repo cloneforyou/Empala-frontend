@@ -10,17 +10,21 @@ class Body extends Component {
 
 
   render() {
-    const { sidebarCollapsed,  } = this.props;
+    const { sidebarCollapsed, loadingPage } = this.props;
     return (
       <div className="container-fluid">
         <div className="row">
           <Sidebar sidebarCollapsed={sidebarCollapsed} />
-          <Main sidebarCollapsed={sidebarCollapsed}/>
+          {
+            !loadingPage && <Main sidebarCollapsed={sidebarCollapsed} />
+          }
         </div>
       </div>
     );
   }
 }
 
-export default connect(state => ({}), {})(Body);
+export default connect(state => ({
+  loadingPage: state.dashboard.loadingPage,
+}), {})(Body);
 
