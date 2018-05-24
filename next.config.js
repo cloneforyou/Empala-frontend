@@ -9,13 +9,13 @@ module.exports = withImages({
         test: /\.(css|scss)/,
         loader: 'emit-file-loader',
         options: {
-          name: 'dist/[path][name].[ext]'
-        }
+          name: 'assets/styles/[path][name].[ext]',
+        },
       }
       ,
       {
         test: /\.css$/,
-        use: ['babel-loader', 'raw-loader', 'postcss-loader']
+        use: ['babel-loader', 'raw-loader', 'postcss-loader'],
       },
       {
         test: /\.s(a|c)ss$/,
@@ -24,14 +24,14 @@ module.exports = withImages({
             loader: 'sass-loader',
             options: {
               includePaths: ['styles', 'node_modules']
-                .map((d) => path.join(__dirname, d))
-                .map((g) => glob.sync(g))
-                .reduce((a, c) => a.concat(c), [])
-            }
-          }
-        ]
-      }
-    )
-    return config
-  }
+                .map(d => path.join(__dirname, d))
+                .map(g => glob.sync(g))
+                .reduce((a, c) => a.concat(c), []),
+            },
+          },
+        ],
+      },
+    );
+    return config;
+  },
 });

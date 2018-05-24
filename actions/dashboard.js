@@ -62,9 +62,9 @@ export function setGroupCountry(label) {
   };
 }
 
-export function setActivePage(page) {
-  return {
-    type: SET_ACTIVE_PAGE,
-    page,
-  };
-}
+
+export const setActivePage = page => ({
+  type: SET_ACTIVE_PAGE,
+  page,
+});
+
