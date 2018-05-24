@@ -1,8 +1,12 @@
 import { listContries } from '../localdata/marketAccesLists';
 
 import {
-  GET_USER_DATA_FAIL, GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
-  REFRESH_TOKEN_REQUEST, START_WEBSOCKET, SET_ACTIVE_PAGE,
+  GET_USER_DATA_FAIL,
+  GET_USER_DATA_REQUEST,
+  GET_USER_DATA_SUCCESS,
+  REFRESH_TOKEN_REQUEST,
+  START_WEBSOCKET,
+  SET_ACTIVE_PAGE,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {

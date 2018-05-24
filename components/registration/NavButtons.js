@@ -10,7 +10,7 @@ import {
   validateFieldsBlank,
   goBackToPart,
   setTabName,
-  setTabPageIndex
+  setTabPageIndex,
 } from '../../actions/registration';
 
 function isFieldsFilled(fieldNames, fields) {
@@ -107,9 +107,9 @@ function mapDispatchToProps(dispatch) {
   return ({
     validateFieldsBlank: fieldNames => dispatch(validateFieldsBlank(fieldNames)),
     changeTabPage: (tabName, tabIndex, direction) => dispatch(changeTabPage(tabName, tabIndex, direction)),
-    setTabPageIndex: (index) => dispatch(setTabPageIndex(index)),
-    setTabName: (tabName) => dispatch(setTabName(tabName)),
-    goBackToPart: (status) => dispatch(goBackToPart(status)),
+    setTabPageIndex: index => dispatch(setTabPageIndex(index)),
+    setTabName: tabName => dispatch(setTabName(tabName)),
+    goBackToPart: status => dispatch(goBackToPart(status)),
   });
 }
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import { setGroupCountry, setActivePage } from '../../actions/dashboard'
+import { setGroupCountry, setActivePage} from '../../actions/dashboard'
 
 
 class Sidebar extends Component {
@@ -13,7 +13,6 @@ class Sidebar extends Component {
       countryMenuIsOpen: false,
     };
   }
-
 
   openMenu = (nextLabel) => {
     const { countryMenuIsOpen } = this.state

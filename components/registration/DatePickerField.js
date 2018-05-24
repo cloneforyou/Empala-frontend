@@ -1,6 +1,7 @@
 import React from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import FaCalendarO from 'react-icons/lib/fa/calendar-o';
+import PropTypes from 'prop-types';
 
 import style from './RegistrationFieldsStyle';
 
@@ -15,15 +16,15 @@ const DatePickerField = (props) => {
 
   return (
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
-      <label className={'registration-label'}>
+      <label className="registration-label">
         {props.label}
       </label>
-      <div className='date-picker__container'>
+      <div className="date-picker__container">
         <DatePicker
           id={props.id}
           locale="en-US"
           underlineStyle={style.underlineStyle}
-          openToYearSelection={true}
+          openToYearSelection
           errorText={errorText}
           inputStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
           firstDayOfWeek={0}
@@ -33,12 +34,22 @@ const DatePickerField = (props) => {
           onChange={(none = null, date) => props.handleDatePick(props.id, date)}
           value={props.value ? new Date(props.value) : null}
           minDate={props.dateExpiry && currentDate}
-          maxDate={props.birthDay && dateBirthDay || props.dateIssue && currentDate }
+          maxDate={(props.birthDay && dateBirthDay) || (props.dateIssue && currentDate)}
         />
-        <FaCalendarO style={style.calendarIcon}/>
+        <FaCalendarO style={style.calendarIcon} />
       </div>
     </div>
   );
+};
+
+DatePickerField.propTypes = {
+  label: PropTypes.string.isRequired,
+  col: PropTypes.number,
+  id: PropTypes.string.isRequired,
+  birthDay: PropTypes.bool,
+  dateIssue: PropTypes.bool,
+  dateExpiry: PropTypes.bool,
+  handleDatePick: PropTypes.func.isRequired,
 };
 
 export default DatePickerField;

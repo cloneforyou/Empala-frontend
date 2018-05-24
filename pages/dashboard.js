@@ -31,7 +31,6 @@ class Dashboard extends Component {
 
   render() {
     const { sidebarCollapsed } = this.state;
-    console.log('this.props Das -==> ', this.props);
     return (
       <MuiThemeProvider>
         <div className="full-height-wrap">

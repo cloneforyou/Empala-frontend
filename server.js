@@ -11,14 +11,6 @@ app.prepare()
   .then(() => {
     const server = express();
     server.use(handler)
-    // server.get('/registration/:tabName/:tabIndex', (req, res) => {
-    //   const actualPage = '/registration';
-    //   const queryParams = {
-    //     tabName: req.params.tabName,
-    //     tabIndex: req.params.tabIndex,
-    //   };
-    //   app.render(req, res, actualPage, queryParams);
-    // });
 
     server.get('*', (req, res) => {
       return handle(req, res)
