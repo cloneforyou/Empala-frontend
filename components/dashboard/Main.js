@@ -9,19 +9,23 @@ import GlobalNetworkPage from './Pages/GlobalNetworkPage';
 class Main extends Component {
   constructor(props) {
     super(props);
-  }
 
-  mapPageToComponent = (page) => {
-    switch (page) {
-      case 'overflow':
-        return <Overflow />;
-      case 'positions':
-        return <Positions />;
-      case 'timeline':
-        return <GlobalNetworkPage />;
-      default:
-        return <Overflow />;
-    }
+
+    this.mapPageToComponent = function mapPageToComponent(pageName) {
+      switch (pageName) {
+        case 'timeline':
+        case 'community':
+        case 'groups':
+        case 'blogs':
+          return <GlobalNetworkPage page={pageName} />;
+        case 'overflow':
+          return <Overflow />;
+        case 'positions':
+          return <Positions />;
+        default:
+          return <Overflow />;
+      }
+    };
   }
 
   render() {
