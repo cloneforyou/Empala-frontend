@@ -15,7 +15,7 @@ class Sidebar extends Component {
   }
 
   openMenu = (nextLabel) => {
-    const { countryMenuIsOpen } = this.state
+    const { countryMenuIsOpen } = this.state;
     this.setState({ countryMenuIsOpen: !countryMenuIsOpen }, () => {
       this.props.setGroupCountry(nextLabel)
     });
