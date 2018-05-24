@@ -54,15 +54,15 @@ export function* validateCheckbox(action) {
   }
   if (action.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && !isChecked) {
     const data = yield select(state => state.registration.registrationData);
-    const trustedContactFields = Object.keys(data).filter((key) => (/identity_trusted_contact/.test(key)));
+    const trustedContactFields = Object.keys(data).filter(key => (/identity_trusted_contact/.test(key)));
     yield all(trustedContactFields.map(field => put(setInputFieldValueById(field, ''))));
   }
 }
 
 export function* validateEmptyFields(action) {
   if (action.fields) {
-    const data = yield select((state) => state.registration.registrationData);
-    const blankFields = action.fields.filter((field) => (!data[field] || data[field] === ''));
+    const data = yield select(state => state.registration.registrationData);
+    const blankFields = action.fields.filter(field => (!data[field] || data[field] === ''));
     yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
@@ -81,7 +81,7 @@ export function* validateFieldValue({ fieldId, fieldValue }) {
 }
 
 export function* validateLiquidWorth({ value }) {
-  const data = yield select((state) => state.registration.registrationData);
+  const data = yield select(state => state.registration.registrationData);
   const liquidNetWorth = data['profile_financials_liquid_net_worth'] || '';
   if (value.length < liquidNetWorth.length ||
     (value.length === liquidNetWorth.length && value[0] <= liquidNetWorth[0])) {
@@ -103,7 +103,7 @@ export default function* validationSaga({ id, value }) {
   // yield put(setFieldValid(id));
   if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({ id, value });
-  } else if (id === 'member_account_password_confirm' || id === 'member_account_password' ) {
+  } else if (id === 'member_account_password_confirm' || id === 'member_account_password') {
     yield validatePasswordField({ id, value });
   } else if (id === 'profile_financials_total_net_worth') {
     yield validateLiquidWorth({ value });

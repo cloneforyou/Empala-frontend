@@ -2,8 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import { setGroupCountry, setActivePage } from '../../actions/dashboard'
+import {changeCurrentPage, setGroupCountry, setActivePage} from '../../actions/dashboard'
 
+function mapStateToProps(state) {
+  return {
+    selectedGroup: state.dashboard.selectedGroup,
+    activePageDashboard: state.dashboard.activePageDashboard,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setGroupCountry: () => dispatch(setGroupCountry()),
+    changeCurrentPage: (page) => dispatch(changeCurrentPage(page)),
+    setActivePage: (label) => dispatch(setActivePage(label))
+  }
+}
 
 class Sidebar extends Component {
   constructor(props) {
@@ -12,7 +26,6 @@ class Sidebar extends Component {
       countryMenuIsOpen: false,
     };
   }
-
 
   openMenu = (nextLabel) => {
     const { countryMenuIsOpen } = this.state
@@ -26,9 +39,6 @@ class Sidebar extends Component {
     this.setState({ countryMenuIsOpen: !countryMenuIsOpen })
   };
 
-  handleClick = (label) => {
-    this.props.setActivePage(label)
-  };
 
 
   render() {
@@ -68,7 +78,7 @@ class Sidebar extends Component {
                             <li
                               className={(item.label === activePageDashboard) ? 'nav-list__item nav-list__item_active' : 'nav-list__item'}
                               key={j}
-                              onClick={() => this.handleClick(item.label)}
+                              onClick={() => this.props.setActivePage(item.label.toLowerCase())}
                             >
                               <i
                                 className={`nav-list__icon nav-list__icon_${item.icon}`}
@@ -97,9 +107,4 @@ class Sidebar extends Component {
 }
 
 
-export default connect(state => ({
-  selectedGroup: state.dashboard.selectedGroup,
-  activePageDashboard: state.dashboard.activePageDashboard,
-}), {
-  setGroupCountry, setActivePage
-})(Sidebar);
+export default connect(mapStateToProps,mapDispatchToProps)(Sidebar);

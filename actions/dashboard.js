@@ -1,8 +1,12 @@
 import { listContries } from '../localdata/marketAccesLists';
 
 import {
-  GET_USER_DATA_FAIL, GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
-  REFRESH_TOKEN_REQUEST, START_WEBSOCKET, SET_ACTIVE_PAGE,
+  GET_USER_DATA_FAIL,
+  GET_USER_DATA_REQUEST,
+  GET_USER_DATA_SUCCESS,
+  REFRESH_TOKEN_REQUEST,
+  START_WEBSOCKET,
+  SET_ACTIVE_PAGE,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -58,8 +62,9 @@ export function setGroupCountry(label) {
   };
 }
 
-
-export const setActivePage = page => ({
-  type: SET_ACTIVE_PAGE,
-  page,
-});
+export function setActivePage(page) {
+  return {
+    type: SET_ACTIVE_PAGE,
+    page,
+  };
+}
