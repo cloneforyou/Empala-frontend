@@ -19,6 +19,9 @@ class Main extends Component {
       case 'positions':
         return <Positions />;
       case 'timeline':
+      case 'community':
+      case 'groups':
+      case 'blogs':
         return <GlobalNetworkPage />;
       case 'performance':
         return <Performance />
