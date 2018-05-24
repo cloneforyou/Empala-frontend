@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import {changeCurrentPage, setGroupCountry, setActivePage} from '../../actions/dashboard'
+import {setGroupCountry, setActivePage} from '../../actions/dashboard'
 
 function mapStateToProps(state) {
   return {

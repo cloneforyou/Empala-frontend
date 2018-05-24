@@ -20,14 +20,17 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.mapPageToComponent = function mapPageToComponent(page) {
-      console.log(' ** PAGECHANGE', page );
-      switch (page) {
+    this.mapPageToComponent = function mapPageToComponent(pageName) {
+      console.log(' ** PAGECHANGE', pageName);
+      switch (pageName) {
         case 'timeline':
-          return <GlobalNetworkPage />;
-          case 'overflow':
+        case 'community':
+        case 'groups':
+        case 'blogs':
+          return <GlobalNetworkPage page={pageName} />;
+        case 'overflow':
           return <Overflow />;
-          case 'positions':
+        case 'positions':
           return <Positions />;
         default:
           return <Overflow />;
