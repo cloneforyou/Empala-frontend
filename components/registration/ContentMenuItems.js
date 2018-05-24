@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ContentMenuItems = (props) => {
 
@@ -15,6 +16,10 @@ const ContentMenuItems = (props) => {
       }
     </ul>
   );
+};
+
+ContentMenuItems.propTypes = {
+  tabIndex: PropTypes.number.isRequired,
 };
 
 export default ContentMenuItems;

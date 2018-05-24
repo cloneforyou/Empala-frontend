@@ -10,12 +10,12 @@ class Body extends Component {
 
 
   render() {
-    const { sidebarCollapsed } = this.props;
+    const { sidebarCollapsed,  } = this.props;
     return (
       <div className="container-fluid">
         <div className="row">
           <Sidebar sidebarCollapsed={sidebarCollapsed} />
-          <Main sidebarCollapsed={sidebarCollapsed} />
+          <Main sidebarCollapsed={sidebarCollapsed}/>
         </div>
       </div>
     );

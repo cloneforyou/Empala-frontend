@@ -1,6 +1,7 @@
 import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import PropTypes from 'prop-types';
 
 import style from './RegistrationFieldsStyle';
 
@@ -14,7 +15,7 @@ const EmpalaSelect = (props) => {
         value={props.value}
         autoWidth={props.autoWidth}
         floatingLabelText={props.label}
-        floatingLabelFixed={true}
+        floatingLabelFixed
         floatingLabelStyle={style.floatingLabelStyle}
         hintText={props.hint || props.label}
         hintStyle={style.hintStyle}
@@ -25,7 +26,7 @@ const EmpalaSelect = (props) => {
         selectedMenuItemStyle={style.selectedMenuItemStyle}
         underlineDisabledStyle={style.underlineDisabledStyle}
         underlineStyle={style.underlineStyle}
-        underlineFocusStyle={style.underlineFocusStyle}
+        underlineFocusStyle={props.errorText ? style.underlineErrorStyle : style.underlineFocusStyle}
         maxHeight={300}
         onChange={(e, i, v) => {
           props.handleChange(props.id, v)
@@ -45,6 +46,19 @@ const EmpalaSelect = (props) => {
       </SelectField>
     </div>
   );
+};
+
+EmpalaSelect.propTypes = {
+  autoWidth: PropTypes.bool,
+  col: PropTypes.string,
+  disabled: PropTypes.bool,
+  errorText: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  hint: PropTypes.string,
+  handleCheck: PropTypes.func,
+  handleChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
 };
 
 export default EmpalaSelect;

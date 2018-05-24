@@ -13,7 +13,7 @@ const initialState = {
   loading: false,
   error: false,
   userData: false,
-  activePageDashboard: false,
+  activePageDashboard: 'overflow',
 };
 
 function dashboard(state = initialState, action) {

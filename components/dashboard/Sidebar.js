@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import {setGroupCountry, setActivePage} from '../../actions/dashboard'
+import { setGroupCountry, setActivePage} from '../../actions/dashboard'
 
-function mapStateToProps(state) {
-  return {
-    selectedGroup: state.dashboard.selectedGroup,
-    activePageDashboard: state.dashboard.activePageDashboard,
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setGroupCountry: () => dispatch(setGroupCountry()),
-    changeCurrentPage: (page) => dispatch(changeCurrentPage(page)),
-    setActivePage: (label) => dispatch(setActivePage(label))
-  }
-}
 
 class Sidebar extends Component {
   constructor(props) {
@@ -28,7 +15,7 @@ class Sidebar extends Component {
   }
 
   openMenu = (nextLabel) => {
-    const { countryMenuIsOpen } = this.state
+    const { countryMenuIsOpen } = this.state;
     this.setState({ countryMenuIsOpen: !countryMenuIsOpen }, () => {
       this.props.setGroupCountry(nextLabel)
     });
@@ -39,6 +26,9 @@ class Sidebar extends Component {
     this.setState({ countryMenuIsOpen: !countryMenuIsOpen })
   };
 
+  handleClick = (label) => {
+    this.props.setActivePage(label.toLowerCase())
+  };
 
 
   render() {
@@ -76,14 +66,18 @@ class Sidebar extends Component {
                         } else {
                           return (
                             <li
-                              className={(item.label === activePageDashboard) ? 'nav-list__item nav-list__item_active' : 'nav-list__item'}
+                              className={(item.label.toLowerCase() === activePageDashboard) ? 'nav-list__item nav-list__item_active' : 'nav-list__item'}
                               key={j}
-                              onClick={() => this.props.setActivePage(item.label.toLowerCase())}
+                              onClick={() => this.handleClick(item.label)}
                             >
-                              <i
-                                className={`nav-list__icon nav-list__icon_${item.icon}`}
-                              />
-                              <span className="nav-list__link">{item.label}</span>
+                              <Link route="dashboard" params={{ page: `${item.label.toLowerCase()}` }}>
+                                <span>
+                                  <i
+                                    className={`nav-list__icon nav-list__icon_${item.icon}`}
+                                  />
+                                <span className="nav-list__link">{item.label}</span>
+                                </span>
+                              </Link>
                             </li>
                           )
                         }
@@ -107,4 +101,9 @@ class Sidebar extends Component {
 }
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(Sidebar);
+export default connect(state => ({
+  selectedGroup: state.dashboard.selectedGroup,
+  activePageDashboard: state.dashboard.activePageDashboard,
+}), {
+  setGroupCountry, setActivePage
+})(Sidebar);
