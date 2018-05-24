@@ -1,8 +1,12 @@
 import { listContries } from '../localdata/marketAccesLists';
 
 import {
-  GET_USER_DATA_FAIL, GET_USER_DATA_REQUEST, GET_USER_DATA_SUCCESS,
-  REFRESH_TOKEN_REQUEST, START_WEBSOCKET,
+  GET_USER_DATA_FAIL,
+  GET_USER_DATA_REQUEST,
+  GET_USER_DATA_SUCCESS,
+  REFRESH_TOKEN_REQUEST,
+  START_WEBSOCKET,
+  SET_ACTIVE_PAGE,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -45,7 +49,7 @@ export function startSocket() {
 }
 
 
-export const setGroupCountry = (label) => {
+export function setGroupCountry(label) {
   let group = {};
   listContries.forEach((item) => {
     if (item.label === label) {
@@ -56,5 +60,11 @@ export const setGroupCountry = (label) => {
     type: 'CHOOSE_GROUP_COUNTRY',
     selectedGroup: group,
   };
-};
+}
 
+export function setActivePage(page) {
+  return {
+    type: SET_ACTIVE_PAGE,
+    page,
+  };
+}

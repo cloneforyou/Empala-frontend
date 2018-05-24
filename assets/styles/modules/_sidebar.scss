@@ -38,10 +38,8 @@
       padding: 0 14px;
       text-align: left;
     }
-    .nav-list__item {
-      a {
-        display: block;
-      }
+    .nav-list__link {
+      display: block;
     }
     .nav-list__icon {
       &:before {
@@ -73,17 +71,14 @@
     position: relative;
     padding-left: 35px;
     min-height: 17px;
+    cursor: pointer;
     &:not(:last-child) {
       margin-bottom: 5px;
     }
     @include fontSize(14px);
-    a {
-      color: $main-color-text-grey;
-      display: none;
-      font-weight: 300;
-    }
+
     &_active, &:hover {
-      a {
+      .nav-list__link {
         color: $white;
         text-decoration: none;
       }
@@ -93,6 +88,7 @@
         }
       }
     }
+
     &_red {
       @include colorfulMenuItem($light-red)
     }
@@ -102,6 +98,11 @@
     &_yellow {
       @include colorfulMenuItem($yellow)
     }
+  }
+  &__link {
+    color: $main-color-text-grey;
+    display: none;
+    font-weight: 300;
   }
   &__icon {
     &:before {

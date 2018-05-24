@@ -1,0 +1,22 @@
+.titlebar {
+  background-color: #98c73a;
+  line-height: 62px;
+  height: 62px;
+  &__title {
+    color: #fff;
+    font-size: 18px;
+    text-transform: capitalize;
+  }
+  &__icon {
+    display: inline-block;
+    margin: 0 10px;
+    background-color: $main-color-text-grey;
+    width: 16px;
+    height: 16px;
+    @each $item in $listItemsSidebar {
+      &_#{$item} {
+        @include iconDashboard($item);
+      }
+    }
+  }
+}
