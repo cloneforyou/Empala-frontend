@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function mapStateToProps(state) {
   return {
-    currentPage: state.dashboard.currentPage,
+    currentPage: state.dashboard.activePageDashboard,
   };
 }
 

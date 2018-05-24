@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
 import Main from './Main';
 
@@ -6,6 +7,7 @@ class Body extends Component {
   constructor(props) {
     super(props);
   }
+
 
   render() {
     const { sidebarCollapsed } = this.props;
@@ -20,4 +22,5 @@ class Body extends Component {
   }
 }
 
-export default Body;
+export default connect(state => ({}), {})(Body);
+

@@ -8,7 +8,7 @@ const GlobalNetworkPage = (props) => {
     <iframe
       src="http://socialenginealb-949568690.us-west-2.elb.amazonaws.com"
       style={{ width: '100%', height: '100vh' }}
-      marginheight="10"
+      marginHeight={10}
       />
   </div>
   )

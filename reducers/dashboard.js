@@ -4,15 +4,16 @@ import {
   COLLAPSE_SIDEBAR,
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS,
+  SET_ACTIVE_PAGE,
 } from '../constants/dashboard';
 
 const initialState = {
-  currentPage: false,
   sidebarCollapsed: true,
   selectedGroup: {},
   loading: false,
   error: false,
   userData: false,
+  activePageDashboard: false,
 };
 
 function dashboard(state = initialState, action) {
@@ -38,10 +39,10 @@ function dashboard(state = initialState, action) {
         loading: false,
         userData: action.data,
       };
-    case CHANGE_CURRENT_PAGE:
+    case SET_ACTIVE_PAGE:
       return {
         ...state,
-        currentPage: action.page,
+        activePageDashboard: action.page,
       };
     default:
       return state;

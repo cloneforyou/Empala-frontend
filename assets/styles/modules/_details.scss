@@ -66,3 +66,8 @@
 
   @include styledButtonsByColor($green, 'green')
 }
+.invisible-btn{
+  background: none;
+  border: none;
+  padding: 0;
+}
