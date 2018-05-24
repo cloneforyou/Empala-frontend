@@ -22,11 +22,12 @@
       background-color: $color !important;
     }
   }
-  &:hover, &:focus  {
-    a {
-      color: $color;
+  &:hover, &:focus, &_active {
+    a, span, .nav-list__link {
+      color: $color !important;
     }
   }
+
 }
 
 @mixin iconFlags($country) {
@@ -35,13 +36,14 @@
     background: url($path-to-dashboard-icon + 'flag-' + $country +'.svg') no-repeat;
   }
 }
+
 @mixin styledButtonsByColor($color, $name) {
   transition: .3s;
   &_#{$name} {
     color: $color;
     border-color: $color;
   }
-  &:hover, &:focus{
+  &:hover, &:focus {
     background: $color;
     color: #fff;
   }
