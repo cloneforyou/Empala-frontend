@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import { setGroupCountry, setActivePage} from '../../actions/dashboard'
+import { setGroupCountry, setActivePage } from '../../actions/dashboard'
 
 
 class Sidebar extends Component {
@@ -59,7 +59,8 @@ class Sidebar extends Component {
                                 <i
                                   className={`nav-list__icon nav-list__icon_${item.icon}`}
                                 />
-                                <span className="nav-list__link">{item.label}</span>
+                                <span
+                                  className="nav-list__link">{item.label}</span>
                               </button>
                             </li>
                           )

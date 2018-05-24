@@ -1,4 +1,5 @@
 import { uniqueId } from 'lodash';
+import Performance from "../components/dashboard/Pages/Performance";
 
 export const widgetsOverflow = [
   {
@@ -757,36 +758,164 @@ export const widgetsPositions = [
         id: uniqueId(),
         headers: [
           {
-            title: 'Exposure',
-          },
-          {
-            title: 'Value',
-          },
-          {
-            title: 'Day chg',
-          },
-          {
-            title: 'Allocation',
+            title: 'Notional amount',
           },
           {
             title: 'Domestic',
           },
           {
+            title: 'Total',
+          },
+          {
             title: 'Foreign',
+          },
+          {
+            title: 'Day change',
           },
         ],
         data: [
           {
             id: uniqueId(),
-            exposure: 'Total a / c value',
-            value: '9,999,999,999',
-            dayChg: { data: 999.9, position: 'up' },
-            allocation: 'EMARA & MM',
+            exposure: 'Net value',
             domestic: '9,999,999,999',
+            total: '9,999,999,999',
             foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
           },
         ],
       },
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Percentage allocations',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Total',
+          },
+          {
+            title: 'Foreign',
+          },
+          {
+            title: 'Day change',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+        ],
+      },
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Position risk measures',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Total',
+          },
+          {
+            title: 'Foreign',
+          },
+          {
+            title: 'Day change',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            total: '9,999,999,999',
+            foreign: '9,999,999,999',
+            dayChage: 999.9,
+          },
+        ],
+      }
     ],
   },
   {
@@ -799,33 +928,203 @@ export const widgetsPositions = [
         id: uniqueId(),
         headers: [
           {
-            title: 'Exposure',
+            title: 'Start date',
           },
           {
-            title: 'Value',
+            title: 'Symbol',
           },
           {
-            title: 'Day chg',
+            title: 'Sec name',
           },
           {
-            title: 'Allocation',
+            title: 'Sec ID',
           },
           {
-            title: 'Domestic',
+            title: 'Category',
           },
           {
-            title: 'Foreign',
+            title: 'Country',
+          },
+          {
+            title: 'Curr',
+          },
+          {
+            title: 'Ann CF%',
+          },
+          {
+            title: 'Carry',
+          },
+          {
+            title: 'Ann Ret',
+          },
+          {
+            title: 'VAR Count',
           },
         ],
         data: [
           {
             id: uniqueId(),
-            exposure: 'Total a / c value',
-            value: '9,999,999,999',
-            dayChg: { data: 999.9, position: 'up' },
-            allocation: 'EMARA & MM',
-            domestic: '9,999,999,999',
-            foreign: '9,999,999,999',
+            date: '07-05-2018',
+            symbol: '999999',
+            secname: 'xxxxxxxxxxxxxxxx',
+            sec: '999999999999',
+            category: 'xxxxxxxxxxxxxxxx',
+            country: '9,99',
+            curr: '999',
+            annCf: '9,99',
+            carry: '9,999',
+            annRet: '9,9',
+            varCount: '99,999,999',
+          },
+          {
+            id: uniqueId(),
+            date: '07-05-2018',
+            symbol: '999999',
+            secname: 'xxxxxxxxxxxxxxxx',
+            sec: '999999999999',
+            category: 'xxxxxxxxxxxxxxxx',
+            country: '9,99',
+            curr: '999',
+            annCf: '9,99',
+            carry: '9,999',
+            annRet: '9,9',
+            varCount: '99,999,999',
+          },
+          {
+            id: uniqueId(),
+            date: '07-05-2018',
+            symbol: '999999',
+            secname: 'xxxxxxxxxxxxxxxx',
+            sec: '999999999999',
+            category: 'xxxxxxxxxxxxxxxx',
+            country: '9,99',
+            curr: '999',
+            annCf: '9,99',
+            carry: '9,999',
+            annRet: '9,9',
+            varCount: '99,999,999',
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export const widgetsPerformance = [
+  {
+    id: uniqueId(),
+    title: 'Performance analysis',
+    col: 2,
+    height: 439,
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Period',
+          },
+          {
+            title: '%CH',
+          },
+          {
+            title: 'Vs ind.',
+          },
+          {
+            title: '%ile',
+          },
+
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            period: 'Today',
+            ch: '999,9',
+            vsInd: '99,9',
+            ile: '99',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Performance analysis by filters',
+    col: 5,
+    height: 439,
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'By',
+          },
+          {
+            title: 'Lower',
+          },
+          {
+            title: 'Upper',
+          },
+          {
+            title: '%CH',
+          },
+          {
+            title: 'P&L',
+          },
+          {
+            title: 'Ann RARR',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            by: 'Trade #',
+            low: '999999',
+            up: '99999999',
+            ch: '999',
+            pl: '99,999,9',
+            ann: '9,99',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Community league',
+    col: 5,
+    height: 439,
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'By',
+          },
+          {
+            title: 'Lower',
+          },
+          {
+            title: 'Upper',
+          },
+          {
+            title: '%CH',
+          },
+          {
+            title: 'P&L',
+          },
+          {
+            title: 'Ann RARR',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            by: 'Trade #',
+            low: '999999',
+            up: '99999999',
+            ch: '999',
+            pl: '99,999,9',
+            ann: '9,99',
           },
         ],
       },

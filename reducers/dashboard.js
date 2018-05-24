@@ -14,6 +14,7 @@ const initialState = {
   error: false,
   userData: false,
   activePageDashboard: 'overflow',
+  loadingPage: true,
 };
 
 function dashboard(state = initialState, action) {
@@ -43,6 +44,7 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         activePageDashboard: action.page,
+        loadingPage: false,
       };
     default:
       return state;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { widgetsPositions } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
+import { widgetsPerformance } from '../../../localdata/dashboardWidgets';
 
-class Positions extends Component {
+class Performance extends Component {
   constructor(props) {
     super(props);
   }
@@ -11,14 +11,13 @@ class Positions extends Component {
     return (
       <div className="row">
         {
-          widgetsPositions.map(widget => (
+          widgetsPerformance.map(widget => (
             <WidgetTable widget={widget} key={widget.id} />
           ))
         }
-
       </div>
     );
   }
 }
 
-export default Positions;
+export default Performance;

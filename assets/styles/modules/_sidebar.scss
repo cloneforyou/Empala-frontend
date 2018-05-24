@@ -67,6 +67,12 @@
 }
 
 .nav-list {
+  &__link {
+    color: $main-color-text-grey;
+    display: none;
+    font-weight: 300;
+  }
+
   &__item {
     position: relative;
     padding-left: 35px;
@@ -99,11 +105,7 @@
       @include colorfulMenuItem($yellow)
     }
   }
-  &__link {
-    color: $main-color-text-grey;
-    display: none;
-    font-weight: 300;
-  }
+
   &__icon {
     &:before {
       background-color: $main-color-text-grey;
