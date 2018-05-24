@@ -5,7 +5,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Header from '../components/registration/Header';
 import Content from '../components/registration/Content';
 import Footer from '../components/registration/Footer';
-import stylesheet from '../assets/styles/main.scss';
 import { getMenuItems } from '../actions/registration';
 import { getMenuItemsByTabName } from '../utils/registrationUtils';
 import { withReduxSaga } from '../store';
@@ -19,7 +18,6 @@ class Registration extends PureComponent {
     const tabName = store.registration ? store.registration.tabName : 'member';
     const tabIndex = store.registration ? store.registration.tabIndex : 1;
     store.dispatch(getMenuItems(getMenuItemsByTabName(tabName)));
-    // if(isServer)store.dispatch('',env)
     return { env };
   }
 
@@ -35,7 +33,6 @@ class Registration extends PureComponent {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
-          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header />
           <Content {...this.props} />
           <Footer />

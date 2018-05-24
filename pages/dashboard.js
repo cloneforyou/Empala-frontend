@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { withReduxSaga } from '../store'
 import { connect } from 'react-redux';
-import openSocket from 'socket.io-client';
 import Header from '../components/dashboard/Header';
 import Body from '../components/dashboard/Body';
-import stylesheet from '../assets/styles/main.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as dashboardActions from '../actions/dashboard';
-import { serverOrigins } from "../utils/config";
 
 
 class Dashboard extends Component {
@@ -34,7 +31,6 @@ class Dashboard extends Component {
     return (
       <MuiThemeProvider>
         <div className="full-height-wrap">
-          <style dangerouslySetInnerHTML={{ __html: stylesheet }}/>
           <Header
             sidebarCollapsed={sidebarCollapsed}
             collapseMenu={this.collapseMenu}
