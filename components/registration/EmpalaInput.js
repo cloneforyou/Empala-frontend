@@ -36,7 +36,7 @@ export default class EmpalaInput extends Component {
           underlineStyle={style.underlineStyle}
           hintStyle={style.hintStyle}
           inputStyle={this.props.disabled ? style.inputStyleDisabled : style.inputStyle}
-          underlineFocusStyle={style.underlineFocusStyle}
+          underlineFocusStyle={errorText ? style.underlineErrorStyle : style.underlineFocusStyle}
           underlineDisabledStyle={style.underlineDisabledStyle}
           value={this.props.value}
           onChange={this.checkRegistrationField}

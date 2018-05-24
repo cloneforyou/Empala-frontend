@@ -48,7 +48,7 @@ export const dataFields = [
       id: 'profile_employment_zip_code',
       type: 'text',
       typeField: 'numberField',
-      col: 6,
+      col: '6',
       placeholder: '',
     },
 
@@ -56,7 +56,7 @@ export const dataFields = [
       id: 'profile_employment_state',
       hint: 'Please select',
       label: 'State',
-      col: 6,
+      col: '6',
       options: usStates,
       autoWidth: true,
     },

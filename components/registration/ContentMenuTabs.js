@@ -1,5 +1,6 @@
 import React from 'react';
 import { withReduxSaga } from '../../store';
+import PropTypes from 'prop-types';
 import { setTabName, setTabPageIndex } from '../../actions/registration';
 
 const ContentMenuTabs = (props) => {
@@ -25,7 +26,11 @@ const ContentMenuTabs = (props) => {
         <span onClick={() => handleClick('experience')}>Experience</span>
       </li>
     </ul>
-  )
+  );
+};
+
+ContentMenuTabs.propTypes = {
+  tabName: PropTypes.string.isRequired,
 };
 
 export default withReduxSaga(ContentMenuTabs)
