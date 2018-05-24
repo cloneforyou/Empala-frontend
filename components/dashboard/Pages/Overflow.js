@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { widgetsOverflow, widgetNews } from '../../../localdata/dashboardWidgets';
+import { connect } from 'react-redux';
+import { widgetsOverflow } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import WidgetNews from '../Widget/WidgetNews';
 import WidgetAdvertisement from '../Widget/WidgetAdvertisement';
+
+function mapStateToProps(state) {
+  return {
+    userData: state.dashboard.userData.data || [],
+  };
+}
 
 class Overflow extends Component {
   constructor(props) {
@@ -10,6 +17,16 @@ class Overflow extends Component {
   }
 
   render() {
+    const widgetNews = [
+      {
+        id: 'external_news',
+        news: this.props.userData['external_news'],
+      },
+      {
+        id: 'internal_news',
+        news: this.props.userData['internal_news'],
+      },
+    ];
     return (
       <div className="row">
         {
@@ -28,4 +45,4 @@ class Overflow extends Component {
   }
 }
 
-export default Overflow;
+export default connect(mapStateToProps, null)(Overflow);
