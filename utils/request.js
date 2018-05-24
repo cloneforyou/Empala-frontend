@@ -18,7 +18,7 @@ export default function request(url, options = {}) {
       return response;
     })
     .catch(err => {
-      console.log(' *** ------------> SERVER RESPOND ERROR', JSON.stringify(err));
+      // console.log(' *** ------------> SERVER RESPOND ERROR', JSON.stringify(err));
       const error = setErrorText(err);
        if (error) { throw error }
        else throw err;

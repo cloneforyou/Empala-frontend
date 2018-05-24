@@ -24,10 +24,14 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getUserData();
     this.props.startSocket();
+    if (this.props.url.query.page) {
+      this.props.setActivePage(this.props.url.query.page.toLowerCase());
+    }
   }
 
   render() {
     const { sidebarCollapsed } = this.state;
+    console.log('this.props Das -==> ', this.props);
     return (
       <MuiThemeProvider>
         <div className="full-height-wrap">
@@ -35,7 +39,7 @@ class Dashboard extends Component {
             sidebarCollapsed={sidebarCollapsed}
             collapseMenu={this.collapseMenu}
           />
-          <Body sidebarCollapsed={sidebarCollapsed}/>
+          <Body sidebarCollapsed={sidebarCollapsed} />
         </div>
       </MuiThemeProvider>
     )
@@ -53,7 +57,8 @@ function mapDispatchToProps(dispatch) {
     collapseSidebar: (bool) => dispatch(dashboardActions.collapseSidebar(bool)),
     getUserData: () => dispatch(dashboardActions.getUserData()),
     startSocket: () => dispatch(dashboardActions.startSocket()),
+    setActivePage: (page) => dispatch(dashboardActions.setActivePage(page))
   }
 }
 
-export default withReduxSaga(connect(mapStateToProps,mapDispatchToProps)(Dashboard))
+export default withReduxSaga(connect(mapStateToProps, mapDispatchToProps)(Dashboard))

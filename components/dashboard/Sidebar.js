@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
 import { setGroupCountry, setActivePage } from '../../actions/dashboard'
@@ -27,7 +28,7 @@ class Sidebar extends Component {
   };
 
   handleClick = (label) => {
-    this.props.setActivePage(label)
+    this.props.setActivePage(label.toLowerCase())
   };
 
 
@@ -66,14 +67,18 @@ class Sidebar extends Component {
                         } else {
                           return (
                             <li
-                              className={(item.label === activePageDashboard) ? 'nav-list__item nav-list__item_active' : 'nav-list__item'}
+                              className={(item.label.toLowerCase() === activePageDashboard) ? 'nav-list__item nav-list__item_active' : 'nav-list__item'}
                               key={j}
                               onClick={() => this.handleClick(item.label)}
                             >
-                              <i
-                                className={`nav-list__icon nav-list__icon_${item.icon}`}
-                              />
-                              <span className="nav-list__link">{item.label}</span>
+                              <Link route="dashboard" params={{ page: `${item.label.toLowerCase()}` }}>
+                                <span>
+                                  <i
+                                    className={`nav-list__icon nav-list__icon_${item.icon}`}
+                                  />
+                                <span className="nav-list__link">{item.label}</span>
+                                </span>
+                              </Link>
                             </li>
                           )
                         }

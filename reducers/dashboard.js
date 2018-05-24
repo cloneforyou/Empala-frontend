@@ -37,6 +37,7 @@ function dashboard(state = initialState, action) {
       };
     }
     case SET_ACTIVE_PAGE: {
+      console.log('action -==> ', action);
       return {
         ...state,
         activePageDashboard: action.page,

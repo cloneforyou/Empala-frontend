@@ -15,8 +15,8 @@ class Main extends Component {
       <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
         <div className="container-fluid">
           {
-            activePageDashboard === 'Overflow' ? <Overflow /> :
-              activePageDashboard === 'Positions' ? <Positions /> : ''
+            activePageDashboard === 'overflow' ? <Overflow /> :
+              activePageDashboard === 'positions' ? <Positions /> : ''
           }
         </div>
         <Footer />
