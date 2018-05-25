@@ -21,10 +21,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setInputValueById: (e) => {
     const { id, value } = e.target;
-    if (value.length === 5 && (id === 'profile_employment_zip_code')) {
-      dispatch(getInfoByZipCode(id, value));
+    if (id === 'profile_employment_zip_code') {
+      if (value.length === 5) {
+        dispatch(getInfoByZipCode(id, value));
+      } else if (value.length > 5) { return false; }
     }
     dispatch(setInputFieldValueById(id, value));
+    return false;
   },
   setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
 });

@@ -32,6 +32,9 @@ const mapDispatchToProps = (dispatch) => {
       setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
       setInputValueById: (e) => {
         const { id, value } = e.target;
+        if ((id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code') && value.length > 5) {
+          return false;
+        }
         if (value.length === 5 && (id === 'identity_mailing_address_zip_code' || id === 'identity_zip_code')) {
           dispatch(getInfoByZipCode(id, value));
         }
@@ -39,6 +42,7 @@ const mapDispatchToProps = (dispatch) => {
         if (id === 'identity_residential_address_residential_address_line_1' || id === 'identity_residential_address_residential_address_line_2') {
           dispatch(validateFieldValue(id, value));
         }
+        return false;
       },
       toggleCheckboxById: (e, checked) => {
         dispatch(toggleCheckboxById(e.target.id));

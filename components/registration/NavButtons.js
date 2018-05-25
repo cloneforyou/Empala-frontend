@@ -10,7 +10,7 @@ import {
   validateFieldsBlank,
   goBackToPart,
   setTabName,
-  setTabPageIndex,
+  setTabPageIndex, validateFieldValue,
 } from '../../actions/registration';
 
 function isFieldsFilled(fieldNames, fields) {
@@ -51,7 +51,10 @@ const NavButtons = (props) => {
       </button>
       <div
         style={{ display: 'inline-block' }}
-        onClick={() => props.validateFieldsBlank(props.fieldNames)}
+        onClick={() => {
+          props.validateFieldsBlank(props.fieldNames);
+          props.validateFieldValues(props.fieldNames, props.registrationData);
+        }}
       >
         <button
           type="button"
@@ -67,6 +70,7 @@ const NavButtons = (props) => {
         <button
           className="btn-default btn-default_green"
           onClick={goBackToReview}
+          disabled={disabled}
         >
           Go back to Review
         </button>
@@ -78,18 +82,24 @@ const NavButtons = (props) => {
 NavButtons.propTypes = {
   tabName: PropTypes.string,
   tabIndex: PropTypes.number,
+  userBackToPart: PropTypes.bool,
   registrationData: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
   checkboxes: PropTypes.object.isRequired,
   fieldNames: PropTypes.array,
   changeTabPage: PropTypes.func.isRequired,
   validateFieldsBlank: PropTypes.func.isRequired,
+  validateFieldValues: PropTypes.func.isRequired,
+  setTabName: PropTypes.func.isRequired,
+  setTabPageIndex: PropTypes.func.isRequired,
+  goBackToPart: PropTypes.func.isRequired,
 };
 
 NavButtons.defaultProps = {
   tabIndex: 1,
   tabName: 'info',
   fieldNames: [],
+  userBackToPart: false,
 };
 
 function mapStateToProps(state) {
@@ -106,6 +116,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return ({
     validateFieldsBlank: fieldNames => dispatch(validateFieldsBlank(fieldNames)),
+    validateFieldValues: (fieldNames, data) => fieldNames.forEach(field => dispatch(validateFieldValue(field, data[field]))),
     changeTabPage: (tabName, tabIndex, direction) => dispatch(changeTabPage(tabName, tabIndex, direction)),
     setTabPageIndex: index => dispatch(setTabPageIndex(index)),
     setTabName: tabName => dispatch(setTabName(tabName)),
