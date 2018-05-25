@@ -78,6 +78,11 @@ export function* validateFieldValue({ fieldId, fieldValue }) {
       yield put(setFieldInvalid(fieldId, 'Invalid ZIP-code format, please provide five digits code'));
     }
   }
+  if (fieldId === 'profile_employment_employment_type' && fieldValue !== 'Employed') {
+    const data = yield select(state => state.registration.registrationData);
+    const employementFields = Object.keys(data).filter(key => (/profile_employment/.test(key) && key !== 'profile_employment_employment_type'));
+    yield all(employementFields.map(field => put(setInputFieldValueById(field, ''))));
+  }
 }
 
 export function* validateLiquidWorth({ value }) {

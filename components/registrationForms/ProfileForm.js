@@ -7,7 +7,7 @@ import EmpalaInput from '../registration/EmpalaInput';
 import { dataFields } from '../../localdata/profilePageData';
 import {
   getInfoByZipCode,
-  setInputFieldValueById,
+  setInputFieldValueById, validateFieldValue,
 } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import { statesAbbvs } from '../../localdata/usStatesList';
@@ -29,7 +29,10 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setInputFieldValueById(id, value));
     return false;
   },
-  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  setSelectedValueById: (id, value) => {
+    dispatch(setInputFieldValueById(id, value));
+    dispatch(validateFieldValue(id, value));
+  },
 });
 
 
