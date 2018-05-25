@@ -10,9 +10,9 @@ class Table extends Component {
     const { table } = this.props;
     return (
       <div className="table-responsive">
-        <table className="table table-borderless emp-table">
+        <table className="table table-borderless table-striped emp-table">
           <thead>
-          <tr>
+          <tr className="emp-table__tr">
             {table.headers.map((header, i) => (
               <th scope="col" className="emp-table__th" key={Math.random()}>{header.title}</th>
             ))}

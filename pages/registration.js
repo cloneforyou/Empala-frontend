@@ -9,6 +9,7 @@ import { getMenuItems } from '../actions/registration';
 import { getMenuItemsByTabName } from '../utils/registrationUtils';
 import { withReduxSaga } from '../store';
 import { GREEN } from '../constants/colors';
+import stylesheet from '../assets/styles/main.scss';
 
 const env = process !== 'undefined' ? process.env.SERVER : null;
 
@@ -33,6 +34,7 @@ class Registration extends PureComponent {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
+          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header />
           <Content {...this.props} />
           <Footer />

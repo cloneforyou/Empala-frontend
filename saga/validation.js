@@ -69,13 +69,13 @@ export function* validateEmptyFields(action) {
 
 export function* validateFieldValue({ fieldId, fieldValue }) {
   if (fieldId === 'identity_residential_address_residential_address_line_1' || fieldId === 'identity_residential_address_residential_address_line_2') {
-    if (fieldValue.toLowerCase().replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '') === 'pobox') {
+    if (fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '') === 'pobox') {
       yield put(setFieldInvalid(fieldId, 'PO Box is not allowed in residential address'));
     }
   }
   if (['identity_zip_code', 'identity_mailing_address_zip_code', 'profile_employment_zip_code'].includes(fieldId)) {
     if (fieldValue.length !== 5) {
-      yield put(setFieldInvalid(fieldId, 'Invalid ZIP-code'));
+      yield put(setFieldInvalid(fieldId, 'Invalid ZIP-code format, please provide five digits code'));
     }
   }
 }
