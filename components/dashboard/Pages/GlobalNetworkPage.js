@@ -19,7 +19,7 @@ function getUrlByPageName(pageName) {
 const frameStyle = { width: '100%',
   height: '100vh',
   border: 'none',
-  ['::-webkit-scrollbar']: {
+  ['::WebkitScrollbar']: {
     display: 'none',
     },
   }

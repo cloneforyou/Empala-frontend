@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import UploadUserFile from '../components/registration/UploadUserFile';
 import MemberInfoForm from '../components/registrationForms/MemberInfoForm';
 import IdentityForm from '../components/registrationForms/IdentityForm';
@@ -139,6 +140,7 @@ export function getMenuItemsByTabName(tabName) {
       return menuItems.member;
     case 'identity':
       return menuItems.identity;
+
     case 'regulatory':
       return menuItems.regulatory;
     case 'profile':
@@ -174,14 +176,12 @@ export function getPageFieldNames(tabName, tabIndex) {
   return pageFields.map(item => item.id);
 }
 
-export function getTabContentByTabName(tabName, pageIndex) {
+export function getTabContentByTabName(tabName) {
   return {
     menuItems: menuItems[tabName],
     tabContent: tabContent[tabName],
-    // tabContent: <RegistrationFormDrawer tabName={tabName} page={pageIndex} />,
   };
 }
-
 
 export function getValuesForSelectField(list) {
   return list.map(el => ({

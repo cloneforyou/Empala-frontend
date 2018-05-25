@@ -1,4 +1,4 @@
-import React from 'react';
+/* eslint-disable react/react-in-jsx-scope */
 import Document, { Head, Main, NextScript } from 'next/document';
 import stylesheet from '../assets/styles/main.scss';
 
