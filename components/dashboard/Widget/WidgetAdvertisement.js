@@ -17,7 +17,7 @@ class WidgetAdvertisement extends Component {
     const { menuIsOpen } = this.state;
     return (
       <div className="widget-col col-lg-5">
-        <div className="widget" style={{ height: '365px' }}>
+        <div className="widget widget_padding" style={{ height: '365px' }}>
           <div className="widget__head">
             <h3 className="widget__title">Advertisement</h3>
             <div className="widget-menu">
