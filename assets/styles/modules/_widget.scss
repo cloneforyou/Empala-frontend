@@ -1,5 +1,4 @@
 .widget {
-  //padding: 25px 10px 25px 20px;
   border: 1px solid;
   height: 100%;
 
@@ -37,12 +36,6 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 90%;
-    .table-responsive {
-      margin-bottom: 20px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
   }
 }
 

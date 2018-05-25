@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash';
-import Performance from "../components/dashboard/Pages/Performance";
+import Performance from '../components/dashboard/Pages/Performance';
 
 export const widgetsOverflow = [
   {
@@ -915,12 +915,11 @@ export const widgetsPositionFirst = [
             dayChage: 999.9,
           },
         ],
-      }
+      },
     ],
   },
-]
+];
 export const widgetsPositions = [
-
   {
     id: uniqueId(),
     title: 'Position portfolio',
@@ -1130,6 +1129,312 @@ export const widgetsPerformance = [
             ann: '9,99',
           },
         ],
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Performance analysis by filters',
+    col: 12,
+    height: 589,
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Trade #',
+          },
+          {
+            title: 'Start date',
+          },
+          {
+            title: 'End date',
+          },
+          {
+            title: 'Symbol',
+          },
+          {
+            title: 'Sec name',
+          },
+          {
+            title: 'Sec ID',
+          },
+          {
+            title: 'Category',
+          },
+          {
+            title: 'Currency',
+          },
+          {
+            title: 'Avg price',
+          },
+          {
+            title: 'Qty',
+          },
+          {
+            title: 'Close/M2M',
+          },
+          {
+            title: 'Notional',
+          },
+          {
+            title: '%CH',
+          },
+          {
+            title: 'Carry',
+          },
+          {
+            title: 'Val CH',
+          },
+          {
+            title: 'Tot P&L',
+          },
+          {
+            title: 'Ann Ret',
+          },
+        ],
+        data: [],
+      },
+    ],
+  },
+];
+
+export const widgetsCash = [
+  {
+    id: uniqueId(),
+    title: 'Currency and money markets fund balance',
+    col: 12,
+    height: 'auto',
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Date',
+          },
+          {
+            title: 'Symbol',
+          },
+          {
+            title: 'Sec name',
+          },
+          {
+            title: 'Sec ID',
+          },
+          {
+            title: 'Qty',
+          },
+          {
+            title: 'Avg price',
+          },
+          {
+            title: 'Exec fees',
+          },
+
+          {
+            title: 'Reg fees',
+          },
+          {
+            title: 'Notional',
+          },
+          {
+            title: 'Curr',
+          },
+          {
+            title: 'Curr. effect',
+          },
+          {
+            title: 'EMARA balance',
+          },
+          {
+            title: 'USD balance',
+          },
+          {
+            title: 'GBP balance',
+          },
+          {
+            title: 'Carry',
+          },
+          {
+            title: 'Val CH',
+          },
+          {
+            title: 'Tot P&L',
+          },
+          {
+            title: 'Ann Ret',
+          },
+        ],
+        data: [],
+      },
+    ],
+  },
+];
+
+
+export const widgetsOrders = [
+  {
+    id: uniqueId(),
+    title: 'Orders',
+    col: 12,
+    height: 224,
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Sec name',
+          },
+          {
+            title: 'Symbol',
+          },
+          {
+            title: 'Date',
+          },
+          {
+            title: 'Curr',
+          },
+          {
+            title: 'Price',
+          },
+          {
+            title: 'Order',
+          },
+          {
+            title: 'Fill Q',
+          },
+          {
+            title: 'Rem Q',
+          },
+          {
+            title: 'Notional',
+          },
+          {
+            title: 'Commision',
+          },
+          {
+            title: 'Distance (%)',
+          },
+          {
+            title: 'Start date',
+          },
+          {
+            title: 'O/C/T',
+          },
+        ],
+        data: [],
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Fills/cancels',
+    col: 12,
+    height: 221,
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Sec name',
+          },
+          {
+            title: 'Symbol',
+          },
+          {
+            title: 'Date',
+          },
+          {
+            title: 'Curr',
+          },
+          {
+            title: 'Price',
+          },
+          {
+            title: 'Order',
+          },
+          {
+            title: 'Fill Q',
+          },
+          {
+            title: 'Rem Q',
+          },
+          {
+            title: 'Notional',
+          },
+          {
+            title: 'Commision',
+          },
+          {
+            title: 'Distance (%)',
+          },
+          {
+            title: 'Start date',
+          },
+          {
+            title: 'O/C/T',
+          },
+        ],
+        data: [],
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Watchlists',
+    col: 12,
+    height: 568,
+    tables: [
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Sec name',
+          },
+          {
+            title: 'Symbol',
+          },
+          {
+            title: 'Date',
+          },
+          {
+            title: 'Curr',
+          },
+          {
+            title: 'Last',
+          },
+          {
+            title: 'Bid SZ',
+          },
+          {
+            title: 'Bid',
+          },
+          {
+            title: 'Offer',
+          },
+          {
+            title: 'Off SZ',
+          },
+          {
+            title: 'Day volume',
+          },
+          {
+            title: 'Sentiment',
+          },
+          {
+            title: 'ES CH',
+          },
+          {
+            title: 'P/E ratio',
+          },
+          {
+            title: 'Sec ID',
+          },
+          {
+            title: 'Rating',
+          },
+        ],
+        data: [],
       },
     ],
   },
