@@ -1,17 +1,30 @@
 .emp-table {
+  margin-bottom: 15px;
   &__th {
     @include fontSize(12px);
     font-weight: normal;
     color: $dark-grey;
-    padding: 0 0 11px !important;
+    padding: 4px 4px 11px !important;
+    &:first-child {
+      padding-left: 10px !important;
+    }
+    &:last-child {
+      padding-right: 10px !important;
+    }
   }
   &__td {
     @include fontSize(12px);
-    padding: 0 2px !important;
+    padding: 4px !important;
     font-weight: normal;
     color: $main-color-text-grey;
     @media (max-width: 1600px) {
       @include fontSize(10px);
+    }
+    &:first-child {
+      padding-left: 10px !important;
+    }
+    &:last-child {
+      padding-right: 10px !important;
     }
     &_up {
       &:before {
@@ -31,6 +44,5 @@
 
   }
   &__tr {
-
   }
 }

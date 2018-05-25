@@ -9,7 +9,7 @@ module.exports = withImages({
         test: /\.(css|scss)/,
         loader: 'emit-file-loader',
         options: {
-          name: 'assets/styles/[path][name].[ext]',
+          name: 'dist/[path][name].[ext]',
         },
       }
       ,
