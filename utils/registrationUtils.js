@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import UploadUserFile from '../components/registration/UploadUserFile';
 import MemberInfoForm from '../components/registrationForms/MemberInfoForm';
 import IdentityForm from '../components/registrationForms/IdentityForm';
@@ -14,14 +15,9 @@ import { dataFields as profilePageData } from '../localdata/profilePageData';
 
 export const menuItems = {
   member: [
-    // {title: 'Upload your picture', key: 'picture', completed: false, active: false},
     {
       title: 'Basic information', key: 'basic-info', completed: true, active: false,
     },
-    // {title: 'Contact information', key: 'contact-info', completed: false, active: true},
-    // {title: 'Home address', key: 'home-address', completed: false, active: false},
-    // {title: 'Username and password', key: 'name-password', completed: false, active: false},
-    // {title: 'Confirmation', key: 'confirmation', completed: false, active: false},
     {
       title: 'Account', key: 'account', completed: false, active: false,
     },
@@ -31,11 +27,6 @@ export const menuItems = {
 
   ],
   identity: [
-    // {title: 'Upload your identification document', key: 'documents', completed: false, active: false},
-    // {title: 'DOB and SSN', key: 'dob-ssn', completed: false, active: false},
-    // {title: 'Investment Experience', key: 'investment', completed: false, active: false},
-    // {title: 'Employment Status', key: 'employment-status', completed: false, active: false},
-    // {title: 'Work address', key: 'work-address', completed: false, active: false},
     {
       title: 'Residential Address', key: 'residential-address', completed: false, active: false,
     },
@@ -50,13 +41,6 @@ export const menuItems = {
     },
 
   ],
-  // account: [
-  //   {title: 'Bank', key: 'bank', completed: false, active: false},
-  //   {title: 'Deposit', key: 'deposit', completed: false, active: false},
-  // ],
-  // approvals: [
-  //   {title: 'Approvals', key: 'approvals', completed: false, active: false},
-  // ],
   regulatory: [
     {
       title: 'Identification', key: 'identification', completed: false, active: false,
@@ -156,10 +140,7 @@ export function getMenuItemsByTabName(tabName) {
       return menuItems.member;
     case 'identity':
       return menuItems.identity;
-    // case 'account':
-    //   return menuItems.account;
-    // case 'approvals':
-    //   return menuItems.approvals;
+
     case 'regulatory':
       return menuItems.regulatory;
     case 'profile':
@@ -195,14 +176,12 @@ export function getPageFieldNames(tabName, tabIndex) {
   return pageFields.map(item => item.id);
 }
 
-export function getTabContentByTabName(tabName, pageIndex) {
+export function getTabContentByTabName(tabName) {
   return {
     menuItems: menuItems[tabName],
     tabContent: tabContent[tabName],
-    // tabContent: <RegistrationFormDrawer tabName={tabName} page={pageIndex} />,
   };
 }
-
 
 export function getValuesForSelectField(list) {
   return list.map(el => ({
