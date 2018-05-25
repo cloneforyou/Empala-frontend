@@ -87,49 +87,41 @@ class AgreementPage extends PureComponent {
 
           <ul className="list-info">
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>Empala Customer Agreement</ins>
               </a>
             </li>
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>Empala Privacy Statement</ins>
               </a>
             </li>
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>Empala Securities Terms and Conditions</ins>
               </a>
             </li>
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>APEX Customer Agreements</ins>
               </a>
             </li>
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>Empala Securities Use and Risk Disclosures</ins>
               </a>
             </li>
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>Empala Securities Rule 606 and 607 Disclosures (Payment for Order Flow)</ins>
               </a>
             </li>
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>Empala Business Continuity Plan</ins>
               </a>
             </li>
             <li className="list-info__item">
-              <span>- </span>
               <a href="#" className="link-decoration">
                 <ins>FINRA Public Disclosure Program (BrokerCheck)</ins>
               </a>

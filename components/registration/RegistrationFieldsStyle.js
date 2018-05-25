@@ -64,6 +64,7 @@ const style = {
     width: '25px',
   },
   labelCheckboxStyle: {
+    fontSize: '16px',
     color: MAIN_COLOR_TEXT_GRAY,
   },
   labelActiveCheckboxStyle: {
