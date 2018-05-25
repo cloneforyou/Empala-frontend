@@ -34,9 +34,7 @@ class Main extends Component {
     const { sidebarCollapsed, activePageDashboard } = this.props;
     return (
       <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
-        <div className="container-fluid">
-          {this.mapPageToComponent(activePageDashboard)}
-        </div>
+        {this.mapPageToComponent(activePageDashboard)}
         <Footer />
       </div>
     );

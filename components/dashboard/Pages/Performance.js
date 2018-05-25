@@ -9,12 +9,14 @@ class Performance extends Component {
 
   render() {
     return (
-      <div className="row">
-        {
-          widgetsPerformance.map(widget => (
-            <WidgetTable widget={widget} key={widget.id} />
-          ))
-        }
+      <div className="container-fluid">
+        <div className="row">
+          {
+            widgetsPerformance.map(widget => (
+              <WidgetTable widget={widget} key={widget.id} />
+            ))
+          }
+        </div>
       </div>
     );
   }

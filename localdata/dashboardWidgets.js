@@ -747,11 +747,11 @@ export const widgetNews = [
   },
 ];
 
-export const widgetsPositions = [
+export const widgetsPositionFirst = [
   {
     id: uniqueId(),
     title: 'Position',
-    col: 5,
+    col: 12,
     height: 'auto',
     tables: [
       {
@@ -918,10 +918,13 @@ export const widgetsPositions = [
       }
     ],
   },
+]
+export const widgetsPositions = [
+
   {
     id: uniqueId(),
     title: 'Position portfolio',
-    col: 7,
+    col: 12,
     height: 'auto',
     tables: [
       {

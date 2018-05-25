@@ -1,13 +1,14 @@
 .emp-table {
+  margin-bottom: 0;
   &__th {
     @include fontSize(12px);
     font-weight: normal;
     color: $dark-grey;
-    padding: 0 0 11px !important;
+    padding: 4px 4px 11px !important;
   }
   &__td {
     @include fontSize(12px);
-    padding: 0 2px !important;
+    padding: 4px !important;
     font-weight: normal;
     color: $main-color-text-grey;
     @media (max-width: 1600px) {
@@ -31,6 +32,5 @@
 
   }
   &__tr {
-
   }
 }

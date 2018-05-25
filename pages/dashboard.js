@@ -5,6 +5,7 @@ import Header from '../components/dashboard/Header';
 import Body from '../components/dashboard/Body';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as dashboardActions from '../actions/dashboard';
+import stylesheet from '../assets/styles/main.scss';
 
 
 class Dashboard extends Component {
@@ -34,6 +35,7 @@ class Dashboard extends Component {
     return (
       <MuiThemeProvider>
         <div className="full-height-wrap">
+          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header
             sidebarCollapsed={sidebarCollapsed}
             collapseMenu={this.collapseMenu}
