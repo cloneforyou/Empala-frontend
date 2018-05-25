@@ -33,6 +33,10 @@ const NavButtons = (props) => {
   if (props.tabName === 'identity' && props.tabIndex === 4) {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
   }
+  if (props.fieldNames.filter(field =>
+    (field.includes('zip_code') && props.registrationData[field].length < 5)).length > 0) {
+    disabled = true;
+  }
 
   function goBackToReview() {
     props.setTabName('final_review');

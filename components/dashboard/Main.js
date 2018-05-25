@@ -4,7 +4,6 @@ import Overflow from './Pages/Overflow';
 import Positions from './Pages/Positions';
 import Performance from './Pages/Performance';
 import Footer from './Footer';
-import { widgets, widgetNews } from '../../localdata/dashboardWidgets';
 import GlobalNetworkPage from './Pages/GlobalNetworkPage';
 
 class Main extends Component {
