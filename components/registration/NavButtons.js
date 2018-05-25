@@ -70,7 +70,7 @@ const NavButtons = (props) => {
         </button>
       </div>
       {
-        props.userBackToPart &&
+        props.userBackToPart && props.tabName !== 'final_review' &&
         <button
           className="btn-default btn-default_green"
           onClick={goBackToReview}
