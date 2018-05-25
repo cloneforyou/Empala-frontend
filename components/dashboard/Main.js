@@ -30,11 +30,12 @@ class Main extends Component {
       case 'groups':
       case 'blogs':
         return <GlobalNetworkPage />;
-
+      case 'performance':
+        return <Performance />;
       default:
         return ''
     }
-  }
+  };
 
   render() {
     const { sidebarCollapsed, activePageDashboard } = this.props;
