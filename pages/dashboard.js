@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import Head from 'next/head'
 import { withReduxSaga } from '../store'
 import { connect } from 'react-redux';
 import Header from '../components/dashboard/Header';
 import Body from '../components/dashboard/Body';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as dashboardActions from '../actions/dashboard';
+import stylesheet from '../assets/styles/main.scss';
 
 
 class Dashboard extends Component {
@@ -31,9 +33,15 @@ class Dashboard extends Component {
 
   render() {
     const { sidebarCollapsed } = this.state;
+    const activePageTitle = this.props.url.query.page;
     return (
       <MuiThemeProvider>
+        <Head>
+          <title>Dashbord - {activePageTitle[0].toUpperCase() + activePageTitle.slice(1)}</title>
+          <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+        </Head>
         <div className="full-height-wrap">
+          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header
             sidebarCollapsed={sidebarCollapsed}
             collapseMenu={this.collapseMenu}
@@ -48,6 +56,7 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
   return {
     sidebarCollapsed: state.dashboard.sidebarCollapsed,
+    activePageDashboard: state.dashboard.activePageDashboard,
   }
 }
 

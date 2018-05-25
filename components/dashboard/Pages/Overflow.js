@@ -28,18 +28,20 @@ class Overflow extends Component {
       },
     ];
     return (
-      <div className="row">
-        {
-          widgetsOverflow.map(widget => (
-            <WidgetTable widget={widget} key={widget.id} />
-          ))
-        }
-        {
-          widgetNews.map(widget => (
-            <WidgetNews widget={widget} key={widget.id} />
-          ))
-        }
-        <WidgetAdvertisement />
+      <div className="container-fluid">
+        <div className="row">
+          {
+            widgetsOverflow.map(widget => (
+              <WidgetTable widget={widget} key={widget.id} />
+            ))
+          }
+          {
+            widgetNews.map(widget => (
+              <WidgetNews widget={widget} key={widget.id} />
+            ))
+          }
+          <WidgetAdvertisement />
+        </div>
       </div>
     );
   }

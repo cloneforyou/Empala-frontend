@@ -33,6 +33,7 @@ class Registration extends PureComponent {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
+          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header />
           <Content {...this.props} />
           <Footer />
