@@ -915,7 +915,7 @@ export const widgetsPositions = [
             dayChage: 999.9,
           },
         ],
-      }
+      },
     ],
   },
   {
