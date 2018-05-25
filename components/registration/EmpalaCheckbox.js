@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 import style from './RegistrationFieldsStyle';
 
-
 const EmpalaCheckbox = (props) => {
   return (
     <div className="check-container">

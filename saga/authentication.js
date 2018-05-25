@@ -34,7 +34,7 @@ export function* refreshTokens() {
 
     localStorage.setItem('accessToken', tokens.data.tokens.access);
     localStorage.setItem('refreshToken', tokens.data.tokens.refresh);
-    location.assign('/dashboard');
+    window.location.assign('/dashboard');
   } catch (err) {
     console.log(' ** ', err);
     // location.assign('/');
@@ -57,7 +57,7 @@ export function* getUserData() {
   } catch (err) {
     // console.log(' ** DASHBOARD ERROR =======>', err);
     if (err.message === 'Missing refresh token' || err.message === 'Refresh token expired') {
-      location.assign('/');
+      window.location.assign('/');
     } else if (err.message === 'Missing access token' || err.message === 'Token expired') {
       yield refreshTokens();
     }

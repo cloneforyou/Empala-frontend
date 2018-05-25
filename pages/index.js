@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Link from 'next/link';
+
 import { withReduxSaga } from '../store';
 import Header from '../components/registration/Header';
 import Footer from '../components/registration/Footer';
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Link from 'next/link';
 
 function Index() {
   return (

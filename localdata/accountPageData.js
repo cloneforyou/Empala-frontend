@@ -20,15 +20,15 @@ export const dataFields = [
       options: [
         {
           value: 'Bank name 1',
-          title: 'Bank name 1'
+          title: 'Bank name 1',
         },
         {
           value: 'Bank name 2',
-          title: 'Bank name 2'
+          title: 'Bank name 2',
         },
         {
           value: 'Bank name 3',
-          title: 'Bank name 3'
+          title: 'Bank name 3',
         },
       ],
     },
@@ -37,15 +37,15 @@ export const dataFields = [
       options: [
         {
           value: 'Routing1',
-          title: 'Routing 1'
+          title: 'Routing 1',
         },
         {
           value: 'Routing 2',
-          title: 'Routing 2'
+          title: 'Routing 2',
         },
         {
           value: 'Routing 3',
-          title: 'Routing 3'
+          title: 'Routing 3',
         },
       ],
     },
@@ -54,7 +54,7 @@ export const dataFields = [
       options: [
         {
           value: 'Account',
-          title: 'Account'
+          title: 'Account',
         },
       ],
     },
@@ -63,11 +63,11 @@ export const dataFields = [
       options: [
         {
           value: 'Type1',
-          title: 'Type 1'
+          title: 'Type 1',
         },
         {
           value: 'Type2',
-          title: 'Type 2'
+          title: 'Type 2',
         },
       ],
     },

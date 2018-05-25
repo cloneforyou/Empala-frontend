@@ -17,7 +17,7 @@ class FinalReviewPage extends PureComponent {
     return `${month}/${day}/${year}`;
   }
 
-  goBack(tabName, tabIndex ) {
+  goBack(tabName, tabIndex) {
     this.props.setTabName(tabName);
     this.props.setTabPageIndex(tabIndex);
     this.props.goBackToPart(true);
@@ -111,13 +111,13 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Date of issue"
                     value={data.member_passport_issue_date
-                    && this.convertDate(data.member_passport_issue_date) || empty}
+                    && (this.convertDate(data.member_passport_issue_date) || empty)}
                   />
                   <FieldComponent
                     col={6}
                     label="Date of expiry"
                     value={data.member_passport_expiry_date
-                    && this.convertDate(data.member_passport_expiry_date) || empty}
+                    && (this.convertDate(data.member_passport_expiry_date) || empty)}
                   />
                 </div>
               </div>
@@ -143,13 +143,13 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Date of issue"
                     value={data.member_drivers_license_issue_date
-                    && this.convertDate(data.member_drivers_license_issue_date) || empty}
+                    && (this.convertDate(data.member_drivers_license_issue_date) || empty)}
                   />
                   <FieldComponent
                     col={6}
                     label="Date of expiry"
                     value={data.member_drivers_license_expiry_date
-                    && this.convertDate(data.member_drivers_license_expiry_date) || empty}
+                    && (this.convertDate(data.member_drivers_license_expiry_date) || empty)}
                   />
                 </div>
               </div>
@@ -288,7 +288,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Date of birth"
                     value={data.regulatory_identification_dateOfBirth
-                    && this.convertDate(data.regulatory_identification_dateOfBirth) || empty}
+                    && (this.convertDate(data.regulatory_identification_dateOfBirth) || empty)}
                   />
                   <FieldComponent
                     col={6}
@@ -366,17 +366,17 @@ class FinalReviewPage extends PureComponent {
                   <FieldComponent
                     col={12}
                     label="Annual income"
-                    value={data.profile_financials_annual_income && data.profile_financials_annual_income || empty}
+                    value={data.profile_financials_annual_income && (data.profile_financials_annual_income || empty)}
                   />
                   <FieldComponent
                     col={12}
                     label="Total net worth"
-                    value={data.profile_financials_total_net_worth && data.profile_financials_total_net_worth || empty}
+                    value={data.profile_financials_total_net_worth && (data.profile_financials_total_net_worth || empty)}
                   />
                   <FieldComponent
                     col={12}
                     label="Liquid net worth"
-                    value={data.profile_financials_liquid_net_worth && data.profile_financials_liquid_net_worth || empty}
+                    value={data.profile_financials_liquid_net_worth && (data.profile_financials_liquid_net_worth || empty)}
                   />
                   <FieldComponent
                     col={12}

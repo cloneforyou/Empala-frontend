@@ -1,6 +1,7 @@
 import React from 'react';
-import { withReduxSaga } from '../../store';
 import PropTypes from 'prop-types';
+
+import { withReduxSaga } from '../../store';
 import { setTabName, setTabPageIndex } from '../../actions/registration';
 
 const ContentMenuTabs = (props) => {
