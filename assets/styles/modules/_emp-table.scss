@@ -5,6 +5,12 @@
     font-weight: normal;
     color: $dark-grey;
     padding: 4px 4px 11px !important;
+    &:first-child {
+      padding-left: 10px !important;
+    }
+    &:last-child {
+      padding-right: 10px !important;
+    }
   }
   &__td {
     @include fontSize(12px);
@@ -13,6 +19,12 @@
     color: $main-color-text-grey;
     @media (max-width: 1600px) {
       @include fontSize(10px);
+    }
+    &:first-child {
+      padding-left: 10px !important;
+    }
+    &:last-child {
+      padding-right: 10px !important;
     }
     &_up {
       &:before {
