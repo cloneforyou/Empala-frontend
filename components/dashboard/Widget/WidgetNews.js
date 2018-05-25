@@ -48,7 +48,10 @@ class WidgetNews extends Component {
                   >
                     <a target="_blank" href={card.link}>
                       <img
-                        className="news-card__image"
+                        className={`news-card__image ${widget.id === 'external_news' ?
+                          'news-card__image_rectangle' :
+                          'news-card__image_square'}`
+                        }
                         src={card.image_link}
                         alt={card.title}
                       />
