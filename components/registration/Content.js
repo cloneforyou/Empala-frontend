@@ -36,17 +36,16 @@ function mapDispatchToProps(dispatch) {
 
 
 class Content extends PureComponent {
-
-  componentDidMount() {
-    if (localStorage.getItem('registrationData')) {
-      this.props.getRegistrationDataFromCache();
-    }
-  }
-
   componentWillMount() {
     if (['info', 'final_review', 'agreement'].includes(this.props.tabName)) {
       this.props.setTabName(this.props.tabName);
       this.props.setTabPageIndex(1);
+    }
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('registrationData')) {
+      this.props.getRegistrationDataFromCache();
     }
   }
 
@@ -95,8 +94,9 @@ class Content extends PureComponent {
     let fieldNames = getPageFieldNames(this.props.tabName, this.props.tabIndex);
     if (this.props.tabName === 'member' && this.props.tabIndex === 3) {
       fieldNames = fieldNames.filter((fieldName) => {
-        return fieldName.includes(this.props.registrationData.memberDocument)});
-    } else if (this.props.tabName === 'identity' && this.props.tabIndex === 1 ) {
+        return fieldName.includes(this.props.registrationData.memberDocument);
+      });
+    } else if (this.props.tabName === 'identity' && this.props.tabIndex === 1) {
       fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_residential_address_same_mailing_address_checkbox');
     } else if (this.props.tabName === 'identity' && this.props.tabIndex === 3) {
       if (!this.props.trustedContactActive) {
@@ -109,7 +109,7 @@ class Content extends PureComponent {
       fieldNames = ['profile_employment_employment_type'];
     }
 
-    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex-1);
+    const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex - 1);
 
     return (
       <div className="onboard">

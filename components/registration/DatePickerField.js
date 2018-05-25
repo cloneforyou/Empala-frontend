@@ -8,10 +8,10 @@ import style from './RegistrationFieldsStyle';
 
 const DatePickerField = (props) => {
   const errorText = props.disabled ? '' : props.errorText;
-  const currentDate = new Date(),
-    birthDayYear = currentDate.getFullYear() - 18,
-    currentMonth = currentDate.getMonth(),
-    currentDay = currentDate.getDate();
+  const currentDate = new Date();
+  const birthDayYear = currentDate.getFullYear() - 18;
+  const currentMonth = currentDate.getMonth();
+  const currentDay = currentDate.getDate();
   const dateBirthDay = new Date(birthDayYear, currentMonth, currentDay);
 
   return (

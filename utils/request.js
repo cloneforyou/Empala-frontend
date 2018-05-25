@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { serverOrigins } from "./config";
+import { serverOrigins } from './config';
 
 
 export default function request(url, options = {}) {
@@ -11,7 +11,7 @@ export default function request(url, options = {}) {
     headers: options.headers,
     credentials: options.credentials,
     mode: "cors",
-    withCredentials: true
+    withCredentials: true,
   })
     .then(response => {
       // console.log(' ** request response', response);
@@ -27,7 +27,7 @@ export default function request(url, options = {}) {
   function setErrorText(err) {
     if (err.response && err.response.status === 401) {
       if (err.response.data.info === 'INVALID_VALUE') {
-        return  new Error('Already in use');
+        return new Error('Already in use');
       } else if (err.response.data.info === 'MISSING_CHECK_TYPE') {
         return new Error('Validation failed');
       } else if (err.response.data.info === 'MISSING_ACCESS_TOKEN') {

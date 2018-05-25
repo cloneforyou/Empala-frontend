@@ -1,7 +1,8 @@
 /* eslint-disable max-len,react/forbid-prop-types */
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import EmpalaInput from '../registration/EmpalaInput';
 import { dataFields } from '../../localdata/profilePageData';
 import {
@@ -29,7 +30,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-class ProfileForm extends React.PureComponent {
+class ProfileForm extends PureComponent {
   constructor(props) {
     super(props);
 
