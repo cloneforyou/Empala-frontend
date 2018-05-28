@@ -13,9 +13,12 @@
     background-color: $main-color-text-grey;
     width: 16px;
     height: 16px;
+    vertical-align: text-top;
     @each $item in $listItemsSidebar {
       &_#{$item} {
-        @include iconDashboard($item);
+        mask: url($path-to-dashboard-icon + 'icon-' + $item +'.svg');
+        mask-size: contain;
+        mask-repeat: no-repeat;
       }
     }
   }

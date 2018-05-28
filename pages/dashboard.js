@@ -38,17 +38,19 @@ class Dashboard extends Component {
     const activePageTitle = this.props.url.query.page || ['overflow'];
     return (
       <MuiThemeProvider>
-        <Head>
-          <title>Dashbord - {activePageTitle[0].toUpperCase() + activePageTitle.slice(1)}</title>
-          <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
-        </Head>
-        <div className="full-height-wrap">
-          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-          <Header
-            sidebarCollapsed={sidebarCollapsed}
-            collapseMenu={this.collapseMenu}
-          />
-          <Body sidebarCollapsed={sidebarCollapsed} />
+        <div>
+          <Head>
+            <title>Dashbord - {activePageTitle[0].toUpperCase() + activePageTitle.slice(1)}</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+          </Head>
+          <div className="full-height-wrap">
+            <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+            <Header
+              sidebarCollapsed={sidebarCollapsed}
+              collapseMenu={this.collapseMenu}
+            />
+            <Body sidebarCollapsed={sidebarCollapsed} />
+          </div>
         </div>
       </MuiThemeProvider>
     )
