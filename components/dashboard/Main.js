@@ -29,7 +29,7 @@ class Main extends Component {
       case 'community':
       case 'groups':
       case 'blogs':
-        return <GlobalNetworkPage />;
+        return <GlobalNetworkPage page={page} />; // STOP TO DELETE PROPS HERE!!!! }:->
       default:
         return '';
     }
