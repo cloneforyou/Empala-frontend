@@ -12,9 +12,11 @@ import {
   setTabName,
   setTabPageIndex, validateFieldValue,
 } from '../../actions/registration';
+import ignoredFields from '../../localdata/noValidatedFiels';
 
 function isFieldsFilled(fieldNames, fields) {
-  return every(fieldNames, name => (fields[name] && fields[name] !== ''));
+  const remainingFields = fieldNames.filter(name => !ignoredFields.includes(name));
+  return every(remainingFields, name => (fields[name] && fields[name] !== ''));
 }
 
 function isFieldError(fieldsList, errorsList) {

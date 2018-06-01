@@ -26,7 +26,9 @@ const EmpalaSelect = (props) => {
         selectedMenuItemStyle={style.selectedMenuItemStyle}
         underlineDisabledStyle={style.underlineDisabledStyle}
         underlineStyle={style.underlineStyle}
-        underlineFocusStyle={props.errorText ? style.underlineErrorStyle : style.underlineFocusStyle}
+        underlineFocusStyle={props.errorText
+          ? style.underlineErrorStyle
+          : style.underlineFocusStyle}
         maxHeight={300}
         onChange={(e, i, v) => {
           props.handleChange(props.id, v)

@@ -8,6 +8,7 @@ import {
   showIdentityModal,
 } from '../actions/registration';
 import request from '../utils/request';
+import ignoredFields from '../localdata/noValidatedFiels';
 
 function* validatePasswordField({ id, value }) {
   const password = yield select(state => state.registration.registrationData['member_account_password']);
@@ -62,15 +63,16 @@ export function* validateCheckbox(action) {
 export function* validateEmptyFields(action) {
   if (action.fields) {
     const data = yield select(state => state.registration.registrationData);
-    const blankFields = action.fields.filter(field => (!data[field] || data[field] === ''));
+    const blankFields = action.fields.filter(field => (!ignoredFields.includes(field) && (!data[field] || data[field] === '')));
     yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
 
 export function* validateFieldValue({ fieldId, fieldValue }) {
   if (fieldId === 'identity_residential_address_residential_address_line_1' || fieldId === 'identity_residential_address_residential_address_line_2') {
-    if (fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '') === 'pobox') {
-      yield put(setFieldInvalid(fieldId, 'PO Box is not allowed in residential address'));
+    const convertedFieldValue = fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '');
+    if (fieldValue && (convertedFieldValue.includes('pobox') || convertedFieldValue.includes('postofficebox'))) {
+      yield put(setFieldInvalid(fieldId, 'Post Office Boxes are not allowed in residential address'));
     }
   }
   if (['identity_zip_code', 'identity_mailing_address_zip_code', 'profile_employment_zip_code'].includes(fieldId)) {
