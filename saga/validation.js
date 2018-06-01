@@ -63,20 +63,22 @@ export function* validateCheckbox(action) {
 export function* validateEmptyFields(action) {
   if (action.fields) {
     const data = yield select(state => state.registration.registrationData);
-    const blankFields = action.fields.filter(field => (!ignoredFields.includes(field) && (!data[field] || data[field] === '')));
+    const blankFields = action.fields.filter(field => (!ignoredFields.includes(field) &&
+      (!data[field] || data[field] === '')));
     yield all(blankFields.map(field => put(setFieldInvalid(field, 'This is a required field'))));
   }
 }
 
 export function* validateFieldValue({ fieldId, fieldValue }) {
-  if (fieldId === 'identity_residential_address_residential_address_line_1' || fieldId === 'identity_residential_address_residential_address_line_2') {
-    const convertedFieldValue = fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '');
-    if (fieldValue && (convertedFieldValue.includes('pobox') || convertedFieldValue.includes('postofficebox'))) {
+  if (fieldId === 'identity_residential_address_residential_address_line_1' ||
+    fieldId === 'identity_residential_address_residential_address_line_2') {
+    if (fieldValue && (fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '').includes('pobox') ||
+        fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '').includes('postofficebox'))) {
       yield put(setFieldInvalid(fieldId, 'Post Office Boxes are not allowed in residential address'));
     }
   }
   if (['identity_zip_code', 'identity_mailing_address_zip_code', 'profile_employment_zip_code'].includes(fieldId)) {
-    if (fieldValue.length !== 5) {
+    if (fieldValue && fieldValue.length !== 5) {
       yield put(setFieldInvalid(fieldId, 'Invalid ZIP-code format, please provide five digits code'));
     }
   }
