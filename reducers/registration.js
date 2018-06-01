@@ -11,12 +11,15 @@ import {
   VALIDATE_FIELD_ERROR,
   VALIDATE_FIELD_SUCCESS,
   EDITABLE_PART,
+  CLOSE_ERROR_MODAL, REGISTRATION_SUBMIT_FAIL,
 } from '../constants/registration';
 
 const initialState = {
   tabName: false,
   tabIndex: false,
   showIdentityModal: false,
+  showErrorModal: false,
+  errorMessage: false,
   menuItems: [],
   registrationData: {
     memberDocument: 'passport',
@@ -51,6 +54,10 @@ function registration(state = initialState, action) {
       return { ...state, showIdentityModal: true };
     case CLOSE_IDENTITY_MODAL:
       return { ...state, showIdentityModal: false };
+    case CLOSE_ERROR_MODAL:
+      return { ...state, showErrorModal: false };
+    case REGISTRATION_SUBMIT_FAIL:
+      return { ...state, showErrorModal: true, errorMessage: action.err };
     case COPY_MAILING_ADDRESS:
       return {
         ...state,

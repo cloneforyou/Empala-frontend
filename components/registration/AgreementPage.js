@@ -1,12 +1,15 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 
-import {changeTabPage, sendRegistrationForm} from '../../actions/registration';
+import {changeTabPage, sendRegistrationForm, closeErrorModal} from '../../actions/registration';
+import ModalErrorWindow from './ModalErrorWindow';
 
 function mapStateToProps(state) {
   return {
     firstName: state.registration.registrationData.member_basic_information_first_name || '',
     lastName: state.registration.registrationData.member_basic_information_last_name || '',
+    errorMessage: state.registration.errorMessage || '',
+    showErrorModal: state.registration.showErrorModal,
   };
 }
 
@@ -15,6 +18,10 @@ function mapDispatchToProps(dispatch) {
     {
       changeTabPage: () => dispatch(changeTabPage('agreement', 1, 'backward')),
       submitRegistration: () => dispatch(sendRegistrationForm()),
+      closeModal: () => {
+        dispatch(closeErrorModal());
+        dispatch(changeTabPage('agreement', 1, 'backward'));
+      },
     });
 }
 
@@ -213,6 +220,11 @@ class AgreementPage extends PureComponent {
             </p>
           </div>
         </div>
+        <ModalErrorWindow
+          open={this.props.showErrorModal}
+          handleClose={this.props.closeModal}
+          message={this.props.errorMessage}
+        />
       </div>
     );
   }
