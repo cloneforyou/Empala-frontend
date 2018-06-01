@@ -11,6 +11,7 @@ import {
   TOGGLE_CHECKBOX,
   SHOW_IDENTITY_MODAL,
   CLOSE_IDENTITY_MODAL,
+  CLOSE_ERROR_MODAL,
   COPY_MAILING_ADDRESS,
   CLEAN_MAILING_ADDRESS,
   REGISTRATION_SUBMIT_REQUEST,
@@ -103,6 +104,12 @@ export function showIdentityModal() {
 export function closeIdentityModal() {
   return {
     type: CLOSE_IDENTITY_MODAL,
+  };
+}
+
+export function closeErrorModal() {
+  return {
+    type: CLOSE_ERROR_MODAL,
   };
 }
 

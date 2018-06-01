@@ -107,7 +107,7 @@ export function* sendRegistrationForm() {
     localStorage.setItem('refreshToken', response.data.data.tokens.refresh);
     location.assign('/dashboard');
   } catch (err) {
-    yield put(registrationFail(err));
+    yield put(registrationFail(err.response ? err.response.data.info : 'Network error'));
   }
 }
 
