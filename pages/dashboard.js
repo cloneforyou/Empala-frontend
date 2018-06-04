@@ -37,19 +37,20 @@ class Dashboard extends Component {
       }
     );
     keycloak.init({ onLoad: 'login-required' })
-    .success(authenticated => {
+    .success(async authenticated => {
       console.log('TOKKENNN', keycloak.token);
-      this.props.setKcToken(keycloak.token);
+      await this.props.setKcToken(keycloak.token);
+      this.props.getUserData();
+      this.props.startSocket();
+      if (this.props.url.query.page) {
+        this.props.setActivePage(this.props.url.query.page.toLowerCase());
+      } else {
+        this.props.setActivePage('overflow');
+      }
     }).error(function(err) {
       console.log('KC Error:', err);
     });
-    this.props.getUserData();
-    this.props.startSocket();
-    if (this.props.url.query.page) {
-      this.props.setActivePage(this.props.url.query.page.toLowerCase());
-    } else {
-      this.props.setActivePage('overflow');
-    }
+
   }
 
   render() {

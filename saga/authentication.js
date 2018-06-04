@@ -47,12 +47,12 @@ export function* getUserData() {
   const options = {
     method: 'GET',
     headers: {
+      Accept: 'application/json',
       Authorization: `Bearer ${kcToken}`,
       'X-Access-Token': localStorage.getItem('accessToken'),
       'X-Refresh-Token': localStorage.getItem('refreshToken'),
     },
   };
-
   try {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
