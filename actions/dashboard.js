@@ -7,6 +7,7 @@ import {
   REFRESH_TOKEN_REQUEST,
   START_WEBSOCKET,
   SET_ACTIVE_PAGE,
+  SET_KC_TOKEN,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -68,3 +69,10 @@ export const setActivePage = page => ({
   page,
 });
 
+export function setKcToken(kcToken) {
+  console.log(' ** ', kcToken);
+  return {
+    type: SET_KC_TOKEN,
+    kcToken,
+  };
+}

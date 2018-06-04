@@ -1,6 +1,7 @@
-import { combineReducers } from 'redux'
-import registration from './reducers/registration'
-import dashboard from './reducers/dashboard'
+import { combineReducers } from 'redux';
+import registration from './reducers/registration';
+import dashboard from './reducers/dashboard';
+import keycloak from './reducers/keycloak';
 
 export const InitialState = {
 
@@ -17,4 +18,5 @@ export default combineReducers({
   reducer,
   registration,
   dashboard,
+  keycloak,
 });

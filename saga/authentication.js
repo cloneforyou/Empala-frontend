@@ -42,10 +42,12 @@ export function* refreshTokens() {
 }
 
 export function* getUserData() {
+  const kcToken = yield select(state => state.keycloak.kcToken) || '';
   const url = '/api/dashboard';
   const options = {
     method: 'GET',
     headers: {
+      Authorization: `Bearer ${kcToken}`,
       'X-Access-Token': localStorage.getItem('accessToken'),
       'X-Refresh-Token': localStorage.getItem('refreshToken'),
     },
