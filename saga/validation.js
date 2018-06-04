@@ -108,6 +108,7 @@ export default function* validationSaga({ id, value }) {
     'member_passport_number',
     'member_drivers_license_number',
     'regulatory_identification_ssn',
+    'member_account_account_no',
   ];
   yield put(setFieldValid(id));
   if (serverValidatedFields.includes(id)) {

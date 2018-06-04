@@ -1,11 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
+import _ from 'lodash';
 import UploadUserFile from '../components/registration/UploadUserFile';
 import MemberInfoForm from '../components/registrationForms/MemberInfoForm';
 import IdentityForm from '../components/registrationForms/IdentityForm';
 import ExperienceForm from '../components/registrationForms/ExperienceForm';
 import RegulatoryForm from '../components/registrationForms/RegulatoryForm';
 import ProfileForm from '../components/registrationForms/ProfileForm';
-import _ from 'lodash';
 import { dataFields as memberPageData } from '../localdata/memberPageData';
 import { dataFields as regulatoryPageData } from '../localdata/regulatoryPageData';
 import { dataFields as identityPageData } from '../localdata/identityPageData';
@@ -190,3 +190,24 @@ export function getValuesForSelectField(list) {
   }));
 }
 
+export function generateId() {
+  return String(Date.now() + Math.floor(Math.random() * Math.random() * 1000000)).substr(3, 12);
+}
+
+export function traceError(err) {
+  if (!(err && err.response && err.response.data && err.response.data.info)) {
+    return 'registration error!';
+  }
+  switch (err.response.data.info) {
+    case 'MISSING_DATA':
+      return 'missing registration data!';
+    case 'THIS_EMAIL_IS_ALREADY_IN_USE':
+      return 'email address is already in use!';
+    case 'THIS_ACCOUNT_IDENTIFIER_IS_ALREADY_IN_USE':
+      return 'this account identifier is already in use!';
+    case 'THIS_DATA_IS_ALREADY_IN_USE':
+      return 'some of your identification values are already in use!';
+    default:
+      return err.response.data.info;
+  }
+}
