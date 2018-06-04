@@ -16,11 +16,10 @@ import {
   SET_MEMBER_DOCUMENT_TYPE,
   VALIDATE_FIELD_VALUE,
 } from '../constants/registration';
-import { menuItems } from '../utils/registrationUtils';
+import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga, { validateCheckbox, validateEmptyFields, validateFieldValue } from './validation';
 import { getAddressInfoByZIP } from './sideServices';
-
 
 export function* changeTabPage({ tabName, tabIndex, direction }) {
   const mailingAddressSameAsResidential = yield select(state =>
@@ -92,7 +91,6 @@ export function* saveData() {
   localStorage.setItem('registrationData', JSON.stringify(registrationData));
 }
 
-
 export function* sendRegistrationForm() {
   const registrationData = yield select(state => state.registration.registrationData);
   const url = '/api/auth/register';
@@ -107,7 +105,7 @@ export function* sendRegistrationForm() {
     localStorage.setItem('refreshToken', response.data.data.tokens.refresh);
     location.assign('/dashboard');
   } catch (err) {
-    yield put(registrationFail(err.response ? err.response.data.info : 'Network error'));
+    yield put(registrationFail(traceError(err)));
   }
 }
 
@@ -124,4 +122,3 @@ export default function* registrationSaga() {
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields),
   ]);
 }
-

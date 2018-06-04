@@ -14,6 +14,8 @@ import {
   CLOSE_ERROR_MODAL, REGISTRATION_SUBMIT_FAIL,
 } from '../constants/registration';
 
+import { generateId } from '../utils/registrationUtils';
+
 const initialState = {
   tabName: false,
   tabIndex: false,
@@ -22,6 +24,7 @@ const initialState = {
   errorMessage: false,
   menuItems: [],
   registrationData: {
+    member_account_account_no: generateId(),
     memberDocument: 'passport',
     regulatory_family_dependents: '0',
   },

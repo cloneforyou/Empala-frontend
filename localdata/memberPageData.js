@@ -78,8 +78,7 @@ export const dataFields = [
     {
       id: 'member_account_account_no',
       type: 'text',
-      label: 'Membership no.',
-      typeField: 'numberField',
+      label: 'Account No.',
       placeholder: '',
     },
     {
