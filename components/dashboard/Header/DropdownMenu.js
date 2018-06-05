@@ -6,7 +6,7 @@ const DropdownMenu = (props) => {
   return (
     <div
       className={(menuAvatarShow === false) ?
-        'dropdown-menu dropdown-menu-right show profile-menu user-nav__dropdown-menu' :
+        'dropdown-menu dropdown-menu-right profile-menu user-nav__dropdown-menu' :
         'dropdown-menu dropdown-menu-right show profile-menu user-nav__dropdown-menu'}
     >
       <div className="profile-menu__head">

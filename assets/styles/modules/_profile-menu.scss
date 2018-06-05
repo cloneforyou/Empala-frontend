@@ -43,4 +43,14 @@
       color: #707070;
     }
   }
+  &__logout-btn {
+    background: $green;
+    color: $white;
+    padding: 6px 10px;
+    width: 100%;
+    @include fontSize(16px);
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+  }
 }
