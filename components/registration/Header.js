@@ -2,7 +2,6 @@
 import React from 'react';
 import Link from 'next/link';
 import IoIosArrowThinLeft from 'react-icons/lib/io/ios-arrow-thin-left';
-
 import logo from '../../static/images/logo.png';
 
 const Header = () => (
