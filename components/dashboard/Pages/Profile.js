@@ -24,7 +24,6 @@ const styles = theme => ({
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
-    primary: '#98c73a',
   },
 
 });
@@ -48,19 +47,17 @@ class ScrollableTabsButtonAuto extends React.Component {
           <Tabs
             value={value}
             onChange={this.handleChange}
-            // indicatorColor="primary"
-            // textColor="primary"
             scrollable
             scrollButtons="auto"
             style={{ color: "#808895" }}
           >
             <Tab label="Membership" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
-            <Tab label="Item Four" />
-            <Tab label="Item Five" />
-            <Tab label="Item Six" />
-            <Tab label="Item Seven" />
+            <Tab label="Regulatory" />
+            <Tab label="Experience" />
+            <Tab label="Account" />
+            <Tab label="Documents" />
+            <Tab label="Order Config" />
+            <Tab label="Notifications" />
           </Tabs>
         </AppBar>
         {value === 0 && <Membership />}

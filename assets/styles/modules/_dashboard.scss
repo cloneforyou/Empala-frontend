@@ -1,5 +1,6 @@
 .dashboard {
   margin-left: 180px;
+  max-width: calc(100% - 180px);
   display: block;
   width: 100%;
   padding-top: 84px;
@@ -19,6 +20,7 @@
 
   &_full {
     margin-left: 80px;
+    max-width: calc(100% - 80px);
   }
   &__footer {
     padding: 10px 20px;

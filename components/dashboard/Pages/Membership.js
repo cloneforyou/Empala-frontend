@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Membership extends Component {
   render() {
     return (
-      <div>OY</div>
+      <div className="tab-container">OY</div>
     );
   }
 }
