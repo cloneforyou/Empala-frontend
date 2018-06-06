@@ -1,3 +1,10 @@
 .tab-container {
   padding: 40px 20px;
 }
+
+.title-part {
+  color: $green;
+  @include fontSize(16px);
+  font-weight: 600;
+  margin-bottom: 16px;
+}

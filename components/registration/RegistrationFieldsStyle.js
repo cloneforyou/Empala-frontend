@@ -25,13 +25,16 @@ const style = {
   },
   floatingLabelStyle: {
     color: GREEN,
+    fontSize: '14px',
   },
   textFieldStyle: {
     width: '100%',
+    fontSize: '16px',
   },
   selectFieldStyle: {
     width: '100%',
     margin: 0,
+    fontSize: '16px',
   },
   calendarIcon: {
     position: 'absolute',

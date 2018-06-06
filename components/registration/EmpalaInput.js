@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import InputMask from 'react-input-mask';
 import TextField from 'material-ui/TextField';
-
-import '../../assets/styles/modules/_input-group.scss';
 import style from './RegistrationFieldsStyle';
 
 
