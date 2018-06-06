@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EmpalaInput from '../../registration/EmpalaInput';
 import EmpalaSelect from '../../registration/EmpalaSelect';
-import { fieldsMembership } from '../../../localdata/profileData';
+import {
+  fieldsMembership,
+  fieldsResidentialAddress,
+  fieldsPersonalWealth,
+  fieldsMemberPersonal,
+  fieldResetPassword
+} from '../../../localdata/profileData';
 import { setInputFieldValueById } from '../../../actions/registration';
+import avatar from '../../../static/images/avatar-user.svg';
 
 class Membership extends Component {
   constructor(props) {
@@ -52,11 +59,35 @@ class Membership extends Component {
   render() {
     return (
       <div className="tab-container">
-        <div className="row">
-          <div className="col-md-6">
-            <h2 className="title-part">Membership</h2>
-            <div className="row">
-              {fieldsMembership.map(item => this.mappingComponent(item))}
+        <div className="tab-container__wrapper">
+          <div className="row">
+            <div className="col-md-6">
+              <h2 className="title-part">Membership</h2>
+              <div className="row margin-bt-30">
+                {fieldsMembership.map(item => this.mappingComponent(item))}
+              </div>
+              <h2 className="title-part">Residential Address</h2>
+              <div className="row margin-bt-30">
+                {fieldsResidentialAddress.map(item => this.mappingComponent(item))}
+              </div>
+              <h2 className="title-part">Personal Wealth</h2>
+              <div className="row">
+                {fieldsPersonalWealth.map(item => this.mappingComponent(item))}
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="row">
+                <div className="col-lg-8">
+                  {fieldsMemberPersonal.map(item => this.mappingComponent(item))}
+                </div>
+                <div className="col-lg-4">
+                  <div className="profile-image">
+                    <img src={avatar} alt="" />
+                  </div>
+                  <button>Edit</button>
+                </div>
+              </div>
+              {fieldResetPassword.map(item => this.mappingComponent(item))}
             </div>
           </div>
         </div>

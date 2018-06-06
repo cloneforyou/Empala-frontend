@@ -41,6 +41,7 @@ export default class EmpalaInput extends Component {
           disabled={this.props.disabled}
           errorText={errorText}
           className='text-field'
+          margin="none"
         >
           {this.props.mask && <InputMask
             mask={this.props.mask}
