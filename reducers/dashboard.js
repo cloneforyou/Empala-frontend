@@ -14,6 +14,7 @@ const initialState = {
   userData: false,
   activePageDashboard: 'overflow',
   loadingPage: true,
+  modalOpen: false,
 };
 
 function dashboard(state = initialState, action) {

@@ -6,7 +6,7 @@ import {
   GET_USER_DATA_SUCCESS,
   REFRESH_TOKEN_REQUEST,
   START_WEBSOCKET,
-  SET_ACTIVE_PAGE,
+  SET_ACTIVE_PAGE, CLEAN_IMAGE_DATA, UPLOAD_IMAGE_REQUEST, OPEN_MODAL, CLOSE_MODAL,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -68,3 +68,19 @@ export const setActivePage = page => ({
   page,
 });
 
+export const cleanImage = () => ({
+  type: CLEAN_IMAGE_DATA,
+});
+
+export const uploadImage = data => ({
+  type: UPLOAD_IMAGE_REQUEST,
+  data,
+});
+
+export const openModal = () => ({
+  type: OPEN_MODAL,
+});
+
+export const closeModal = () => ({
+  type: CLOSE_MODAL,
+});
