@@ -1,7 +1,10 @@
 .tab-container {
   padding: 40px 20px;
+  .registration-group {
+    margin-bottom: 0;
+    margin-top: -7px;
+  }
 }
-
 .title-part {
   color: $green;
   @include fontSize(16px);

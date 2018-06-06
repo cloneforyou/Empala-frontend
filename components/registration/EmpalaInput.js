@@ -40,6 +40,7 @@ export default class EmpalaInput extends Component {
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}
           errorText={errorText}
+          className='text-field'
         >
           {this.props.mask && <InputMask
             mask={this.props.mask}
