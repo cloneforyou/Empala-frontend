@@ -20,8 +20,33 @@
 .profile-image {
   width: 163px;
   border-radius: 10px;
+  margin-bottom: 20px;
   img {
     width: 100%;
     border-radius: 10px;
+  }
+}
+
+.edit-btn {
+  @include button-reset;
+  color: $main-color-text-grey;
+  @include fontSize(16px);
+}
+
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  &__right {
+
+  }
+  &__left {
+    button {
+      &:not(:last-child) {
+        margin-right: 35px;
+      }
+    }
+  }
+  button {
+    @include button-reset;
   }
 }

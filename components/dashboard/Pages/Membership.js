@@ -66,6 +66,24 @@ class Membership extends Component {
               <div className="row margin-bt-30">
                 {fieldsMembership.map(item => this.mappingComponent(item))}
               </div>
+            </div>
+            <div className="col-md-6">
+              <div className="row">
+                <div className="col-lg-8">
+                  {fieldsMemberPersonal.map(item => this.mappingComponent(item))}
+                </div>
+                <div className="col-lg-4 text-center">
+                  <div className="profile-image">
+                    <img src={avatar} alt="" />
+                  </div>
+                  <button className="edit-btn">Edit</button>
+                </div>
+              </div>
+              {fieldResetPassword.map(item => this.mappingComponent(item))}
+            </div>
+          </div>
+          <div className="row margin-bt-30">
+            <div className="col-md-6">
               <h2 className="title-part">Residential Address</h2>
               <div className="row margin-bt-30">
                 {fieldsResidentialAddress.map(item => this.mappingComponent(item))}
@@ -76,18 +94,19 @@ class Membership extends Component {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="row">
-                <div className="col-lg-8">
-                  {fieldsMemberPersonal.map(item => this.mappingComponent(item))}
-                </div>
-                <div className="col-lg-4">
-                  <div className="profile-image">
-                    <img src={avatar} alt="" />
-                  </div>
-                  <button>Edit</button>
-                </div>
+              <h2 className="title-part">Mailing Address</h2>
+              <div className="row margin-bt-30">
+                {fieldsResidentialAddress.map(item => this.mappingComponent(item))}
               </div>
-              {fieldResetPassword.map(item => this.mappingComponent(item))}
+            </div>
+          </div>
+          <div className="tab-container__foot buttons-row">
+            <div className="buttons-row__right">
+              <button>Delete Account</button>
+            </div>
+            <div className="buttons-row__left">
+              <button>Cancel</button>
+              <button>Save</button>
             </div>
           </div>
         </div>
