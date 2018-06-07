@@ -6,6 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Membership from './Membership';
+import UploadImage from '../UploadImage';
 
 function TabContainer(props) {
   return (
@@ -43,6 +44,7 @@ class ScrollableTabsButtonAuto extends React.Component {
 
     return (
       <div className={classes.root + ' tabs-line'}>
+        <UploadImage />
         <AppBar position="static" color="default">
           <Tabs
             value={value}

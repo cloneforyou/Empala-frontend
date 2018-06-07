@@ -1,9 +1,9 @@
 import {
-  CHOOSE_GROUP_COUNTRY,
+  CHOOSE_GROUP_COUNTRY, CLEAN_IMAGE_DATA, CLOSE_MODAL,
   COLLAPSE_SIDEBAR,
   GET_USER_DATA_REQUEST,
-  GET_USER_DATA_SUCCESS,
-  SET_ACTIVE_PAGE,
+  GET_USER_DATA_SUCCESS, OPEN_MODAL,
+  SET_ACTIVE_PAGE, SET_UPLOADABLE_IMAGE, UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_REQUEST, UPLOAD_IMAGE_SUCCESS,
 } from '../constants/dashboard';
 
 const initialState = {
@@ -15,6 +15,7 @@ const initialState = {
   activePageDashboard: 'overflow',
   loadingPage: true,
   modalOpen: false,
+  uploadableImage: false,
 };
 
 function dashboard(state = initialState, action) {
@@ -45,6 +46,43 @@ function dashboard(state = initialState, action) {
         ...state,
         activePageDashboard: action.page,
         loadingPage: false,
+      };
+    case SET_UPLOADABLE_IMAGE:
+      return {
+        ...state,
+        uploadableImage: action.img,
+      };
+    case CLEAN_IMAGE_DATA:
+      return {
+        ...state,
+        uploadableImage: false,
+      };
+    case UPLOAD_IMAGE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPLOAD_IMAGE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        modalOpen: false,
+      };
+    case UPLOAD_IMAGE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.err,
+      };
+    case OPEN_MODAL:
+      return {
+        ...state,
+        modalOpen: true,
+      };
+    case CLOSE_MODAL:
+      return {
+        ...state,
+        modalOpen: false,
       };
     default:
       return state;

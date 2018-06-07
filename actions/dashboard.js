@@ -6,7 +6,8 @@ import {
   GET_USER_DATA_SUCCESS,
   REFRESH_TOKEN_REQUEST,
   START_WEBSOCKET,
-  SET_ACTIVE_PAGE, CLEAN_IMAGE_DATA, UPLOAD_IMAGE_REQUEST, OPEN_MODAL, CLOSE_MODAL,
+  SET_ACTIVE_PAGE, CLEAN_IMAGE_DATA, UPLOAD_IMAGE_REQUEST, OPEN_MODAL, CLOSE_MODAL, SET_UPLOADABLE_IMAGE,
+  UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_SUCCESS,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -72,9 +73,23 @@ export const cleanImage = () => ({
   type: CLEAN_IMAGE_DATA,
 });
 
+export const setUploadableImage = img => ({
+  type: SET_UPLOADABLE_IMAGE,
+  img,
+});
+
 export const uploadImage = data => ({
   type: UPLOAD_IMAGE_REQUEST,
   data,
+});
+
+export const uploadImageFail = err => ({
+  type: UPLOAD_IMAGE_FAIL,
+  err,
+});
+
+export const uploadImageSuccess = () => ({
+  type: UPLOAD_IMAGE_SUCCESS,
 });
 
 export const openModal = () => ({
