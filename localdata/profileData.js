@@ -199,6 +199,60 @@ export const fieldsResidentialAddress = [
   },
 ];
 
+export const fieldsMaillingAddress = [
+  {
+    id: 'identity_residential_address_residential_address_line_1',
+    field: 'input',
+    label: 'Address line 1',
+    type: 'text',
+    placeholder: '',
+  },
+  {
+    id: 'identity_residential_address_residential_address_line_2',
+    field: 'input',
+    label: 'Address line 2',
+    type: 'text',
+    placeholder: '',
+  },
+  {
+    id: 'identity_residential_address_residential_address_city',
+    hint: 'Please select',
+    field: 'input',
+    label: 'City',
+    type: 'text',
+  },
+  {
+    field: 'input',
+    label: 'Zip code',
+    id: 'identity_zip_code',
+    type: 'text',
+    typeField: 'numberField',
+    placeholder: '',
+    col: 6,
+  },
+  {
+    id: 'identity_residential_address_residential_address_state',
+    hint: 'Please select',
+    field: 'select',
+    label: 'State',
+    options: usStates,
+    autoWidth: true,
+    col: 6,
+  },
+  {
+    id: 'identity_residential_address_residential_address_country',
+    hint: 'Please select',
+    field: 'select',
+    label: 'Country',
+    options: [
+      {
+        value: 'United States',
+        title: 'United States',
+      },
+    ],
+  },
+];
+
 export const fieldsPersonalWealth = [
   {
     id: 'profile_financials_annual_income',
@@ -292,6 +346,26 @@ export const fieldsPersonalWealth = [
       {
         value: 'Greater than 10,000,000',
         title: 'Greater than 10,000,000',
+      },
+    ],
+  },
+
+  {
+    id: 'profile_financials_tax_rate_profile',
+    label: 'Tax rate profile',
+    hint: 'Please select',
+    options: [
+      {
+        value: 'Low',
+        title: 'Low',
+      },
+      {
+        value: 'Medium',
+        title: 'Medium',
+      },
+      {
+        value: 'High',
+        title: 'High',
       },
     ],
   },

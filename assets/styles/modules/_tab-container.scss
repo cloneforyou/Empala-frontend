@@ -27,7 +27,7 @@
   }
 }
 
-.edit-btn {
+.default-btn {
   @include button-reset;
   color: $main-color-text-grey;
   @include fontSize(16px);
@@ -46,7 +46,19 @@
       }
     }
   }
-  button {
-    @include button-reset;
+}
+
+.profile-btn {
+  @include button-reset;
+  @include fontSize(16px);
+  color: #fff;
+  font-weight: 600;
+  padding: 3px 35px;
+  min-width: 170px;
+  &_red {
+    background: #d50000;
+  }
+  &_green {
+    background: $green;
   }
 }

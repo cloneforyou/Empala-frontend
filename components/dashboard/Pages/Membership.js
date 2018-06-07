@@ -5,6 +5,7 @@ import EmpalaSelect from '../../registration/EmpalaSelect';
 import {
   fieldsMembership,
   fieldsResidentialAddress,
+  fieldsMaillingAddress,
   fieldsPersonalWealth,
   fieldsMemberPersonal,
   fieldResetPassword
@@ -76,7 +77,7 @@ class Membership extends Component {
                   <div className="profile-image">
                     <img src={avatar} alt="" />
                   </div>
-                  <button className="edit-btn">Edit</button>
+                  <button className="default-btn">Edit</button>
                 </div>
               </div>
               {fieldResetPassword.map(item => this.mappingComponent(item))}
@@ -96,17 +97,17 @@ class Membership extends Component {
             <div className="col-md-6">
               <h2 className="title-part">Mailing Address</h2>
               <div className="row margin-bt-30">
-                {fieldsResidentialAddress.map(item => this.mappingComponent(item))}
+                {fieldsMaillingAddress.map(item => this.mappingComponent(item))}
               </div>
             </div>
           </div>
           <div className="tab-container__foot buttons-row">
             <div className="buttons-row__right">
-              <button>Delete Account</button>
+              <button className="profile-btn profile-btn_red">Delete Account</button>
             </div>
             <div className="buttons-row__left">
-              <button>Cancel</button>
-              <button>Save</button>
+              <button className="default-btn">Cancel</button>
+              <button className="profile-btn profile-btn_green">Save</button>
             </div>
           </div>
         </div>
