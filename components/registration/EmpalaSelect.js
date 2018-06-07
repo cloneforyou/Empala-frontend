@@ -35,6 +35,7 @@ const EmpalaSelect = (props) => {
         }}
         disabled={props.disabled}
         errorText={props.disabled ? '' : props.errorText}
+        margin="none"
 
       >
         {props.options.map((option) => (
