@@ -40,18 +40,10 @@ class WidgetNews extends Component {
             {
               widgetNews.map(card => (
                 <div className="news-card row no-gutters" key={card.id}>
-                  <div
-                    className={widget.id === 'external_news' ?
-                      'news-card__wrap-image news-card__wrap-image_rectangle' :
-                      'news-card__wrap-image news-card__wrap-image_square'
-                    }
-                  >
+                  <div className="news-card__wrap-image">
                     <a target="_blank" href={card.link}>
                       <img
-                        className={`news-card__image ${widget.id === 'external_news' ?
-                          'news-card__image_rectangle' :
-                          'news-card__image_square'}`
-                        }
+                        className="news-card__image"
                         src={card.image_link}
                         alt={card.title}
                       />
@@ -62,7 +54,8 @@ class WidgetNews extends Component {
                       <div>
                         {
                           card.origin_title &&
-                          <a className="news-card__creator" target="_blank" href={card.origin_link}>{card.origin_title}</a>
+                          <a className="news-card__creator" target="_blank"
+                             href={card.origin_link}>{card.origin_title}</a>
                         }
                         <span className="news-card__time">
                           {
@@ -77,14 +70,14 @@ class WidgetNews extends Component {
                       <p className="m-0">{card.description}</p>
                     </div>
                     {/*<div className="news-card__foot">*/}
-                      {/*<div className="news-card__rating">*/}
-                        {/*<span>Rating:</span>*/}
-                        {/*<div className="stars">*/}
-                          {/*<div className="stars__empty">*/}
-                            {/*<div className={`stars__fill stars__fill_${card.rating}`} />*/}
-                          {/*</div>*/}
-                        {/*</div>*/}
-                      {/*</div>*/}
+                    {/*<div className="news-card__rating">*/}
+                    {/*<span>Rating:</span>*/}
+                    {/*<div className="stars">*/}
+                    {/*<div className="stars__empty">*/}
+                    {/*<div className={`stars__fill stars__fill_${card.rating}`} />*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
+                    {/*</div>*/}
                     {/*</div>*/}
                   </div>
                 </div>
