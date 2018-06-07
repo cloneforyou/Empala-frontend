@@ -35,6 +35,7 @@ const EmpalaSelect = (props) => {
         }}
         disabled={props.disabled}
         errorText={props.disabled ? '' : props.errorText}
+        margin="none"
 
       >
         {props.options.map((option) => (
@@ -52,7 +53,6 @@ const EmpalaSelect = (props) => {
 
 EmpalaSelect.propTypes = {
   autoWidth: PropTypes.bool,
-  col: PropTypes.string,
   disabled: PropTypes.bool,
   errorText: PropTypes.string,
   id: PropTypes.string.isRequired,

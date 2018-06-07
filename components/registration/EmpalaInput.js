@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import InputMask from 'react-input-mask';
 import TextField from 'material-ui/TextField';
-
-import '../../assets/styles/modules/_input-group.scss';
 import style from './RegistrationFieldsStyle';
 
 
@@ -42,6 +40,8 @@ export default class EmpalaInput extends Component {
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}
           errorText={errorText}
+          className='text-field'
+          margin="none"
         >
           {this.props.mask && <InputMask
             mask={this.props.mask}
