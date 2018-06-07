@@ -1,57 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EmpalaInput from '../../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
+import EmpalaCheckbox from '../../../../registration/EmpalaCheckbox';
 import Footer from './Components/Footer';
 import {
-  fieldsEmployment,
-  fieldsTrustedContactPerson,
-} from '../../../../../localdata/profileData';
-import { setInputFieldValueById } from '../../../../../actions/registration';
+  setInputFieldValueById,
+  toggleCheckboxById,
+} from '../../../../../actions/registration';
 
 class OrderConfig extends Component {
   constructor(props) {
     super(props);
   }
 
-  mappingComponent(item) {
-    let mask = '';
-    const phoneMask = '+9 999 999-9999';
-    if (item.id.includes('phone')) {
-      mask = phoneMask;
-    }
-
-    if (item.options) {
-      return (
-        <EmpalaSelect
-          id={item.id}
-          key={item.id}
-          options={item.options}
-          label={item.label}
-          value={this.props.registrationData[item.id] || ''}
-          handleChange={this.props.setSelectedValueById}
-          errorText={this.props.fieldsErrors[item.id]}
-          col={item.col}
-          hint={item.hint || item.label}
-        />
-      );
-    }
-    return (
-      <EmpalaInput
-        key={item.id}
-        id={item.id}
-        type={item.type}
-        label={item.label}
-        value={this.props.registrationData[item.id] || ''}
-        handleChange={this.props.setInputValueById}
-        errorText={this.props.fieldsErrors[item.id]}
-        placeholder={item.placeholder}
-        col={item.col}
-        mask={mask}
-        typeField={item.typeField}
-      />
-    );
-  }
 
   render() {
     return (
@@ -71,7 +32,7 @@ class OrderConfig extends Component {
                   label="Time zone"
                   value="(UTC-08:00) Pacific Time (US & Canada)"
                   handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors['order_config_time_zone']}
+                  errorText={this.props.fieldsErrors.order_config_time_zone}
                   hint="Time zone"
                 />
               </div>
@@ -89,7 +50,7 @@ class OrderConfig extends Component {
                   label="Current color scheme"
                   value="Light"
                   handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors['order_config_theme']}
+                  errorText={this.props.fieldsErrors.order_config_theme}
                   hint="Current color scheme"
                 />
               </div>
@@ -97,11 +58,87 @@ class OrderConfig extends Component {
           </div>
           <div className="row margin-bt-30">
             <div className="col-md-6">
-              <div className="row margin-bt-30">
-              </div>
+              <div className="row margin-bt-30" />
             </div>
             <div className="col-md-6">
               <div className="row margin-bt-30">
+                <EmpalaSelect
+                  id="order_config_quantity_increment_multiplier"
+                  options={[
+                    {
+                      value: '100',
+                      title: '100',
+                    },
+                  ]}
+                  label="Quantity increment multiplier"
+                  value="100"
+                  handleChange={this.props.setSelectedValueById}
+                  errorText={this.props.fieldsErrors.order_config_quantity_increment_multiplier}
+                  hint="Quantity increment multiplier"
+                />
+                <EmpalaSelect
+                  id="order_config_price_increment_multiplier"
+                  options={[
+                    {
+                      value: '100',
+                      title: '100',
+                    },
+                  ]}
+                  label="Price increment multiplier"
+                  value="100"
+                  handleChange={this.props.setSelectedValueById}
+                  errorText={this.props.fieldsErrors.order_config_price_increment_multiplier}
+                  hint="Quantity increment multiplier"
+                />
+                <div className="col-md-6">
+                  <EmpalaCheckbox
+                    id="order_config_verify_orders"
+                    label="Do not verify orders"
+                    handleCheck={this.props.toggleCheckboxById}
+                    checked={this.props.checkboxes.order_config_verify_orders}
+                  />
+                  <EmpalaCheckbox
+                    id="order_config_verify_orders_cancellations"
+                    label="Do not verify orders cancellations"
+                    handleCheck={this.props.toggleCheckboxById}
+                    checked={this.props.checkboxes.order_config_verify_orders_cancellations}
+                  />
+                </div>
+                <div className="col-md-6">
+                  <EmpalaCheckbox
+                    id="order_config_verify_closing"
+                    label="Do not verify closing positions"
+                    handleCheck={this.props.toggleCheckboxById}
+                    checked={this.props.checkboxes.order_config_verify_closing}
+                  />
+                  <EmpalaCheckbox
+                    id="order_config_modify_order_request"
+                    label="Do not verify modify order request"
+                    handleCheck={this.props.toggleCheckboxById}
+                    checked={this.props.checkboxes.order_config_modify_order_request}
+                  />
+                </div>
+              </div>
+              <h2 className="title-part">Behaviour</h2>
+              <div>
+                <EmpalaCheckbox
+                  id="order_config_confirm_dialog"
+                  label="Show confirm dialog on tabs and widgets removal"
+                  handleCheck={this.props.toggleCheckboxById}
+                  checked={this.props.checkboxes.order_config_confirm_dialog}
+                />
+                <EmpalaCheckbox
+                  id="order_config_turn_safe"
+                  label="Turn safe mode on"
+                  handleCheck={this.props.toggleCheckboxById}
+                  checked={this.props.checkboxes.order_config_turn_safe}
+                />
+                <EmpalaCheckbox
+                  id="order_config_renew_ssession"
+                  label="Auto renew user session"
+                  handleCheck={this.props.toggleCheckboxById}
+                  checked={this.props.checkboxes.order_config_renew_ssession}
+                />
               </div>
             </div>
           </div>
@@ -117,9 +154,11 @@ export default connect(
   state => ({
     registrationData: state.registration.registrationData,
     fieldsErrors: state.registration.fieldsErrors,
+    checkboxes: state.registration.checkboxes,
   }),
   (dispatch => ({
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+    toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
   })),
 )(OrderConfig);
