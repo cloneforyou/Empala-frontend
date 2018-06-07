@@ -2,7 +2,7 @@ import React from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import PropTypes from 'prop-types';
-
+import fieldNeedsLabel from '../../localdata/noLabelFields';
 import style from './RegistrationFieldsStyle';
 
 
@@ -17,7 +17,7 @@ const EmpalaSelect = (props) => {
         floatingLabelText={props.label}
         floatingLabelFixed
         floatingLabelStyle={style.floatingLabelStyle}
-        hintText={props.hint || props.label}
+        hintText={fieldNeedsLabel(props.id) && (props.hint || props.label)}
         hintStyle={style.hintStyle}
         labelStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
         style={style.selectFieldStyle}
@@ -31,7 +31,7 @@ const EmpalaSelect = (props) => {
           : style.underlineFocusStyle}
         maxHeight={300}
         onChange={(e, i, v) => {
-          props.handleChange(props.id, v)
+          props.handleChange(props.id, v);
         }}
         disabled={props.disabled}
         errorText={props.disabled ? '' : props.errorText}
