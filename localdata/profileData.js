@@ -499,26 +499,190 @@ export const fieldsTrustedContactPerson = [
 export const AccountStatements = [
   {
     id: Math.random(),
-    title: "April 2018 Account Statement",
+    title: 'April 2018 Account Statement',
   },
   {
     id: Math.random(),
-    title: "March 2018 Account Statement",
+    title: 'March 2018 Account Statement',
   },
   {
     id: Math.random(),
-    title: "February 2018 Account Statement",
+    title: 'February 2018 Account Statement',
   },
   {
     id: Math.random(),
-    title: "January 2018 Account Statement",
+    title: 'January 2018 Account Statement',
   },
   {
     id: Math.random(),
-    title: "December 2017 Account Statement",
+    title: 'December 2017 Account Statement',
   },
   {
     id: Math.random(),
-    title: "November 2017 Account Statement",
+    title: 'November 2017 Account Statement',
   },
-]
+];
+
+const options = [
+  {
+    value: 'None',
+    title: 'No experience',
+  },
+  {
+    value: '<1',
+    title: '< 1 year',
+  },
+  {
+    value: '1-2',
+    title: '1 - 2 years',
+  },
+  {
+    value: '2-5',
+    title: '2 - 5 years',
+  },
+  {
+    value: '>5',
+    title: '> 5 years',
+  },
+];
+
+export const fieldsInvestmentExperienceOne = [
+  {
+    id: 'regulatory_family_investment_experience',
+    hint: 'Please select',
+    label: 'Investment experience',
+    field: 'select',
+    options: [
+      {
+        value: 'None',
+        title: 'None',
+      },
+      {
+        value: 'Limited',
+        title: 'Limited',
+      },
+      {
+        value: 'Good',
+        title: 'Good',
+      },
+      {
+        value: 'Excellent',
+        title: 'Excellent',
+      },
+    ],
+  },
+  {
+    id: 'profile_financials_investment_objectives',
+    hint: 'Please select',
+    label: 'Investment objectives',
+    options: [
+      {
+        value: 'Capital preservation (low risk)',
+        title: 'Capital preservation (low risk)',
+      },
+      {
+        value: 'Income (low-medium risk)',
+        title: 'Income (low-medium risk)',
+      },
+      {
+        value: 'Growth & income (medium risk)',
+        title: 'Growth & income (medium risk)',
+      },
+      {
+        value: 'Growth (medium-high risk)',
+        title: 'Growth (medium-high risk)',
+      },
+      {
+        value: 'Speculation (high risk)',
+        title: 'Speculation (high risk)',
+      },
+    ],
+  },
+  {
+    id: 'investment_experience_equities',
+    label: 'Equities',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_options',
+    label: 'Options',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_bonds',
+    label: 'Bonds',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_margin_currencies',
+    label: 'Currencies',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_futures',
+    label: 'Futures',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+
+];
+export const fieldsInvestmentExperienceTwo = [
+  {
+    id: 'investment_experience_cryptocurrencies',
+    label: 'Cryptocurrencies',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_private_equity',
+    label: 'Private equity',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_margin_accounts',
+    label: 'Margin accounts',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_borrowing_money',
+    label: 'Borrowing money',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_lending_money',
+    label: 'Lending money',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_foreign_markets',
+    label: 'Foreign markets',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'investment_experience_exotics',
+    label: 'Exotics',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+];

@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Membership from './Membership';
 import Regulatory from './Regulatory';
+import Experience from './Experience';
 import Documents from './Documents';
 
 function TabContainer(props) {
@@ -64,7 +65,7 @@ class ScrollableTabsButtonAuto extends React.Component {
         </AppBar>
         {value === 0 && <Membership />}
         {value === 1 && <Regulatory />}
-        {value === 2 && <TabContainer>Item Three</TabContainer>}
+        {value === 2 && <Experience />}
         {value === 3 && <TabContainer>Item Four</TabContainer>}
         {value === 4 && <Documents />}
         {value === 5 && <TabContainer>Item Six</TabContainer>}
