@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import EmpalaInput from '../../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import Footer from './Components/Footer';
+import UploadImage from '../../../UploadImage';
 import {
   fieldsMembership,
   fieldsResidentialAddress,
@@ -13,8 +14,7 @@ import {
 } from '../../../../../localdata/profileData';
 import { setInputFieldValueById } from '../../../../../actions/registration';
 import avatar from '../../../../../static/images/avatar-user.svg';
-import UploadImage from "../UploadImage";
-import {openModal} from "../../../actions/dashboard";
+import { openModal } from '../../../../../actions/dashboard';
 
 class Membership extends Component {
   constructor(props) {
@@ -120,7 +120,7 @@ export default connect(state => ({
   registrationData: state.registration.registrationData,
   fieldsErrors: state.registration.fieldsErrors,
 }), (dispatch => ({
-  setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-  showUploadDialog: () => dispatch(openModal()),
-})))(Membership);
+    setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
+    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+    showUploadDialog: () => dispatch(openModal()),
+  })))(Membership);
