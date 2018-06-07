@@ -6,7 +6,6 @@ import DatePickerField from '../../registration/DatePickerField';
 import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
-  fieldsPersonalWealth,
 } from '../../../localdata/profileData';
 import { setInputFieldValueById } from '../../../actions/registration';
 import { countriesList } from '../../../localdata/countriesList';

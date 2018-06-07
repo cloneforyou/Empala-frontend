@@ -495,3 +495,30 @@ export const fieldsTrustedContactPerson = [
     placeholder: '',
   },
 ];
+
+export const AccountStatements = [
+  {
+    id: Math.random(),
+    title: "April 2018 Account Statement",
+  },
+  {
+    id: Math.random(),
+    title: "March 2018 Account Statement",
+  },
+  {
+    id: Math.random(),
+    title: "February 2018 Account Statement",
+  },
+  {
+    id: Math.random(),
+    title: "January 2018 Account Statement",
+  },
+  {
+    id: Math.random(),
+    title: "December 2017 Account Statement",
+  },
+  {
+    id: Math.random(),
+    title: "November 2017 Account Statement",
+  },
+]
