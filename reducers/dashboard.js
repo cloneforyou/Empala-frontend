@@ -1,5 +1,5 @@
 import {
-  CHOOSE_GROUP_COUNTRY, CLEAN_IMAGE_DATA, CLOSE_MODAL,
+  CHOOSE_GROUP_COUNTRY, CLEAN_ERROR_TEXT, CLEAN_IMAGE_DATA, CLOSE_MODAL,
   COLLAPSE_SIDEBAR,
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS, OPEN_MODAL,
@@ -83,6 +83,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         modalOpen: false,
+      };
+    case CLEAN_ERROR_TEXT:
+      return {
+        ...state,
+        error: false,
       };
     default:
       return state;

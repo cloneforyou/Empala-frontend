@@ -2,20 +2,19 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import {cleanImage, closeModal, setUploadableImage, uploadImage} from '../../actions/dashboard';
+import {cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage} from '../../actions/dashboard';
 import {ALTO, GREEN, TORCH_RED, WHITE} from "../../constants/colors";
 // import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
 
 const style = {
   chooseBtn: {
     backgroundColor: ALTO,
+    margin: '10px 0',
   },
   labelChoose: {
-    margin: '10px 0',
     fontSize: '12px',
   },
   uploadInput: {
-    cursor: 'pointer',
     position: 'absolute',
     top: 0,
     bottom: 0,
@@ -32,12 +31,6 @@ const style = {
     verticalAlign: 'top',
     margin: '0 20px',
   },
-  // labelUploadBtn: {
-  //   color: WHITE,
-  //   fontSize: '12px',
-  //   textAlign: 'center',
-  //   padding: 0,
-  // },
   cancelBtn: {
     backgroundColor: TORCH_RED,
     width: '130px',
@@ -52,6 +45,12 @@ const style = {
     textAlign: 'center',
     padding: 0,
   },
+  errorText: {
+    fontSize: '12px',
+    lineHeight: '12px',
+    color: 'rgb(244, 67, 54)',
+    margin: '10px 0'
+  }
 };
 
 class UploadImage extends PureComponent {
@@ -80,7 +79,7 @@ class UploadImage extends PureComponent {
     e.preventDefault();
     const data = new FormData();
     const reader = new FileReader();
-    data.append('picture', e.target.files[0]);
+    data.append('avatar', e.target.files[0]);
     this.props.setUploadableImage(data);
     console.log(' ** ', data);
     const file = e.target.files[0];
@@ -115,6 +114,7 @@ class UploadImage extends PureComponent {
                borderRadius: '5%',
              }}
         />
+        <div style={style.errorText}>{this.props.errorText || ''}</div>
        <FlatButton
          label="Choose an Image"
          style={style.chooseBtn}
@@ -137,6 +137,7 @@ const mapStateToProps = state => (
   {
     image: state.dashboard.uploadableImage,
     modalOpen: state.dashboard.modalOpen,
+    errorText: state.dashboard.error,
   }
 );
 
@@ -146,6 +147,7 @@ const mapDispatchToProps = dispatch => (
     uploadImage: () => dispatch(uploadImage()),
     handleCancel: () => {
       dispatch(cleanImage());
+      dispatch(cleanErrorText());
       dispatch(closeModal());
     },
   }

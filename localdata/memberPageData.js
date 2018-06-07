@@ -49,7 +49,7 @@ export const dataFields = [
     {
       id: 'member_basic_information_suffix',
       label: 'Suffix',
-      hint: 'Please select',
+      // hint: 'Please select' // no hint needed for this field
       options: [
         {
           value: ' ',

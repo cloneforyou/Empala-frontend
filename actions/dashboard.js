@@ -7,7 +7,7 @@ import {
   REFRESH_TOKEN_REQUEST,
   START_WEBSOCKET,
   SET_ACTIVE_PAGE, CLEAN_IMAGE_DATA, UPLOAD_IMAGE_REQUEST, OPEN_MODAL, CLOSE_MODAL, SET_UPLOADABLE_IMAGE,
-  UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_SUCCESS,
+  UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_SUCCESS, CLEAN_ERROR_TEXT,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -98,4 +98,8 @@ export const openModal = () => ({
 
 export const closeModal = () => ({
   type: CLOSE_MODAL,
+});
+
+export const cleanErrorText = () => ({
+  type: CLEAN_ERROR_TEXT,
 });
