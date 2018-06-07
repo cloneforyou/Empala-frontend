@@ -396,10 +396,102 @@ export const fieldsMemberPersonal = [
     placeholder: '',
   },
 ];
+
 export const fieldResetPassword = [
   {
     id: 'member_account_password_confirm',
     type: 'password',
     label: 'Resset Password',
+  },
+];
+
+export const fieldsEmployment = [
+  {
+    id: 'profile_employment_employment_type',
+    label: 'Employment type',
+    hint: 'Please select',
+    options: [
+      {
+        value: 'Employed',
+        title: 'Employed',
+      },
+      {
+        value: 'Self-employed',
+        title: 'Self-employed',
+      },
+      {
+        value: 'Not employed',
+        title: 'Not employed',
+      },
+      {
+        value: 'Retired',
+        title: 'Retired',
+      },
+    ],
+  },
+  {
+    id: 'profile_employment_employer_name',
+    label: 'Employer name',
+    type: 'text',
+    placeholder: '',
+  },
+
+  {
+    id: 'profile_employment_city',
+    field: 'input',
+    label: 'City',
+    type: 'text',
+  },
+  {
+    label: 'Zip code',
+    id: 'profile_employment_zip_code',
+    type: 'text',
+    typeField: 'numberField',
+    col: '6',
+    placeholder: '',
+  },
+
+  {
+    id: 'profile_employment_state',
+    hint: 'Please select',
+    label: 'State',
+    col: '6',
+    options: usStates,
+    autoWidth: true,
+  },
+  {
+    id: 'profile_employment_employment_country',
+    label: 'Employment сountry',
+    type: 'text',
+    placeholder: '',
+  },
+];
+
+export const fieldsTrustedContactPerson = [
+  {
+    id: 'identity_trusted_contact_person_first_name',
+    label: 'First name',
+    type: 'text',
+    placeholder: '',
+    col: 6,
+  },
+  {
+    id: 'identity_trusted_contact_person_last_name',
+    label: 'Last name',
+    type: 'text',
+    placeholder: '',
+    col: 6,
+  },
+  {
+    id: 'identity_trusted_contact_person_email',
+    label: 'Email address',
+    type: 'text',
+    placeholder: '',
+  },
+  {
+    id: 'identity_trusted_contact_person_relationship',
+    label: 'Relationship',
+    type: 'text',
+    placeholder: '',
   },
 ];
