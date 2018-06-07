@@ -16,6 +16,8 @@ export default function request(url, options = {}) {
         return new Error('Missing refresh token');
       } else if (err.response.data.info === 'REFRESH_TOKEN_EXPIRED') {
         return new Error('Refresh token expired');
+      } else if (err.response.data.info === 'ACCESS_DENIED' || err.response.data.info === 'WRONG_CREDENTIALS') {
+        return new Error('Invalid credentials');
       }
       return false;
     }
@@ -24,7 +26,7 @@ export default function request(url, options = {}) {
   // console.log('------------------------------', url, options)
   return axios({
     method: options.method,
-    url: `${serverOrigins.aws}${url}`,
+    url: `${serverOrigins.local}${url}`,
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,

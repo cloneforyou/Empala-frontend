@@ -1,21 +1,31 @@
 import { call, put, takeLatest, select, takeEvery, all } from 'redux-saga/effects';
 import request from '../utils/request';
 import { setUserData } from '../actions/dashboard';
+import {loginFailed, loginSuccess} from "../actions/login";
 
 
-export function* authenticate({ login, password }) {
+export function* authenticate() {
+  const email = yield select(state => state.reducer.index_username);
+  const password = yield select(state => state.reducer.index_password);
+  console.log(' ** AUTH', email, password);
   const url = '/api/auth/login';
   const options = {
-    method: 'GET',
+    method: 'POST',
     data: {
-      login,
+      email,
       password,
     },
   };
   try {
-    yield call(request, url, options);
+    const result = yield call(request, url, options);
+    console.log(' ** ', result);
+    yield put(loginSuccess());
+    localStorage.setItem('accessToken', result.data.data.tokens.access);
+    localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+    window.location.assign('/dashboard');
   } catch (err) {
-    console.log(' ** ', err);
+    // console.log(' ** ', err);
+    yield put(loginFailed(err.message));
   }
 }
 
@@ -37,7 +47,7 @@ export function* refreshTokens() {
     window.location.assign('/dashboard');
   } catch (err) {
     console.log(' ** ', err);
-    // location.assign('/');
+    location.assign('/');
   }
 }
 
