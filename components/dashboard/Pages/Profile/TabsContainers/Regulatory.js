@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EmpalaInput from '../../registration/EmpalaInput';
-import EmpalaSelect from '../../registration/EmpalaSelect';
-import DatePickerField from '../../registration/DatePickerField';
+import EmpalaInput from '../../../../registration/EmpalaInput';
+import EmpalaSelect from '../../../../registration/EmpalaSelect';
+import DatePickerField from '../../../../registration/DatePickerField';
+import Footer from './Components/Footer';
 import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
-} from '../../../localdata/profileData';
-import { setInputFieldValueById } from '../../../actions/registration';
-import { countriesList } from '../../../localdata/countriesList';
+} from '../../../../../localdata/profileData';
+import { setInputFieldValueById } from '../../../../../actions/registration';
+import { countriesList } from '../../../../../localdata/countriesList';
 
 class Regulatory extends Component {
   constructor(props) {
@@ -162,13 +163,7 @@ class Regulatory extends Component {
               </div>
             </div>
           </div>
-          <div className="tab-container__foot buttons-row">
-            <div className="buttons-row__right" />
-            <div className="buttons-row__left">
-              <button className="default-btn">Cancel</button>
-              <button className="profile-btn profile-btn_green">Save</button>
-            </div>
-          </div>
+          <Footer deleteAccountBtnIsShow={false} />
         </div>
       </div>
     );

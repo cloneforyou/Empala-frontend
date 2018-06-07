@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import Membership from './Membership';
-import Regulatory from './Regulatory';
-import Experience from './Experience';
-import Documents from './Documents';
+import Membership from './TabsContainers/Membership';
+import Regulatory from './TabsContainers/Regulatory';
+import Experience from './TabsContainers/Experience';
+import Documents from './TabsContainers/Documents';
+import OrderConfig from './TabsContainers/OrderConfig';
 
 function TabContainer(props) {
   return (
@@ -31,7 +32,7 @@ const styles = theme => ({
 
 });
 
-class ScrollableTabsButtonAuto extends React.Component {
+class Profile extends Component {
   state = {
     value: 0,
   };
@@ -68,15 +69,15 @@ class ScrollableTabsButtonAuto extends React.Component {
         {value === 2 && <Experience />}
         {value === 3 && <TabContainer>Item Four</TabContainer>}
         {value === 4 && <Documents />}
-        {value === 5 && <TabContainer>Item Six</TabContainer>}
+        {value === 5 && <OrderConfig />}
         {value === 6 && <TabContainer>Item Seven</TabContainer>}
       </div>
     );
   }
 }
 
-ScrollableTabsButtonAuto.propTypes = {
+Profile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(ScrollableTabsButtonAuto);
+export default withStyles(styles)(Profile);

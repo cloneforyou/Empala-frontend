@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EmpalaInput from '../../registration/EmpalaInput';
-import EmpalaSelect from '../../registration/EmpalaSelect';
-import DatePickerField from '../../registration/DatePickerField';
+import EmpalaInput from '../../../../registration/EmpalaInput';
+import EmpalaSelect from '../../../../registration/EmpalaSelect';
+import Footer from './Components/Footer';
 import {
-  fieldsInvestmentExperienceOne,
-  fieldsInvestmentExperienceTwo,
-} from '../../../localdata/profileData';
-import { setInputFieldValueById } from '../../../actions/registration';
-import { countriesList } from '../../../localdata/countriesList';
+  fieldsEmployment,
+  fieldsTrustedContactPerson,
+} from '../../../../../localdata/profileData';
+import { setInputFieldValueById } from '../../../../../actions/registration';
 
-class Experience extends Component {
+class OrderConfig extends Component {
   constructor(props) {
     super(props);
   }
@@ -58,26 +57,55 @@ class Experience extends Component {
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
-          <h2 className="title-part">Investment Experience</h2>
           <div className="row">
             <div className="col-md-6">
               <div className="row margin-bt-30">
-                {fieldsInvestmentExperienceOne.map(item => this.mappingComponent(item))}
+                <EmpalaSelect
+                  id="order_config_time_zone"
+                  options={[
+                    {
+                      value: '(UTC-08:00) Pacific Time (US & Canada)',
+                      title: '(UTC-08:00) Pacific Time (US & Canada)',
+                    },
+                  ]}
+                  label="Time zone"
+                  value="(UTC-08:00) Pacific Time (US & Canada)"
+                  handleChange={this.props.setSelectedValueById}
+                  errorText={this.props.fieldsErrors['order_config_time_zone']}
+                  hint="Time zone"
+                />
               </div>
             </div>
             <div className="col-md-6">
               <div className="row margin-bt-30">
-                {fieldsInvestmentExperienceTwo.map(item => this.mappingComponent(item))}
+                <EmpalaSelect
+                  id="order_config_theme"
+                  options={[
+                    {
+                      value: 'Light',
+                      title: 'Light',
+                    },
+                  ]}
+                  label="Current color scheme"
+                  value="Light"
+                  handleChange={this.props.setSelectedValueById}
+                  errorText={this.props.fieldsErrors['order_config_theme']}
+                  hint="Current color scheme"
+                />
               </div>
             </div>
           </div>
-          <div className="tab-container__foot buttons-row">
-            <div className="buttons-row__right" />
-            <div className="buttons-row__left">
-              <button className="default-btn">Cancel</button>
-              <button className="profile-btn profile-btn_green">Save</button>
+          <div className="row margin-bt-30">
+            <div className="col-md-6">
+              <div className="row margin-bt-30">
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="row margin-bt-30">
+              </div>
             </div>
           </div>
+          <Footer deleteAccountBtnIsShow={false} />
         </div>
       </div>
     );
@@ -94,4 +122,4 @@ export default connect(
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
   })),
-)(Experience);
+)(OrderConfig);
