@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import { setTabName, setTabPageIndex, goBackToPart } from '../../actions/registration';
 import NavButtons from './NavButtons';
-import '../../assets/styles/modules/_final-review-page.scss';
 import FieldComponent from './FieldComponent';
 
 class FinalReviewPage extends PureComponent {

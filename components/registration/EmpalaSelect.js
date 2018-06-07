@@ -52,7 +52,6 @@ const EmpalaSelect = (props) => {
 
 EmpalaSelect.propTypes = {
   autoWidth: PropTypes.bool,
-  col: PropTypes.string,
   disabled: PropTypes.bool,
   errorText: PropTypes.string,
   id: PropTypes.string.isRequired,

@@ -1,3 +1,64 @@
 .tab-container {
   padding: 40px 20px;
+  .registration-group {
+    margin-bottom: 0;
+    margin-top: -7px;
+  }
+  &__wrapper {
+    max-width: 1100px;
+    margin: auto;
+  }
+}
+
+.title-part {
+  color: $green;
+  @include fontSize(16px);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.profile-image {
+  width: 163px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  img {
+    width: 100%;
+    border-radius: 10px;
+  }
+}
+
+.default-btn {
+  @include button-reset;
+  color: $main-color-text-grey;
+  @include fontSize(16px);
+}
+
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  &__right {
+
+  }
+  &__left {
+    button {
+      &:not(:last-child) {
+        margin-right: 35px;
+      }
+    }
+  }
+}
+
+.profile-btn {
+  @include button-reset;
+  @include fontSize(16px);
+  color: #fff;
+  font-weight: 600;
+  padding: 3px 35px;
+  min-width: 170px;
+  &_red {
+    background: #d50000;
+  }
+  &_green {
+    background: $green;
+  }
 }
