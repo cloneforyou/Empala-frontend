@@ -5,7 +5,7 @@ import Positions from './Pages/Positions';
 import Performance from './Pages/Performance';
 import Cash from './Pages/Cash'
 import Orders from "./Pages/Orders";
-import ScrollableTabsButtonAuto from "./Pages/Profile";
+import Profile from "./Pages/Profile";
 import Footer from './Footer';
 import GlobalNetworkPage from './Pages/GlobalNetworkPage';
 
@@ -32,7 +32,7 @@ class Main extends Component {
       case 'blogs':
         return <GlobalNetworkPage page={page} />; // STOP TO DELETE PROPS HERE!!!! }:->
       case 'profile':
-        return <ScrollableTabsButtonAuto />;
+        return <Profile />;
       default:
         return '';
     }

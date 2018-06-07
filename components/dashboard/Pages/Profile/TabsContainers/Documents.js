@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccountStatements } from '../../../localdata/profileData';
+import { AccountStatements } from '../../../../../localdata/profileData';
 
 const Documents = () => (
   <div className="tab-container">

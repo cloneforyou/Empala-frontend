@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EmpalaInput from '../../registration/EmpalaInput';
-import EmpalaSelect from '../../registration/EmpalaSelect';
+import EmpalaInput from '../../../../registration/EmpalaInput';
+import EmpalaSelect from '../../../../registration/EmpalaSelect';
+import Footer from './Components/Footer';
 import {
   fieldsMembership,
   fieldsResidentialAddress,
   fieldsMaillingAddress,
   fieldsPersonalWealth,
   fieldsMemberPersonal,
-  fieldResetPassword
-} from '../../../localdata/profileData';
-import { setInputFieldValueById } from '../../../actions/registration';
-import avatar from '../../../static/images/avatar-user.svg';
+  fieldResetPassword,
+} from '../../../../../localdata/profileData';
+import { setInputFieldValueById } from '../../../../../actions/registration';
+import avatar from '../../../../../static/images/avatar-user.svg';
 import UploadImage from "../UploadImage";
 import {openModal} from "../../../actions/dashboard";
 
@@ -106,15 +107,7 @@ class Membership extends Component {
               </div>
             </div>
           </div>
-          <div className="tab-container__foot buttons-row">
-            <div className="buttons-row__right">
-              <button className="profile-btn profile-btn_red">Delete Account</button>
-            </div>
-            <div className="buttons-row__left">
-              <button className="default-btn">Cancel</button>
-              <button className="profile-btn profile-btn_green">Save</button>
-            </div>
-          </div>
+          <Footer deleteAccountBtnIsShow />
         </div>
         <UploadImage />
       </div>
