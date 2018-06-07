@@ -1,14 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { withReduxSaga } from '../store';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from '../components/registration/Header';
 import Footer from '../components/registration/Footer';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import stylesheet from '../assets/styles/main.scss';
-import Login from '../components/registrationForms/Login';
 
-
-function Index() {
+function Login() {
   return (
     <MuiThemeProvider>
       <div>
@@ -17,7 +14,7 @@ function Index() {
         <div className="index_placeholder noselect">
           <div className="index_placeholder__inner">
             <div>
-              <Login />
+
             </div>
           </div>
         </div>
@@ -27,4 +24,4 @@ function Index() {
   );
 }
 
-export default withReduxSaga(Index);
+export default withReduxSaga(Login);

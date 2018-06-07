@@ -4,7 +4,6 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage} from '../../actions/dashboard';
 import {ALTO, GREEN, TORCH_RED, WHITE} from "../../constants/colors";
-// import DialogTitle from "@material-ui/core/es/DialogTitle/DialogTitle";
 
 const style = {
   chooseBtn: {
