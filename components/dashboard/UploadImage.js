@@ -99,7 +99,7 @@ class UploadImage extends PureComponent {
         onClose={this.props.handleCancel}
         aria-labelledby="simple-dialog-title"
         actions={this.actions}
-        open={this.props.modalOpen || true}>
+        open={this.props.modalOpen}>
         {/*<DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>*/}
       <div className="">
         <div

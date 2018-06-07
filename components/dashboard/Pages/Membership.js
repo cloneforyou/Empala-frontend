@@ -12,6 +12,8 @@ import {
 } from '../../../localdata/profileData';
 import { setInputFieldValueById } from '../../../actions/registration';
 import avatar from '../../../static/images/avatar-user.svg';
+import UploadImage from "../UploadImage";
+import {openModal} from "../../../actions/dashboard";
 
 class Membership extends Component {
   constructor(props) {
@@ -74,7 +76,10 @@ class Membership extends Component {
                   {fieldsMemberPersonal.map(item => this.mappingComponent(item))}
                 </div>
                 <div className="col-lg-4 text-center">
-                  <div className="profile-image">
+                  <div
+                    className="profile-image"
+                    onClick={this.props.showUploadDialog}
+                  >
                     <img src={avatar} alt="" />
                   </div>
                   <button className="default-btn">Edit</button>
@@ -111,6 +116,7 @@ class Membership extends Component {
             </div>
           </div>
         </div>
+        <UploadImage />
       </div>
     );
   }
@@ -123,4 +129,5 @@ export default connect(state => ({
 }), (dispatch => ({
   setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
   setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  showUploadDialog: () => dispatch(openModal()),
 })))(Membership);
