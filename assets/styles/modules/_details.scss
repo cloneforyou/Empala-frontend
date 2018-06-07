@@ -76,3 +76,15 @@
 .margin-bt-30 {
   margin-bottom: 30px;
 }
+
+.default-list {
+  padding-left: 0;
+  &__item {
+    list-style: none;
+    @include fontSize(16px);
+    color: $main-color-text-grey;
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+}
