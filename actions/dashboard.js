@@ -9,6 +9,7 @@ import {
   SET_ACTIVE_PAGE, CLEAN_IMAGE_DATA, UPLOAD_IMAGE_REQUEST, OPEN_MODAL, CLOSE_MODAL, SET_UPLOADABLE_IMAGE,
   UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_SUCCESS, CLEAN_ERROR_TEXT,
 } from '../constants/dashboard';
+import {SET_FIELD_VALUE} from "../constants/registration";
 
 export function collapseSidebar(bool) {
   return {
@@ -92,8 +93,9 @@ export const uploadImageSuccess = () => ({
   type: UPLOAD_IMAGE_SUCCESS,
 });
 
-export const openModal = () => ({
+export const openModal = name => ({
   type: OPEN_MODAL,
+  name,
 });
 
 export const closeModal = () => ({
@@ -103,3 +105,11 @@ export const closeModal = () => ({
 export const cleanErrorText = () => ({
   type: CLEAN_ERROR_TEXT,
 });
+
+export function setInputFieldValueById(id, value) {
+  return {
+    type: SET_FIELD_VALUE,
+    id,
+    value,
+  };
+}

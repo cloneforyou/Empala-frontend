@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import EmpalaInput from '../../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import Footer from './Components/Footer';
-import UploadImage from '../../../UploadImage';
+import UploadImage from '../UploadImage';
 import {
   fieldsMembership,
   fieldsResidentialAddress,
@@ -15,6 +15,7 @@ import {
 import { setInputFieldValueById } from '../../../../../actions/registration';
 import avatar from '../../../../../static/images/avatar-user.svg';
 import { openModal } from '../../../../../actions/dashboard';
+import DeleteAccountModal from "./Components/DeleteAccountModal";
 
 class Membership extends Component {
   constructor(props) {
@@ -110,6 +111,7 @@ class Membership extends Component {
           <Footer deleteAccountBtnIsShow />
         </div>
         <UploadImage />
+        <DeleteAccountModal />
       </div>
     );
   }
@@ -122,5 +124,5 @@ export default connect(state => ({
 }), (dispatch => ({
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    showUploadDialog: () => dispatch(openModal()),
+    showUploadDialog: () => dispatch(openModal('uploadImage')),
   })))(Membership);

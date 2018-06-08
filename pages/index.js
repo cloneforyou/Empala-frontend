@@ -8,23 +8,30 @@ import stylesheet from '../assets/styles/main.scss';
 import Login from '../components/registrationForms/Login';
 
 
-function Index() {
-  return (
-    <MuiThemeProvider>
-      <div>
-        <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-        <Header />
-        <div className="index_placeholder noselect">
-          <div className="index_placeholder__inner">
-            <div>
-              <Login />
+class Index extends React.PureComponent {
+  componentDidMount() {
+    if (localStorage.getItem('accessToken')) {
+      window.location.assign('/dashboard');
+    }
+  }
+  render() {
+    return (
+      <MuiThemeProvider>
+        <div>
+          <style dangerouslySetInnerHTML={{__html: stylesheet}}/>
+          <Header />
+          <div className="index_placeholder noselect">
+            <div className="index_placeholder__inner">
+              <div>
+                <Login />
+              </div>
             </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </MuiThemeProvider>
-  );
+      </MuiThemeProvider>
+    );
+  }
 }
 
 export default withReduxSaga(Index);

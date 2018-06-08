@@ -14,3 +14,5 @@ export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const SET_UPLOADABLE_IMAGE = 'SET_UPLOADABLE_IMAGE';
 export const CLEAN_ERROR_TEXT = 'CLEAN_ERROR_TEXT';
+export const SET_FIELD_VALUE = 'SET_FIELD_VALUE';
+
