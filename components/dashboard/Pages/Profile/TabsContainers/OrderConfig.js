@@ -90,6 +90,8 @@ class OrderConfig extends Component {
                   errorText={this.props.fieldsErrors.order_config_price_increment_multiplier}
                   hint="Quantity increment multiplier"
                 />
+              </div>
+              <div className="row margin-bt-30">
                 <div className="col-md-6">
                   <EmpalaCheckbox
                     id="order_config_verify_orders"
