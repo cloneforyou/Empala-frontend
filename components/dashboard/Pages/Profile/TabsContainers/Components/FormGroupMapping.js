@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EmpalaInput from '../../../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../../../registration/EmpalaSelect';
-import { setInputFieldValueById } from '../../../../../../actions/registration';
+import EmpalaCheckbox from '../../../../../registration/EmpalaCheckbox';
+import { setInputFieldValueById, toggleCheckboxById } from '../../../../../../actions/registration';
 
 class FormGroupMapping extends Component {
   constructor(props) {
@@ -31,6 +32,16 @@ class FormGroupMapping extends Component {
           hint={item.hint || item.label}
         />
       );
+    } else if (item.type && item.type === 'checkbox') {
+      return (
+        <EmpalaCheckbox
+          id={item.id}
+          key={item.id}
+          label={item.label}
+          handleCheck={this.props.toggleCheckboxById}
+          checked={this.props.checkboxes[item.id]}
+        />
+      )
     }
     return (
       <EmpalaInput
@@ -54,9 +65,11 @@ export default connect(
   state => ({
     registrationData: state.registration.registrationData,
     fieldsErrors: state.registration.fieldsErrors,
+    checkboxes: state.registration.checkboxes,
   }),
   (dispatch => ({
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+    toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
   })),
 )(FormGroupMapping);

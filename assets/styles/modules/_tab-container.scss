@@ -89,5 +89,12 @@
 .default-order {
   &__wrapper {
     padding-left: 20px;
+    width: 100%;
+  }
+  .check-container {
+    margin-left: 13px;
+    & > div {
+      marfin-botttom: 0;
+    }
   }
 }

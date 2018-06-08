@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import DefaultOrderForm from './DefaultOrderForm';
+import { fieldsDefaultOrderOptions } from '../../../../../../localdata/profileData'
 
 const styles = theme => ({
   root: {
@@ -62,7 +64,7 @@ class InsideVerticalTabBlock extends Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-
+    const listFieldsDefOrder = value === 1 ? fieldsDefaultOrderOptions : []
     return (
       <div className={classes.root + ' default-order'}>
         <Tabs
@@ -84,9 +86,7 @@ class InsideVerticalTabBlock extends Component {
           />
         </Tabs>
         <div className="default-order__wrapper">
-          {value === 0 && <div>One</div>}
-          {value === 1 && <div>Item Two</div>}
-          {value === 2 && <div>Item Three</div>}
+          <DefaultOrderForm list={listFieldsDefOrder} />
         </div>
       </div>
     );
