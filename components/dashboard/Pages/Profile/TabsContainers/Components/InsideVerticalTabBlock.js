@@ -64,7 +64,7 @@ class InsideVerticalTabBlock extends Component {
     const { value } = this.state;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root + ' default-order'}>
         <Tabs
           value={value}
           onChange={this.handleChange}
@@ -83,9 +83,11 @@ class InsideVerticalTabBlock extends Component {
             label="Forex"
           />
         </Tabs>
-        {value === 0 && <div>One</div>}
-        {value === 1 && <div>Item Two</div>}
-        {value === 2 && <div>Item Three</div>}
+        <div className="default-order__wrapper">
+          {value === 0 && <div>One</div>}
+          {value === 1 && <div>Item Two</div>}
+          {value === 2 && <div>Item Three</div>}
+        </div>
       </div>
     );
   }

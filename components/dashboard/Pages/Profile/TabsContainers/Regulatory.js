@@ -4,6 +4,7 @@ import EmpalaInput from '../../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import DatePickerField from '../../../../registration/DatePickerField';
 import Footer from './Components/Footer';
+import FormGroupMapping from './Components/FormGroupMapping';
 import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
@@ -16,45 +17,6 @@ class Regulatory extends Component {
     super(props);
   }
 
-  mappingComponent(item) {
-    let mask = '';
-    const phoneMask = '+9 999 999-9999';
-    if (item.id.includes('phone')) {
-      mask = phoneMask;
-    }
-
-    if (item.options) {
-      return (
-        <EmpalaSelect
-          id={item.id}
-          key={item.id}
-          options={item.options}
-          label={item.label}
-          value={this.props.registrationData[item.id] || ''}
-          handleChange={this.props.setSelectedValueById}
-          errorText={this.props.fieldsErrors[item.id]}
-          col={item.col}
-          hint={item.hint || item.label}
-        />
-      );
-    }
-    return (
-      <EmpalaInput
-        key={item.id}
-        id={item.id}
-        type={item.type}
-        label={item.label}
-        value={this.props.registrationData[item.id] || ''}
-        handleChange={this.props.setInputValueById}
-        errorText={this.props.fieldsErrors[item.id]}
-        placeholder={item.placeholder}
-        col={item.col}
-        mask={mask}
-        typeField={item.typeField}
-      />
-    );
-  }
-
   render() {
     return (
       <div className="tab-container">
@@ -63,13 +25,13 @@ class Regulatory extends Component {
             <div className="col-md-6">
               <h2 className="title-part">Employment</h2>
               <div className="row margin-bt-30">
-                {fieldsEmployment.map(item => this.mappingComponent(item))}
+                {fieldsEmployment.map(item => <FormGroupMapping key={item.id} item={item} />)}
               </div>
             </div>
             <div className="col-md-6">
               <h2 className="title-part">Trusted Contact Person</h2>
               <div className="row margin-bt-30">
-                {fieldsTrustedContactPerson.map(item => this.mappingComponent(item))}
+                {fieldsTrustedContactPerson.map(item => <FormGroupMapping key={item.id} item={item} />)}
               </div>
             </div>
           </div>
@@ -179,5 +141,6 @@ export default connect(
   (dispatch => ({
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
   })),
 )(Regulatory);

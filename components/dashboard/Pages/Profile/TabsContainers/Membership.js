@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import EmpalaInput from '../../../../registration/EmpalaInput';
-import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import Footer from './Components/Footer';
 import UploadImage from '../../../UploadImage';
+import FormGroupMapping from './Components/FormGroupMapping';
 import {
   fieldsMembership,
   fieldsResidentialAddress,
@@ -12,52 +11,12 @@ import {
   fieldsMemberPersonal,
   fieldResetPassword,
 } from '../../../../../localdata/profileData';
-import { setInputFieldValueById } from '../../../../../actions/registration';
 import avatar from '../../../../../static/images/avatar-user.svg';
 import { openModal } from '../../../../../actions/dashboard';
 
 class Membership extends Component {
   constructor(props) {
     super(props);
-  }
-
-  mappingComponent(item) {
-    let mask = '';
-    const phoneMask = '+9 999 999-9999';
-    if (item.id.includes('phone')) {
-      mask = phoneMask;
-    }
-
-    if (item.options) {
-      return (
-        <EmpalaSelect
-          id={item.id}
-          key={item.id}
-          options={item.options}
-          label={item.label}
-          value={this.props.registrationData[item.id] || ''}
-          handleChange={this.props.setSelectedValueById}
-          errorText={this.props.fieldsErrors[item.id]}
-          col={item.col}
-          hint={item.hint || item.label}
-        />
-      );
-    }
-    return (
-      <EmpalaInput
-        key={item.id}
-        id={item.id}
-        type={item.type}
-        label={item.label}
-        value={this.props.registrationData[item.id] || ''}
-        handleChange={this.props.setInputValueById}
-        errorText={this.props.fieldsErrors[item.id]}
-        placeholder={item.placeholder}
-        col={item.col}
-        mask={mask}
-        typeField={item.typeField}
-      />
-    );
   }
 
   render() {
@@ -68,13 +27,13 @@ class Membership extends Component {
             <div className="col-md-6">
               <h2 className="title-part">Membership</h2>
               <div className="row margin-bt-30">
-                {fieldsMembership.map(item => this.mappingComponent(item))}
+                {fieldsMembership.map(item => <FormGroupMapping item={item} />)}
               </div>
             </div>
             <div className="col-md-6">
               <div className="row">
                 <div className="col-lg-8">
-                  {fieldsMemberPersonal.map(item => this.mappingComponent(item))}
+                  {fieldsMemberPersonal.map(item => <FormGroupMapping item={item} />)}
                 </div>
                 <div className="col-lg-4 text-center">
                   <div
@@ -86,24 +45,24 @@ class Membership extends Component {
                   <button className="default-btn">Edit</button>
                 </div>
               </div>
-              {fieldResetPassword.map(item => this.mappingComponent(item))}
+              {fieldResetPassword.map(item => <FormGroupMapping item={item} />)}
             </div>
           </div>
           <div className="row margin-bt-30">
             <div className="col-md-6">
               <h2 className="title-part">Residential Address</h2>
               <div className="row margin-bt-30">
-                {fieldsResidentialAddress.map(item => this.mappingComponent(item))}
+                {fieldsResidentialAddress.map(item => <FormGroupMapping item={item} />)}
               </div>
               <h2 className="title-part">Personal Wealth</h2>
               <div className="row">
-                {fieldsPersonalWealth.map(item => this.mappingComponent(item))}
+                {fieldsPersonalWealth.map(item => <FormGroupMapping item={item} />)}
               </div>
             </div>
             <div className="col-md-6">
               <h2 className="title-part">Mailing Address</h2>
               <div className="row margin-bt-30">
-                {fieldsMaillingAddress.map(item => this.mappingComponent(item))}
+                {fieldsMaillingAddress.map(item => <FormGroupMapping item={item} />)}
               </div>
             </div>
           </div>
@@ -116,11 +75,6 @@ class Membership extends Component {
 }
 
 
-export default connect(state => ({
-  registrationData: state.registration.registrationData,
-  fieldsErrors: state.registration.fieldsErrors,
-}), (dispatch => ({
-    setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    showUploadDialog: () => dispatch(openModal()),
-  })))(Membership);
+export default connect(state => ({}), (dispatch => ({
+  showUploadDialog: () => dispatch(openModal()),
+})))(Membership);
