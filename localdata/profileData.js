@@ -399,9 +399,9 @@ export const fieldsMemberPersonal = [
 
 export const fieldResetPassword = [
   {
-    id: 'member_account_password_confirm',
+    id: 'member_account_password_reset',
     type: 'password',
-    label: 'Resset Password',
+    label: 'Reset Password',
   },
 ];
 
