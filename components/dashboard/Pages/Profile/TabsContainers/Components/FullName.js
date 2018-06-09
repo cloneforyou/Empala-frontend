@@ -21,7 +21,6 @@ class FullName extends Component {
   render() {
     const { field } = this.props;
     const { formIsOpen } = this.state;
-    console.log('formIsOpen -==> ', formIsOpen);
     return (
       <div className="name-edit col-12">
         <div className="name-edit__pseudo-input pseudo-input">
