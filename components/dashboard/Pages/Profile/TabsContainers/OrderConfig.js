@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import EmpalaCheckbox from '../../../../registration/EmpalaCheckbox';
 import Footer from './Components/Footer';
+import InsideVerticalTabBlock from './Components/InsideVerticalTabBlock';
 import {
   setInputFieldValueById,
   toggleCheckboxById,
@@ -58,7 +59,10 @@ class OrderConfig extends Component {
           </div>
           <div className="row margin-bt-30">
             <div className="col-md-6">
-              <div className="row margin-bt-30" />
+              <div className="block-editable">
+                <h2 className="title-part">Default Order</h2>
+                <InsideVerticalTabBlock />
+              </div>
             </div>
             <div className="col-md-6">
               <div className="row margin-bt-30">

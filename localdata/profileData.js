@@ -399,9 +399,9 @@ export const fieldsMemberPersonal = [
 
 export const fieldResetPassword = [
   {
-    id: 'member_account_password_confirm',
+    id: 'member_account_password_reset',
     type: 'password',
-    label: 'Resset Password',
+    label: 'Reset Password',
   },
 ];
 
@@ -686,3 +686,71 @@ export const fieldsInvestmentExperienceTwo = [
     autoWidth: true,
   },
 ];
+
+export const fieldsDefaultOrderOptions =  [
+  {
+    id: 'default_order_options_type',
+    label: 'Order type',
+    options: [
+      {
+        value: 'Individual',
+        title: 'Individual',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'default_order_options_quantity',
+    label: 'Quantity',
+    options: [
+      {
+        value: '100',
+        title: '100',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'default_order_options_duration',
+    label: 'Duration',
+    options: [
+      {
+        value: 'Day',
+        title: 'Day',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'default_order_options_checkbox',
+    label: 'All or none',
+    type: 'checkbox',
+  },
+  {
+    id: 'default_order_options_exchange',
+    label: 'Exchange',
+    options: [
+      {
+        value: 'Day',
+        title: 'Day',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'default_order_options_spreads',
+    label: 'Spreads',
+    options: [
+      {
+        value: 'Day',
+        title: 'Day',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+]
