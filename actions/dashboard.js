@@ -6,9 +6,20 @@ import {
   GET_USER_DATA_SUCCESS,
   REFRESH_TOKEN_REQUEST,
   START_WEBSOCKET,
-  SET_ACTIVE_PAGE, CLEAN_IMAGE_DATA, UPLOAD_IMAGE_REQUEST, OPEN_MODAL, CLOSE_MODAL, SET_UPLOADABLE_IMAGE,
-  UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_SUCCESS, CLEAN_ERROR_TEXT,
+  SET_ACTIVE_PAGE,
+  CLEAN_IMAGE_DATA,
+  UPLOAD_IMAGE_REQUEST,
+  OPEN_MODAL,
+  CLOSE_MODAL,
+  SET_UPLOADABLE_IMAGE,
+  UPLOAD_IMAGE_FAIL,
+  UPLOAD_IMAGE_SUCCESS,
+  CLEAN_ERROR_TEXT,
+  DELETE_ACCOUNT_REQUEST,
+  DELETE_ACCOUNT_FAIL,
+  DELETE_ACCOUNT_SUCCESS, LOGOUT,
 } from '../constants/dashboard';
+import {SET_FIELD_VALUE} from "../constants/registration";
 
 export function collapseSidebar(bool) {
   return {
@@ -92,8 +103,9 @@ export const uploadImageSuccess = () => ({
   type: UPLOAD_IMAGE_SUCCESS,
 });
 
-export const openModal = () => ({
+export const openModal = name => ({
   type: OPEN_MODAL,
+  name,
 });
 
 export const closeModal = () => ({
@@ -102,4 +114,29 @@ export const closeModal = () => ({
 
 export const cleanErrorText = () => ({
   type: CLEAN_ERROR_TEXT,
+});
+
+export function setInputFieldValueById(id, value) {
+  return {
+    type: SET_FIELD_VALUE,
+    id,
+    value,
+  };
+}
+
+export const deleteAccount = () => ({
+  type: DELETE_ACCOUNT_REQUEST,
+});
+
+export const deleteAccountFail = err => ({
+  type: DELETE_ACCOUNT_FAIL,
+  err,
+});
+
+export const deleteAccountSuccess = () => ({
+  type: DELETE_ACCOUNT_SUCCESS,
+});
+
+export const logout = () => ({
+  type: LOGOUT,
 });

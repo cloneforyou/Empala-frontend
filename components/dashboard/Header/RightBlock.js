@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import DropdownMenu from './DropdownMenu';
 import avatar from '../../../static/images/avatar-user.svg';
+import {logout} from "../../../actions/dashboard";
 
-class RightBlock extends Component {
+export default class RightBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +17,7 @@ class RightBlock extends Component {
 
   closeMenu = () => {
     this.setState({ menuAvatarShow: false })
-  }
+  };
 
   render() {
     const { menuAvatarShow } = this.state;
@@ -37,16 +38,17 @@ class RightBlock extends Component {
             <button
               className="nav-link user-nav__dropdown-btn"
               onClick={this.toggleMenu}
-              onBlur={this.closeMenu}
+              // onBlur={this.closeMenu}
             >
               <img src={avatar} alt="" />
             </button>
-            <DropdownMenu menuAvatarShow={menuAvatarShow}/>
+            <DropdownMenu
+              closeMenu = {this.closeMenu}
+              menuAvatarShow={menuAvatarShow}
+            />
           </li>
         </ul>
       </div>
     )
   }
 }
-
-export default RightBlock

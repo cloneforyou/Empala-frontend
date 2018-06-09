@@ -18,7 +18,7 @@ export function* authenticate() {
   };
   try {
     const result = yield call(request, url, options);
-    console.log(' ** ', result);
+    // console.log(' ** ', result);
     yield put(loginSuccess());
     localStorage.setItem('accessToken', result.data.data.tokens.access);
     localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
@@ -47,7 +47,29 @@ export function* refreshTokens() {
     window.location.assign('/dashboard');
   } catch (err) {
     console.log(' ** ', err);
-    location.assign('/');
+    window.location.assign('/');
+    localStorage.removeItem('refreshToken');
+  }
+}
+
+export function* logout() {
+  const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  const url = '/api/auth/logout';
+  const options = {
+    headers: {
+      'x-access-token': accessToken,
+      'x-refresh-token': refreshToken,
+    },
+    method: 'GET',
+  };
+  try {
+    const result = yield call(request, url, options);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    window.location.assign('/');
+  } catch (err) {
+    console.log(err.message);
   }
 }
 
@@ -60,15 +82,16 @@ export function* getUserData() {
       'X-Refresh-Token': localStorage.getItem('refreshToken'),
     },
   };
-
   try {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
   } catch (err) {
     // console.log(' ** DASHBOARD ERROR =======>', err);
     if (err.message === 'Missing refresh token' || err.message === 'Refresh token expired') {
+      localStorage.removeItem('refreshToken');
       window.location.assign('/');
     } else if (err.message === 'Missing access token' || err.message === 'Token expired') {
+      localStorage.removeItem('accessToken');
       yield refreshTokens();
     }
   }
