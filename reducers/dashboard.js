@@ -4,7 +4,7 @@ import {
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS, OPEN_MODAL,
   SET_ACTIVE_PAGE, SET_UPLOADABLE_IMAGE, UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_REQUEST, UPLOAD_IMAGE_SUCCESS,
-  SET_FIELD_VALUE,
+  SET_FIELD_VALUE, DELETE_ACCOUNT_REQUEST, DELETE_ACCOUNT_FAIL, DELETE_ACCOUNT_SUCCESS,
 } from '../constants/dashboard';
 
 const initialState = {
@@ -61,6 +61,7 @@ function dashboard(state = initialState, action) {
         uploadableImage: false,
       };
     case UPLOAD_IMAGE_REQUEST:
+    case DELETE_ACCOUNT_REQUEST:
       return {
         ...state,
         loading: true,
@@ -71,7 +72,15 @@ function dashboard(state = initialState, action) {
         loading: false,
         modalOpen: false,
       };
+    case DELETE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        modalOpen: false,
+        error: '',
+      };
     case UPLOAD_IMAGE_FAIL:
+    case DELETE_ACCOUNT_FAIL:
       return {
         ...state,
         loading: false,
@@ -95,7 +104,6 @@ function dashboard(state = initialState, action) {
         error: false,
       };
     case SET_FIELD_VALUE:
-      console.log("======000", action)
       return {
         ...state,
         [action.id]: action.value,

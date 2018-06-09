@@ -23,7 +23,7 @@ export default function request(url, options = {}) {
     }
     return false;
   }
-  // console.log('------------------------------', url, options)
+  console.log('------------------------------', url, options)
   return axios({
     method: options.method,
     url: `${serverOrigins.local}${url}`,
@@ -33,7 +33,7 @@ export default function request(url, options = {}) {
     mode: 'cors',
     withCredentials: true,
   })
-    .then(response => (response))
+    .then(response => response)
     .catch((err) => {
       // console.log(' *** ------------> SERVER RESPOND ERROR', JSON.stringify(err));
       const error = setErrorText(err);

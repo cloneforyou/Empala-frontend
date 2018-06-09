@@ -47,8 +47,29 @@ export function* refreshTokens() {
     window.location.assign('/dashboard');
   } catch (err) {
     console.log(' ** ', err);
-    location.assign('/');
+    window.location.assign('/');
     localStorage.removeItem('refreshToken');
+  }
+}
+
+export function* logout() {
+  const accessToken = localStorage.getItem('accessToken');
+  const refreshToken = localStorage.getItem('refreshToken');
+  const url = '/api/auth/logout';
+  const options = {
+    headers: {
+      'x-access-token': accessToken,
+      'x-refresh-token': refreshToken,
+    },
+    method: 'GET',
+  };
+  try {
+    const result = yield call(request, url, options);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    window.location.assign('/');
+  } catch (err) {
+    console.log(err.message);
   }
 }
 
