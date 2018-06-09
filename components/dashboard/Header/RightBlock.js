@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DropdownMenu from './DropdownMenu';
 import avatar from '../../../static/images/avatar-user.svg';
-import {logout} from "../../../actions/dashboard";
 
 export default class RightBlock extends Component {
   constructor(props) {
@@ -38,7 +37,7 @@ export default class RightBlock extends Component {
             <button
               className="nav-link user-nav__dropdown-btn"
               onClick={this.toggleMenu}
-              // onBlur={this.closeMenu}
+              // onBlur={() => setTimeout(this.closeMenu, 100)}
             >
               <img src={avatar} alt="" />
             </button>

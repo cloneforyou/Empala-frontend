@@ -1,12 +1,21 @@
-import { call, put, takeLatest, select, takeEvery, all } from 'redux-saga/effects';
+import {
+  call,
+  put,
+  select,
+} from 'redux-saga/effects';
 import request from '../utils/request';
 import { setUserData } from '../actions/dashboard';
-import {loginFailed, loginSuccess} from "../actions/login";
+import {
+  cleanErrorMessage,
+  loginFailed,
+  loginSuccess,
+  setAccountBlocked,
+} from '../actions/auth';
 
 
 export function* authenticate() {
-  const email = yield select(state => state.reducer.index_username);
-  const password = yield select(state => state.reducer.index_password);
+  const email = yield select(state => state.auth.index_username);
+  const password = yield select(state => state.auth.index_password);
   console.log(' ** AUTH', email, password);
   const url = '/api/auth/login';
   const options = {
@@ -16,16 +25,21 @@ export function* authenticate() {
       password,
     },
   };
-  try {
-    const result = yield call(request, url, options);
-    // console.log(' ** ', result);
-    yield put(loginSuccess());
-    localStorage.setItem('accessToken', result.data.data.tokens.access);
-    localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
-    window.location.assign('/dashboard');
-  } catch (err) {
-    // console.log(' ** ', err);
-    yield put(loginFailed(err.message));
+  if (email && password) {
+    try {
+      const result = yield call(request, url, options);
+      // console.log(' ** ', result);
+      yield put(loginSuccess());
+      localStorage.setItem('accessToken', result.data.data.tokens.access);
+      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+      window.location.assign('/dashboard');
+    } catch (err) {
+      console.log(' ** ', err);
+      if (err.message === 'Account suspended') {
+        yield put(setAccountBlocked());
+        yield put(cleanErrorMessage());
+      } else yield put(loginFailed(err.message));
+    }
   }
 }
 
@@ -97,3 +111,30 @@ export function* getUserData() {
   }
 }
 
+export function* unblockAccount() {
+  const email = yield select(state => state.auth.index_email);
+  const code = yield select(state => state.auth.index_activation_code);
+  console.log(' ** UNBLOCK', email, code);
+  const url = '/api/auth/unblock';
+  const options = {
+    method: 'POST',
+    data: {
+      email,
+      code,
+    },
+  };
+  if (email && code) {
+    try {
+      const result = yield call(request, url, options);
+      // console.log(' ** ', result);
+      yield put(loginSuccess());
+      yield put(cleanErrorMessage());
+      localStorage.setItem('accessToken', result.data.data.tokens.access);
+      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+      window.location.assign('/dashboard');
+    } catch (err) {
+      // console.log(' ** ', err);
+      yield put(loginFailed(err.message));
+    }
+  }
+}

@@ -18,6 +18,11 @@ export default function request(url, options = {}) {
         return new Error('Refresh token expired');
       } else if (err.response.data.info === 'ACCESS_DENIED' || err.response.data.info === 'WRONG_CREDENTIALS') {
         return new Error('Invalid credentials');
+      } else if (err.response.data.info === 'ACCOUNT_SUSPENDED' &&
+        err.response.data.misc === 'MAX_AUTH_FAILS') {
+        return new Error('Account suspended');
+      } else if (err.response.data.info === 'INVALID_ACTIVATION_CODE') {
+        return new Error('Invalid activation code');
       }
       return false;
     }
