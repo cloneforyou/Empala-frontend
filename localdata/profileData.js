@@ -9,7 +9,7 @@ export const fieldsFullName = [
     id: 'member_basic_information_prefix',
     hint: 'Select',
     label: 'Prefix',
-    col: 2,
+    col: 3,
     options: [
       {
         value: 'Mr',
@@ -34,20 +34,34 @@ export const fieldsFullName = [
     type: 'text',
     label: 'First name',
     placeholder: '',
-    col: 4,
+    col: 6,
+  },
+  {
+    id: 'member_basic_information_middle_name',
+    type: 'text',
+    label: 'Middle name',
+    placeholder: '',
+    col: 3,
+  },
+  {
+    id: 'member_basic_information_second_middle_name',
+    type: 'text',
+    label: 'Middle name 2',
+    placeholder: '',
+    col: 3,
   },
   {
     id: 'member_basic_information_last_name',
     type: 'text',
     label: 'Last name',
     placeholder: '',
-    col: 4,
+    col: 6,
   },
   {
     id: 'member_basic_information_suffix',
     label: 'Suffix',
     hint: 'Select',
-    col: 2,
+    col: 3,
     options: [
       {
         value: ' ',
