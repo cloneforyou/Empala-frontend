@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import EmpalaInput from '../../../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../../../registration/EmpalaSelect';
 import EmpalaCheckbox from '../../../../../registration/EmpalaCheckbox';
+import FullName from './FullName';
 import { setInputFieldValueById, toggleCheckboxById } from '../../../../../../actions/registration';
 
 class FormGroupMapping extends Component {
@@ -41,6 +42,10 @@ class FormGroupMapping extends Component {
           handleCheck={this.props.toggleCheckboxById}
           checked={this.props.checkboxes[item.id]}
         />
+      )
+    } else if (item.label === 'Full name') {
+      return (
+        <FullName field={item} />
       )
     }
     return (
