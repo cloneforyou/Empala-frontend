@@ -4,12 +4,12 @@ import { getValuesForSelectField } from '../utils/registrationUtils';
 
 const usStates = getValuesForSelectField(usStatesList);
 
-export const fieldsMembership = [
+export const fieldsFullName = [
   {
     id: 'member_basic_information_prefix',
-    hint: 'Please select',
+    hint: 'Select',
     label: 'Prefix',
-    col: 2,
+    col: 4,
     options: [
       {
         value: 'Mr',
@@ -34,6 +34,27 @@ export const fieldsMembership = [
     type: 'text',
     label: 'First name',
     placeholder: '',
+    col: 8,
+  },
+  {
+    id: 'member_basic_information_middle_name',
+    type: 'text',
+    label: 'Middle name',
+    placeholder: '',
+    col: 4,
+  },
+  {
+    id: 'member_basic_information_second_middle_name',
+    type: 'text',
+    label: 'Middle name 2',
+    placeholder: '',
+    col: 4,
+  },
+  {
+    id: 'member_basic_information_second_middle_name',
+    type: 'text',
+    label: 'Middle name 2',
+    placeholder: '',
     col: 4,
   },
   {
@@ -41,18 +62,14 @@ export const fieldsMembership = [
     type: 'text',
     label: 'Last name',
     placeholder: '',
-    col: 4,
+    col: 8,
   },
   {
     id: 'member_basic_information_suffix',
+    hint: 'Select',
     label: 'Suffix',
-    hint: 'Please select',
-    col: 2,
+    col: 4,
     options: [
-      {
-        value: ' ',
-        title: ' ',
-      },
       {
         value: 'Jr',
         title: 'Jr',
@@ -70,6 +87,15 @@ export const fieldsMembership = [
         title: 'III',
       },
     ],
+  },
+]
+
+export const fieldsMembership = [
+  {
+    id: 'member_basic_information_full_name',
+    type: 'text',
+    label: 'Full name',
+    placeholder: '',
   },
   {
     id: 'member_account_email',
@@ -201,21 +227,21 @@ export const fieldsResidentialAddress = [
 
 export const fieldsMaillingAddress = [
   {
-    id: 'identity_residential_address_residential_address_line_1',
+    id: 'identity_mailing_address_line_1',
     field: 'input',
     label: 'Address line 1',
     type: 'text',
     placeholder: '',
   },
   {
-    id: 'identity_residential_address_residential_address_line_2',
+    id: 'identity_mailing_address_line_2',
     field: 'input',
     label: 'Address line 2',
     type: 'text',
     placeholder: '',
   },
   {
-    id: 'identity_residential_address_residential_address_city',
+    id: 'identity_mailing_address_city',
     hint: 'Please select',
     field: 'input',
     label: 'City',
@@ -224,14 +250,14 @@ export const fieldsMaillingAddress = [
   {
     field: 'input',
     label: 'Zip code',
-    id: 'identity_zip_code',
+    id: 'identity__mailing_address_zip_code',
     type: 'text',
     typeField: 'numberField',
     placeholder: '',
     col: 6,
   },
   {
-    id: 'identity_residential_address_residential_address_state',
+    id: 'identity_mailing_address_state',
     hint: 'Please select',
     field: 'select',
     label: 'State',
@@ -240,7 +266,7 @@ export const fieldsMaillingAddress = [
     col: 6,
   },
   {
-    id: 'identity_residential_address_residential_address_country',
+    id: 'identity_mailing_address_country',
     hint: 'Please select',
     field: 'select',
     label: 'Country',
@@ -635,6 +661,7 @@ export const fieldsInvestmentExperienceOne = [
   },
 
 ];
+
 export const fieldsInvestmentExperienceTwo = [
   {
     id: 'investment_experience_cryptocurrencies',
@@ -687,7 +714,7 @@ export const fieldsInvestmentExperienceTwo = [
   },
 ];
 
-export const fieldsDefaultOrderOptions =  [
+export const fieldsDefaultOrderOptions = [
   {
     id: 'default_order_options_type',
     label: 'Order type',

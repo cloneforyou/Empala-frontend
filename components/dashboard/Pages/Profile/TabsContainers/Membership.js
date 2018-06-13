@@ -25,9 +25,9 @@ class Membership extends Component {
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
+          <h2 className="title-part">Membership</h2>
           <div className="row">
             <div className="col-md-6">
-              <h2 className="title-part">Membership</h2>
               <div className="row margin-bt-30">
                 {fieldsMembership.map(item => <FormGroupMapping item={item} />)}
               </div>

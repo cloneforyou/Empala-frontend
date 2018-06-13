@@ -1,0 +1,35 @@
+.name-edit {
+  transition: .3s;
+  &__form {
+    transition: .3s;
+    height: 203px;
+    &_close {
+      height: 0;
+      transition: .3s;
+      .registration-group {
+        transition: .4s;
+        height: 0;
+        opacity: 0;
+        z-Index: -2;
+      }
+    }
+  }
+}
+
+.pseudo-input {
+  height: 65px;
+  &__label {
+    color: $green;
+    font-size: 12px;
+  }
+  &__input {
+    border: none;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: none;
+    width: 100%;
+    display: block;
+    padding: 12px 0 0;
+    cursor: text;
+    color: $main-color-text-grey;
+  }
+}
