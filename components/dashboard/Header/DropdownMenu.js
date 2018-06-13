@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import avatar from '../../../static/images/avatar-user.svg';
+import { logout } from '../../../actions/dashboard';
 
 const DropdownMenu = (props) => {
   const { menuAvatarShow } = props;
@@ -34,8 +36,19 @@ const DropdownMenu = (props) => {
         <li className="profile-menu__item"><a href="">Order Mgt Defaults</a></li>
         <li className="profile-menu__item"><a href="">Notifications</a></li>
       </ul>
-      <button className="profile-menu__logout-btn">Sign Out</button>
+      <button
+        className="profile-menu__logout-btn"
+        onClick={props.logout}
+      >Sign Out
+      </button>
     </div>
   );
 };
-export default DropdownMenu;
+export default connect(
+  state => ({}),
+  dispatch => (
+    {
+      logout: () => dispatch(logout()),
+    }
+  ),
+)(DropdownMenu);

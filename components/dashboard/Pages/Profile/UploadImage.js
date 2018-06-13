@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import {cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage} from '../../actions/dashboard';
-import {ALTO, GREEN, TORCH_RED, WHITE} from "../../constants/colors";
+import {cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage} from '../../../../actions/dashboard';
+import {ALTO, GREEN, TORCH_RED, WHITE} from "../../../../constants/colors";
 
 const style = {
   chooseBtn: {
@@ -135,7 +135,7 @@ class UploadImage extends PureComponent {
 const mapStateToProps = state => (
   {
     image: state.dashboard.uploadableImage,
-    modalOpen: state.dashboard.modalOpen,
+    modalOpen: state.dashboard.modalOpen && state.dashboard.openModalName === 'uploadImage',
     errorText: state.dashboard.error,
   }
 );
