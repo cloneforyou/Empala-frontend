@@ -72,18 +72,18 @@ class FinalReviewPage extends PureComponent {
                     value={data.member_account_contact_phone || empty}
                   />
                   <FieldComponent
-                    col={3}
-                    label="Membership no."
+                    col={6}
+                    label="Member no."
                     value={data.member_account_account_no || empty}
                   />
                   <FieldComponent
-                    col={3}
+                    col={6}
                     label="Account type"
                     value={data.member_account_account_type || empty}
                   />
                   <FieldComponent
                     col={6}
-                    label="Country"
+                    label="Country of citizenship"
                     value={data.member_basic_information_residence || empty}
                   />
                 </div>
@@ -442,23 +442,23 @@ class FinalReviewPage extends PureComponent {
                   />
                   <FieldComponent
                     col={6}
-                    label="Private Equity"
-                    value={data.investment_experience_private_equity + (data.investment_experience_private_equity !== 'None' ? ' years' : '') || empty}
-                  />
-                  <FieldComponent
-                    col={6}
-                    label="Margin accounts"
-                    value={data.investment_experience_margin_accounts + (data.investment_experience_margin_accounts !== 'None' ? ' years' : '') || empty}
-                  />
-                  <FieldComponent
-                    col={6}
                     label="Borrowing money"
                     value={data.investment_experience_borrowing_money + (data.investment_experience_borrowing_money !== 'None' ? ' years' : '') || empty}
                   />
                   <FieldComponent
                     col={6}
+                    label="Private Equity"
+                    value={data.investment_experience_private_equity + (data.investment_experience_private_equity !== 'None' ? ' years' : '') || empty}
+                  />
+                  <FieldComponent
+                    col={6}
                     label="Lending money"
                     value={data.investment_experience_lending_money + (data.investment_experience_lending_money !== 'None' ? ' years' : '') || empty}
+                  />
+                  <FieldComponent
+                    col={6}
+                    label="Margin accounts"
+                    value={data.investment_experience_margin_accounts + (data.investment_experience_margin_accounts !== 'None' ? ' years' : '') || empty}
                   />
                   <FieldComponent
                     col={6}
