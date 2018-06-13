@@ -1210,6 +1210,8 @@ export const widgetsCash = [
     title: 'Currency and money markets fund balance',
     col: 12,
     height: 'auto',
+    localFX: true,
+    dots: true,
     tables: [
       {
         id: uniqueId(),

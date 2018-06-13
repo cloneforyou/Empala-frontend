@@ -4,11 +4,24 @@ import WidgetDotsMenu from './WidgetDotsMenu';
 class WidgetHead extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {
+      fxButtonContent: 'Local',
+    }
+  }
+
+  toggleFX = () => {
+    this.setState((prevState) => {
+      if (prevState.fxButtonContent === 'Local') {
+        return { fxButtonContent: 'Active' };
+      }
+      return { fxButtonContent: 'Local' };
+    })
   }
 
 
   render() {
     const { widget } = this.props;
+    const { fxButtonContent } = this.state;
     return (
       <div className="widget__head">
         <div className="widget__title-row">
@@ -19,12 +32,15 @@ class WidgetHead extends PureComponent {
         </div>
         <div className="widget__row-buttons">
           {
-            widget.localFX && <button className="btn-widget-head btn-widget-head_green">Local FX</button>
+            widget.localFX &&
+            <button
+              className="btn-widget-head btn-widget-head_green"
+              onClick={this.toggleFX}
+            >{fxButtonContent} FX</button>
           }
           {
             widget.dots && <WidgetDotsMenu />
           }
-
         </div>
 
       </div>
