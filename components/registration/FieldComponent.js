@@ -7,7 +7,7 @@ const FieldComponent = props => (
     <div className="frc-block__field-label">
       {props.label}
     </div>
-    <div className="frc-block__field-value">
+    <div className="frc-block__field-value text-truncate">
       {typeof props.value === 'object' ? JSON.stringify(props.value) : props.value}
     </div>
   </div>
