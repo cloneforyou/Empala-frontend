@@ -9,6 +9,8 @@ import {
   cleanErrorMessage,
   loginFailed,
   loginSuccess,
+  sendActivationLinkFailed,
+  sendActivationLinkSuccess,
   setAccountBlocked,
 } from '../actions/auth';
 
@@ -111,30 +113,47 @@ export function* getUserData() {
   }
 }
 
-export function* unblockAccount() {
-  const email = yield select(state => state.auth.index_email);
-  const code = yield select(state => state.auth.index_activation_code);
-  console.log(' ** UNBLOCK', email, code);
-  const url = '/api/auth/unblock';
+export function* unblockAccount({code}) {
+  console.log(' ** UNBLOCK', code);
+  const url = '/api/auth/unblock/verify';
   const options = {
     method: 'POST',
     data: {
-      email,
       code,
     },
   };
-  if (email && code) {
+  if (code) {
     try {
       const result = yield call(request, url, options);
       // console.log(' ** ', result);
       yield put(loginSuccess());
       yield put(cleanErrorMessage());
-      localStorage.setItem('accessToken', result.data.data.tokens.access);
-      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
-      window.location.assign('/dashboard');
     } catch (err) {
       // console.log(' ** ', err);
       yield put(loginFailed(err.message));
+    }
+  }
+}
+
+export function* sendActivationLink() {
+  const email = yield select(state => state.auth.index_email);
+  console.log(' ** SEND Link', email);
+  const url = '/api/auth/unblock/send';
+  const options = {
+    method: 'POST',
+    data: {
+      email,
+    },
+  };
+  if (email) {
+    try {
+      const result = yield call(request, url, options);
+      // console.log(' ** ', result);
+      yield put(sendActivationLinkSuccess());
+      yield put(cleanErrorMessage());
+    } catch (err) {
+      // console.log(' ** ', err);
+      yield put(sendActivationLinkFailed(err.message));
     }
   }
 }

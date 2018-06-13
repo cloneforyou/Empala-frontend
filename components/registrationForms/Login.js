@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import Link from 'next/link';
 import FlatButton from 'material-ui/FlatButton';
 import EmpalaInput from '../registration/EmpalaInput';
-import { GREEN, WHITE } from '../../constants/colors';
+import { GREEN, TORCH_RED, WHITE } from '../../constants/colors';
 import { setInputFieldValueById } from '../../actions/registration';
-import { loginRequest, unblockAccountInit } from "../../actions/auth";
+import { loginRequest, sendActivationLink, unblockAccountInit } from '../../actions/auth';
 
 
 const style = {
@@ -33,40 +33,49 @@ const style = {
     fontStyle: 'oblique',
     fontWeight: 'bolder',
   },
+  errorText: {
+    color: TORCH_RED,
+    fontWeight: 'bolder',
+  },
 };
 
-const SuspendedForm = props => (
-  <div style={style.warningTextBlock}>
-    <h2>Security warning</h2>
-    <p>Too many failed login attempts has been received from your account.</p>
-    <p>Account will be suspended until <span style={style.markedText}>activation code</span> been provided. We sent you email, containing that code.
-      Please check your e-mail for details.
-    </p>
-    <p>To activate your account type <span style={style.markedText}>e-mail</span> and <span style={style.markedText}>activation code</span> in fields below.
-    </p>
+const ConfirmationText = (props) => {
+  if (props.linkSent) return <p>Please check your e-mail for details.</p>;
+  if (props.errorText) {
+    return <p><span style={style.errorText}>Sorry, an error occurs when sending activation link</span></p>;
+  }
+  return (
     <form>
+      Please type your account e-mail below.
       <EmpalaInput
         key="index_email"
         id="index_email"
         type="text"
         label="E-mail"
-        handleChange={e => props.setInputValueById(e)}
-      />
-      <EmpalaInput
-        key="index_activation_code"
-        id="index_activation_code"
-        type="text"
-        label="Activation code"
-        handleChange={e => props.setInputValueById(e)}
-        errorText={props.errorText}
+        handleChange={props.setInputValueById}
       />
       <FlatButton
-        label="Unblock account"
+        label="Send a link"
         style={{ ...style.loginBtn, width: 'auto', padding: '0 5px' }}
         labelStyle={style.labelLoginBtn}
-        onClick={props.unblockAccount}
+        onClick={props.sendActivationLink}
       />
     </form>
+  );
+}
+
+const SuspendedForm = props => (
+  /* Text is a sample */
+  <div style={style.warningTextBlock}>
+    <h2>Security warning</h2>
+    <p>Too many failed login attempts has been received from your account.</p>
+    <p>Account is been suspended for a while. We can send you email, containing <span style={style.markedText}>activation link</span>.
+    </p>
+
+    <div>
+      <ConfirmationText {...props} />
+    </div>
+
   </div>
 );
 
@@ -111,10 +120,12 @@ export default connect(
   state => ({
     errorText: state.auth.loginError,
     accountSuspended: state.auth.isBlocked,
+    linkSent: state.auth.linkSent,
   }),
   dispatch => ({
     handleLogin: () => dispatch(loginRequest()),
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     unblockAccount: () => dispatch(unblockAccountInit()),
+    sendActivationLink: () => dispatch(sendActivationLink()),
   }),
 )(Login);

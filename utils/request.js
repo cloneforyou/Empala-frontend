@@ -23,12 +23,14 @@ export default function request(url, options = {}) {
         return new Error('Account suspended');
       } else if (err.response.data.info === 'INVALID_ACTIVATION_CODE') {
         return new Error('Invalid activation code');
+      } else if (err.response.data.info === 'WRONG_VERIFICATION_CODE') {
+        return new Error('Wrong verification code');
       }
       return false;
     }
     return false;
   }
-  console.log('------------------------------', url, options)
+  // console.log('------------------------------', url, options)
   return axios({
     method: options.method,
     url: `${serverOrigins.local}${url}`,
