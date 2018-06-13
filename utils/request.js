@@ -30,10 +30,11 @@ export default function request(url, options = {}) {
     }
     return false;
   }
+
   // console.log('------------------------------', url, options)
   return axios({
     method: options.method,
-    url: `${serverOrigins.local}${url}`,
+    url: `${serverOrigins.aws}${url}`,
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,

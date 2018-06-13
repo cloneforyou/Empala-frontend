@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from './Table';
+import WidgetHead from './WidgetHead';
 
 class WidgetTable extends Component {
   constructor(props) {
@@ -11,12 +12,7 @@ class WidgetTable extends Component {
     return (
       <div className={`widget-col col-lg-${widget.col}`} key={widget.id}>
         <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
-          <div className="widget__head">
-            {
-              widget.icon && <i className={`widget__icon widget__icon_${widget.icon}`} />
-            }
-            <h3 className="widget__title">{widget.title}</h3>
-          </div>
+          <WidgetHead widget={widget} />
           <div className="widget__body">
             {
               widget.title === 'Environmental capital' ?
