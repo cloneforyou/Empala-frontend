@@ -14,7 +14,13 @@ class Table extends Component {
           <thead>
           <tr className="emp-table__tr">
             {table.headers.map((header, i) => (
-              <th scope="col" className="emp-table__th" key={Math.random()}>{header.title}</th>
+              <th scope="col"
+                  className="emp-table__th"
+                  key={Math.random()}
+                  style={{ width: header.width || 'auto' }}
+              >
+                {header.title}
+              </th>
             ))}
           </tr>
           </thead>
@@ -53,7 +59,8 @@ class Table extends Component {
                         )
                       } else {
                         return (
-                          <td className="emp-table__td" key={Math.random()}>{item}</td>
+                          <td className="emp-table__td" key={Math.random()}
+                              style={{ widht: item.width || 'auto' }}>{item}</td>
                         );
                       }
                     }

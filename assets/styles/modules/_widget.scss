@@ -5,6 +5,9 @@
 
   &__head {
     padding: 25px 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   &__icon {
@@ -37,6 +40,13 @@
     overflow-y: auto;
     max-height: 90%;
   }
+  &__row-buttons {
+    display: flex;
+    align-items: end;
+    & > button:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
   &_padding {
     padding: 25px 15px;
     .widget__head {
@@ -59,9 +69,6 @@
 
 .widget-menu {
   position: relative;
-  float: right;
-  margin-top: -20px;
-  margin-right: 13px;
   &__btn {
     background: none;
     border: none;
@@ -82,5 +89,17 @@
   }
   &__list {
 
+  }
+}
+
+.btn-widget-head {
+  @include button-reset;
+  @include fontSize(12px);
+  border-radius: 30px;
+  transition: .3s;
+  padding: 3px 10px;
+  &_green {
+    color: $white;
+    background: $green;
   }
 }

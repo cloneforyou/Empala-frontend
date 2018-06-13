@@ -51,9 +51,9 @@ export const fieldsFullName = [
     col: 4,
   },
   {
-    id: 'member_basic_information_second_middle_name',
+    id: 'member_basic_information_third_middle_name',
     type: 'text',
-    label: 'Middle name 2',
+    label: 'Middle name 3',
     placeholder: '',
     col: 4,
   },
