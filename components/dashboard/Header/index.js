@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import RightBlock from './RightBlock';
 import Search from './Search';
-import logo from '../../../static/images/logo.png';
+import logo from '../../../static/images/logo.svg';
 import iconLogo from '../../../static/images/dashboard-icons/icon-logo.svg';
 
 class Header extends Component {

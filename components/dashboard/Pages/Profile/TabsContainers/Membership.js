@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Footer from './Components/Footer';
 import UploadImage from '../UploadImage';
-import UploadImage from '../../../UploadImage';
 import FormGroupMapping from './Components/FormGroupMapping';
 import {
   fieldsMembership,
