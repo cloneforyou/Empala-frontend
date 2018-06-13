@@ -9,7 +9,7 @@ export const fieldsFullName = [
     id: 'member_basic_information_prefix',
     hint: 'Select',
     label: 'Prefix',
-    col: 3,
+    col: 4,
     options: [
       {
         value: 'Mr',
@@ -34,39 +34,42 @@ export const fieldsFullName = [
     type: 'text',
     label: 'First name',
     placeholder: '',
-    col: 6,
+    col: 8,
   },
   {
     id: 'member_basic_information_middle_name',
     type: 'text',
     label: 'Middle name',
     placeholder: '',
-    col: 3,
+    col: 4,
   },
   {
     id: 'member_basic_information_second_middle_name',
     type: 'text',
     label: 'Middle name 2',
     placeholder: '',
-    col: 3,
+    col: 4,
+  },
+  {
+    id: 'member_basic_information_second_middle_name',
+    type: 'text',
+    label: 'Middle name 2',
+    placeholder: '',
+    col: 4,
   },
   {
     id: 'member_basic_information_last_name',
     type: 'text',
     label: 'Last name',
     placeholder: '',
-    col: 6,
+    col: 8,
   },
   {
     id: 'member_basic_information_suffix',
-    label: 'Suffix',
     hint: 'Select',
-    col: 3,
+    label: 'Suffix',
+    col: 4,
     options: [
-      {
-        value: ' ',
-        title: ' ',
-      },
       {
         value: 'Jr',
         title: 'Jr',
