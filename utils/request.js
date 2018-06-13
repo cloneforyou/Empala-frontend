@@ -28,7 +28,6 @@ export default function request(url, options = {}) {
     }
     return false;
   }
-  console.log('------------------------------', url, options);
   return axios({
     method: options.method,
     url: `${serverOrigins.aws}${url}`,
