@@ -2,7 +2,7 @@ import {
   CLEAN_ERROR_MESSAGE,
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
-  LOGIN_REQUEST_SUCCESS,
+  LOGIN_REQUEST_SUCCESS, SEND_ACTIVATION_LINK_FAIL, SEND_ACTIVATION_LINK_REQUEST, SEND_ACTIVATION_LINK_SUCCESS,
   SET_ACCOUNT_BLOCKED,
   SET_ACCOUNT_UNBLOCKED,
   UNBLOCK_REQUEST,
@@ -30,9 +30,10 @@ export function loginRequest() {
 }
 
 
-export function unblockAccountInit() {
+export function unblockAccountInit(code) {
   return {
     type: UNBLOCK_REQUEST,
+    code
   };
 }
 
@@ -65,5 +66,25 @@ export function setAccountunBlocked() {
 export function cleanErrorMessage() {
   return {
     type: CLEAN_ERROR_MESSAGE,
+  };
+}
+
+export function sendActivationLink() {
+  return {
+    type: SEND_ACTIVATION_LINK_REQUEST,
+  };
+}
+
+
+export function sendActivationLinkSuccess() {
+  return {
+    type: SEND_ACTIVATION_LINK_SUCCESS,
+  };
+}
+
+export function sendActivationLinkFailed(err) {
+  return {
+    type: SEND_ACTIVATION_LINK_FAIL,
+    err,
   };
 }
