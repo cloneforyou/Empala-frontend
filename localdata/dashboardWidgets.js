@@ -928,6 +928,8 @@ export const widgetsPositions = [
     title: 'Position portfolio',
     col: 12,
     height: 'auto',
+    localFX: true,
+    dots: true,
     tables: [
       {
         id: uniqueId(),
