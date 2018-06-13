@@ -759,6 +759,7 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Notional amount',
+            width: '120px',
           },
           {
             title: 'Domestic',
@@ -813,6 +814,7 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Percentage allocations',
+            width: '120px',
           },
           {
             title: 'Domestic',
@@ -867,6 +869,7 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Position risk measures',
+            width: '120px',
           },
           {
             title: 'Domestic',

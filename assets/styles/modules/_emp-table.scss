@@ -45,4 +45,7 @@
   }
   &__tr {
   }
+  &.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(245, 245, 246, 0.5);
+  }
 }
