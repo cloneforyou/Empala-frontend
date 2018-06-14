@@ -1100,6 +1100,7 @@ export const widgetsPerformance = [
     title: 'Community league',
     col: 5,
     height: 439,
+    assetAmountRange: true,
     tables: [
       {
         id: uniqueId(),
@@ -1142,6 +1143,8 @@ export const widgetsPerformance = [
     title: 'Performance analysis by filters',
     col: 12,
     height: 589,
+    localFX: true,
+    dots: true,
     tables: [
       {
         id: uniqueId(),

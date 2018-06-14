@@ -100,9 +100,22 @@
   @include fontSize(12px);
   border-radius: 30px;
   transition: .3s;
-  padding: 3px 10px;
+  padding: 0 10px;
   &_green {
     color: $white;
     background: $green;
+  }
+}
+
+.form-range {
+  &__label {
+    font-size: 10px;
+    color: $dark-grey;
+  }
+  &__input {
+    width: 60px;
+    height: 16px;
+    padding: 1px 2px;
+    @include fontSize(10px);
   }
 }
