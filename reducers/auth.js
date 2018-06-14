@@ -1,4 +1,5 @@
-import { SET_FIELD_VALUE,
+import {
+  SET_FIELD_VALUE,
   VALIDATE_FIELD_ERROR,
   VALIDATE_FIELD_SUCCESS,
 } from '../constants/registration';

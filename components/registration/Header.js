@@ -18,14 +18,14 @@ const Header = () => (
       </div>
 
       <div className="header__block__center">
-        <Link href="/">
+        <a href="/">
           <img
             src={logo}
             alt="EMPALA"
             style={{ width: '182px' }}
             className="pointer"
           />
-        </Link>
+        </a>
       </div>
 
       <div className="header__block__right-side">

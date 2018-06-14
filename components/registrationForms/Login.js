@@ -142,7 +142,7 @@ const Login = (props) => {
           type="text"
           label="E-mail"
           handleChange={e => props.setInputValueById(e)}
-          errorText={props.errorText}
+          errorText={props.errorText || props.fieldsError.index_username}
         />
         <EmpalaInput
           key="password"
@@ -150,6 +150,7 @@ const Login = (props) => {
           type="password"
           label="Password"
           handleChange={e => props.setInputValueById(e)}
+          errorText={props.fieldsError.index_password}
         />
         <span
           style={{ ...style.markedText, ...style.markedText_link }}
@@ -175,6 +176,7 @@ export default connect(
     accountSuspended: state.auth.isBlocked,
     linkSent: state.auth.linkSent,
     forgotPassword: state.auth.forgotPassword,
+    fieldsError: state.auth.fieldsErrors,
   }),
   dispatch => ({
     handleLogin: () => dispatch(loginRequest()),
