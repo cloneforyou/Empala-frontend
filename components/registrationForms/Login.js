@@ -5,7 +5,13 @@ import FlatButton from 'material-ui/FlatButton';
 import EmpalaInput from '../registration/EmpalaInput';
 import { GREEN, TORCH_RED, WHITE } from '../../constants/colors';
 import { setInputFieldValueById } from '../../actions/registration';
-import { loginRequest, sendActivationLink, unblockAccountInit } from '../../actions/auth';
+import {
+  clearLoginState,
+  loginRequest,
+  sendActivationLink,
+  setPasswordForgotten,
+  unblockAccountInit,
+} from '../../actions/auth';
 
 
 const style = {
@@ -37,32 +43,52 @@ const style = {
     color: TORCH_RED,
     fontWeight: 'bolder',
   },
+  markedText_link: {
+    cursor: 'pointer',
+    fontSize: '.9rem',
+    verticalAlign: 'text-top',
+  },
 };
 
+const UserEmailForm = props => (
+  <form>
+      Please type your account e-mail below.
+    <EmpalaInput
+      key="index_email"
+      id="index_email"
+      type="text"
+      label="E-mail"
+      handleChange={props.handleInput}
+      errorText={props.errorText}
+    />
+    {props.goBack &&
+      <span
+        style={{ ...style.markedText, ...style.markedText_link }}
+        onClick={props.handleBack}
+      >Go back
+      </span>
+    }
+    <FlatButton
+      label="Send a link"
+      style={{ ...style.loginBtn, width: 'auto', padding: '0 5px' }}
+      labelStyle={style.labelLoginBtn}
+      onClick={props.handleClick}
+    />
+  </form>
+);
 const ConfirmationText = (props) => {
   if (props.linkSent) return <p>Please check your e-mail for details.</p>;
-  if (props.errorText) {
-    return <p><span style={style.errorText}>Sorry, an error occurs when sending activation link</span></p>;
-  }
+  // if (props.errorText) {
+  //   return <p><span style={style.errorText}>Sorry, an error occurs when sending activation link</span></p>;
+  // }
   return (
-    <form>
-      Please type your account e-mail below.
-      <EmpalaInput
-        key="index_email"
-        id="index_email"
-        type="text"
-        label="E-mail"
-        handleChange={props.setInputValueById}
-      />
-      <FlatButton
-        label="Send a link"
-        style={{ ...style.loginBtn, width: 'auto', padding: '0 5px' }}
-        labelStyle={style.labelLoginBtn}
-        onClick={props.sendActivationLink}
-      />
-    </form>
+    <UserEmailForm
+      handleClick={props.sendActivationLink}
+      handleInput={props.setInputValueById}
+      errorText={props.errorText ? 'Sorry, an error occurs when sending activation link' : ''}
+    />
   );
-}
+};
 
 const SuspendedForm = props => (
   /* Text is a sample */
@@ -79,9 +105,32 @@ const SuspendedForm = props => (
   </div>
 );
 
+const ForgotPasswordForm = (props) => {
+  if (props.linkSent) {
+    return (
+      <p>We have sent you a link for password reset procedure. Please check your e-mail for details.</p>);
+  }
+  return (
+    <div style={style.warningTextBlock}>
+      <h2>Have you forgotten your password?</h2>
+      <p>Please enter your account email below so we can send you a link for password reset.</p>
+      <UserEmailForm
+        handleClick={props.sendPasswordRecoveryLink}
+        handleInput={props.setInputValueById}
+        errorText={props.errorText ? 'Sorry, an error occurs when sending activation link' : ''}
+        handleBack={props.clearLoginState}
+        goBack
+      />
+    </div>
+  );
+};
+
 const Login = (props) => {
   if (props.accountSuspended) {
     return <SuspendedForm {...props} />;
+  }
+  if (props.forgotPassword) {
+    return <ForgotPasswordForm {...props} />;
   }
   return (
     <div>
@@ -105,6 +154,11 @@ const Login = (props) => {
           label="Password"
           handleChange={e => props.setInputValueById(e)}
         />
+        <span
+          style={{ ...style.markedText, ...style.markedText_link }}
+          onClick={props.setPasswordForgotten}
+        >Forgot password?
+        </span>
         <FlatButton
           label="Log in"
           style={style.loginBtn}
@@ -121,11 +175,15 @@ export default connect(
     errorText: state.auth.loginError,
     accountSuspended: state.auth.isBlocked,
     linkSent: state.auth.linkSent,
+    forgotPassword: state.auth.forgotPassword,
   }),
   dispatch => ({
     handleLogin: () => dispatch(loginRequest()),
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     unblockAccount: () => dispatch(unblockAccountInit()),
-    sendActivationLink: () => dispatch(sendActivationLink()),
+    sendActivationLink: () => dispatch(sendActivationLink('unblockAccount')),
+    setPasswordForgotten: () => dispatch(setPasswordForgotten()),
+    sendPasswordRecoveryLink: () => dispatch(sendActivationLink('passwordRecovery')),
+    clearLoginState: () => dispatch(clearLoginState()),
   }),
 )(Login);

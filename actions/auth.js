@@ -1,10 +1,10 @@
 import {
-  CLEAN_ERROR_MESSAGE,
+  CLEAN_ERROR_MESSAGE, CLEAR_LOGIN_STATE,
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS, SEND_ACTIVATION_LINK_FAIL, SEND_ACTIVATION_LINK_REQUEST, SEND_ACTIVATION_LINK_SUCCESS,
   SET_ACCOUNT_BLOCKED,
-  SET_ACCOUNT_UNBLOCKED,
+  SET_ACCOUNT_UNBLOCKED, SET_PASSWORD_FORGOTTEN,
   UNBLOCK_REQUEST,
   UNBLOCK_REQUEST_FAIL,
   UNBLOCK_REQUEST_SUCCESS,
@@ -33,10 +33,9 @@ export function loginRequest() {
 export function unblockAccountInit(code) {
   return {
     type: UNBLOCK_REQUEST,
-    code
+    code,
   };
 }
-
 
 export function unblockSuccess() {
   return {
@@ -57,9 +56,21 @@ export function setAccountBlocked() {
   };
 }
 
-export function setAccountunBlocked() {
+export function setAccountUnblocked() {
   return {
     type: SET_ACCOUNT_UNBLOCKED,
+  };
+}
+
+export function setPasswordForgotten() {
+  return {
+    type: SET_PASSWORD_FORGOTTEN,
+  };
+}
+
+export function clearLoginState() {
+  return {
+    type: CLEAR_LOGIN_STATE,
   };
 }
 
@@ -69,9 +80,10 @@ export function cleanErrorMessage() {
   };
 }
 
-export function sendActivationLink() {
+export function sendActivationLink(operation) {
   return {
     type: SEND_ACTIVATION_LINK_REQUEST,
+    operation,
   };
 }
 
@@ -88,3 +100,4 @@ export function sendActivationLinkFailed(err) {
     err,
   };
 }
+

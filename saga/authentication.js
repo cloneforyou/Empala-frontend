@@ -113,8 +113,8 @@ export function* getUserData() {
   }
 }
 
-export function* unblockAccount({code}) {
-  console.log(' ** UNBLOCK', code);
+export function* unblockAccount({ code }) {
+  // console.log(' ** UNBLOCK', code);
   const url = '/api/auth/unblock/verify';
   const options = {
     method: 'POST',
@@ -135,10 +135,14 @@ export function* unblockAccount({code}) {
   }
 }
 
-export function* sendActivationLink() {
+export function* sendActivationLink({ operation }) {
   const email = yield select(state => state.auth.index_email);
   console.log(' ** SEND Link', email);
-  const url = '/api/auth/unblock/send';
+
+  const urls = {
+    unblockAccount: '/api/auth/unblock/send',
+    passwordRecovery: '/api/auth/recovery/send', // sample route
+  };
   const options = {
     method: 'POST',
     data: {
@@ -147,7 +151,7 @@ export function* sendActivationLink() {
   };
   if (email) {
     try {
-      const result = yield call(request, url, options);
+      const result = yield call(request, urls[operation], options);
       // console.log(' ** ', result);
       yield put(sendActivationLinkSuccess());
       yield put(cleanErrorMessage());

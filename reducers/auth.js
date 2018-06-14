@@ -1,10 +1,12 @@
 import { SET_FIELD_VALUE } from '../constants/registration';
 import {
-  CLEAN_ERROR_MESSAGE,
+  CLEAN_ERROR_MESSAGE, CLEAR_LOGIN_STATE,
   LOGIN_REQUEST_FAIL,
-  LOGIN_REQUEST_SUCCESS, SEND_ACTIVATION_LINK_FAIL, SEND_ACTIVATION_LINK_SUCCESS,
+  LOGIN_REQUEST_SUCCESS,
+  SEND_ACTIVATION_LINK_FAIL,
+  SEND_ACTIVATION_LINK_SUCCESS,
   SET_ACCOUNT_BLOCKED,
-  SET_ACCOUNT_UNBLOCKED
+  SET_ACCOUNT_UNBLOCKED, SET_PASSWORD_FORGOTTEN,
 } from '../constants/auth';
 
 export const InitialState = {
@@ -16,6 +18,7 @@ export const InitialState = {
   isBlocked: false,
   linkSent: false,
   loading: false,
+  forgotPassword: false,
 };
 
 function auth(state = InitialState, action) {
@@ -40,6 +43,15 @@ function auth(state = InitialState, action) {
       return { ...state, isBlocked: false };
     case CLEAN_ERROR_MESSAGE:
       return { ...state, loginError: false };
+    case SET_PASSWORD_FORGOTTEN:
+      return { ...state, forgotPassword: true };
+    case CLEAR_LOGIN_STATE:
+      return {
+        ...state,
+        forgotPassword: false,
+        linkSent: false,
+        loginError: false,
+      };
     default:
       return state;
   }
