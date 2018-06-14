@@ -8,7 +8,7 @@ import { setUserData } from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
-  loginSuccess,
+  loginSuccess, passwordUpdateFailed, passwordUpdateSuccess,
   sendActivationLinkFailed,
   sendActivationLinkSuccess,
   setAccountBlocked,
@@ -135,13 +135,37 @@ export function* unblockAccount({ code }) {
   }
 }
 
+export function* changePassword({ password, code }) {
+  // console.log(' ** RESET', code);
+  const url = '/api/auth/recovery/verify';
+  const options = {
+    method: 'POST',
+    data: {
+      code,
+      password,
+    },
+  };
+  if (code) {
+    try {
+      const result = yield call(request, url, options);
+      // console.log(' ** ', result);
+      yield put(passwordUpdateSuccess());
+      yield put(cleanErrorMessage());
+      setTimeout(() => window.location.assign('/'), 3000);
+    } catch (err) {
+      // console.log(' ** ', err);
+      yield put(passwordUpdateFailed(err.message));
+    }
+  }
+}
+
 export function* sendActivationLink({ operation }) {
   const email = yield select(state => state.auth.index_email);
   console.log(' ** SEND Link', email);
 
   const urls = {
     unblockAccount: '/api/auth/unblock/send',
-    passwordRecovery: '/api/auth/recovery/send', // sample route
+    passwordRecovery: '/api/auth/recovery/send',
   };
   const options = {
     method: 'POST',

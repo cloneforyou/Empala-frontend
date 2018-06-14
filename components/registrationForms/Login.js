@@ -85,7 +85,7 @@ const ConfirmationText = (props) => {
     <UserEmailForm
       handleClick={props.sendActivationLink}
       handleInput={props.setInputValueById}
-      errorText={props.errorText ? 'Sorry, an error occurs when sending activation link' : ''}
+      errorText={props.errorText}
     />
   );
 };
@@ -117,7 +117,7 @@ const ForgotPasswordForm = (props) => {
       <UserEmailForm
         handleClick={props.sendPasswordRecoveryLink}
         handleInput={props.setInputValueById}
-        errorText={props.errorText ? 'Sorry, an error occurs when sending activation link' : ''}
+        errorText={props.errorText}
         handleBack={props.clearLoginState}
         goBack
       />
@@ -172,7 +172,9 @@ const Login = (props) => {
 
 export default connect(
   state => ({
-    errorText: state.auth.loginError,
+    errorText: state.auth.authError === 'Invalid credentials' ?
+      'Account not found' :
+      state.auth.authError,
     accountSuspended: state.auth.isBlocked,
     linkSent: state.auth.linkSent,
     forgotPassword: state.auth.forgotPassword,

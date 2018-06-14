@@ -10,17 +10,23 @@ import {
 import request from '../utils/request';
 import ignoredFields from '../localdata/noValidatedFiels';
 
-function* validatePasswordField({ id, value }) {
+function* validatePasswordField(id) {
   const password = yield select(state => state.registration.registrationData['member_account_password']);
   const passwordConfirm = yield select(state => state.registration.registrationData['member_account_password_confirm']);
-  if (id === 'member_account_password_confirm') {
-    if (password === passwordConfirm) {
-      yield put(setFieldValid(id));
+  const newPassword = yield select(state => state.auth['recovery_password']);
+  const newPasswordConfirm = yield select(state => state.registration.registrationData['recovery_password_confirm']);
+  if (id === 'member_account_password_confirm' || id === 'recovery_password_confirm') {
+    if (id === 'member_account_password_confirm' && password === passwordConfirm) {
+      yield put(setFieldValid('member_account_password_confirm'));
+    } else if (id === 'recovery_password_confirm' && newPassword === newPasswordConfirm) {
+      yield put(setFieldValid('recovery_password_confirm'));
     } else {
       yield put(setFieldInvalid(id, 'Passwords mismatch: check password and confirm password fields.'));
     }
-  } else if (id === 'member_account_password') {
-    if (password.length < 8 || !/[A-Z]+/.test(password) || !/\d+/.test(password)) {
+  } else if (id === 'member_account_password' || id === 'recovery_password') {
+    let checkedPassword = password;
+    if (id === 'recovery_password') checkedPassword = newPassword;
+    if (checkedPassword.length < 8 || !/[A-Z]+/.test(checkedPassword) || !/\d+/.test(checkedPassword)) {
       yield put(setFieldInvalid(id, 'Passwords must contain at least 8 characters and have at least one Capital letter and numerical digit.'));
     } else {
       yield put(setFieldValid(id));
@@ -113,8 +119,9 @@ export default function* validationSaga({ id, value }) {
   yield put(setFieldValid(id));
   if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({ id, value });
-  } else if (id === 'member_account_password_confirm' || id === 'member_account_password') {
-    yield validatePasswordField({ id, value });
+  } else if (id === 'member_account_password_confirm' || id === 'member_account_password'
+    || id === 'recovery_password' || id === 'recovery_password_confirm') {
+    yield validatePasswordField(id);
   } else if (id === 'profile_financials_total_net_worth') {
     yield validateLiquidWorth({ value });
   }

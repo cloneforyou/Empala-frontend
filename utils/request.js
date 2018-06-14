@@ -26,11 +26,15 @@ export default function request(url, options = {}) {
       } else if (err.response.data.info === 'WRONG_VERIFICATION_CODE') {
         return new Error('Wrong verification code');
       }
-      return false;
+    }
+    if (err.response && err.response.status === 403) {
+      if (err.response.data.info === 'INVALID_PASSWORD' && err.response.data.misc === 'PASSWORD_WAS_ALREADY_USED') {
+        return new Error('Password was already used');
+      }
     }
     return false;
   }
-  console.log('------------------------------', url, options)
+  // console.log('------------------------------', url, options)
   return axios({
     method: options.method,
     url: `${serverOrigins.local}${url}`,
