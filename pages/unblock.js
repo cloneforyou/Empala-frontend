@@ -8,8 +8,9 @@ import Footer from '../components/registration/Footer';
 import stylesheet from '../assets/styles/main.scss';
 import { unblockAccountInit } from '../actions/auth';
 
-class Index extends React.PureComponent {
-  static async getInitialProps({ store, query }) {
+class Unblock extends React.PureComponent {
+  static async getInitialProps({ isServer, res, store, query }) {
+    if (isServer && !query.code) return res.redirect('/');
     if (query.code) store.dispatch(unblockAccountInit(query.code));
     return { code: query.code };
   }
@@ -45,4 +46,4 @@ class Index extends React.PureComponent {
   }
 }
 
-export default withReduxSaga(connect(state => ({ error: state.auth.loginError }), null)(Index));
+export default withReduxSaga(connect(state => ({ error: state.auth.authError }), null)(Unblock));

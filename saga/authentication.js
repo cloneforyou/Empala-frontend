@@ -8,7 +8,7 @@ import { setUserData } from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
-  loginSuccess,
+  loginSuccess, passwordUpdateFailed, passwordUpdateSuccess,
   sendActivationLinkFailed,
   sendActivationLinkSuccess,
   setAccountBlocked,
@@ -18,7 +18,7 @@ import {
 export function* authenticate() {
   const email = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
-  console.log(' ** AUTH', email, password);
+  // console.log(' ** AUTH', email, password);
   const url = '/api/auth/login';
   const options = {
     method: 'POST',
@@ -62,7 +62,7 @@ export function* refreshTokens() {
     localStorage.setItem('refreshToken', tokens.data.tokens.refresh);
     window.location.assign('/dashboard');
   } catch (err) {
-    console.log(' ** ', err);
+    // console.log(' ** ', err);
     window.location.assign('/');
     localStorage.removeItem('refreshToken');
   }
@@ -113,8 +113,8 @@ export function* getUserData() {
   }
 }
 
-export function* unblockAccount({code}) {
-  console.log(' ** UNBLOCK', code);
+export function* unblockAccount({ code }) {
+  // console.log(' ** UNBLOCK', code);
   const url = '/api/auth/unblock/verify';
   const options = {
     method: 'POST',
@@ -135,10 +135,38 @@ export function* unblockAccount({code}) {
   }
 }
 
-export function* sendActivationLink() {
+export function* changePassword({ password, code }) {
+  // console.log(' ** RESET', code);
+  const url = '/api/auth/recovery/verify';
+  const options = {
+    method: 'POST',
+    data: {
+      code,
+      password,
+    },
+  };
+  if (code) {
+    try {
+      const result = yield call(request, url, options);
+      // console.log(' ** ', result);
+      yield put(passwordUpdateSuccess());
+      yield put(cleanErrorMessage());
+      setTimeout(() => window.location.assign('/'), 3000);
+    } catch (err) {
+      // console.log(' ** ', err);
+      yield put(passwordUpdateFailed(err.message));
+    }
+  }
+}
+
+export function* sendActivationLink({ operation }) {
   const email = yield select(state => state.auth.index_email);
   console.log(' ** SEND Link', email);
-  const url = '/api/auth/unblock/send';
+
+  const urls = {
+    unblockAccount: '/api/auth/unblock/send',
+    passwordRecovery: '/api/auth/recovery/send',
+  };
   const options = {
     method: 'POST',
     data: {
@@ -147,7 +175,7 @@ export function* sendActivationLink() {
   };
   if (email) {
     try {
-      const result = yield call(request, url, options);
+      const result = yield call(request, urls[operation], options);
       // console.log(' ** ', result);
       yield put(sendActivationLinkSuccess());
       yield put(cleanErrorMessage());
