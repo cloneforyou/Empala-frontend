@@ -13,6 +13,7 @@ import {
   sendActivationLinkSuccess,
   setAccountBlocked,
 } from '../actions/auth';
+import { setFieldInvalid } from "../actions/registration";
 
 
 export function* authenticate() {
@@ -42,6 +43,12 @@ export function* authenticate() {
         yield put(cleanErrorMessage());
       } else yield put(loginFailed(err.message));
     }
+  }
+  if (!email) {
+    yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
+  }
+  if (!password) {
+    yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
   }
 }
 
