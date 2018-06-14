@@ -1391,6 +1391,7 @@ export const widgetsOrders = [
     title: 'Watchlists',
     col: 12,
     height: 568,
+    dots: true,
     tables: [
       {
         id: uniqueId(),

@@ -11,10 +11,7 @@ class WidgetHead extends PureComponent {
 
   toggleFX = () => {
     this.setState((prevState) => {
-      if (prevState.fxButtonContent === 'Local') {
-        return { fxButtonContent: 'Active' };
-      }
-      return { fxButtonContent: 'Local' };
+      return { fxButtonContent: prevState.fxButtonContent === 'Local' ? 'Active' : 'Local' };
     })
   }
 
