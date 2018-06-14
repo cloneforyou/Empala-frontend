@@ -1,14 +1,13 @@
 /* eslint-disable max-len */
 import React from 'react';
 import { connect } from 'react-redux';
-import Link from 'next/link';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { FlatButton } from 'material-ui';
 import { withReduxSaga } from '../store';
 import Header from '../components/registration/Header';
 import Footer from '../components/registration/Footer';
 import stylesheet from '../assets/styles/main.scss';
 import EmpalaInput from '../components/registration/EmpalaInput';
-import { FlatButton } from 'material-ui';
 import { GREEN, TORCH_RED, WHITE } from '../constants/colors';
 import { setInputFieldValueById } from '../actions/registration';
 import { sendPasswordUpdate } from '../actions/auth';

@@ -18,7 +18,7 @@ import {
 export function* authenticate() {
   const email = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
-  console.log(' ** AUTH', email, password);
+  // console.log(' ** AUTH', email, password);
   const url = '/api/auth/login';
   const options = {
     method: 'POST',
@@ -62,7 +62,7 @@ export function* refreshTokens() {
     localStorage.setItem('refreshToken', tokens.data.tokens.refresh);
     window.location.assign('/dashboard');
   } catch (err) {
-    console.log(' ** ', err);
+    // console.log(' ** ', err);
     window.location.assign('/');
     localStorage.removeItem('refreshToken');
   }

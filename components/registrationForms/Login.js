@@ -78,9 +78,6 @@ const UserEmailForm = props => (
 );
 const ConfirmationText = (props) => {
   if (props.linkSent) return <p>Please check your e-mail for details.</p>;
-  // if (props.errorText) {
-  //   return <p><span style={style.errorText}>Sorry, an error occurs when sending activation link</span></p>;
-  // }
   return (
     <UserEmailForm
       handleClick={props.sendActivationLink}
