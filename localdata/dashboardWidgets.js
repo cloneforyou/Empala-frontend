@@ -1209,6 +1209,9 @@ export const widgetsPerformance = [
     col: 5,
     height: 439,
     assetAmountRange: true,
+    switcher: {
+      labels: ['Empala network', 'Your network'],
+    },
     tables: [
       {
         id: uniqueId(),
@@ -1251,6 +1254,7 @@ export const widgetsPerformance = [
     title: 'Performance analysis by filters',
     col: 12,
     height: 589,
+    assetAmountRange: true,
     localFX: true,
     dots: true,
     tables: [
