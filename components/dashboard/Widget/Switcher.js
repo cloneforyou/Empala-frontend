@@ -26,10 +26,10 @@ const styles = theme => ({
   },
   iOSBar: {
     borderRadius: 13,
-    width: 22,
+    width: 28,
     height: 13,
     marginTop: -6,
-    marginLeft: -8,
+    marginLeft: -14,
     border: 'solid 1px',
     borderColor: theme.palette.grey[400],
     backgroundColor: theme.palette.grey[50],
