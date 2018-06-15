@@ -59,8 +59,7 @@ class Sidebar extends Component {
                                 <i
                                   className={`nav-list__icon nav-list__icon_${item.icon}`}
                                 />
-                                <span
-                                  className="nav-list__link">{item.label}</span>
+                                <span className="nav-list__link">{item.label}</span>
                               </button>
                             </li>
                           )

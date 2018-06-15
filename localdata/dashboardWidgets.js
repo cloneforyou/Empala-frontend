@@ -759,16 +759,16 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Notional amount',
-            width: '120px',
+            width: '170px',
           },
           {
             title: 'Domestic',
           },
           {
-            title: 'Total',
+            title: 'Foreign',
           },
           {
-            title: 'Foreign',
+            title: 'Total',
           },
           {
             title: 'Day change',
@@ -781,7 +781,7 @@ export const widgetsPositionFirst = [
             domestic: '9,999,999,999',
             total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
+            dayChange: 999.9,
           },
           {
             id: uniqueId(),
@@ -789,23 +789,7 @@ export const widgetsPositionFirst = [
             domestic: '9,999,999,999',
             total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
-          },
-          {
-            id: uniqueId(),
-            exposure: 'Net value',
-            domestic: '9,999,999,999',
-            total: '9,999,999,999',
-            foreign: '9,999,999,999',
-            dayChage: 999.9,
-          },
-          {
-            id: uniqueId(),
-            exposure: 'Net value',
-            domestic: '9,999,999,999',
-            total: '9,999,999,999',
-            foreign: '9,999,999,999',
-            dayChage: 999.9,
+            dayChange: 999.9,
           },
         ],
       },
@@ -814,16 +798,16 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Percentage allocations',
-            width: '120px',
+            width: '170px',
           },
           {
             title: 'Domestic',
           },
           {
-            title: 'Total',
+            title: 'Foreign',
           },
           {
-            title: 'Foreign',
+            title: 'Total',
           },
           {
             title: 'Day change',
@@ -834,33 +818,56 @@ export const widgetsPositionFirst = [
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
+            total: '9,999,999,999',
+            dayChange: 999.9,
           },
           {
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
+            total: '9,999,999,999',
+            dayChange: 999.9,
+          },
+        ],
+      },
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Adjusted amounts',
+            width: '170px',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Foreign',
+          },
+          {
+            title: 'Total',
+          },
+          {
+            title: 'Day change',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+            total: '9,999,999,999',
+            dayChange: 999.9,
           },
           {
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
-          },
-          {
-            id: uniqueId(),
-            exposure: 'Net value',
-            domestic: '9,999,999,999',
             total: '9,999,999,999',
-            foreign: '9,999,999,999',
-            dayChage: 999.9,
+            dayChange: 999.9,
           },
         ],
       },
@@ -869,16 +876,16 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Position risk measures',
-            width: '120px',
+            width: '170px',
           },
           {
             title: 'Domestic',
           },
           {
-            title: 'Total',
+            title: 'Foreign',
           },
           {
-            title: 'Foreign',
+            title: 'Total',
           },
           {
             title: 'Day change',
@@ -889,33 +896,134 @@ export const widgetsPositionFirst = [
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
+            total: '9,999,999,999',
+            dayChange: 999.9,
           },
           {
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
+            total: '9,999,999,999',
+            dayChange: 999.9,
+          },
+        ],
+      },
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Risk theoreticals',
+            width: '170px',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Foreign',
+          },
+          {
+            title: 'Total',
+          },
+          {
+            title: 'Day change',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+            total: '9,999,999,999',
+            dayChange: 999.9,
           },
           {
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
+            total: '9,999,999,999',
+            dayChange: 999.9,
+          },
+        ],
+      },
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Funding analysis',
+            width: '170px',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Foreign',
+          },
+          {
+            title: 'Total',
+          },
+          {
+            title: 'Day change',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+            total: '9,999,999,999',
+            dayChange: 999.9,
           },
           {
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
-            dayChage: 999.9,
+            total: '9,999,999,999',
+            dayChange: 999.9,
+          },
+        ],
+      },
+      {
+        id: uniqueId(),
+        headers: [
+          {
+            title: 'Credit analysis',
+            width: '170px',
+          },
+          {
+            title: 'Domestic',
+          },
+          {
+            title: 'Foreign',
+          },
+          {
+            title: 'Total',
+          },
+          {
+            title: 'Day change',
+          },
+        ],
+        data: [
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+            total: '9,999,999,999',
+            dayChange: 999.9,
+          },
+          {
+            id: uniqueId(),
+            exposure: 'Net value',
+            domestic: '9,999,999,999',
+            foreign: '9,999,999,999',
+            total: '9,999,999,999',
+            dayChange: 999.9,
           },
         ],
       },
@@ -1100,6 +1208,10 @@ export const widgetsPerformance = [
     title: 'Community league',
     col: 5,
     height: 439,
+    assetAmountRange: true,
+    switcher: {
+      labels: ['Empala network', 'Your network'],
+    },
     tables: [
       {
         id: uniqueId(),
@@ -1142,6 +1254,9 @@ export const widgetsPerformance = [
     title: 'Performance analysis by filters',
     col: 12,
     height: 589,
+    assetAmountRange: true,
+    localFX: true,
+    dots: true,
     tables: [
       {
         id: uniqueId(),
@@ -1210,6 +1325,8 @@ export const widgetsCash = [
     title: 'Currency and money markets fund balance',
     col: 12,
     height: 'auto',
+    localFX: true,
+    dots: true,
     tables: [
       {
         id: uniqueId(),
@@ -1389,6 +1506,7 @@ export const widgetsOrders = [
     title: 'Watchlists',
     col: 12,
     height: 568,
+    dots: true,
     tables: [
       {
         id: uniqueId(),

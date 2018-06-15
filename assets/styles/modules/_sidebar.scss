@@ -61,6 +61,11 @@
         transform: translateY(-50%);
         left: 0;
       }
+      &_file{
+        &:before {
+          left: 3px;
+        }
+      }
     }
     .user-status > span:before {
       left: -20px;
