@@ -1,6 +1,6 @@
 /* global fetch */
 
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest, takeEvery } from 'redux-saga/effects';
 import es6promise from 'es6-promise';
 import 'isomorphic-unfetch';
 
@@ -13,6 +13,7 @@ import {
   unblockAccount,
 } from './saga/authentication';
 import {
+  CLEAR_REGISTRATION_DATA,
   LOGIN_REQUEST,
   PASSWORD_UPDATE_REQUEST,
   SEND_ACTIVATION_LINK_REQUEST,
@@ -23,6 +24,10 @@ import {
 es6promise.polyfill();
 
 
+function* clearLocalData() {
+  yield delete localStorage.registrationData;
+}
+
 function* rootSaga() {
   yield all([
     registrationSaga(),
@@ -31,6 +36,7 @@ function* rootSaga() {
     takeLatest(SEND_ACTIVATION_LINK_REQUEST, sendActivationLink),
     takeLatest(UNBLOCK_REQUEST, unblockAccount),
     takeLatest(PASSWORD_UPDATE_REQUEST, changePassword),
+    takeEvery(CLEAR_REGISTRATION_DATA, clearLocalData),
   ]);
 }
 

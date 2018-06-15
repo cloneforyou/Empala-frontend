@@ -14,8 +14,9 @@ import {
   SEND_ACTIVATION_LINK_SUCCESS,
   SET_ACCOUNT_BLOCKED,
   SET_ACCOUNT_UNBLOCKED,
-  SET_PASSWORD_FORGOTTEN,
+  SET_PASSWORD_FORGOTTEN, TOGGLE_MODAL,
 } from '../constants/auth';
+import {OPEN_MODAL} from '../constants/dashboard';
 
 export const InitialState = {
   authError: false,
@@ -32,6 +33,7 @@ export const InitialState = {
     index_username: '',
     index_password: '',
   },
+  modalIsOpen: false,
 };
 
 function auth(state = InitialState, action) {
@@ -74,6 +76,11 @@ function auth(state = InitialState, action) {
         forgotPassword: false,
         linkSent: false,
         authError: false,
+      };
+    case TOGGLE_MODAL:
+      return {
+        ...state,
+        modalIsOpen: !state.modalIsOpen,
       };
     default:
       return state;

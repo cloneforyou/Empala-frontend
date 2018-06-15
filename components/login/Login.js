@@ -6,13 +6,14 @@ import EmpalaInput from '../registration/EmpalaInput';
 import { GREEN, TORCH_RED, WHITE } from '../../constants/colors';
 import { setInputFieldValueById } from '../../actions/registration';
 import {
-  clearLoginState,
+  clearLoginState, clearRegistrationData,
   loginRequest,
   sendActivationLink,
-  setPasswordForgotten,
+  setPasswordForgotten, toggleModal,
   unblockAccountInit,
 } from '../../actions/auth';
-import GoogleAuth from "../social/auth/GoogleAuth";
+import GoogleAuth from '../social/auth/GoogleAuth';
+import RegistrationModal from './RegistrationModal';
 
 
 const style = {
@@ -168,6 +169,10 @@ const Login = (props) => {
       <GoogleAuth
         handlelogin={props.handleLogin}
       />
+      <RegistrationModal
+        handleClose={props.handleModalCancel}
+        open={props.modalIsOpen}
+      />
     </div>
   );
 };
@@ -181,6 +186,7 @@ export default connect(
     linkSent: state.auth.linkSent,
     forgotPassword: state.auth.forgotPassword,
     fieldsError: state.auth.fieldsErrors,
+    modalIsOpen: state.auth.modalIsOpen,
   }),
   dispatch => ({
     handleLogin: (provider, token) => dispatch(loginRequest(provider, token)),
@@ -190,5 +196,9 @@ export default connect(
     setPasswordForgotten: () => dispatch(setPasswordForgotten()),
     sendPasswordRecoveryLink: () => dispatch(sendActivationLink('passwordRecovery')),
     clearLoginState: () => dispatch(clearLoginState()),
+    handleModalCancel: () => {
+      dispatch(clearRegistrationData());
+      dispatch(toggleModal());
+    },
   }),
 )(Login);
