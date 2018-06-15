@@ -11,7 +11,7 @@ function mapStateToProps(state) {
   };
 }
 
-class Overflow extends Component {
+class Overview extends Component {
   constructor(props) {
     super(props);
   }
@@ -47,4 +47,4 @@ class Overflow extends Component {
   }
 }
 
-export default connect(mapStateToProps, null)(Overflow);
+export default connect(mapStateToProps, null)(Overview);

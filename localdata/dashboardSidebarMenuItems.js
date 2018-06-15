@@ -3,7 +3,7 @@ export const sidebarItems = [
     title: 'Dashboard',
     items: [
       {
-        label: 'Overflow',
+        label: 'Overview',
         icon: 'chart',
       },
     ],

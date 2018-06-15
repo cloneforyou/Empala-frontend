@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Overflow from './Pages/Overflow';
+import Overview from './Pages/Overview';
 import Positions from './Pages/Positions';
 import Performance from './Pages/Performance';
 import Cash from './Pages/Cash'
@@ -16,8 +16,8 @@ class Main extends Component {
 
   mapPageToComponent = (page) => {
     switch (page) {
-      case 'overflow':
-        return <Overflow />;
+      case 'overview':
+        return <Overview />;
       case 'positions':
         return <Positions />;
       case 'performance':

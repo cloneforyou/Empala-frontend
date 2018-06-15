@@ -29,13 +29,13 @@ class Dashboard extends Component {
     if (this.props.url.query.page) {
       this.props.setActivePage(this.props.url.query.page.toLowerCase());
     } else {
-      this.props.setActivePage('overflow');
+      this.props.setActivePage('overview');
     }
   }
 
   render() {
     const { sidebarCollapsed } = this.state;
-    const activePageTitle = this.props.url.query.page || ['overflow'];
+    const activePageTitle = this.props.url.query.page || ['overview'];
     return (
       <MuiThemeProvider>
         <div>
