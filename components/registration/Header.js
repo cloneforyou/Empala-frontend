@@ -30,7 +30,7 @@ const Header = () => (
 
       <div className="header__block__right-side">
         <a
-          href="#"
+          href="/"
           className="header__block__right-link"
         >
             I have an account (Login)

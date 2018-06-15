@@ -29,9 +29,11 @@ export function loginSuccess() {
   };
 }
 
-export function loginRequest() {
+export function loginRequest(provider, token) {
   return {
     type: LOGIN_REQUEST,
+    provider: provider || null,
+    token: token || null,
   };
 }
 

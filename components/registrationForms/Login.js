@@ -12,6 +12,7 @@ import {
   setPasswordForgotten,
   unblockAccountInit,
 } from '../../actions/auth';
+import GoogleAuth from "../social/auth/GoogleAuth";
 
 
 const style = {
@@ -30,7 +31,7 @@ const style = {
     verticalAlign: 'top',
   },
   warningTextBlock: {
-    maxWidth: '400px',
+    width: '350px',
     fontSize: '14px',
     textAlign: 'justify',
   },
@@ -164,6 +165,9 @@ const Login = (props) => {
           onClick={props.handleLogin}
         />
       </div>
+      <GoogleAuth
+        handlelogin={props.handleLogin}
+      />
     </div>
   );
 };
@@ -171,7 +175,7 @@ const Login = (props) => {
 export default connect(
   state => ({
     errorText: state.auth.authError === 'Invalid credentials' ?
-      'Account not found' :
+      'Password is incorrect or account not found' :
       state.auth.authError,
     accountSuspended: state.auth.isBlocked,
     linkSent: state.auth.linkSent,
@@ -179,7 +183,7 @@ export default connect(
     fieldsError: state.auth.fieldsErrors,
   }),
   dispatch => ({
-    handleLogin: () => dispatch(loginRequest()),
+    handleLogin: (provider, token) => dispatch(loginRequest(provider, token)),
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     unblockAccount: () => dispatch(unblockAccountInit()),
     sendActivationLink: () => dispatch(sendActivationLink('unblockAccount')),

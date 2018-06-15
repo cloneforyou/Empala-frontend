@@ -8,7 +8,9 @@ import { setUserData } from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
-  loginSuccess, passwordUpdateFailed, passwordUpdateSuccess,
+  loginSuccess,
+  passwordUpdateFailed,
+  passwordUpdateSuccess,
   sendActivationLinkFailed,
   sendActivationLinkSuccess,
   setAccountBlocked,
@@ -16,40 +18,61 @@ import {
 import { setFieldInvalid } from "../actions/registration";
 
 
-export function* authenticate() {
+function* loginRequest(url, options) {
+  console.log('====', url, options)
+  try {
+    const result = yield call(request, url, options);
+    console.log(' ** ', result);
+    yield put(loginSuccess());
+    localStorage.setItem('accessToken', result.data.data.tokens.access);
+    localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+    window.location.assign('/dashboard');
+  } catch (err) {
+    console.log(' ** ', err);
+    if (err.message === 'Account suspended') {
+      yield put(setAccountBlocked());
+      yield put(cleanErrorMessage());
+    } else yield put(loginFailed(err.message));
+  }
+}
+
+export function* authenticate({ provider, token }) {
   const email = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
-  // console.log(' ** AUTH', email, password);
-  const url = '/api/auth/login';
+  console.log(' ** AUTH', provider);
+  let url = '';
   const options = {
     method: 'POST',
     data: {
-      email,
-      password,
-    },
+          email,
+          password,
+        },
   };
-  if (email && password) {
-    try {
-      const result = yield call(request, url, options);
-      // console.log(' ** ', result);
-      yield put(loginSuccess());
-      localStorage.setItem('accessToken', result.data.data.tokens.access);
-      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
-      window.location.assign('/dashboard');
-    } catch (err) {
-      console.log(' ** ', err);
-      if (err.message === 'Account suspended') {
-        yield put(setAccountBlocked());
-        yield put(cleanErrorMessage());
-      } else yield put(loginFailed(err.message));
-    }
+  switch (provider) {
+    case 'google':
+      url = '/api/auth/login/google';
+      options.data = {
+        token,
+      };
+      break;
+    default:
+      url = '/api/auth/login';
+      options.data = {
+        email,
+        password,
+      };
   }
-  if (!email) {
-    yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
-  }
-  if (!password) {
-    yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
-  }
+      if (provider || (email && password)) {
+        console.log('etetet')
+        yield loginRequest(url, options);
+        return false;
+      }
+      if (!email) {
+        yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
+      }
+      if (!password) {
+        yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
+      }
 }
 
 export function* refreshTokens() {
