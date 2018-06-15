@@ -23,8 +23,14 @@ export default function request(url, options = {}) {
         return new Error('Account suspended');
       } else if (err.response.data.info === 'INVALID_ACTIVATION_CODE') {
         return new Error('Invalid activation code');
+      } else if (err.response.data.info === 'WRONG_VERIFICATION_CODE') {
+        return new Error('Wrong verification code');
       }
-      return false;
+    }
+    if (err.response && err.response.status === 403) {
+      if (err.response.data.info === 'INVALID_PASSWORD' && err.response.data.misc === 'PASSWORD_WAS_ALREADY_USED') {
+        return new Error('Password was already used');
+      }
     }
     return false;
   }
