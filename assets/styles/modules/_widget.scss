@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    min-height: 73px
   }
   &__title-row {
     flex-grow: .3;
@@ -130,10 +131,6 @@
 
 .switcher {
   padding: 0 15px;
-  .MuiFormControlLabel-root-8 {
-    margin-right: -9px;
-    margin-left: -18px;
-  }
   &__label {
     width: 50px;
     @include button-reset;
@@ -144,5 +141,15 @@
     &_checked {
       color: $green;
     }
+  }
+  label {
+    margin-bottom: 0;
+  }
+  .MuiIconButton-root-24 {
+    height: 1rem;
+  }
+  .MuiFormControlLabel-root-8 {
+    margin-right: -9px;
+    margin-left: -18px;
   }
 }
