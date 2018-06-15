@@ -15,14 +15,12 @@ import {
   sendActivationLinkSuccess,
   setAccountBlocked,
 } from '../actions/auth';
-import { setFieldInvalid } from "../actions/registration";
+import { setFieldInvalid } from '../actions/registration';
 
 
 function* loginRequest(url, options) {
-  console.log('====', url, options)
   try {
     const result = yield call(request, url, options);
-    console.log(' ** ', result);
     yield put(loginSuccess());
     localStorage.setItem('accessToken', result.data.data.tokens.access);
     localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
@@ -39,14 +37,14 @@ function* loginRequest(url, options) {
 export function* authenticate({ provider, token }) {
   const email = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
-  console.log(' ** AUTH', provider);
+  // console.log(' ** AUTH', provider);
   let url = '';
   const options = {
     method: 'POST',
     data: {
-          email,
-          password,
-        },
+      email,
+      password,
+    },
   };
   switch (provider) {
     case 'google':
@@ -62,17 +60,16 @@ export function* authenticate({ provider, token }) {
         password,
       };
   }
-      if (provider || (email && password)) {
-        console.log('etetet')
-        yield loginRequest(url, options);
-        return false;
-      }
-      if (!email) {
-        yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
-      }
-      if (!password) {
-        yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
-      }
+  if (provider || (email && password)) {
+    yield loginRequest(url, options);
+    return false;
+  }
+  if (!email) {
+    yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
+  }
+  if (!password) {
+    yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
+  }
 }
 
 export function* refreshTokens() {
@@ -191,8 +188,7 @@ export function* changePassword({ password, code }) {
 
 export function* sendActivationLink({ operation }) {
   const email = yield select(state => state.auth.index_email);
-  console.log(' ** SEND Link', email);
-
+  // console.log(' ** SEND Link', email);
   const urls = {
     unblockAccount: '/api/auth/unblock/send',
     passwordRecovery: '/api/auth/recovery/send',
