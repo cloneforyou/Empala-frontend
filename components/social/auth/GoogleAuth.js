@@ -1,5 +1,6 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
+import { clientsId } from '../../../utils/config';
 
 const responseError = (response) => {
   console.log(response);
@@ -19,7 +20,7 @@ const style = {
 
 const GoogleAuth = props => (
   <GoogleLogin
-    clientId="775618626283-0146i9co6rpcopbui2i78mmnc4884j32.apps.googleusercontent.com"
+    clientId={clientsId.google}
     // buttonText="Login"
     onSuccess={res => props.handlelogin('google', res.tokenObj.id_token)}
     onFailure={responseError}
