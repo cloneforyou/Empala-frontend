@@ -13,7 +13,7 @@ import {
   passwordUpdateSuccess,
   sendActivationLinkFailed,
   sendActivationLinkSuccess,
-  setAccountBlocked,
+  setAccountBlocked, toggleModal,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 
@@ -21,10 +21,21 @@ import { setFieldInvalid } from '../actions/registration';
 function* loginRequest(url, options) {
   try {
     const result = yield call(request, url, options);
-    yield put(loginSuccess());
-    localStorage.setItem('accessToken', result.data.data.tokens.access);
-    localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
-    window.location.assign('/dashboard');
+    if (result.data.info === 'LOGGED_IN') {
+      yield put(loginSuccess());
+      localStorage.setItem('accessToken', result.data.data.tokens.access);
+      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+      return window.location.assign('/dashboard');
+    }
+    if (result.data.info === 'RELATED_ACCOUNT_NOT_FOUND') {
+      yield put(toggleModal());
+      const registrationData = {
+        member_basic_information_first_name: result.data.data.given_name,
+        member_basic_information_last_name: result.data.data.family_name,
+        member_account_email: result.data.data.email,
+      };
+      localStorage.setItem('registrationData', JSON.stringify(registrationData));
+    }
   } catch (err) {
     console.log(' ** ', err);
     if (err.message === 'Account suspended') {

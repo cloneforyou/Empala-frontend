@@ -1,6 +1,6 @@
 import {
   CLEAN_ERROR_MESSAGE,
-  CLEAR_LOGIN_STATE,
+  CLEAR_LOGIN_STATE, CLEAR_REGISTRATION_DATA,
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
@@ -10,7 +10,7 @@ import {
   SEND_ACTIVATION_LINK_SUCCESS,
   SET_ACCOUNT_BLOCKED,
   SET_ACCOUNT_UNBLOCKED,
-  SET_PASSWORD_FORGOTTEN,
+  SET_PASSWORD_FORGOTTEN, TOGGLE_MODAL,
   UNBLOCK_REQUEST,
   UNBLOCK_REQUEST_FAIL,
   UNBLOCK_REQUEST_SUCCESS,
@@ -124,9 +124,21 @@ export function passwordUpdateFailed(err) {
   };
 }
 
-
 export function passwordUpdateSuccess() {
   return {
     type: PASSWORD_UPDATE_REQUEST_SUCCESS,
+  };
+}
+
+export function toggleModal() {
+  return {
+    type: TOGGLE_MODAL,
+  };
+}
+
+
+export function clearRegistrationData() {
+  return {
+    type: CLEAR_REGISTRATION_DATA,
   };
 }

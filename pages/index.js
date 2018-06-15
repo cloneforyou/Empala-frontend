@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from '../components/registration/Header';
 import Footer from '../components/registration/Footer';
 import stylesheet from '../assets/styles/main.scss';
-import Login from '../components/registrationForms/Login';
+import Login from '../components/login/Login';
 
 
 class Index extends React.PureComponent {
