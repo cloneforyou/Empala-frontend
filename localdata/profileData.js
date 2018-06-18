@@ -6,7 +6,7 @@ const usStates = getValuesForSelectField(usStatesList);
 
 export const fieldsFullName = [
   {
-    id: 'member_basic_information_prefix',
+    id: 'basic_information_prefix',
     hint: 'Select',
     label: 'Prefix',
     col: 4,
@@ -30,42 +30,42 @@ export const fieldsFullName = [
     ],
   },
   {
-    id: 'member_basic_information_first_name',
+    id: 'basic_information_first_name',
     type: 'text',
     label: 'First name',
     placeholder: '',
     col: 8,
   },
   {
-    id: 'member_basic_information_middle_name',
+    id: 'basic_information_middle_name',
     type: 'text',
     label: 'Middle name',
     placeholder: '',
     col: 4,
   },
   {
-    id: 'member_basic_information_second_middle_name',
+    id: 'basic_information_second_middle_name',
     type: 'text',
     label: 'Middle name 2',
     placeholder: '',
     col: 4,
   },
   {
-    id: 'member_basic_information_third_middle_name',
+    id: 'basic_information_third_middle_name',
     type: 'text',
     label: 'Middle name 3',
     placeholder: '',
     col: 4,
   },
   {
-    id: 'member_basic_information_last_name',
+    id: 'basic_information_last_name',
     type: 'text',
     label: 'Last name',
     placeholder: '',
     col: 8,
   },
   {
-    id: 'member_basic_information_suffix',
+    id: 'basic_information_suffix',
     hint: 'Select',
     label: 'Suffix',
     col: 4,
@@ -98,19 +98,19 @@ export const fieldsMembership = [
     placeholder: '',
   },
   {
-    id: 'member_account_email',
+    id: 'account_information_email',
     type: 'email',
     label: 'E-mail address',
     placeholder: '',
   },
   {
-    id: 'member_account_contact_phone',
+    id: 'account_information_contact_phone_number',
     type: 'text',
     label: 'Contact telephone no.',
     placeholder: '',
   },
   {
-    id: 'regulatory_identification_dateOfBirth',
+    id: 'regulatory_identification_date_of_birth',
     field: 'date',
     label: 'Date of birth',
     birthDay: true,
@@ -155,14 +155,14 @@ export const fieldsMembership = [
   },
   {
     label: 'No of dependents',
-    id: 'regulatory_family_dependents',
+    id: 'regulatory_family_number_of_dependents',
     field: 'input',
     type: 'text',
     typeField: 'numberField',
     col: 6,
   },
   {
-    id: 'regulatory_identification_citizenship',
+    id: 'regulatory_identification_country_of_citizenship',
     label: 'Country of citizenship',
     hint: 'Please select',
     field: 'select',
@@ -187,7 +187,7 @@ export const fieldsResidentialAddress = [
     placeholder: '',
   },
   {
-    id: 'identity_residential_address_residential_address_city',
+    id: 'identity_residential_address_city',
     hint: 'Please select',
     field: 'input',
     label: 'City',
@@ -196,14 +196,14 @@ export const fieldsResidentialAddress = [
   {
     field: 'input',
     label: 'Zip code',
-    id: 'identity_zip_code',
+    id: 'identity_residential_address_zip_code',
     type: 'text',
     typeField: 'numberField',
     placeholder: '',
     col: 6,
   },
   {
-    id: 'identity_residential_address_residential_address_state',
+    id: 'identity_residential_address_state',
     hint: 'Please select',
     field: 'select',
     label: 'State',
@@ -212,7 +212,7 @@ export const fieldsResidentialAddress = [
     col: 6,
   },
   {
-    id: 'identity_residential_address_residential_address_country',
+    id: 'identity_residential_address_country',
     hint: 'Please select',
     field: 'select',
     label: 'Country',
@@ -227,14 +227,14 @@ export const fieldsResidentialAddress = [
 
 export const fieldsMaillingAddress = [
   {
-    id: 'identity_mailing_address_line_1',
+    id: 'identity_mailing_address_mailing_address_line_1',
     field: 'input',
     label: 'Address line 1',
     type: 'text',
     placeholder: '',
   },
   {
-    id: 'identity_mailing_address_line_2',
+    id: 'identity_mailing_address_mailing_address_line_2',
     field: 'input',
     label: 'Address line 2',
     type: 'text',
@@ -250,7 +250,7 @@ export const fieldsMaillingAddress = [
   {
     field: 'input',
     label: 'Zip code',
-    id: 'identity__mailing_address_zip_code',
+    id: 'identity_mailing_address_zip_code',
     type: 'text',
     typeField: 'numberField',
     placeholder: '',
@@ -399,13 +399,13 @@ export const fieldsPersonalWealth = [
 
 export const fieldsMemberPersonal = [
   {
-    id: 'member_account_account_no',
+    id: 'account_information_account_number',
     type: 'text',
     label: 'Account No.',
     placeholder: '',
   },
   {
-    id: 'member_account_account_type',
+    id: 'account_information_account_type',
     label: 'Account type',
     hint: 'Please select',
     options: [
@@ -416,7 +416,7 @@ export const fieldsMemberPersonal = [
     ],
   },
   {
-    id: 'member_account_since',
+    id: 'createdat',
     type: 'text',
     label: 'Member since',
     placeholder: '',
@@ -581,7 +581,7 @@ export const fieldsInvestmentExperienceOne = [
     options: [
       {
         value: 'None',
-        title: 'None',
+        title: 'No experience',
       },
       {
         value: 'Limited',
@@ -625,35 +625,35 @@ export const fieldsInvestmentExperienceOne = [
     ],
   },
   {
-    id: 'investment_experience_equities',
+    id: 'experience_investment_experience_equities',
     label: 'Equities',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_options',
+    id: 'experience_investment_experience_options',
     label: 'Options',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_bonds',
+    id: 'experience_investment_experience_bonds',
     label: 'Bonds',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_margin_currencies',
+    id: 'experience_investment_experience_margin_currencies',
     label: 'Currencies',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_futures',
+    id: 'experience_investment_experience_futures',
     label: 'Futures',
     options,
     hint: 'Please select',
@@ -664,49 +664,49 @@ export const fieldsInvestmentExperienceOne = [
 
 export const fieldsInvestmentExperienceTwo = [
   {
-    id: 'investment_experience_cryptocurrencies',
+    id: 'experience_investment_experience_cryptocurrencies',
     label: 'Cryptocurrencies',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_private_equity',
+    id: 'experience_investment_experience_private_equity',
     label: 'Private equity',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_margin_accounts',
+    id: 'experience_investment_experience_margin_accounts',
     label: 'Margin accounts',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_borrowing_money',
+    id: 'experience_investment_experience_borrowing_money',
     label: 'Borrowing money',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_lending_money',
+    id: 'experience_investment_experience_lending_money',
     label: 'Lending money',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_foreign_markets',
+    id: 'experience_investment_experience_foreign_markets',
     label: 'Foreign markets',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'investment_experience_exotics',
+    id: 'experience_investment_experience_exotics',
     label: 'Exotics',
     options,
     hint: 'Please select',
