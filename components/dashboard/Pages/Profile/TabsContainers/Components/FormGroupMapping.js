@@ -57,7 +57,7 @@ export default class FormGroupMapping extends Component {
         id={item.id}
         type={item.type}
         label={item.label}
-        value={userData[item.id] || ''}
+        value={(userData[item.id] === 'Not available' ? '' : userData[item.id]) || ''}
         handleChange={this.props.setInputValueById}
         errorText={fieldsErrors[item.id]}
         placeholder={item.placeholder}

@@ -15,12 +15,7 @@ class Experience extends Component {
   }
 
   render() {
-    const flattenUserData = flattenObject(this.props.userData.profile);
-    const userData = {};
-    Object.keys(flattenUserData).forEach((key) => {
-      userData[key.replace(/^Member/, '').toLowerCase()] = flattenUserData[key] === 'Not provided' ?
-        '' : flattenUserData[key];
-    });
+    const userData = this.props.userData;
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
@@ -29,18 +24,22 @@ class Experience extends Component {
             <div className="col-md-6">
               <div className="row margin-bt-30">
                 {fieldsInvestmentExperienceOne.map(item => (<FormGroupMapping
-                  item={item}
-                  userData={userData}
-                  fieldsErrors={this.props.fieldsErrors}
+                  // key={item.id}
+                  // item={item}
+                  // userData={userData}
+                  // fieldsErrors={this.props.fieldsErrors}
+                  {...{ ...this.props, item, key: item.id }}
                 />))}
               </div>
             </div>
             <div className="col-md-6">
               <div className="row margin-bt-30">
                 {fieldsInvestmentExperienceTwo.map(item => (<FormGroupMapping
-                  item={item}
-                  userData={userData}
-                  fieldsErrors={this.props.fieldsErrors}
+                  // key={item.id}
+                  // item={item}
+                  // userData={userData}
+                  // fieldsErrors={this.props.fieldsErrors}
+                  {...{ ...this.props, item, key: item.id }}
                 />))}
               </div>
             </div>
@@ -55,7 +54,7 @@ class Experience extends Component {
 
 export default connect(
   state => ({
-    userData: state.dashboard.userData.data || {},
+    userData: state.profile.profileUserData || {},
     fieldsErrors: state.dashboard.fieldsErrors || {},
   }),
   (dispatch => ({

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { openModal } from "../../../../../../actions/dashboard";
+import { openModal } from '../../../../../../actions/dashboard';
+import { updateProfileSend } from '../../../../../../actions/profile';
 
 
 class Footer extends PureComponent {
@@ -16,12 +17,17 @@ class Footer extends PureComponent {
             deleteAccountBtnIsShow && <button
               className="profile-btn profile-btn_red"
               onClick={this.props.showDeleteModal}
-            >Delete Account</button>
+            >Delete Account
+            </button>
           }
         </div>
         <div className="buttons-row__left">
           <button className="default-btn">Cancel</button>
-          <button className="profile-btn profile-btn_green">Save</button>
+          <button
+            className="profile-btn profile-btn_green"
+            onClick={this.props.handleUpdateInfo}
+          >Save
+          </button>
         </div>
       </div>
     );
@@ -35,6 +41,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     showDeleteModal: () => dispatch(openModal('accountDelete')),
+    handleUpdateInfo: () => dispatch(updateProfileSend()),
   };
 }
 

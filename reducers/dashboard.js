@@ -6,6 +6,7 @@ import {
   SET_ACTIVE_PAGE, SET_UPLOADABLE_IMAGE, UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_REQUEST, UPLOAD_IMAGE_SUCCESS,
   SET_FIELD_VALUE, DELETE_ACCOUNT_REQUEST, DELETE_ACCOUNT_FAIL, DELETE_ACCOUNT_SUCCESS,
 } from '../constants/dashboard';
+import {flattenObject, renameKeys} from '../utils/additional';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -19,6 +20,7 @@ const initialState = {
   openModalName: false,
   uploadableImage: false,
   membership_account_delete_confirm: '',
+  profileInfo: false,
 };
 
 function dashboard(state = initialState, action) {
@@ -102,11 +104,6 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         error: false,
-      };
-    case SET_FIELD_VALUE:
-      return {
-        ...state,
-        [action.id]: action.value,
       };
     default:
       return state;
