@@ -11,6 +11,7 @@ import {
 } from '../../../../../localdata/profileData';
 import { setInputFieldValueById } from '../../../../../actions/registration';
 import { countriesList } from '../../../../../localdata/countriesList';
+import {flattenObject} from '../../../../../utils/additional';
 
 class Regulatory extends Component {
   constructor(props) {
@@ -18,6 +19,12 @@ class Regulatory extends Component {
   }
 
   render() {
+    const flattenUserData = flattenObject(this.props.userData.profile);
+    const userData = {};
+    Object.keys(flattenUserData).forEach((key) => {
+      userData[key.replace(/^Member/, '').toLowerCase()] = flattenUserData[key] === 'Not provided' ?
+        '' : flattenUserData[key];
+    });
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
@@ -25,13 +32,21 @@ class Regulatory extends Component {
             <div className="col-md-6">
               <h2 className="title-part">Employment</h2>
               <div className="row margin-bt-30">
-                {fieldsEmployment.map(item => <FormGroupMapping key={item.id} item={item} />)}
+                {fieldsEmployment.map(item => (<FormGroupMapping
+                  item={item}
+                  userData={userData}
+                  fieldsErrors={this.props.fieldsErrors}
+                />))}
               </div>
             </div>
             <div className="col-md-6">
               <h2 className="title-part">Trusted Contact Person</h2>
               <div className="row margin-bt-30">
-                {fieldsTrustedContactPerson.map(item => <FormGroupMapping key={item.id} item={item} />)}
+                {fieldsTrustedContactPerson.map(item => (<FormGroupMapping
+                  item={item}
+                  userData={userData}
+                  fieldsErrors={this.props.fieldsErrors}
+                />))}
               </div>
             </div>
           </div>
@@ -40,41 +55,39 @@ class Regulatory extends Component {
               <h2 className="title-part">Passport</h2>
               <div className="row margin-bt-30">
                 <EmpalaSelect
-                  key="member-passport-countryOfIssue"
-                  id="member_passport_countryOfIssue"
+                  id="identification_passport_country_of_issue"
                   label="Country of issue"
                   options={countriesList}
-                  value={this.props.registrationData.member_passport_countryOfIssue || ''}
+                  value={userData.identification_passport_country_of_issue || ''}
                   handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors.member_passport_countryOfIssue}
+                  errorText={this.props.identification_passport_country_of_issue}
                   hint="Please select"
                   autoWidth
                 />
                 <EmpalaInput
-                  key="member-passport-number"
-                  id="member_passport_number"
+                  id="identification_passport_document_number"
                   type="text"
                   label="Passport no."
-                  value={this.props.registrationData.member_passport_number || ''}
+                  value={userData.identification_passport_document_number || ''}
                   handleChange={this.props.setInputValueById}
-                  errorText={this.props.fieldsErrors.member_passport_number}
+                  errorText={this.props.fieldsErrors.identification_passport_document_number}
                   mask="a999999999"
                 />
                 <DatePickerField
-                  id="member_passport_issue_date"
+                  id="identification_passport_issue_date"
                   label="Date of issue"
                   handleDatePick={this.props.setPickedDate}
-                  value={this.props.registrationData.member_passport_issue_date || ''}
-                  errorText={this.props.fieldsErrors.member_passport_issue_date}
+                  value={userData.identification_passport_date_of_issue || ''}
+                  errorText={this.props.fieldsErrors.identification_passport_date_of_issue}
                   col={6}
                   dateIssue
                 />
                 <DatePickerField
-                  id="member_passport_expiry_date"
+                  id="identification_passport_date_of_expiry"
                   label="Date of expiry"
                   handleDatePick={this.props.setPickedDate}
-                  value={this.props.registrationData.member_passport_expiry_date || ''}
-                  errorText={this.props.fieldsErrors.member_passport_expiry_date}
+                  value={userData.identification_passport_date_of_expiry || ''}
+                  errorText={this.props.fieldsErrors.identification_passport_date_of_expiry}
                   col={6}
                   dateExpiry
                 />
@@ -84,41 +97,38 @@ class Regulatory extends Component {
               <h2 className="title-part">Drivers License</h2>
               <div className="row margin-bt-30">
                 <EmpalaSelect
-                  key="member-passport-countryOfIssue"
-                  id="member_passport_countryOfIssue"
+                  id="identification_drivers_license_country_of_issue"
                   label="Country of issue"
                   options={countriesList}
-                  value={this.props.registrationData.member_passport_countryOfIssue || ''}
+                  value={userData.identification_drivers_license_country_of_issue || ''}
                   handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors.member_passport_countryOfIssue}
+                  errorText={this.props.fieldsErrors.identification_drivers_license_country_of_issue}
                   hint="Please select"
                   autoWidth
                 />
                 <EmpalaInput
-                  key="member-passport-number"
-                  id="member_passport_number"
+                  id="identification_drivers_license_document_number"
                   type="text"
-                  label="Passport no."
-                  value={this.props.registrationData.member_passport_number || ''}
+                  label="Drivers license no."
+                  value={userData.identification_drivers_license_document_number || ''}
                   handleChange={this.props.setInputValueById}
-                  errorText={this.props.fieldsErrors.member_passport_number}
-                  mask="a999999999"
+                  errorText={this.props.fieldsErrors.identification_drivers_license_document_number}
                 />
                 <DatePickerField
-                  id="member_passport_issue_date"
+                  id="dentification_drivers_license_issue_date"
                   label="Date of issue"
                   handleDatePick={this.props.setPickedDate}
-                  value={this.props.registrationData.member_passport_issue_date || ''}
-                  errorText={this.props.fieldsErrors.member_passport_issue_date}
+                  value={userData.identification_drivers_license_date_of_issue || ''}
+                  errorText={this.props.fieldsErrors.identification_drivers_license_date_of_issue}
                   col={6}
                   dateIssue
                 />
                 <DatePickerField
-                  id="member_passport_expiry_date"
+                  id="dentification_drivers_license_expiry_date"
                   label="Date of expiry"
                   handleDatePick={this.props.setPickedDate}
-                  value={this.props.registrationData.member_passport_expiry_date || ''}
-                  errorText={this.props.fieldsErrors.member_passport_expiry_date}
+                  value={userData.identification_drivers_license_date_of_expiry || ''}
+                  errorText={this.props.fieldsErrors.identification_drivers_license_date_of_expiry}
                   col={6}
                   dateExpiry
                 />
@@ -135,8 +145,8 @@ class Regulatory extends Component {
 
 export default connect(
   state => ({
-    registrationData: state.registration.registrationData,
-    fieldsErrors: state.registration.fieldsErrors,
+    userData: state.dashboard.userData.data || {},
+    fieldsErrors: state.dashboard.fieldsErrors || {},
   }),
   (dispatch => ({
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),

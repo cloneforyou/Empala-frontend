@@ -19,7 +19,7 @@ class FullName extends Component {
   }
 
   render() {
-    const { field } = this.props;
+    const { field, userData, fieldsErrors } = this.props;
     const { formIsOpen } = this.state;
     return (
       <div className="name-edit col-12">
@@ -36,7 +36,10 @@ class FullName extends Component {
 
         <div className={formIsOpen ? 'name-edit__form' : 'name-edit__form  name-edit__form_close'}>
           <div className="row">
-            {fieldsFullName.map(item => <FormGroupMapping item={item} />)}
+            {fieldsFullName.map(item => <FormGroupMapping
+              item={item}
+              userData={userData}
+              fieldsErrors={fieldsErrors} />)}
           </div>
         </div>
 
