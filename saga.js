@@ -19,6 +19,8 @@ import {
   SEND_ACTIVATION_LINK_REQUEST,
   UNBLOCK_REQUEST,
 } from './constants/auth';
+import { UPDATE_PROFILE_REQUEST } from './constants/profile';
+import { sendProfileData } from './saga/profile';
 
 
 es6promise.polyfill();
@@ -36,6 +38,7 @@ function* rootSaga() {
     takeLatest(SEND_ACTIVATION_LINK_REQUEST, sendActivationLink),
     takeLatest(UNBLOCK_REQUEST, unblockAccount),
     takeLatest(PASSWORD_UPDATE_REQUEST, changePassword),
+    takeLatest(UPDATE_PROFILE_REQUEST, sendProfileData),
     takeEvery(CLEAR_REGISTRATION_DATA, clearLocalData),
   ]);
 }

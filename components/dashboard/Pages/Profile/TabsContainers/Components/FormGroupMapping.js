@@ -12,12 +12,13 @@ export default class FormGroupMapping extends Component {
   render() {
     let mask = '';
     const { item, userData, fieldsErrors } = this.props;
+    const disabled = userData.profile_employment_employment_type !== 'Employed'
+      && /profile_employment/.test(item.id) && item.id !== 'profile_employment_employment_type';
     if (!userData) return false;
     const phoneMask = '+9 999 999-9999';
     if (item.id && item.id.includes('phone')) {
       mask = phoneMask;
     }
-
     if (item.options) {
       return (
         <EmpalaSelect
@@ -30,6 +31,7 @@ export default class FormGroupMapping extends Component {
           errorText={fieldsErrors[item.id]}
           col={item.col}
           hint={item.hint || item.label}
+          disabled={disabled}
         />
       );
     } else if (item.type && item.type === 'checkbox') {
@@ -44,11 +46,7 @@ export default class FormGroupMapping extends Component {
       );
     } else if (item.label === 'Full name') {
       return (
-        <FullName
-          field={item}
-          fieldsErrors={fieldsErrors}
-          key={item.id}
-        />
+        <FullName {...this.props} />
       );
     }
     return (
@@ -57,13 +55,14 @@ export default class FormGroupMapping extends Component {
         id={item.id}
         type={item.type}
         label={item.label}
-        value={userData[item.id] || ''}
+        value={(userData[item.id] === 'Not available' ? '' : userData[item.id]) || ''}
         handleChange={this.props.setInputValueById}
         errorText={fieldsErrors[item.id]}
         placeholder={item.placeholder}
         col={item.col}
         mask={mask}
         typeField={item.typeField}
+        disabled={disabled}
       />
     );
   }

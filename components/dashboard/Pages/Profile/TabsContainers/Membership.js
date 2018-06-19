@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Footer from './Components/Footer';
 import UploadImage from '../UploadImage';
-import FormGroupMapping from './Components/FormGroupMapping';
 import {
   fieldsMembership,
   fieldsResidentialAddress,
@@ -11,32 +10,30 @@ import {
   fieldsMemberPersonal,
   fieldResetPassword,
 } from '../../../../../localdata/profileData';
-import avatar from '../../../../../static/images/avatar-user.svg';
 import { openModal } from '../../../../../actions/dashboard';
 import DeleteAccountModal from './Components/DeleteAccountModal';
-import { toggleCheckboxById } from '../../../../../actions/registration';
+import { getInfoByZipCode, setInputFieldValueById, toggleCheckboxById } from '../../../../../actions/registration';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../../registration/EmpalaInput';
 import FullName from './Components/FullName';
 import DatePickerField from '../../../../registration/DatePickerField';
-import {flattenObject} from '../../../../../utils/additional';
 
 class Membership extends Component {
   // TODO format for created at, date of birth fields
-  // TODO process fullName
   constructor(props) {
     super(props);
     this.mappingComponent = (item, userData) => {
       let mask = '';
       const phoneMask = '+9 999 999-9999';
-      if (item.id.includes('phone')) {
+      const ssnMask = '999-99-9999';
+      if (item.id.includes('ssn')) {
+        mask = ssnMask;
+      } else if (item.id.includes('phone')) {
         mask = phoneMask;
       }
-      if (item.label === 'Full name') return <FullName
-        field={item}
-        userData={userData}
-        fieldsErrors={this.props.fieldsErrors}
-      />;
+      if (item.label === 'Full name') {
+        return (<FullName {...{ ...this.props, field: item, key: item.id }} />);
+      }
       switch (item.field) {
         case 'select':
           return (
@@ -78,6 +75,7 @@ class Membership extends Component {
               col={item.col}
               mask={mask}
               typeField={item.typeField}
+              disabled={item.disabled}
             />
           );
       }
@@ -85,12 +83,7 @@ class Membership extends Component {
   }
 
   render() {
-    const flattenUserData = flattenObject(this.props.userData.profile);
-    const userData = {};
-    Object.keys(flattenUserData).forEach((key) => {
-      userData[key.replace(/^Member/, '').toLowerCase()] = flattenUserData[key];
-    });
-    console.log('proff1', userData);
+    const { userData } = this.props;
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
@@ -99,26 +92,28 @@ class Membership extends Component {
             <div className="col-md-6">
               <div className="row margin-bt-30">
                 {fieldsMembership.map(item => this.mappingComponent(item, userData))}
-                {/* {fieldsMembership.map(item => <FormGroupMapping item={item} userData={userData} />)}; */}
               </div>
             </div>
             <div className="col-md-6">
               <div className="row">
                 <div className="col-lg-8">
                   {fieldsMemberPersonal.map(item => this.mappingComponent(item, userData))}
-                  {/* {fieldsMemberPersonal.map(item => <FormGroupMapping item={item} userData={userData} />)}; */}
                 </div>
                 <div className="col-lg-4 text-center">
                   <div
                     className="profile-image"
                     onClick={this.props.showUploadDialog}
                   >
-                    <img src={avatar} alt="" />
+                    <img src={userData.basic_information_avatarlink} alt="" />
                   </div>
                   <button className="default-btn">Edit</button>
                 </div>
               </div>
-              {fieldResetPassword.map(item => this.mappingComponent(item, userData))}
+              <button
+                className="green-btn pseudo-input"
+                onClick={this.props.handlePasswordReset}
+              >Reset password
+              </button>
             </div>
           </div>
           <div className="row margin-bt-30">
@@ -129,7 +124,16 @@ class Membership extends Component {
               </div>
               <h2 className="title-part">Personal Wealth</h2>
               <div className="row">
-                {fieldsPersonalWealth.map(item => this.mappingComponent(item, userData))}
+                {fieldsPersonalWealth.map((item) => {
+                  if (item.id === 'profile_financials_liquid_net_worth' && this.props.userData.profile_financials_total_net_worth) {
+                    const filteredOptions = item.options.filter(option =>
+                      (option.value.length < this.props.userData.profile_financials_total_net_worth.length ||
+                        (option.value.length === this.props.userData.profile_financials_total_net_worth.length &&
+                          option.value[0] <= this.props.userData.profile_financials_total_net_worth[0])));
+                    return this.mappingComponent({ ...item, options: filteredOptions }, userData);
+                  }
+                    return this.mappingComponent(item, userData);
+                })}
               </div>
             </div>
             <div className="col-md-6">
@@ -149,13 +153,23 @@ class Membership extends Component {
 }
 
 
-
 export default connect(state => ({
-  userData: state.dashboard.userData.data || {},
-  fieldsErrors: state.dashboard.fieldsErrors || {},
+  userData: state.profile.profileUserData || {},
+  fieldsErrors: state.profile.fieldsErrors || {},
 }), (dispatch => ({
-    setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
+    setInputValueById: (e) => {
+      const { id, value } = e.target;
+      if (/zip_code/.test(id)) {
+        if (value.length === 5) {
+          dispatch(getInfoByZipCode(id, value));
+        } else if (value.length > 5) { return false; }
+      }
+      dispatch(setInputFieldValueById(id, value));
+      return false;
+    },
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     showUploadDialog: () => dispatch(openModal('uploadImage')),
     toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
+    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+    handlePasswordReset: () => console.log('=====> PASSSWORD RESET <====='), // TODO reset password
   })))(Membership);
