@@ -36,11 +36,7 @@ class Membership extends Component {
         mask = phoneMask;
       }
       if (item.label === 'Full name') {
-        return (<FullName
-          field={item}
-          userData={userData}
-          fieldsErrors={this.props.fieldsErrors}
-        />);
+        return (<FullName {...{ ...this.props, field: item, key: item.id }} />);
       }
       switch (item.field) {
         case 'select':

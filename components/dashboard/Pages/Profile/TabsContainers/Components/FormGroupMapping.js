@@ -17,7 +17,6 @@ export default class FormGroupMapping extends Component {
     if (item.id && item.id.includes('phone')) {
       mask = phoneMask;
     }
-
     if (item.options) {
       return (
         <EmpalaSelect
@@ -44,11 +43,7 @@ export default class FormGroupMapping extends Component {
       );
     } else if (item.label === 'Full name') {
       return (
-        <FullName
-          field={item}
-          fieldsErrors={fieldsErrors}
-          key={item.id}
-        />
+        <FullName {...this.props} />
       );
     }
     return (

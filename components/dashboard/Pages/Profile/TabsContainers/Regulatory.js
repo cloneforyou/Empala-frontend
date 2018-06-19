@@ -9,9 +9,8 @@ import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
 } from '../../../../../localdata/profileData';
-import {getInfoByZipCode, setInputFieldValueById} from '../../../../../actions/registration';
+import { getInfoByZipCode, setInputFieldValueById } from '../../../../../actions/registration';
 import { countriesList } from '../../../../../localdata/countriesList';
-import {flattenObject} from '../../../../../utils/additional';
 
 class Regulatory extends Component {
   constructor(props) {
@@ -139,7 +138,7 @@ export default connect(
     userData: state.profile.profileUserData || {},
     fieldsErrors: state.dashboard.fieldsErrors || {},
   }),
-  (dispatch => ({
+  dispatch => ({
     setInputValueById: (e) => {
       const { id, value } = e.target;
       if (/zip_code/.test(id)) {
@@ -152,5 +151,5 @@ export default connect(
     },
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  })),
+  }),
 )(Regulatory);
