@@ -56,6 +56,10 @@
   color: $yellow !important;
 }
 
+.white {
+  color: $white;
+}
+
 .btn-default {
   background: none;
   border: 2px solid;
@@ -87,4 +91,22 @@
       margin-bottom: 25px;
     }
   }
+}
+
+.no-borders {
+  border: none !important;
+}
+
+.vertical-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.fw-300 {
+  font-weight: 300;
+}
+
+.simple-box-shadow {
+  box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.16);
 }
