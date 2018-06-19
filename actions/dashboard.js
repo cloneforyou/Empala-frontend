@@ -17,7 +17,7 @@ import {
   CLEAN_ERROR_TEXT,
   DELETE_ACCOUNT_REQUEST,
   DELETE_ACCOUNT_FAIL,
-  DELETE_ACCOUNT_SUCCESS, LOGOUT,
+  DELETE_ACCOUNT_SUCCESS, LOGOUT, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS,
 } from '../constants/dashboard';
 import {SET_FIELD_VALUE} from "../constants/registration";
 
@@ -135,6 +135,20 @@ export const deleteAccountFail = err => ({
 
 export const deleteAccountSuccess = () => ({
   type: DELETE_ACCOUNT_SUCCESS,
+});
+
+
+export const resetPassword = () => ({
+  type: RESET_PASSWORD_REQUEST,
+});
+
+export const resetPasswordFail = err => ({
+  type: RESET_PASSWORD_FAIL,
+  err,
+});
+
+export const resetPasswordSuccess = () => ({
+  type: RESET_PASSWORD_SUCCESS,
 });
 
 export const logout = () => ({

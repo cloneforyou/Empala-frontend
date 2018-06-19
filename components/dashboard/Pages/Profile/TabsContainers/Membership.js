@@ -17,6 +17,7 @@ import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../../registration/EmpalaInput';
 import FullName from './Components/FullName';
 import DatePickerField from '../../../../registration/DatePickerField';
+import ResetPasswordModal from '../ResetPasswordModal';
 
 class Membership extends Component {
   // TODO format for created at, date of birth fields
@@ -111,7 +112,7 @@ class Membership extends Component {
               </div>
               <button
                 className="green-btn pseudo-input"
-                onClick={this.props.handlePasswordReset}
+                onClick={this.props.showResetModal}
               >Reset password
               </button>
             </div>
@@ -147,6 +148,7 @@ class Membership extends Component {
         </div>
         <UploadImage />
         <DeleteAccountModal />
+        <ResetPasswordModal />
       </div>
     );
   }
@@ -171,5 +173,5 @@ export default connect(state => ({
     showUploadDialog: () => dispatch(openModal('uploadImage')),
     toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-    handlePasswordReset: () => console.log('=====> PASSSWORD RESET <====='), // TODO reset password
+    showResetModal: () => dispatch(openModal('resetPassword')),
   })))(Membership);
