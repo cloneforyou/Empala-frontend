@@ -55,12 +55,11 @@ const UserEmailForm = props => (
     >Go back
     </span>
     }
-    <FlatButton
-      label="Send a link"
-      style={{ ...style.loginBtn, width: 'auto', padding: '0 5px' }}
-      labelStyle={style.labelLoginBtn}
+    <button
+      className="login__btn"
       onClick={props.handleClick}
-    />
+    >Send a link
+    </button>
   </form>
 );
 const ConfirmationText = (props) => {
@@ -157,7 +156,7 @@ const Login = (props) => {
             >
               Forgot password?
             </a>
-            <button className="login__btn" onClick={props.handleLogin}>Log in</button>
+            <button className="login__btn" onClick={props.handleLogin}>SIGN IN</button>
           </div>
           <div className="social-auth">
             <div className="styled-part-separate"><span>or connect with</span></div>
