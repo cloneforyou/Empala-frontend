@@ -110,3 +110,12 @@
 .simple-box-shadow {
   box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.16);
 }
+
+.green-link {
+  color: $green;
+  font-weight: normal;
+  @include fontSize(14px);
+  &:hover, &:focus {
+    color: $green;
+  }
+}

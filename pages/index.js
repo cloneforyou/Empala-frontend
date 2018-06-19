@@ -20,7 +20,7 @@ class Index extends React.PureComponent {
       <MuiThemeProvider>
         <div>
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
-          <Header />
+          <Header login />
           <div className="index_placeholder noselect no-borders simple-box-shadow">
             <div className="container-fluid">
               <Login />

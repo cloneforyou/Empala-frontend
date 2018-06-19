@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { connect } from 'react-redux';
 import EmpalaInput from '../registration/EmpalaInput';
 import { GREEN, TORCH_RED, WHITE } from '../../constants/colors';
@@ -130,9 +131,6 @@ const Login = (props) => {
       <div className="col-6 login__part">
         <div className="login__content ">
           <h3 className="login__title fw-300">Login to your account</h3>
-          {/*<Link href="/registration">
-          <span className="index_placeholder__link"> register</span>
-        </Link>*/}
           <div className="login__form-width no-gutters clear-fix">
             <EmpalaInput
               key="username"
@@ -165,6 +163,9 @@ const Login = (props) => {
               <GoogleAuth handlelogin={props.handleLogin} />
               <button className="social-btn social-btn__linkedin">linkedin</button>
             </div>
+          </div>
+          <div className="text-center">
+            <Link href="/registration"><a className="green-link">Registration</a></Link>
           </div>
           <RegistrationModal
             handleClose={props.handleModalCancel}
