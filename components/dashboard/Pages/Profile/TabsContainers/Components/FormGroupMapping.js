@@ -68,3 +68,8 @@ export default class FormGroupMapping extends Component {
   }
 }
 
+FormGroupMapping.defaultProps = {
+  userData: {},
+  fieldsErrors: {},
+  checkboxes: {},
+};
