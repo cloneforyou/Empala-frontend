@@ -45,8 +45,14 @@
 }
 
 .default-btn {
+   @include button-reset;
+   color: $main-color-text-grey;
+   @include fontSize(16px);
+ }
+
+.green-btn {
   @include button-reset;
-  color: $main-color-text-grey;
+  color: $green;
   @include fontSize(16px);
 }
 

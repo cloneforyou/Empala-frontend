@@ -24,10 +24,6 @@ class Experience extends Component {
             <div className="col-md-6">
               <div className="row margin-bt-30">
                 {fieldsInvestmentExperienceOne.map(item => (<FormGroupMapping
-                  // key={item.id}
-                  // item={item}
-                  // userData={userData}
-                  // fieldsErrors={this.props.fieldsErrors}
                   {...{ ...this.props, item, key: item.id }}
                 />))}
               </div>
@@ -35,10 +31,6 @@ class Experience extends Component {
             <div className="col-md-6">
               <div className="row margin-bt-30">
                 {fieldsInvestmentExperienceTwo.map(item => (<FormGroupMapping
-                  // key={item.id}
-                  // item={item}
-                  // userData={userData}
-                  // fieldsErrors={this.props.fieldsErrors}
                   {...{ ...this.props, item, key: item.id }}
                 />))}
               </div>
@@ -55,7 +47,7 @@ class Experience extends Component {
 export default connect(
   state => ({
     userData: state.profile.profileUserData || {},
-    fieldsErrors: state.dashboard.fieldsErrors || {},
+    fieldsErrors: state.profile.fieldsErrors || {},
   }),
   (dispatch => ({
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),

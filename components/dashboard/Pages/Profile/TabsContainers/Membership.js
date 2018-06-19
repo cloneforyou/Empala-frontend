@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Footer from './Components/Footer';
 import UploadImage from '../UploadImage';
-import FormGroupMapping from './Components/FormGroupMapping';
 import {
   fieldsMembership,
   fieldsResidentialAddress,
@@ -11,7 +10,6 @@ import {
   fieldsMemberPersonal,
   fieldResetPassword,
 } from '../../../../../localdata/profileData';
-import avatar from '../../../../../static/images/avatar-user.svg';
 import { openModal } from '../../../../../actions/dashboard';
 import DeleteAccountModal from './Components/DeleteAccountModal';
 import { getInfoByZipCode, setInputFieldValueById, toggleCheckboxById } from '../../../../../actions/registration';
@@ -19,7 +17,6 @@ import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../../registration/EmpalaInput';
 import FullName from './Components/FullName';
 import DatePickerField from '../../../../registration/DatePickerField';
-import { flattenObject } from '../../../../../utils/additional';
 
 class Membership extends Component {
   // TODO format for created at, date of birth fields
@@ -113,7 +110,12 @@ class Membership extends Component {
                   <button className="default-btn">Edit</button>
                 </div>
               </div>
-              {fieldResetPassword.map(item => this.mappingComponent(item, userData))} {/* TODO convert to button */}
+              {/* {fieldResetPassword.map(item => this.mappingComponent(item, userData))} /!* TODO convert to button *!/ */}
+              <button
+                className="green-btn pseudo-input"
+                onClick={this.props.handlePasswordReset}
+              >Reset password
+              </button>
             </div>
           </div>
           <div className="row margin-bt-30">
@@ -124,7 +126,16 @@ class Membership extends Component {
               </div>
               <h2 className="title-part">Personal Wealth</h2>
               <div className="row">
-                {fieldsPersonalWealth.map(item => this.mappingComponent(item, userData))}
+                {fieldsPersonalWealth.map((item) => {
+                  if (item.id === 'profile_financials_liquid_net_worth' && this.props.userData.profile_financials_total_net_worth) {
+                    const filteredOptions = item.options.filter(option =>
+                      (option.value.length < this.props.userData.profile_financials_total_net_worth.length ||
+                        (option.value.length === this.props.userData.profile_financials_total_net_worth.length &&
+                          option.value[0] <= this.props.userData.profile_financials_total_net_worth[0])));
+                    return this.mappingComponent({ ...item, options: filteredOptions }, userData);
+                  }
+                    return this.mappingComponent(item, userData);
+                })}
               </div>
             </div>
             <div className="col-md-6">
@@ -146,7 +157,7 @@ class Membership extends Component {
 
 export default connect(state => ({
   userData: state.profile.profileUserData || {},
-  fieldsErrors: state.dashboard.fieldsErrors || {},
+  fieldsErrors: state.profile.fieldsErrors || {},
 }), (dispatch => ({
     setInputValueById: (e) => {
       const { id, value } = e.target;
@@ -162,4 +173,5 @@ export default connect(state => ({
     showUploadDialog: () => dispatch(openModal('uploadImage')),
     toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+    handlePasswordReset: () => console.log('=====> PASSSWORD RESET <====='),
   })))(Membership);

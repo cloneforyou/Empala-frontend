@@ -9,7 +9,7 @@ import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
 } from '../../../../../localdata/profileData';
-import { getInfoByZipCode, setInputFieldValueById } from '../../../../../actions/registration';
+import {getInfoByZipCode, setInputFieldValueById, validateFieldValue} from '../../../../../actions/registration';
 import { countriesList } from '../../../../../localdata/countriesList';
 
 class Regulatory extends Component {
@@ -136,7 +136,7 @@ class Regulatory extends Component {
 export default connect(
   state => ({
     userData: state.profile.profileUserData || {},
-    fieldsErrors: state.dashboard.fieldsErrors || {},
+    fieldsErrors: state.profile.fieldsErrors || {},
   }),
   dispatch => ({
     setInputValueById: (e) => {
@@ -149,7 +149,10 @@ export default connect(
       dispatch(setInputFieldValueById(id, value));
       return false;
     },
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+    setSelectedValueById: (id, value) => {
+      dispatch(setInputFieldValueById(id, value));
+      dispatch(validateFieldValue(id, value));
+    },
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
   }),
 )(Regulatory);

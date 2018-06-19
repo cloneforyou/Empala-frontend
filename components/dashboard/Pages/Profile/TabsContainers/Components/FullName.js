@@ -43,13 +43,14 @@ class FullName extends Component {
             className="pseudo-input__input"
             value={this.getFullName(this.props.userData) || 'Mr. Iain David James Clarke Sr.'}
             onFocus={this.openEditForm}
+            readOnly
           />
         </div>
 
 
         <div className={formIsOpen ? 'name-edit__form' : 'name-edit__form  name-edit__form_close'}>
           <div className="row">
-            {fieldsFullName.map(item => <FormGroupMapping {...{...this.props, item}} />)}
+            {fieldsFullName.map(item => <FormGroupMapping key={item.id} {...{...this.props, item}} />)}
           </div>
         </div>
 

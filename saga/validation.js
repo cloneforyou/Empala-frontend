@@ -76,6 +76,7 @@ export function* validateEmptyFields(action) {
 }
 
 export function* validateFieldValue({ fieldId, fieldValue }) {
+  console.log('vvvval')
   if (fieldId === 'identity_residential_address_residential_address_line_1' ||
     fieldId === 'identity_residential_address_residential_address_line_2') {
     if (fieldValue && (fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '').includes('pobox') ||
@@ -89,15 +90,21 @@ export function* validateFieldValue({ fieldId, fieldValue }) {
     }
   }
   if (fieldId === 'profile_employment_employment_type' && fieldValue !== 'Employed') {
-    const data = yield select(state => state.registration.registrationData);
+    console.log('dsfsdsfsdf')
+    let data = yield select(state => state.registration.registrationData);
+    if (!data.profile_employment_employment_type) {
+      data = yield select(state => state.profile.profileUserData);
+    }
     const employementFields = Object.keys(data).filter(key => (/profile_employment/.test(key) && key !== 'profile_employment_employment_type'));
     yield all(employementFields.map(field => put(setInputFieldValueById(field, ''))));
   }
 }
 
 export function* validateLiquidWorth({ value }) {
-  const data = yield select(state => state.registration.registrationData);
-  const liquidNetWorth = data['profile_financials_liquid_net_worth'] || '';
+  const registrationData = yield select(state => state.registration.registrationData);
+  const profileData = yield select(state => state.profile.profileUserData);
+  const liquidNetWorth = registrationData['profile_financials_liquid_net_worth'] ||
+    profileData['profile_financials_liquid_net_worth'] || '';
   if (value.length < liquidNetWorth.length ||
     (value.length === liquidNetWorth.length && value[0] <= liquidNetWorth[0])) {
     yield put(setInputFieldValueById('profile_financials_liquid_net_worth', ''));

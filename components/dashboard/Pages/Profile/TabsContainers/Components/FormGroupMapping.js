@@ -12,6 +12,8 @@ export default class FormGroupMapping extends Component {
   render() {
     let mask = '';
     const { item, userData, fieldsErrors } = this.props;
+    const disabled = userData.profile_employment_employment_type !== 'Employed'
+      && /profile_employment/.test(item.id) && item.id !== 'profile_employment_employment_type';
     if (!userData) return false;
     const phoneMask = '+9 999 999-9999';
     if (item.id && item.id.includes('phone')) {
@@ -29,6 +31,7 @@ export default class FormGroupMapping extends Component {
           errorText={fieldsErrors[item.id]}
           col={item.col}
           hint={item.hint || item.label}
+          disabled={disabled}
         />
       );
     } else if (item.type && item.type === 'checkbox') {
@@ -59,6 +62,7 @@ export default class FormGroupMapping extends Component {
         col={item.col}
         mask={mask}
         typeField={item.typeField}
+        disabled={disabled}
       />
     );
   }
