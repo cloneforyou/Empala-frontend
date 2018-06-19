@@ -20,7 +20,6 @@ import DatePickerField from '../../../../registration/DatePickerField';
 
 class Membership extends Component {
   // TODO format for created at, date of birth fields
-  // TODO process fullName
   constructor(props) {
     super(props);
     this.mappingComponent = (item, userData) => {
@@ -84,7 +83,7 @@ class Membership extends Component {
   }
 
   render() {
-    const userData = this.props.userData;
+    const { userData } = this.props;
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
@@ -110,7 +109,6 @@ class Membership extends Component {
                   <button className="default-btn">Edit</button>
                 </div>
               </div>
-              {/* {fieldResetPassword.map(item => this.mappingComponent(item, userData))} /!* TODO convert to button *!/ */}
               <button
                 className="green-btn pseudo-input"
                 onClick={this.props.handlePasswordReset}
@@ -173,5 +171,5 @@ export default connect(state => ({
     showUploadDialog: () => dispatch(openModal('uploadImage')),
     toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-    handlePasswordReset: () => console.log('=====> PASSSWORD RESET <====='),
+    handlePasswordReset: () => console.log('=====> PASSSWORD RESET <====='), // TODO reset password
   })))(Membership);

@@ -76,7 +76,6 @@ export function* validateEmptyFields(action) {
 }
 
 export function* validateFieldValue({ fieldId, fieldValue }) {
-  console.log('vvvval')
   if (fieldId === 'identity_residential_address_residential_address_line_1' ||
     fieldId === 'identity_residential_address_residential_address_line_2') {
     if (fieldValue && (fieldValue.toLowerCase().replace(/[&/\\#,+()$~%.'":*?<>{} ]/g, '').includes('pobox') ||
@@ -90,7 +89,6 @@ export function* validateFieldValue({ fieldId, fieldValue }) {
     }
   }
   if (fieldId === 'profile_employment_employment_type' && fieldValue !== 'Employed') {
-    console.log('dsfsdsfsdf')
     let data = yield select(state => state.registration.registrationData);
     if (!data.profile_employment_employment_type) {
       data = yield select(state => state.profile.profileUserData);
