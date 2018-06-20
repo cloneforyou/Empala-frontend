@@ -34,7 +34,8 @@ const style = {
   markedText_link: {
     cursor: 'pointer',
     fontSize: '.9rem',
-    verticalAlign: 'text-top',
+    verticalAlign: 'top',
+    display: 'inline-block',
   },
 };
 
@@ -59,6 +60,7 @@ const UserEmailForm = props => (
     <button
       className="login__btn"
       onClick={props.handleClick}
+      type="button"
     >Send a link
     </button>
   </form>
