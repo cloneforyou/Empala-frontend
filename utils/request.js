@@ -32,6 +32,11 @@ export default function request(url, options = {}) {
         return new Error('Password was already used');
       }
     }
+    if (err.response && err.response.status === 400) {
+      if (err.response.data.info === 'MATCHING_PASSWORDS') {
+        return new Error('New password matches old password');
+      }
+    }
     return false;
   }
   return axios({

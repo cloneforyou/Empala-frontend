@@ -4,7 +4,9 @@ import {
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
-  PASSWORD_UPDATE_REQUEST, PASSWORD_UPDATE_REQUEST_FAIL, PASSWORD_UPDATE_REQUEST_SUCCESS,
+  PASSWORD_UPDATE_REQUEST,
+  PASSWORD_UPDATE_REQUEST_FAIL,
+  PASSWORD_UPDATE_REQUEST_SUCCESS,
   SEND_ACTIVATION_LINK_FAIL,
   SEND_ACTIVATION_LINK_REQUEST,
   SEND_ACTIVATION_LINK_SUCCESS,
@@ -32,8 +34,8 @@ export function loginSuccess() {
 export function loginRequest(provider, token) {
   return {
     type: LOGIN_REQUEST,
-    provider: provider || null,
-    token: token || null,
+    provider,
+    token,
   };
 }
 

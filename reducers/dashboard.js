@@ -17,6 +17,7 @@ import {
   DELETE_ACCOUNT_FAIL,
   DELETE_ACCOUNT_SUCCESS,
 } from '../constants/dashboard';
+import {RESET_PASSWORD_FAIL} from '../constants/profile';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -92,6 +93,7 @@ function dashboard(state = initialState, action) {
       };
     case UPLOAD_IMAGE_FAIL:
     case DELETE_ACCOUNT_FAIL:
+    case RESET_PASSWORD_FAIL:
       return {
         ...state,
         loading: false,
