@@ -36,6 +36,7 @@ const style = {
     fontSize: '.9rem',
     verticalAlign: 'top',
     display: 'inline-block',
+    margin: '10px 0',
   },
 };
 
