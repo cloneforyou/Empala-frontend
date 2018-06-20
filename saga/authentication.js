@@ -71,16 +71,15 @@ export function* authenticate({ provider, token }) {
         password,
       };
   }
-  if (provider || (email && password)) {
-    yield loginRequest(url, options);
-    return false;
+  if (provider === 'local') {
+    if (!email) {
+      yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
+    }
+    if (!password) {
+      return yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
+    }
   }
-  if (!email) {
-    yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
-  }
-  if (!password) {
-    yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
-  }
+  yield loginRequest(url, options);
 }
 
 export function* refreshTokens() {

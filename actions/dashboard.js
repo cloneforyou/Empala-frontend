@@ -137,20 +137,6 @@ export const deleteAccountSuccess = () => ({
   type: DELETE_ACCOUNT_SUCCESS,
 });
 
-
-export const resetPassword = () => ({
-  type: RESET_PASSWORD_REQUEST,
-});
-
-export const resetPasswordFail = err => ({
-  type: RESET_PASSWORD_FAIL,
-  err,
-});
-
-export const resetPasswordSuccess = () => ({
-  type: RESET_PASSWORD_SUCCESS,
-});
-
 export const logout = () => ({
   type: LOGOUT,
 });

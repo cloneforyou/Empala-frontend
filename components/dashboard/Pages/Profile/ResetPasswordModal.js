@@ -9,20 +9,27 @@ import EmpalaInput from '../../../registration/EmpalaInput';
 import {
   cleanErrorText,
   closeModal,
-  resetPassword,
   setInputFieldValueById,
 } from '../../../../actions/dashboard';
+import { resetPassword } from '../../../../actions/profile';
 
+const styles = {
+  formWrapper: {
+    width: '350px',
+    margin: '10px auto',
+    textAlign: 'left',
+  },
+};
 const ResetPasswordModal = (props) => {
   const actions = [
     <FlatButton
-      label="No, thanks"
+      label="Cancel"
       style={style.cancelBtn}
       labelStyle={style.labelCancelBtn}
       onClick={props.handleClose}
     />,
     <FlatButton
-      label="Yes, register"
+      label="Save"
       style={style.returnBtn}
       labelStyle={style.labelReturnBtn}
       onClick={props.submitReset}
@@ -41,13 +48,13 @@ const ResetPasswordModal = (props) => {
       // style={this.styles.style}
     >
       <p>Please provide new password for your account</p>
-      <div>
+      <div style={styles.formWrapper}>
         <EmpalaInput
           key="reset_password"
           id="reset_password"
           type="password"
           label="New password"
-          handleChange={e => props.setInputValueById(e)}
+          handleChange={props.setInputValue}
           errorText={props.fieldsErrorText.reset_password}
           value={props.password}
         />
@@ -56,16 +63,21 @@ const ResetPasswordModal = (props) => {
           id="reset_password_confirm"
           type="password"
           label="Confirm new password"
-          handleChange={e => props.setInputValueById(e)}
+          handleChange={props.setInputValue}
           errorText={props.fieldsErrorText.reset_password_confirm}
           value={props.passwordConfirm}
         />
-        {/* <FlatButton */}
-        {/* label="Save" */}
-        {/* style={style.submitBtn} */}
-        {/* labelStyle={style.labelSubmitBtn} */}
-        {/* onClick={handleSubmit} */}
-        {/* /> */}
+        <p>Type in old password here</p>
+        <EmpalaInput
+          key="reset_password_old"
+          id="reset_password_old"
+          type="password"
+          label="Old password"
+          handleChange={props.setInputValue}
+          errorText={props.errorText === 'Invalid credentials' ? 'Wrong password' : props.fieldsErrorText.reset_password_old}
+          value={props.oldPassword}
+        />
+        <p className="errorText">{props.errorText}</p>
       </div>
     </Dialog>
   );
@@ -82,6 +94,9 @@ const mapStateToProps = state => (
     open: state.dashboard.modalOpen && state.dashboard.openModalName === 'resetPassword',
     errorText: state.dashboard.error,
     fieldsErrorText: state.profile.fieldsErrors,
+    password: state.profile.profileUserData.reset_password,
+    oldPassword: state.profile.profileUserData.reset_password_old,
+    passwordConfirm: state.profile.profileUserData.reset_password_confirm,
   }
 );
 
