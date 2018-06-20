@@ -40,7 +40,7 @@ class Dashboard extends Component {
       <MuiThemeProvider>
         <div>
           <Head>
-            <title>Dashbord - {activePageTitle[0].toUpperCase() + activePageTitle.slice(1)}</title>
+            <title>Dashboard - {activePageTitle[0].toUpperCase() + activePageTitle.slice(1)}</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
           </Head>
           <div className="full-height-wrap">
