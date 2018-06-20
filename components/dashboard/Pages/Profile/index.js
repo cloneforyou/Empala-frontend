@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -10,6 +11,7 @@ import Regulatory from './TabsContainers/Regulatory';
 import Experience from './TabsContainers/Experience';
 import Documents from './TabsContainers/Documents';
 import OrderConfig from './TabsContainers/OrderConfig';
+import { getActiveTabProfile, changeActiveTabProfile } from '../../../../actions/profile';
 
 function TabContainer(props) {
   return (
@@ -32,18 +34,28 @@ const styles = theme => ({
 
 });
 
-class Profile extends Component {
-  state = {
-    value: 0,
+function mapStateToProps(state) {
+  return {
+    tabValue: state.profile.tabValue,
   };
+}
+
+function mapDispatchToProps(dispatch) {
+  return ({
+    getActiveTabProfile: () => dispatch(getActiveTabProfile()),
+    changeActiveTabProfile: (value) => dispatch(changeActiveTabProfile(value)),
+  });
+}
+
+class Profile extends Component {
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.props.changeActiveTabProfile(value);
   };
 
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
+    const value = this.props.tabValue;
 
     return (
       <div className={classes.root + ' tabs-line'}>
@@ -80,4 +92,4 @@ Profile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Profile);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile));
