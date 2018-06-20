@@ -1,3 +1,7 @@
+import {
+  GET_ACTIVE_TAB_PROFILE,
+  CHANGE_ACTIVE_TAB_PROFILE,
+} from '../constants/profile';
 import { GET_USER_DATA_SUCCESS, SET_FIELD_VALUE } from '../constants/dashboard';
 import { flattenObject, renameKeys } from '../utils/additional';
 import {VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS} from '../constants/registration';
@@ -5,10 +9,15 @@ import {VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS} from '../constants/registr
 const initialState = {
   profileUserData: {},
   fieldsErrors: false,
+  tabValue: 0,
 };
 
 function profile(state = initialState, action) {
   switch (action.type) {
+    case GET_ACTIVE_TAB_PROFILE:
+      return { ...state, tabValue: action.tabValue };
+    case CHANGE_ACTIVE_TAB_PROFILE:
+      return { ...state, tabValue: action.activeTab };
     case GET_USER_DATA_SUCCESS:
       return {
         ...state,

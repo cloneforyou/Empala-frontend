@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from '../../../routes';
 import avatar from '../../../static/images/avatar-user.svg';
-import { logout } from '../../../actions/dashboard';
+import { logout, setActivePage } from '../../../actions/dashboard';
+import { changeActiveTabProfile } from '../../../actions/profile';
 
 const DropdownMenu = (props) => {
   const { menuAvatarShow } = props;
@@ -29,19 +31,47 @@ const DropdownMenu = (props) => {
       </div>
       <h3 className="profile-menu__title">Membership settings</h3>
       <ul className="profile-menu__list">
-        <li className="profile-menu__item"><a href="">Membership</a></li>
-        <li className="profile-menu__item"><a href="">Regulatory</a></li>
-        <li className="profile-menu__item"><a href="">Investment Experience</a></li>
-        <li className="profile-menu__item"><a href="">Accounts</a></li>
+        <li className="profile-menu__item">
+          <a href="" onClick={() => { props.changeActiveTabProfile(0); props.setActivePage('profile'); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>Membership</Link>
+          </a>
+        </li>
+        <li className="profile-menu__item">
+          <a href="" onClick={() => { props.changeActiveTabProfile(1); props.setActivePage('profile'); }}>
+             <Link route="dashboard" params={{ page: 'profile' }}>Regulatory</Link>
+          </a>
+        </li>
+        <li className="profile-menu__item">
+          <a href="" onClick={() => { props.changeActiveTabProfile(2); props.setActivePage('profile'); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>Investment Experience</Link>
+          </a>
+        </li>
+        <li className="profile-menu__item">
+          <a href="" onClick={() => { props.changeActiveTabProfile(3); props.setActivePage('profile'); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>Accounts</Link>
+          </a>
+        </li>
       </ul>
       <h3 className="profile-menu__title">Account Statements</h3>
       <ul className="profile-menu__list">
-        <li className="profile-menu__item"><a href="">Documents</a></li>
+        <li className="profile-menu__item">
+          <a href="" onClick={() => { props.changeActiveTabProfile(4); props.setActivePage('profile'); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>Documents</Link>
+          </a>
+        </li>
       </ul>
       <h3 className="profile-menu__title">Platform Configuration</h3>
       <ul className="profile-menu__list">
-        <li className="profile-menu__item"><a href="">Order Mgt Defaults</a></li>
-        <li className="profile-menu__item"><a href="">Notifications</a></li>
+        <li className="profile-menu__item">
+          <a href="" onClick={() => { props.changeActiveTabProfile(5); props.setActivePage('profile'); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>Order Mgt Defaults</Link>
+          </a>
+        </li>
+        <li className="profile-menu__item">
+          <a href="" onClick={() => { props.changeActiveTabProfile(6); props.setActivePage('profile'); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>Notifications</Link>
+          </a>
+        </li>
       </ul>
       <button
         className="profile-menu__logout-btn"
@@ -56,6 +86,8 @@ export default connect(
   dispatch => (
     {
       logout: () => dispatch(logout()),
+      changeActiveTabProfile: (value) => dispatch(changeActiveTabProfile(value)),
+      setActivePage: (page) => dispatch(setActivePage(page)),
     }
   ),
 )(DropdownMenu);
