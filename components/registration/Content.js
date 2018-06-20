@@ -130,7 +130,7 @@ class Content extends PureComponent {
             </div>
             <div className="col-6">
               <div className="onboard__right-block">
-                <div className="onboard__right-block--center">
+                <div className={`onboard__right-block--center ${this.props.tabName === 'experience' && 'experience-page'}`}>
                   {pageContent.tabContent}
                 </div>
                 <div className="onboard__right-block--bottom">

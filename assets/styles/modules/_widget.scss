@@ -54,13 +54,31 @@
   &__body {
     position: relative;
     overflow-y: auto;
-    max-height: 90%;
+    max-height: 80%;
   }
   &_padding {
     padding: 25px 15px;
     .widget__head {
       padding: 0 0 20px;
     }
+  }
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: inherit;
+  }
+  ::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 3px;
+    background-color: #ededed;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #dadada;
+  }
+  ::-webkit-scrollbar:horizontal{
+    height: 9px;
   }
 }
 

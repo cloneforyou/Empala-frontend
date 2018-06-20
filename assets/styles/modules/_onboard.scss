@@ -60,6 +60,16 @@
   }
 }
 
+.experience-page {
+  padding: 0 119px;
+  @media(max-width: 1366px) {
+    padding: 0 58px;
+  }
+  @media(max-width: 991px) {
+    padding: 0 15px;
+  }
+}
+
 .check-container {
   margin-left: -26px;
   @media(max-width: 991px) {
