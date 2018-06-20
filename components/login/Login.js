@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import Link from 'next/link';
-import FlatButton from 'material-ui/FlatButton';
+import { connect } from 'react-redux';
 import EmpalaInput from '../registration/EmpalaInput';
 import { GREEN, TORCH_RED, WHITE } from '../../constants/colors';
 import { setInputFieldValueById } from '../../actions/registration';
@@ -14,23 +13,10 @@ import {
 } from '../../actions/auth';
 import GoogleAuth from '../social/auth/GoogleAuth';
 import RegistrationModal from './RegistrationModal';
+import logo from '../../static/images/logo.svg';
 
 
 const style = {
-  loginBtn: {
-    backgroundColor: GREEN,
-    width: '80px',
-    height: '30px',
-    lineHeight: '15px',
-    float: 'right',
-  },
-  labelLoginBtn: {
-    color: WHITE,
-    fontSize: '12px',
-    textAlign: 'center',
-    padding: 0,
-    verticalAlign: 'top',
-  },
   warningTextBlock: {
     width: '350px',
     fontSize: '14px',
@@ -48,13 +34,15 @@ const style = {
   markedText_link: {
     cursor: 'pointer',
     fontSize: '.9rem',
-    verticalAlign: 'text-top',
+    verticalAlign: 'top',
+    display: 'inline-block',
+    margin: '10px 0',
   },
 };
 
 const UserEmailForm = props => (
   <form>
-      Please type your account e-mail below.
+    Please type your account e-mail below.
     <EmpalaInput
       key="index_email"
       id="index_email"
@@ -64,18 +52,18 @@ const UserEmailForm = props => (
       errorText={props.errorText}
     />
     {props.goBack &&
-      <span
-        style={{ ...style.markedText, ...style.markedText_link }}
-        onClick={props.handleBack}
-      >Go back
-      </span>
+    <span
+      style={{ ...style.markedText, ...style.markedText_link }}
+      onClick={props.handleBack}
+    >Go back
+    </span>
     }
-    <FlatButton
-      label="Send a link"
-      style={{ ...style.loginBtn, width: 'auto', padding: '0 5px' }}
-      labelStyle={style.labelLoginBtn}
+    <button
+      className="login__btn"
       onClick={props.handleClick}
-    />
+      type="button"
+    >Send a link
+    </button>
   </form>
 );
 const ConfirmationText = (props) => {
@@ -132,47 +120,62 @@ const Login = (props) => {
     return <ForgotPasswordForm {...props} />;
   }
   return (
-    <div>
-      Please log in or
-      <Link href="/registration">
-        <span className="index_placeholder__link"> register</span>
-      </Link>
-      <div>
-        <EmpalaInput
-          key="username"
-          id="index_username"
-          type="text"
-          label="E-mail"
-          handleChange={e => props.setInputValueById(e)}
-          errorText={props.errorText || props.fieldsError.index_username}
-        />
-        <EmpalaInput
-          key="password"
-          id="index_password"
-          type="password"
-          label="Password"
-          handleChange={e => props.setInputValueById(e)}
-          errorText={props.fieldsError.index_password}
-        />
-        <span
-          style={{ ...style.markedText, ...style.markedText_link }}
-          onClick={props.setPasswordForgotten}
-        >Forgot password?
-        </span>
-        <FlatButton
-          label="Log in"
-          style={style.loginBtn}
-          labelStyle={style.labelLoginBtn}
-          onClick={props.handleLogin}
-        />
+    <div className="row login">
+      <div className="col-6 login__part login__bg">
+        <div className="login__top-layer login__content text-center">
+          <img className="login__logo" src={logo} alt="Logotype" />
+          <ul className="login__list vertical-list white fw-300">
+            <li>Join together</li>
+            <li>Invest together</li>
+            <li>Succeed together</li>
+          </ul>
+        </div>
       </div>
-      <GoogleAuth
-        handlelogin={props.handleLogin}
-      />
-      <RegistrationModal
-        handleClose={props.handleModalCancel}
-        open={props.modalIsOpen}
-      />
+      <div className="col-6 login__part">
+        <div className="login__content ">
+          <h3 className="login__title fw-300">Login to your account</h3>
+          <div className="login__form-width no-gutters clear-fix">
+            <EmpalaInput
+              key="username"
+              id="index_username"
+              type="text"
+              label="E-mail"
+              handleChange={e => props.setInputValueById(e)}
+              errorText={props.errorText || props.fieldsError.index_username}
+            />
+            <EmpalaInput
+              key="password"
+              id="index_password"
+              type="password"
+              label="Password"
+              handleChange={e => props.setInputValueById(e)}
+              errorText={props.fieldsError.index_password}
+            />
+            <a
+              className="login__forgot-link fw-300 float-right"
+              onClick={props.setPasswordForgotten}
+            >
+              Forgot password?
+            </a>
+            <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
+          </div>
+          <div className="social-auth">
+            <div className="styled-part-separate"><span>or connect with</span></div>
+            <div className="social-auth__row">
+              <button className="social-btn social-btn__facebook">facebook</button>
+              <GoogleAuth handlelogin={props.handleLogin} />
+              <button className="social-btn social-btn__linkedin">linkedin</button>
+            </div>
+          </div>
+          <div className="text-center">
+            <Link href="/registration"><a className="green-link">Registration</a></Link>
+          </div>
+          <RegistrationModal
+            handleClose={props.handleModalCancel}
+            open={props.modalIsOpen}
+          />
+        </div>
+      </div>
     </div>
   );
 };

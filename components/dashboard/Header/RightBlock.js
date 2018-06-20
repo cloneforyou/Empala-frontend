@@ -39,11 +39,16 @@ export default class RightBlock extends Component {
               onClick={this.toggleMenu}
               // onBlur={() => setTimeout(this.closeMenu, 100)}
             >
-              <img src={avatar} alt="" />
+              <div
+                className="user-nav__userPic"
+                style={{backgroundImage: `url(${this.props.userPic || avatar})`}}
+                alt=""
+              />
             </button>
             <DropdownMenu
               closeMenu = {this.closeMenu}
               menuAvatarShow={menuAvatarShow}
+              userPic={this.props.userPic}
             />
           </li>
         </ul>

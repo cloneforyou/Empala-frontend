@@ -284,6 +284,7 @@ export const fieldsPersonalWealth = [
     id: 'profile_financials_annual_income',
     hint: 'Please select',
     label: 'Annual income',
+    field: 'select',
     options: [
       {
         value: '0 - 50,000',
@@ -316,6 +317,7 @@ export const fieldsPersonalWealth = [
     label: 'Total net worth',
     id: 'profile_financials_total_net_worth',
     hint: 'Please select',
+    field: 'select',
     options: [
       {
         value: '0 – 100,000',
@@ -348,6 +350,7 @@ export const fieldsPersonalWealth = [
     label: 'Liquid net worth',
     id: 'profile_financials_liquid_net_worth',
     hint: 'Please select',
+    field: 'select',
     options: [
       {
         value: '0 – 100,000',
@@ -380,6 +383,7 @@ export const fieldsPersonalWealth = [
     id: 'profile_financials_tax_rate_profile',
     label: 'Tax rate profile',
     hint: 'Please select',
+    field: 'select',
     options: [
       {
         value: 'Low',
@@ -403,6 +407,7 @@ export const fieldsMemberPersonal = [
     type: 'text',
     label: 'Account No.',
     placeholder: '',
+    field: 'input',
   },
   {
     id: 'account_information_account_type',
@@ -414,12 +419,15 @@ export const fieldsMemberPersonal = [
         title: 'Individual',
       },
     ],
+    field: 'select',
   },
   {
     id: 'createdat',
     type: 'text',
     label: 'Member since',
     placeholder: '',
+    field: 'input',
+    disabled: true,
   },
 ];
 
@@ -428,6 +436,7 @@ export const fieldResetPassword = [
     id: 'member_account_password_reset',
     type: 'password',
     label: 'Reset Password',
+    field: 'input',
   },
 ];
 
@@ -488,8 +497,9 @@ export const fieldsEmployment = [
   {
     id: 'profile_employment_employment_country',
     label: 'Employment сountry',
-    type: 'text',
+    type: 'select',
     placeholder: '',
+    options: countriesList,
   },
 ];
 
@@ -659,7 +669,13 @@ export const fieldsInvestmentExperienceOne = [
     hint: 'Please select',
     autoWidth: true,
   },
-
+  {
+    id: 'experience_investment_experience_foreign_markets',
+    label: 'Foreign markets',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
 ];
 
 export const fieldsInvestmentExperienceTwo = [
@@ -694,13 +710,6 @@ export const fieldsInvestmentExperienceTwo = [
   {
     id: 'experience_investment_experience_lending_money',
     label: 'Lending money',
-    options,
-    hint: 'Please select',
-    autoWidth: true,
-  },
-  {
-    id: 'experience_investment_experience_foreign_markets',
-    label: 'Foreign markets',
     options,
     hint: 'Please select',
     autoWidth: true,

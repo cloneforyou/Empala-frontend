@@ -1375,16 +1375,13 @@ export const widgetsCash = [
             title: 'GBP balance',
           },
           {
-            title: 'Carry',
+            title: 'EUR balance',
           },
           {
-            title: 'Val CH',
+            title: 'Trade conf. link',
           },
           {
-            title: 'Tot P&L',
-          },
-          {
-            title: 'Ann Ret',
+            title: 'Comments',
           },
         ],
         data: [],

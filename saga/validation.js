@@ -13,19 +13,22 @@ import ignoredFields from '../localdata/noValidatedFiels';
 function* validatePasswordField(id) {
   const password = yield select(state => state.registration.registrationData['member_account_password']);
   const passwordConfirm = yield select(state => state.registration.registrationData['member_account_password_confirm']);
-  const newPassword = yield select(state => state.auth['recovery_password']);
-  const newPasswordConfirm = yield select(state => state.registration.registrationData['recovery_password_confirm']);
-  if (id === 'member_account_password_confirm' || id === 'recovery_password_confirm') {
+  const newPassword = yield select(state => state.auth['recovery_password'] || state.profile.profileUserData['reset_password']);
+  const newPasswordConfirm = yield select(state => state.registration.registrationData['recovery_password_confirm'] ||
+    state.profile.profileUserData['reset_password_confirm']);
+  if (id === 'member_account_password_confirm' || id === 'recovery_password_confirm' || id === 'reset_password_confirm') {
     if (id === 'member_account_password_confirm' && password === passwordConfirm) {
       yield put(setFieldValid('member_account_password_confirm'));
     } else if (id === 'recovery_password_confirm' && newPassword === newPasswordConfirm) {
       yield put(setFieldValid('recovery_password_confirm'));
+    } else if (id === 'reset_password_confirm' && newPassword === newPasswordConfirm) {
+      yield put(setFieldValid('reset_password_confirm'));
     } else {
       yield put(setFieldInvalid(id, 'Passwords mismatch: check password and confirm password fields.'));
     }
-  } else if (id === 'member_account_password' || id === 'recovery_password') {
+  } else if (id === 'member_account_password' || id === 'recovery_password' || id === 'reset_password') {
     let checkedPassword = password;
-    if (id === 'recovery_password') checkedPassword = newPassword;
+    if (id === 'recovery_password' || id === 'reset_password') checkedPassword = newPassword;
     if (checkedPassword.length < 8 || !/[A-Z]+/.test(checkedPassword) || !/\d+/.test(checkedPassword)) {
       yield put(setFieldInvalid(id, 'Passwords must contain at least 8 characters and have at least one Capital letter and numerical digit.'));
     } else {
@@ -89,15 +92,20 @@ export function* validateFieldValue({ fieldId, fieldValue }) {
     }
   }
   if (fieldId === 'profile_employment_employment_type' && fieldValue !== 'Employed') {
-    const data = yield select(state => state.registration.registrationData);
+    let data = yield select(state => state.registration.registrationData);
+    if (!data.profile_employment_employment_type) {
+      data = yield select(state => state.profile.profileUserData);
+    }
     const employementFields = Object.keys(data).filter(key => (/profile_employment/.test(key) && key !== 'profile_employment_employment_type'));
     yield all(employementFields.map(field => put(setInputFieldValueById(field, ''))));
   }
 }
 
 export function* validateLiquidWorth({ value }) {
-  const data = yield select(state => state.registration.registrationData);
-  const liquidNetWorth = data['profile_financials_liquid_net_worth'] || '';
+  const registrationData = yield select(state => state.registration.registrationData);
+  const profileData = yield select(state => state.profile.profileUserData);
+  const liquidNetWorth = registrationData['profile_financials_liquid_net_worth'] ||
+    profileData['profile_financials_liquid_net_worth'] || '';
   if (value.length < liquidNetWorth.length ||
     (value.length === liquidNetWorth.length && value[0] <= liquidNetWorth[0])) {
     yield put(setInputFieldValueById('profile_financials_liquid_net_worth', ''));
@@ -116,11 +124,18 @@ export default function* validationSaga({ id, value }) {
     'regulatory_identification_ssn',
     'member_account_account_no',
   ];
+  const passwordFields = [
+    'member_account_password_confirm',
+    'member_account_password',
+    'recovery_password',
+    'recovery_password_confirm',
+    'reset_password_confirm',
+    'reset_password',
+  ];
   yield put(setFieldValid(id));
   if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({ id, value });
-  } else if (id === 'member_account_password_confirm' || id === 'member_account_password'
-    || id === 'recovery_password' || id === 'recovery_password_confirm') {
+  } else if (passwordFields.includes(id)) {
     yield validatePasswordField(id);
   } else if (id === 'profile_financials_total_net_worth') {
     yield validateLiquidWorth({ value });

@@ -56,6 +56,9 @@ export function* getAddressInfoByZIP({ fieldId, zipCode }) {
       } else if (fieldId === 'profile_employment_zip_code') {
         yield put(setInputFieldValueById('profile_employment_state', info.state));
         yield put(setInputFieldValueById('profile_employment_city', info.city));
+      } else if (fieldId === 'identity_residential_address_zip_code') {
+        yield put(setInputFieldValueById('identity_residential_address_state', info.state));
+        yield put(setInputFieldValueById('identity_residential_address_city', info.city));
       }
       yield put(setFieldValid(fieldId));
     } else {

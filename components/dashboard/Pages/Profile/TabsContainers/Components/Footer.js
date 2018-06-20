@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { openModal } from "../../../../../../actions/dashboard";
+import { openModal } from '../../../../../../actions/dashboard';
+import { updateProfileSend } from '../../../../../../actions/profile';
+import * as dashboardActions from '../../../../../../actions/dashboard';
 
 
 class Footer extends PureComponent {
@@ -13,15 +15,28 @@ class Footer extends PureComponent {
       <div className="tab-container__foot buttons-row">
         <div className="buttons-row__right">
           {
-            deleteAccountBtnIsShow && <button
+            deleteAccountBtnIsShow &&
+            <button
               className="profile-btn profile-btn_red"
               onClick={this.props.showDeleteModal}
-            >Delete Account</button>
+            >Delete Account
+            </button>
           }
         </div>
         <div className="buttons-row__left">
-          <button className="default-btn">Cancel</button>
-          <button className="profile-btn profile-btn_green">Save</button>
+          <button
+            className="default-btn"
+            onClick={this.props.handleCancel}
+          >Cancel
+          </button>
+          <button
+            className="profile-btn profile-btn_green"
+            onClick={this.props.handleUpdateInfo}
+          >Save
+          </button>
+          <div className="errorText" >
+            {this.props.PageErrorText || ' '}
+          </div>
         </div>
       </div>
     );
@@ -29,12 +44,16 @@ class Footer extends PureComponent {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    PageErrorText: state.dashboard.error,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     showDeleteModal: () => dispatch(openModal('accountDelete')),
+    handleUpdateInfo: () => dispatch(updateProfileSend()),
+    handleCancel: () => dispatch(dashboardActions.getUserData()),
   };
 }
 
