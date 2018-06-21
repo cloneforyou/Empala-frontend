@@ -9,9 +9,8 @@ import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
 } from '../../../../../localdata/profileData';
-import { setInputFieldValueById } from '../../../../../actions/registration';
+import {getInfoByZipCode, setInputFieldValueById, validateFieldValue} from '../../../../../actions/registration';
 import { countriesList } from '../../../../../localdata/countriesList';
-import {flattenObject} from '../../../../../utils/additional';
 
 class Regulatory extends Component {
   constructor(props) {
@@ -19,12 +18,7 @@ class Regulatory extends Component {
   }
 
   render() {
-    const flattenUserData = flattenObject(this.props.userData.profile);
-    const userData = {};
-    Object.keys(flattenUserData).forEach((key) => {
-      userData[key.replace(/^Member/, '').toLowerCase()] = flattenUserData[key] === 'Not provided' ?
-        '' : flattenUserData[key];
-    });
+    const userData = this.props.userData;
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
@@ -33,9 +27,7 @@ class Regulatory extends Component {
               <h2 className="title-part">Employment</h2>
               <div className="row margin-bt-30">
                 {fieldsEmployment.map(item => (<FormGroupMapping
-                  item={item}
-                  userData={userData}
-                  fieldsErrors={this.props.fieldsErrors}
+                  {...{ ...this.props, item, key: item.id }}
                 />))}
               </div>
             </div>
@@ -43,9 +35,7 @@ class Regulatory extends Component {
               <h2 className="title-part">Trusted Contact Person</h2>
               <div className="row margin-bt-30">
                 {fieldsTrustedContactPerson.map(item => (<FormGroupMapping
-                  item={item}
-                  userData={userData}
-                  fieldsErrors={this.props.fieldsErrors}
+                  {...{ ...this.props, item, key: item.id }}
                 />))}
               </div>
             </div>
@@ -145,12 +135,24 @@ class Regulatory extends Component {
 
 export default connect(
   state => ({
-    userData: state.dashboard.userData.data || {},
-    fieldsErrors: state.dashboard.fieldsErrors || {},
+    userData: state.profile.profileUserData || {},
+    fieldsErrors: state.profile.fieldsErrors || {},
   }),
-  (dispatch => ({
-    setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  dispatch => ({
+    setInputValueById: (e) => {
+      const { id, value } = e.target;
+      if (/zip_code/.test(id)) {
+        if (value.length === 5) {
+          dispatch(getInfoByZipCode(id, value));
+        } else if (value.length > 5) { return false; }
+      }
+      dispatch(setInputFieldValueById(id, value));
+      return false;
+    },
+    setSelectedValueById: (id, value) => {
+      dispatch(setInputFieldValueById(id, value));
+      dispatch(validateFieldValue(id, value));
+    },
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  })),
+  }),
 )(Regulatory);

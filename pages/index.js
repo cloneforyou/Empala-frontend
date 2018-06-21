@@ -14,17 +14,16 @@ class Index extends React.PureComponent {
       window.location.assign('/dashboard');
     }
   }
+
   render() {
     return (
       <MuiThemeProvider>
         <div>
-          <style dangerouslySetInnerHTML={{__html: stylesheet}}/>
-          <Header />
-          <div className="index_placeholder noselect">
-            <div className="index_placeholder__inner">
-              <div>
-                <Login />
-              </div>
+          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+          <Header login />
+          <div className="index_placeholder noselect no-borders simple-box-shadow">
+            <div className="container-fluid">
+              <Login />
             </div>
           </div>
           <Footer />

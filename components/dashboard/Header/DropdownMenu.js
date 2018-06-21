@@ -14,8 +14,15 @@ const DropdownMenu = (props) => {
         'dropdown-menu dropdown-menu-right show profile-menu user-nav__dropdown-menu'}
     >
       <div className="profile-menu__head">
-        <div className="profile-menu__avatar">
-          <img src={avatar} alt="" />
+        <div
+          className="profile-menu__avatar"
+          style={{ backgroundImage: `url(${props.userPic || avatar})`,
+          backgroundPosition: '50% 50%',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          marginRight: '1em',
+          }}
+        >
         </div>
         <div className="profile-menu__user-info">
           <h4>Iain Clarke</h4>

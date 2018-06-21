@@ -4,7 +4,7 @@ import Link from 'next/link';
 import IoIosArrowThinLeft from 'react-icons/lib/io/ios-arrow-thin-left';
 import logo from '../../static/images/logo.png';
 
-const Header = () => (
+const Header = (props) => (
   <div className="header">
     <div className="row no-gutters header__block noselect">
 
@@ -27,14 +27,16 @@ const Header = () => (
           />
         </a>
       </div>
-
       <div className="header__block__right-side">
-        <a
-          href="/"
-          className="header__block__right-link"
-        >
+        {
+          (!props.login) &&
+          <a
+            href="/"
+            className="header__block__right-link"
+          >
             I have an account (Login)
-        </a>
+          </a>
+        }
       </div>
 
     </div>

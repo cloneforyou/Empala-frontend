@@ -3,7 +3,7 @@
 import { all, takeLatest, takeEvery } from 'redux-saga/effects';
 import es6promise from 'es6-promise';
 import 'isomorphic-unfetch';
-
+import profileSaga from './saga/profile';
 import registrationSaga from './saga/registration';
 import dashboardSaga from './saga/dashboard';
 import {
@@ -32,6 +32,7 @@ function* rootSaga() {
   yield all([
     registrationSaga(),
     dashboardSaga(),
+    profileSaga(),
     takeLatest(LOGIN_REQUEST, authenticate),
     takeLatest(SEND_ACTIVATION_LINK_REQUEST, sendActivationLink),
     takeLatest(UNBLOCK_REQUEST, unblockAccount),

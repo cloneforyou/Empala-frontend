@@ -35,7 +35,7 @@ class Header extends Component {
             <span className="navbar-toggler-icon" />
           </button>
           <Search />
-          <RightBlock />
+          <RightBlock userPic={this.props.userPic} />
         </div>
       </div>
     );
@@ -43,7 +43,9 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    userPic: state.profile.profileUserData.account_avatar,
+  };
 }
 
 function mapDispatchToProps(dispatch) {

@@ -1,11 +1,23 @@
 import {
-  CHOOSE_GROUP_COUNTRY, CLEAN_ERROR_TEXT, CLEAN_IMAGE_DATA, CLOSE_MODAL,
+  CHOOSE_GROUP_COUNTRY,
+  CLEAN_ERROR_TEXT,
+  CLEAN_IMAGE_DATA,
+  CLOSE_MODAL,
   COLLAPSE_SIDEBAR,
   GET_USER_DATA_REQUEST,
-  GET_USER_DATA_SUCCESS, OPEN_MODAL,
-  SET_ACTIVE_PAGE, SET_UPLOADABLE_IMAGE, UPLOAD_IMAGE_FAIL, UPLOAD_IMAGE_REQUEST, UPLOAD_IMAGE_SUCCESS,
-  SET_FIELD_VALUE, DELETE_ACCOUNT_REQUEST, DELETE_ACCOUNT_FAIL, DELETE_ACCOUNT_SUCCESS,
+  GET_USER_DATA_SUCCESS,
+  OPEN_MODAL,
+  SET_ACTIVE_PAGE,
+  SET_UPLOADABLE_IMAGE,
+  UPLOAD_IMAGE_FAIL,
+  UPLOAD_IMAGE_REQUEST,
+  UPLOAD_IMAGE_SUCCESS,
+  SET_FIELD_VALUE,
+  DELETE_ACCOUNT_REQUEST,
+  DELETE_ACCOUNT_FAIL,
+  DELETE_ACCOUNT_SUCCESS,
 } from '../constants/dashboard';
+import {RESET_PASSWORD_FAIL} from '../constants/profile';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -81,6 +93,7 @@ function dashboard(state = initialState, action) {
       };
     case UPLOAD_IMAGE_FAIL:
     case DELETE_ACCOUNT_FAIL:
+    case RESET_PASSWORD_FAIL:
       return {
         ...state,
         loading: false,
@@ -102,11 +115,6 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         error: false,
-      };
-    case SET_FIELD_VALUE:
-      return {
-        ...state,
-        [action.id]: action.value,
       };
     default:
       return state;

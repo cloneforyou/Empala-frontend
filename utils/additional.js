@@ -17,3 +17,11 @@ export const flattenObject = (ob) => {
   }
   return toReturn;
 };
+
+export const renameKeys = (obj, pattern, replaceble) => {
+  const out = {};
+  Object.keys(obj).forEach((key) => {
+    out[key.replace(pattern, replaceble).toLowerCase()] = obj[key];
+  });
+  return out;
+};
