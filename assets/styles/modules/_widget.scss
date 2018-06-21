@@ -57,9 +57,9 @@
     max-height: 80%;
   }
   &_padding {
-    padding: 25px 15px;
+    padding: 0 15px;
     .widget__head {
-      padding: 0 0 20px;
+      padding: 0;
     }
   }
   ::-webkit-scrollbar {
@@ -83,7 +83,7 @@
 }
 
 .widget-adv-img {
-  max-height: 88%;
+  max-height: 78%;
   height: 100%;
   display: block;
   position: relative;
