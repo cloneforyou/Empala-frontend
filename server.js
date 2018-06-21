@@ -25,16 +25,16 @@ app.prepare()
         ? 'http://ec2-18-217-9-54.us-east-2.compute.amazonaws.com/'
         : 'localhost:3000'}`);
     });
-    // https.createServer({
-    //   key: fs.readFileSync('key.pem'),
-    //   cert: fs.readFileSync('cert.pem'),
-    //   passphrase: 'empala',
-    // }, server).listen(55555, (err) => {
-    //   if (err) throw err;
-    //   console.log(`> EMPALA: ready on ${process.env.NODE_ENV === 'production'
-    //     ? 'https://ec2-18-217-9-54.us-east-2.compute.amazonaws.com/'
-    //     : 'https://localhost:55555'}`);
-    // });
+    https.createServer({
+      key: fs.readFileSync('key.pem'),
+      cert: fs.readFileSync('cert.pem'),
+      passphrase: 'empala',
+    }, server).listen(55555, (err) => {
+      if (err) throw err;
+      console.log(`> EMPALA: ready on ${process.env.NODE_ENV === 'production'
+        ? 'https://ec2-18-217-9-54.us-east-2.compute.amazonaws.com/'
+        : 'https://localhost:55555'}`);
+    });
   })
   .catch((ex) => {
     console.error(ex.stack);

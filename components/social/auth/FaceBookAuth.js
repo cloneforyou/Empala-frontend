@@ -8,6 +8,7 @@ const responseFacebook = (response) => {
     console.log(response.error.message);
     return false;
   }
+  console.log(response)
   return response;
 };
 
@@ -15,9 +16,9 @@ const FacebookAuth = (props) => (
   <FacebookLogin
     appId={clientsId.faceBook}
     scope="public_profile, email, user_birthday, user_hometown"
-    fields="name,email,picture,hometown,birthday"
+    fields="name,email,picture,hometown,birthday,first_name,last_name"
     callback={res => props.handlelogin('facebook', responseFacebook(res))}
-    cssClass="social-btn social-btn__facebook"
+    cssClass="social-btn social-btn__facebook social-btn__facebook-moved"
     textButton="Facebook"
     // icon="fa-facebook"
     // autoLoad

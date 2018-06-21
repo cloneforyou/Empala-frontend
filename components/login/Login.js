@@ -195,7 +195,7 @@ export default connect(
     modalIsOpen: state.auth.modalIsOpen,
   }),
   dispatch => ({
-    handleLogin: (provider, token) => dispatch(loginRequest(provider, token)),
+    handleLogin: (provider, data) => dispatch(loginRequest(provider, data)),
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     unblockAccount: () => dispatch(unblockAccountInit()),
     sendActivationLink: () => dispatch(sendActivationLink('unblockAccount')),

@@ -31,11 +31,11 @@ export function loginSuccess() {
   };
 }
 
-export function loginRequest(provider, token) {
+export function loginRequest(provider, data) {
   return {
     type: LOGIN_REQUEST,
     provider,
-    token,
+    data,
   };
 }
 
