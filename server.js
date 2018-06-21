@@ -2,6 +2,9 @@ const express = require('express');
 const next = require('next');
 const routes = require('./routes')
 
+const https = require('https');
+const fs = require('fs');
+
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -22,6 +25,16 @@ app.prepare()
         ? 'http://ec2-18-217-9-54.us-east-2.compute.amazonaws.com/'
         : 'localhost:3000'}`);
     });
+    // https.createServer({
+    //   key: fs.readFileSync('key.pem'),
+    //   cert: fs.readFileSync('cert.pem'),
+    //   passphrase: 'empala',
+    // }, server).listen(55555, (err) => {
+    //   if (err) throw err;
+    //   console.log(`> EMPALA: ready on ${process.env.NODE_ENV === 'production'
+    //     ? 'https://ec2-18-217-9-54.us-east-2.compute.amazonaws.com/'
+    //     : 'https://localhost:55555'}`);
+    // });
   })
   .catch((ex) => {
     console.error(ex.stack);

@@ -64,6 +64,12 @@ export function* authenticate({ provider, token }) {
         token,
       };
       break;
+    case 'facebook':
+      url = '/api/auth/login/facebook';
+      options.data = {
+        token,
+      };
+      break;
     default:
       url = '/api/auth/login';
       options.data = {
