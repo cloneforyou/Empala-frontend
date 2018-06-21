@@ -14,6 +14,8 @@ import {
 import GoogleAuth from '../social/auth/GoogleAuth';
 import RegistrationModal from './RegistrationModal';
 import logo from '../../static/images/logo.svg';
+import FacebookAuth from '../social/auth/FaceBookAuth';
+
 
 
 const style = {
@@ -162,7 +164,8 @@ const Login = (props) => {
           <div className="social-auth">
             <div className="styled-part-separate"><span>or connect with</span></div>
             <div className="social-auth__row">
-              <button className="social-btn social-btn__facebook">facebook</button>
+              {/*<button className="social-btn social-btn__facebook">facebook</button>*/}
+              <FacebookAuth handlelogin={props.handleLogin} />
               <GoogleAuth handlelogin={props.handleLogin} />
               <button className="social-btn social-btn__linkedin">linkedin</button>
             </div>
@@ -192,7 +195,7 @@ export default connect(
     modalIsOpen: state.auth.modalIsOpen,
   }),
   dispatch => ({
-    handleLogin: (provider, token) => dispatch(loginRequest(provider, token)),
+    handleLogin: (provider, data) => dispatch(loginRequest(provider, data)),
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     unblockAccount: () => dispatch(unblockAccountInit()),
     sendActivationLink: () => dispatch(sendActivationLink('unblockAccount')),
