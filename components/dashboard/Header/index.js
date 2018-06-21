@@ -44,7 +44,7 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    userPic: state.profile.profileUserData.basic_information_avatarlink,
+    userPic: state.profile.profileUserData.account_avatar,
   };
 }
 

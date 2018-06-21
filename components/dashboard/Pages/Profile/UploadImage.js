@@ -112,7 +112,8 @@ class UploadImage extends PureComponent {
                width: 200,
                borderRadius: '5%',
              }}
-        />
+        >{!this.state.imagePreviewUrl && 'NO FILE CHOSEN'}
+        </div>
         <div style={style.errorText}>{this.props.errorText || ''}</div>
        <FlatButton
          label="Choose an Image"

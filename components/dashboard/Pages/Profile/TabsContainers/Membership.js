@@ -20,7 +20,6 @@ import DatePickerField from '../../../../registration/DatePickerField';
 import ResetPasswordModal from '../ResetPasswordModal';
 
 class Membership extends Component {
-  // TODO format for created at, date of birth fields
   constructor(props) {
     super(props);
     this.mappingComponent = (item, userData) => {
@@ -98,14 +97,20 @@ class Membership extends Component {
             <div className="col-md-6">
               <div className="row">
                 <div className="col-lg-8">
-                  {fieldsMemberPersonal.map(item => this.mappingComponent(item, userData))}
+                  {fieldsMemberPersonal.map((item) => {
+                    if (item.id === 'createdat' && userData['createdat']) {
+                      const data = { createdat: new Date(userData['createdat']).toLocaleString().slice(0, 10) };
+                      return this.mappingComponent(item, data);
+                    }
+                    return this.mappingComponent(item, userData);
+                  })}
                 </div>
                 <div className="col-lg-4 text-center">
                   <div
                     className="profile-image"
                     onClick={this.props.showUploadDialog}
                   >
-                    <img src={userData.basic_information_avatarlink} alt="" />
+                    <img src={userData.account_avatar} alt="" />
                   </div>
                   <button className="default-btn">Edit</button>
                 </div>
