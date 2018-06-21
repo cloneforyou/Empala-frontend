@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import nophotoUser from '../../../static/images/nophoto_user.png';
 
 class WidgetNews extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class WidgetNews extends Component {
             </div>
           </div>
           <div className="widget__body">
-            {
+            {widget.id === 'external_news' ?
               widgetNews.map(card => (
                 <div className="news-card row no-gutters" key={card.id}>
                   <div className="news-card__wrap-image">
@@ -58,12 +59,7 @@ class WidgetNews extends Component {
                              href={card.origin_link}>{card.origin_title}</a>
                         }
                         <span className="news-card__time">
-                          {
-                            widget.id === 'external_news' ?
-                              <Moment date={card.pubDate} fromNow /> :
-                              <Moment date={card.pubDate} format="MM-DD-YYYY" />
-                          }
-
+                            <Moment date={card.pubDate} fromNow />
                         </span>
                       </div>
                       <a className="news-card__link" target="_blank" href={card.link}>{card.title}</a>
@@ -79,6 +75,33 @@ class WidgetNews extends Component {
                     {/*</div>*/}
                     {/*</div>*/}
                     {/*</div>*/}
+                  </div>
+                </div>
+              )) :
+              widgetNews.map(card => (
+                <div className="news-card row no-gutters" key={card.id}>
+                  <div className="news-card__wrap-image">
+                    { card.feed.subject.image_profile ?
+                      <img
+                        className="news-card__image"
+                        src={card.feed.subject.image_profile}
+                        alt=""
+                      /> :
+                    <img
+                      className="news-card__image"
+                      src={nophotoUser}
+                      alt=""
+                    /> }
+                  </div>
+                  <div className="col news-card__body">
+                    <div className="news-card__head">
+                      <div>
+                        <span className="news-card__time">
+                          <Moment date={card.feed.subject.modified_date} format="MM-DD-YYYY" />
+                        </span>
+                      </div>
+                      <p className="news-card__title">{card.feed.main_content}</p>
+                    </div>
                   </div>
                 </div>
               ))

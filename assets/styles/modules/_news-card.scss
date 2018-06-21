@@ -37,6 +37,10 @@
       color: $green;
     }
   }
+  &__title {
+    @include fontSize(12px);
+    color: $dark-grey;
+  }
   &__foot {
   }
   &__rating {
