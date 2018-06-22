@@ -19,6 +19,7 @@
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-wrap-in-js": "^1.1.0",
     "bootstrap": "^4.1.0",
+    "detect-node": "^2.0.3",
     "es6-promise": "4.1.1",
     "express": "^4.16.3",
     "file-loader": "^1.1.11",

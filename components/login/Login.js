@@ -16,6 +16,10 @@ import RegistrationModal from './RegistrationModal';
 import logo from '../../static/images/logo.svg';
 import FacebookAuth from '../social/auth/FaceBookAuth';
 
+import LinkedInAuth from '../social/auth/LinkedInAuth';
+
+const isNode = require('detect-node');
+
 const style = {
   warningTextBlock: {
     width: '350px',
@@ -165,7 +169,7 @@ const Login = (props) => {
               {/*<button className="social-btn social-btn__facebook">facebook</button>*/}
               <FacebookAuth handlelogin={props.handleLogin} />
               <GoogleAuth handlelogin={props.handleLogin} />
-              <button className="social-btn social-btn__linkedin">linkedin</button>
+              {!isNode && <LinkedInAuth handlelogin={props.handleLogin} />}
             </div>
           </div>
           <div className="text-center">
