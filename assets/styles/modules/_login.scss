@@ -1,8 +1,14 @@
 .login {
   position: relative;
-  height: 100%;
+  display: flex;
+  //height: 100%;
+  background: url($path-to-images + "login_bg1.jpg") no-repeat 50% 50% /cover;
+  max-width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
   &__bg {
-    background: url($path-to-images + "login-bg.jpg") no-repeat 46% 0;
+    //background: url($path-to-images + "login-bg.jpg") no-repeat 46% 0;
     background-size: cover;
     position: relative;
     &:before {
@@ -23,18 +29,23 @@
     z-index: 5;
   }
   &__content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    box-shadow: 3px 8px 10px 0 rgba(0, 0, 0, 0.45);
+    background-color: #ffffff;
+    border: solid 1px #e0e0e0;
+    padding: 32px 42px 20px 42px;
+    width: 462px;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   &__form-width {
-    max-width: 250px;
-    margin: 0 auto 45px;
+    width: 250px;
+    margin: 0 auto 55px;
   }
   &__logo {
-    width: 367px;
-    margin-bottom: 65px;
+    width: 243px;
+    margin-bottom: 56px;
   }
   &__list {
     & > li {
@@ -52,21 +63,23 @@
   }
   &__forgot-link {
     @include fontSize(12px);
-    color: #c9c9c9;
+    color: #bcbcbc!important;
     margin-bottom: 20px;
     margin-top: -10px;
     z-index: 3;
     position: relative;
   }
   &__btn {
-    background: $green;
+    background: $pale-olive-green;
+    border: none;
+    border-radius: 5px;
     color: $white;
     @include fontSize(16px);
     width: 100%;
     padding: 8px 10px;
     font-weight: 300;
     box-shadow: 3px 5px 6px 0 rgba(0, 0, 0, 0.16);
-    border-radius: 5px;
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   }
 }
 
@@ -78,8 +91,9 @@
   font-weight: 300;
   box-shadow: 3px 5px 6px 0 rgba(0, 0, 0, 0.16);
   border-radius: 5px;
-  padding: 5px 20px 5px 50px;
-  height: 36px;
+  padding: 5px 20px 5px 40px;
+  height: 40px;
+  width: 124px;
   &:before {
     content: '';
     position: absolute;
@@ -87,8 +101,8 @@
   &__google {
     background-color: #d93b2c;
     &:before {
-      height: 20px;
-      width: 20px;
+      height: 25px;
+      width: 25px;
       left: 15px;
       top: 8px;
       background: url($path-to-images + "ic-google-plus.svg");
@@ -98,24 +112,24 @@
   &__facebook {
     background-color: #39579b;
     &:before {
-      height: 20px;
-      width: 20px;
+      height: 25px;
+      width: 25px;
       left: 15px;
       top: 8px;
-      background: url($path-to-images + "ic-facebook-letter.svg");
+      background: url($path-to-images + "ic-facebook-letter.svg") no-repeat 50% 50% /cover;
       background-size: 100%;
     }
   }
-  &__facebook-moved {
-    // tricks to compensate <span> in which this button wrapped by component
-    margin-right: 15px;
-    top: -10px;
-  }
+  //&__facebook-moved {
+  //  // tricks to compensate <span> in which this button wrapped by component
+  //  margin-right: 15px;
+  //  top: -10px;
+  //}
   &__linkedin {
     background-color: #0073b5;
     &:before {
-      height: 15px;
-      width: 15px;
+      height: 20px;
+      width: 20px;
       left: 15px;
       top: 8px;
       background: url($path-to-images + "ic-linkedin.svg");
@@ -129,15 +143,18 @@
   text-align: center;
   line-height: 1rem;
   margin-bottom: 15px;
-  &:before {
+  &:before,&:after {
     content: '';
-    width: 100%;
-    height: 1px;
+    width: 18%;
+    height: .5px;
     background: #b3b4b5;
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 65px;
     transform: translateY(50%);
+  }
+  &:after {
+    left: 245px;
   }
   span {
     color: #878889;
@@ -150,14 +167,11 @@
 }
 
 .social-auth {
+  width: 100%;
   margin-bottom: 25px;
   &__row {
     display: flex;
-  }
-  button {
-    &:not(:last-child) {
-      margin-right: 15px;
-    }
+    justify-content: space-between;
   }
 }
 

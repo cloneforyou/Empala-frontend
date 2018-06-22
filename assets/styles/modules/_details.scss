@@ -104,7 +104,7 @@
 }
 
 .fw-300 {
-  font-weight: 300;
+  font-weight: 300!important;
 }
 
 .simple-box-shadow {
@@ -117,5 +117,14 @@
   @include fontSize(14px);
   &:hover, &:focus {
     color: $green;
+  }
+}
+
+.gray-link {
+  color: $gray-600;
+  font-weight: 300;
+  @include fontSize(16px);
+  &:hover, &:focus {
+    color: $gray-700;
   }
 }

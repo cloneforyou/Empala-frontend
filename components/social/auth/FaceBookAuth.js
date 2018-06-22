@@ -18,8 +18,8 @@ const FacebookAuth = (props) => (
     scope="public_profile, email, user_birthday, user_hometown"
     fields="name,email,picture,hometown,birthday,first_name,last_name"
     callback={res => props.handlelogin('facebook', responseFacebook(res))}
-    cssClass="social-btn social-btn__facebook social-btn__facebook-moved"
-    textButton="Facebook"
+    cssClass="social-btn social-btn__facebook"
+    textButton="facebook"
     // icon="fa-facebook"
     // autoLoad
     returnScopes
