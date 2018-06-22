@@ -79,6 +79,7 @@
   box-shadow: 3px 5px 6px 0 rgba(0, 0, 0, 0.16);
   border-radius: 5px;
   padding: 5px 20px 5px 50px;
+  height: 36px;
   &:before {
     content: '';
     position: absolute;
@@ -104,6 +105,11 @@
       background: url($path-to-images + "ic-facebook-letter.svg");
       background-size: 100%;
     }
+  }
+  &__facebook-moved {
+    // tricks to compensate <span> in which this button wrapped by component
+    margin-right: 15px;
+    top: -10px;
   }
   &__linkedin {
     background-color: #0073b5;
