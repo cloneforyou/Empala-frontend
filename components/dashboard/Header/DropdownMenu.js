@@ -6,7 +6,14 @@ import { logout, setActivePage } from '../../../actions/dashboard';
 import { changeActiveTabProfile } from '../../../actions/profile';
 
 const DropdownMenu = (props) => {
-  const { menuAvatarShow } = props;
+  const {menuAvatarShow} = props;
+
+  this.handlerClick = (tab) => {
+    props.changeActiveTabProfile(tab);
+    props.setActivePage('profile');
+    props.closeMenu();
+  };
+
   return (
     <div
       className={(menuAvatarShow === false) ?
@@ -16,14 +23,14 @@ const DropdownMenu = (props) => {
       <div className="profile-menu__head">
         <div
           className="profile-menu__avatar"
-          style={{ backgroundImage: `url(${props.userPic || avatar})`,
+          style={{
+          backgroundImage: `url(${props.userPic || avatar})`,
           backgroundPosition: '50% 50%',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           marginRight: '1em',
           }}
-        >
-        </div>
+        />
         <div className="profile-menu__user-info">
           <h4>Iain Clarke</h4>
           <h4>Member No: 1234567890</h4>
@@ -32,45 +39,59 @@ const DropdownMenu = (props) => {
       <h3 className="profile-menu__title">Membership settings</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <a href="" onClick={() => { props.changeActiveTabProfile(0); props.setActivePage('profile'); }}>
-            <Link route="dashboard" params={{ page: 'profile' }}>Membership</Link>
-          </a>
+          <button onClick={() => { this.handlerClick(0); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>
+              <span>Membership</span>
+            </Link>
+          </button>
         </li>
         <li className="profile-menu__item">
-          <a href="" onClick={() => { props.changeActiveTabProfile(1); props.setActivePage('profile'); }}>
-             <Link route="dashboard" params={{ page: 'profile' }}>Regulatory</Link>
-          </a>
+          <button onClick={() => { this.handlerClick(1); }}>
+             <Link route="dashboard" params={{ page: 'profile' }}>
+               <span>Regulatory</span>
+             </Link>
+          </button>
         </li>
         <li className="profile-menu__item">
-          <a href="" onClick={() => { props.changeActiveTabProfile(2); props.setActivePage('profile'); }}>
-            <Link route="dashboard" params={{ page: 'profile' }}>Investment Experience</Link>
-          </a>
+          <button onClick={() => { this.handlerClick(2); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>
+              <span>Investment Experience</span>
+            </Link>
+          </button>
         </li>
         <li className="profile-menu__item">
-          <a href="" onClick={() => { props.changeActiveTabProfile(3); props.setActivePage('profile'); }}>
-            <Link route="dashboard" params={{ page: 'profile' }}>Accounts</Link>
-          </a>
+          <button onClick={() => { this.handlerClick(3); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>
+              <span>Accounts</span>
+            </Link>
+          </button>
         </li>
       </ul>
       <h3 className="profile-menu__title">Account Statements</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <a href="" onClick={() => { props.changeActiveTabProfile(4); props.setActivePage('profile'); }}>
-            <Link route="dashboard" params={{ page: 'profile' }}>Documents</Link>
-          </a>
+          <button onClick={() => { this.handlerClick(4); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>
+              <span>Documents</span>
+            </Link>
+          </button>
         </li>
       </ul>
       <h3 className="profile-menu__title">Platform Configuration</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <a href="" onClick={() => { props.changeActiveTabProfile(5); props.setActivePage('profile'); }}>
-            <Link route="dashboard" params={{ page: 'profile' }}>Order Mgt Defaults</Link>
-          </a>
+          <button onClick={() => { this.handlerClick(5); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>
+              <span>Order Mgt Defaults</span>
+            </Link>
+          </button>
         </li>
         <li className="profile-menu__item">
-          <a href="" onClick={() => { props.changeActiveTabProfile(6); props.setActivePage('profile'); }}>
-            <Link route="dashboard" params={{ page: 'profile' }}>Notifications</Link>
-          </a>
+          <button onClick={() => { this.handlerClick(6); }}>
+            <Link route="dashboard" params={{ page: 'profile' }}>
+              <span>Notifications</span>
+            </Link>
+          </button>
         </li>
       </ul>
       <button
