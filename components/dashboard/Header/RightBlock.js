@@ -10,6 +10,7 @@ export default class RightBlock extends Component {
     };
   }
 
+
   toggleMenu = () => {
     this.setState({ menuAvatarShow: !this.state.menuAvatarShow })
   };

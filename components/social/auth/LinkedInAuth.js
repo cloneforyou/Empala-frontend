@@ -21,7 +21,7 @@ export default class LinkedInLogin extends React.Component {
         callBack={this.onSignIn}
         fields=":(id,num-connections,date-of-birth,first-name,last-name,email-address,location)"
         className="social-btn social-btn__linkedin"
-        textButton="Linkedin"
+        textButton="linkedin"
         buttonType="button"
         // icon={<Icon />}
       />

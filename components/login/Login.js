@@ -13,7 +13,7 @@ import {
 } from '../../actions/auth';
 import GoogleAuth from '../social/auth/GoogleAuth';
 import RegistrationModal from './RegistrationModal';
-import logo from '../../static/images/logo.svg';
+import logo from '../../static/images/login_logo.png';
 import FacebookAuth from '../social/auth/FaceBookAuth';
 
 import LinkedInAuth from '../social/auth/LinkedInAuth';
@@ -125,18 +125,18 @@ const Login = (props) => {
   }
   return (
     <div className="row login">
-      <div className="col-6 login__part login__bg">
-        <div className="login__top-layer login__content text-center">
-          <img className="login__logo" src={logo} alt="Logotype" />
-          <ul className="login__list vertical-list white fw-300">
-            <li>Join together</li>
-            <li>Invest together</li>
-            <li>Succeed together</li>
-          </ul>
-        </div>
-      </div>
-      <div className="col-6 login__part">
+      {/*<div className="col-6 login__part login__bg">*/}
+        {/*<div className="login__top-layer login__content text-center">*/}
+          {/*<img className="login__logo" src={logo} alt="Logotype" />*/}
+          {/*<ul className="login__list vertical-list white fw-300">*/}
+            {/*<li>Join together</li>*/}
+            {/*<li>Invest together</li>*/}
+            {/*<li>Succeed together</li>*/}
+          {/*</ul>*/}
+        {/*</div>*/}
+      {/*</div>*/}
         <div className="login__content ">
+          <img className="login__logo" src={logo} alt="Logotype" />
           <h3 className="login__title fw-300">Login to your account</h3>
           <div className="login__form-width no-gutters clear-fix">
             <EmpalaInput
@@ -173,14 +173,13 @@ const Login = (props) => {
             </div>
           </div>
           <div className="text-center">
-            <Link href="/registration"><a className="green-link">Registration</a></Link>
+            <Link href="/registration"><a className="gray-link">New member registration</a></Link>
           </div>
           <RegistrationModal
             handleClose={props.handleModalCancel}
             open={props.modalIsOpen}
           />
         </div>
-      </div>
     </div>
   );
 };
