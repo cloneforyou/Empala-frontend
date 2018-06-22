@@ -5,5 +5,6 @@ export const serverOrigins = {
 
 export const clientsId = {
   google: '775618626283-0146i9co6rpcopbui2i78mmnc4884j32.apps.googleusercontent.com',
+  linkedIn: '86yquq2rh1996d',
 };
 
