@@ -34,7 +34,7 @@
     border: solid 1px #e0e0e0;
     padding: 32px 42px 20px 42px;
     width: 462px;
-    height: 620px;
+    min-height: 620px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,7 +63,7 @@
   }
   &__forgot-link {
     @include fontSize(12px);
-    color: #c9c9c9;
+    color: #bcbcbc!important;
     margin-bottom: 20px;
     margin-top: -10px;
     z-index: 3;

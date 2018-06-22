@@ -125,16 +125,6 @@ const Login = (props) => {
   }
   return (
     <div className="row login">
-      {/*<div className="col-6 login__part login__bg">*/}
-        {/*<div className="login__top-layer login__content text-center">*/}
-          {/*<img className="login__logo" src={logo} alt="Logotype" />*/}
-          {/*<ul className="login__list vertical-list white fw-300">*/}
-            {/*<li>Join together</li>*/}
-            {/*<li>Invest together</li>*/}
-            {/*<li>Succeed together</li>*/}
-          {/*</ul>*/}
-        {/*</div>*/}
-      {/*</div>*/}
         <div className="login__content ">
           <img className="login__logo" src={logo} alt="Logotype" />
           <h3 className="login__title fw-300">Login to your account</h3>
@@ -155,12 +145,12 @@ const Login = (props) => {
               handleChange={e => props.setInputValueById(e)}
               errorText={props.fieldsError.index_password}
             />
-            <a
-              className="login__forgot-link fw-300 float-right"
+            <button
+              className="default-btn login__forgot-link fw-300 float-right"
               onClick={props.setPasswordForgotten}
             >
-              Forgot password?
-            </a>
+              forgot password?
+            </button>
             <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
           </div>
           <div className="social-auth">
