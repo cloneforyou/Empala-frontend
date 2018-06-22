@@ -16,8 +16,6 @@ import RegistrationModal from './RegistrationModal';
 import logo from '../../static/images/logo.svg';
 import FacebookAuth from '../social/auth/FaceBookAuth';
 
-
-
 const style = {
   warningTextBlock: {
     width: '350px',
