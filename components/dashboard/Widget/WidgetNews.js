@@ -20,7 +20,7 @@ class WidgetNews extends Component {
     const { menuIsOpen } = this.state;
     const widgetNews = widget.news || [];
     return (
-      <div className={`widget-col col-lg-${widget.id === 'external_news' ? 4 : 3}`} key={widget.id}>
+      <div className={`widget-col col-lg-${widget.id === 'external_news' ? 5 : 3}`} key={widget.id}>
         <div className="widget widget_padding" style={{ height: '365px' }}>
           <div className="widget__head">
             <h3 className="widget__title">{widget.id === 'external_news' ? 'News' : 'Empala internal news'}</h3>
@@ -79,7 +79,7 @@ class WidgetNews extends Component {
                 </div>
               )) :
               widgetNews.map(card => (
-                <div className="news-card row no-gutters" key={card.id}>
+                <div className="news-card row no-gutters" key={card.feed.action_id}>
                   <div className="news-card__wrap-image">
                     { card.feed.subject.image_profile ?
                       <img

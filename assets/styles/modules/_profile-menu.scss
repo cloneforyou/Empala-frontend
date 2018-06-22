@@ -43,6 +43,12 @@
       font-weight: 600;
       color: #707070;
     }
+    button {
+      @include button-reset();
+      @include fontSize(16px);
+      font-weight: 600;
+      color: #707070;
+    }
   }
   &__logout-btn {
     background: $green;

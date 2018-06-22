@@ -6,7 +6,7 @@ export const widgetsOverflow = [
     id: uniqueId(),
     title: 'Financial capital',
     icon: 'community',
-    col: 4,
+    col: 5,
     height: 390,
     tables: [
       {
@@ -228,7 +228,7 @@ export const widgetsOverflow = [
     id: uniqueId(),
     title: 'Environmental capital',
     icon: 'environmental',
-    col: 5,
+    col: 4,
     height: 390,
     tables: [
       {
@@ -339,7 +339,7 @@ export const widgetsOverflow = [
   {
     id: uniqueId(),
     title: 'Active orders',
-    col: 4,
+    col: 5,
     height: 287,
     tables: [
       {
@@ -602,7 +602,7 @@ export const widgetsOverflow = [
   {
     id: uniqueId(),
     title: 'Deal development',
-    col: 5,
+    col: 4,
     height: 287,
     tables: [
       {
