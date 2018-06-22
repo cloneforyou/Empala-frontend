@@ -19,7 +19,7 @@ import { setFieldInvalid } from '../actions/registration';
 
 
 function* loginRequest(url, options) {
-  console.log(url, options)
+  // console.log(url, options)
   try {
     const result = yield call(request, url, options);
     if (result.data.info === 'LOGGED_IN') {
@@ -40,6 +40,9 @@ function* loginRequest(url, options) {
         registrationData.identity_residential_address_residential_address_city = memberTown[0];
         // registrationData.identity_residential_address_residential_address_country = memberTown[1]; // Enable on next phase
       }
+      if (result.data.data.country) {
+        // registrationData.identity_residential_address_residential_address_country = country.name; // Enable on next phase
+      }
       localStorage.setItem('registrationData', JSON.stringify(registrationData));
     }
   } catch (err) {
@@ -54,7 +57,7 @@ function* loginRequest(url, options) {
 export function* authenticate({ provider, data }) {
   const email = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
-  // console.log(' ** AUTH', provider);
+  // console.log(' ** AUTH', provider, data);
   let url = '';
   const options = {
     method: 'POST',
@@ -72,6 +75,12 @@ export function* authenticate({ provider, data }) {
       break;
     case 'facebook':
       url = '/api/auth/login/facebook';
+      options.data = {
+        userData: data,
+      };
+      break;
+    case 'linkedIn':
+      url = '/api/auth/login/linkedin';
       options.data = {
         userData: data,
       };
