@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
-import nophotoUser from '../../../static/images/nophoto_user.png';
+import nophotoUser from '../../../static/images/default-avatar-of-user.svg';
 
 class WidgetNews extends Component {
   constructor(props) {
@@ -81,17 +81,11 @@ class WidgetNews extends Component {
               widgetNews.map(card => (
                 <div className="news-card row no-gutters" key={card.feed.action_id}>
                   <div className="news-card__wrap-image">
-                    { card.feed.subject.image_profile ?
-                      <img
-                        className="news-card__image"
-                        src={card.feed.subject.image_profile}
-                        alt=""
-                      /> :
                     <img
-                      className="news-card__image"
-                      src={nophotoUser}
+                      className={card.feed.subject.image_profile ? "news-card__image" : 'news-card__image news-card__image_bordered'}
+                      src={card.feed.subject.image_profile || nophotoUser}
                       alt=""
-                    /> }
+                    />
                   </div>
                   <div className="col news-card__body">
                     <div className="news-card__head">

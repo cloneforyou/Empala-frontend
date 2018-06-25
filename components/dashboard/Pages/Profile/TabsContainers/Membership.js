@@ -96,7 +96,7 @@ class Membership extends Component {
             </div>
             <div className="col-md-6">
               <div className="row">
-                <div className="col-lg-8">
+                <div className="col-lg-8 no-gutters">
                   {fieldsMemberPersonal.map((item) => {
                     if (item.id === 'createdat' && userData['createdat']) {
                       const data = { createdat: new Date(userData['createdat']).toLocaleString().slice(0, 10) };
@@ -105,7 +105,7 @@ class Membership extends Component {
                     return this.mappingComponent(item, userData);
                   })}
                 </div>
-                <div className="col-lg-4 text-center">
+                <div className="col-lg-4 text-center no-gutters">
                   <div
                     className="profile-image"
                     onClick={this.props.showUploadDialog}
