@@ -150,7 +150,7 @@ const Login = props =>
             </button>
             <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
           </div>
-          <div className="social-au_h">
+          <div className="social-auth">
             <div className="styled-part-separate"><span>or connect with</span></div>
             <div className="social-auth__row">
               {/* <button className="social-btn social-btn__facebook">facebook</button> */}
