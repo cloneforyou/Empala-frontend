@@ -45,8 +45,7 @@ const style = {
 };
 
 const UserEmailForm = props => (
-  <form>
-    Please type your account e-mail below.
+  <div className="login__form-width no-gutters clear-fix">
     <EmpalaInput
       key="index_email"
       id="index_email"
@@ -66,9 +65,9 @@ const UserEmailForm = props => (
       className="login__btn"
       onClick={props.handleClick}
       type="button"
-    >Send a link
+    >SEND
     </button>
-  </form>
+  </div>
 );
 const ConfirmationText = (props) => {
   if (props.linkSent) return <p>Please check your e-mail for details.</p>;
@@ -85,10 +84,8 @@ const SuspendedForm = props => (
   /* Text is a sample */
   <div style={style.warningTextBlock}>
     <h2>Security warning</h2>
-    <p>Too many failed login attempts has been received from your account.</p>
-    <p>Account is been suspended for a while. We can send you email, containing <span style={style.markedText}>activation link</span>.
-    </p>
-
+    <p>You have too many failed login attempts on your account.</p>
+    <p>We have sent you <span style={style.markedText}>activation link</span> to your email to reactivate your account.</p>
     <div>
       <ConfirmationText {...props} />
     </div>
@@ -103,30 +100,30 @@ const ForgotPasswordForm = (props) => {
   }
   return (
     <div style={style.warningTextBlock}>
-      <h2>Have you forgotten your password?</h2>
-      <p>Please enter your account email below so we can send you a link for password reset.</p>
-      <UserEmailForm
-        handleClick={props.sendPasswordRecoveryLink}
-        handleInput={props.setInputValueById}
-        errorText={props.errorText}
-        handleBack={props.clearLoginState}
-        goBack
-      />
-    </div>
+      <h2 className="login__security-title">Let’s find your account</h2>
+        <div className="login__description-wrapper">
+          <span>Enter your email address</span>
+        </div>
+        <UserEmailForm
+          handleClick={props.sendPasswordRecoveryLink}
+          handleInput={props.setInputValueById}
+          errorText={props.errorText}
+          handleBack={props.clearLoginState}
+          goBack
+        />
+      </div>
   );
 };
 
-const Login = (props) => {
-  if (props.accountSuspended) {
-    return <SuspendedForm {...props} />;
-  }
-  if (props.forgotPassword) {
-    return <ForgotPasswordForm {...props} />;
-  }
-  return (
+const Login = props =>
+  (
     <div className="row login">
-        <div className="login__content ">
-          <img className="login__logo" src={logo} alt="Logotype" />
+      <div className="login__content ">
+        <img className="login__logo" src={logo} alt="Logotype" />
+        {props.accountSuspended && <SuspendedForm {...props} />}
+        {props.forgotPassword && <ForgotPasswordForm {...props} />}
+        {!(props.accountSuspended || props.forgotPassword) &&
+        <div>
           <h3 className="login__title fw-300">Login to your account</h3>
           <div className="login__form-width no-gutters clear-fix">
             <EmpalaInput
@@ -153,27 +150,28 @@ const Login = (props) => {
             </button>
             <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
           </div>
-          <div className="social-auth">
+          <div className="social-au_h">
             <div className="styled-part-separate"><span>or connect with</span></div>
             <div className="social-auth__row">
-              {/*<button className="social-btn social-btn__facebook">facebook</button>*/}
+              {/* <button className="social-btn social-btn__facebook">facebook</button> */}
               <FacebookAuth handlelogin={props.handleLogin} />
               <GoogleAuth handlelogin={props.handleLogin} />
               {!isNode && <LinkedInAuth handlelogin={props.handleLogin} />}
             </div>
           </div>
+
           <div className="text-center">
             <Link href="/registration"><a className="gray-link">New member registration</a></Link>
           </div>
-          <RegistrationModal
-            handleClose={props.handleModalCancel}
-            open={props.modalIsOpen}
-          />
         </div>
+          }
+        <RegistrationModal
+          handleClose={props.handleModalCancel}
+          open={props.modalIsOpen}
+        />
+      </div>
     </div>
   );
-};
-
 export default connect(
   state => ({
     errorText: state.auth.authError === 'Invalid credentials' ?
