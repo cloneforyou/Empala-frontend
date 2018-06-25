@@ -55,14 +55,14 @@ function* loginRequest(url, options) {
 }
 
 export function* authenticate({ provider, data }) {
-  const email = yield select(state => state.auth.index_username);
+  const login = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
   // console.log(' ** AUTH', provider, data);
   let url = '';
   const options = {
     method: 'POST',
     data: {
-      email,
+      login,
       password,
     },
   };
@@ -88,13 +88,13 @@ export function* authenticate({ provider, data }) {
     default:
       url = '/api/auth/login';
       options.data = {
-        email,
+        login,
         password,
       };
   }
   if (provider === 'local') {
-    if (!email) {
-      yield put(setFieldInvalid('index_username', 'Please provide the e-mail'));
+    if (!login) {
+      yield put(setFieldInvalid('index_username', 'Please provide member no. or e-mail'));
     }
     if (!password) {
       return yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
