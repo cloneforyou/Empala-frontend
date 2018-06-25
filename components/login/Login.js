@@ -130,7 +130,7 @@ const Login = props =>
               key="username"
               id="index_username"
               type="text"
-              label="E-mail"
+              label="Member no. or e-mail"
               handleChange={e => props.setInputValueById(e)}
               errorText={props.errorText || props.fieldsError.index_username}
             />
