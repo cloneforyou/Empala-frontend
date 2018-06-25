@@ -7,7 +7,6 @@ import {
   fieldsInvestmentExperienceTwo,
 } from '../../../../../localdata/profileData';
 import { setInputFieldValueById } from '../../../../../actions/registration';
-import { flattenObject } from '../../../../../utils/additional';
 
 class Experience extends Component {
   constructor(props) {
@@ -15,7 +14,6 @@ class Experience extends Component {
   }
 
   render() {
-    const userData = this.props.userData;
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
@@ -23,16 +21,16 @@ class Experience extends Component {
           <div className="row">
             <div className="col-md-6">
               <div className="row margin-bt-30">
-                {fieldsInvestmentExperienceOne.map(item => (<FormGroupMapping
-                  {...{ ...this.props, item, key: item.id }}
-                />))}
+                {fieldsInvestmentExperienceOne.map(item => (
+                  <FormGroupMapping {...{ ...this.props, item, key: item.id }} />
+                ))}
               </div>
             </div>
             <div className="col-md-6">
               <div className="row margin-bt-30">
-                {fieldsInvestmentExperienceTwo.map(item => (<FormGroupMapping
-                  {...{ ...this.props, item, key: item.id }}
-                />))}
+                {fieldsInvestmentExperienceTwo.map(item => (
+                  <FormGroupMapping {...{ ...this.props, item, key: item.id }} />
+                ))}
               </div>
             </div>
           </div>
