@@ -14,6 +14,14 @@ export default class LinkedInLogin extends React.Component {
   onSignIn(authPayload) {
     this.props.handlelogin('linkedIn', authPayload);
   }
+
+  componentWillMount() {
+    /* Trick to fix LinkedIn SDK exeption, when use SSR. */
+    /* (in some cases object 'module' appears in window scope */
+    if (module.exports) module.exports = undefined;
+    if (window.module && window.module.exports) window.module.exports = undefined;
+  }
+
   render() {
     return (
       <LinkedAuth
@@ -23,7 +31,7 @@ export default class LinkedInLogin extends React.Component {
         className="social-btn social-btn__linkedin"
         textButton="linkedin"
         buttonType="button"
-        // icon={<Icon />}
+        lang
       />
     );
   }
