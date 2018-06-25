@@ -11,6 +11,11 @@
   }
   &__image {
     max-height: 72px;
+    border-radius: 6px;
+    &_bordered{
+      padding: 5px;
+      border: 2px solid $green;
+    }
   }
   &__head {
     @include fontSize(10px);
