@@ -12,7 +12,7 @@ class Header extends Component {
 
 
   render() {
-    const { sidebarCollapsed } = this.props;
+    const { sidebarCollapsed, userPic } = this.props;
     return (
       <div
         className={sidebarCollapsed ?
@@ -35,7 +35,7 @@ class Header extends Component {
             <span className="navbar-toggler-icon" />
           </button>
           <Search />
-          <RightBlock userPic={this.props.userPic} />
+          <RightBlock userPic={userPic} />
         </div>
       </div>
     );

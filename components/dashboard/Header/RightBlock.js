@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DropdownMenu from './DropdownMenu';
-import avatar from '../../../static/images/avatar-user.svg';
+import avatar from '../../../static/images/default-avatar-of-user.svg';
 
 export default class RightBlock extends Component {
   constructor(props) {
@@ -20,6 +20,7 @@ export default class RightBlock extends Component {
   };
 
   render() {
+    const { userPic } = this.props;
     const { menuAvatarShow } = this.state;
     return (
       <div>
@@ -38,18 +39,22 @@ export default class RightBlock extends Component {
             <button
               className="nav-link user-nav__dropdown-btn"
               onClick={this.toggleMenu}
-              // onBlur={() => setTimeout(this.closeMenu, 100)}
             >
-              <div
+              {/*<div
                 className="user-nav__userPic"
-                style={{backgroundImage: `url(${this.props.userPic || avatar})`}}
+                style={{ backgroundImage: `url(${this.props.userPic || avatar})` }}
                 alt=""
+              />*/}
+              <img
+                className={userPic ? 'user-nav__userPic' : "user-nav__userPic  user-nav__userPic_bordered"}
+                src={userPic || avatar}
+                alt="Avatar"
               />
             </button>
             <DropdownMenu
-              closeMenu = {this.closeMenu}
+              closeMenu={this.closeMenu}
               menuAvatarShow={menuAvatarShow}
-              userPic={this.props.userPic}
+              userPic={userPic}
             />
           </li>
         </ul>
