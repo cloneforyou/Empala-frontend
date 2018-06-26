@@ -46,6 +46,7 @@ export default function request(url, options = {}) {
   return axios({
     method: options.method,
     url: `${origin || serverOrigins.aws}${url}`,
+
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,
