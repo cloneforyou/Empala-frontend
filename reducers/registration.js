@@ -50,7 +50,7 @@ function registration(state = initialState, action) {
     case VALIDATE_FIELD_SUCCESS:
       return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: '' } };
     case GET_DATA_FROM_CACHE:
-      return { ...state, registrationData: JSON.parse(localStorage.getItem('registrationData')) };
+      return { ...state, registrationData: { ...state.registrationData, ...JSON.parse(localStorage.getItem('registrationData')) } };
     case TOGGLE_CHECKBOX:
       return { ...state, checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] } };
     case SHOW_IDENTITY_MODAL:

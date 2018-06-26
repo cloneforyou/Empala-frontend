@@ -43,7 +43,7 @@ export default function request(url, options = {}) {
   }
   return axios({
     method: options.method,
-    url: `${serverOrigins.aws}${url}`,
+    url: `${serverOrigins.local}${url}`, // use serverOrigins.local for local testing
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,
