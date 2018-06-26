@@ -99,8 +99,9 @@ export const uploadImageFail = err => ({
   err,
 });
 
-export const uploadImageSuccess = () => ({
+export const uploadImageSuccess = data => ({
   type: UPLOAD_IMAGE_SUCCESS,
+  data,
 });
 
 export const openModal = name => ({

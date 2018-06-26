@@ -43,7 +43,7 @@ function* loginRequest(url, options) {
       if (result.data.data.country) {
         // registrationData.identity_residential_address_residential_address_country = country.name; // Enable on next phase
       }
-      localStorage.setItem('registrationData', JSON.stringify(registrationData));
+      localStorage.setItem('registrationData', JSON.stringify({ ...localStorage.getItem('registrationData'), ...registrationData }));
     }
   } catch (err) {
     console.log(' ** ', err);

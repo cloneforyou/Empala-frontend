@@ -5,14 +5,15 @@ import Search from './Search';
 import logo from '../../../static/images/logo.svg';
 import iconLogo from '../../../static/images/dashboard-icons/icon-logo.svg';
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-
   render() {
-    const { sidebarCollapsed, userPic } = this.props;
+    const {
+      sidebarCollapsed,
+      userPic,
+      memberFullName,
+      memberNumber,
+    } = this.props;
     return (
       <div
         className={sidebarCollapsed ?
@@ -35,7 +36,11 @@ class Header extends Component {
             <span className="navbar-toggler-icon" />
           </button>
           <Search />
-          <RightBlock userPic={userPic} />
+          <RightBlock
+            userPic={userPic}
+            memberNumber={memberNumber}
+            memberFullName={memberFullName}
+          />
         </div>
       </div>
     );
@@ -43,8 +48,31 @@ class Header extends Component {
 }
 
 function mapStateToProps(state) {
+  const fullNameFields = [
+    'basic_information_prefix',
+    'basic_information_first_name',
+    // 'basic_information_middle_name',
+    // 'basic_information_second_middle_name',
+    // 'basic_information_third_middle_name',
+    'basic_information_last_name',
+    // 'basic_information_suffix',
+  ];
+  const getFullName = (fields, userData) => {
+    let fullName = '';
+    fields.forEach((el, index) => {
+      if (userData[el]) {
+        fullName += userData[el];
+        if (index < fields.length - 1) {
+          fullName += ' ';
+        }
+      }
+    });
+    return fullName;
+  };
   return {
     userPic: state.profile.profileUserData.account_avatar,
+    memberNumber: state.profile.profileUserData.account_information_account_number,
+    memberFullName: getFullName(fullNameFields, state.profile.profileUserData),
   };
 }
 
