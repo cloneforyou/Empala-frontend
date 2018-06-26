@@ -18,6 +18,7 @@ import EmpalaInput from '../../../../registration/EmpalaInput';
 import FullName from './Components/FullName';
 import DatePickerField from '../../../../registration/DatePickerField';
 import ResetPasswordModal from '../ResetPasswordModal';
+import avatar from '../../../../../static/images/default-avatar-of-user.svg';
 
 class Membership extends Component {
   constructor(props) {
@@ -110,7 +111,13 @@ class Membership extends Component {
                     className="profile-image"
                     onClick={this.props.showUploadDialog}
                   >
-                    <img src={userData.account_avatar} alt="" />
+                    <img
+                      className={userData.account_avatar ?
+                        'profile-menu__avatar' :
+                        'profile-menu__avatar profile-menu__avatar_bordered'}
+                      src={userData.account_avatar ? userData.account_avatar : avatar}
+                      alt="Avatar"
+                    />
                   </div>
                   <button className="default-btn">Edit</button>
                 </div>

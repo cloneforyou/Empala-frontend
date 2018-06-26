@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from '../../../routes';
 import avatar from '../../../static/images/default-avatar-of-user.svg';
@@ -120,6 +121,15 @@ const DropdownMenu = (props) => {
     </div>
   );
 };
+
+DropdownMenu.propTypes = {
+  menuAvatarShow: PropTypes.bool.isRequired,
+  changeActiveTabProfile: PropTypes.func.isRequired,
+  setActivePage: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+};
+
 export default connect(
   state => ({}),
   dispatch => (
