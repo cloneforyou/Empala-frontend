@@ -2,7 +2,7 @@ import {
   GET_ACTIVE_TAB_PROFILE,
   CHANGE_ACTIVE_TAB_PROFILE,
 } from '../constants/profile';
-import { GET_USER_DATA_SUCCESS, SET_FIELD_VALUE } from '../constants/dashboard';
+import { GET_USER_DATA_SUCCESS, SET_FIELD_VALUE, UPLOAD_IMAGE_SUCCESS } from '../constants/dashboard';
 import { flattenObject, renameKeys } from '../utils/additional';
 import {VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS} from '../constants/registration';
 
@@ -19,6 +19,7 @@ function profile(state = initialState, action) {
     case CHANGE_ACTIVE_TAB_PROFILE:
       return { ...state, tabValue: action.activeTab };
     case GET_USER_DATA_SUCCESS:
+    case UPLOAD_IMAGE_SUCCESS:
       return {
         ...state,
         profileUserData: renameKeys(flattenObject(action.data.data.profile), /^Member/, ''),

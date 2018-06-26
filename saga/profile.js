@@ -84,7 +84,7 @@ export function* uploadImage() {
   try {
     // console.log(' ** UPLOAD');
     const result = yield call(request, url, options);
-    yield put(uploadImageSuccess());
+    yield put(uploadImageSuccess(result.data));
   } catch (err) {
     yield put(uploadImageFail(err.message));
   }

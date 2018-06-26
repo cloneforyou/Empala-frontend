@@ -52,6 +52,7 @@ export default class RightBlock extends Component {
               />
             </button>
             <DropdownMenu
+              {...this.props}
               closeMenu={this.closeMenu}
               menuAvatarShow={menuAvatarShow}
               userPic={userPic}

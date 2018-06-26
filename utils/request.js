@@ -2,6 +2,8 @@ import axios from 'axios';
 import { serverOrigins } from './config';
 
 export default function request(url, options = {}) {
+  const port = 9000;
+  const origin = `http://${window.location.hostname}:${port}`;
   function setErrorText(err) {
     if (err.response && err.response.status === 401) {
       if (err.response.data.info === 'INVALID_VALUE') {
@@ -43,7 +45,8 @@ export default function request(url, options = {}) {
   }
   return axios({
     method: options.method,
-    url: `${serverOrigins.local}${url}`, // use serverOrigins.local for local testing
+    url: `${origin || serverOrigins.aws}${url}`,
+
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,

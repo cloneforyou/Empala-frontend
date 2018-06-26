@@ -29,8 +29,8 @@ const DropdownMenu = (props) => {
           />
         </div>
         <div className="profile-menu__user-info">
-          <h4>Iain Clarke</h4>
-          <h4>Member No: 1234567890</h4>
+          <h4>{props.memberFullName}</h4>
+          <h4>Member No: {props.memberNumber}</h4>
         </div>
       </div>
       <h3 className="profile-menu__title">Membership settings</h3>

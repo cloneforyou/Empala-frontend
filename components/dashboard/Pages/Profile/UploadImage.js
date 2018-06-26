@@ -63,7 +63,12 @@ class UploadImage extends PureComponent {
        label="Cancel"
        style={style.cancelBtn}
        labelStyle={style.labelBtn}
-       onClick={this.props.handleCancel}
+       onClick={() => {
+         this.setState({
+           imagePreviewUrl: '',
+         });
+         this.props.handleCancel();
+       }}
      />,
      <FlatButton
        label="Upload"
@@ -99,7 +104,6 @@ class UploadImage extends PureComponent {
         aria-labelledby="simple-dialog-title"
         actions={this.actions}
         open={this.props.modalOpen}>
-        {/*<DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>*/}
       <div className="">
         <div
           className=""

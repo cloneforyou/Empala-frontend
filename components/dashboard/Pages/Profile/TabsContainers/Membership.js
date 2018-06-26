@@ -8,7 +8,6 @@ import {
   fieldsMaillingAddress,
   fieldsPersonalWealth,
   fieldsMemberPersonal,
-  fieldResetPassword,
 } from '../../../../../localdata/profileData';
 import { openModal } from '../../../../../actions/dashboard';
 import DeleteAccountModal from './Components/DeleteAccountModal';
@@ -18,6 +17,7 @@ import EmpalaInput from '../../../../registration/EmpalaInput';
 import FullName from './Components/FullName';
 import DatePickerField from '../../../../registration/DatePickerField';
 import ResetPasswordModal from '../ResetPasswordModal';
+import avatar from '../../../../../static/images/default-avatar-of-user.svg';
 
 class Membership extends Component {
   constructor(props) {
@@ -110,9 +110,13 @@ class Membership extends Component {
                     className="profile-image"
                     onClick={this.props.showUploadDialog}
                   >
-                    <img src={userData.account_avatar} alt="" />
+                    <img src={userData.account_avatar || avatar} alt="userpic" />
                   </div>
-                  <button className="default-btn">Edit</button>
+                  <button
+                    className="default-btn"
+                    onClick={this.props.showUploadDialog}
+                  >Edit
+                  </button>
                 </div>
               </div>
               <button
