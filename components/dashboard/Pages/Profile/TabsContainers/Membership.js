@@ -110,7 +110,13 @@ class Membership extends Component {
                     className="profile-image"
                     onClick={this.props.showUploadDialog}
                   >
-                    <img src={userData.account_avatar || avatar} alt="userpic" />
+                    <img
+                      className={userData.account_avatar ?
+                        'profile-menu__avatar' :
+                        'profile-menu__avatar profile-menu__avatar_bordered'}
+                      src={userData.account_avatar || avatar}
+                      alt="Userpic"
+                    />
                   </div>
                   <button
                     className="default-btn"
