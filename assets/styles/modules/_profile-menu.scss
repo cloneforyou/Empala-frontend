@@ -24,6 +24,7 @@
       border: 2px solid $green;
     }
   }
+
   &__user-info-name {
     @include fontSize(16px);
     font-weight: 600;
@@ -33,6 +34,7 @@
       margin-bottom: 6px;
     }
   }
+
   &__user-info-member-no {
     @include fontSize(14px);
     font-weight: 600;

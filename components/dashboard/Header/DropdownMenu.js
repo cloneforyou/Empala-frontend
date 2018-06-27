@@ -22,7 +22,7 @@ const DropdownMenu = (props) => {
         'dropdown-menu dropdown-menu-right show profile-menu user-nav__dropdown-menu'}
     >
       <div className="profile-menu__head">
-        <div className="row no-gutters">
+        <div className="row no-gutters align-items-center">
           <div className="profile-menu__avatar-wrap">
             <img
               className={props.userPic ? 'profile-menu__avatar' : 'profile-menu__avatar profile-menu__avatar_bordered'}
@@ -30,7 +30,7 @@ const DropdownMenu = (props) => {
               alt="Avatar"
             />
           </div>
-          <h4 className="profile-menu__user-info-title">{props.memberFullName}</h4>
+          <h4 className="profile-menu__user-info-name">{props.memberFullName}</h4>
         </div>
         <h4 className="profile-menu__user-info-member-no">Member No: {props.memberNumber}</h4>
       </div>
