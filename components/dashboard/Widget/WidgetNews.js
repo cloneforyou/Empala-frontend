@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import _ from 'lodash';
 import nophotoUser from '../../../static/images/default-avatar-of-user.svg';
 
 class WidgetNews extends Component {
@@ -62,8 +63,8 @@ class WidgetNews extends Component {
                             <Moment date={card.pubDate} fromNow />
                         </span>
                       </div>
-                      <a className="news-card__link" target="_blank" href={card.link}>{card.title}</a>
-                      <p className="m-0">{card.description}</p>
+                      <a className="news-card__link" target="_blank" href={card.link}>{_.unescape(card.title)}</a>
+                      <p className="m-0">{_.unescape(card.description)}</p>
                     </div>
                     {/*<div className="news-card__foot">*/}
                     {/*<div className="news-card__rating">*/}
@@ -94,7 +95,7 @@ class WidgetNews extends Component {
                           <Moment date={card.feed.subject.modified_date} format="MM-DD-YYYY" />
                         </span>
                       </div>
-                      <p className="news-card__title">{card.feed.main_content}</p>
+                      <p className="news-card__title">{_.unescape(card.feed.main_content)}</p>
                     </div>
                   </div>
                 </div>
