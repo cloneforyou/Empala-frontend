@@ -8,6 +8,8 @@ import Orders from "./Pages/Orders";
 import Profile from "./Pages/Profile";
 import Footer from './Footer';
 import GlobalNetworkPage from './Pages/GlobalNetworkPage';
+import PasswordReminderModal from './PasswordReminderModal';
+import { closeModal } from '../../actions/dashboard';
 
 class Main extends Component {
   constructor(props) {
@@ -45,12 +47,19 @@ class Main extends Component {
         className={sidebarCollapsed ? `dashboard dashboard_${currentColorScheme}` : `dashboard dashboard_full dashboard_${currentColorScheme}`}>
         {this.mapPageToComponent(activePageDashboard)}
         <Footer />
+        <PasswordReminderModal
+          handleClose={this.props.closeModal}
+          open={this.props.reminderModalOpen}
+         />
       </div>
     );
   }
 }
 
 export default connect(state => ({
+  reminderModalOpen: state.dashboard.modalOpen && state.dashboard.openModalName === 'passwordReminder',
   activePageDashboard: state.dashboard.activePageDashboard,
   currentColorScheme: state.dashboard.currentColorScheme,
+}), dispatch => ({
+  closeModal: () => dispatch(closeModal()),
 }))(Main);
