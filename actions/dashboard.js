@@ -17,9 +17,11 @@ import {
   CLEAN_ERROR_TEXT,
   DELETE_ACCOUNT_REQUEST,
   DELETE_ACCOUNT_FAIL,
-  DELETE_ACCOUNT_SUCCESS, LOGOUT, RESET_PASSWORD_REQUEST, RESET_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS,
+  DELETE_ACCOUNT_SUCCESS,
+  LOGOUT,
+  SET_COLOR_SCHEME,
 } from '../constants/dashboard';
-import {SET_FIELD_VALUE} from "../constants/registration";
+import { SET_FIELD_VALUE } from '../constants/registration';
 
 export function collapseSidebar(bool) {
   return {
@@ -141,3 +143,11 @@ export const deleteAccountSuccess = () => ({
 export const logout = () => ({
   type: LOGOUT,
 });
+
+export const setColorScheme = colorScheme => {
+  console.log('colorScheme -==> ', colorScheme);
+  return {
+    type: SET_COLOR_SCHEME,
+    colorScheme,
+  }
+};

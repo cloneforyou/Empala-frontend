@@ -39,9 +39,10 @@ class Main extends Component {
   };
 
   render() {
-    const { sidebarCollapsed, activePageDashboard } = this.props;
+    const { sidebarCollapsed, activePageDashboard, currentColorScheme } = this.props;
     return (
-      <div className={sidebarCollapsed ? 'dashboard dashboard_light' : 'dashboard dashboard_full dashboard_light'}>
+      <div
+        className={sidebarCollapsed ? `dashboard dashboard_${currentColorScheme}` : `dashboard dashboard_full dashboard_${currentColorScheme}`}>
         {this.mapPageToComponent(activePageDashboard)}
         <Footer />
       </div>
@@ -51,4 +52,5 @@ class Main extends Component {
 
 export default connect(state => ({
   activePageDashboard: state.dashboard.activePageDashboard,
+  currentColorScheme: state.dashboard.currentColorScheme,
 }))(Main);

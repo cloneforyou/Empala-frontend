@@ -25,15 +25,6 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-
-});
-
 function mapStateToProps(state) {
   return {
     tabValue: state.profile.tabValue,
@@ -58,7 +49,7 @@ class Profile extends Component {
     const value = this.props.tabValue;
 
     return (
-      <div className={classes.root + ' tabs-line'}>
+      <div className='tabs-line'>
         <AppBar position="static" color="default">
           <Tabs
             value={value}
@@ -92,4 +83,4 @@ Profile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile));
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
