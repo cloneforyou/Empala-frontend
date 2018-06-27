@@ -405,9 +405,10 @@ export const fieldsMemberPersonal = [
   {
     id: 'account_information_account_number',
     type: 'text',
-    label: 'Account No.',
+    label: 'Membership No.',
     placeholder: '',
     field: 'input',
+    disabled: true,
   },
   {
     id: 'account_information_account_type',

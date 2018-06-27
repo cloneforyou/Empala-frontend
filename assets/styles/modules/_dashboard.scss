@@ -43,6 +43,9 @@
     .list-horizontal__link, .dashboard__copyright, .main-text-helvetica {
       color: #000;
     }
+    .tabs-line{
+      background: #fff;
+    }
   }
   &_dark {
     background: $dark-bg-blue;
@@ -66,6 +69,12 @@
     }
     .news-card__link {
       color: #b2b2b3;
+    }
+    .MuiAppBar-colorDefault-6 {
+      background: $dark-bg-blue;
+    }
+    .emp-table.table-striped tbody tr:nth-of-type(odd) {
+      background-color: rgba(245, 245, 246, 0.13);
     }
   }
 }

@@ -33,10 +33,10 @@ class Sidebar extends Component {
 
   render() {
     const { countryMenuIsOpen } = this.state;
-    const { sidebarCollapsed, selectedGroup, activePageDashboard } = this.props;
+    const { sidebarCollapsed, selectedGroup, activePageDashboard, currentColorScheme } = this.props;
     return (
       <div>
-        <div className={sidebarCollapsed ? 'sidebar sidebar_collapsed sidebar_black' : 'sidebar sidebar_black'}>
+        <div className={sidebarCollapsed ? `sidebar sidebar_collapsed sidebar_${currentColorScheme}-theme` : `sidebar sidebar_${currentColorScheme}-theme`}>
           <div className="sidebar-sticky">
             {
               sidebarItems.map((part, index) => (
@@ -104,6 +104,7 @@ class Sidebar extends Component {
 export default connect(state => ({
   selectedGroup: state.dashboard.selectedGroup,
   activePageDashboard: state.dashboard.activePageDashboard,
+  currentColorScheme: state.dashboard.currentColorScheme,
 }), {
   setGroupCountry, setActivePage
 })(Sidebar);

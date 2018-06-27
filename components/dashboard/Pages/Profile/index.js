@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -25,15 +24,6 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-
-});
-
 function mapStateToProps(state) {
   return {
     tabValue: state.profile.tabValue,
@@ -54,11 +44,10 @@ class Profile extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const value = this.props.tabValue;
 
     return (
-      <div className={classes.root + ' tabs-line'}>
+      <div className='tabs-line'>
         <AppBar position="static" color="default">
           <Tabs
             value={value}
@@ -88,8 +77,4 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile));
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

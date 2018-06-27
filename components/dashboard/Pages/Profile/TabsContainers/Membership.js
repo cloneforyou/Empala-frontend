@@ -95,7 +95,7 @@ class Membership extends Component {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="row">
+              <div className="row margin-bt-30">
                 <div className="col-lg-8 no-gutters">
                   {fieldsMemberPersonal.map((item) => {
                     if (item.id === 'createdat' && userData['createdat']) {
@@ -126,7 +126,7 @@ class Membership extends Component {
                 </div>
               </div>
               <button
-                className="green-btn pseudo-input"
+                className="green-btn"
                 onClick={this.props.showResetModal}
               >Reset password
               </button>
@@ -148,7 +148,7 @@ class Membership extends Component {
                           option.value[0] <= this.props.userData.profile_financials_total_net_worth[0])));
                     return this.mappingComponent({ ...item, options: filteredOptions }, userData);
                   }
-                    return this.mappingComponent(item, userData);
+                  return this.mappingComponent(item, userData);
                 })}
               </div>
             </div>
@@ -174,19 +174,21 @@ export default connect(state => ({
   userData: state.profile.profileUserData || {},
   fieldsErrors: state.profile.fieldsErrors || {},
 }), (dispatch => ({
-    setInputValueById: (e) => {
-      const { id, value } = e.target;
-      if (/zip_code/.test(id)) {
-        if (value.length === 5) {
-          dispatch(getInfoByZipCode(id, value));
-        } else if (value.length > 5) { return false; }
+  setInputValueById: (e) => {
+    const { id, value } = e.target;
+    if (/zip_code/.test(id)) {
+      if (value.length === 5) {
+        dispatch(getInfoByZipCode(id, value));
+      } else if (value.length > 5) {
+        return false;
       }
-      dispatch(setInputFieldValueById(id, value));
-      return false;
-    },
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    showUploadDialog: () => dispatch(openModal('uploadImage')),
-    toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
-    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-    showResetModal: () => dispatch(openModal('resetPassword')),
-  })))(Membership);
+    }
+    dispatch(setInputFieldValueById(id, value));
+    return false;
+  },
+  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  showUploadDialog: () => dispatch(openModal('uploadImage')),
+  toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
+  setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+  showResetModal: () => dispatch(openModal('resetPassword')),
+})))(Membership);

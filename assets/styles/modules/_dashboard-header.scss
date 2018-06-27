@@ -60,6 +60,11 @@
     .dashboard-header__logo {
       background: $dark-blue;
     }
+    .profile-menu__user-info-member-no,
+    .profile-menu__user-info-title,
+    .profile-menu__link {
+      color: #dee2e6;
+    }
     .user-nav__dropdown-menu {
       background: #383757;
       .dropdown-item {

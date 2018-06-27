@@ -7,28 +7,13 @@
   padding: 74px 0 0;
   width: 80px;
   transition: .4s;
-  ::-webkit-scrollbar {
-    width: 9px;
-  }
-  ::-webkit-scrollbar-track {
-    background: inherit;
-  }
-  ::-webkit-scrollbar-thumb {
-    border: 3px solid transparent;
-    border-radius: 3px;
-    background-color: #a0a0a0;
-    background-clip: content-box;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: #dadada;
-  }
-  &_black {
+  &_light-theme {
     background: $dark-grey;
     .user-status {
       background: #3b3e42;
     }
   }
-  &_blue {
+  &_dark-theme {
     background: $dark-blue;
     .user-status {
       background: #31304c;

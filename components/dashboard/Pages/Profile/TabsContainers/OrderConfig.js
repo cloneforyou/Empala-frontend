@@ -8,6 +8,7 @@ import {
   setInputFieldValueById,
   toggleCheckboxById,
 } from '../../../../../actions/registration';
+import { setColorScheme } from '../../../../../actions/dashboard';
 
 class OrderConfig extends Component {
   constructor(props) {
@@ -44,13 +45,17 @@ class OrderConfig extends Component {
                   id="order_config_theme"
                   options={[
                     {
-                      value: 'Light',
+                      value: 'light',
                       title: 'Light',
+                    },
+                    {
+                      value: 'dark',
+                      title: 'Dark',
                     },
                   ]}
                   label="Current color scheme"
-                  value="Light"
-                  handleChange={this.props.setSelectedValueById}
+                  value={this.props.currentColorScheme}
+                  handleChange={(id, value) => this.props.setColorScheme(value)}
                   errorText={this.props.fieldsErrors.order_config_theme}
                   hint="Current color scheme"
                 />
@@ -161,10 +166,12 @@ export default connect(
     registrationData: state.registration.registrationData,
     fieldsErrors: state.registration.fieldsErrors,
     checkboxes: state.registration.checkboxes,
+    currentColorScheme: state.dashboard.currentColorScheme,
   }),
   (dispatch => ({
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
+    setColorScheme: colorScheme => dispatch(setColorScheme(colorScheme)),
   })),
 )(OrderConfig);
