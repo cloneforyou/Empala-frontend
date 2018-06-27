@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage} from '../../../../actions/dashboard';
-import {ALTO, GREEN, TORCH_RED, WHITE} from "../../../../constants/colors";
+import {ALTO, GREEN, TORCH_RED, WHITE} from '../../../../constants/colors';
+import avatar from '../../../../static/images/default-avatar-of-user.svg';
 
 const style = {
   chooseBtn: {
@@ -49,6 +50,18 @@ const style = {
     lineHeight: '12px',
     color: 'rgb(244, 67, 54)',
     margin: '10px 0'
+  },
+  contentStyleDialog: {
+    maxWidth: '500px',
+  },
+  actionsContainer: {
+    textAlign: 'center',
+  },
+  imageWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
   }
 };
 
@@ -89,7 +102,6 @@ class UploadImage extends PureComponent {
     const file = e.target.files[0];
 
     reader.onloadend = () => {
-    // this.props.setUploadableImage(data);
       this.setState({
         imagePreviewUrl: reader.result,
       });
@@ -103,10 +115,11 @@ class UploadImage extends PureComponent {
         onClose={this.props.handleCancel}
         aria-labelledby="simple-dialog-title"
         actions={this.actions}
+        contentStyle={style.contentStyleDialog}
+        actionsContainerStyle={style.actionsContainer}
         open={this.props.modalOpen}>
-      <div className="">
+      <div style={style.imageWrapper}>
         <div
-          className=""
           style={{
                backgroundImage: `url(${this.state.imagePreviewUrl})`,
                backgroundPosition: 'center center',
@@ -116,7 +129,15 @@ class UploadImage extends PureComponent {
                width: 200,
                borderRadius: '5%',
              }}
-        >{!this.state.imagePreviewUrl && 'NO FILE CHOSEN'}
+        >{!this.state.imagePreviewUrl &&
+          <div className="profile-image">
+            <p>NO FILE CHOSEN</p>
+            <img
+              className={'profile-menu__avatar profile-menu__avatar_bordered'}
+              src={avatar}
+              alt="Userpic"
+            />
+        </div>}
         </div>
         <div style={style.errorText}>{this.props.errorText || ''}</div>
        <FlatButton
