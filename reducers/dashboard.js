@@ -17,7 +17,7 @@ import {
   DELETE_ACCOUNT_FAIL,
   DELETE_ACCOUNT_SUCCESS,
 } from '../constants/dashboard';
-import {RESET_PASSWORD_FAIL} from '../constants/profile';
+import { RESET_PASSWORD_FAIL } from '../constants/profile';
 
 const initialState = {
   sidebarCollapsed: true,
