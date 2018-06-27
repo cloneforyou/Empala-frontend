@@ -22,95 +22,46 @@ const DropdownMenu = (props) => {
         'dropdown-menu dropdown-menu-right show profile-menu user-nav__dropdown-menu'}
     >
       <div className="profile-menu__head">
-        <div className="profile-menu__avatar-wrap">
-          <img
-            className={props.userPic ? 'profile-menu__avatar' : 'profile-menu__avatar profile-menu__avatar_bordered'}
-            src={props.userPic || avatar}
-            alt="Avatar"
-          />
+        <div className="row no-gutters">
+          <div className="profile-menu__avatar-wrap">
+            <img
+              className={props.userPic ? 'profile-menu__avatar' : 'profile-menu__avatar profile-menu__avatar_bordered'}
+              src={props.userPic || avatar}
+              alt="Avatar"
+            />
+          </div>
+          <h4 className="profile-menu__user-info-title">{props.memberFullName}</h4>
         </div>
-        <div className="profile-menu__user-info">
-          <h4>{props.memberFullName}</h4>
-          <h4>Member No: {props.memberNumber}</h4>
-        </div>
+        <h4 className="profile-menu__user-info-member-no">Member No: {props.memberNumber}</h4>
       </div>
       <h3 className="profile-menu__title">Membership settings</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <button onClick={() => {
-            this.handlerClick(0);
-          }}
-          >
-            <Link route="dashboard" params={{ page: 'profile' }}>
-              <span>Membership</span>
-            </Link>
-          </button>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(0)}>Membership</button>
         </li>
         <li className="profile-menu__item">
-          <button onClick={() => {
-            this.handlerClick(1);
-          }}
-          >
-            <Link route="dashboard" params={{ page: 'profile' }}>
-              <span>Regulatory</span>
-            </Link>
-          </button>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(1)}>Regulatory</button>
         </li>
         <li className="profile-menu__item">
-          <button onClick={() => {
-            this.handlerClick(2);
-          }}
-          >
-            <Link route="dashboard" params={{ page: 'profile' }}>
-              <span>Investment Experience</span>
-            </Link>
-          </button>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(2)}>Investment Experience</button>
         </li>
         <li className="profile-menu__item">
-          <button onClick={() => {
-            this.handlerClick(3);
-          }}
-          >
-            <Link route="dashboard" params={{ page: 'profile' }}>
-              <span>Accounts</span>
-            </Link>
-          </button>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(3)}>Accounts</button>
         </li>
       </ul>
       <h3 className="profile-menu__title">Account Statements</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <button onClick={() => {
-            this.handlerClick(4);
-          }}
-          >
-            <Link route="dashboard" params={{ page: 'profile' }}>
-              <span>Documents</span>
-            </Link>
-          </button>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(4)}>Documents</button>
         </li>
       </ul>
       <h3 className="profile-menu__title">Platform Configuration</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <button onClick={() => {
-            this.handlerClick(5);
-          }}
-          >
-            <Link route="dashboard" params={{ page: 'profile' }}>
-              <span>Order Mgt Defaults</span>
-            </Link>
-          </button>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(5)}>Order Mgt Defaults</button>
         </li>
         <li className="profile-menu__item">
-          <button onClick={() => {
-            this.handlerClick(6);
-          }}
-          >
-            <Link route="dashboard" params={{ page: 'profile' }}>
-              <span>Notifications</span>
-            </Link>
-          </button>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(6)}>Notifications</button>
         </li>
       </ul>
       <button

@@ -1,7 +1,6 @@
 .tabs-line {
   margin-top: -12px;
-  header {
-  }
+
   .MuiPaper-elevation4-16 {
     box-shadow: none;
   }
@@ -11,9 +10,13 @@
   .MuiTab-selected-52 {
     color: $green;
   }
+  .TabIndicator-colorSecondary-63 {
+    background-color: $green;
+  }
   @media (min-width: 1366px) {
     .MuiTabs-flexContainer-38 {
       justify-content: space-between;
     }
   }
+
 }

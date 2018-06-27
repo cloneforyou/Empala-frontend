@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class CountryMenu extends Component {
   constructor(props) {
@@ -6,9 +7,9 @@ class CountryMenu extends Component {
   }
 
   render() {
-    const { country } = this.props;
+    const { country, currentColorScheme } = this.props;
     return (
-      <div className={`side-menu side-menu_light side-menu_${country.color}`}>
+      <div className={`side-menu side-menu_${currentColorScheme} side-menu_${country.color}`}>
         <h3 className={`side-menu__title ${country.color}`}>{country.title}</h3>
         <ul className="side-menu__list">
           {
@@ -27,5 +28,6 @@ class CountryMenu extends Component {
   }
 }
 
-
-export default CountryMenu;
+export default connect(state => ({
+  currentColorScheme: state.dashboard.currentColorScheme,
+}))(CountryMenu);

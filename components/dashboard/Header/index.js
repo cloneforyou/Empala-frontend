@@ -13,12 +13,13 @@ class Header extends Component {
       userPic,
       memberFullName,
       memberNumber,
+      currentColorScheme,
     } = this.props;
     return (
       <div
         className={sidebarCollapsed ?
-          'navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_light dashboard-header_collapsed' :
-          'navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_light'
+          `navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_${currentColorScheme} dashboard-header_collapsed` :
+          `navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_${currentColorScheme}`
         }
       >
         <a className="navbar-brand mr-0 dashboard-header__logo" href="#">
@@ -73,6 +74,7 @@ function mapStateToProps(state) {
     userPic: state.profile.profileUserData.account_avatar,
     memberNumber: state.profile.profileUserData.account_information_account_number,
     memberFullName: getFullName(fullNameFields, state.profile.profileUserData),
+    currentColorScheme: state.dashboard.currentColorScheme,
   };
 }
 
