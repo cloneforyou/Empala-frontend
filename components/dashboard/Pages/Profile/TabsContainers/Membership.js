@@ -95,7 +95,7 @@ class Membership extends Component {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="row">
+              <div className="row margin-bt-30">
                 <div className="col-lg-8 no-gutters">
                   {fieldsMemberPersonal.map((item) => {
                     if (item.id === 'createdat' && userData['createdat']) {
@@ -126,7 +126,7 @@ class Membership extends Component {
                 </div>
               </div>
               <button
-                className="green-btn pseudo-input"
+                className="green-btn"
                 onClick={this.props.showResetModal}
               >Reset password
               </button>

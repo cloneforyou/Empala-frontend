@@ -53,8 +53,10 @@
 
 .green-btn {
   @include button-reset;
-  color: $green;
+  background: $green;
+  color: $white;
   @include fontSize(16px);
+  padding: 3px 25px;
 }
 
 .buttons-row {
