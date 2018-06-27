@@ -45,7 +45,6 @@ class Profile extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const value = this.props.tabValue;
 
     return (
@@ -78,9 +77,5 @@ class Profile extends Component {
     );
   }
 }
-
-Profile.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
