@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -45,7 +44,6 @@ class Profile extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const value = this.props.tabValue;
 
     return (
@@ -78,9 +76,5 @@ class Profile extends Component {
     );
   }
 }
-
-Profile.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

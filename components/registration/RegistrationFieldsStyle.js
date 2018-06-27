@@ -17,9 +17,6 @@ const style = {
   underlineFocusStyle: {
     borderBottom: `2px solid ${GREEN}`,
   },
-  underlineDisabledStyle: {
-    borderBottom: `2px dotted ${IRON}`,
-  },
   hintStyle: {
     color: LIGHT_GREY,
   },
