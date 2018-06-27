@@ -17,7 +17,6 @@ class OrderConfig extends Component {
 
 
   render() {
-    console.log('this.props.currentColorScheme -==> ', this.props.currentColorScheme);
     return (
       <div className="tab-container">
         <div className="tab-container__wrapper">
