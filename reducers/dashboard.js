@@ -60,7 +60,7 @@ function dashboard(state = initialState, action) {
           [action.id]: action.value,
         };
       }
-      break;
+      return state;
     case GET_USER_DATA_SUCCESS:
       return {
         ...state,
