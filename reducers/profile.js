@@ -4,7 +4,7 @@ import {
 } from '../constants/profile';
 import { GET_USER_DATA_SUCCESS, SET_FIELD_VALUE, UPLOAD_IMAGE_SUCCESS } from '../constants/dashboard';
 import { flattenObject, renameKeys } from '../utils/additional';
-import {VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS} from '../constants/registration';
+import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
 const initialState = {
   profileUserData: {},
