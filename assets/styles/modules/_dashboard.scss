@@ -43,6 +43,9 @@
     .list-horizontal__link, .dashboard__copyright, .main-text-helvetica {
       color: #000;
     }
+    .tabs-line{
+      background: #fff;
+    }
   }
   &_dark {
     background: $dark-bg-blue;
