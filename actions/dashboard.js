@@ -144,10 +144,7 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const setColorScheme = colorScheme => {
-  console.log('colorScheme -==> ', colorScheme);
-  return {
-    type: SET_COLOR_SCHEME,
-    colorScheme,
-  }
-};
+export const setColorScheme = colorScheme => ({
+  type: SET_COLOR_SCHEME,
+  colorScheme,
+});
