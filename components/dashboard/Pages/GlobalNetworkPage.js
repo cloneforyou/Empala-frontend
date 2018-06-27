@@ -1,4 +1,5 @@
-import React  from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import TitleBar from '../TitleBar';
 
 function getUrlByPageName(pageName) {
@@ -16,22 +17,30 @@ function getUrlByPageName(pageName) {
   }
 }
 
-const frameStyle = { width: '100%',
+const frameStyle = {
+  width: '100%',
   height: '100vh',
   border: 'none',
-  }
+};
 
-const GlobalNetworkPage = (props) => {
-  return(
-  <div>
-    <TitleBar />
-    <iframe
-      src={`http://socialenginealb-949568690.us-west-2.elb.amazonaws.com/${getUrlByPageName(props.page)}`}
-      style={frameStyle}
-      marginHeight={10}
+const GlobalNetworkPage = props => (
+    <div>
+      <TitleBar />
+      <iframe
+        src={`http://socialenginealb-949568690.us-west-2.elb.amazonaws.com/${getUrlByPageName(props.page)}?token=${props.seToken}`}
+        style={frameStyle}
+        marginHeight={10}
+        title="SocialEngineFrame"
       />
-  </div>
-  )
-}
+    </div>
+);
 
-export default GlobalNetworkPage;
+GlobalNetworkPage.defaultProps = {
+  seToken: '',
+  page: 'timeline',
+};
+
+export default connect(state => (
+  {
+    seToken: state.dashboard.userData ? state.dashboard.userData.data.se_token : '',
+  }), null)(GlobalNetworkPage);
