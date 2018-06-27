@@ -52,6 +52,15 @@ function dashboard(state = initialState, action) {
         ...state,
         loading: true,
       };
+    case SET_FIELD_VALUE:
+      if (action.id === "membership_account_delete_confirm" ||
+        action.id === "membership_account_delete_legal_wording") {
+        return {
+          ...state,
+          [action.id]: action.value,
+        };
+      }
+      break;
     case GET_USER_DATA_SUCCESS:
       return {
         ...state,
