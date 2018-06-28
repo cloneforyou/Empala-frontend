@@ -1,0 +1,50 @@
+.profile-popup {
+  max-width: 500px !important;
+  &__action-container {
+    text-align: center !important;
+  }
+  &__image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  &__btn {
+    width: 130px;
+    height: 48px !important;
+    line-height: 15px !important;
+    vertical-align: top;
+    margin: 0 20px !important;
+    color: $white !important;
+    @include fontSize(12px);
+    text-align: center;
+    padding: 0;
+    &_upload {
+      background-color: $green !important;
+    }
+    &_cancel {
+      background-color: $light-red !important;
+    }
+  }
+  &__choose-file {
+    &_btn {
+      background-color: $alto !important;
+      @include fontSize(12px);
+    }
+    &_input {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+    }
+  }
+  &__error-text {
+    @include fontSize(12px);
+    line-height: 12px;
+    color: rgb(244, 67, 54);
+    margin: 10px 0;
+  }
+}
