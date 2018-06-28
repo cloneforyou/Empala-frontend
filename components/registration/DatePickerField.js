@@ -13,7 +13,6 @@ const DatePickerField = (props) => {
   const currentMonth = currentDate.getMonth();
   const currentDay = currentDate.getDate();
   const dateBirthDay = new Date(birthDayYear, currentMonth, currentDay);
-
   return (
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
       <label className="registration-label">
@@ -29,10 +28,10 @@ const DatePickerField = (props) => {
           inputStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
           firstDayOfWeek={0}
           disabled={props.disabled}
-          textFieldStyle={{width: '100%'}}
+          textFieldStyle={{ width: '100%' }}
           underlineDisabledStyle={style.underlineDisabledStyle}
           onChange={(none = null, date) => props.handleDatePick(props.id, date)}
-          value={props.value ? new Date(props.value) : null}
+          value={props.value && props.value !== 'Not provided' ? new Date(props.value) : null}
           minDate={props.dateExpiry && currentDate}
           maxDate={(props.birthDay && dateBirthDay) || (props.dateIssue && currentDate)}
         />
