@@ -10,32 +10,9 @@ import Regulatory from './TabsContainers/Regulatory';
 import Experience from './TabsContainers/Experience';
 import Documents from './TabsContainers/Documents';
 import OrderConfig from './TabsContainers/OrderConfig';
+import Account from './TabsContainers/Account';
 import { getActiveTabProfile, changeActiveTabProfile } from '../../../../actions/profile';
 
-function TabContainer(props) {
-  return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
-    </Typography>
-  );
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-function mapStateToProps(state) {
-  return {
-    tabValue: state.profile.tabValue,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return ({
-    getActiveTabProfile: () => dispatch(getActiveTabProfile()),
-    changeActiveTabProfile: (value) => dispatch(changeActiveTabProfile(value)),
-  });
-}
 
 class Profile extends Component {
 
@@ -47,7 +24,7 @@ class Profile extends Component {
     const value = this.props.tabValue;
 
     return (
-      <div className='tabs-line'>
+      <div className="tabs-line">
         <AppBar position="static" color="default">
           <Tabs
             value={value}
@@ -68,13 +45,19 @@ class Profile extends Component {
         {value === 0 && <Membership />}
         {value === 1 && <Regulatory />}
         {value === 2 && <Experience />}
-        {value === 3 && <TabContainer>Item Four</TabContainer>}
+        {value === 3 && <Account />}
         {value === 4 && <Documents />}
         {value === 5 && <OrderConfig />}
-        {value === 6 && <TabContainer>Item Seven</TabContainer>}
+        {value === 6 && <div>Item Seven</div>}
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+
+export default connect((state) => ({
+  tabValue: state.profile.tabValue,
+}), (dispatch => ({
+  getActiveTabProfile: () => dispatch(getActiveTabProfile()),
+  changeActiveTabProfile: (value) => dispatch(changeActiveTabProfile(value)),
+})))(Profile);

@@ -790,4 +790,132 @@ export const fieldsDefaultOrderOptions = [
     hint: 'Please select',
     autoWidth: true,
   },
-]
+];
+
+export const fieldsAccountFirst = [
+
+  {
+    id: 'account_value',
+    label: 'Account value',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_pending_order',
+    label: 'Pending order count',
+    options: [
+      {
+        value: '9999',
+        title: '9999',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_stock_buying',
+    label: 'Stock buying power',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_option_buying',
+    label: 'Option buying power',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_day_trading',
+    label: 'Day trading buying power',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+];
+
+export const fieldsAccountSecond = [
+
+  {
+    id: 'account_maintenance_margin',
+    label: 'Maintenance margin',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_option_maintenance',
+    label: 'Option maintenance margin',
+    options: [
+      {
+        value: '9999',
+        title: '9999',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_urealized',
+    label: 'Unrealized P/L',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_realized',
+    label: 'Realized P/L today',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'account_position_market',
+    label: 'Position market value',
+    options: [
+      {
+        value: '$99,999,999.99',
+        title: '$99,999,999.99',
+      },
+    ],
+    hint: 'Please select',
+    autoWidth: true,
+  },
+];
