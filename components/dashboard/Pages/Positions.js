@@ -33,19 +33,19 @@ class Positions extends Component {
                   </div>
                 </div>
                 <div className="widget__body">
-                  <AnyChart
-                    type="line"
-                    data={
-                      [
-                        { x: 'Rouge', value: 80540 },
-                        { x: 'Foundation', value: 94190 },
-                        { x: 'Mascara', value: 102610 },
-                        { x: 'Lip gloss', value: 110430 },
-                        { x: 'Pomade', value: 128000 }
-                      ]
-                    }
-                    title="Simple pie chart"
-                  />
+                  <div className="chart">
+                    <AnyChart
+                      type="line"
+                      height={450}
+                      data={
+                        [
+                          { y: 8000 },
+                          { y: 10000 },
+                          { y: 12000 },
+                        ]
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             </div>
