@@ -7,6 +7,8 @@ import Body from '../components/dashboard/Body';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import * as dashboardActions from '../actions/dashboard';
 import stylesheet from '../assets/styles/main.scss';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { GREEN } from '../constants/colors';
 
 
 class Dashboard extends Component {
@@ -36,8 +38,15 @@ class Dashboard extends Component {
   render() {
     const { sidebarCollapsed } = this.state;
     const activePageTitle = this.props.url.query.page || ['overview'];
+    const muiTheme = getMuiTheme({
+      palette: {
+        primary1Color: GREEN,
+        primary2Color: GREEN,
+        pickerHeaderColor: GREEN,
+      },
+    });
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <Head>
             <title>Dashboard - {activePageTitle[0].toUpperCase() + activePageTitle.slice(1)}</title>

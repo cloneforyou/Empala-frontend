@@ -64,7 +64,7 @@ class Regulatory extends Component {
                   mask="a999999999"
                 />
                 <DatePickerField
-                  id="identification_passport_issue_date"
+                  id="identification_passport_date_of_issue"
                   label="Date of issue"
                   handleDatePick={this.props.setPickedDate}
                   value={userData.identification_passport_date_of_issue || ''}
@@ -105,7 +105,7 @@ class Regulatory extends Component {
                   errorText={this.props.fieldsErrors.identification_drivers_license_document_number}
                 />
                 <DatePickerField
-                  id="dentification_drivers_license_issue_date"
+                  id="identification_drivers_license_date_of_issue"
                   label="Date of issue"
                   handleDatePick={this.props.setPickedDate}
                   value={userData.identification_drivers_license_date_of_issue || ''}
@@ -114,7 +114,7 @@ class Regulatory extends Component {
                   dateIssue
                 />
                 <DatePickerField
-                  id="dentification_drivers_license_expiry_date"
+                  id="identification_drivers_license_date_of_expiry"
                   label="Date of expiry"
                   handleDatePick={this.props.setPickedDate}
                   value={userData.identification_drivers_license_date_of_expiry || ''}
