@@ -9,14 +9,10 @@ import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
 } from '../../../../../localdata/profileData';
-import {getInfoByZipCode, setInputFieldValueById, validateFieldValue} from '../../../../../actions/registration';
+import { getInfoByZipCode, setInputFieldValueById, validateFieldValue } from '../../../../../actions/registration';
 import { countriesList } from '../../../../../localdata/countriesList';
 
 class Regulatory extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const userData = this.props.userData;
     return (

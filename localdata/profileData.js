@@ -506,27 +506,27 @@ export const fieldsEmployment = [
 
 export const fieldsTrustedContactPerson = [
   {
-    id: 'identity_trusted_contact_person_first_name',
+    id: 'identity_trusted_contact_first_name',
     label: 'First name',
     type: 'text',
     placeholder: '',
     col: 6,
   },
   {
-    id: 'identity_trusted_contact_person_last_name',
+    id: 'identity_trusted_contact_last_name',
     label: 'Last name',
     type: 'text',
     placeholder: '',
     col: 6,
   },
   {
-    id: 'identity_trusted_contact_person_email',
+    id: 'identity_trusted_contact_email',
     label: 'Email address',
     type: 'text',
     placeholder: '',
   },
   {
-    id: 'identity_trusted_contact_person_relationship',
+    id: 'identity_trusted_contact_relationship',
     label: 'Relationship',
     type: 'text',
     placeholder: '',
