@@ -3,67 +3,7 @@ import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import {cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage} from '../../../../actions/dashboard';
-import {ALTO, GREEN, TORCH_RED, WHITE} from '../../../../constants/colors';
 import avatar from '../../../../static/images/default-avatar-of-user.svg';
-
-const style = {
-  chooseBtn: {
-    backgroundColor: ALTO,
-    margin: '10px 0',
-  },
-  labelChoose: {
-    fontSize: '12px',
-  },
-  uploadInput: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0,
-  },
-  uploadBtn: {
-    backgroundColor: GREEN,
-    width: '130px',
-    height: '48px',
-    lineHeight: '15px',
-    verticalAlign: 'top',
-    margin: '0 20px',
-  },
-  cancelBtn: {
-    backgroundColor: TORCH_RED,
-    width: '130px',
-    height: '48px',
-    lineHeight: '15px',
-    verticalAlign: 'top',
-    margin: '0 20px',
-  },
-  labelBtn: {
-    color: WHITE,
-    fontSize: '12px',
-    textAlign: 'center',
-    padding: 0,
-  },
-  errorText: {
-    fontSize: '12px',
-    lineHeight: '12px',
-    color: 'rgb(244, 67, 54)',
-    margin: '10px 0'
-  },
-  contentStyleDialog: {
-    maxWidth: '500px',
-  },
-  actionsContainer: {
-    textAlign: 'center',
-  },
-  imageWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    textAlign: 'center',
-  }
-};
 
 class UploadImage extends PureComponent {
  constructor(props) {
@@ -74,8 +14,7 @@ class UploadImage extends PureComponent {
    this.actions = [
      <FlatButton
        label="Cancel"
-       style={style.cancelBtn}
-       labelStyle={style.labelBtn}
+       className="profile-popup__btn profile-popup__btn_cancel"
        onClick={() => {
          this.setState({
            imagePreviewUrl: '',
@@ -85,8 +24,8 @@ class UploadImage extends PureComponent {
      />,
      <FlatButton
        label="Upload"
-       style={style.uploadBtn}
-       labelStyle={style.labelBtn}
+       backgroundColor="none"
+       className="profile-popup__btn profile-popup__btn_upload"
        onClick={this.props.uploadImage}
      />,
      ]
@@ -115,10 +54,10 @@ class UploadImage extends PureComponent {
         onClose={this.props.handleCancel}
         aria-labelledby="simple-dialog-title"
         actions={this.actions}
-        contentStyle={style.contentStyleDialog}
-        actionsContainerStyle={style.actionsContainer}
+        contentClassName="profile-popup"
+        actionsContainerClassName="profile-popup__action-container"
         open={this.props.modalOpen}>
-      <div style={style.imageWrapper}>
+      <div className="profile-popup__image-wrapper">
         <div
           style={{
                backgroundImage: `url(${this.state.imagePreviewUrl})`,
@@ -139,17 +78,16 @@ class UploadImage extends PureComponent {
             />
         </div>}
         </div>
-        <div style={style.errorText}>{this.props.errorText || ''}</div>
+        <div className="profile-popup__error-text">{this.props.errorText || ''}</div>
        <FlatButton
          label="Choose an Image"
-         style={style.chooseBtn}
-         labelStyle={style.labelChoose}
+         className="profile-popup__choose-file_btn"
          labelPosition="before"
          containerElement="label">
         <input
           type="file"
           onChange={this.handleImageChange}
-          style={style.uploadInput}
+          className="profile-popup__choose-file_input"
         />
        </FlatButton>
       </div>
