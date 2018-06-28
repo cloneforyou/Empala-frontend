@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import AnyChart from 'anychart-react';
 import {
   fieldsAccountFirst,
   fieldsAccountSecond,
@@ -32,6 +33,36 @@ class Account extends Component {
                   <FormGroupMapping {...{ ...this.props, item, key: item.id }} />
                 ))}
               </div>
+            </div>
+          </div>
+          <div className="row margin-bt-30">
+            <div className="col-md-6">
+              <AnyChart
+                type="pie3d"
+                height={250}
+                id="chart-container-account-pie"
+                data={
+                  [
+                    { x: "A", value: 637166 },
+                    { x: "B", value: 721630 },
+                    { x: "C", value: 148662 },
+                    { x: "D", value: 78662 },
+                    { x: "E", value: 90000 }
+                  ]
+                }
+              />
+            </div>
+            <div className="col-md-6">
+              <AnyChart
+                type="area"
+                height={250}
+                id="chart-container-account-area"
+                data={
+                  [7.44, 7.20, 6.45, 7.42],
+                  [6.43, 6.16, 6.36, 6.43],
+                  [6.04, 5.58, 6.16, 6.05]
+                }
+              />
             </div>
           </div>
           <Footer deleteAccountBtnIsShow={false} />

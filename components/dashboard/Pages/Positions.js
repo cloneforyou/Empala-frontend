@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import AnyChart from 'anychart-react';
 import { widgetsPositionFirst, widgetsPositions } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
-import AnyChart from 'anychart-react';
 
 class Positions extends Component {
   constructor(props) {
