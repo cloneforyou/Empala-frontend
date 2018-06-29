@@ -95,7 +95,10 @@ class WidgetNews extends Component {
                           <Moment date={card.feed.subject.modified_date} format="MM-DD-YYYY" />
                         </span>
                       </div>
-                      <p className="news-card__title">{_.unescape(card.feed.main_content)}</p>
+                      <div>
+                        <p className="news-card__title m-0">{card.feed.subject.displayname}</p>
+                        <p className="m-0">{_.unescape(card.feed.subject.status) || _.unescape(card.feed.main_content)}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
