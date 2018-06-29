@@ -4,7 +4,7 @@ import {
   select,
 } from 'redux-saga/effects';
 import request from '../utils/request';
-import { openModal, setUserData } from '../actions/dashboard';
+import { openModal, setUserData, startSocket } from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
@@ -159,6 +159,7 @@ export function* getUserData() {
   try {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
+    yield put(startSocket());
     if (data.data.data.profile.should_update_password) {
       yield put(openModal('passwordReminder'));
     }
