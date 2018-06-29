@@ -42,6 +42,7 @@ export default class EmpalaInput extends Component {
           errorText={errorText}
           className='text-field'
           margin="none"
+          onKeyPress = {this.props.onKeyPress}
         >
           {this.props.mask && <InputMask
             mask={this.props.mask}

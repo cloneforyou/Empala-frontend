@@ -93,14 +93,17 @@ export function* authenticate({ provider, data }) {
       };
   }
   if (provider === 'local') {
-    if (!login) {
-      yield put(setFieldInvalid('index_username', 'Please provide member no. or e-mail'));
+    if (!(login && password)) {
+      if (!login) {
+        yield put(setFieldInvalid('index_username', 'Please provide member no. or e-mail'));
+      }
+      if (!password) {
+        return yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
+      }
+      return false;
     }
-    if (!password) {
-      return yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
-    }
+    yield loginRequest(url, options);
   }
-  yield loginRequest(url, options);
 }
 
 export function* refreshTokens() {

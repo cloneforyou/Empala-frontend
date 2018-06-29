@@ -44,6 +44,7 @@ const style = {
   },
 };
 
+
 const UserEmailForm = props => (
   <div className="login__form-width no-gutters clear-fix">
     <EmpalaInput
@@ -53,6 +54,7 @@ const UserEmailForm = props => (
       label="E-mail"
       handleChange={props.handleInput}
       errorText={props.errorText}
+      onKeyPress={(e) => { if (e.key === 'Enter') props.handleClick(); }}
     />
     {props.goBack &&
     <span
@@ -115,48 +117,53 @@ const ForgotPasswordForm = (props) => {
   );
 };
 
-const Login = props =>
-  (
+const Login = props => {
+  const handleLogin = (e) => {
+    if (e.key === 'Enter') props.handleLogin('local', null);
+  };
+  return (
     <div className="row login">
       <div className="login__content ">
-        <img className="login__logo" src={logo} alt="Logotype" />
+        <img className="login__logo" src={logo} alt="Logotype"/>
         {props.accountSuspended && <SuspendedForm {...props} />}
         {props.forgotPassword && <ForgotPasswordForm {...props} />}
         {!(props.accountSuspended || props.forgotPassword) &&
         <div>
           <h3 className="login__title fw-300">Login to your account</h3>
           <div className="login__form-width no-gutters clear-fix">
-            <EmpalaInput
-              key="username"
-              id="index_username"
-              type="text"
-              label="Member no. or e-mail"
-              handleChange={e => props.setInputValueById(e)}
-              errorText={props.errorText || props.fieldsError.index_username}
-            />
-            <EmpalaInput
-              key="password"
-              id="index_password"
-              type="password"
-              label="Password"
-              handleChange={e => props.setInputValueById(e)}
-              errorText={props.fieldsError.index_password}
-            />
-            <button
-              className="default-btn login__forgot-link fw-300 float-right"
-              onClick={props.setPasswordForgotten}
-            >
-              forgot password?
-            </button>
-            <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
+              <EmpalaInput
+                key="username"
+                id="index_username"
+                type="text"
+                label="Member no. or e-mail"
+                handleChange={e => props.setInputValueById(e)}
+                errorText={props.errorText || props.fieldsError.index_username}
+                onKeyPress = {handleLogin}
+              />
+              <EmpalaInput
+                key="password"
+                id="index_password"
+                type="password"
+                label="Password"
+                handleChange={e =>  props.setInputValueById(e)}
+                errorText={props.fieldsError.index_password}
+                onKeyPress = {handleLogin}
+              />
+              <button
+                className="default-btn login__forgot-link fw-300 float-right"
+                onClick={props.setPasswordForgotten}
+              >
+                forgot password?
+              </button>
+              <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
           </div>
           <div className="social-auth">
             <div className="styled-part-separate"><span>or connect with</span></div>
             <div className="social-auth__row">
               {/* <button className="social-btn social-btn__facebook">facebook</button> */}
-              <FacebookAuth handlelogin={props.handleLogin} />
-              <GoogleAuth handlelogin={props.handleLogin} />
-              {!isNode && <LinkedInAuth handlelogin={props.handleLogin} />}
+              <FacebookAuth handlelogin={props.handleLogin}/>
+              <GoogleAuth handlelogin={props.handleLogin}/>
+              {!isNode && <LinkedInAuth handlelogin={props.handleLogin}/>}
             </div>
           </div>
 
@@ -164,7 +171,7 @@ const Login = props =>
             <Link href="/registration"><a className="gray-link">New member registration</a></Link>
           </div>
         </div>
-          }
+        }
         <RegistrationModal
           handleClose={props.handleModalCancel}
           open={props.modalIsOpen}
@@ -172,6 +179,8 @@ const Login = props =>
       </div>
     </div>
   );
+}
+
 export default connect(
   state => ({
     errorText: state.auth.authError === 'Invalid credentials' ?
