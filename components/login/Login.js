@@ -152,6 +152,7 @@ const Login = props => {
               <button
                 className="default-btn login__forgot-link fw-300 float-right"
                 onClick={props.setPasswordForgotten}
+                tabIndex="-1"
               >
                 forgot password?
               </button>
