@@ -102,8 +102,8 @@ export function* authenticate({ provider, data }) {
       }
       return false;
     }
-    yield loginRequest(url, options);
   }
+    yield loginRequest(url, options);
 }
 
 export function* refreshTokens() {
