@@ -45,7 +45,7 @@ export default function request(url, options = {}) {
   }
   return axios({
     method: options.method,
-    url: `${origin || serverOrigins.aws}${url}`,
+    url: `${serverOrigins.aws}${url}`,
 
     data: options.data,
     headers: options.headers,
@@ -55,7 +55,6 @@ export default function request(url, options = {}) {
   })
     .then(response => response)
     .catch((err) => {
-      // console.log(' *** ------------> SERVER RESPOND ERROR', JSON.stringify(err));
       const error = setErrorText(err);
       if (error) {
         throw error;

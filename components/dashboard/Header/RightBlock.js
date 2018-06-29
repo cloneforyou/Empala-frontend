@@ -10,7 +10,6 @@ export default class RightBlock extends Component {
     };
   }
 
-
   toggleMenu = () => {
     this.setState({ menuAvatarShow: !this.state.menuAvatarShow })
   };
@@ -20,7 +19,7 @@ export default class RightBlock extends Component {
   };
 
   render() {
-    const { userPic } = this.props;
+    const { userPic, loading } = this.props;
     const { menuAvatarShow } = this.state;
     return (
       <div>
@@ -40,16 +39,14 @@ export default class RightBlock extends Component {
               className="nav-link user-nav__dropdown-btn"
               onClick={this.toggleMenu}
             >
-              {/*<div
-                className="user-nav__userPic"
-                style={{ backgroundImage: `url(${this.props.userPic || avatar})` }}
-                alt=""
-              />*/}
-              <img
-                className={userPic ? 'user-nav__userPic' : "user-nav__userPic  user-nav__userPic_bordered"}
-                src={userPic || avatar}
-                alt="Avatar"
-              />
+              {
+                !loading &&
+                <img
+                  className={userPic ? 'user-nav__userPic' : "user-nav__userPic  user-nav__userPic_bordered"}
+                  src={userPic || avatar}
+                  alt="Avatar"
+                />
+              }
             </button>
             <DropdownMenu
               {...this.props}

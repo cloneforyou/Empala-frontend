@@ -14,6 +14,7 @@ class Header extends Component {
       memberFullName,
       memberNumber,
       currentColorScheme,
+      loading
     } = this.props;
     return (
       <div
@@ -38,6 +39,7 @@ class Header extends Component {
           </button>
           <Search />
           <RightBlock
+            loading={loading}
             userPic={userPic}
             memberNumber={memberNumber}
             memberFullName={memberFullName}
@@ -71,6 +73,7 @@ function mapStateToProps(state) {
     return fullName;
   };
   return {
+    loading: state.dashboard.loading,
     userPic: state.profile.profileUserData.account_avatar,
     memberNumber: state.profile.profileUserData.account_information_account_number,
     memberFullName: getFullName(fullNameFields, state.profile.profileUserData),
