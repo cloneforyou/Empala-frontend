@@ -77,10 +77,13 @@ export function setGroupCountry(label) {
 }
 
 
-export const setActivePage = page => ({
-  type: SET_ACTIVE_PAGE,
-  page,
-});
+export const setActivePage = page => {
+  console.log('page -==> ', page);
+  return {
+    type: SET_ACTIVE_PAGE,
+    page,
+  };
+}
 
 export const cleanImage = () => ({
   type: CLEAN_IMAGE_DATA,

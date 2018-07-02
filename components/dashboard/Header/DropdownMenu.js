@@ -10,8 +10,8 @@ const DropdownMenu = (props) => {
   const { menuAvatarShow } = props;
 
   this.handlerClick = (tab) => {
-    props.changeActiveTabProfile(tab);
     props.setActivePage('profile');
+    props.changeActiveTabProfile(tab);
     props.closeMenu();
   };
 
@@ -37,7 +37,7 @@ const DropdownMenu = (props) => {
       <h3 className="profile-menu__title">Membership settings</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(0)}>Membership</button>
+          <Link route="dashboard" params={{ page: 'profile' }} className="profile-menu__link" onClick={() => this.handlerClick(0)}>Membership</Link>
         </li>
         <li className="profile-menu__item">
           <button className="profile-menu__link" onClick={() => this.handlerClick(1)}>Regulatory</button>
