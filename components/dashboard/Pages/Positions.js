@@ -35,13 +35,16 @@ class Positions extends Component {
                 <div className="widget__body">
                   <div className="chart">
                     <AnyChart
-                      type="line"
+                      series="splineArea"
+                      type="area"
                       height={450}
-                      data={
+                      splineArea={
                         [
-                          { y: 8000 },
-                          { y: 10000 },
-                          { y: 12000 },
+                          [0, 8000],
+                          [25, 6000],
+                          [50, 12000],
+                          [75, 9000],
+                          [100, 5000],
                         ]
                       }
                     />
