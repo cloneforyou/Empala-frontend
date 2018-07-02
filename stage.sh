@@ -1,4 +1,6 @@
 echo ' EMPALA FRONTEND APP'
+echo ' Terminating FOREVER and NODE ...'
+forever stopall && killall node
 echo ' Building static files ...'
 npm run build
 echo ' Building complete'
