@@ -12,7 +12,14 @@ import Documents from './TabsContainers/Documents';
 import OrderConfig from './TabsContainers/OrderConfig';
 import Account from './TabsContainers/Account';
 import { getActiveTabProfile, changeActiveTabProfile } from '../../../../actions/profile';
+import { withStyles } from '@material-ui/core/styles';
+import { GREEN } from '../../../../constants/colors';
 
+const styles = theme => ({
+  indicator: {
+    backgroundColor: GREEN,
+  },
+});
 
 class Profile extends Component {
 
@@ -22,6 +29,7 @@ class Profile extends Component {
 
   render() {
     const value = this.props.tabValue;
+    const { classes } = this.props;
 
     return (
       <div className="tabs-line">
@@ -32,6 +40,9 @@ class Profile extends Component {
             scrollable
             scrollButtons="auto"
             style={{ color: "#808895" }}
+            classes={{
+              indicator: classes.indicator,
+            }}
           >
             <Tab label="Membership" />
             <Tab label="Regulatory" />
@@ -55,9 +66,9 @@ class Profile extends Component {
 }
 
 
-export default connect((state) => ({
+export default withStyles(styles)(connect((state) => ({
   tabValue: state.profile.tabValue,
 }), (dispatch => ({
   getActiveTabProfile: () => dispatch(getActiveTabProfile()),
   changeActiveTabProfile: (value) => dispatch(changeActiveTabProfile(value)),
-})))(Profile);
+})))(Profile));
