@@ -37,7 +37,7 @@ const DropdownMenu = (props) => {
       <h3 className="profile-menu__title">Membership settings</h3>
       <ul className="profile-menu__list">
         <li className="profile-menu__item">
-          <Link route="dashboard" params={{ page: 'profile' }} className="profile-menu__link" onClick={() => this.handlerClick(0)}>Membership</Link>
+          <button className="profile-menu__link" onClick={() => this.handlerClick(0)}>Membership</button>
         </li>
         <li className="profile-menu__item">
           <button className="profile-menu__link" onClick={() => this.handlerClick(1)}>Regulatory</button>

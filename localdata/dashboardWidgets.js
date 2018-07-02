@@ -1417,7 +1417,7 @@ export const widgetsOrders = [
             title: 'Price',
           },
           {
-            title: 'Order',
+            title: 'Order Q',
           },
           {
             title: 'Fill Q',
@@ -1470,7 +1470,7 @@ export const widgetsOrders = [
             title: 'Price',
           },
           {
-            title: 'Order',
+            title: 'Order Q',
           },
           {
             title: 'Fill Q',
