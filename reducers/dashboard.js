@@ -23,7 +23,7 @@ import { RESET_PASSWORD_FAIL } from '../constants/profile';
 const initialState = {
   sidebarCollapsed: true,
   selectedGroup: {},
-  loading: null,
+  loading: true,
   error: false,
   userData: false,
   activePageDashboard: 'overflow',
