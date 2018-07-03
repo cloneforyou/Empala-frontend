@@ -19,7 +19,7 @@ class Table extends Component {
                   scope="col"
                   className="emp-table__th"
                   key={Math.random()}
-                  style={{ width: header.width || 'auto' }}
+                  style={{ minWidth: header.width || 'auto' }}
                 >
                   {header.title}
                 </th>
