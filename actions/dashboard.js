@@ -78,7 +78,6 @@ export function setGroupCountry(label) {
 
 
 export const setActivePage = page => {
-  console.log('page -==> ', page);
   return {
     type: SET_ACTIVE_PAGE,
     page,
