@@ -11,6 +11,9 @@
     &:last-child {
       padding-right: 10px !important;
     }
+    @media (max-width: 1500px){
+      @include fontSize(10px);
+    }
   }
   &__td {
     @include fontSize(12px);
