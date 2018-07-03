@@ -8,9 +8,12 @@ class WidgetTable extends Component {
   }
 
   render() {
-    const { widget } = this.props;
+    const { widget, overview } = this.props;
     return (
-      <div className={`widget-col col-lg-${widget.col}`} key={widget.id}>
+      <div
+        className={`widget-col ${overview ? `widget-col_${widget.col}` : `col-lg-${widget.col}`} `}
+        key={widget.id}
+      >
         <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
           <WidgetHead widget={widget} />
           <div className="widget__body">

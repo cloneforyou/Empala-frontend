@@ -131,7 +131,7 @@ export const widgetsOverflow = [
     id: uniqueId(),
     title: 'Social capital',
     icon: 'groups',
-    col: 3,
+    col:3,
     height: 390,
     tables: [
       {
@@ -669,79 +669,6 @@ export const widgetsOverflow = [
             diff: '99.9',
           },
         ],
-      },
-    ],
-  },
-];
-export const widgetNews = [
-  {
-    id: uniqueId(),
-    title: 'News',
-    type: 'All',
-    col: 4,
-    height: 365,
-    news: [
-      {
-        id: uniqueId(),
-        creator: 'BBC News',
-        date: new Date(),
-        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
-        image: 'news-image.svg',
-      },
-      {
-        id: uniqueId(),
-        creator: 'BBC News',
-        date: new Date(2018, 13, 1),
-        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 3,
-        image: 'news-image.svg',
-      },
-      {
-        id: uniqueId(),
-        creator: 'BBC News',
-        date: new Date(2014, 13, 1),
-        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 5,
-        image: 'news-image.svg',
-      },
-      {
-        id: uniqueId(),
-        creator: 'BBC News',
-        date: new Date(2013, 13, 1),
-        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 2,
-        image: 'news-image.svg',
-      },
-    ],
-  },
-  {
-    id: uniqueId(),
-    title: 'Empala internal news',
-    type: 'Empala',
-    col: 3,
-    height: 365,
-    news: [
-      {
-        id: uniqueId(),
-        date: new Date(),
-        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
-        image: 'news-image2.svg',
-      },
-      {
-        id: uniqueId(),
-        date: new Date(),
-        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
-        image: 'news-image2.svg',
-      },
-      {
-        id: uniqueId(),
-        date: new Date(),
-        title: 'UK is ‘sleepwalking into a Brexit security crisis’, warn MPs',
-        rating: 4,
-        image: 'news-image2.svg',
       },
     ],
   },

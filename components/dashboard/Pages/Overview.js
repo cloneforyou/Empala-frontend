@@ -32,12 +32,12 @@ class Overview extends Component {
         <div className="row">
           {
             widgetsOverflow.map(widget => (
-              <WidgetTable widget={widget} key={widget.id} />
+              <WidgetTable overview widget={widget} key={widget.id} />
             ))
           }
           {
             widgetNews.map(widget => (
-              <WidgetNews widget={widget} key={widget.id} />
+              <WidgetNews overview widget={widget} key={widget.id} />
             ))
           }
           <WidgetAdvertisement />
