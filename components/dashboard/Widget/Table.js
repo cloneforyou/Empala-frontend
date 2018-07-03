@@ -8,6 +8,7 @@ class Table extends Component {
 
   render() {
     const { table } = this.props;
+    console.log('==========TTTTT', table)
     return (
       <div className="table-responsive">
         <table className="table table-borderless table-striped emp-table">

@@ -17,6 +17,7 @@ import {
   DELETE_ACCOUNT_FAIL,
   DELETE_ACCOUNT_SUCCESS,
   SET_COLOR_SCHEME,
+  SET_ORDERS_LIST,
 } from '../constants/dashboard';
 import { RESET_PASSWORD_FAIL } from '../constants/profile';
 
@@ -33,6 +34,7 @@ const initialState = {
   uploadableImage: false,
   membership_account_delete_confirm: '',
   currentColorScheme: 'light',
+  ordersList: false,
 };
 
 function dashboard(state = initialState, action) {
@@ -131,6 +133,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         currentColorScheme: action.colorScheme,
+      };
+    case SET_ORDERS_LIST:
+      return {
+        ...state,
+        ordersList: action.data,
       };
     default:
       return state;

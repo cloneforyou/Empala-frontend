@@ -20,6 +20,8 @@ import {
   DELETE_ACCOUNT_SUCCESS,
   LOGOUT,
   SET_COLOR_SCHEME,
+  GET_ORDERS_LIST,
+  SET_ORDERS_LIST,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -147,4 +149,13 @@ export const logout = () => ({
 export const setColorScheme = colorScheme => ({
   type: SET_COLOR_SCHEME,
   colorScheme,
+});
+
+export const getOrdersList = () => ({
+  type: GET_ORDERS_LIST,
+});
+
+export const setOrdersList = (data) => ({
+  type: SET_ORDERS_LIST,
+  data,
 });
