@@ -21,7 +21,7 @@ class WidgetNews extends Component {
     const { menuIsOpen } = this.state;
     const widgetNews = widget.news || [];
     return (
-      <div className={`widget-col col-lg-${widget.id === 'external_news' ? 5 : 3}`} key={widget.id}>
+      <div className={`widget-col widget-col_${widget.id === 'external_news' ? 5 : 3}`} key={widget.id}>
         <div className="widget widget_padding" style={{ height: '365px' }}>
           <div className="widget__head">
             <h3 className="widget__title">{widget.id === 'external_news' ? 'News' : 'Empala internal news'}</h3>
