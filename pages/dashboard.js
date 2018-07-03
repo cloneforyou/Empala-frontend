@@ -27,7 +27,7 @@ class Dashboard extends Component {
 
   componentDidMount() {
     this.props.getUserData();
-    this.props.startSocket();
+    // this.props.startSocket();
     if (this.props.url.query.page) {
       this.props.setActivePage(this.props.url.query.page.toLowerCase());
     } else {
