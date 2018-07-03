@@ -45,7 +45,7 @@ export default function request(url, options = {}) {
   }
   return axios({
     method: options.method,
-    url: `${serverOrigins.aws}${url}`,
+    url: `${origin || serverOrigins.aws}${url}`,
 
     data: options.data,
     headers: options.headers,

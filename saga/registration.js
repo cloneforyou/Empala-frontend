@@ -1,7 +1,8 @@
 import { call, put, takeLatest, select, takeEvery, all } from 'redux-saga/effects';
 import _ from 'lodash';
 import {
-  registrationFail, setInputFieldValueById,
+  registrationFail,
+  setInputFieldValueById,
   setTabName,
   setTabPageIndex,
 } from '../actions/registration';
