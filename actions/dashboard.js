@@ -22,6 +22,9 @@ import {
   SET_COLOR_SCHEME,
   GET_ORDERS_LIST,
   SET_ORDERS_LIST,
+  GET_ETNA_DATA,
+  SET_WATCH_LISTS,
+  SET_WATCHLIST_NUMBER,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -155,7 +158,22 @@ export const getOrdersList = () => ({
   type: GET_ORDERS_LIST,
 });
 
-export const setOrdersList = (data) => ({
+export const getETNAData = payloadType => ({
+  type: GET_ETNA_DATA,
+  payloadType,
+});
+
+export const setOrdersList = data => ({
   type: SET_ORDERS_LIST,
   data,
+});
+
+export const setWatchLists = data => ({
+  type: SET_WATCH_LISTS,
+  data,
+});
+
+export const setWatchListNumber = number => ({
+  type: SET_WATCHLIST_NUMBER,
+  number,
 });

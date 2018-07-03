@@ -1403,13 +1403,14 @@ export const widgetsOrders = [
         headers: [
           {
             title: 'Sec name',
+            width: '400px',
           },
           {
             title: 'Symbol',
           },
-          {
-            title: 'Date',
-          },
+          // {
+          //   title: 'Date',
+          // },
           {
             title: 'Curr',
           },
@@ -1456,13 +1457,14 @@ export const widgetsOrders = [
         headers: [
           {
             title: 'Sec name',
+            width: '400px',
           },
           {
             title: 'Symbol',
           },
-          {
-            title: 'Date',
-          },
+          // {
+          //   title: 'Date',
+          // },
           {
             title: 'Curr',
           },
@@ -1510,13 +1512,14 @@ export const widgetsOrders = [
         headers: [
           {
             title: 'Sec name',
+            width: '400px',
           },
           {
             title: 'Symbol',
           },
-          {
-            title: 'Date',
-          },
+          // {
+          //   title: 'Date',
+          // },
           {
             title: 'Curr',
           },

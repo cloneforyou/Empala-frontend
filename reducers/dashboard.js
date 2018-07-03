@@ -18,6 +18,7 @@ import {
   DELETE_ACCOUNT_SUCCESS,
   SET_COLOR_SCHEME,
   SET_ORDERS_LIST,
+  SET_WATCH_LISTS, SET_WATCHLIST_NUMBER,
 } from '../constants/dashboard';
 import { RESET_PASSWORD_FAIL } from '../constants/profile';
 
@@ -35,6 +36,8 @@ const initialState = {
   membership_account_delete_confirm: '',
   currentColorScheme: 'light',
   ordersList: false,
+  watchLists: false,
+  watchListNumber: false,
 };
 
 function dashboard(state = initialState, action) {
@@ -138,6 +141,16 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         ordersList: action.data,
+      };
+    case SET_WATCH_LISTS:
+      return {
+        ...state,
+        watchLists: action.data,
+      };
+    case SET_WATCHLIST_NUMBER:
+      return {
+        ...state,
+        watchListNumber: action.number,
       };
     default:
       return state;

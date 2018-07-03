@@ -1,6 +1,7 @@
 import { takeEvery, all, take, select, put, call, race } from 'redux-saga/effects';
 import openSocket from 'socket.io-client';
 import {
+  GET_ETNA_DATA,
   GET_ORDERS_LIST,
   GET_USER_DATA_REQUEST,
   LOGOUT,
@@ -10,7 +11,7 @@ import { serverOrigins } from '../utils/config';
 import { eventChannel } from 'redux-saga';
 import request from '../utils/request';
 import axios from 'axios/index';
-import { setOrdersList } from '../actions/dashboard';
+import { setOrdersList, setWatchLists } from '../actions/dashboard';
 
 
 
@@ -100,14 +101,28 @@ const etnaConfig = {
   },
 };
 
-function* get_orders_list() {
+
+function* selectETNADataRequest({ payloadType }) {
   const ETNACredentials = yield select(state => (
     state.dashboard.userData ? state.dashboard.userData.data.etna_credentials : {}));
-  const url = `${etnaConfig.api_path}/orders_list_page`;
+  switch (payloadType) {
+    case 'orders_list':
+      yield get_orders_list(ETNACredentials);
+      break;
+    case 'watch_lists':
+      yield get_watchlists(ETNACredentials);
+      break;
+    default: return false;
+  }
+  return false;
+}
+
+function* get_orders_list(credentials) {
+    const url = `${etnaConfig.api_path}/orders_list_page`;
   const params = {
     method: 'POST',
     data: {
-      ticket: ETNACredentials.ticket,
+      ticket: credentials.ticket,
       // pageNumber: 0,
       accountId: 6,
       // accounts: '4',
@@ -121,10 +136,25 @@ function* get_orders_list() {
       'X-Refresh-Token': localStorage.getItem('refreshToken'),
     },
   };
-  console.log('55555', url, params)
   const res = yield getENTAData(url, params);
-  console.log(res.data.Result)
-  yield put(setOrdersList(res.data.Result.Orders));
+  if (res) yield put(setOrdersList(res.data.Result.Orders));
+}
+
+function* get_watchlists(credentials) {
+  const url = `${etnaConfig.api_path}/watchlists`;
+  const params = {
+    method: 'POST',
+    data: {
+      ticket: credentials.ticket,
+    },
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+      'X-Refresh-Token': localStorage.getItem('refreshToken'),
+    },
+  };
+  const res = yield getENTAData(url, params);
+  console.log('waaaatttttchhhhhlist', res)
+  if (res) yield put(setWatchLists(res.data.Result));
 }
 
 function* getENTAData(url, params) {
@@ -144,7 +174,8 @@ export default function* dashboardSaga() {
   yield all([
     takeEvery(GET_USER_DATA_REQUEST, getUserData),
     takeEvery(LOGOUT, logout),
-    takeEvery(GET_ORDERS_LIST, get_orders_list),
+    // takeEvery(GET_ORDERS_LIST, get_orders_list),
+    takeEvery(GET_ETNA_DATA, selectETNADataRequest),
     wsHandling(),
   ]);
 }
