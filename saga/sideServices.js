@@ -50,12 +50,15 @@ export function* getAddressInfoByZIP({ fieldId, zipCode }) {
       if (fieldId === 'identity_zip_code') {
         yield put(setInputFieldValueById('identity_residential_address_residential_address_state', info.state));
         yield put(setInputFieldValueById('identity_residential_address_residential_address_city', info.city));
+        yield put(setInputFieldValueById('identity_residential_address_residential_address_country', 'United States'));
       } else if (fieldId === 'identity_mailing_address_zip_code') {
         yield put(setInputFieldValueById('identity_mailing_address_state', info.state));
         yield put(setInputFieldValueById('identity_mailing_address_city', info.city));
+        yield put(setInputFieldValueById('identity_mailing_address_country', 'United States'));
       } else if (fieldId === 'profile_employment_zip_code') {
         yield put(setInputFieldValueById('profile_employment_state', info.state));
         yield put(setInputFieldValueById('profile_employment_city', info.city));
+        yield put(setInputFieldValueById('profile_employment_employment_country', 'United States'));
       } else if (fieldId === 'identity_residential_address_zip_code') {
         yield put(setInputFieldValueById('identity_residential_address_state', info.state));
         yield put(setInputFieldValueById('identity_residential_address_city', info.city));
