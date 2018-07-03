@@ -1075,6 +1075,30 @@ export const widgetsPositions = [
           {
             title: 'VAR Count',
           },
+          {
+            title: 'Avg Price',
+          },
+          {
+            title: 'Quantity',
+          },
+          {
+            title: 'M2M',
+          },
+          {
+            title: 'Notional',
+          },
+          {
+            title: 'Tot % Chg',
+          },
+          {
+            title: 'Tot P&L',
+          },
+          {
+            title: 'Day % Chg',
+          },
+          {
+            title: 'Day P&L',
+          },
         ],
         data: [
           {
@@ -1090,6 +1114,12 @@ export const widgetsPositions = [
             carry: '9,999',
             annRet: '9,9',
             varCount: '99,999,999',
+            avgPrice: '99,999,999',
+            quantity: '99,999,999',
+            m2m: '99,999,999',
+            notional: '99,999,999',
+            totChg: '99,999,999',
+            DayPL: '99,999,999',
           },
           {
             id: uniqueId(),
@@ -1104,6 +1134,12 @@ export const widgetsPositions = [
             carry: '9,999',
             annRet: '9,9',
             varCount: '99,999,999',
+            avgPrice: '99,999,999',
+            quantity: '99,999,999',
+            m2m: '99,999,999',
+            notional: '99,999,999',
+            totChg: '99,999,999',
+            DayPL: '99,999,999',
           },
           {
             id: uniqueId(),
@@ -1118,6 +1154,12 @@ export const widgetsPositions = [
             carry: '9,999',
             annRet: '9,9',
             varCount: '99,999,999',
+            avgPrice: '99,999,999',
+            quantity: '99,999,999',
+            m2m: '99,999,999',
+            notional: '99,999,999',
+            totChg: '99,999,999',
+            DayPL: '99,999,999',
           },
         ],
       },

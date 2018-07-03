@@ -12,14 +12,14 @@ class Positions extends Component {
     return (
       <div className="container-fluid">
         <div className="row no-gutters">
-          <div className="col-md-5">
+          <div className="col-md-4">
             {
               widgetsPositionFirst.map(widget => (
                 <WidgetTable widget={widget} key={widget.id} />
               ))
             }
           </div>
-          <div className="col-md-7">
+          <div className="col-md-8">
             {
               widgetsPositions.map(widget => (
                 <WidgetTable widget={widget} key={widget.id} />
