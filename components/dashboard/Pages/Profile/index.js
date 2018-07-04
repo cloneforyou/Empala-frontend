@@ -29,11 +29,14 @@ class Profile extends Component {
 
   render() {
     const value = this.props.tabValue;
-    const { classes } = this.props;
-
+    const { classes, currentColorScheme } = this.props;
+    console.log('currentColorScheme -==> ', currentColorScheme);
     return (
       <div className="tabs-line">
-        <AppBar position="static" color="default">
+        <AppBar
+          position="static"
+          style={{ backgroundColor: currentColorScheme === 'light' ? "#f3f3f3" : "#211f39" }}
+        >
           <Tabs
             value={value}
             onChange={this.handleChange}
@@ -68,6 +71,7 @@ class Profile extends Component {
 
 export default withStyles(styles)(connect((state) => ({
   tabValue: state.profile.tabValue,
+  currentColorScheme: state.dashboard.currentColorScheme,
 }), (dispatch => ({
   getActiveTabProfile: () => dispatch(getActiveTabProfile()),
   changeActiveTabProfile: (value) => dispatch(changeActiveTabProfile(value)),
