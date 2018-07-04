@@ -11,7 +11,10 @@ import {
   VALIDATE_FIELD_ERROR,
   VALIDATE_FIELD_SUCCESS,
   EDITABLE_PART,
-  CLOSE_ERROR_MODAL, REGISTRATION_SUBMIT_FAIL,
+  CLOSE_ERROR_MODAL,
+  REGISTRATION_SUBMIT_REQUEST,
+  REGISTRATION_SUBMIT_FAIL,
+  REGISTRATION_SUBMIT_SUCCESS,
 } from '../constants/registration';
 
 import { generateId } from '../utils/registrationUtils';
@@ -31,6 +34,7 @@ const initialState = {
   fieldsErrors: {},
   checkboxes: {},
   userBackToPart: false,
+  loading: false,
 };
 
 function registration(state = initialState, action) {
@@ -50,7 +54,10 @@ function registration(state = initialState, action) {
     case VALIDATE_FIELD_SUCCESS:
       return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: '' } };
     case GET_DATA_FROM_CACHE:
-      return { ...state, registrationData: { ...state.registrationData, ...JSON.parse(localStorage.getItem('registrationData')) } };
+      return {
+        ...state,
+        registrationData: { ...state.registrationData, ...JSON.parse(localStorage.getItem('registrationData')) },
+      };
     case TOGGLE_CHECKBOX:
       return { ...state, checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] } };
     case SHOW_IDENTITY_MODAL:
@@ -59,8 +66,23 @@ function registration(state = initialState, action) {
       return { ...state, showIdentityModal: false };
     case CLOSE_ERROR_MODAL:
       return { ...state, showErrorModal: false };
+    case REGISTRATION_SUBMIT_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case REGISTRATION_SUBMIT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
     case REGISTRATION_SUBMIT_FAIL:
-      return { ...state, showErrorModal: true, errorMessage: action.err };
+      return {
+        ...state,
+        showErrorModal: true,
+        errorMessage: action.err,
+        loading: false,
+      };
     case COPY_MAILING_ADDRESS:
       return {
         ...state,
