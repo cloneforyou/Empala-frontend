@@ -75,5 +75,5 @@ Positions.defaultProps = {
 };
 
 export default connect(state => ({
-  positions: state.dashboard.positions ? parsePositionsList(state.dashboard.positions) : [],
+  positions: state.dashboard.parsedPositions ? state.dashboard.parsedPositions : [],
 }))(Positions);

@@ -23,6 +23,7 @@ import {
   SET_POSITIONS,
 } from '../constants/dashboard';
 import { RESET_PASSWORD_FAIL } from '../constants/profile';
+import { parsePositionsList, parseWatchList } from '../utils/dashboardUtils';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -40,6 +41,7 @@ const initialState = {
   ordersList: false,
   watchLists: false,
   positions: false,
+  parsedPositions: false,
   watchListNumber: false,
 };
 
@@ -154,6 +156,7 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         positions: action.data,
+        parsedPositions: parsePositionsList(action.data),
       };
     case SET_WATCHLIST_NUMBER:
       return {

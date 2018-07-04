@@ -1,5 +1,4 @@
-import { takeEvery, all, take, select, put, call, race } from 'redux-saga/effects';
-import openSocket from 'socket.io-client';
+import { takeEvery, all, take, select, put, call, race, fork, spawn } from 'redux-saga/effects';
 import {
   GET_ETNA_DATA,
   GET_ORDERS_LIST,
@@ -43,6 +42,7 @@ function watchMessages(socket, request) {
       // console.log('===> msssg', msg)
       if (msg.Cmd === 'CreateSession.txt' && msg.SessionId) {
         console.log('WS SessionId:', msg.SessionId)
+        socket.send(JSON.stringify({ ...request, SessionId: msg.SessionId, Keys: 166 }));
         return socket.send(JSON.stringify({ ...request, SessionId: msg.SessionId }));
       }
       if (msg.Cmd !== 'Ping') emit({ item: msg });
@@ -71,8 +71,10 @@ function* wsHandling() {
     };
     // const socket = new WebSocket(`${ETNACredentials.dataUrl}/CreateSession.txt?${query}`);
     const socketQuotes = new WebSocket(`${ETNACredentials.quoteUrl}/CreateSession.txt?${queryQuote}`);
+    // const socketQuotes = [166, 7].map(key => new WebSocket(`${ETNACredentials.quoteUrl}/CreateSession.txt?${queryQuote}`));
     console.log(' ** SOCKET', socketQuotes);
     // const socketChannel = yield call(watchMessages, socket, request);
+    // const quoteChannel = yield all([166, 7].map((key, i) => spawn(watchMessages, socketQuotes[i], { ...request, Keys: key, EntityType: 'Quote' })));
     const quoteChannel = yield call(watchMessages, socketQuotes, { ...request, Keys: 7, EntityType: 'Quote' });
     const { cancel } = yield race({
       task: [

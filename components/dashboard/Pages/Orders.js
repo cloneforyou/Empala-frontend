@@ -57,8 +57,4 @@ export default connect(
     ordersList: state.dashboard.ordersList,
     watchLists: state.dashboard.watchLists ? state.dashboard.watchLists.map(list => parseWatchList(list)) : [],
     userData: state.dashboard.userData,
-  }),
-  // dispatch => ({
-  //   getOrdersList: () => dispatch(getOrdersList()),
-  // }),
-)(Orders);
+  }))(Orders);
