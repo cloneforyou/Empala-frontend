@@ -10,7 +10,7 @@ import { serverOrigins } from '../utils/config';
 import { eventChannel } from 'redux-saga';
 import request from '../utils/request';
 import axios from 'axios/index';
-import { setOrdersList, setPositions, setWatchLists } from '../actions/dashboard';
+import { modifyPosition, setOrdersList, setPositions, setWatchLists } from '../actions/dashboard';
 
 
 
@@ -26,14 +26,18 @@ function* externalListener(socketChannel) {
     const action = yield take(socketChannel);
     // yield put(action);
     console.log('acttt ======>', action.item);
+    if (!action.item['Cmd'] && action.item['EntityType'] === 'Quote') {
+      console.log('quote key : price', action.item.Key, action.item.Price)
+      yield put(modifyPosition(action.item));
+    }
   }
 }
 
-function watchMessages(socket, request) {
+function watchMessages(socket, params) {
   return eventChannel((emit) => {
     socket.onopen = (i) => {
       console.log('------------> OPEN', i);
-      console.log('------------> REQ', request);
+      console.log('------------> REQ', params);
       // socket.send(JSON.stringify(request)); // Send data to server
     };
     socket.onmessage = (event) => {
@@ -42,8 +46,13 @@ function watchMessages(socket, request) {
       // console.log('===> msssg', msg)
       if (msg.Cmd === 'CreateSession.txt' && msg.SessionId) {
         console.log('WS SessionId:', msg.SessionId)
-        socket.send(JSON.stringify({ ...request, SessionId: msg.SessionId, Keys: 166 }));
-        return socket.send(JSON.stringify({ ...request, SessionId: msg.SessionId }));
+        // socket.send(JSON.stringify({ ...params, SessionId: msg.SessionId, Keys: 166 }));
+        return params.keys.forEach(key => socket.send(JSON.stringify({
+            Cmd: 'Subscribe.txt',
+            SessionId: msg.SessionId,
+            Keys: key,
+            EntityType: 'Quote',
+          })));
       }
       if (msg.Cmd !== 'Ping') emit({ item: msg });
     };
@@ -71,11 +80,13 @@ function* wsHandling() {
     };
     // const socket = new WebSocket(`${ETNACredentials.dataUrl}/CreateSession.txt?${query}`);
     const socketQuotes = new WebSocket(`${ETNACredentials.quoteUrl}/CreateSession.txt?${queryQuote}`);
+    const quotesKeys = yield select(state => state.dashboard.parsedPositions ? state.dashboard.parsedPositions.map(pos => pos.sec_id) : [])
+    console.log('qqqqqqqqquuuuuooooo =====>', quotesKeys)
     // const socketQuotes = [166, 7].map(key => new WebSocket(`${ETNACredentials.quoteUrl}/CreateSession.txt?${queryQuote}`));
     console.log(' ** SOCKET', socketQuotes);
     // const socketChannel = yield call(watchMessages, socket, request);
     // const quoteChannel = yield all([166, 7].map((key, i) => spawn(watchMessages, socketQuotes[i], { ...request, Keys: key, EntityType: 'Quote' })));
-    const quoteChannel = yield call(watchMessages, socketQuotes, { ...request, Keys: 7, EntityType: 'Quote' });
+    const quoteChannel = yield call(watchMessages, socketQuotes, { ...request, keys: quotesKeys, EntityType: 'Quote' });
     const { cancel } = yield race({
       task: [
         // call(externalListener, socketChannel),
@@ -172,7 +183,7 @@ function* get_positions(credentials) {
   if (res) yield put(setPositions(res.data.Result));
 }
 
-function* selectETNADataRequest({ payloadType }) {
+export function* selectETNADataRequest({ payloadType }) {
   const ETNACredentials = yield select(state => (
     state.dashboard.userData ? state.dashboard.userData.data.etna_credentials : {}));
   switch (payloadType) {
