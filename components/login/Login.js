@@ -92,6 +92,11 @@ const SuspendedForm = props => (
     <p>You have too many failed login attempts on your account.</p>
     <p>We have sent you <span style={style.markedText}>activation link</span> to your email to reactivate your account.
     </p>
+    <span
+      style={{ ...style.markedText, ...style.markedText_link }}
+      onClick={props.clearLoginState}
+    >Go back
+    </span>
     <div>
       <ConfirmationText {...props} />
     </div>
@@ -102,7 +107,15 @@ const SuspendedForm = props => (
 const ForgotPasswordForm = (props) => {
   if (props.linkSent) {
     return (
-      <p>We have sent you a link for password reset procedure. Please check your e-mail for details.</p>);
+      <div>
+        <p>We have sent you a link for password reset procedure. Please check your e-mail for details.</p>
+        <span
+          style={{ ...style.markedText, ...style.markedText_link }}
+          onClick={props.clearLoginState}
+        >Go back
+        </span>
+      </div>
+    );
   }
   return (
     <div style={style.warningTextBlock}>
