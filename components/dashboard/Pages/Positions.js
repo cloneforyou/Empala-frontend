@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import AnyChart from 'anychart-react';
 import { widgetsPositionFirst, widgetsPositions } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
+import { parsePositionsList } from '../../../utils/dashboardUtils';
+
 
 class Positions extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="container-fluid">
@@ -19,10 +18,21 @@ class Positions extends Component {
               ))
             }
           </div>
+          {/*For debug. TODO  Remove later.*/}
+          {/*{this.props.positions && this.props.positions.map(pos => (<p key={Math.random()}>{JSON.stringify(pos)}</p>))}*/}
           <div className="col-lg-8">
             {
               widgetsPositions.map(widget => (
-                <WidgetTable widget={widget} key={widget.id} />
+                <WidgetTable
+                  widget={{
+                    ...widget,
+                    tables: [{
+                      ...widget.tables[0],
+                      data: this.props.positions,
+                    }],
+                  }}
+                  key={widget.id}
+                />
               ))
             }
             <div className="widget-col col-lg-12">
@@ -60,4 +70,10 @@ class Positions extends Component {
   }
 }
 
-export default Positions;
+Positions.defaultProps = {
+  positions: [],
+};
+
+export default connect(state => ({
+  positions: state.dashboard.positions ? parsePositionsList(state.dashboard.positions) : [],
+}))(Positions);
