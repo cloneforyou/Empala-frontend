@@ -1,7 +1,8 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
-import {changeTabPage, sendRegistrationForm, closeErrorModal} from '../../actions/registration';
+import { changeTabPage, sendRegistrationForm, closeErrorModal } from '../../actions/registration';
 import ModalErrorWindow from './ModalErrorWindow';
 
 function mapStateToProps(state) {
@@ -10,6 +11,7 @@ function mapStateToProps(state) {
     lastName: state.registration.registrationData.member_basic_information_last_name || '',
     errorMessage: state.registration.errorMessage || '',
     showErrorModal: state.registration.showErrorModal,
+    loading: state.registration.loading
   };
 }
 
@@ -85,6 +87,17 @@ class AgreementPage extends PureComponent {
   render() {
     return (
       <div className="agreements">
+        {
+          this.props.loading &&
+          <div className="loader__wrap">
+            <div className="loader">
+              <CircularProgress
+                size={100}
+                style={{ color: '#98c73a' }}
+              />
+            </div>
+          </div>
+        }
         <p className="agreements__title">Before we can proceed you are required to review and consent to all of the
           following documents and information
         </p>
@@ -193,7 +206,8 @@ class AgreementPage extends PureComponent {
                          className={`input-confirmation form-control border-default ${(!this.state.signed && this.state.submitted) && 'border-error'}`}
                          onChange={this.checkRegistrationName} />
                   {(!this.state.signed && this.state.submitted) &&
-                  <p className="text--error">Please make sure that you provided the correct First name and Last name</p>}
+                  <p className="text--error">Please make sure that you provided the correct First name and Last
+                    name</p>}
                 </div>
               </div>
               <div className="group-buttons">

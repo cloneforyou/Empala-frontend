@@ -6,6 +6,7 @@ import {
 import {
   CLEAN_ERROR_MESSAGE,
   CLEAR_LOGIN_STATE,
+  LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
   PASSWORD_UPDATE_REQUEST_FAIL,
@@ -16,7 +17,7 @@ import {
   SET_ACCOUNT_UNBLOCKED,
   SET_PASSWORD_FORGOTTEN, TOGGLE_MODAL,
 } from '../constants/auth';
-import {OPEN_MODAL} from '../constants/dashboard';
+import { OPEN_MODAL } from '../constants/dashboard';
 
 export const InitialState = {
   authError: false,
@@ -44,6 +45,11 @@ function auth(state = InitialState, action) {
       return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: action.message } };
     case VALIDATE_FIELD_SUCCESS:
       return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: '' } };
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case LOGIN_REQUEST_FAIL:
     case SEND_ACTIVATION_LINK_FAIL:
     case PASSWORD_UPDATE_REQUEST_FAIL:
