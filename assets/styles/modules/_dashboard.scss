@@ -87,8 +87,11 @@
     }
     .form-range__input {
       background: #7a7697;
-      border: #7a7697 1px solid;;
+      border: #7a7697 1px solid;
       color: #cacaca;
+    }
+    .pseudo-input__input {
+      background: none;
     }
   }
 }
