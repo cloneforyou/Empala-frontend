@@ -25,6 +25,7 @@ import {
   GET_ETNA_DATA,
   SET_WATCH_LISTS,
   SET_WATCHLIST_NUMBER,
+  SET_POSITIONS,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -82,12 +83,10 @@ export function setGroupCountry(label) {
 }
 
 
-export const setActivePage = page => {
-  return {
-    type: SET_ACTIVE_PAGE,
-    page,
-  };
-}
+export const setActivePage = page => ({
+  type: SET_ACTIVE_PAGE,
+  page,
+});
 
 export const cleanImage = () => ({
   type: CLEAN_IMAGE_DATA,
@@ -178,4 +177,9 @@ export const setWatchLists = data => ({
 export const setWatchListNumber = number => ({
   type: SET_WATCHLIST_NUMBER,
   number,
+});
+
+export const setPositions = data => ({
+  type: SET_POSITIONS,
+  data,
 });

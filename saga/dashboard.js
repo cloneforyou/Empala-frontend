@@ -11,7 +11,7 @@ import { serverOrigins } from '../utils/config';
 import { eventChannel } from 'redux-saga';
 import request from '../utils/request';
 import axios from 'axios/index';
-import { setOrdersList, setWatchLists } from '../actions/dashboard';
+import { setOrdersList, setPositions, setWatchLists } from '../actions/dashboard';
 
 
 
@@ -101,20 +101,15 @@ const etnaConfig = {
   },
 };
 
-
-function* selectETNADataRequest({ payloadType }) {
-  const ETNACredentials = yield select(state => (
-    state.dashboard.userData ? state.dashboard.userData.data.etna_credentials : {}));
-  switch (payloadType) {
-    case 'orders_list':
-      yield get_orders_list(ETNACredentials);
-      break;
-    case 'watch_lists':
-      yield get_watchlists(ETNACredentials);
-      break;
-    default: return false;
+function* getENTAData(url, params) {
+  if (url && params) {
+    try {
+      const res = yield call(request, url, params);
+      return res.data;
+    } catch (err) {
+      console.log(err.message);
+    }
   }
-  return false;
 }
 
 function* get_orders_list(credentials) {
@@ -124,7 +119,7 @@ function* get_orders_list(credentials) {
     data: {
       ticket: credentials.ticket,
       // pageNumber: 0,
-      accountId: 6,
+      accountId: credentials.accountId,
       // accounts: '4',
       pageSize: 0,
       // symbol: 'GOOG',
@@ -153,19 +148,44 @@ function* get_watchlists(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  console.log('waaaatttttchhhhhlist', res)
+  console.log('waaaatttttchhhhhlist =>', res)
   if (res) yield put(setWatchLists(res.data.Result));
 }
 
-function* getENTAData(url, params) {
-  if (url && params) {
-    try {
-      const res = yield call(request, url, params);
-      return res.data;
-    } catch (err) {
-      console.log(err.message);
-    }
+function* get_positions(credentials) {
+  const url = `${etnaConfig.api_path}/get_positions`;
+  const params = {
+    method: 'POST',
+    data: {
+      ticket: credentials.ticket,
+      accountId: credentials.accountId,
+    },
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+      'X-Refresh-Token': localStorage.getItem('refreshToken'),
+    },
+  };
+  const res = yield getENTAData(url, params);
+  console.log('poooooosiiiiiitiiiiiiooooooons =>', res)
+  if (res) yield put(setPositions(res.data.Result));
+}
+
+function* selectETNADataRequest({ payloadType }) {
+  const ETNACredentials = yield select(state => (
+    state.dashboard.userData ? state.dashboard.userData.data.etna_credentials : {}));
+  switch (payloadType) {
+    case 'orders_list':
+      yield get_orders_list(ETNACredentials);
+      break;
+    case 'watch_lists':
+      yield get_watchlists(ETNACredentials);
+      break;
+    case 'positions':
+      yield get_positions(ETNACredentials);
+      break;
+    default: return false;
   }
+  return false;
 }
 
 /*  --------- ETNA TEST API FUNCTIONS  END ---------- */

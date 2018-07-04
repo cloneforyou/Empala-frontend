@@ -1,10 +1,11 @@
 import {
+  all,
   call,
   put,
   select,
 } from 'redux-saga/effects';
 import request from '../utils/request';
-import { getETNAData, getOrdersList, openModal, setUserData, startSocket } from '../actions/dashboard';
+import { getETNAData, openModal, setUserData, startSocket } from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
@@ -164,8 +165,13 @@ export function* getUserData() {
     yield put(setUserData(data.data));
     yield put(startSocket());
     // yield put(getOrdersList());
-    yield put(getETNAData('orders_list'));
-    yield put(getETNAData('watch_lists'));
+    // yield put(getETNAData('orders_list'));
+    // yield put(getETNAData('watch_lists'));
+    yield all([
+      'orders_list',
+      'watch_lists',
+      'positions',
+    ].map(list => put(getETNAData(list))));
     if (data.data.data.profile.should_update_password) {
       yield put(openModal('passwordReminder'));
     }

@@ -18,7 +18,9 @@ import {
   DELETE_ACCOUNT_SUCCESS,
   SET_COLOR_SCHEME,
   SET_ORDERS_LIST,
-  SET_WATCH_LISTS, SET_WATCHLIST_NUMBER,
+  SET_WATCH_LISTS,
+  SET_WATCHLIST_NUMBER,
+  SET_POSITIONS,
 } from '../constants/dashboard';
 import { RESET_PASSWORD_FAIL } from '../constants/profile';
 
@@ -37,6 +39,7 @@ const initialState = {
   currentColorScheme: 'light',
   ordersList: false,
   watchLists: false,
+  positions: false,
   watchListNumber: false,
 };
 
@@ -146,6 +149,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         watchLists: action.data,
+      };
+    case SET_POSITIONS:
+      return {
+        ...state,
+        positions: action.data,
       };
     case SET_WATCHLIST_NUMBER:
       return {
