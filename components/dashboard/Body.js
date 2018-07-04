@@ -22,6 +22,7 @@ class Body extends Component {
                 <div className="loader">
                   <CircularProgress
                     size={100}
+                    style={{ color: '#98c73a' }}
                   />
                 </div>
               </div>

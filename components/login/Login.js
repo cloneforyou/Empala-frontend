@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import EmpalaInput from '../registration/EmpalaInput';
 import { GREEN, TORCH_RED, WHITE } from '../../constants/colors';
@@ -54,7 +55,9 @@ const UserEmailForm = props => (
       label="E-mail"
       handleChange={props.handleInput}
       errorText={props.errorText}
-      onKeyPress={(e) => { if (e.key === 'Enter') props.handleClick(); }}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter') props.handleClick();
+      }}
     />
     {props.goBack &&
     <span
@@ -87,7 +90,8 @@ const SuspendedForm = props => (
   <div style={style.warningTextBlock}>
     <h2>Security warning</h2>
     <p>You have too many failed login attempts on your account.</p>
-    <p>We have sent you <span style={style.markedText}>activation link</span> to your email to reactivate your account.</p>
+    <p>We have sent you <span style={style.markedText}>activation link</span> to your email to reactivate your account.
+    </p>
     <div>
       <ConfirmationText {...props} />
     </div>
@@ -103,17 +107,17 @@ const ForgotPasswordForm = (props) => {
   return (
     <div style={style.warningTextBlock}>
       <h2 className="login__security-title">Let’s find your account</h2>
-        <div className="login__description-wrapper">
-          <span>Enter your email address</span>
-        </div>
-        <UserEmailForm
-          handleClick={props.sendPasswordRecoveryLink}
-          handleInput={props.setInputValueById}
-          errorText={props.errorText}
-          handleBack={props.clearLoginState}
-          goBack
-        />
+      <div className="login__description-wrapper">
+        <span>Enter your email address</span>
       </div>
+      <UserEmailForm
+        handleClick={props.sendPasswordRecoveryLink}
+        handleInput={props.setInputValueById}
+        errorText={props.errorText}
+        handleBack={props.clearLoginState}
+        goBack
+      />
+    </div>
   );
 };
 
@@ -123,48 +127,59 @@ const Login = props => {
   };
   return (
     <div className="row login">
+      {
+        props.loading &&
+        <div className="loader__wrap">
+          <div className="loader">
+            <CircularProgress
+              size={100}
+              style={{ color: '#98c73a' }}
+            />
+          </div>
+        </div>
+      }
       <div className="login__content ">
-        <img className="login__logo" src={logo} alt="Logotype"/>
+        <img className="login__logo" src={logo} alt="Logotype" />
         {props.accountSuspended && <SuspendedForm {...props} />}
         {props.forgotPassword && <ForgotPasswordForm {...props} />}
         {!(props.accountSuspended || props.forgotPassword) &&
         <div>
           <h3 className="login__title fw-300">Login to your account</h3>
           <div className="login__form-width no-gutters clear-fix">
-              <EmpalaInput
-                key="username"
-                id="index_username"
-                type="text"
-                label="Member no. or e-mail"
-                handleChange={e => props.setInputValueById(e)}
-                errorText={props.errorText || props.fieldsError.index_username}
-                onKeyPress = {handleLogin}
-              />
-              <EmpalaInput
-                key="password"
-                id="index_password"
-                type="password"
-                label="Password"
-                handleChange={e =>  props.setInputValueById(e)}
-                errorText={props.fieldsError.index_password}
-                onKeyPress = {handleLogin}
-              />
-              <button
-                className="default-btn login__forgot-link fw-300 float-right"
-                onClick={props.setPasswordForgotten}
-                tabIndex="-1"
-              >
-                forgot password?
-              </button>
-              <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
+            <EmpalaInput
+              key="username"
+              id="index_username"
+              type="text"
+              label="Member no. or e-mail"
+              handleChange={e => props.setInputValueById(e)}
+              errorText={props.errorText || props.fieldsError.index_username}
+              onKeyPress={handleLogin}
+            />
+            <EmpalaInput
+              key="password"
+              id="index_password"
+              type="password"
+              label="Password"
+              handleChange={e => props.setInputValueById(e)}
+              errorText={props.fieldsError.index_password}
+              onKeyPress={handleLogin}
+            />
+            <button
+              className="default-btn login__forgot-link fw-300 float-right"
+              onClick={props.setPasswordForgotten}
+              tabIndex="-1"
+            >
+              forgot password?
+            </button>
+            <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
           </div>
           <div className="social-auth">
             <div className="styled-part-separate"><span>or connect with</span></div>
             <div className="social-auth__row">
               {/* <button className="social-btn social-btn__facebook">facebook</button> */}
-              <FacebookAuth handlelogin={props.handleLogin}/>
-              <GoogleAuth handlelogin={props.handleLogin}/>
-              {!isNode && <LinkedInAuth handlelogin={props.handleLogin}/>}
+              <FacebookAuth handlelogin={props.handleLogin} />
+              <GoogleAuth handlelogin={props.handleLogin} />
+              {!isNode && <LinkedInAuth handlelogin={props.handleLogin} />}
             </div>
           </div>
 
@@ -192,6 +207,7 @@ export default connect(
     forgotPassword: state.auth.forgotPassword,
     fieldsError: state.auth.fieldsErrors,
     modalIsOpen: state.auth.modalIsOpen,
+    loading: state.auth.loading,
   }),
   dispatch => ({
     handleLogin: (provider, data) => dispatch(loginRequest(provider, data)),
