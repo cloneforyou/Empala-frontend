@@ -30,7 +30,6 @@ class Profile extends Component {
   render() {
     const value = this.props.tabValue;
     const { classes, currentColorScheme } = this.props;
-    console.log('currentColorScheme -==> ', currentColorScheme);
     return (
       <div className="tabs-line">
         <AppBar
