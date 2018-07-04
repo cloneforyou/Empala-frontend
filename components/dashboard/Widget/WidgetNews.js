@@ -56,26 +56,31 @@ class WidgetNews extends Component {
                       <div>
                         {
                           card.origin_title &&
-                          <a className="news-card__creator" target="_blank"
-                             href={card.origin_link}>{card.origin_title}</a>
+                          <a
+                            className="news-card__creator"
+                            target="_blank"
+                            href={card.origin_link}
+                          >
+                            {card.origin_title}
+                          </a>
                         }
                         <span className="news-card__time">
                             <Moment date={card.pubDate} fromNow />
                         </span>
                       </div>
                       <a className="news-card__link" target="_blank" href={card.link}>{_.unescape(card.title)}</a>
-                      <p className="m-0">{_.unescape(card.description)}</p>
+                      <p className="news-card__text m-0">{_.unescape(card.description)}</p>
                     </div>
-                    {/*<div className="news-card__foot">*/}
-                    {/*<div className="news-card__rating">*/}
-                    {/*<span>Rating:</span>*/}
-                    {/*<div className="stars">*/}
-                    {/*<div className="stars__empty">*/}
-                    {/*<div className={`stars__fill stars__fill_${card.rating}`} />*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
+                    {/*<div className="news-card__foot">
+                      <div className="news-card__rating">
+                        <span>Rating:</span>
+                        <div className="stars">
+                          <div className="stars__empty">
+                            <div className={`stars__fill stars__fill_${card.rating}`} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>*/}
                   </div>
                 </div>
               )) :
@@ -97,7 +102,9 @@ class WidgetNews extends Component {
                       </div>
                       <div>
                         <p className="news-card__title m-0">{card.feed.subject.displayname}</p>
-                        <p className="m-0">{_.unescape(card.feed.subject.status) || _.unescape(card.feed.main_content)}</p>
+                        <p className="news-card__text m-0">
+                          {_.unescape(card.feed.subject.status) || _.unescape(card.feed.main_content)}
+                        </p>
                       </div>
                     </div>
                   </div>
