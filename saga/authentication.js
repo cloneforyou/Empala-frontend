@@ -17,6 +17,7 @@ import {
   setAccountBlocked, toggleModal,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
+import { selectETNADataRequest } from './dashboard';
 
 
 function* loginRequest(url, options) {
@@ -163,15 +164,13 @@ export function* getUserData() {
   try {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
-    yield put(startSocket());
-    // yield put(getOrdersList());
-    // yield put(getETNAData('orders_list'));
-    // yield put(getETNAData('watch_lists'));
     yield all([
       'orders_list',
       'watch_lists',
       'positions',
-    ].map(list => put(getETNAData(list))));
+    // ].map(list => put(getETNAData(list))));
+    ].map(list => call(selectETNADataRequest, { payloadType: list })));
+    yield put(startSocket());
     if (data.data.data.profile.should_update_password) {
       yield put(openModal('passwordReminder'));
     }

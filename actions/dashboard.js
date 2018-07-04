@@ -25,7 +25,7 @@ import {
   GET_ETNA_DATA,
   SET_WATCH_LISTS,
   SET_WATCHLIST_NUMBER,
-  SET_POSITIONS,
+  SET_POSITIONS, MODIFY_POSITION_DATA,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -181,5 +181,10 @@ export const setWatchListNumber = number => ({
 
 export const setPositions = data => ({
   type: SET_POSITIONS,
+  data,
+});
+
+export const modifyPosition = data => ({
+  type: MODIFY_POSITION_DATA,
   data,
 });

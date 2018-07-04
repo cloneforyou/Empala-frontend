@@ -20,9 +20,10 @@ import {
   SET_ORDERS_LIST,
   SET_WATCH_LISTS,
   SET_WATCHLIST_NUMBER,
-  SET_POSITIONS,
+  SET_POSITIONS, MODIFY_POSITION_DATA,
 } from '../constants/dashboard';
 import { RESET_PASSWORD_FAIL } from '../constants/profile';
+import { parsePositionsList, parseWatchList } from '../utils/dashboardUtils';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -40,6 +41,7 @@ const initialState = {
   ordersList: false,
   watchLists: false,
   positions: false,
+  parsedPositions: false,
   watchListNumber: false,
 };
 
@@ -154,11 +156,26 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         positions: action.data,
+        parsedPositions: parsePositionsList(action.data),
       };
     case SET_WATCHLIST_NUMBER:
       return {
         ...state,
         watchListNumber: action.number,
+      };
+    case MODIFY_POSITION_DATA:
+      return {
+        ...state,
+        parsedPositions: state.parsedPositions.map(pos => {
+          if (pos.sec_id === +action.data.Key) {
+            return {
+              ...pos,
+              m2m: action.data.Last,
+              day_chg: action.data.ChangePc,
+            };
+          }
+          return pos;
+        }),
       };
     default:
       return state;
