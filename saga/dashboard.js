@@ -24,10 +24,8 @@ function* internalListener(socket) {
 function* externalListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
-    // yield put(action);
-    console.log('acttt ======>', action.item);
+    // console.log('acttt ======>', action.item);
     if (!action.item['Cmd'] && action.item['EntityType'] === 'Quote') {
-      console.log('quote key : price', action.item.Key, action.item.Price)
       yield put(modifyPosition(action.item));
     }
   }
@@ -74,18 +72,15 @@ function* wsHandling() {
       Cmd: 'Subscribe.txt',
       SessionId: '',
       Keys: ETNACredentials.accountId,
-      // Symbol: 'GOOG, HAIR',
       EntityType: 'Order',
       HttpClientType: 'WebSocket',
     };
     // const socket = new WebSocket(`${ETNACredentials.dataUrl}/CreateSession.txt?${query}`);
     const socketQuotes = new WebSocket(`${ETNACredentials.quoteUrl}/CreateSession.txt?${queryQuote}`);
     const quotesKeys = yield select(state => state.dashboard.parsedPositions ? state.dashboard.parsedPositions.map(pos => pos.sec_id) : [])
-    console.log('qqqqqqqqquuuuuooooo =====>', quotesKeys)
     // const socketQuotes = [166, 7].map(key => new WebSocket(`${ETNACredentials.quoteUrl}/CreateSession.txt?${queryQuote}`));
     console.log(' ** SOCKET', socketQuotes);
     // const socketChannel = yield call(watchMessages, socket, request);
-    // const quoteChannel = yield all([166, 7].map((key, i) => spawn(watchMessages, socketQuotes[i], { ...request, Keys: key, EntityType: 'Quote' })));
     const quoteChannel = yield call(watchMessages, socketQuotes, { ...request, keys: quotesKeys, EntityType: 'Quote' });
     const { cancel } = yield race({
       task: [
