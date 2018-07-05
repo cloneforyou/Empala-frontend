@@ -7,26 +7,28 @@ class Table extends Component {
   }
 
   render() {
-    const { table } = this.props;
+    const { table, overview } = this.props;
     return (
       <div className="table-responsive">
-        <table className="table table-borderless table-striped emp-table">
+        <table
+          className={overview ? 'table table-borderless emp-table' : 'table table-borderless table-striped emp-table'}
+        >
           <thead>
-            <tr className="emp-table__tr">
-              {table.headers.map((header, i) => (
-                <th
-                  scope="col"
-                  className="emp-table__th"
-                  key={Math.random()}
-                  style={{ minWidth: header.width || 'auto' }}
-                >
-                  {header.title}
-                </th>
+          <tr className="emp-table__tr">
+            {table.headers.map((header, i) => (
+              <th
+                scope="col"
+                className={header.align ? `emp-table__th text-${header.align}` : 'emp-table__th'}
+                key={Math.random()}
+                style={{ width: header.width || 'auto' }}
+              >
+                {header.title}
+              </th>
             ))}
-            </tr>
+          </tr>
           </thead>
           <tbody>
-            {
+          {
             table.data && table.data.length > 0 && table.data.map((row, i) => (
               <tr key={row.id} className="emp-table__tr">
                 {
@@ -59,15 +61,15 @@ class Table extends Component {
                           </td>
                         );
                       }
-                        return (
-                          <td
-                            className="emp-table__td"
-                            key={Math.random()}
-                            style={{ widht: item.width || 'auto' }}
-                          >
-                            {item}
-                          </td>
-                        );
+                      return (
+                        <td
+                          className="emp-table__td"
+                          key={Math.random()}
+                          style={{ widht: item.width || 'auto' }}
+                        >
+                          {item}
+                        </td>
+                      );
                     }
                   })
                 }

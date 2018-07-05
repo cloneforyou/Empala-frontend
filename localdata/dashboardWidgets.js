@@ -22,19 +22,17 @@ export const widgetsOverflow = [
           },
           {
             title: 'Day chg',
-            align: 'center',
           },
           {
             title: 'Allocation',
-            align: 'left',
           },
           {
             title: 'Domestic',
-            align: 'left',
+            align: 'right',
           },
           {
             title: 'Foreign',
-            align: 'left',
+            align: 'right',
           },
         ],
         data: [
@@ -94,11 +92,11 @@ export const widgetsOverflow = [
           },
           {
             title: '% change',
-            align: 'center',
+            align: 'right',
           },
           {
             title: 'Vs indexes',
-            align: 'center',
+            align: 'right',
           },
           {
             title: 'LT Performance',
@@ -106,11 +104,11 @@ export const widgetsOverflow = [
           },
           {
             title: '% change',
-            align: 'center',
+            align: 'right',
           },
           {
             title: 'Vs indexes',
-            align: 'center',
+            align: 'right',
           },
         ],
         data: [
@@ -238,6 +236,7 @@ export const widgetsOverflow = [
           {
             title: 'Size & growth',
             align: 'left',
+            width: '115px',
           },
           {
             title: 'No.',
@@ -279,6 +278,7 @@ export const widgetsOverflow = [
           {
             title: 'Opinions',
             align: 'left',
+            width: '115px',
           },
           {
             title: 'No.',
