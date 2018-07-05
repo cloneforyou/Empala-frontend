@@ -48,7 +48,6 @@ export default function request(url, options = {}) {
     method: options.method,
     // url: `${origin || serverOrigins.local}${url}`,
     url: `${serverOrigins.local}${url}`,
-
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,

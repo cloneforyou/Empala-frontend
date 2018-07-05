@@ -43,7 +43,7 @@
     .list-horizontal__link, .dashboard__copyright, .main-text-helvetica {
       color: #000;
     }
-    .tabs-line{
+    .tabs-line {
       background: #fff;
     }
   }
@@ -65,16 +65,33 @@
       color: #7a7697;
     }
     .emp-table__td {
-      //color: #f7f7f8;
+      color: #cacaca;
     }
     .news-card__link {
       color: #b2b2b3;
     }
-    .MuiAppBar-colorDefault-6, .MuiPaper-root-18 {
+    .MuiAppBar-colorDefault-6 {
       background: $dark-bg-blue;
     }
     .emp-table.table-striped tbody tr:nth-of-type(odd) {
-      background-color: rgba(245, 245, 246, 0.13);
+      background-color: rgba(245, 245, 246, 0.2);
+    }
+    .news-card__title, .news-card__link, .form-range__label, .switcher__label {
+      color: #b9bccb;
+    }
+    .switcher__label_checked {
+      color: #98c73a;
+    }
+    .news-card__text {
+      color: #a5a8b7;
+    }
+    .form-range__input {
+      background: #7a7697;
+      border: #7a7697 1px solid;
+      color: #cacaca;
+    }
+    .pseudo-input__input {
+      background: none;
     }
   }
 }
