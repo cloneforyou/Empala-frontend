@@ -694,19 +694,23 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Notional amount',
-            width: '170px',
+            width: '140px',
           },
           {
             title: 'Domestic',
+            align: 'right',
           },
           {
             title: 'Foreign',
+            align: 'right',
           },
           {
             title: 'Total',
+            align: 'right',
           },
           {
             title: 'Day change',
+            align: 'right',
           },
         ],
         data: [
@@ -733,19 +737,23 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Percentage allocations',
-            width: '170px',
+            width: '140px',
           },
           {
             title: 'Domestic',
+            align: 'right',
           },
           {
             title: 'Foreign',
+            align: 'right',
           },
           {
             title: 'Total',
+            align: 'right',
           },
           {
             title: 'Day change',
+            align: 'right',
           },
         ],
         data: [
@@ -772,19 +780,23 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Adjusted amounts',
-            width: '170px',
+            width: '140px',
           },
           {
             title: 'Domestic',
+            align: 'right',
           },
           {
             title: 'Foreign',
+            align: 'right',
           },
           {
             title: 'Total',
+            align: 'right',
           },
           {
             title: 'Day change',
+            align: 'right',
           },
         ],
         data: [
@@ -811,19 +823,23 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Position risk measures',
-            width: '170px',
+            width: '140px',
           },
           {
             title: 'Domestic',
+            align: 'right',
           },
           {
             title: 'Foreign',
+            align: 'right',
           },
           {
             title: 'Total',
+            align: 'right',
           },
           {
             title: 'Day change',
+            align: 'right',
           },
         ],
         data: [
@@ -850,19 +866,23 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Risk theoreticals',
-            width: '170px',
+            width: '140px',
           },
           {
             title: 'Domestic',
+            align: 'right',
           },
           {
             title: 'Foreign',
+            align: 'right',
           },
           {
             title: 'Total',
+            align: 'right',
           },
           {
             title: 'Day change',
+            align: 'right',
           },
         ],
         data: [
@@ -889,19 +909,23 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Funding analysis',
-            width: '170px',
+            width: '140px',
           },
           {
             title: 'Domestic',
+            align: 'right',
           },
           {
             title: 'Foreign',
+            align: 'right',
           },
           {
             title: 'Total',
+            align: 'right',
           },
           {
             title: 'Day change',
+            align: 'right',
           },
         ],
         data: [
@@ -928,19 +952,23 @@ export const widgetsPositionFirst = [
         headers: [
           {
             title: 'Credit analysis',
-            width: '170px',
+            width: '140px',
           },
           {
             title: 'Domestic',
+            align: 'right',
           },
           {
             title: 'Foreign',
+            align: 'right',
           },
           {
             title: 'Total',
+            align: 'right',
           },
           {
             title: 'Day change',
+            align: 'right',
           },
         ],
         data: [
@@ -1336,7 +1364,6 @@ export const widgetsCash = [
           {
             title: 'Exec fees',
           },
-
           {
             title: 'Reg fees',
           },
