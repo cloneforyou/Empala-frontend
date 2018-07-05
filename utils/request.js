@@ -2,8 +2,9 @@ import axios from 'axios';
 import { serverOrigins } from './config';
 
 export default function request(url, options = {}) {
-  const port = 9000;
-  const origin = `http://${window.location.hostname}:${port}`;
+  // const port = 9000;
+  // const isNode = require('detect-node');
+  // const origin = isNode ? null : `http://${window.location.hostname}:${port}`;
   function setErrorText(err) {
     if (err.response && err.response.status === 401) {
       if (err.response.data.info === 'INVALID_VALUE') {
@@ -45,7 +46,8 @@ export default function request(url, options = {}) {
   }
   return axios({
     method: options.method,
-    url: `${origin || serverOrigins.aws}${url}`,
+    // url: `${origin || serverOrigins.local}${url}`,
+    url: `${serverOrigins.local}${url}`,
 
     data: options.data,
     headers: options.headers,
