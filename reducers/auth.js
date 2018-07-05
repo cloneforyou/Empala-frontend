@@ -82,6 +82,7 @@ function auth(state = InitialState, action) {
         forgotPassword: false,
         linkSent: false,
         authError: false,
+        isBlocked: false,
       };
     case TOGGLE_MODAL:
       return {
