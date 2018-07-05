@@ -11,7 +11,10 @@
     &:last-child {
       padding-right: 10px !important;
     }
-    @media (max-width: 1500px){
+    &.text-right {
+      padding-right: 10px !important;
+    }
+    @media (max-width: 1500px) {
       @include fontSize(10px);
     }
   }
@@ -44,10 +47,12 @@
     &_chart {
       padding-bottom: 12px !important;
     }
+    &.text-right {
+      padding-right: 10px !important;
+    }
 
   }
-  &__tr {
-  }
+
   &.table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(245, 245, 246, 0.6);
   }

@@ -63,7 +63,7 @@ class Table extends Component {
                       }
                       return (
                         <td
-                          className="emp-table__td"
+                          className={(table.headers[index - 1] && table.headers[index - 1].align) ? `emp-table__td text-${table.headers[index - 1].align}` : 'emp-table__td'}
                           key={Math.random()}
                           style={{ widht: item.width || 'auto' }}
                         >

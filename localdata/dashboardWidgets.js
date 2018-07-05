@@ -129,7 +129,7 @@ export const widgetsOverflow = [
     id: uniqueId(),
     title: 'Social capital',
     icon: 'groups',
-    col:3,
+    col: 3,
     height: 390,
     tables: [
       {
@@ -138,18 +138,22 @@ export const widgetsOverflow = [
           {
             title: 'Network',
             align: 'left',
+            width: '30%',
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
+            width: '20%',
           },
           {
             title: 'Positioning',
             align: 'left',
+            width: '30%',
           },
           {
             title: '%ile',
             align: 'left',
+            width: '20%',
           },
         ],
         data: [
@@ -182,18 +186,22 @@ export const widgetsOverflow = [
           {
             title: 'Get',
             align: 'left',
+            width: '30%',
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
+            width: '20%',
           },
           {
             title: 'Give',
             align: 'left',
+            width: '30%',
           },
           {
             title: 'No.',
             align: 'left',
+            width: '20%',
           },
         ],
         data: [
@@ -240,7 +248,7 @@ export const widgetsOverflow = [
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
           },
         ],
         data: [
@@ -282,7 +290,7 @@ export const widgetsOverflow = [
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
           },
         ],
         data: [
@@ -614,7 +622,7 @@ export const widgetsOverflow = [
           },
           {
             title: 'Date',
-            align: 'left',
+            align: 'right',
           },
           {
             title: 'Update type',
