@@ -1,14 +1,12 @@
 .login {
   position: relative;
   display: flex;
-  //height: 100%;
   background: url($path-to-images + "login_bg1.jpg") no-repeat 50% 50% /cover;
   max-width: 100vw;
   height: 100vh;
   align-items: center;
   justify-content: center;
   &__bg {
-    //background: url($path-to-images + "login-bg.jpg") no-repeat 46% 0;
     background-size: cover;
     position: relative;
     &:before {
@@ -98,6 +96,18 @@
     box-shadow: 3px 5px 6px 0 rgba(0, 0, 0, 0.16);
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
   }
+  &__text-container {
+    width: 350px;
+    @include fontSize(14px);
+  }
+  &__link {
+    cursor: pointer;
+    @include fontSize(12px);
+    vertical-align: top;
+    display: inline-block;
+    margin: 10px 0;
+    font-weight: 600;
+  }
 }
 
 .social-btn {
@@ -137,11 +147,7 @@
       background-size: 100%;
     }
   }
-  //&__facebook-moved {
-  //  // tricks to compensate <span> in which this button wrapped by component
-  //  margin-right: 15px;
-  //  top: -10px;
-  //}
+
   &__linkedin {
     background-color: #0073b5;
     &:before {

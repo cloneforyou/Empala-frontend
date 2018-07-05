@@ -57,3 +57,21 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+@mixin styledScroll($color) {
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: inherit;
+  }
+  ::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 3px;
+    background-color: $color;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #dadada;
+  }
+}

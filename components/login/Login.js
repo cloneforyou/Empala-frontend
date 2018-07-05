@@ -3,7 +3,6 @@ import Link from 'next/link';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import EmpalaInput from '../registration/EmpalaInput';
-import { GREEN, TORCH_RED, WHITE } from '../../constants/colors';
 import { setInputFieldValueById } from '../../actions/registration';
 import {
   clearLoginState, clearRegistrationData,
@@ -21,31 +20,6 @@ import LinkedInAuth from '../social/auth/LinkedInAuth';
 
 const isNode = require('detect-node');
 
-const style = {
-  warningTextBlock: {
-    width: '350px',
-    fontSize: '14px',
-    textAlign: 'justify',
-  },
-  markedText: {
-    color: GREEN,
-    fontStyle: 'oblique',
-    fontWeight: 'bolder',
-  },
-  errorText: {
-    color: TORCH_RED,
-    fontWeight: 'bolder',
-  },
-  markedText_link: {
-    cursor: 'pointer',
-    fontSize: '.9rem',
-    verticalAlign: 'top',
-    display: 'inline-block',
-    margin: '10px 0',
-  },
-};
-
-
 const UserEmailForm = props => (
   <div className="login__form-width no-gutters clear-fix">
     <EmpalaInput
@@ -61,7 +35,7 @@ const UserEmailForm = props => (
     />
     {props.goBack &&
     <span
-      style={{ ...style.markedText, ...style.markedText_link }}
+      className="login__link green"
       onClick={props.handleBack}
     >Go back
     </span>
@@ -87,13 +61,13 @@ const ConfirmationText = (props) => {
 
 const SuspendedForm = props => (
   /* Text is a sample */
-  <div style={style.warningTextBlock}>
+  <div className="login__text-container">
     <h2>Security warning</h2>
     <p>You have too many failed login attempts on your account.</p>
-    <p>We have sent you <span style={style.markedText}>activation link</span> to your email to reactivate your account.
+    <p>We have sent you <span className="green">activation link</span> to your email to reactivate your account.
     </p>
     <span
-      style={{ ...style.markedText, ...style.markedText_link }}
+      className="login__link green"
       onClick={props.clearLoginState}
     >Go back
     </span>
@@ -110,7 +84,7 @@ const ForgotPasswordForm = (props) => {
       <div>
         <p>We have sent you a link for password reset procedure. Please check your e-mail for details.</p>
         <span
-          style={{ ...style.markedText, ...style.markedText_link }}
+          className="login__link green"
           onClick={props.clearLoginState}
         >Go back
         </span>
@@ -118,7 +92,7 @@ const ForgotPasswordForm = (props) => {
     );
   }
   return (
-    <div style={style.warningTextBlock}>
+    <div className="login__text-container">
       <h2 className="login__security-title">Let’s find your account</h2>
       <div className="login__description-wrapper">
         <span>Enter your email address</span>
@@ -151,7 +125,7 @@ const Login = props => {
           </div>
         </div>
       }
-      <div className="login__content ">
+      <div className="login__content">
         <img className="login__logo" src={logo} alt="Logotype" />
         {props.accountSuspended && <SuspendedForm {...props} />}
         {props.forgotPassword && <ForgotPasswordForm {...props} />}
@@ -189,7 +163,6 @@ const Login = props => {
           <div className="social-auth">
             <div className="styled-part-separate"><span>or connect with</span></div>
             <div className="social-auth__row">
-              {/* <button className="social-btn social-btn__facebook">facebook</button> */}
               <FacebookAuth handlelogin={props.handleLogin} />
               <GoogleAuth handlelogin={props.handleLogin} />
               {!isNode && <LinkedInAuth handlelogin={props.handleLogin} />}
@@ -208,7 +181,7 @@ const Login = props => {
       </div>
     </div>
   );
-}
+};
 
 export default connect(
   state => ({
