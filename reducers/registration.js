@@ -14,10 +14,10 @@ import {
   CLOSE_ERROR_MODAL,
   REGISTRATION_SUBMIT_REQUEST,
   REGISTRATION_SUBMIT_FAIL,
-  REGISTRATION_SUBMIT_SUCCESS,
+  REGISTRATION_SUBMIT_SUCCESS, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
 } from '../constants/registration';
 
-import { generateId } from '../utils/registrationUtils';
+// import { generateId } from '../utils/registrationUtils';
 
 const initialState = {
   tabName: false,
@@ -27,7 +27,7 @@ const initialState = {
   errorMessage: false,
   menuItems: [],
   registrationData: {
-    member_account_account_no: generateId(),
+    // member_account_account_no: generateId(),
     memberDocument: 'passport',
     regulatory_family_dependents: '0',
   },
@@ -35,6 +35,7 @@ const initialState = {
   checkboxes: {},
   userBackToPart: false,
   loading: false,
+  id: false,
 };
 
 function registration(state = initialState, action) {
@@ -77,6 +78,7 @@ function registration(state = initialState, action) {
         loading: false,
       };
     case REGISTRATION_SUBMIT_FAIL:
+    case GET_USER_ID_REQUEST_FAIL:
       return {
         ...state,
         showErrorModal: true,
@@ -100,6 +102,11 @@ function registration(state = initialState, action) {
       return {
         ...state,
         userBackToPart: action.status,
+      };
+    case SET_USER_ID:
+      return {
+        ...state,
+        id: action.id,
       };
     default:
       return state;

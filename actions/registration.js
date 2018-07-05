@@ -19,7 +19,7 @@ import {
   VALIDATE_FIELDS_BLANK,
   ADDRESS_INFO_REQUEST,
   VALIDATE_FIELD_VALUE,
-  EDITABLE_PART,
+  EDITABLE_PART, GET_USER_ID_REQUEST, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -165,5 +165,24 @@ export function goBackToPart(bool) {
   return {
     type: EDITABLE_PART,
     status: bool,
+  };
+}
+
+export function getUserID() {
+  return {
+    type: GET_USER_ID_REQUEST,
+  };
+}
+
+export function setUserID(id) {
+  return {
+    type: SET_USER_ID,
+    id,
+  };
+}
+export function failUserID(err) {
+  return {
+    type: GET_USER_ID_REQUEST_FAIL,
+    err,
   };
 }

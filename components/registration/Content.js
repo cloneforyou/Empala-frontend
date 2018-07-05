@@ -4,13 +4,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import NavButtons from './NavButtons';
-import { getMenuItems, getRegistrationDataFromCache, setTabName, setTabPageIndex } from '../../actions/registration';
+import {
+  changeTabPage, closeErrorModal,
+  getMenuItems,
+  getRegistrationDataFromCache,
+  getUserID,
+  setTabName,
+  setTabPageIndex,
+} from '../../actions/registration';
 import { getMenuItemsByTabName, getPageFieldNames, getTabContentByTabName } from '../../utils/registrationUtils';
 import ContentMenuTabs from './ContentMenuTabs';
 import ContentMenuItems from './ContentMenuItems';
 import InformationPage from './InformationPage';
 import FinalReviewPage from './FinalReviewPage';
 import AgreementPage from './AgreementPage';
+import ModalErrorWindow from './ModalErrorWindow';
 
 function mapStateToProps(state) {
   return {
@@ -19,6 +27,8 @@ function mapStateToProps(state) {
     menuItems: state.registration.menuItems,
     registrationData: state.registration.registrationData,
     trustedContactActive: state.registration.checkboxes['identity_trusted_contact_person_trusted_contact_checkbox'],
+    errorMessage: state.registration.errorMessage || '',
+    showErrorModal: state.registration.showErrorModal,
     errors: state.fieldsErrors,
   };
 }
@@ -31,6 +41,11 @@ function mapDispatchToProps(dispatch) {
     setTabName: (tabName) => dispatch(setTabName(tabName)),
     setTabPageIndex: (tabIndex) => dispatch(setTabPageIndex(tabIndex)),
     getRegistrationDataFromCache: () => dispatch(getRegistrationDataFromCache()),
+    getUserID: () => dispatch(getUserID()),
+    closeModal: () => {
+      dispatch(closeErrorModal());
+      dispatch(changeTabPage('info', 1, 'backward'));
+    },
   });
 }
 
@@ -47,6 +62,7 @@ class Content extends PureComponent {
     if (localStorage.getItem('registrationData')) {
       this.props.getRegistrationDataFromCache();
     }
+    this.props.getUserID();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,6 +75,11 @@ class Content extends PureComponent {
     if (this.props.tabName === 'info') {
       return (
         <div className="onboard">
+          <ModalErrorWindow
+            open={this.props.showErrorModal}
+            handleClose={this.props.closeModal}
+            message={this.props.errorMessage}
+          />
           <div className="onboard__container">
             <div className="row no-gutters onboard__col">
               <InformationPage />
@@ -153,6 +174,7 @@ Content.propTypes = {
   setTabName: PropTypes.func,
   setTabPageIndex: PropTypes.func,
   getMenuItems: PropTypes.func,
+  getUserID: PropTypes.func,
   tabIndex: PropTypes.number,
 };
 

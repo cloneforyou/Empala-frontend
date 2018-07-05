@@ -1,10 +1,11 @@
 import { call, put, takeLatest, select, takeEvery, all } from 'redux-saga/effects';
 import _ from 'lodash';
 import {
+  failUserID,
   registrationFail,
   setInputFieldValueById,
   setTabName,
-  setTabPageIndex,
+  setTabPageIndex, setUserID,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -16,6 +17,7 @@ import {
   ADDRESS_INFO_REQUEST,
   SET_MEMBER_DOCUMENT_TYPE,
   VALIDATE_FIELD_VALUE,
+  GET_USER_ID_REQUEST,
 } from '../constants/registration';
 import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -94,19 +96,36 @@ export function* saveData() {
 
 export function* sendRegistrationForm() {
   const registrationData = yield select(state => state.registration.registrationData);
+  const id = localStorage.getItem('id');
   const url = '/api/auth/register';
   const options = {
     method: 'POST',
-    data: registrationData,
+    data: { ...registrationData, id },
   };
 
   try {
     const response = yield call(request, url, options);
     localStorage.setItem('accessToken', response.data.data.tokens.access);
     localStorage.setItem('refreshToken', response.data.data.tokens.refresh);
-    location.assign('/dashboard');
+    window.location.assign('/dashboard');
   } catch (err) {
     yield put(registrationFail(traceError(err)));
+  }
+}
+
+export function* getUserID() {
+  const id = localStorage.getItem('id');
+  const url = `/api/auth/register?id=${id}`;
+  const options = {
+    method: 'GET',
+  };
+  try {
+    const res = yield call(request, url, options);
+    yield put(setUserID(res.data.data.id));
+    localStorage.setItem('id', res.data.data.id);
+    yield put(setInputFieldValueById('member_account_account_no', res.data.data.id));
+  } catch (err) {
+    yield put(failUserID(`Sorry, the registration is unavailable right now. ${err.message}`));
   }
 }
 
@@ -119,6 +138,7 @@ export default function* registrationSaga() {
     takeEvery(SET_MEMBER_DOCUMENT_TYPE, clearMemberDocumentInfo),
     takeEvery(VALIDATE_FIELD_VALUE, validateFieldValue),
     takeLatest(SET_FIELD_VALUE, validationSaga),
+    takeLatest(GET_USER_ID_REQUEST, getUserID),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields),
   ]);
