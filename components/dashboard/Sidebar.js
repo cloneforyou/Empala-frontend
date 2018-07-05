@@ -23,10 +23,11 @@ class Sidebar extends Component {
 
   closeMenu = () => {
     const { countryMenuIsOpen } = this.state;
-    this.setState({ countryMenuIsOpen: !countryMenuIsOpen })
+    setTimeout(() => this.setState({ countryMenuIsOpen: !countryMenuIsOpen }), 200);
   };
 
   handleClick = (label) => {
+
     this.props.setActivePage(label.toLowerCase())
   };
 
@@ -93,7 +94,10 @@ class Sidebar extends Component {
           </div>
         </div>
         {
-          countryMenuIsOpen && selectedGroup.list && <CountryMenu country={selectedGroup} />
+          countryMenuIsOpen && selectedGroup.list && <CountryMenu
+            country={selectedGroup}
+            selectMarket={this.handleClick}
+          />
         }
       </div>
     );
