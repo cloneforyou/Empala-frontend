@@ -10,6 +10,7 @@ import Footer from './Footer';
 import GlobalNetworkPage from './Pages/GlobalNetworkPage';
 import PasswordReminderModal from './PasswordReminderModal';
 import { closeModal } from '../../actions/dashboard';
+import MarketAccessPage from './Pages/MarketAccessPage';
 
 class Main extends Component {
   constructor(props) {
@@ -32,9 +33,11 @@ class Main extends Component {
       case 'community':
       case 'groups':
       case 'blogs':
-        return <GlobalNetworkPage page={page} />; // STOP TO DELETE PROPS HERE!!!! }:->
+        return <GlobalNetworkPage page={page} />;
       case 'profile':
         return <Profile />;
+      case 'market':
+        return <MarketAccessPage />;
       default:
         return '';
     }
