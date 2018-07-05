@@ -97,9 +97,11 @@ export function* authenticate({ provider, data }) {
   if (provider === 'local') {
     if (!(login && password)) {
       if (!login) {
+        yield put(loginFailed());
         yield put(setFieldInvalid('index_username', 'Please provide member no. or e-mail'));
       }
       if (!password) {
+        yield put(loginFailed());
         return yield put(setFieldInvalid('index_password', 'This field should\'n be blank'));
       }
       return false;
