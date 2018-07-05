@@ -21,6 +21,9 @@ export default function request(url, options = {}) {
         return new Error('Refresh token expired');
       } else if (err.response.data.info === 'ACCESS_DENIED' && err.response.data.misc === 'ACCOUNT_NOT_FOUND') {
         return new Error('We could not find an Empala membership associated to that email address');
+      } else if (err.response.data.info === 'ACCESS_DENIED' &&
+        err.response.data.misc === 'ACCOUNT_SUSPENDED') {
+        return new Error('Account suspended');
       } else if (err.response.data.info === 'ACCESS_DENIED' || err.response.data.info === 'WRONG_CREDENTIALS') {
         return new Error('Invalid credentials');
       } else if (err.response.data.info === 'ACCOUNT_SUSPENDED' &&

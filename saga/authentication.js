@@ -52,6 +52,7 @@ function* loginRequest(url, options) {
     if (err.message === 'Account suspended') {
       yield put(setAccountBlocked());
       yield put(cleanErrorMessage());
+      yield put(loginFailed());
     } else yield put(loginFailed(err.message));
   }
 }
@@ -184,6 +185,9 @@ export function* getUserData() {
     } else if (err.message === 'Missing access token' || err.message === 'Token expired') {
       localStorage.removeItem('accessToken');
       yield refreshTokens();
+    } else if (err.message === 'Account suspended') {
+      localStorage.removeItem('accessToken');
+      return window.location.assign('/');
     }
   }
 }
