@@ -25,7 +25,7 @@ class WidgetTable extends Component {
                       widget.tables && widget.tables.map((table) => {
                         if (table.group === 1)
                           return (
-                            <Table table={table} key={table.id} />
+                            <Table overview={overview} table={table} key={table.id} />
                           )
                       })
                     }
@@ -35,14 +35,14 @@ class WidgetTable extends Component {
                       widget.tables && widget.tables.map((table) => {
                         if (table.group === 2)
                           return (
-                            <Table table={table} key={table.id} />
+                            <Table overview={overview} table={table} key={table.id} />
                           )
                       })
                     }
                   </div>
                 </div> :
                 widget.tables && widget.tables.map((table) => (
-                  <Table table={table} key={table.id} />
+                  <Table overview={overview} table={table} key={table.id} />
                 ))
             }
 

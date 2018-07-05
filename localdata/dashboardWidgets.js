@@ -22,19 +22,17 @@ export const widgetsOverflow = [
           },
           {
             title: 'Day chg',
-            align: 'center',
           },
           {
             title: 'Allocation',
-            align: 'left',
           },
           {
             title: 'Domestic',
-            align: 'left',
+            align: 'right',
           },
           {
             title: 'Foreign',
-            align: 'left',
+            align: 'right',
           },
         ],
         data: [
@@ -94,11 +92,11 @@ export const widgetsOverflow = [
           },
           {
             title: '% change',
-            align: 'center',
+            align: 'right',
           },
           {
             title: 'Vs indexes',
-            align: 'center',
+            align: 'right',
           },
           {
             title: 'LT Performance',
@@ -106,11 +104,11 @@ export const widgetsOverflow = [
           },
           {
             title: '% change',
-            align: 'center',
+            align: 'right',
           },
           {
             title: 'Vs indexes',
-            align: 'center',
+            align: 'right',
           },
         ],
         data: [
@@ -131,7 +129,7 @@ export const widgetsOverflow = [
     id: uniqueId(),
     title: 'Social capital',
     icon: 'groups',
-    col:3,
+    col: 3,
     height: 390,
     tables: [
       {
@@ -140,18 +138,22 @@ export const widgetsOverflow = [
           {
             title: 'Network',
             align: 'left',
+            width: '30%',
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
+            width: '20%',
           },
           {
             title: 'Positioning',
             align: 'left',
+            width: '30%',
           },
           {
             title: '%ile',
             align: 'left',
+            width: '20%',
           },
         ],
         data: [
@@ -184,18 +186,22 @@ export const widgetsOverflow = [
           {
             title: 'Get',
             align: 'left',
+            width: '30%',
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
+            width: '20%',
           },
           {
             title: 'Give',
             align: 'left',
+            width: '30%',
           },
           {
             title: 'No.',
             align: 'left',
+            width: '20%',
           },
         ],
         data: [
@@ -238,10 +244,11 @@ export const widgetsOverflow = [
           {
             title: 'Size & growth',
             align: 'left',
+            width: '115px',
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
           },
         ],
         data: [
@@ -279,10 +286,11 @@ export const widgetsOverflow = [
           {
             title: 'Opinions',
             align: 'left',
+            width: '115px',
           },
           {
             title: 'No.',
-            align: 'left',
+            align: 'right',
           },
         ],
         data: [
@@ -614,7 +622,7 @@ export const widgetsOverflow = [
           },
           {
             title: 'Date',
-            align: 'left',
+            align: 'right',
           },
           {
             title: 'Update type',
