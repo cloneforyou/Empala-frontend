@@ -49,7 +49,7 @@ class Main extends Component {
       <div
         className={sidebarCollapsed ? `dashboard dashboard_${currentColorScheme}` : `dashboard dashboard_full dashboard_${currentColorScheme}`}>
         {this.mapPageToComponent(activePageDashboard)}
-        <Footer />
+        { !['timeline', 'community', 'groups', 'blogs'].includes(activePageDashboard) && <Footer /> }
         <PasswordReminderModal
           handleClose={this.props.closeModal}
           open={this.props.reminderModalOpen}
