@@ -19,7 +19,7 @@ function getUrlByPageName(pageName) {
 
 const frameStyle = {
   width: '100%',
-  height: '100vh',
+  height: 'calc(100vh - 200px)',
   border: 'none',
 };
 
