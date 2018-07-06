@@ -1008,24 +1008,33 @@ export const widgetsPositions = [
           {
             title: 'Start date',
             width: '80px',
+            sort: true,
           },
           {
             title: 'Symbol',
+            width: '60px',
+            sort: true,
           },
           {
             title: 'Sec name',
+            width: '100px',
           },
           {
             title: 'Sec ID',
+            align: 'right',
+            sort: true,
           },
           {
             title: 'Category',
+            width: '100px',
           },
           {
             title: 'Country',
+            sort: true,
           },
           {
             title: 'Curr',
+            sort: true,
           },
           {
             title: 'Ann CF%',
@@ -1035,6 +1044,7 @@ export const widgetsPositions = [
           },
           {
             title: 'Ann Ret',
+            sort: true,
           },
           {
             title: 'VAR Count',
@@ -1418,6 +1428,7 @@ export const widgetsOrders = [
           },
           {
             title: 'Symbol',
+            sort: true,
           },
           // {
           //   title: 'Date',
@@ -1427,6 +1438,7 @@ export const widgetsOrders = [
           },
           {
             title: 'Price',
+            sort: true,
           },
           {
             title: 'Order Q',
@@ -1472,6 +1484,7 @@ export const widgetsOrders = [
           },
           {
             title: 'Symbol',
+            sort: true,
           },
           // {
           //   title: 'Date',
@@ -1481,6 +1494,7 @@ export const widgetsOrders = [
           },
           {
             title: 'Price',
+            sort: true,
           },
           {
             title: 'Order Q',
@@ -1527,6 +1541,7 @@ export const widgetsOrders = [
           },
           {
             title: 'Symbol',
+            sort: true,
           },
           // {
           //   title: 'Date',

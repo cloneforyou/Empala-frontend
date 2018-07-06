@@ -41,8 +41,9 @@ class WidgetHead extends PureComponent {
             >{fxButtonContent} FX</button>
           }
           {
-            widget.dots && <WidgetDotsMenu
-            name={widget.title}
+            widget.dots &&
+            <WidgetDotsMenu
+              name={widget.title}
             />
           }
         </div>
