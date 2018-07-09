@@ -4,9 +4,16 @@ import AnyChart from 'anychart-react';
 import { widgetsPositionFirst, widgetsPositions } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import { parsePositionsList } from '../../../utils/dashboardUtils';
+import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
 
 
 class Positions extends Component {
+  componentDidMount() {
+    this.props.subscribeQuotes();
+  }
+  componentWillUnmount() {
+    this.props.unsubscribeQuotes();
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -76,4 +83,9 @@ Positions.defaultProps = {
 
 export default connect(state => ({
   positions: state.dashboard.parsedPositions ? state.dashboard.parsedPositions : [],
-}))(Positions);
+}),
+  dispatch => ({
+      subscribeQuotes: () => dispatch(subscribeQuotes()),
+      unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
+    }
+  ))(Positions);

@@ -25,7 +25,11 @@ import {
   GET_ETNA_DATA,
   SET_WATCH_LISTS,
   SET_WATCHLIST_NUMBER,
-  SET_POSITIONS, MODIFY_POSITION_DATA,
+  SET_POSITIONS,
+  MODIFY_POSITION_DATA,
+  UPDATE_WATCHLIST,
+  UPDATE_ORDERS_LIST,
+  SUBSCRIBE_QUOTES, UNSUBSCRIBE_QUOTES, SET_PARSED_POSITIONS,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -183,8 +187,29 @@ export const setPositions = data => ({
   type: SET_POSITIONS,
   data,
 });
+export const setParsedPositions = data => ({
+  type: SET_PARSED_POSITIONS,
+  data,
+});
 
 export const modifyPosition = data => ({
   type: MODIFY_POSITION_DATA,
   data,
+});
+
+export const updateOrders = data => ({
+  type: UPDATE_ORDERS_LIST,
+  data,
+});
+export const updateWatchlist = data => ({
+  type: UPDATE_WATCHLIST,
+  data,
+});
+
+export const subscribeQuotes = () => ({
+  type: SUBSCRIBE_QUOTES,
+});
+
+export const unsubscribeQuotes = () => ({
+  type: UNSUBSCRIBE_QUOTES,
 });

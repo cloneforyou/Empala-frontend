@@ -6,6 +6,7 @@ import 'isomorphic-unfetch';
 import profileSaga from './saga/profile';
 import registrationSaga from './saga/registration';
 import dashboardSaga from './saga/dashboard';
+import socketSaga from './saga/marketParser';
 import {
   authenticate,
   changePassword,
@@ -33,6 +34,7 @@ function* rootSaga() {
     registrationSaga(),
     dashboardSaga(),
     profileSaga(),
+    socketSaga(),
     takeLatest(LOGIN_REQUEST, authenticate),
     takeLatest(SEND_ACTIVATION_LINK_REQUEST, sendActivationLink),
     takeLatest(UNBLOCK_REQUEST, unblockAccount),

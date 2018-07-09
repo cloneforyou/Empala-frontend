@@ -7,17 +7,25 @@ import {
   parseOrdersList,
   parseWatchList,
 } from '../../../utils/dashboardUtils';
+import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
 
 const getTableDataFromOrders = (orders, title) => {
   if (title === 'Orders') {
-    return parseOrdersList(filter(
+    const filteredOrders = filter(
       orders,
-      order => order.ExecutionStatus === 'Filled' || order.ExecutionStatus === 'PartiallyFilled',
-    ));
+      order => order.status === 'Filled' || order.ExecutionStatus === 'PartiallyFilled',
+    );
+    return filteredOrders.map(order => order.values);
   }
 };
 
 class Orders extends React.Component {
+  componentDidMount() {
+    this.props.subscribeQuotes();
+  }
+  componentWillUnmount() {
+    this.props.unsubscribeQuotes();
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -54,7 +62,12 @@ Orders.defaultProps = {
 export default connect(
   state => ({
     listNumber: state.dashboard.watchListNumber || 0,
-    ordersList: state.dashboard.ordersList,
-    watchLists: state.dashboard.watchLists ? state.dashboard.watchLists.map(list => parseWatchList(list)) : [],
+    ordersList: state.dashboard.parsedOrdersList,
+    watchLists: state.dashboard.parsedWatchLists ? state.dashboard.parsedWatchLists : [],
     userData: state.dashboard.userData,
-  }))(Orders);
+  }),
+    dispatch => ({
+    subscribeQuotes: () => dispatch(subscribeQuotes()),
+    unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
+  }
+))(Orders);
