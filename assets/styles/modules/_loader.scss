@@ -4,6 +4,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   &__wrap {
+    left: 0;
+    top: 0;
     position: fixed;
     background: rgba(255, 255, 255, 0.66);
     width: 100%;
