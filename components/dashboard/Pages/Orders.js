@@ -26,6 +26,29 @@ class Orders extends React.Component {
   componentWillUnmount() {
     this.props.unsubscribeQuotes();
   }
+  updateWatchlist(positions, quotes) {
+    if (positions.length > 0 && quotes) {
+      return positions.map(pos => (
+        quotes[pos.secID] ? {
+          ...pos,
+          last_p: quotes[pos.secID].Last,
+          bid_sz: quotes[pos.secID].BidSize,
+          bid: quotes[pos.secID].Bid,
+          day_volume: quotes[pos.secID].TotalDailyVolume,
+        }
+          : pos
+      ));
+    }
+    return [];
+  }
+  getDataForTableByTableTitle(title) {
+    if (title === 'Watchlists') {
+      return this.props.watchLists.length > 0 ?
+        this.updateWatchlist(this.props.watchLists[this.props.listNumber].content, this.props.quotes)
+        : [];
+    }
+    return getTableDataFromOrders(this.props.ordersList, title);
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -37,8 +60,7 @@ class Orders extends React.Component {
                 ...widget,
                 tables: [{
                 ...widget.tables[0],
-                data: widget.title === 'Watchlists' ? (this.props.watchLists.length > 0 ? this.props.watchLists[this.props.listNumber].content : [])
-                    : getTableDataFromOrders(this.props.ordersList, widget.title),
+                data: this.getDataForTableByTableTitle(widget.title),
                 }],
               }}
               key={widget.id}
@@ -46,9 +68,9 @@ class Orders extends React.Component {
             ))
           }
         </div>
-        {/*For debug. TODO  Remove later.*/}
-        {/*{this.props.ordersList && this.props.ordersList.map(order => (<p key={Math.random()}>{JSON.stringify(order)}</p>))}*/}
-        {/*{this.props.watchLists && this.props.watchLists.map(list => (<p key={Math.random()}>{JSON.stringify(list)}</p>))}*/}
+        {/* For debug. TODO  Remove later. */}
+        {/* {this.props.ordersList && this.props.ordersList.map(order => (<p key={Math.random()}>{JSON.stringify(order)}</p>))} */}
+        {/* {this.props.watchLists && this.props.watchLists.map(list => (<p key={Math.random()}>{JSON.stringify(list)}</p>))} */}
       </div>
     );
   }
@@ -65,9 +87,11 @@ export default connect(
     ordersList: state.dashboard.parsedOrdersList,
     watchLists: state.dashboard.parsedWatchLists ? state.dashboard.parsedWatchLists : [],
     userData: state.dashboard.userData,
+    quotes: state.dashboard.quotes,
   }),
-    dispatch => ({
+  dispatch => ({
     subscribeQuotes: () => dispatch(subscribeQuotes()),
     unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
   }
-))(Orders);
+  ),
+)(Orders);

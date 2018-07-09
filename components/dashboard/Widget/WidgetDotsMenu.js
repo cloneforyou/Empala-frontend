@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { setWatchListNumber } from '../../../actions/dashboard';
+import { setWatchListNumber, subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
 
 
 class WidgetDotsMenu extends PureComponent {
@@ -48,15 +48,6 @@ class WidgetDotsMenu extends PureComponent {
     return (
       <div className="widget-menu">
         <button className="widget-menu__btn" onClick={this.toggleMenu} />
-        {/*<ul className={menuIsOpen ?*/}
-          {/*'dropdown-menu dropdown-menu-right show widget-menu__list' :*/}
-          {/*'dropdown-menu dropdown-menu-right  widget-menu__list'*/}
-        {/*}*/}
-        {/*>*/}
-          {/*<li className="dropdown-item widget-menu__item"><a href="#">Link 1</a></li>*/}
-          {/*<li className="dropdown-item widget-menu__item"><a href="#">Link 2</a></li>*/}
-          {/*<li className="dropdown-item widget-menu__item"><a href="#">Link 3</a></li>*/}
-        {/*</ul>*/}
         {this.getMenuContentByWidgetName(name)}
       </div>
     );
@@ -68,5 +59,9 @@ export default connect(state => ({
   watchListsNames: state.dashboard.watchLists ? state.dashboard.watchLists.map(list => list['Name']) : [],
 }),
   dispatch => ({
-    setWatchListNumber: (i) => dispatch(setWatchListNumber(i))
+    setWatchListNumber: (i) => {
+      dispatch(setWatchListNumber(i));
+      dispatch(unsubscribeQuotes());
+      dispatch(subscribeQuotes());
+    },
   }))(WidgetDotsMenu);

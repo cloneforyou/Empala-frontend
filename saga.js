@@ -6,7 +6,7 @@ import 'isomorphic-unfetch';
 import profileSaga from './saga/profile';
 import registrationSaga from './saga/registration';
 import dashboardSaga from './saga/dashboard';
-import socketSaga from './saga/marketParser';
+import socketSaga from './saga/ETNASocketParser';
 import {
   authenticate,
   changePassword,

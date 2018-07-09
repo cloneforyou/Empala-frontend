@@ -21,7 +21,10 @@ import {
   SET_WATCH_LISTS,
   SET_WATCHLIST_NUMBER,
   SET_POSITIONS,
-  MODIFY_POSITION_DATA, UPDATE_ORDERS_LIST, SET_PARSED_POSITIONS,
+  MODIFY_POSITION_DATA,
+  UPDATE_ORDERS_LIST,
+  SET_PARSED_POSITIONS,
+  UPDATE_QUOTES,
 } from '../constants/dashboard';
 import { RESET_PASSWORD_FAIL } from '../constants/profile';
 import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
@@ -47,6 +50,7 @@ const initialState = {
   parsedWatchLists: false,
   watchListNumber: false,
   sessionId: false,
+  quotes: false,
 };
 
 
@@ -185,14 +189,28 @@ function dashboard(state = initialState, action) {
         watchListNumber: action.number,
       };
     case 'SET_SESSION_ID':
-      return {
-        ...state,
-        sessionId: action.id,
-      };
+      if (action.name === 'orders') {
+        return ({
+          ...state,
+          sessionId: action.id,
+        });
+      }
+      if (action.name === 'quote') {
+        return ({
+          ...state,
+          sessionQuotesId: action.id,
+        });
+      }
+      break;
     case UPDATE_ORDERS_LIST:
       return {
         ...state,
         parsedOrdersList: { ...state.parsedOrdersList, id: parseOrdersList([action.data])[0] },
+      };
+    case UPDATE_QUOTES:
+      return {
+        ...state,
+        quotes: { ...state.quotes, [action.quote.Key]: action.quote },
       };
     case MODIFY_POSITION_DATA:
       return {
