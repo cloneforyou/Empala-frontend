@@ -104,7 +104,7 @@
 }
 
 .fw-300 {
-  font-weight: 300!important;
+  font-weight: 300 !important;
 }
 
 .simple-box-shadow {
@@ -127,4 +127,13 @@
   &:hover, &:focus {
     color: $gray-700;
   }
+}
+
+.icon-sort {
+  background-image: url($path-to-dashboard-icon + "icon-label-filter.svg");
+  width: 6px;
+  height: 5px;
+  position: relative;
+  display: inline-block;
+  margin-left: 3px;
 }

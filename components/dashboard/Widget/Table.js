@@ -23,6 +23,9 @@ class Table extends Component {
                 style={{ width: header.width || 'auto' }}
               >
                 {header.title}
+                {
+                  header.sort && <i className="icon-sort" />
+                }
               </th>
             ))}
           </tr>

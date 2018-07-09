@@ -2,7 +2,6 @@ import axios from 'axios';
 import { serverOrigins } from './config';
 
 export default function request(url, options = {}) {
-  console.log('reqqq', url, options)
   // const port = 9000;
   // const isNode = require('detect-node');
   // const origin = isNode ? null : `http://${window.location.hostname}:${port}`;
@@ -51,7 +50,7 @@ export default function request(url, options = {}) {
   return axios({
     method: options.method,
     // url: `${origin || serverOrigins.local}${url}`,
-    url: `${serverOrigins.aws}${url}`,
+    url: `${serverOrigins.local}${url}`,
     data: options.data,
     headers: options.headers,
     credentials: options.credentials,
