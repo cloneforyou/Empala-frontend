@@ -107,13 +107,15 @@ class Membership extends Component {
                 </div>
                 <div className="col-lg-4 text-center no-gutters">
                   <div
-                    className="profile-image"
+                    className={
+                      userData.account_avatar ?
+                        'profile-menu__upload-preview' :
+                        'profile-menu__upload-preview profile-menu__upload-preview_bordered'
+                    }
                     onClick={this.props.showUploadDialog}
                   >
                     <img
-                      className={userData.account_avatar ?
-                        'profile-menu__avatar' :
-                        'profile-menu__avatar profile-menu__avatar_bordered'}
+                      className="profile-menu__avatar"
                       src={userData.account_avatar || avatar}
                       alt="Userpic"
                     />
