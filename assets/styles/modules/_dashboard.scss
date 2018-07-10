@@ -1,6 +1,6 @@
 .dashboard {
-  margin-left: 180px;
-  max-width: calc(100% - 180px);
+  margin-left: $sidebar-width-full;
+  max-width: calc(100% - #{$sidebar-width-full});
   display: block;
   width: 100%;
   padding-top: 84px;
@@ -19,8 +19,8 @@
   }
 
   &_full {
-    margin-left: 80px;
-    max-width: calc(100% - 80px);
+    margin-left: $sidebar-width;
+    max-width: calc(100% - #{$sidebar-width});
   }
   &__footer {
     padding: 10px 20px;

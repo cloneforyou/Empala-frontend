@@ -5,7 +5,7 @@
   left: 0;
   z-index: 100;
   padding: 74px 0 0;
-  width: 80px;
+  width: $sidebar-width;
   transition: .4s;
   @include styledScroll($silver);
   &_light-theme {
@@ -34,7 +34,7 @@
     @include fontSize(12px);
   }
   &_collapsed {
-    width: 180px;
+    width: $sidebar-width-full;
     .sidebar__part-nav {
       padding: 0 14px;
       text-align: left;
@@ -47,7 +47,7 @@
         transform: translateY(-50%);
         left: 0;
       }
-      &_file{
+      &_file {
         &:before {
           left: 3px;
         }
@@ -57,7 +57,7 @@
       left: -20px;
     }
     & + .side-menu {
-      left: 180px;
+      left: $sidebar-width-full;
     }
   }
   &__user-status {

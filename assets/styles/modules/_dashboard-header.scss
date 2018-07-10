@@ -2,14 +2,14 @@
   border: none;
   &_collapsed {
     .dashboard-header__logo {
-      width: 180px;
+      width: $sidebar-width-full;
     }
     .dashboard-header__main {
-      width: calc(100% - 180px);
+      width: calc(100% - #{$sidebar-width-full});
     }
   }
   &__logo {
-    width: 80px;
+    width: $sidebar-width;
     padding: 23px 15px;
     transition: .4s;
     text-align: center;
@@ -18,7 +18,7 @@
     }
   }
   &__main {
-    width: calc(100% - 80px);
+    width: calc(100% - #{$sidebar-width});
     transition: .4s;
     margin: 0;
   }
@@ -82,6 +82,7 @@
 .user-nav {
   &__text-btn {
     display: inline-block;
+    color: #aab0ba;
     &:after {
       content: '';
       background-image: url($path-to-dashboard-icon + "icon-down-arrow.svg");
