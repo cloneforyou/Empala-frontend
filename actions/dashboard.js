@@ -29,7 +29,12 @@ import {
   MODIFY_POSITION_DATA,
   UPDATE_WATCHLIST,
   UPDATE_ORDERS_LIST,
-  SUBSCRIBE_QUOTES, UNSUBSCRIBE_QUOTES, SET_PARSED_POSITIONS, UPDATE_QUOTES,
+  SUBSCRIBE_QUOTES,
+  UNSUBSCRIBE_QUOTES,
+  SET_PARSED_POSITIONS,
+  UPDATE_QUOTES,
+  SUBSCRIBE_WATCHLIST_CONTENT,
+  UNSUBSCRIBE_WATCHLIST_CONTENT,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -212,6 +217,14 @@ export const subscribeQuotes = () => ({
 
 export const unsubscribeQuotes = () => ({
   type: UNSUBSCRIBE_QUOTES,
+});
+
+export const subscribeWatchlists = () => ({
+  type: SUBSCRIBE_WATCHLIST_CONTENT,
+});
+
+export const unsubscribesubscribeWatchlists = () => ({
+  type: UNSUBSCRIBE_WATCHLIST_CONTENT,
 });
 
 export const updateQuotes = quote => ({

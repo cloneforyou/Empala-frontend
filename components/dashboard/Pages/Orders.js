@@ -7,7 +7,7 @@ import {
   parseOrdersList,
   parseWatchList,
 } from '../../../utils/dashboardUtils';
-import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
+import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
 
 const getTableDataFromOrders = (orders, title) => {
   if (title === 'Orders') {
@@ -22,6 +22,7 @@ const getTableDataFromOrders = (orders, title) => {
 class Orders extends React.Component {
   componentDidMount() {
     this.props.subscribeQuotes();
+    this.props.subscribeWatchlists();
   }
   componentWillUnmount() {
     this.props.unsubscribeQuotes();
@@ -92,6 +93,7 @@ export default connect(
   dispatch => ({
     subscribeQuotes: () => dispatch(subscribeQuotes()),
     unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
+      subscribeWatchlists: () => dispatch(subscribeWatchlists()),
   }
   ),
 )(Orders);
