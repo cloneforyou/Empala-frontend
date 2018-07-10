@@ -224,7 +224,7 @@ function watchMessages(socket, params) {
     socket.onmessage = (event) => {
       // console.log('msssg', event);
       const msg = JSON.parse(event.data);
-      console.log('===> msssg', msg)
+      // console.log('===> msssg', msg)
       if (msg.Cmd === 'CreateSession.txt' && msg.SessionId) {
         console.log('WS SessionId:', msg.SessionId);
         if (params.EntityType === 'WatchlistContent') {

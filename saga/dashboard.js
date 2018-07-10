@@ -88,6 +88,24 @@ function* get_positions(credentials) {
   if (res) yield put(setPositions(res.data.Result));
 }
 
+function* get_balance(credentials) {
+  const url = `${etnaConfig.api_path}/get_balance`;
+  const params = {
+    method: 'POST',
+    data: {
+      ticket: credentials.ticket,
+      accountId: credentials.accountId,
+      currency: 'USD', // further will get from store maybe
+    },
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+      'X-Refresh-Token': localStorage.getItem('refreshToken'),
+    },
+  };
+  const res = yield getENTAData(url, params);
+  console.log('balance =>', res);
+}
+
 export function* selectETNADataRequest({ payloadType }) {
   const ETNACredentials = yield select(state => (
     state.dashboard.userData ? state.dashboard.userData.data.etna_credentials : {}));
@@ -100,6 +118,9 @@ export function* selectETNADataRequest({ payloadType }) {
       break;
     case 'positions':
       yield get_positions(ETNACredentials);
+      break;
+    case 'balance':
+      yield get_balance(ETNACredentials);
       break;
     default: return false;
   }
