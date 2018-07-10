@@ -80,18 +80,42 @@
 }
 
 .user-nav {
+  &__text-btn {
+    display: inline-block;
+    &:after {
+      content: '';
+      background-image: url($path-to-dashboard-icon + "icon-down-arrow.svg");
+      width: 11px;
+      height: 10px;
+      background-size: contain;
+      display: inline-block;
+      margin-left: 5px;
+      margin-top: -1px;
+      vertical-align: middle;
+    }
+  }
   &__dropdown-btn {
     background: none;
     border: none;
     padding: 0;
     margin-right: 10px;
     margin-left: 25px;
-    width: 55px;
-    height: 55px;
     overflow: hidden;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &_open {
+      .user-nav__text-btn {
+        &:after {
+          transform: rotate(180deg);
+        }
+      }
+    }
   }
   &__userPic {
-    width: 100%;
+    width: 55px;
+    height: 55px;
     border-radius: 6px;
     &_bordered {
       padding: 5px;
