@@ -4,10 +4,31 @@ import AnyChart from 'anychart-react';
 import { widgetsPositionFirst, widgetsPositions } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import { parsePositionsList } from '../../../utils/dashboardUtils';
+import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
 
 
 class Positions extends Component {
+  componentDidMount() {
+    this.props.subscribeQuotes();
+  }
+  componentWillUnmount() {
+    this.props.unsubscribeQuotes();
+  }
+  updatePositions(positions, quotes) {
+    if (positions.length > 0 && quotes) {
+      return positions.map(pos => (
+        quotes[pos.sec_id] ? {
+          ...pos,
+          m2m: quotes[pos.sec_id].Last,
+          day_chg: quotes[pos.sec_id].ChangePc,
+        }
+        : pos
+       ));
+    }
+    return [];
+  }
   render() {
+    const positions = this.updatePositions(this.props.positions, this.props.quotes);
     return (
       <div className="container-fluid">
         <div className="row no-gutters">
@@ -18,8 +39,8 @@ class Positions extends Component {
               ))
             }
           </div>
-          {/*For debug. TODO  Remove later.*/}
-          {/*{this.props.positions && this.props.positions.map(pos => (<p key={Math.random()}>{JSON.stringify(pos)}</p>))}*/}
+          {/* For debug. TODO  Remove later. */}
+          {/* {this.props.positions && this.props.positions.map(pos => (<p key={Math.random()}>{JSON.stringify(pos)}</p>))} */}
           <div className="col-lg-8">
             {
               widgetsPositions.map(widget => (
@@ -28,7 +49,7 @@ class Positions extends Component {
                     ...widget,
                     tables: [{
                       ...widget.tables[0],
-                      data: this.props.positions,
+                      data: positions,
                     }],
                   }}
                   key={widget.id}
@@ -74,6 +95,13 @@ Positions.defaultProps = {
   positions: [],
 };
 
-export default connect(state => ({
-  positions: state.dashboard.parsedPositions ? state.dashboard.parsedPositions : [],
-}))(Positions);
+export default connect(
+  state => ({
+    positions: state.dashboard.parsedPositions ? state.dashboard.parsedPositions : [],
+    quotes: state.dashboard.quotes,
+  }),
+  dispatch => ({
+    subscribeQuotes: () => dispatch(subscribeQuotes()),
+    unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
+  }),
+)(Positions);

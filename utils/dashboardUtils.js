@@ -10,22 +10,25 @@ export const calculateOrderPrice = (symbolPrice, quantity) =>
   (Math.round(parseFloat(symbolPrice) * parseInt(quantity, 10) * 100) / 100).toFixed(2);
 
 export const parseOrdersList = list => list.map(order => ({
-  id: Math.random(),
-  // sec_name: order.Name,
-  sec_name: order.SymbolDescription,
-  symbol: order.Symbol,
-  // date: parseOrderDate(order.Date),
-  currency: order.SecurityCurrency,
-  price: calculateOrderPrice(order.AveragePrice, order.Quantity),
-  order_quantity: order.Quantity,
-  fill_quantity: order.ExecutedQuantity,
-  remain_quantity: order.LeavesQuantity,
-  notional_ammount: '--', // TODO find the way how to calculate
-  comission: '--', // TODO find the way how to calculate
-  distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
-  start_date: parseOrderDate(order.CreateDate),
-  qct: '--', // TODO Investigate how to calculate
-
+  status: order.ExecutionStatus,
+  id: order.Id,
+  values: {
+    id: Math.random(),
+    // sec_name: order.Name,
+    sec_name: order.SymbolDescription,
+    symbol: order.Symbol,
+    // date: parseOrderDate(order.Date),
+    currency: order.SecurityCurrency,
+    price: calculateOrderPrice(order.AveragePrice, order.Quantity),
+    order_quantity: order.Quantity,
+    fill_quantity: order.ExecutedQuantity,
+    remain_quantity: order.LeavesQuantity,
+    notional_ammount: '--', // TODO find the way how to calculate
+    comission: '--', // TODO find the way how to calculate
+    distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
+    start_date: parseOrderDate(order.CreateDate),
+    qct: '--', // TODO Investigate how to calculate
+  },
 }));
 
 export const parseWatchList = list => ({
@@ -48,7 +51,7 @@ export const parseWatchList = list => ({
       sentiment: '--', // Not Used in Phase 1 (will not be available from Etna in any case)
       esch: '--', // Not Used in Phase 1 (will not be available from Etna in any case)
       pe_ratio: '--', // Not Used in Phase 1 (will not be available from Etna in any case)
-      secID: '--', // Not Used in Phase 1 (will not be available from Etna in any case)
+      secID: position.Id, // Not Used in Phase 1 (will not be available from Etna in any case)
       rating: '--', // Not Used in Phase 1 (will not be available from Etna in any case)
     }
   )),

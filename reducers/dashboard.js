@@ -20,10 +20,14 @@ import {
   SET_ORDERS_LIST,
   SET_WATCH_LISTS,
   SET_WATCHLIST_NUMBER,
-  SET_POSITIONS, MODIFY_POSITION_DATA,
+  SET_POSITIONS,
+  MODIFY_POSITION_DATA,
+  UPDATE_ORDERS_LIST,
+  SET_PARSED_POSITIONS,
+  UPDATE_QUOTES,
 } from '../constants/dashboard';
 import { RESET_PASSWORD_FAIL } from '../constants/profile';
-import { parsePositionsList, parseWatchList } from '../utils/dashboardUtils';
+import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -42,7 +46,21 @@ const initialState = {
   watchLists: false,
   positions: false,
   parsedPositions: false,
+  parsedOrdersList: false,
+  parsedWatchLists: false,
   watchListNumber: false,
+  sessionId: false,
+  quotes: false,
+};
+
+
+const modifiyPositionsList = (list, data) => {
+  list.map((pos) => {
+    if (pos.sec_id === +data.Key) {
+      pos.m2m = data.Last;
+      pos.day_chg = data.ChangePc;
+    }
+  });
 };
 
 function dashboard(state = initialState, action) {
@@ -63,8 +81,8 @@ function dashboard(state = initialState, action) {
         loading: true,
       };
     case SET_FIELD_VALUE:
-      if (action.id === "membership_account_delete_confirm" ||
-        action.id === "membership_account_delete_legal_wording") {
+      if (action.id === 'membership_account_delete_confirm' ||
+        action.id === 'membership_account_delete_legal_wording') {
         return {
           ...state,
           [action.id]: action.value,
@@ -146,11 +164,13 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         ordersList: action.data,
+        parsedOrdersList: parseOrdersList(action.data),
       };
     case SET_WATCH_LISTS:
       return {
         ...state,
         watchLists: action.data,
+        parsedWatchLists: action.data.map(list => parseWatchList(list)),
       };
     case SET_POSITIONS:
       return {
@@ -158,10 +178,39 @@ function dashboard(state = initialState, action) {
         positions: action.data,
         parsedPositions: parsePositionsList(action.data),
       };
+    case SET_PARSED_POSITIONS:
+      return {
+        ...state,
+        parsedPositions: action.data,
+      };
     case SET_WATCHLIST_NUMBER:
       return {
         ...state,
         watchListNumber: action.number,
+      };
+    case 'SET_SESSION_ID':
+      if (action.name === 'orders') {
+        return ({
+          ...state,
+          sessionId: action.id,
+        });
+      }
+      if (action.name === 'quote') {
+        return ({
+          ...state,
+          sessionQuotesId: action.id,
+        });
+      }
+      break;
+    case UPDATE_ORDERS_LIST:
+      return {
+        ...state,
+        parsedOrdersList: { ...state.parsedOrdersList, id: parseOrdersList([action.data])[0] },
+      };
+    case UPDATE_QUOTES:
+      return {
+        ...state,
+        quotes: { ...state.quotes, [action.quote.Key]: action.quote },
       };
     case MODIFY_POSITION_DATA:
       return {

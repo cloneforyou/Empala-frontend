@@ -7,17 +7,49 @@ import {
   parseOrdersList,
   parseWatchList,
 } from '../../../utils/dashboardUtils';
+import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
 
 const getTableDataFromOrders = (orders, title) => {
   if (title === 'Orders') {
-    return parseOrdersList(filter(
+    const filteredOrders = filter(
       orders,
-      order => order.ExecutionStatus === 'Filled' || order.ExecutionStatus === 'PartiallyFilled',
-    ));
+      order => order.status === 'Filled' || order.ExecutionStatus === 'PartiallyFilled',
+    );
+    return filteredOrders.map(order => order.values);
   }
 };
 
 class Orders extends React.Component {
+  componentDidMount() {
+    this.props.subscribeQuotes();
+    this.props.subscribeWatchlists();
+  }
+  componentWillUnmount() {
+    this.props.unsubscribeQuotes();
+  }
+  updateWatchlist(positions, quotes) {
+    if (positions.length > 0 && quotes) {
+      return positions.map(pos => (
+        quotes[pos.secID] ? {
+          ...pos,
+          last_p: quotes[pos.secID].Last,
+          bid_sz: quotes[pos.secID].BidSize,
+          bid: quotes[pos.secID].Bid,
+          day_volume: quotes[pos.secID].TotalDailyVolume,
+        }
+          : pos
+      ));
+    }
+    return [];
+  }
+  getDataForTableByTableTitle(title) {
+    if (title === 'Watchlists') {
+      return this.props.watchLists.length > 0 ?
+        this.updateWatchlist(this.props.watchLists[this.props.listNumber].content, this.props.quotes)
+        : [];
+    }
+    return getTableDataFromOrders(this.props.ordersList, title);
+  }
   render() {
     return (
       <div className="container-fluid">
@@ -29,8 +61,7 @@ class Orders extends React.Component {
                 ...widget,
                 tables: [{
                 ...widget.tables[0],
-                data: widget.title === 'Watchlists' ? (this.props.watchLists.length > 0 ? this.props.watchLists[this.props.listNumber].content : [])
-                    : getTableDataFromOrders(this.props.ordersList, widget.title),
+                data: this.getDataForTableByTableTitle(widget.title),
                 }],
               }}
               key={widget.id}
@@ -38,9 +69,9 @@ class Orders extends React.Component {
             ))
           }
         </div>
-        {/*For debug. TODO  Remove later.*/}
-        {/*{this.props.ordersList && this.props.ordersList.map(order => (<p key={Math.random()}>{JSON.stringify(order)}</p>))}*/}
-        {/*{this.props.watchLists && this.props.watchLists.map(list => (<p key={Math.random()}>{JSON.stringify(list)}</p>))}*/}
+        {/* For debug. TODO  Remove later. */}
+        {/* {this.props.ordersList && this.props.ordersList.map(order => (<p key={Math.random()}>{JSON.stringify(order)}</p>))} */}
+        {/* {this.props.watchLists && this.props.watchLists.map(list => (<p key={Math.random()}>{JSON.stringify(list)}</p>))} */}
       </div>
     );
   }
@@ -54,7 +85,15 @@ Orders.defaultProps = {
 export default connect(
   state => ({
     listNumber: state.dashboard.watchListNumber || 0,
-    ordersList: state.dashboard.ordersList,
-    watchLists: state.dashboard.watchLists ? state.dashboard.watchLists.map(list => parseWatchList(list)) : [],
+    ordersList: state.dashboard.parsedOrdersList,
+    watchLists: state.dashboard.parsedWatchLists ? state.dashboard.parsedWatchLists : [],
     userData: state.dashboard.userData,
-  }))(Orders);
+    quotes: state.dashboard.quotes,
+  }),
+  dispatch => ({
+    subscribeQuotes: () => dispatch(subscribeQuotes()),
+    unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
+      subscribeWatchlists: () => dispatch(subscribeWatchlists()),
+  }
+  ),
+)(Orders);
