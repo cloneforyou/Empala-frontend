@@ -4,7 +4,7 @@ import Performance from '../components/dashboard/Pages/Performance';
 export const widgetsOverflow = [
   {
     id: uniqueId(),
-    title: 'Financial portfolio',
+    title: 'Financial capital',
     icon: 'community',
     col: 5,
     height: 390,
