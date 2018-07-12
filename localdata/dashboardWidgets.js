@@ -4,7 +4,7 @@ import Performance from '../components/dashboard/Pages/Performance';
 export const widgetsOverflow = [
   {
     id: uniqueId(),
-    title: 'Financial portfolio',
+    title: 'Financial capital',
     icon: 'community',
     col: 5,
     height: 390,
@@ -244,7 +244,7 @@ export const widgetsOverflow = [
           {
             title: 'Size & growth',
             align: 'left',
-            width: '115px',
+            width: '120px',
           },
           {
             title: 'No.',
@@ -286,7 +286,7 @@ export const widgetsOverflow = [
           {
             title: 'Opinions',
             align: 'left',
-            width: '115px',
+            width: '120px',
           },
           {
             title: 'No.',

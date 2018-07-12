@@ -6,12 +6,12 @@
   @include styledScroll($light-gray);
 
   &__head {
-    padding: 15px 10px 0;
+    padding: 20px 16px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    min-height: 73px
+    margin-bottom: 17px;
   }
   &__title-row {
     flex-grow: .3;
