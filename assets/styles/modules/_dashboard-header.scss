@@ -2,14 +2,14 @@
   border: none;
   &_collapsed {
     .dashboard-header__logo {
-      width: 180px;
+      width: $sidebar-width-full;
     }
     .dashboard-header__main {
-      width: calc(100% - 180px);
+      width: calc(100% - #{$sidebar-width-full});
     }
   }
   &__logo {
-    width: 80px;
+    width: $sidebar-width;
     padding: 23px 15px;
     transition: .4s;
     text-align: center;
@@ -18,7 +18,7 @@
     }
   }
   &__main {
-    width: calc(100% - 80px);
+    width: calc(100% - #{$sidebar-width});
     transition: .4s;
     margin: 0;
   }
@@ -80,23 +80,52 @@
 }
 
 .user-nav {
+  &__text-btn {
+    display: inline-block;
+    color: #aab0ba;
+    &:after {
+      content: '';
+      background-image: url($path-to-dashboard-icon + "icon-down-arrow.svg");
+      width: 11px;
+      height: 10px;
+      background-size: contain;
+      display: inline-block;
+      margin-left: 5px;
+      margin-top: -1px;
+      vertical-align: middle;
+    }
+  }
   &__dropdown-btn {
     background: none;
     border: none;
     padding: 0;
     margin-right: 10px;
     margin-left: 25px;
+    overflow: hidden;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &_open {
+      .user-nav__text-btn {
+        &:after {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  &__avatar-wrap {
     width: 55px;
     height: 55px;
-    overflow: hidden;
-  }
-  &__userPic {
-    width: 100%;
     border-radius: 6px;
+    overflow: hidden;
     &_bordered {
       padding: 5px;
       border: 2px solid $green;
     }
+  }
+  &__userPic {
+    max-width: 100%;
   }
   &__link {
     position: relative;

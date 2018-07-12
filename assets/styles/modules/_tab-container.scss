@@ -34,17 +34,6 @@
   }
 }
 
-.profile-image {
-  width: 100%;
-  max-width: 163px;
-  border-radius: 10px;
-  margin: 0 auto 20px;
-  img {
-    width: 100%;
-    border-radius: 10px;
-  }
-}
-
 .default-btn {
    @include button-reset;
    color: $main-color-text-grey;

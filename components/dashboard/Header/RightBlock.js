@@ -36,16 +36,23 @@ export default class RightBlock extends Component {
           </li>
           <li className="nav-item dropdown">
             <button
-              className="nav-link user-nav__dropdown-btn"
+              className={menuAvatarShow ? "nav-link user-nav__dropdown-btn user-nav__dropdown-btn_open" : "nav-link user-nav__dropdown-btn"}
               onClick={this.toggleMenu}
             >
+              <span className="user-nav__text-btn">me</span>
               {
                 !loading &&
-                <img
-                  className={userPic ? 'user-nav__userPic' : "user-nav__userPic  user-nav__userPic_bordered"}
-                  src={userPic || avatar}
-                  alt="Avatar"
-                />
+                <div className={userPic ?
+                  'user-nav__avatar-wrap' :
+                  "user-nav__avatar-wrap  user-nav__avatar-wrap_bordered"}
+                >
+                  <img
+                    className="user-nav__userPic"
+                    src={userPic || avatar}
+                    alt="Avatar"
+                  />
+                </div>
+
               }
             </button>
             <DropdownMenu

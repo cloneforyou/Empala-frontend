@@ -10,7 +10,7 @@ export const sidebarItems = [
 
   },
   {
-    title: 'Financial capital',
+    title: 'Financial portfolio',
     items: [
       {
         label: 'Positions',
