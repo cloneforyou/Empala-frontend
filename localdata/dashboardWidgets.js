@@ -244,7 +244,7 @@ export const widgetsOverflow = [
           {
             title: 'Size & growth',
             align: 'left',
-            width: '115px',
+            width: '120px',
           },
           {
             title: 'No.',
@@ -286,7 +286,7 @@ export const widgetsOverflow = [
           {
             title: 'Opinions',
             align: 'left',
-            width: '115px',
+            width: '120px',
           },
           {
             title: 'No.',
