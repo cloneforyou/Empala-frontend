@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import DatePicker from 'material-ui/DatePicker';
 import FaCalendarO from 'react-icons/lib/fa/calendar-o';
 import PropTypes from 'prop-types';
@@ -7,6 +8,7 @@ import style from './RegistrationFieldsStyle';
 
 
 const DatePickerField = (props) => {
+  const { currentColorScheme } = props;
   const errorText = props.disabled ? '' : props.errorText;
   const currentDate = new Date();
   const birthDayYear = currentDate.getFullYear() - 18;
@@ -25,7 +27,12 @@ const DatePickerField = (props) => {
           underlineStyle={style.underlineStyle}
           openToYearSelection
           errorText={errorText}
-          inputStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
+          inputStyle={props.disabled ? style.inputStyleDisabled :
+            (currentColorScheme === 'light' ?
+                { 'color': '#C5C5C5' } :
+                { 'color': '#cacaca' }
+            )
+          }
           firstDayOfWeek={0}
           disabled={props.disabled}
           textFieldStyle={{ width: '100%' }}
@@ -51,4 +58,6 @@ DatePickerField.propTypes = {
   handleDatePick: PropTypes.func.isRequired,
 };
 
-export default DatePickerField;
+export default connect(state => ({
+  currentColorScheme: state.dashboard.currentColorScheme,
+}))(DatePickerField);

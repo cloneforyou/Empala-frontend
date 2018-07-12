@@ -1,13 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import PropTypes from 'prop-types';
 import fieldNeedsLabel from '../../localdata/noLabelFields';
 import style from './RegistrationFieldsStyle';
+import { closeModal } from "../../actions/dashboard";
 
 
 const EmpalaSelect = (props) => {
-
+  const { currentColorScheme } = props;
+  console.log('currentColorScheme -==> ', currentColorScheme);
   return (
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
       <SelectField
@@ -16,10 +19,19 @@ const EmpalaSelect = (props) => {
         autoWidth={props.autoWidth}
         floatingLabelText={props.label}
         floatingLabelFixed
+        className="dashboard-select"
         floatingLabelStyle={style.floatingLabelStyle}
         hintText={fieldNeedsLabel(props.id) && (props.hint || props.label)}
-        hintStyle={style.hintStyle}
-        labelStyle={props.disabled ? style.inputStyleDisabled : style.inputStyle}
+        hintStyle={currentColorScheme === 'light' ?
+          { 'color': '#C5C5C5' } :
+          { 'color': '#fff' }
+        }
+        labelStyle={props.disabled ? style.inputStyleDisabled :
+          (currentColorScheme === 'light' ?
+              { 'color': '#C5C5C5' } :
+              { 'color': '#cacaca' }
+          )
+        }
         style={style.selectFieldStyle}
         iconStyle={style.iconSelectStyle}
         menuItemStyle={style.menuItemStyle}
@@ -62,5 +74,7 @@ EmpalaSelect.propTypes = {
   handleChange: PropTypes.func.isRequired,
   value: PropTypes.string,
 };
+export default connect(state => ({
+  currentColorScheme: state.dashboard.currentColorScheme,
+}))(EmpalaSelect);
 
-export default EmpalaSelect;
