@@ -2,7 +2,7 @@ import { takeEvery, all, take, select, put, call, race, fork, spawn } from 'redu
 import {
   GET_ETNA_DATA,
   GET_USER_DATA_REQUEST,
-  LOGOUT, SUBSCRIBE_QUOTES, UNSUBSCRIBE_QUOTES,
+  LOGOUT,
 } from '../constants/dashboard';
 import { getUserData, logout } from './authentication';
 import { serverOrigins } from '../utils/config';
