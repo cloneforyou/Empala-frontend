@@ -718,8 +718,8 @@ export const widgetsPositionFirst = [
             id: uniqueId(),
             exposure: 'Net value',
             domestic: '9,999,999,999',
-            total: '9,999,999,999',
             foreign: '9,999,999,999',
+            total: '9,999,999,999',
             dayChange: 999.9,
           },
           {

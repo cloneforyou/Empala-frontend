@@ -1,61 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AnyChart from 'anychart-react';
+import { reduce, uniqueId } from 'lodash';
 import { widgetsPositionFirst, widgetsPositions } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import { parsePositionsList } from '../../../utils/dashboardUtils';
 import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
+import PositionsTable from '../Widget/PositionsTable';
+import PositionsPortfolioTable from '../Widget/PositionsPortfolioTable';
 
-
-class Positions extends Component {
-  componentDidMount() {
-    this.props.subscribeQuotes();
-  }
-  componentWillUnmount() {
-    this.props.unsubscribeQuotes();
-  }
-  updatePositions(positions, quotes) {
-    if (positions.length > 0 && quotes) {
-      return positions.map(pos => (
-        quotes[pos.sec_id] ? {
-          ...pos,
-          m2m: quotes[pos.sec_id].Last,
-          day_chg: quotes[pos.sec_id].ChangePc,
-        }
-        : pos
-       ));
-    }
-    return [];
-  }
-  render() {
-    const positions = this.updatePositions(this.props.positions, this.props.quotes);
-    return (
+const Positions = (props) => (
       <div className="container-fluid">
         <div className="row no-gutters">
           <div className="col-lg-4">
-            {
-              widgetsPositionFirst.map(widget => (
-                <WidgetTable widget={widget} key={widget.id} />
-              ))
-            }
+            <PositionsTable />
           </div>
-          {/* For debug. TODO  Remove later. */}
-          {/* {this.props.positions && this.props.positions.map(pos => (<p key={Math.random()}>{JSON.stringify(pos)}</p>))} */}
           <div className="col-lg-8">
-            {
-              widgetsPositions.map(widget => (
-                <WidgetTable
-                  widget={{
-                    ...widget,
-                    tables: [{
-                      ...widget.tables[0],
-                      data: positions,
-                    }],
-                  }}
-                  key={widget.id}
-                />
-              ))
-            }
+            <PositionsPortfolioTable />
             <div className="widget-col col-lg-12">
               <div className="widget">
                 <div className="widget__head">
@@ -88,20 +49,5 @@ class Positions extends Component {
       </div>
 
     );
-  }
-}
 
-Positions.defaultProps = {
-  positions: [],
-};
-
-export default connect(
-  state => ({
-    positions: state.dashboard.parsedPositions ? state.dashboard.parsedPositions : [],
-    quotes: state.dashboard.quotes,
-  }),
-  dispatch => ({
-    subscribeQuotes: () => dispatch(subscribeQuotes()),
-    unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
-  }),
-)(Positions);
+export default Positions;
