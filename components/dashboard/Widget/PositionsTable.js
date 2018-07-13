@@ -4,6 +4,30 @@ import { reduce, uniqueId } from 'lodash';
 import { widgetsPositionFirst } from '../../../localdata/dashboardWidgets';
 import WidgetTable from './WidgetTable';
 
+const rawNames = {
+  net: 'Net value',
+  emara: 'Emara & Money Market',
+  currencies: 'Currencies & Money Market',
+  stocks: 'Stocks',
+  governmentBonds: 'Government Bonds',
+  corporateBonds: 'Corporate Bonds',
+  hybrids: 'Hybrids & Other Securities',
+  commodities: 'Commodities',
+  private: 'Private Markets',
+  net_position: 'Net Position',
+  adjusted_net_position: 'Adjusted Net Position',
+  gross_position: 'Gross Position',
+  adjusted_gross_position: 'Adjusted Gross Position',
+  estimated_var: 'Estimated VAR',
+  regulatory_margin: 'Regulatory Margin',
+  portfolio_1pc_delta: 'Portfolio 1% Delta',
+  portfolio_1pc_gamma: 'Portfolio 1% Gamma',
+  portfolio_1d_theta: 'Portfolio 1D Theta',
+  portfolio_5pc_vega: 'Portfolio 5% Vega',
+  portfolio_1pc_Rho: 'Portfolio 1% Rho',
+  annualized_carry: 'Annualized Carry',
+  credit_available: 'Credit Available',
+};
 const parsePositionsTablesData = (tables, data) => {
   if (tables.length > 0) {
     const calculateDomestic = reduce(data, (sum, value, index) => sum + data[index].CostBasis, 0);
@@ -15,41 +39,197 @@ const parsePositionsTablesData = (tables, data) => {
       }, 0);
     };
     const domestic = {
-      net: calculateDomesticByType(),
-      stocks: calculateDomesticByType('CommonStock'),
+      notional: {
+        net: calculateDomesticByType(),
+        stocks: calculateDomesticByType('CommonStock'),
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      percent: {
+        net: calculateDomesticByType(),
+        stocks: calculateDomesticByType('CommonStock'),
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      adjusted: {
+        net: 0,
+        stocks: '--',
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      riskMeasures: {
+        net_position: '--',
+        adjusted_net_position: '--',
+        gross_position: '--',
+        adjusted_gross_position: '--',
+        estimated_var: '--',
+        regulatory_margin: '--',
+      },
+      riskTheoreticals: {
+        portfolio_1pc_delta: '--',
+        portfolio_1pc_gamma: '--',
+        portfolio_1d_theta: '--',
+        portfolio_5pc_vega: '--',
+        portfolio_1pc_Rho: '--',
+      },
+      fundingAnalysis: {
+        annualized_carry: '--',
+      },
+      creditAnalysis: {
+        credit_available: '--',
+      },
     };
     const foreign = {
-      net: 0,
-      stocks: 0,
+      notional: {
+        net: 0,
+        stocks: 0,
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      percent: {
+        net: 0,
+        stocks: 0,
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      adjusted: {
+        net: 0,
+        stocks: '--',
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      riskMeasures: {
+        net_position: '--',
+        adjusted_net_position: '--',
+        gross_position: '--',
+        adjusted_gross_position: '--',
+        estimated_var: '--',
+        regulatory_margin: '--',
+      },
+      riskTheoreticals: {
+        portfolio_1pc_delta: '--',
+        portfolio_1pc_gamma: '--',
+        portfolio_1d_theta: '--',
+        portfolio_5pc_vega: '--',
+        portfolio_1pc_Rho: '--',
+      },
+      fundingAnalysis: {
+        annualized_carry: '--',
+      },
+      creditAnalysis: {
+        credit_available: '--',
+      },
     };
-    return tables.map((table, index) => {
-      if (index === 0) {
-        return {
-          ...table,
-          data: [
-            {
-              id: uniqueId(),
-              exposure: 'Net value',
-              domestic: domestic.net,
-              foreign: foreign.net,
-              total: foreign.net + domestic.net,
-              dayChange: 999.9,
-            },
-            {
-              id: uniqueId(),
-              exposure: 'Stoks',
-              domestic: domestic.stocks,
-              foreign: foreign.stocks,
-              total: 0,
-              dayChange: 999.9,
-            },
-          ],
-        };
+    const getChangeByTitleAndType = title => type => '--';
+    const getDomesticByTitleAndType = title => type => domestic[title][type];
+    const getForeignByTitleAndType = title => type => foreign[title][type];
+    const getExposureByType = type => rawNames[type];
+    const mapTableTitleToData = (title) => {
+      let types = [];
+      if (title === 'notional' || title === 'percent' || title === 'adjusted') {
+        types = [
+          'net',
+          'emara',
+          'currencies',
+          'stocks',
+          'governmentBonds',
+          'corporateBonds',
+          'hybrids',
+          'commodities',
+          'private',
+        ];
       }
-      return table;
+      if (title === 'riskMeasures') {
+        types = [
+          'net_position',
+          'adjusted_net_position',
+          'gross_position',
+          'adjusted_gross_position',
+          'estimated_var',
+          'regulatory_margin',
+        ];
+      }
+      if (title === 'riskTheoreticals') {
+        types = [
+          'portfolio_1pc_delta',
+          'portfolio_1pc_gamma',
+          'portfolio_1d_theta',
+          'portfolio_5pc_vega',
+          'portfolio_1pc_Rho',
+        ];
+      }
+      if (title === 'creditAnalysis') {
+        types = [
+          'credit_available',
+        ];
+      }
+      if (title === 'fundingAnalysis') {
+        types = [
+          'annualized_carry',
+        ];
+      }
+      return types.map((type) => {
+        const calculatedDomestic = getDomesticByTitleAndType(title)(type);
+        const calculatedForeign = getForeignByTitleAndType(title)(type);
+        const calculatedTotal = calculatedDomestic + calculatedForeign;
+        if (title === 'percent') {
+          return {
+            id: uniqueId(),
+            exposure: getExposureByType(type),
+            domestic: Math.round(calculatedDomestic * 10000 / calculatedTotal) / 100 || '--',
+            foreign: Math.round(calculatedForeign * 10000 / calculatedTotal) / 100 || '--',
+            total: 100,
+            dayChange: getChangeByTitleAndType(title)(type),
+          };
+        }
+        return {
+          id: uniqueId(),
+          exposure: getExposureByType(type),
+          domestic: calculatedDomestic,
+          foreign: calculatedForeign,
+          total: calculatedTotal,
+          dayChange: getChangeByTitleAndType(title)(type),
+        };
+      });
+    };
+    return tables.map((table) => {
+      if (!table) return [];
+      return {
+        ...table,
+        data: mapTableTitleToData(table.title),
+      };
     });
   }
-  return [];
 };
 
 const PositionsTable = props => (
