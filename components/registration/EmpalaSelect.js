@@ -37,7 +37,10 @@ const EmpalaSelect = (props) => {
         menuItemStyle={style.menuItemStyle}
         selectedMenuItemStyle={style.selectedMenuItemStyle}
         underlineDisabledStyle={style.underlineDisabledStyle}
-        underlineStyle={style.underlineStyle}
+        underlineStyle={currentColorScheme === 'light' ?
+          { borderBottom: '2px solid #E0E0E0' } :
+          { borderBottom: '2px solid #676676' }
+        }
         underlineFocusStyle={props.errorText
           ? style.underlineErrorStyle
           : style.underlineFocusStyle}

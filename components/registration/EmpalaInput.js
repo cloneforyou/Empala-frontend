@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import InputMask from 'react-input-mask';
 import TextField from 'material-ui/TextField';
 import style from './RegistrationFieldsStyle';
+import { ALTO } from "../../constants/colors";
 
 
 class EmpalaInput extends Component {
@@ -31,7 +32,10 @@ class EmpalaInput extends Component {
           floatingLabelStyle={style.floatingLabelStyle}
           hintText={this.props.placeholder}
           style={style.textFieldStyle}
-          underlineStyle={style.underlineStyle}
+          underlineStyle={currentColorScheme === 'light' ?
+            { borderBottom: `2px solid #E0E0E0` } :
+            { borderBottom: `2px solid #676676` }}
+          
           hintStyle={style.hintStyle}
           inputStyle={this.props.disabled ? style.inputStyleDisabled :
             (currentColorScheme === 'light' ?
