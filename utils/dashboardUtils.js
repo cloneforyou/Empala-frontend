@@ -1,3 +1,4 @@
+import moment from 'moment';
 /* ========= parses the date from specified string ======== */
 /* ========= like '/Date(1530076567409+0000)/' ==========  */
 export const parseOrderDate = str => new Date(parseInt(str.match(/\d+(\+\d+)?/)[0], 10)).toLocaleString();
@@ -26,7 +27,8 @@ export const parseOrdersList = list => list.map(order => ({
     notional_ammount: '--', // TODO find the way how to calculate
     comission: '--', // TODO find the way how to calculate
     distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
-    start_date: parseOrderDate(order.CreateDate),
+    // start_date: parseOrderDate(order.CreateDate),
+    start_date: moment(order.CreateDate).format("MM/DD/YY"),
     qct: '--', // TODO Investigate how to calculate
   },
 }));

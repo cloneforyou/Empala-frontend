@@ -1430,9 +1430,6 @@ export const widgetsOrders = [
             title: 'Symbol',
             sort: true,
           },
-          // {
-          //   title: 'Date',
-          // },
           {
             title: 'Curr',
           },
