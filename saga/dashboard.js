@@ -136,5 +136,3 @@ export default function* dashboardSaga() {
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
   ]);
 }
-
-
