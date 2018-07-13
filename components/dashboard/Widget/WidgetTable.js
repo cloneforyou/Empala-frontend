@@ -41,7 +41,7 @@ class WidgetTable extends Component {
                     }
                   </div>
                 </div> :
-                widget.tables && widget.tables.map((table) => (
+                widget.tables && widget.tables.map(table => (
                   <Table overview={overview} table={table} key={table.id} />
                 ))
             }

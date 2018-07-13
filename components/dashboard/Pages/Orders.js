@@ -44,7 +44,7 @@ class Orders extends React.Component {
     if (title === 'Orders') {
       const filteredOrders = filter(
         orders,
-        order => order.status === 'Filled' || order.ExecutionStatus === 'PartiallyFilled',
+        order => order.status === 'Filled' || order.status === 'PartiallyFilled',
       );
       return filteredOrders.map(order => order.values);
     }
