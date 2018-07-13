@@ -93,7 +93,7 @@ export default connect(
   dispatch => ({
     subscribeQuotes: () => dispatch(subscribeQuotes()),
     unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
-      subscribeWatchlists: () => dispatch(subscribeWatchlists()),
+    subscribeWatchlists: () => dispatch(subscribeWatchlists()),
   }
   ),
 )(Orders);
