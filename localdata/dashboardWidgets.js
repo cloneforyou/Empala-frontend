@@ -691,10 +691,11 @@ export const widgetsPositionFirst = [
     tables: [
       {
         id: uniqueId(),
+        title: 'notional',
         headers: [
           {
             title: 'Notional amount',
-            width: '140px',
+            width: '165px',
           },
           {
             title: 'Domestic',
@@ -734,10 +735,11 @@ export const widgetsPositionFirst = [
       },
       {
         id: uniqueId(),
+        title: 'percent',
         headers: [
           {
             title: 'Percentage allocations',
-            width: '140px',
+            width: '165px',
           },
           {
             title: 'Domestic',
@@ -777,10 +779,11 @@ export const widgetsPositionFirst = [
       },
       {
         id: uniqueId(),
+        title: 'adjusted',
         headers: [
           {
             title: 'Adjusted amounts',
-            width: '140px',
+            width: '165px',
           },
           {
             title: 'Domestic',
@@ -820,10 +823,11 @@ export const widgetsPositionFirst = [
       },
       {
         id: uniqueId(),
+        title: 'riskMeasures',
         headers: [
           {
             title: 'Position risk measures',
-            width: '140px',
+            width: '165px',
           },
           {
             title: 'Domestic',
@@ -863,10 +867,11 @@ export const widgetsPositionFirst = [
       },
       {
         id: uniqueId(),
+        title: 'riskTheoreticals',
         headers: [
           {
             title: 'Risk theoreticals',
-            width: '140px',
+            width: '165px',
           },
           {
             title: 'Domestic',
@@ -906,10 +911,11 @@ export const widgetsPositionFirst = [
       },
       {
         id: uniqueId(),
+        title: 'fundingAnalysis',
         headers: [
           {
             title: 'Funding analysis',
-            width: '140px',
+            width: '165px',
           },
           {
             title: 'Domestic',
@@ -949,10 +955,11 @@ export const widgetsPositionFirst = [
       },
       {
         id: uniqueId(),
+        title: 'creditAnalysis',
         headers: [
           {
             title: 'Credit analysis',
-            width: '140px',
+            width: '165px',
           },
           {
             title: 'Domestic',
@@ -1017,7 +1024,7 @@ export const widgetsPositions = [
           },
           {
             title: 'Sec name',
-            width: '100px',
+            width: '140px',
           },
           {
             title: 'Sec ID',

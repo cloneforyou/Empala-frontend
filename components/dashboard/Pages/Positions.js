@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import AnyChart from 'anychart-react';
-import { reduce, uniqueId } from 'lodash';
-import { widgetsPositionFirst, widgetsPositions } from '../../../localdata/dashboardWidgets';
-import WidgetTable from '../Widget/WidgetTable';
-import { parsePositionsList } from '../../../utils/dashboardUtils';
-import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
 import PositionsTable from '../Widget/PositionsTable';
 import PositionsPortfolioTable from '../Widget/PositionsPortfolioTable';
 
-const Positions = (props) => (
+const Positions = () => (
       <div className="container-fluid">
         <div className="row no-gutters">
           <div className="col-lg-4">
@@ -47,7 +41,6 @@ const Positions = (props) => (
           </div>
         </div>
       </div>
-
     );
 
 export default Positions;
