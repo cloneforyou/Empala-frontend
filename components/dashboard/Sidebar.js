@@ -27,7 +27,6 @@ class Sidebar extends Component {
   };
 
   handleClick = (label) => {
-
     this.props.setActivePage(label.toLowerCase())
   };
 

@@ -36,32 +36,88 @@ const DropdownMenu = (props) => {
       </div>
       <h3 className="profile-menu__title">Membership settings</h3>
       <ul className="profile-menu__list">
-        <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(0)}>Membership</button>
+        <li
+          className="profile-menu__item"
+          onClick={() => this.handlerClick(0)}
+        >
+          <Link
+            route="dashboard"
+            params={{ page: 'profile' }}
+          >
+            Membership
+          </Link>
         </li>
-        <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(1)}>Regulatory</button>
+        <li
+          className="profile-menu__item"
+          onClick={() => this.handlerClick(1)}
+        >
+          <Link
+            route="dashboard"
+            params={{ page: 'profile' }}
+          >
+            Regulatory
+          </Link>
         </li>
-        <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(2)}>Investment Experience</button>
+        <li
+          className="profile-menu__item"
+          onClick={() => this.handlerClick(2)}
+        >
+          <Link
+            route="dashboard"
+            params={{ page: 'profile' }}
+          >
+            Investment Experience
+          </Link>
         </li>
-        <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(3)}>Accounts</button>
+        <li
+          className="profile-menu__item"
+          onClick={() => this.handlerClick(3)}
+        >
+          <Link
+            route="dashboard"
+            params={{ page: 'profile' }}
+          >
+            Accounts
+          </Link>
         </li>
       </ul>
       <h3 className="profile-menu__title">Account Statements</h3>
       <ul className="profile-menu__list">
-        <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(4)}>Documents</button>
+        <li
+          className="profile-menu__item"
+          onClick={() => this.handlerClick(4)}
+        >
+          <Link
+            route="dashboard"
+            params={{ page: 'profile' }}
+          >
+            Documents
+          </Link>
         </li>
       </ul>
       <h3 className="profile-menu__title">Platform Configuration</h3>
       <ul className="profile-menu__list">
-        <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(5)}>Order Mgt Defaults</button>
+        <li
+          className="profile-menu__item"
+          onClick={() => this.handlerClick(5)}
+        >
+          <Link
+            route="dashboard"
+            params={{ page: 'profile' }}
+          >
+            Application Settings
+          </Link>
         </li>
-        <li className="profile-menu__item">
-          <button className="profile-menu__link" onClick={() => this.handlerClick(6)}>Notifications</button>
+        <li
+          className="profile-menu__item"
+          onClick={() => this.handlerClick(6)}
+        >
+          <Link
+            route="dashboard"
+            params={{ page: 'profile' }}
+          >
+            Notifications
+          </Link>
         </li>
       </ul>
       <button
