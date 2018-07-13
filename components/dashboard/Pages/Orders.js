@@ -3,53 +3,53 @@ import { connect } from 'react-redux';
 import { filter } from 'lodash';
 import { widgetsOrders } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
-import {
-  parseOrdersList,
-  parseWatchList,
-} from '../../../utils/dashboardUtils';
 import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
-
-const getTableDataFromOrders = (orders, title) => {
-  if (title === 'Orders') {
-    const filteredOrders = filter(
-      orders,
-      order => order.status === 'Filled' || order.ExecutionStatus === 'PartiallyFilled',
-    );
-    return filteredOrders.map(order => order.values);
-  }
-};
 
 class Orders extends React.Component {
   componentDidMount() {
     this.props.subscribeQuotes();
     this.props.subscribeWatchlists();
   }
+
   componentWillUnmount() {
     this.props.unsubscribeQuotes();
   }
+
   updateWatchlist(positions, quotes) {
     if (positions.length > 0 && quotes) {
       return positions.map(pos => (
         quotes[pos.secID] ? {
-          ...pos,
-          last_p: quotes[pos.secID].Last,
-          bid_sz: quotes[pos.secID].BidSize,
-          bid: quotes[pos.secID].Bid,
-          day_volume: quotes[pos.secID].TotalDailyVolume,
-        }
+            ...pos,
+            last_p: quotes[pos.secID].Last,
+            bid_sz: quotes[pos.secID].BidSize,
+            bid: quotes[pos.secID].Bid,
+            day_volume: quotes[pos.secID].TotalDailyVolume,
+          }
           : pos
       ));
     }
     return [];
   }
+
   getDataForTableByTableTitle(title) {
     if (title === 'Watchlists') {
       return this.props.watchLists.length > 0 ?
         this.updateWatchlist(this.props.watchLists[this.props.listNumber].content, this.props.quotes)
         : [];
     }
-    return getTableDataFromOrders(this.props.ordersList, title);
+    return this.getTableDataFromOrders(this.props.ordersList, title);
   }
+
+  getTableDataFromOrders = (orders, title) => {
+    if (title === 'Orders') {
+      const filteredOrders = filter(
+        orders,
+        order => order.status === 'Filled' || order.ExecutionStatus === 'PartiallyFilled',
+      );
+      return filteredOrders.map(order => order.values);
+    }
+  };
+
   render() {
     return (
       <div className="container-fluid">
@@ -60,13 +60,13 @@ class Orders extends React.Component {
               widget={{
                 ...widget,
                 tables: [{
-                ...widget.tables[0],
-                data: this.getDataForTableByTableTitle(widget.title),
+                  ...widget.tables[0],
+                  data: this.getDataForTableByTableTitle(widget.title),
                 }],
               }}
               key={widget.id}
             />
-            ))
+          ))
           }
         </div>
         {/* For debug. TODO  Remove later. */}
@@ -91,9 +91,9 @@ export default connect(
     quotes: state.dashboard.quotes,
   }),
   dispatch => ({
-    subscribeQuotes: () => dispatch(subscribeQuotes()),
-    unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
-    subscribeWatchlists: () => dispatch(subscribeWatchlists()),
-  }
+      subscribeQuotes: () => dispatch(subscribeQuotes()),
+      unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
+      subscribeWatchlists: () => dispatch(subscribeWatchlists()),
+    }
   ),
 )(Orders);

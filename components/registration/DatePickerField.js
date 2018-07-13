@@ -24,13 +24,16 @@ const DatePickerField = (props) => {
         <DatePicker
           id={props.id}
           locale="en-US"
-          underlineStyle={style.underlineStyle}
+          underlineStyle={currentColorScheme === 'light' ?
+            { borderBottom: '2px solid #E0E0E0' } :
+            { borderBottom: '2px solid #676676' }
+          }
           openToYearSelection
           errorText={errorText}
           inputStyle={props.disabled ? style.inputStyleDisabled :
             (currentColorScheme === 'light' ?
-                { 'color': '#C5C5C5' } :
-                { 'color': '#cacaca' }
+                { color: '#C5C5C5' } :
+                { color: '#cacaca' }
             )
           }
           firstDayOfWeek={0}
