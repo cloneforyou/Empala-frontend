@@ -31,7 +31,9 @@ class WatchlistsTable extends React.Component {
   }
 
   render() {
-    const watchlist = this.updateWatchlist(this.props.watchLists[this.props.listNumber].content, this.props.quotes);
+    const watchlist = this.props.watchLists.length > 0 ?
+      this.updateWatchlist(this.props.watchLists[this.props.listNumber].content, this.props.quotes)
+    : [];
     return (
       widgetsWatchlists.map(widget => (
         <WidgetTable
