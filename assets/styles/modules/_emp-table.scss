@@ -52,6 +52,15 @@
     }
 
   }
+  &__table-cell {
+    @include fontSize(12px);
+    padding: 4px !important;
+    font-weight: normal;
+    color: $main-color-text-grey;
+    @media (max-width: 1600px) {
+      @include fontSize(10px);
+    }
+  }
 
   &.table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(245, 245, 246, 0.6);
