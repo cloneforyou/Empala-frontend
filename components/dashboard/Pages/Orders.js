@@ -4,32 +4,9 @@ import { filter } from 'lodash';
 import { widgetsOrders } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
+import WatchlistsTable from '../Widget/WatchlistsTable';
 
 class Orders extends React.Component {
-  componentDidMount() {
-    this.props.subscribeQuotes();
-    this.props.subscribeWatchlists();
-  }
-
-  componentWillUnmount() {
-    this.props.unsubscribeQuotes();
-  }
-
-  updateWatchlist(positions, quotes) {
-    if (positions.length > 0 && quotes) {
-      return positions.map(pos => (
-        quotes[pos.secID] ? {
-            ...pos,
-            last_p: quotes[pos.secID].Last,
-            bid_sz: quotes[pos.secID].BidSize,
-            bid: quotes[pos.secID].Bid,
-            day_volume: quotes[pos.secID].TotalDailyVolume,
-          }
-          : pos
-      ));
-    }
-    return [];
-  }
 
   getDataForTableByTableTitle(title) {
     if (title === 'Watchlists') {
@@ -61,13 +38,14 @@ class Orders extends React.Component {
                 ...widget,
                 tables: [{
                   ...widget.tables[0],
-                  data: this.getDataForTableByTableTitle(widget.title),
+                  data: this.getTableDataFromOrders(this.props.ordersList, widget.title)
                 }],
               }}
               key={widget.id}
             />
           ))
           }
+          <WatchlistsTable />
         </div>
         {/* For debug. TODO  Remove later. */}
         {/* {this.props.ordersList && this.props.ordersList.map(order => (<p key={Math.random()}>{JSON.stringify(order)}</p>))} */}
@@ -86,7 +64,6 @@ export default connect(
   state => ({
     listNumber: state.dashboard.watchListNumber || 0,
     ordersList: state.dashboard.parsedOrdersList,
-    watchLists: state.dashboard.parsedWatchLists ? state.dashboard.parsedWatchLists : [],
     userData: state.dashboard.userData,
     quotes: state.dashboard.quotes,
   }),

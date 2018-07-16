@@ -1529,13 +1529,15 @@ export const widgetsOrders = [
       },
     ],
   },
+];
+export const widgetsWatchlists = [
   {
     id: uniqueId(),
     title: 'Watchlists',
     col: 12,
     height: 568,
     dots: true,
-    tables: [
+    tables:
       {
         id: uniqueId(),
         headers: [
@@ -1589,6 +1591,5 @@ export const widgetsOrders = [
         ],
         data: [],
       },
-    ],
   },
 ];
