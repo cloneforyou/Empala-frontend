@@ -32,6 +32,7 @@ function* loginRequest(url, options) {
     }
     if (result.data.info === 'RELATED_ACCOUNT_NOT_FOUND') {
       yield put(toggleModal());
+      yield put(loginSuccess());
       const registrationData = {
         member_basic_information_first_name: result.data.data.given_name || result.data.data.first_name || '',
         member_basic_information_last_name: result.data.data.family_name || result.data.data.last_name || '',

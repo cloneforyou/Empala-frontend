@@ -8,15 +8,6 @@ import WatchlistsTable from '../Widget/WatchlistsTable';
 
 class Orders extends React.Component {
 
-  getDataForTableByTableTitle(title) {
-    if (title === 'Watchlists') {
-      return this.props.watchLists.length > 0 ?
-        this.updateWatchlist(this.props.watchLists[this.props.listNumber].content, this.props.quotes)
-        : [];
-    }
-    return this.getTableDataFromOrders(this.props.ordersList, title);
-  }
-
   getTableDataFromOrders = (orders, title) => {
     if (title === 'Orders') {
       const filteredOrders = filter(
