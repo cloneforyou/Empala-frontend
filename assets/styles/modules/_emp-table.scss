@@ -54,7 +54,7 @@
   }
   &__table-cell {
     @include fontSize(12px);
-    padding: 4px !important;
+    padding: 4px 10px !important;
     font-weight: normal;
     color: $main-color-text-grey;
     @media (max-width: 1600px) {
@@ -65,4 +65,8 @@
   &.table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(245, 245, 246, 0.6);
   }
+  &.table-striped-row .emp-table__table-cell:nth-of-type(odd) {
+    background-color: rgba(245, 245, 246, 0.6);
+  }
 }
+

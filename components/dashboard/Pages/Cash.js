@@ -12,11 +12,11 @@ const parsePositionsToTableData = (positions) => {
     const avgPrice = ((pos.AverageClosePrice + pos.AverageOpenPrice) / 2).toFixed(2);
     return [
       { value: parseOrderDate(pos.ModifyDate).slice(0, 10) },
-      { value: pos.Symbol },
+      { value: pos.Symbol, },
       { value: pos.CompanyName },
       { value: pos.SecurityId },
       { value: pos.Quantity },
-      { value: avgPrice },
+      { value: avgPrice, mark: 'numeric' },
       { value: 0 }, // Exec fees
       { value: 0 }, // Reg fees
       { value: (pos.Quantity * avgPrice).toFixed(2) },
@@ -43,6 +43,7 @@ const Cash = (props) => (
       <EmpalaTable
         tableName="dashboard_cash"
         tableData={parsePositionsToTableData(props.positions)}
+        striped
       />
     </div>
   </div>
