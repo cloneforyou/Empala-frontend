@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 import WidgetHead from './Widget/WidgetHead';
 import { getTableHeaderByName } from '../../utils/dashboardUtils';
+import EmpalaTableCell from './EmpalaTableCell';
+
+/* ======== EMPALA TABLE ======== */
+/* Draws a table based on several arrays provided as props
+
+*       tableData = [{
+*         value: string/number,
+*         mark: enum('numeric', 'status'),
+*         }]
+*
+*         callbacks = [] - callbacks array for click on headers.
+*         Default is sort by column value.
+/* =============================== */
 
 class EmpalaTable extends Component {
   constructor(props) {
@@ -41,16 +54,25 @@ class EmpalaTable extends Component {
       return false;
     });
   }
-
+  getColorStyleByAttribute(attr) {
+    if (!attr) return '';
+    switch (attr) {
+      case 'red':
+        return 'red';
+      case 'down':
+        return 'emp-table__td_down red';
+      case 'green':
+        return 'green';
+      case 'up':
+        return 'emp-table__td_up green';
+      default:
+        return false;
+    }
+  }
   render() {
     const widget = getTableHeaderByName(this.props.tableName);
     const { sortDirection, sortColIndex } = this.state;
-    console.log('dddddddaaaaatttttaaa', this.props.tableData);
-    const Data = this.props.tableData || [
-      [{ value: '123' }, { value: 'dfsfdsf' }, { value: '66' }, { value: '123', onclick: e => console.log('clicked', e.target) }, , , { value: 'sdfdsfsdfsdf' }],
-      [{ value: '123' }, { value: 'aaadfsfdsf' }, { value: '566' }, { value: '223', onclick: e => console.log('clicked', e.target) }, , , { value: 'dsffdfdsfsdfsdf' }],
-    ];
-    const tableData = this.sortByColumn(Data, sortColIndex, sortDirection);
+    const tableData = this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
     return (
       <div
         className={`widget-col col-lg-${widget.col}`}
@@ -61,10 +83,10 @@ class EmpalaTable extends Component {
             widget={widget}
           />
           {/* <div className="row"> */}
-          <ul className="d-flex flex-row list-unstyled">
+          <ul className="d-flex flex-row no-gutters list-unstyled">
             {widget.headers.map((header, index) => (
               <li
-                className="col-auto"
+                className={`col-auto ${this.props.striped && 'emp-table table-striped-row'}`}
                 key={header}
                 style={{ width: widget.attrs.width[index] || 'auto' }}
               >
@@ -76,13 +98,19 @@ class EmpalaTable extends Component {
                 >{header}
                 </div>
                 <div>{tableData.map(row => (
-                  <div
+                  /*<div
                     id={Math.random()}
-                    className="emp-table__table-cell"
+                    className={`emp-table__table-cell ${row[index] && this.getColorStyleByAttribute(row[index].attr)}`}
                     onClick={row[index] ? row[index].onclick : null}
                   >
-                    {row[index] ? row[index].value : '--'}
-                  </div>
+                    {row[index] ? row[index].value || '--' : '--'}
+                  </div>*/
+                  <EmpalaTableCell
+                    key={Math.random()}
+                    handleClick={row[index] ? row[index].onclick : null}
+                    value={row[index] && row[index].value}
+                    mark={row[index] && row[index].mark}
+                      />
                   ))}
                 </div>
               </li>
@@ -96,5 +124,11 @@ class EmpalaTable extends Component {
   }
 }
 
+EmpalaTable.defaultProps = {
+  tableName: 'EmpalaTable',
+  tableData: [],
+  callbacks: [],
+  striped: false,
+};
 
 export default EmpalaTable;

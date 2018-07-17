@@ -33,7 +33,34 @@ const tableHeaders = {
       width: [],
     },
   },
+  dashboard_watchlist: {
+    id: 'dashboard_watchlist',
+    title: 'Watchlists',
+    col: 12,
+    height: 224,
+    headers: [
+      'Sec name',
+      'Symbol',
+      'Curr',
+      'Last',
+      'Bid SZ',
+      'Bid',
+      'Offer',
+      'Off SZ',
+      'Day volume',
+      'Sentiment',
+      'ES CH',
+      'P/E ratio',
+      'Sec ID',
+      'Rating',
+    ],
+    attrs: {
+      width: [],
+    },
+  },
 };
+
+export const getFormattedNumber = number => number.toString().replace(/[^0-9]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 
 /* ========= parses the date from specified string ======== */
 /* ========= like '/Date(1530076567409+0000)/' ==========  */

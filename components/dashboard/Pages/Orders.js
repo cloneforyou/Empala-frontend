@@ -9,13 +9,20 @@ import WatchlistsTable from '../Widget/WatchlistsTable';
 class Orders extends React.Component {
 
   getTableDataFromOrders = (orders, title) => {
+    let filteredOrders = [];
     if (title === 'Orders') {
-      const filteredOrders = filter(
+      filteredOrders = filter(
         orders,
         order => order.status === 'Filled' || order.status === 'PartiallyFilled',
       );
-      return filteredOrders.map(order => order.values);
     }
+      if (title === 'Fills/cancels') {
+        filteredOrders = filter(
+          orders,
+          order => order.status !== 'Filled',
+        );
+    }
+    return filteredOrders.map(order => order.values);
   };
 
   render() {

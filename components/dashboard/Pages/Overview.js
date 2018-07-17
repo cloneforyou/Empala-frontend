@@ -59,7 +59,7 @@ class Overview extends Component {
                   tables: [{
                     ...widget.tables[0],
                     data: tableData,
-                  }],
+                  }, ...widget.tables.slice(1)],
                 }}
                 key={widget.id} />
             )
