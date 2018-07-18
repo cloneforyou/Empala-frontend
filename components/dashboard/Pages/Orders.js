@@ -63,7 +63,6 @@ export default connect(
     listNumber: state.dashboard.watchListNumber || 0,
     ordersList: state.dashboard.parsedOrdersList,
     userData: state.dashboard.userData,
-    quotes: state.dashboard.quotes,
   }),
   dispatch => ({
       subscribeQuotes: () => dispatch(subscribeQuotes()),

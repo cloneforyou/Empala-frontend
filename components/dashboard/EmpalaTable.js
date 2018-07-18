@@ -22,6 +22,7 @@ class EmpalaTable extends Component {
       sortDirection: false,
       sortColIndex: false,
     };
+    this.widget = getTableHeaderByName(this.props.tableName);
   }
 
   setSortType(index) {
@@ -36,8 +37,8 @@ class EmpalaTable extends Component {
   }
 
   sortByColumn(data, col, order) {
+    if (!order) return data;
     return data.sort((a, b) => {
-      if (!order) return data;
       if (!a[col]) return 1;
       if (!b[col]) return -1;
       if (a[col].value === b[col].value) return 0;
@@ -54,35 +55,14 @@ class EmpalaTable extends Component {
       return false;
     });
   }
-  getColorStyleByAttribute(attr) {
-    if (!attr) return '';
-    switch (attr) {
-      case 'red':
-        return 'red';
-      case 'down':
-        return 'emp-table__td_down red';
-      case 'green':
-        return 'green';
-      case 'up':
-        return 'emp-table__td_up green';
-      default:
-        return false;
-    }
-  }
   render() {
-    const widget = getTableHeaderByName(this.props.tableName);
+    const { widget } = this;
     const { sortDirection, sortColIndex } = this.state;
     const tableData = this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
+    // const tableData = this.props.tableData;
     return (
-      <div
-        className={`widget-col col-lg-${widget.col}`}
-        key={widget.id}
-      >
-        <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
-          <WidgetHead
-            widget={widget}
-          />
-          {/* <div className="row"> */}
+
+<div style={{ overflow: 'scroll' }} >
           <ul className="d-flex flex-row no-gutters list-unstyled">
             {widget.headers.map((header, index) => (
               <li
@@ -93,33 +73,29 @@ class EmpalaTable extends Component {
                 <div
                   id={`col${index}`}
                   className="emp-table__th"
-                  onClick={e => (this.props.callbacks && this.props.callbacks[index] ? widget.callbacks[index](e) : this.setSortType(index))}
-                  style={{ cursor: 'pointer' }}
+                  onClick={widget.attrs.sortable && widget.attrs.sortable[index] &&
+                  (e => (this.props.callbacks && this.props.callbacks[index] ?
+                    widget.callbacks[index](e) :
+                    this.setSortType(index)))}
+                  style={{ cursor: widget.attrs.sortable && widget.attrs.sortable[index] ? 'pointer' : '' }}
                 >{header}
+                  {widget.attrs.sortable && widget.attrs.sortable[index] && <i className="icon-sort" />}
                 </div>
-                <div>{tableData.map(row => (
-                  /*<div
-                    id={Math.random()}
-                    className={`emp-table__table-cell ${row[index] && this.getColorStyleByAttribute(row[index].attr)}`}
-                    onClick={row[index] ? row[index].onclick : null}
-                  >
-                    {row[index] ? row[index].value || '--' : '--'}
-                  </div>*/
+                <div>{tableData.map((row, i) => (
                   <EmpalaTableCell
-                    key={Math.random()}
+                    key={`${header}-${i}`}
                     handleClick={row[index] ? row[index].onclick : null}
                     value={row[index] && row[index].value}
                     mark={row[index] && row[index].mark}
-                      />
+                    color={row[index] && row[index].color}
+                  />
                   ))}
                 </div>
               </li>
               ))}
           </ul>
-        </div>
-        <div className="table table-striped emp-table" />
-      </div>
-    // </div>
+
+    </div>
     );
   }
 }

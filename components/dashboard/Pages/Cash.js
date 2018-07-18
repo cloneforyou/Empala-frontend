@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { widgetsCash } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import EmpalaTable from '../EmpalaTable';
-import { parseOrderDate } from '../../../utils/dashboardUtils';
+import { getTableHeaderByName, parseOrderDate } from '../../../utils/dashboardUtils';
+import WidgetHead from '../Widget/WidgetHead';
 
 
 const parsePositionsToTableData = (positions) => {
-  // const symbols = {};
   return positions.map(pos => {
     const avgPrice = ((pos.AverageClosePrice + pos.AverageOpenPrice) / 2).toFixed(2);
     return [
@@ -32,14 +32,16 @@ const parsePositionsToTableData = (positions) => {
   });
 };
 
+const widget = getTableHeaderByName('dashboard_cash');
 const Cash = (props) => (
-  <div className="container-fluid">
-    <div className="row">
-      {
-        widgetsCash.map(widget => (
-          <WidgetTable widget={widget} key={widget.id} />
-          ))
-        }
+  <div
+    className={`widget-col col-lg-${widget.col}`}
+    key={widget.id}
+  >
+    <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
+      <WidgetHead
+        widget={widget}
+      />
       <EmpalaTable
         tableName="dashboard_cash"
         tableData={parsePositionsToTableData(props.positions)}
