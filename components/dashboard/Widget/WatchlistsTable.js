@@ -1,10 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { widgetsWatchlists } from '../../../localdata/dashboardWidgets';
-import WidgetTable from './WidgetTable';
 import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
+import EmpalaTable from '../EmpalaTable';
+import { getTableHeaderByName } from '../../../utils/dashboardUtils';
+import WidgetHead from './WidgetHead';
+
 
 class WatchlistsTable extends React.Component {
+  constructor(props) {
+    super(props);
+    this.widget = getTableHeaderByName('dashboard_watchlist');
+  }
   componentDidMount() {
     this.props.subscribeQuotes();
     this.props.subscribeWatchlists();
@@ -27,26 +33,72 @@ class WatchlistsTable extends React.Component {
           : pos
       ));
     }
-    return [];
+    return positions;
   }
 
+  getWatchListsData(watchlist) {
+    return watchlist && watchlist.map(list => ([
+      { value: list.sec_name },
+      { value: list.symbol },
+      { value: 'USD' },
+      { value: list.last_p, mark: 'numeric' },
+      { value: list.bid_sz },
+      { value: list.bid, mark: 'numeric' },
+      { value: list.off },
+      { value: list.off_size },
+      { value: list.day_volume },
+      { value: list.sentiment },
+      { value: list.esch }, // ES CH
+      { value: list.pe_ratio }, // P/E ratio
+      { value: list.secID },
+      { value: list.rating },
+    ]));
+  }
+  updateWatchlistData(positions, quotes) {
+    if (positions && quotes) {
+      positions.forEach((pos) => {
+        const secId = pos[12].value;
+        if (quotes[secId]) {
+          pos[3].value = quotes[secId].Last;
+          pos[4].value = quotes[secId].BidSize;
+          pos[5].value = quotes[secId].Bid;
+          pos[8].value = quotes[secId].TotalDailyVolume;
+        }
+      });
+    }
+    return positions;
+  }
+
+
   render() {
-    const watchlist = this.props.watchLists.length > 0 ?
-      this.updateWatchlist(this.props.watchLists[this.props.listNumber].content, this.props.quotes)
-    : [];
+    const {
+      widget,
+      props,
+      updateWatchlistData,
+      getWatchListsData,
+    } = this;
+    const watchlistData = props.watchLists[props.listNumber] &&
+      updateWatchlistData(getWatchListsData(props.watchLists[props.listNumber].content), props.quotes);
+    // console.log(watchlistData[0])
     return (
-      widgetsWatchlists.map(widget => (
-        <WidgetTable
-          widget={{
-            ...widget,
-            tables: [{
-              ...widget.tables,
-              data: watchlist,
-            }],
-          }}
-          key={widget.id}
-        />
-      )));
+      <div
+        className={`widget-col col-lg-${widget.col}`}
+        key={widget.id}
+      >
+        <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
+          <WidgetHead
+            widget={widget}
+          />
+          <div style={{ width: '100%' }}>
+            <EmpalaTable
+              tableName="dashboard_watchlist"
+              tableData={watchlistData}
+              striped
+            />
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

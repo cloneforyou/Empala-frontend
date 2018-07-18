@@ -65,6 +65,11 @@ const modifiyPositionsList = (list, data) => {
 
 function dashboard(state = initialState, action) {
   switch (action.type) {
+    case UPDATE_QUOTES:
+      return {
+        ...state,
+        quotes: { ...state.quotes, [action.quote.Key]: action.quote },
+      };
     case COLLAPSE_SIDEBAR:
       return {
         ...state,
@@ -206,11 +211,6 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         parsedOrdersList: { ...state.parsedOrdersList, id: parseOrdersList([action.data])[0] },
-      };
-    case UPDATE_QUOTES:
-      return {
-        ...state,
-        quotes: { ...state.quotes, [action.quote.Key]: action.quote },
       };
     case MODIFY_POSITION_DATA:
       return {

@@ -11,7 +11,7 @@ class WidgetDotsMenu extends PureComponent {
     };
   }
   getMenuContentByWidgetName = name => {
-    if (name === 'Watchlists') {
+    if (name === 'Watchlists' || name === 'dashboard_watchlist') {
       return(
         <ul className={this.state.menuIsOpen ?
           'dropdown-menu dropdown-menu-right show widget-menu__list' :

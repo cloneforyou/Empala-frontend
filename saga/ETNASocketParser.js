@@ -182,7 +182,7 @@ function* externalListener(socketChannel) {
       yield put(subscribeWatchlists());
     }
     if (!action.item.Cmd && action.item.EntityType === 'Watchlist') {
-      console.log('wwwwwwliiiiiisttt');
+      // console.log('wwwwwwliiiiiisttt');
       yield call(selectETNADataRequest, { payloadType: 'watch_lists' });
     }
     if (!action.item.Cmd && action.item.EntityType === 'WatchlistContent') {
@@ -194,6 +194,8 @@ function* externalListener(socketChannel) {
 
 function watchQuotes(socket, params) {
   return eventChannel((emit) => {
+    const delta = 100;
+    const lastMessageTime = {};
     socket.onopen = (i) => {
       console.log('------------> OPEN', i);
       console.log('------------> REQ', params);
@@ -206,7 +208,12 @@ function watchQuotes(socket, params) {
       if (msg.Cmd === 'CreateSession.txt' && msg.SessionId) {
         console.log('WS Quotes SessionId:', msg.SessionId);
       }
-      if (msg.Cmd !== 'Ping') emit({ item: msg, type: 'quote' });
+      if (msg.Cmd !== 'Ping') {
+        if (!lastMessageTime[msg.Key] || Date.now() >= lastMessageTime[msg.Key] + delta) {
+          emit({ item: msg, type: 'quote' });
+          lastMessageTime[msg.Key] = Date.now();
+        }
+      }
     };
     return () => {
       socket.close();
