@@ -192,6 +192,8 @@
 .social-auth {
   width: 100%;
   margin-bottom: 30px;
+  min-width: 372px;
+  text-align: center;
   &__row {
     display: flex;
     justify-content: space-between;

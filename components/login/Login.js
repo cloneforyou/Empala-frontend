@@ -15,7 +15,6 @@ import GoogleAuth from '../social/auth/GoogleAuth';
 import RegistrationModal from './RegistrationModal';
 import logo from '../../static/images/login_logo.png';
 import FacebookAuth from '../social/auth/FaceBookAuth';
-
 import LinkedInAuth from '../social/auth/LinkedInAuth';
 
 const isNode = require('detect-node');
@@ -162,15 +161,20 @@ const Login = props => {
           </div>
           <div className="social-auth">
             <div className="styled-part-separate"><span>or connect with</span></div>
-            <div className="social-auth__row">
-              <FacebookAuth handlelogin={props.handleLogin} />
-              <GoogleAuth handlelogin={props.handleLogin} />
-              {!isNode && <LinkedInAuth handlelogin={props.handleLogin} />}
-            </div>
+            { !isNode ? (
+              <div className="social-auth__row">
+                <FacebookAuth handlelogin={props.handleLogin} />
+                <GoogleAuth handlelogin={props.handleLogin} />
+                <LinkedInAuth handlelogin={props.handleLogin} />
+              </div>
+            ) :
+              <div>Loading...</div> }
           </div>
 
           <div className="text-center">
-            <Link href="/registration"><a className="gray-link">New member registration</a></Link>
+            <Link href="/registration">
+              <a className="gray-link">New member registration</a>
+            </Link>
           </div>
         </div>
         }
