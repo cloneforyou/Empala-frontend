@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, {Component} from 'react';
 import { withReduxSaga } from '../store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import stylesheet from '../assets/styles/main.scss';
-import Login from '../components/login/Login';
+import AuthPhone from '../components/login/AuthPhone';
 
 
-class Index extends React.PureComponent {
+class MFA extends Component {
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
       window.location.assign('/dashboard');
@@ -19,7 +19,7 @@ class Index extends React.PureComponent {
         <div>
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <div className="container-fluid">
-            <Login />
+            <AuthPhone />
           </div>
         </div>
       </MuiThemeProvider>
@@ -27,4 +27,4 @@ class Index extends React.PureComponent {
   }
 }
 
-export default withReduxSaga(Index);
+export default withReduxSaga(MFA);
