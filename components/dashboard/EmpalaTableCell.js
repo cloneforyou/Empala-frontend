@@ -8,9 +8,6 @@ export default class EmpalaTableCell extends Component {
       // value: this.props.value,
     };
   }
-  componentDidMount() {
-    console.log('mounted!')
-  }
   // static getDerivedStateFromProps(nextProps, prevState) {
   //   // console.log('pppppppppppppprrrrrr', nextProps, prevState)
   //   if (nextProps.mark === 'numeric') {

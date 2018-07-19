@@ -64,7 +64,7 @@ class EmpalaTable extends Component {
     const { sortDirection, sortColIndex } = this.state;
     const tableData = this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
     return (
-      <div style={{ overflowY: 'scroll', height: this.innerHeight(widget.height) }} >
+      <div style={{ overflowY: 'scroll', maxHeight: this.innerHeight(widget.height) }} >
         <ul
           className="d-flex flex-row no-gutters list-unstyled "
           style={{ overflowX: 'scroll' }}
@@ -78,10 +78,11 @@ class EmpalaTable extends Component {
               <div
                 id={`col${index}`}
                 className="emp-table__th"
-                onClick={widget.attrs.sortable && widget.attrs.sortable[index] &&
+                onClick={(widget.attrs.sortable && widget.attrs.sortable[index]) ?
                   (e => (this.props.callbacks && this.props.callbacks[index] ?
                     widget.callbacks[index](e) :
-                    this.setSortType(index)))}
+                    this.setSortType(index)))
+                  : undefined}
                 style={{ cursor: widget.attrs.sortable && widget.attrs.sortable[index] ? 'pointer' : '' }}
               >{header}
                 {widget.attrs.sortable && widget.attrs.sortable[index] && <i className="icon-sort" />}
@@ -89,7 +90,7 @@ class EmpalaTable extends Component {
               <div>{tableData.map((row, i) => (
                 <EmpalaTableCell
                   key={`${header}-${i}`}
-                  handleClick={row[index] ? row[index].onclick : null}
+                  handleClick={row[index] ? row[index].onclick : undefined}
                   value={row[index] && row[index].value}
                   mark={row[index] && row[index].mark}
                   color={row[index] && row[index].color}
