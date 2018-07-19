@@ -4,6 +4,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
+  TWO_FACTOR_AUTHENTICATION,
   PASSWORD_UPDATE_REQUEST,
   PASSWORD_UPDATE_REQUEST_FAIL,
   PASSWORD_UPDATE_REQUEST_SUCCESS,
@@ -39,6 +40,14 @@ export function loginRequest(provider, data) {
   };
 }
 
+export function twoFactorAuthentication(login, password, code) {
+  return {
+    type: TWO_FACTOR_AUTHENTICATION,
+    login,
+    password,
+    code,
+  };
+}
 
 export function unblockAccountInit(code) {
   return {

@@ -8,9 +8,7 @@ import AuthPhone from '../components/login/AuthPhone';
 
 class MFA extends Component {
   componentDidMount() {
-    if (localStorage.getItem('accessToken')) {
-      window.location.assign('/dashboard');
-    }
+
   }
 
   render() {

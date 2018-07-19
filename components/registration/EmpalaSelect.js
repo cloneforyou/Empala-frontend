@@ -10,7 +10,6 @@ import { closeModal } from "../../actions/dashboard";
 
 const EmpalaSelect = (props) => {
   const { currentColorScheme } = props;
-  console.log('currentColorScheme -==> ', currentColorScheme);
   return (
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
       <SelectField

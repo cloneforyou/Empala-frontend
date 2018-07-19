@@ -9,6 +9,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_REQUEST_FAIL,
   LOGIN_REQUEST_SUCCESS,
+  TWO_FACTOR_AUTHENTICATION,
   PASSWORD_UPDATE_REQUEST_FAIL,
   PASSWORD_UPDATE_REQUEST_SUCCESS,
   SEND_ACTIVATION_LINK_FAIL,
@@ -56,6 +57,10 @@ function auth(state = InitialState, action) {
       return { ...state, authError: action.err, loading: false };
     case LOGIN_REQUEST_SUCCESS:
       return { ...state, authError: false, loading: false };
+    case TWO_FACTOR_AUTHENTICATION:
+      return {
+        ...state,
+      };
     case SEND_ACTIVATION_LINK_SUCCESS:
       return {
         ...state,

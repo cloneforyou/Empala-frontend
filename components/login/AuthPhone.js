@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import logo from '../../static/images/login_logo.png';
-import EmpalaInput from '../registration/EmpalaInput';
+import { twoFactorAuthentication } from '../../actions/auth';
 
 class AuthPhone extends Component {
   constructor(props) {
@@ -14,10 +15,15 @@ class AuthPhone extends Component {
     this.setState({ code: e.target.value })
   }
 
-  handleLogin = (e) => {
-    if (e.key === 'Enter') {
-
-    }
+  handleLogin = () => {
+    const registrationData = localStorage.getItem('registrationData');
+    const data = JSON.parse(registrationData)
+    console.log('registrationData -==> ', data);
+    const login = data.index_username;
+    const password = data.index_password;
+    const { code } = this.state;
+    console.log('1 -==> ', 1);
+    this.props.twoFactorAuthentication(login, password, code);
   };
 
   render() {
@@ -27,8 +33,9 @@ class AuthPhone extends Component {
         <div className="login__content">
           <img className="login__logo" src={logo} alt="Logotype" />
           <h1 className="mfa__title">Two-Factor Authentication</h1>
-          <p className="mfa__sub-title">Enter the code we have just sent to the mobile phone
-            registered with your account.</p>
+          <p className="mfa__sub-title">
+            Enter the code we have just sent to the mobile phone registered with your account.
+          </p>
           <input
             type="text"
             placeholder={code}
@@ -48,4 +55,8 @@ class AuthPhone extends Component {
   }
 }
 
-export default AuthPhone;
+export default connect(state => {
+  console.log('state -==> ', state);
+}, dispatch => ({
+  twoFactorAuthentication: (login, password, code) => dispatch(twoFactorAuthentication(login, password, code))
+}))(AuthPhone);
