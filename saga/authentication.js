@@ -71,6 +71,7 @@ export function* twoFactorAuthentication({login, password, code}) {
     data: {
       login,
       password,
+      code
     },
   };
   try {
