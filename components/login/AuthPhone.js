@@ -7,7 +7,7 @@ class AuthPhone extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      code: '0000',
+      code: '000000',
     }
   }
 
@@ -18,11 +18,9 @@ class AuthPhone extends Component {
   handleLogin = () => {
     const registrationData = localStorage.getItem('registrationData');
     const data = JSON.parse(registrationData)
-    console.log('registrationData -==> ', data);
     const login = data.index_username;
     const password = data.index_password;
     const { code } = this.state;
-    console.log('1 -==> ', 1);
     this.props.twoFactorAuthentication(login, password, code);
   };
 
@@ -55,8 +53,6 @@ class AuthPhone extends Component {
   }
 }
 
-export default connect(state => {
-  console.log('state -==> ', state);
-}, dispatch => ({
+export default connect(state => {}, dispatch => ({
   twoFactorAuthentication: (login, password, code) => dispatch(twoFactorAuthentication(login, password, code))
 }))(AuthPhone);

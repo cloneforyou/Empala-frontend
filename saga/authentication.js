@@ -65,7 +65,6 @@ function* loginRequest(url, options) {
 }
 
 export function* twoFactorAuthentication({login, password, code}) {
-  console.log('login, password, code -==> ', login, password, code);
   const options = {
     method: 'POST',
     data: {
