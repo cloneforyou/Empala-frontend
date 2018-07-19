@@ -24,11 +24,17 @@ function* loginRequest(url, options) {
   // console.log(url, options)
   try {
     const result = yield call(request, url, options);
-    if (result.data.info === 'LOGGED_IN') {
+    // if (result.data.info === 'LOGGED_IN') {
+    //   yield put(loginSuccess());
+    //   localStorage.setItem('accessToken', result.data.data.tokens.access);
+    //   localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+    //   return window.location.assign('/dashboard');
+    // }
+    if (result.data.info === 'CODE_SENT') {
       yield put(loginSuccess());
-      localStorage.setItem('accessToken', result.data.data.tokens.access);
-      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
-      return window.location.assign('/dashboard');
+      // localStorage.setItem('accessToken', result.data.data.tokens.access);
+      // localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+      return window.location.assign('/mfa');
     }
     if (result.data.info === 'RELATED_ACCOUNT_NOT_FOUND') {
       yield put(toggleModal());
@@ -57,6 +63,29 @@ function* loginRequest(url, options) {
     } else yield put(loginFailed(err.message));
   }
 }
+
+export function* twoFactorAuthentication({login, password, code}) {
+  const options = {
+    method: 'POST',
+    data: {
+      login,
+      password,
+      code
+    },
+  };
+  try {
+    const result = yield call(request, '/api/auth/login', options);
+    if (result.data.info === 'LOGGED_IN') {
+      yield put(loginSuccess());
+      localStorage.setItem('accessToken', result.data.data.tokens.access);
+      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+      return window.location.assign('/dashboard');
+    }
+  } catch (err) {
+    console.log(' ** ', err);
+    yield put(loginFailed(err.message));
+  }
+};
 
 export function* authenticate({ provider, data }) {
   const login = yield select(state => state.auth.index_username);
@@ -90,7 +119,7 @@ export function* authenticate({ provider, data }) {
       };
       break;
     default:
-      url = '/api/auth/login';
+      url = '/api/auth/login?code=get';
       options.data = {
         login,
         password,
@@ -109,7 +138,7 @@ export function* authenticate({ provider, data }) {
       return false;
     }
   }
-    yield loginRequest(url, options);
+  yield loginRequest(url, options);
 }
 
 export function* refreshTokens() {
@@ -172,7 +201,7 @@ export function* getUserData() {
       'orders_list',
       'watch_lists',
       'positions',
-    // ].map(list => put(getETNAData(list))));
+      // ].map(list => put(getETNAData(list))));
     ].map(list => call(selectETNADataRequest, { payloadType: list })));
     yield put(startSocket());
     if (data.data.data.profile.should_update_password) {

@@ -12,6 +12,7 @@ import {
   changePassword,
   sendActivationLink,
   unblockAccount,
+  twoFactorAuthentication,
 } from './saga/authentication';
 import {
   CLEAR_REGISTRATION_DATA,
@@ -19,6 +20,7 @@ import {
   PASSWORD_UPDATE_REQUEST,
   SEND_ACTIVATION_LINK_REQUEST,
   UNBLOCK_REQUEST,
+  TWO_FACTOR_AUTHENTICATION,
 } from './constants/auth';
 
 
@@ -38,6 +40,7 @@ function* rootSaga() {
     takeLatest(LOGIN_REQUEST, authenticate),
     takeLatest(SEND_ACTIVATION_LINK_REQUEST, sendActivationLink),
     takeLatest(UNBLOCK_REQUEST, unblockAccount),
+    takeLatest(TWO_FACTOR_AUTHENTICATION, twoFactorAuthentication),
     takeLatest(PASSWORD_UPDATE_REQUEST, changePassword),
     takeEvery(CLEAR_REGISTRATION_DATA, clearLocalData),
   ]);

@@ -35,8 +35,11 @@ class EmpalaInput extends Component {
           underlineStyle={currentColorScheme === 'light' ?
             { borderBottom: `2px solid #E0E0E0` } :
             { borderBottom: `2px solid #676676` }}
-          
-          hintStyle={style.hintStyle}
+
+          hintStyle={currentColorScheme === 'light' ?
+            { 'color': '#4d4d4d' } :
+            { 'color': '#fff' }
+          }
           inputStyle={this.props.disabled ? style.inputStyleDisabled :
             (currentColorScheme === 'light' ?
                 { 'color': '#C5C5C5' } :
