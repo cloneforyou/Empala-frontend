@@ -55,47 +55,51 @@ class EmpalaTable extends Component {
       return false;
     });
   }
+  innerHeight(height) {
+    if (height) return `${height - 40}px`;
+    return 'auto';
+  }
   render() {
     const { widget } = this;
     const { sortDirection, sortColIndex } = this.state;
     const tableData = this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
-    // const tableData = this.props.tableData;
     return (
-
-<div style={{ overflow: 'scroll' }} >
-          <ul className="d-flex flex-row no-gutters list-unstyled">
-            {widget.headers.map((header, index) => (
-              <li
-                className={`col-auto ${this.props.striped && 'emp-table table-striped-row'}`}
-                key={header}
-                style={{ width: widget.attrs.width[index] || 'auto' }}
-              >
-                <div
-                  id={`col${index}`}
-                  className="emp-table__th"
-                  onClick={widget.attrs.sortable && widget.attrs.sortable[index] &&
+      <div style={{ overflowY: 'scroll', height: this.innerHeight(widget.height) }} >
+        <ul
+          className="d-flex flex-row no-gutters list-unstyled "
+          style={{ overflowX: 'scroll' }}
+        >
+          {widget.headers.map((header, index) => (
+            <li
+              className={`col-auto ${this.props.striped && 'emp-table table-striped-row'}`}
+              key={header}
+              style={{ width: widget.attrs.width[index] || 'auto' }}
+            >
+              <div
+                id={`col${index}`}
+                className="emp-table__th"
+                onClick={widget.attrs.sortable && widget.attrs.sortable[index] &&
                   (e => (this.props.callbacks && this.props.callbacks[index] ?
                     widget.callbacks[index](e) :
                     this.setSortType(index)))}
-                  style={{ cursor: widget.attrs.sortable && widget.attrs.sortable[index] ? 'pointer' : '' }}
-                >{header}
-                  {widget.attrs.sortable && widget.attrs.sortable[index] && <i className="icon-sort" />}
-                </div>
-                <div>{tableData.map((row, i) => (
-                  <EmpalaTableCell
-                    key={`${header}-${i}`}
-                    handleClick={row[index] ? row[index].onclick : null}
-                    value={row[index] && row[index].value}
-                    mark={row[index] && row[index].mark}
-                    color={row[index] && row[index].color}
-                  />
+                style={{ cursor: widget.attrs.sortable && widget.attrs.sortable[index] ? 'pointer' : '' }}
+              >{header}
+                {widget.attrs.sortable && widget.attrs.sortable[index] && <i className="icon-sort" />}
+              </div>
+              <div>{tableData.map((row, i) => (
+                <EmpalaTableCell
+                  key={`${header}-${i}`}
+                  handleClick={row[index] ? row[index].onclick : null}
+                  value={row[index] && row[index].value}
+                  mark={row[index] && row[index].mark}
+                  color={row[index] && row[index].color}
+                />
                   ))}
-                </div>
-              </li>
+              </div>
+            </li>
               ))}
-          </ul>
-
-    </div>
+        </ul>
+      </div>
     );
   }
 }

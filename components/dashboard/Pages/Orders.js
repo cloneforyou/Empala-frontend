@@ -5,8 +5,9 @@ import { widgetsOrders } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
 import WatchlistsTable from '../Widget/WatchlistsTable';
+import OrdersTable from '../Widget/OrdersTable';
 
-class Orders extends React.Component {
+export default class Orders extends React.Component {
 
   getTableDataFromOrders = (orders, title) => {
     let filteredOrders = [];
@@ -29,20 +30,7 @@ class Orders extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          {this.props.ordersList &&
-          widgetsOrders.map(widget => (
-            <WidgetTable
-              widget={{
-                ...widget,
-                tables: [{
-                  ...widget.tables[0],
-                  data: this.getTableDataFromOrders(this.props.ordersList, widget.title)
-                }],
-              }}
-              key={widget.id}
-            />
-          ))
-          }
+          <OrdersTable />
           <WatchlistsTable />
         </div>
         {/* For debug. TODO  Remove later. */}
@@ -53,21 +41,21 @@ class Orders extends React.Component {
   }
 }
 
-Orders.defaultProps = {
-  ordersList: [],
-  watchLists: [],
-};
-
-export default connect(
-  state => ({
-    listNumber: state.dashboard.watchListNumber || 0,
-    ordersList: state.dashboard.parsedOrdersList,
-    userData: state.dashboard.userData,
-  }),
-  dispatch => ({
-      subscribeQuotes: () => dispatch(subscribeQuotes()),
-      unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
-      subscribeWatchlists: () => dispatch(subscribeWatchlists()),
-    }
-  ),
-)(Orders);
+// Orders.defaultProps = {
+//   ordersList: [],
+//   watchLists: [],
+// };
+//
+// export default connect(
+//   state => ({
+//     listNumber: state.dashboard.watchListNumber || 0,
+//     ordersList: state.dashboard.parsedOrdersList,
+//     userData: state.dashboard.userData,
+//   }),
+//   dispatch => ({
+//       subscribeQuotes: () => dispatch(subscribeQuotes()),
+//       unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
+//       subscribeWatchlists: () => dispatch(subscribeWatchlists()),
+//     }
+//   ),
+// )(Orders);
