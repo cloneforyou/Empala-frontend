@@ -16,6 +16,7 @@ import RegistrationModal from './RegistrationModal';
 import logo from '../../static/images/login_logo.png';
 import FacebookAuth from '../social/auth/FaceBookAuth';
 import LinkedInAuth from '../social/auth/LinkedInAuth';
+import FaSpinner from 'react-icons/lib/fa/spinner';
 
 const isNode = require('detect-node');
 
@@ -168,7 +169,7 @@ const Login = props => {
                 <LinkedInAuth handlelogin={props.handleLogin} />
               </div>
             ) :
-              <div>Loading...</div> }
+              <FaSpinner size={40} className="spinner" /> }
           </div>
 
           <div className="text-center">
