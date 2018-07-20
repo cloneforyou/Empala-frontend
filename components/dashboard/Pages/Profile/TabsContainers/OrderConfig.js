@@ -8,13 +8,12 @@ import {
   setInputFieldValueById,
   toggleCheckboxById,
 } from '../../../../../actions/registration';
-import { setColorScheme } from '../../../../../actions/dashboard';
+import { saveColorTheme } from '../../../../../actions/dashboard';
 
 class OrderConfig extends Component {
   constructor(props) {
     super(props);
   }
-
 
   render() {
     return (
@@ -55,7 +54,7 @@ class OrderConfig extends Component {
                   ]}
                   label="Current color scheme"
                   value={this.props.currentColorScheme}
-                  handleChange={(id, value) => this.props.setColorScheme(value)}
+                  handleChange={(id, value) => this.props.saveColorTheme(value)}
                   errorText={this.props.fieldsErrors.order_config_theme}
                   hint="Current color scheme"
                 />
@@ -172,6 +171,6 @@ export default connect(
     setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
     setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
     toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
-    setColorScheme: colorScheme => dispatch(setColorScheme(colorScheme)),
+    saveColorTheme: colorScheme => dispatch(saveColorTheme(colorScheme)),
   })),
 )(OrderConfig);

@@ -20,6 +20,9 @@ import {
   DELETE_ACCOUNT_SUCCESS,
   LOGOUT,
   SET_COLOR_SCHEME,
+  SAVE_COLOR_SCHEME,
+  SET_COLOR_SCHEME_SUCCESS,
+  SET_COLOR_SCHEME_ERROR,
   GET_ORDERS_LIST,
   SET_ORDERS_LIST,
   GET_ETNA_DATA,
@@ -162,6 +165,16 @@ export const logout = () => ({
 export const setColorScheme = colorScheme => ({
   type: SET_COLOR_SCHEME,
   colorScheme,
+});
+
+export const saveColorTheme = colorTheme => ({
+  type: SAVE_COLOR_SCHEME,
+  colorTheme,
+});
+
+export const setColorSchemeError = err => ({
+  type: SET_COLOR_SCHEME_ERROR,
+  err,
 });
 
 export const getOrdersList = () => ({
