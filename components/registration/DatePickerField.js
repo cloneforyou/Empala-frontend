@@ -32,13 +32,13 @@ const DatePickerField = (props) => {
           errorText={errorText}
           inputStyle={props.disabled ? style.inputStyleDisabled :
             (currentColorScheme === 'light' ?
-                { color: '#C5C5C5' } :
+                { color: '#808895' } :
                 { color: '#cacaca' }
             )
           }
           firstDayOfWeek={0}
           disabled={props.disabled}
-          textFieldStyle={{ width: '100%' }}
+          textFieldStyle={{ width: '100%', color: '#808895', fontSize: '14px' }}
           underlineDisabledStyle={style.underlineDisabledStyle}
           onChange={(none = null, date) => props.handleDatePick(props.id, date)}
           value={props.value && props.value !== 'Not provided' ? new Date(props.value) : null}
