@@ -20,6 +20,7 @@ import {
   ADDRESS_INFO_REQUEST,
   VALIDATE_FIELD_VALUE,
   EDITABLE_PART, GET_USER_ID_REQUEST, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
+  SHOW_POPUP_PIN,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -180,9 +181,16 @@ export function setUserID(id) {
     id,
   };
 }
+
 export function failUserID(err) {
   return {
     type: GET_USER_ID_REQUEST_FAIL,
     err,
+  };
+}
+
+export function showPopupPIN() {
+  return {
+    type: SHOW_POPUP_PIN,
   };
 }

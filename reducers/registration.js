@@ -15,6 +15,7 @@ import {
   REGISTRATION_SUBMIT_REQUEST,
   REGISTRATION_SUBMIT_FAIL,
   REGISTRATION_SUBMIT_SUCCESS, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
+  SHOW_POPUP_PIN,
 } from '../constants/registration';
 
 // import { generateId } from '../utils/registrationUtils';
@@ -36,6 +37,7 @@ const initialState = {
   userBackToPart: false,
   loading: false,
   id: false,
+  showPopupPIN: false,
 };
 
 function registration(state = initialState, action) {
@@ -107,6 +109,11 @@ function registration(state = initialState, action) {
       return {
         ...state,
         id: action.id,
+      };
+    case SHOW_POPUP_PIN:
+      return {
+        ...state,
+        showPopupPIN: true,
       };
     default:
       return state;
