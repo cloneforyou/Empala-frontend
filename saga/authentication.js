@@ -17,6 +17,7 @@ import {
   setAccountBlocked, toggleModal,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
+import { setColorScheme } from '../actions/dashboard';
 import { selectETNADataRequest } from './dashboard';
 
 
@@ -197,6 +198,7 @@ export function* getUserData() {
   try {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
+    yield put(setColorScheme(data.data.data.profile.MemberPreferences.theme));
     yield all([
       'orders_list',
       'watch_lists',
