@@ -27,7 +27,7 @@ const EmpalaSelect = (props) => {
         }
         labelStyle={props.disabled ? style.inputStyleDisabled :
           (currentColorScheme === 'light' ?
-              { 'color': '#C5C5C5' } :
+              { 'color': '#808895' } :
               { 'color': '#cacaca' }
           )
         }

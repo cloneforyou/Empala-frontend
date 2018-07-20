@@ -37,12 +37,12 @@ class EmpalaInput extends Component {
             { borderBottom: `2px solid #676676` }}
 
           hintStyle={currentColorScheme === 'light' ?
-            { 'color': '#4d4d4d' } :
+            { 'color': '#C5C5C5' } :
             { 'color': '#fff' }
           }
           inputStyle={this.props.disabled ? style.inputStyleDisabled :
             (currentColorScheme === 'light' ?
-                { 'color': '#C5C5C5' } :
+                { 'color': '#808895' } :
                 { 'color': '#cacaca' }
             )
           }
@@ -56,7 +56,8 @@ class EmpalaInput extends Component {
           margin="none"
           onKeyPress={this.props.onKeyPress}
         >
-          {this.props.mask && <InputMask
+          {this.props.mask &&
+          <InputMask
             mask={this.props.mask}
             maskChar=""
             formatChars={{
@@ -66,7 +67,8 @@ class EmpalaInput extends Component {
               '*': '[A-Za-z0-9]',
             }}
             value={this.props.value}
-          />}
+          />
+          }
         </TextField>
       </div>
     );
