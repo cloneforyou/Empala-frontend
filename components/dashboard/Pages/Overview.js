@@ -5,11 +5,14 @@ import WidgetTable from '../Widget/WidgetTable';
 import WidgetNews from '../Widget/WidgetNews';
 import WidgetAdvertisement from '../Widget/WidgetAdvertisement';
 import { uniqueId } from 'lodash';
+import FinancialCapitalTable from '../Widget/FinancialCapitalTable';
+import { parsePositionsTablesData } from '../Widget/PositionsTable';
 
 function mapStateToProps(state) {
   return {
     userData: state.dashboard.userData.data || [],
     ordersList: state.dashboard.parsedOrdersList || [],
+    positions: state.dashboard.positions ? state.dashboard.positions : [],
   };
 }
 
@@ -46,22 +49,31 @@ class Overview extends Component {
         news: this.props.userData['internal_news'],
       },
     ];
+    console.log('------->>>>>>', parsePositionsTablesData(widgetsOverflow[0].tables, this.props.positions))
     return (
       <div className="container-fluid">
         <div className="row">
+          <FinancialCapitalTable />
+          {/*<WidgetTable*/}
+            {/*overview*/}
+            {/*widget={{ ...widgetsOverflow[0],*/}
+              {/*tables: parsePositionsTablesData(widgetsOverflow[0].tables, this.props.positions)*/}
+            {/*}}*/}
+
+          {/*/>*/}
           {
-            widgetsOverflow.map(widget => {
+            widgetsOverflow.slice(1).map(widget => {
               const tableData = this.mapWidgetTitleToData(widget.title) || widget.tables[0].data;
               return (<WidgetTable
-                overview
-                widget={{
-                  ...widget,
+              overview
+              widget={{
+              ...widget,
                   tables: [{
-                    ...widget.tables[0],
-                    data: tableData,
-                  }, ...widget.tables.slice(1)],
-                }}
-                key={widget.id} />
+                  ...widget.tables[0],
+                  data: tableData,
+                }, ...widget.tables.slice(1)],
+              }}
+              key={widget.id} />
             )
           })
           }

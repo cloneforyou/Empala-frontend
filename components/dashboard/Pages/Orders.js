@@ -9,23 +9,6 @@ import OrdersTable from '../Widget/OrdersTable';
 
 export default class Orders extends React.Component {
 
-  getTableDataFromOrders = (orders, title) => {
-    let filteredOrders = [];
-    if (title === 'Orders') {
-      filteredOrders = filter(
-        orders,
-        order => order.status === 'Filled' || order.status === 'PartiallyFilled',
-      );
-    }
-      if (title === 'Fills/cancels') {
-        filteredOrders = filter(
-          orders,
-          order => order.status !== 'Filled',
-        );
-    }
-    return filteredOrders.map(order => order.values);
-  };
-
   render() {
     return (
       <div className="container-fluid">
@@ -41,21 +24,3 @@ export default class Orders extends React.Component {
   }
 }
 
-// Orders.defaultProps = {
-//   ordersList: [],
-//   watchLists: [],
-// };
-//
-// export default connect(
-//   state => ({
-//     listNumber: state.dashboard.watchListNumber || 0,
-//     ordersList: state.dashboard.parsedOrdersList,
-//     userData: state.dashboard.userData,
-//   }),
-//   dispatch => ({
-//       subscribeQuotes: () => dispatch(subscribeQuotes()),
-//       unsubscribeQuotes: () => dispatch(unsubscribeQuotes()),
-//       subscribeWatchlists: () => dispatch(subscribeWatchlists()),
-//     }
-//   ),
-// )(Orders);

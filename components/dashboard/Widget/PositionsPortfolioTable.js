@@ -80,25 +80,24 @@ class PositionsPortfolioTable extends React.Component {
 
   render() {
     const positions = this.updatePositionsData(this.positions, this.props.quotes);
-    console.log(positions)
     return (
-        <div
-          className={`widget-col col-lg-${this.widget.col}`}
-          key={this.widget.id}
-        >
-          <div className="widget" style={{ maxHeight: `${this.widget.height}px` }}>
-            <WidgetHead
-              widget={this.widget}
+      <div
+        className={`widget-col col-lg-${this.widget.col}`}
+        // key={this.widget.id}
+      >
+        <div className="widget" style={{ maxHeight: `${this.widget.height}px` }}>
+          <WidgetHead
+            widget={this.widget}
+          />
+          <div style={{ width: '100%' }}>
+            <EmpalaTable
+              tableName="dashboard_positions_portfolio"
+              tableData={positions}
+              striped
             />
-            <div style={{ width: '100%' }}>
-              <EmpalaTable
-                tableName="dashboard_positions_portfolio"
-                tableData={positions}
-                striped
-              />
-            </div>
           </div>
         </div>
+      </div>
     );
   }
 }

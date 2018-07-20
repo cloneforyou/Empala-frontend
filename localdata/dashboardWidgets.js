@@ -11,6 +11,7 @@ export const widgetsOverflow = [
     tables: [
       {
         id: uniqueId(),
+        title: 'financialCapital',
         headers: [
           {
             title: 'Exposure',
