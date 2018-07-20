@@ -202,6 +202,89 @@ const tableHeaders = {
       ],
     },
   },
+  overview_financial_capital_exposure: {
+    id: 'overview_financial_capital_exposure',
+    title: 'Financial capital',
+    icon: 'community',
+    col: 5,
+    height: 390,
+    padding_left: 10,
+    headers: [
+      'Exposure',
+      'Value',
+      'Day chg',
+    ],
+    attrs: {
+      width: [
+        '118px',
+        '100px',
+        '60px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_financial_capital_allocation: {
+    id: 'overview_financial_capital_allocation',
+    height: 390,
+    // padding_left: 10,
+    headers: [
+      'Allocation',
+      'Domestic',
+      'Foreign',
+    ],
+    attrs: {
+      width: [
+        '125px',
+        '95px',
+        '95px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_financial_capital_performance_st: {
+    id: 'overview_financial_capital_performance',
+    title: 'Financial capital performance',
+    col: 5,
+    height: 390,
+    padding_left: 10,
+    headers: [
+      'ST performance',
+      '% change',
+      'Vs indexes',
+    ],
+    attrs: {
+      width: [
+        '118px',
+        '100px',
+        '60px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_financial_capital_performance_lt: {
+    id: 'overview_financial_capital_performance',
+    title: 'Financial capital performance',
+    col: 5,
+    height: 390,
+    // padding_left: 10,
+    headers: [
+      'LT Performance',
+      '% change',
+      'Vs indexes',
+    ],
+    attrs: {
+      width: [
+        '125px',
+        '95px',
+        '95px',
+      ],
+      sortable: [
+      ],
+    },
+  },
 };
 
 export const getFormattedNumber = number => number.toString().replace(/[^0-9]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');

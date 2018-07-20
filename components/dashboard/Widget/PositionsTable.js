@@ -27,8 +27,19 @@ const rawNames = {
   portfolio_1pc_Rho: 'Portfolio 1% Rho',
   annualized_carry: 'Annualized Carry',
   credit_available: 'Credit Available',
+  emara_short: 'EMARA & MM',
+  currencies_short: 'Currencies & MM',
+  governmentBonds_short: 'Govt bonds',
+  corporateBonds_short: 'Corp bonds',
+  hybrids_short: 'Hybrid & others',
+  total_ac: 'Total a/c value',
+  adjusted_net_position_short: 'Adj net position',
+  adjusted_gross_position_short: 'Adj gross position',
 };
-const parsePositionsTablesData = (tables, data) => {
+
+
+
+export const parsePositionsTablesData = (tables, data) => {
   if (tables.length > 0) {
     const calculateDomestic = reduce(data, (sum, value, index) => sum + data[index].CostBasis, 0);
     const calculateDomesticByType = (type) => {
@@ -93,6 +104,16 @@ const parsePositionsTablesData = (tables, data) => {
       creditAnalysis: {
         credit_available: '--',
       },
+      financialCapital: {
+        total_ac: '--',
+        net_position: '--',
+        adjusted_net_position_short: '--',
+        gross_position: '--',
+        adjusted_gross_position_short: '--',
+        estimated_var: '--',
+        annualized_carry: '--',
+        credit_available: '--',
+      },
     };
     const foreign = {
       notional: {
@@ -149,6 +170,16 @@ const parsePositionsTablesData = (tables, data) => {
       creditAnalysis: {
         credit_available: '--',
       },
+      financialCapital: {
+        total_ac: '--',
+        net_position: '--',
+        adjusted_net_position_short: '--',
+        gross_position: '--',
+        adjusted_gross_position_short: '--',
+        estimated_var: '--',
+        annualized_carry: '--',
+        credit_available: '--',
+      },
     };
     const getChangeByTitleAndType = title => type => '--';
     const getDomesticByTitleAndType = title => type => domestic[title][type];
@@ -198,6 +229,18 @@ const parsePositionsTablesData = (tables, data) => {
           'annualized_carry',
         ];
       }
+      if (title === 'financialCapital') {
+        types = [
+          'total_ac',
+          'net_position',
+          'adjusted_net_position_short',
+          'gross_position',
+          'adjusted_gross_position_short',
+          'estimated_var',
+          'annualized_carry',
+          'credit_available',
+        ];
+      }
       return types.map((type) => {
         const calculatedDomestic = getDomesticByTitleAndType(title)(type);
         const calculatedForeign = getForeignByTitleAndType(title)(type);
@@ -210,6 +253,17 @@ const parsePositionsTablesData = (tables, data) => {
             foreign: Math.round(calculatedForeign * 10000 / calculatedTotal) / 100 || '--',
             total: 100,
             dayChange: getChangeByTitleAndType(title)(type),
+          };
+        }
+        if (title === 'financialCapital') {
+          return {
+            id: uniqueId(),
+            exposure: getExposureByType(type),
+            value: calculatedTotal,
+            dayChange: getChangeByTitleAndType(title)(type),
+            allocation: 'allocation',
+            domestic: Math.round(calculatedDomestic * 10000 / calculatedTotal) / 100 || '--',
+            foreign: Math.round(calculatedForeign * 10000 / calculatedTotal) / 100 || '--',
           };
         }
         return {
