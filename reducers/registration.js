@@ -16,6 +16,8 @@ import {
   REGISTRATION_SUBMIT_FAIL,
   REGISTRATION_SUBMIT_SUCCESS, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
   SHOW_POPUP_PIN,
+  VERIFY_SEND_REQUEST,
+  VERIFY_SEND_SUCCESS,
 } from '../constants/registration';
 
 // import { generateId } from '../utils/registrationUtils';
@@ -38,6 +40,7 @@ const initialState = {
   loading: false,
   id: false,
   showPopupPIN: false,
+  verifyLoading: false,
 };
 
 function registration(state = initialState, action) {
@@ -114,6 +117,17 @@ function registration(state = initialState, action) {
       return {
         ...state,
         showPopupPIN: true,
+      };
+    case VERIFY_SEND_REQUEST:
+      return {
+        ...state,
+        verifyLoading: true,
+      };
+    case VERIFY_SEND_SUCCESS:
+      console.log('action -==> ', action);
+      return {
+        ...state,
+        verifyLoading: false,
       };
     default:
       return state;

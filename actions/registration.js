@@ -21,6 +21,8 @@ import {
   VALIDATE_FIELD_VALUE,
   EDITABLE_PART, GET_USER_ID_REQUEST, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
   SHOW_POPUP_PIN,
+  VERIFY_SEND_REQUEST,
+  VERIFY_SEND_SUCCESS,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -192,5 +194,18 @@ export function failUserID(err) {
 export function showPopupPIN() {
   return {
     type: SHOW_POPUP_PIN,
+  };
+}
+
+export function verifySendRequest() {
+  return {
+    type: VERIFY_SEND_REQUEST,
+  };
+}
+
+export function verifySendSuccess() {
+  console.log('verifySendSuccess -==> ', );
+  return {
+    type: VERIFY_SEND_SUCCESS,
   };
 }

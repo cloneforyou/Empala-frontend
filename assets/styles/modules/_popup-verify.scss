@@ -45,6 +45,7 @@
     border-radius: 3px;
     font-weight: 600;
     box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+    cursor: pointer;
     @include fontSize(16px);
     &:hover, &:focus {
       background: transparent;
@@ -53,7 +54,7 @@
   }
   &__btn-default {
     background: none;
-    @include button-reset()
+    @include button-reset();
     @include fontSize(18px);
   }
 }

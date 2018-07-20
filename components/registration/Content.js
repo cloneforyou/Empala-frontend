@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import NavButtons from './NavButtons';
 import {
@@ -31,7 +32,8 @@ function mapStateToProps(state) {
     errorMessage: state.registration.errorMessage || '',
     showErrorModal: state.registration.showErrorModal,
     errors: state.fieldsErrors,
-    showPopupPIN: state.registration.showPopupPIN
+    showPopupPIN: state.registration.showPopupPIN,
+    verifyLoading: state.registration.verifyLoading
   };
 }
 
@@ -137,6 +139,17 @@ class Content extends PureComponent {
 
     return (
       <div className="onboard">
+        {
+          this.props.verifyLoading &&
+          <div className="loader__wrap">
+            <div className="loader">
+              <CircularProgress
+                size={100}
+                style={{ color: '#98c73a' }}
+              />
+            </div>
+          </div>
+        }
         <div className="onboard__container">
           <div className="row no-gutters onboard__col">
             <div className="col-6">

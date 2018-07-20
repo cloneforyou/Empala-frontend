@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import iconPadlock from '../../static/images/dashboard-icons/icon-padlock.svg';
-
-;
+import { verifySendRequest } from '../../actions/registration'
 
 class PopupPIN extends Component {
   constructor(props) {
@@ -42,7 +41,12 @@ class PopupPIN extends Component {
         </div>*/}
         </div>
         <div className="popup-verify__foot buttons-row">
-          <button className="popup-verify__btn-green">Send</button>
+          <button
+            className="popup-verify__btn-green"
+            onClick={() => this.props.verifySendRequest()}
+          >
+            Send
+          </button>
           <button className="popup-verify__btn-default">Cancel</button>
         </div>
       </div>
@@ -51,6 +55,6 @@ class PopupPIN extends Component {
 }
 
 export default connect((state) => ({
-  showPopupPIN: state.registration.showPopupPIN
-}), (dispatch) => {
-})(PopupPIN);
+}), (dispatch) => ({
+  verifySendRequest: () => dispatch(verifySendRequest())
+}))(PopupPIN);

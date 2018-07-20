@@ -6,6 +6,7 @@ import {
   setInputFieldValueById,
   setTabName,
   setTabPageIndex, setUserID,
+  verifySendSuccess,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -18,6 +19,8 @@ import {
   SET_MEMBER_DOCUMENT_TYPE,
   VALIDATE_FIELD_VALUE,
   GET_USER_ID_REQUEST,
+  VERIFY_SEND_REQUEST,
+  VERIFY_SEND_SUCCESS,
 } from '../constants/registration';
 import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -129,6 +132,30 @@ export function* getUserID() {
   }
 }
 
+export function* verifySendRequest() {
+  const id = localStorage.getItem('id');
+  const url = '/api/auth/email/send';
+  const options = {
+    method: 'POST',
+    data: {
+      email: 'i.martyshko@dunice.net',
+      id: '2',
+    },
+  };
+
+  try {
+    const res = yield call(request, url, options);
+    console.log('verifySendRequest res -==> ', res);
+    if (res.status === '200') {
+      console.log('ok -==> ',);
+    }
+
+    yield put(verifySendSuccess());
+  } catch (err) {
+    console.log('verifySendRequest ERR -==> ', err);
+  }
+}
+
 export default function* registrationSaga() {
   yield all([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
@@ -141,5 +168,8 @@ export default function* registrationSaga() {
     takeLatest(GET_USER_ID_REQUEST, getUserID),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields),
+    takeLatest(VERIFY_SEND_REQUEST, verifySendRequest),
+    // takeLatest(VERIFY_SEND_SUCCESS, verifySendSuccess),
   ]);
 }
+
