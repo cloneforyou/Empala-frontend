@@ -67,7 +67,7 @@ class EmpalaTable extends Component {
       <div style={{ overflowY: 'scroll', maxHeight: this.innerHeight(widget.height) }} >
         <ul
           className="d-flex flex-row no-gutters list-unstyled "
-          style={{ overflowX: 'scroll' }}
+          style={{ overflowX: 'scroll', margin: 0, padding: 0 }}
         >
           {widget.headers.map((header, index) => (
             <li
