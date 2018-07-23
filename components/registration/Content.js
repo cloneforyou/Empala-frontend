@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import NavButtons from './NavButtons';
 import {
@@ -19,6 +20,7 @@ import InformationPage from './InformationPage';
 import FinalReviewPage from './FinalReviewPage';
 import AgreementPage from './AgreementPage';
 import ModalErrorWindow from './ModalErrorWindow';
+import PopupPIN from './PopupPIN';
 
 function mapStateToProps(state) {
   return {
@@ -30,6 +32,8 @@ function mapStateToProps(state) {
     errorMessage: state.registration.errorMessage || '',
     showErrorModal: state.registration.showErrorModal,
     errors: state.fieldsErrors,
+    showPopupPIN: state.registration.showPopupPIN,
+    verifyLoading: state.registration.verifyLoading
   };
 }
 
@@ -126,14 +130,26 @@ class Content extends PureComponent {
         fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox');
       }
     } else if (this.props.tabName === 'profile' && this.props.tabIndex === 1 &&
-        this.props.registrationData['profile_employment_employment_type'] !== 'Employed') {
+      this.props.registrationData['profile_employment_employment_type'] !== 'Employed') {
       fieldNames = ['profile_employment_employment_type'];
     }
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex - 1);
+    const { showPopupPIN } = this.props;
 
     return (
       <div className="onboard">
+        {
+          this.props.verifyLoading &&
+          <div className="loader__wrap">
+            <div className="loader">
+              <CircularProgress
+                size={100}
+                style={{ color: '#98c73a' }}
+              />
+            </div>
+          </div>
+        }
         <div className="onboard__container">
           <div className="row no-gutters onboard__col">
             <div className="col-6">
@@ -151,9 +167,13 @@ class Content extends PureComponent {
             </div>
             <div className="col-6">
               <div className="onboard__right-block">
-                <div className={`onboard__right-block--center ${this.props.tabName === 'experience' && 'experience-page'}`}>
+                <div
+                  className={`onboard__right-block--center ${this.props.tabName === 'experience' && 'experience-page'}`}>
                   {pageContent.tabContent}
                 </div>
+                {
+                  showPopupPIN && <PopupPIN />
+                }
                 <div className="onboard__right-block--bottom">
                   <NavButtons
                     fieldNames={fieldNames}

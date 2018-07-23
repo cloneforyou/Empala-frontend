@@ -31,7 +31,6 @@ const ModalWindow = (props) => {
       actionsContainerStyle={style.actionsContainer}
       contentStyle={style.contentStyle}
       overlayStyle={style.overlayDialogStyle}
-      // style={this.styles.style}
     >
       Sorry we are not yet able to open accounts with
       this characteristic but we are working on it.
