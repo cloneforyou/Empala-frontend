@@ -257,8 +257,8 @@ const tableHeaders = {
     attrs: {
       width: [
         '118px',
-        '100px',
-        '60px',
+        '75px',
+        '85px',
       ],
       sortable: [
       ],
@@ -287,11 +287,21 @@ const tableHeaders = {
   },
 };
 
+
 export const getFormattedNumber = number => number.toString().replace(/[^0-9]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+export const formatNumberWithFixedPoint = (number, n) => {
+  if (!n || n === 0) return getFormattedNumber(Math.round(number));
+  const vals = Number(number).toFixed(n).split('.');
+  return [getFormattedNumber(vals[0]), vals[1]].join('.');
+};
 
 /* ========= parses the date from specified string ======== */
 /* ========= like '/Date(1530076567409+0000)/' ==========  */
 export const parseOrderDate = str => new Date(parseInt(str.match(/\d+(\+\d+)?/)[0], 10)).toLocaleString();
+const parseDateString = (str, pattern) => {
+  if (!pattern) return moment(str).format('DD-MM-YYYY');
+  return moment(str).format(pattern);
+};
 
 // TODO maybe will need some correction when watchlist appears
 export const calculateOrderDistance = (price, lastPrice) =>
