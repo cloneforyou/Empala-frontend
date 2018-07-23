@@ -12,7 +12,6 @@ import {
   setTabName,
   setTabPageIndex,
   validateFieldValue,
-  showPopupPIN,
   checkEmailVerificationRequest,
 } from '../../actions/registration';
 import ignoredFields from '../../localdata/noValidatedFiels';
@@ -47,8 +46,6 @@ const NavButtons = (props) => {
   function handleChangePage(arrow) {
     if (props.tabName === 'member' && props.tabIndex === 2 && arrow === 'forward') {
       props.checkEmailVerificationRequest();
-      // props.showPopupPIN();
-      // return;
     }
     props.changeTabPage(props.tabName, props.tabIndex, arrow);
   }

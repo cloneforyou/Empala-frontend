@@ -11,9 +11,6 @@
   z-index: 9;
   text-align: center;
   min-height: 412px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   &__title {
     @include fontSize(18px);
     font-weight: 600;
@@ -31,7 +28,12 @@
     margin-bottom: 30px;
   }
   &__body {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &_h-335 {
+      height: 335px;
+    }
   }
   &__foot {
     padding: 0 20px;
