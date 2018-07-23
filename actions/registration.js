@@ -20,9 +20,15 @@ import {
   ADDRESS_INFO_REQUEST,
   VALIDATE_FIELD_VALUE,
   EDITABLE_PART, GET_USER_ID_REQUEST, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
+  CHECK_EMAIL_VERIFICATION,
   SHOW_POPUP_PIN,
+  CLOSE_POPUP_PIN,
   VERIFY_SEND_REQUEST,
   VERIFY_SEND_SUCCESS,
+  VERIFY_SEND_FAILURE,
+  SEND_CODE_VERIFY,
+  SEND_CODE_VERIFY_SUCCESS,
+  SEND_CODE_VERIFY_FAILURE,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -191,9 +197,21 @@ export function failUserID(err) {
   };
 }
 
+export function checkEmailVerificationRequest() {
+  return {
+    type: CHECK_EMAIL_VERIFICATION,
+  };
+}
+
 export function showPopupPIN() {
   return {
     type: SHOW_POPUP_PIN,
+  };
+}
+
+export function closePopupPIN() {
+  return {
+    type: CLOSE_POPUP_PIN,
   };
 }
 
@@ -204,8 +222,33 @@ export function verifySendRequest() {
 }
 
 export function verifySendSuccess() {
-  console.log('verifySendSuccess -==> ', );
   return {
     type: VERIFY_SEND_SUCCESS,
   };
+}
+
+export function verifySendFailure(err) {
+  return {
+    type: VERIFY_SEND_FAILURE,
+  };
+}
+
+export function sendCodeVerify(code) {
+  return {
+    type: SEND_CODE_VERIFY,
+    code,
+  };
+}
+
+export function sendCodeVerifySuccess() {
+  return {
+    type: SEND_CODE_VERIFY_SUCCESS,
+  };
+}
+
+export function sendCodeVerifyFailure(err) {
+  return {
+    type: SEND_CODE_VERIFY_FAILURE,
+    err
+  }
 }

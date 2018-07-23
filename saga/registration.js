@@ -7,6 +7,10 @@ import {
   setTabName,
   setTabPageIndex, setUserID,
   verifySendSuccess,
+  verifySendFailure,
+  sendCodeVerifySuccess,
+  sendCodeVerifyFailure,
+  showPopupPIN,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -20,7 +24,8 @@ import {
   VALIDATE_FIELD_VALUE,
   GET_USER_ID_REQUEST,
   VERIFY_SEND_REQUEST,
-  VERIFY_SEND_SUCCESS,
+  SEND_CODE_VERIFY,
+  CHECK_EMAIL_VERIFICATION,
 } from '../constants/registration';
 import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -134,51 +139,64 @@ export function* getUserID() {
 
 export function* verifySendRequest() {
   const id = localStorage.getItem('id');
+  const email = yield select(state => state.registration.registrationData.member_account_email);
   const url = '/api/auth/email/send';
   const options = {
     method: 'POST',
     data: {
-      email: 'i.martyshko@dunice.net',
-      id: '2',
+      email,
+      id,
     },
   };
 
   try {
     const res = yield call(request, url, options);
-    console.log('verifySendRequest res -==> ', res);
-    if (res.status === '200') {
-      console.log('ok -==> ',);
-    }
-
     yield put(verifySendSuccess());
   } catch (err) {
-    console.log('verifySendRequest ERR -==> ', err);
+    yield put(verifySendFailure(err))
   }
 }
 
 
 export function* verifySendCodeRequest() {
+  const email = yield select(state => state.registration.registrationData.member_account_email);
   const id = localStorage.getItem('id');
+  const code = yield select(state => state.registration.codeVerify);
   const url = '/api/auth/email/verify';
   const options = {
     method: 'POST',
     data: {
-      email: 'i.martyshko@dunice.net',
-      id: '2',
-      code: '',
+      email,
+      id,
+      code,
     },
   };
-
   try {
     const res = yield call(request, url, options);
-    console.log('verifySendRequest res -==> ', res);
-    if (res.status === '200') {
-      console.log('ok -==> ',);
-    }
-
-    yield put(verifySendSuccess());
+    yield put(sendCodeVerifySuccess());
   } catch (err) {
-    console.log('verifySendRequest ERR -==> ', err);
+    yield put(sendCodeVerifyFailure(err));
+  }
+}
+
+export function* checkEmailVerificationRequest() {
+  const email = yield select(state => state.registration.registrationData.member_account_email);
+  const id = localStorage.getItem('id');
+  const url = '/api/auth/email/checkVerify';
+  const options = {
+    method: 'POST',
+    data: {
+      email,
+      id,
+    },
+  };
+  try {
+    const res = yield call(request, url, options);
+    if (res.data.info === 'EMAIL_NOT_VERIFIED') {
+      yield put(showPopupPIN())
+    }
+  } catch (err) {
+    console.log('checkEmailVerificationRequest ERR -==> ', err);
   }
 }
 
@@ -195,6 +213,8 @@ export default function* registrationSaga() {
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields),
     takeLatest(VERIFY_SEND_REQUEST, verifySendRequest),
+    takeLatest(SEND_CODE_VERIFY, verifySendCodeRequest),
+    takeLatest(CHECK_EMAIL_VERIFICATION, checkEmailVerificationRequest),
   ]);
 }
 

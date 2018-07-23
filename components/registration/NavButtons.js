@@ -13,6 +13,7 @@ import {
   setTabPageIndex,
   validateFieldValue,
   showPopupPIN,
+  checkEmailVerificationRequest,
 } from '../../actions/registration';
 import ignoredFields from '../../localdata/noValidatedFiels';
 
@@ -45,10 +46,11 @@ const NavButtons = (props) => {
 
   function handleChangePage(arrow) {
     if (props.tabName === 'member' && props.tabIndex === 2 && arrow === 'forward') {
-      props.showPopupPIN()
-      return
+      props.checkEmailVerificationRequest();
+      // props.showPopupPIN();
+      // return;
     }
-    props.changeTabPage(props.tabName, props.tabIndex, arrow)
+    props.changeTabPage(props.tabName, props.tabIndex, arrow);
   }
 
   function goBackToReview() {
@@ -111,6 +113,7 @@ NavButtons.propTypes = {
   setTabPageIndex: PropTypes.func.isRequired,
   goBackToPart: PropTypes.func.isRequired,
   showPopupPIN: PropTypes.func.isRequired,
+  checkEmailVerificationRequest: PropTypes.func.isRequired,
 };
 
 NavButtons.defaultProps = {
@@ -139,7 +142,8 @@ function mapDispatchToProps(dispatch) {
     setTabPageIndex: index => dispatch(setTabPageIndex(index)),
     setTabName: tabName => dispatch(setTabName(tabName)),
     goBackToPart: status => dispatch(goBackToPart(status)),
-    showPopupPIN: () => dispatch(showPopupPIN())
+    showPopupPIN: () => dispatch(showPopupPIN()),
+    checkEmailVerificationRequest: () => dispatch(checkEmailVerificationRequest()),
   });
 }
 

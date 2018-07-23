@@ -15,9 +15,15 @@ import {
   REGISTRATION_SUBMIT_REQUEST,
   REGISTRATION_SUBMIT_FAIL,
   REGISTRATION_SUBMIT_SUCCESS, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
+  CHECK_EMAIL_VERIFICATION,
   SHOW_POPUP_PIN,
+  CLOSE_POPUP_PIN,
   VERIFY_SEND_REQUEST,
   VERIFY_SEND_SUCCESS,
+  VERIFY_SEND_FAILURE,
+  SEND_CODE_VERIFY,
+  SEND_CODE_VERIFY_SUCCESS,
+  SEND_CODE_VERIFY_FAILURE,
 } from '../constants/registration';
 
 // import { generateId } from '../utils/registrationUtils';
@@ -41,6 +47,9 @@ const initialState = {
   id: false,
   showPopupPIN: false,
   verifyLoading: false,
+  showVerifyEmailForm: false,
+  codeVerify: null,
+  codeVerifyError: null,
 };
 
 function registration(state = initialState, action) {
@@ -113,10 +122,20 @@ function registration(state = initialState, action) {
         ...state,
         id: action.id,
       };
+    case CHECK_EMAIL_VERIFICATION:
+      return {
+        ...state,
+        showPopupPIN: false,
+      };
     case SHOW_POPUP_PIN:
       return {
         ...state,
         showPopupPIN: true,
+      };
+    case CLOSE_POPUP_PIN:
+      return {
+        ...state,
+        showPopupPIN: false,
       };
     case VERIFY_SEND_REQUEST:
       return {
@@ -124,10 +143,40 @@ function registration(state = initialState, action) {
         verifyLoading: true,
       };
     case VERIFY_SEND_SUCCESS:
-      console.log('action -==> ', action);
       return {
         ...state,
         verifyLoading: false,
+        showVerifyEmailForm: true,
+        codeVerifyError: null,
+      };
+    case VERIFY_SEND_FAILURE:
+      return {
+        ...state,
+        verifyLoading: false,
+        showVerifyEmailForm: false,
+        codeVerifyError: action.err,
+      };
+    case SEND_CODE_VERIFY:
+      return {
+        ...state,
+        verifyLoading: true,
+        codeVerify: action.code,
+      };
+    case SEND_CODE_VERIFY_SUCCESS:
+      return {
+        ...state,
+        verifyLoading: false,
+        codeVerify: null,
+        showVerifyEmailForm: false,
+        showPopupPIN: false,
+        codeVerifyError: null,
+      };
+    case SEND_CODE_VERIFY_FAILURE:
+      return {
+        ...state,
+        verifyLoading: false,
+        codeVerify: null,
+        codeVerifyError: action.err,
       };
     default:
       return state;
