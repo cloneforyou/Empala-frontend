@@ -22,7 +22,7 @@ class EmpalaTable extends Component {
       sortDirection: false,
       sortColIndex: false,
     };
-    this.widget = getTableHeaderByName(this.props.tableName);
+    this.table = getTableHeaderByName(this.props.tableName);
   }
 
   setSortType(index) {
@@ -60,32 +60,32 @@ class EmpalaTable extends Component {
     return 'auto';
   }
   render() {
-    const { widget } = this;
+    const { table } = this;
     const { sortDirection, sortColIndex } = this.state;
     const tableData = this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
     return (
-      <div style={{ overflowY: 'scroll', maxHeight: this.innerHeight(widget.height) }} >
+      <div style={{ overflowY: 'scroll', maxHeight: this.innerHeight(table.height) }} >
         <ul
           className="d-flex flex-row no-gutters list-unstyled "
           style={{ overflowX: 'scroll', margin: 0, padding: 0 }}
         >
-          {widget.headers.map((header, index) => (
+          {table.headers.map((header, index) => (
             <li
               className={`col-auto ${this.props.striped && 'emp-table table-striped-row'}`}
               key={header}
-              style={{ width: widget.attrs.width[index] || 'auto' }}
+              style={{ width: table.attrs.width[index] || 'auto' }}
             >
               <div
                 id={`col${index}`}
                 className="emp-table__th"
-                onClick={(widget.attrs.sortable && widget.attrs.sortable[index]) ?
+                onClick={(table.attrs.sortable && table.attrs.sortable[index]) ?
                   (e => (this.props.callbacks && this.props.callbacks[index] ?
-                    widget.callbacks[index](e) :
+                    table.callbacks[index](e) :
                     this.setSortType(index)))
                   : undefined}
-                style={{ cursor: widget.attrs.sortable && widget.attrs.sortable[index] ? 'pointer' : '' }}
+                style={{ cursor: table.attrs.sortable && table.attrs.sortable[index] ? 'pointer' : '' }}
               >{header}
-                {widget.attrs.sortable && widget.attrs.sortable[index] && <i className="icon-sort" />}
+                {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort" />}
               </div>
               <div>{tableData.map((row, i) => (
                 <EmpalaTableCell
