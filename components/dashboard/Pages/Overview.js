@@ -7,6 +7,7 @@ import WidgetAdvertisement from '../Widget/WidgetAdvertisement';
 import { uniqueId } from 'lodash';
 import FinancialCapitalTable from '../Widget/FinancialCapitalTable';
 import { parsePositionsTablesData } from '../Widget/PositionsTable';
+import SocialCapitalTable from '../Widget/SocialCapitalTable';
 
 function mapStateToProps(state) {
   return {
@@ -54,6 +55,7 @@ class Overview extends Component {
       <div className="container-fluid">
         <div className="row">
           <FinancialCapitalTable />
+          <SocialCapitalTable />
           {/*<WidgetTable*/}
             {/*overview*/}
             {/*widget={{ ...widgetsOverflow[0],*/}
@@ -62,7 +64,7 @@ class Overview extends Component {
 
           {/*/>*/}
           {
-            widgetsOverflow.slice(1).map(widget => {
+            widgetsOverflow.slice(2).map(widget => {
               const tableData = this.mapWidgetTitleToData(widget.title) || widget.tables[0].data;
               return (<WidgetTable
               overview

@@ -2,6 +2,24 @@ import moment from 'moment';
 import { uniqueId } from 'lodash';
 
 
+const widgetHeaders = {
+  overview_social_capital: {
+    id: 'overview_social_capital',
+    title: 'Social capital',
+    icon: 'groups',
+    col: 5,
+    height: 390,
+    padding_left: 24,
+  },
+  overview_financial_capital_exposure: {
+    id: 'overview_financial_capital_exposure',
+    title: 'Financial capital',
+    icon: 'community',
+    col: 5,
+    height: 390,
+    padding_left: 10,
+  },
+};
 const tableHeaders = {
   dashboard_cash: {
     id: 'dashboard_cash',
@@ -204,11 +222,7 @@ const tableHeaders = {
   },
   overview_financial_capital_exposure: {
     id: 'overview_financial_capital_exposure',
-    title: 'Financial capital',
-    icon: 'community',
-    col: 5,
-    height: 390,
-    padding_left: 10,
+    height: 230,
     headers: [
       'Exposure',
       'Value',
@@ -226,8 +240,7 @@ const tableHeaders = {
   },
   overview_financial_capital_allocation: {
     id: 'overview_financial_capital_allocation',
-    height: 390,
-    // padding_left: 10,
+    height: 230,
     headers: [
       'Allocation',
       'Domestic',
@@ -244,7 +257,7 @@ const tableHeaders = {
     },
   },
   overview_financial_capital_performance_st: {
-    id: 'overview_financial_capital_performance',
+    id: 'overview_financial_capital_performance_st',
     title: 'Financial capital performance',
     col: 5,
     height: 390,
@@ -265,11 +278,10 @@ const tableHeaders = {
     },
   },
   overview_financial_capital_performance_lt: {
-    id: 'overview_financial_capital_performance',
+    id: 'overview_financial_capital_performance_lt',
     title: 'Financial capital performance',
     col: 5,
     height: 390,
-    // padding_left: 10,
     headers: [
       'LT Performance',
       '% change',
@@ -280,6 +292,69 @@ const tableHeaders = {
         '125px',
         '95px',
         '95px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_social_capital_network: {
+    id: 'overview_social_capital_network',
+    title: 'Social capital',
+    height: 230,
+    headers: [
+      'Network',
+      'No.',
+    ],
+    attrs: {
+      width: [
+        '125px',
+        '80px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_social_capital_positioning: {
+    id: 'overview_social_capital_positioning',
+    height: 230,
+    headers: [
+      'Positioning',
+      '%ile',
+    ],
+    attrs: {
+      width: [
+        '115px',
+        '75px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_social_capital_get: {
+    id: 'overview_social_capital_get',
+    headers: [
+      'Get',
+      'No.',
+    ],
+    attrs: {
+      width: [
+        '130px',
+        '85px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_social_capital_give: {
+    id: 'overview_social_capital_give',
+    headers: [
+      'Give',
+      'No.',
+    ],
+    attrs: {
+      width: [
+        '115px',
+        '75px',
       ],
       sortable: [
       ],
@@ -384,3 +459,4 @@ export const parsePositionsList = list => (list.map(pos => ({
 
 
 export const getTableHeaderByName = tableName => tableHeaders[tableName];
+export const getWidgetAttributesByName = widgetName => widgetHeaders[widgetName];
