@@ -81,7 +81,9 @@ const MapStateToProps = state => ({
     ...state.dashboard.userData.data.social_capital,
     Network: {
       // Connections: 20,
-      ...state.dashboard.userData.data.social_capital.Network,
+      ...(state.dashboard.userData.data.social_capital.Network ?
+        state.dashboard.userData.data.social_capital.Network
+        : {}),
       Partners: 1,
       'Trusted relationship': 0,
       'Board seats': 0,
