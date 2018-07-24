@@ -152,7 +152,9 @@ const FinancialCapitalTable = props => (
 
 const MapStateToProps = state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
-  financial: state.dashboard.userData.data.financial_capital || {
+  financial: state.dashboard.userData.data.financial_capital.performance ?
+    state.dashboard.userData.data.financial_capital.performance :
+    {
     performance: {
       '1 Week': {
         '% change': Math.random() * 100,
