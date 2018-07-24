@@ -46,7 +46,7 @@ const SocialCapitalTable = props => (
       <div style={{ display: 'inline-block' }}>
         <EmpalaTable
           tableName="overview_social_capital_network"
-          tableData={parseNetworkCapitalData(props.social.Networking)}
+          tableData={parseNetworkCapitalData(props.social.Network)}
         />
       </div>
       <div style={{ display: 'inline-block' }}>
@@ -73,9 +73,11 @@ const SocialCapitalTable = props => (
 );
 
 const MapStateToProps = state => ({
-  social: state.dashboard.userData.data.social_capital || {
-    Networking: {
-      Connections: 20,
+  social: {
+    ...state.dashboard.userData.data.social_capital,
+    Network: {
+      // Connections: 20,
+      ...state.dashboard.userData.data.social_capital.Network,
       Partners: 1,
       'Trusted relationship': 0,
       'Board seats': 0,
