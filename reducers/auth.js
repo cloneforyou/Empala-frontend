@@ -18,7 +18,7 @@ import {
   SET_ACCOUNT_UNBLOCKED,
   SET_PASSWORD_FORGOTTEN, TOGGLE_MODAL,
 } from '../constants/auth';
-import { OPEN_MODAL } from '../constants/dashboard';
+import { OPEN_MODAL, LOGOUT } from '../constants/dashboard';
 
 export const InitialState = {
   authError: false,
@@ -56,10 +56,15 @@ function auth(state = InitialState, action) {
     case PASSWORD_UPDATE_REQUEST_FAIL:
       return { ...state, authError: action.err, loading: false };
     case LOGIN_REQUEST_SUCCESS:
-      return { ...state, authError: false, loading: false };
+      return {
+        ...state,
+        authError: false,
+        loading: false,
+      };
     case TWO_FACTOR_AUTHENTICATION:
       return {
         ...state,
+        loading: true,
       };
     case SEND_ACTIVATION_LINK_SUCCESS:
       return {
@@ -72,6 +77,11 @@ function auth(state = InitialState, action) {
       return {
         state,
         passwordChanged: true,
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        loading: true,
       };
     case SET_ACCOUNT_BLOCKED:
       return { ...state, isBlocked: true };
