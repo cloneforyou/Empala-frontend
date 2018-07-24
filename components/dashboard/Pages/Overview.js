@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { uniqueId } from 'lodash';
 import { widgetsOverflow } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import WidgetNews from '../Widget/WidgetNews';
 import WidgetAdvertisement from '../Widget/WidgetAdvertisement';
-import { uniqueId } from 'lodash';
-import FinancialCapitalTable from '../Widget/FinancialCapitalTable';
 import { parsePositionsTablesData } from '../Widget/PositionsTable';
+import FinancialCapitalTable from '../Widget/FinancialCapitalTable';
 import SocialCapitalTable from '../Widget/SocialCapitalTable';
+import EnvironmentalCapitalTable from '../Widget/EnvironmentalCapitalTable';
 
 function mapStateToProps(state) {
   return {
@@ -56,15 +57,9 @@ class Overview extends Component {
         <div className="row">
           <FinancialCapitalTable />
           <SocialCapitalTable />
-          {/*<WidgetTable*/}
-            {/*overview*/}
-            {/*widget={{ ...widgetsOverflow[0],*/}
-              {/*tables: parsePositionsTablesData(widgetsOverflow[0].tables, this.props.positions)*/}
-            {/*}}*/}
-
-          {/*/>*/}
+          <EnvironmentalCapitalTable />
           {
-            widgetsOverflow.slice(2).map(widget => {
+            widgetsOverflow.slice(3).map(widget => {
               const tableData = this.mapWidgetTitleToData(widget.title) || widget.tables[0].data;
               return (<WidgetTable
               overview

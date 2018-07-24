@@ -43,29 +43,33 @@ const SocialCapitalTable = props => (
       <WidgetHead
         widget={widget}
       />
-      <div style={{ display: 'inline-block' }}>
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_social_capital_network"
           tableData={parseNetworkCapitalData(props.social.Network)}
+          small
         />
       </div>
-      <div style={{ display: 'inline-block' }}>
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_social_capital_positioning"
           tableData={parsePositioningCapitalData(positioning)}
+          small
         />
       </div>
       <div className="w-100" />
-      <div className="d-inline-block">
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_social_capital_get"
           tableData={parseNetworkCapitalData(props.social.Get)}
+          small
         />
       </div>
-      <div className="d-inline-block">
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_social_capital_give"
           tableData={parseNetworkCapitalData(props.social.Give)}
+          small
         />
       </div>
     </div>
@@ -77,7 +81,9 @@ const MapStateToProps = state => ({
     ...state.dashboard.userData.data.social_capital,
     Network: {
       // Connections: 20,
-      ...state.dashboard.userData.data.social_capital.Network,
+      ...(state.dashboard.userData.data.social_capital.Network ?
+        state.dashboard.userData.data.social_capital.Network
+        : {}),
       Partners: 1,
       'Trusted relationship': 0,
       'Board seats': 0,

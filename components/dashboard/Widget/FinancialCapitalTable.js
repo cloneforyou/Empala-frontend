@@ -121,29 +121,33 @@ const FinancialCapitalTable = props => (
       <WidgetHead
         widget={widget}
       />
-      <div style={{ display: 'inline-block' }}>
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_financial_capital_exposure"
           tableData={parsePositionsToTableData('overview_financial_capital_exposure', props.positions)}
+          small
         />
       </div>
-      <div style={{ display: 'inline-block' }}>
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_financial_capital_allocation"
           tableData={parsePositionsToTableData('overview_financial_capital_allocation', props.positions)}
+          small
         />
       </div>
       <div className="w-100" />
-      <div className="d-inline-block">
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_financial_capital_performance_st"
           tableData={parsePerformanceData(props.financial.performance, 'overview_financial_capital_performance_st')}
+          small
         />
       </div>
-      <div className="d-inline-block">
+      <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_financial_capital_performance_lt"
           tableData={parsePerformanceData(props.financial.performance, 'overview_financial_capital_performance_lt')}
+          small
         />
       </div>
     </div>
