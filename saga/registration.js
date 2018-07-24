@@ -113,9 +113,7 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
-    localStorage.setItem('accessToken', response.data.data.tokens.access);
-    localStorage.setItem('refreshToken', response.data.data.tokens.refresh);
-    window.location.assign('/dashboard');
+    window.location.assign('/');
   } catch (err) {
     yield put(registrationFail(traceError(err)));
   }
