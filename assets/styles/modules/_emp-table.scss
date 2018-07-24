@@ -60,6 +60,10 @@
     @media (max-width: 1600px) {
       @include fontSize(10px);
     }
+    &_small {
+      padding-top: 0!important;
+      padding-bottom: 0!important;
+    }
   }
 
   &.table-striped tbody tr:nth-of-type(odd) {

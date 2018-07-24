@@ -2,7 +2,7 @@ import moment from 'moment';
 import { uniqueId } from 'lodash';
 
 
-const widgetHeaders = {
+const widgetAttributes = {
   overview_social_capital: {
     id: 'overview_social_capital',
     title: 'Social capital',
@@ -18,6 +18,14 @@ const widgetHeaders = {
     col: 5,
     height: 390,
     padding_left: 10,
+  },
+  overview_environmental_capital: {
+    id: 'overview_environmental_capital',
+    title: 'Environmental capital',
+    icon: 'environmental',
+    col: 4,
+    height: 390,
+    padding_left: 40,
   },
 };
 const tableHeaders = {
@@ -230,8 +238,8 @@ const tableHeaders = {
     ],
     attrs: {
       width: [
-        '118px',
-        '100px',
+        '115px',
+        '85px',
         '60px',
       ],
       sortable: [
@@ -248,9 +256,9 @@ const tableHeaders = {
     ],
     attrs: {
       width: [
-        '125px',
-        '95px',
-        '95px',
+        '120px',
+        '105px',
+        '85px',
       ],
       sortable: [
       ],
@@ -269,9 +277,9 @@ const tableHeaders = {
     ],
     attrs: {
       width: [
-        '118px',
+        '115px',
+        '70px',
         '75px',
-        '85px',
       ],
       sortable: [
       ],
@@ -289,9 +297,9 @@ const tableHeaders = {
     ],
     attrs: {
       width: [
-        '125px',
-        '95px',
-        '95px',
+        '120px',
+        '105px',
+        '85px',
       ],
       sortable: [
       ],
@@ -355,6 +363,36 @@ const tableHeaders = {
       width: [
         '115px',
         '75px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_environmental_capital_size_growth: {
+    id: 'overview_environmental_capital_size_growth',
+    headers: [
+      'Size & growth',
+      'No.',
+    ],
+    attrs: {
+      width: [
+        '175px',
+        '80px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_environmental_capital_opinions: {
+    id: 'overview_environmental_capital_opinions',
+    headers: [
+      'Opinions',
+      'No.',
+    ],
+    attrs: {
+      width: [
+        '175px',
+        '80px',
       ],
       sortable: [
       ],
@@ -459,4 +497,4 @@ export const parsePositionsList = list => (list.map(pos => ({
 
 
 export const getTableHeaderByName = tableName => tableHeaders[tableName];
-export const getWidgetAttributesByName = widgetName => widgetHeaders[widgetName];
+export const getWidgetAttributesByName = widgetName => widgetAttributes[widgetName];
