@@ -13,6 +13,7 @@ import {
   sendActivationLink,
   unblockAccount,
   twoFactorAuthentication,
+  logout,
 } from './saga/authentication';
 import {
   CLEAR_REGISTRATION_DATA,
@@ -22,6 +23,9 @@ import {
   UNBLOCK_REQUEST,
   TWO_FACTOR_AUTHENTICATION,
 } from './constants/auth';
+import {
+  LOGOUT
+} from './constants/dashboard';
 
 
 es6promise.polyfill();
@@ -43,6 +47,7 @@ function* rootSaga() {
     takeLatest(TWO_FACTOR_AUTHENTICATION, twoFactorAuthentication),
     takeLatest(PASSWORD_UPDATE_REQUEST, changePassword),
     takeEvery(CLEAR_REGISTRATION_DATA, clearLocalData),
+    takeLatest(LOGOUT, logout),
   ]);
 }
 
