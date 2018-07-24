@@ -156,8 +156,9 @@ const FinancialCapitalTable = props => (
 
 const MapStateToProps = state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
-  financial: state.dashboard.userData.data.financial_capital.performance ?
-    state.dashboard.userData.data.financial_capital.performance :
+  financial: state.dashboard.userData.data ?
+    state.dashboard.userData.data.financial_capital
+    :
     {
     performance: {
       '1 Week': {
