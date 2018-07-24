@@ -230,7 +230,7 @@ const tableHeaders = {
   },
   overview_financial_capital_exposure: {
     id: 'overview_financial_capital_exposure',
-    height: 230,
+    height: 240,
     headers: [
       'Exposure',
       'Value',
@@ -248,7 +248,7 @@ const tableHeaders = {
   },
   overview_financial_capital_allocation: {
     id: 'overview_financial_capital_allocation',
-    height: 230,
+    height: 240,
     headers: [
       'Allocation',
       'Domestic',
@@ -308,7 +308,7 @@ const tableHeaders = {
   overview_social_capital_network: {
     id: 'overview_social_capital_network',
     title: 'Social capital',
-    height: 230,
+    height: 240,
     headers: [
       'Network',
       'No.',
@@ -324,7 +324,7 @@ const tableHeaders = {
   },
   overview_social_capital_positioning: {
     id: 'overview_social_capital_positioning',
-    height: 230,
+    height: 240,
     headers: [
       'Positioning',
       '%ile',
