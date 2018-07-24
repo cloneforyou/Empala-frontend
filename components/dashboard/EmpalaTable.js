@@ -13,6 +13,8 @@ import EmpalaTableCell from './EmpalaTableCell';
 *
 *         callbacks = [] - callbacks array for click on headers.
 *         Default is sort by column value.
+*         small: bool - table cells without vertical padding
+*           default - false.
 /* =============================== */
 
 class EmpalaTable extends Component {
@@ -94,6 +96,7 @@ class EmpalaTable extends Component {
                   value={row[index] && row[index].value}
                   mark={row[index] && row[index].mark}
                   color={row[index] && row[index].color}
+                  small={this.props.small}
                 />
                   ))}
               </div>
