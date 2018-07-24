@@ -103,7 +103,7 @@ const MapStateToProps = state => ({
     ...state.dashboard.userData.data.env_capital,
     'Size & growth': {
       'Community assets': '--',
-      'Community 1 YR Retur': '--',
+      'Community 1 YR % Return': '--',
       'Community members': '--',
       'Public rate (% assets)': '--',
       'Private rate (% assets)': '--',
