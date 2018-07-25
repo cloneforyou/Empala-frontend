@@ -34,6 +34,11 @@ export default class RightBlock extends Component {
               <i className="user-nav__icon user-nav__icon_notification" />
             </a>
           </li>
+          <li className="nav-item">
+            <a className="nav-link user-nav__link" href="#">
+              <i className="user-nav__icon user-nav__icon_wallet" />
+            </a>
+          </li>
           <li className="nav-item dropdown">
             <button
               className={menuAvatarShow ? "nav-link user-nav__dropdown-btn user-nav__dropdown-btn_open" : "nav-link user-nav__dropdown-btn"}

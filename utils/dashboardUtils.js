@@ -1,6 +1,4 @@
 import moment from 'moment';
-import { uniqueId } from 'lodash';
-
 
 const widgetAttributes = {
   overview_social_capital: {
@@ -83,6 +81,25 @@ const tableHeaders = {
       'Comments',
     ],
     attrs: {
+      align: [
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'center',
+        'center',
+      ],
       width: [
         '93px',
         '60px',
@@ -127,6 +144,22 @@ const tableHeaders = {
       'Rating',
     ],
     attrs: {
+      align: [
+        'left',
+        'left',
+        'center',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'center',
+        'center',
+        'center',
+        'left',
+        'left',
+      ],
       width: [
         '210px',
         '107px',
@@ -170,6 +203,20 @@ const tableHeaders = {
       'O/C/T',
     ],
     attrs: {
+      align: [
+        'left',
+        'left',
+        'left',
+        'center',
+        'right',
+        'right',
+        'right',
+        'center',
+        'left',
+        'left',
+        'center',
+        'center',
+      ],
       width: [
         '230px',
         '125px',
@@ -241,6 +288,27 @@ const tableHeaders = {
         '80px',
         '75px',
       ],
+      align: [
+        'left',
+        'left',
+        'left',
+        'right',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'left',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+      ],
       sortable: [
         true,
         true,
@@ -264,6 +332,11 @@ const tableHeaders = {
       'D % ch',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+        'left',
+      ],
       width: [
         '125px',
         '95px',
@@ -282,6 +355,11 @@ const tableHeaders = {
       'Foreign',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+        'right',
+      ],
       width: [
         '120px',
         '105px',
@@ -303,6 +381,11 @@ const tableHeaders = {
       'Vs indexes',
     ],
     attrs: {
+      align: [
+        'left',
+        'left',
+        'left',
+      ],
       width: [
         '115px',
         '75px',
@@ -323,6 +406,11 @@ const tableHeaders = {
       'Vs indexes',
     ],
     attrs: {
+      align: [
+        'left',
+        'left',
+        'left',
+      ],
       width: [
         '120px',
         '105px',
@@ -341,6 +429,10 @@ const tableHeaders = {
       'No.',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+      ],
       width: [
         '185px',
         '75px',
@@ -357,6 +449,10 @@ const tableHeaders = {
       '%ile',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+      ],
       width: [
         '130px',
         '45px',
@@ -372,6 +468,10 @@ const tableHeaders = {
       'No.',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+      ],
       width: [
         '185px',
         '75px',
@@ -387,6 +487,10 @@ const tableHeaders = {
       'No.',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+      ],
       width: [
         '130px',
         '45px',

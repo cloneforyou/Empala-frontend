@@ -75,7 +75,7 @@ class EmpalaTable extends Component {
             <li
               className={`col-auto ${this.props.striped && 'emp-table table-striped-row'}`}
               key={header}
-              style={{ width: table.attrs.width[index] || 'auto' }}
+              style={{ width: table.attrs.width[index] || 'auto', textAlign: table.attrs.align && table.attrs.align[index] }}
             >
               <div
                 id={`col${index}`}

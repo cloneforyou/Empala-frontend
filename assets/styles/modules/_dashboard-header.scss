@@ -171,6 +171,17 @@
         height: 20px;
       }
     }
+    &_wallet {
+      width: 20px;
+      height: 21px;
+      &:before {
+        mask: url($path-to-dashboard-icon + 'icon-wallet.svg');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        width: 20px;
+        height: 21px;
+      }
+    }
   }
   &__dropdown-menu {
     margin-right: 10px;
