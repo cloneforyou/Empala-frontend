@@ -195,7 +195,6 @@ export function* getUserData() {
       'orders_list',
       'watch_lists',
       'positions',
-      // ].map(list => put(getETNAData(list))));
     ].map(list => call(selectETNADataRequest, { payloadType: list })));
     yield put(startSocket());
     if (data.data.data.profile.should_update_password) {

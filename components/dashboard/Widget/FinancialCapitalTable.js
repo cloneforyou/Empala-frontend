@@ -79,31 +79,17 @@ const parsePositionsToTableData = (tableName, positions) => {
     if (tableName === 'overview_financial_capital_exposure') {
       return exposures.map(exp => [
         { value: exp.name },
-        { value: formatNumberWithFixedPoint(exp.value, 2) },
-        { value: formatNumberWithFixedPoint(exp.day_ch) },
+        { value: formatNumberWithFixedPoint(exp.value) },
+        { value: formatNumberWithFixedPoint(exp.day_ch, 1) },
       ]);
     }
     if (tableName === 'overview_financial_capital_allocation') {
       return allocations.map(all => [
         { value: all.name },
-        { value: formatNumberWithFixedPoint(all.domestic, 2) },
-        { value: formatNumberWithFixedPoint(all.foreign, 2) },
+        { value: formatNumberWithFixedPoint(all.domestic) },
+        { value: formatNumberWithFixedPoint(all.foreign) },
       ]);
     }
-    // if (tableName === 'overview_financial_capital_performance_st') {
-    //   return allocations.map(all => [
-    //     { value: all.name },
-    //     { value: formatNumberWithFixedPoint(all.domestic, 2) },
-    //     { value: formatNumberWithFixedPoint(all.foreign, 2) },
-    //   ]);
-    // }
-    // if (tableName === 'overview_financial_capital_performance_lt') {
-    //   return allocations.map(all => [
-    //     { value: all.name },
-    //     { value: formatNumberWithFixedPoint(all.domestic, 2) },
-    //     { value: formatNumberWithFixedPoint(all.foreign, 2) },
-    //   ]);
-    // }
     return [];
   };
   return getTableDataByName(tableName);
@@ -111,12 +97,18 @@ const parsePositionsToTableData = (tableName, positions) => {
 
 const FinancialCapitalTable = props => (
   <div
-    className={`widget-col widget-col-${widget.col}`}
+    className={`widget-col d-inline-block`}
     key={widget.id}
   >
     <div
       className="widget"
-      style={{ maxHeight: `${widget.height}px`, paddingLeft: `${widget.padding_left && widget.padding_left}px` }}
+      style={
+        {
+          maxHeight: `${widget.height}px`,
+          paddingLeft: `${widget.padding_left && widget.padding_left}px`,
+          paddingRight: `${widget.padding_right && widget.padding_right}px`,
+        }
+      }
     >
       <WidgetHead
         widget={widget}
@@ -156,9 +148,8 @@ const FinancialCapitalTable = props => (
 
 const MapStateToProps = state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
-  financial: state.dashboard.userData.data ?
-    state.dashboard.userData.data.financial_capital
-    :
+  financial: state.dashboard.userData.data.financial_capital ?
+    state.dashboard.userData.data.financial_capital :
     {
       performance: {
         '1 Week': {
