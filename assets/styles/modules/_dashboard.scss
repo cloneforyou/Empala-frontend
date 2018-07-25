@@ -14,7 +14,8 @@
     }
   }
   .widget-col {
-    padding: 0 2.5px;
+    box-sizing: content-box;
+    padding: 0 5px 0 0;
     margin-bottom: 5px;
   }
 

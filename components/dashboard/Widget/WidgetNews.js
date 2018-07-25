@@ -21,7 +21,7 @@ class WidgetNews extends Component {
     const { menuIsOpen } = this.state;
     const widgetNews = widget.news || [];
     return (
-      <div className={`widget-col widget-col_${widget.id === 'external_news' ? 5 : 3}`}
+      <div className={`widget-col widget-col_${widget.id === 'external_news' ? 5 : 4}`}
            key={widget.id}
            style={{ maxWidth: this.props.maxWidth ? this.props.maxWidth : 'auto'}}
       >
