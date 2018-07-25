@@ -17,7 +17,7 @@ const parseTableData = data => Object.keys(data).map(key => [
 
 const EnvironmentalCapitalTable = props => (
   <div
-    className={`widget-col widget-col-${widget.col}`}
+    className={`widget-col d-inline-block`}
     key={widget.id}
   >
     <div
@@ -27,7 +27,7 @@ const EnvironmentalCapitalTable = props => (
       <WidgetHead
         widget={widget}
       />
-      <div className="d-inline-block align-top" style={{ width: '265px' }}>
+      <div className="d-inline-block align-top" style={{ width: '280px' }}>
         <EmpalaTable
           tableName="overview_environmental_capital_size_growth"
           tableData={parseTableData(props.env_capital['Size & growth'])}
@@ -41,7 +41,7 @@ const EnvironmentalCapitalTable = props => (
       </div>
       <div
         className="d-inline-block align-top"
-        style={{ padding: '0 10px 0 60px' }}
+        style={{ padding: '0 10px 0 10px' }}
       >
         <div className="table-responsive">  {/* todo replace later with aclual elements */}
           <table className="table table-borderless emp-table">

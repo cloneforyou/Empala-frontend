@@ -35,6 +35,7 @@ const initialState = {
   loading: true,
   error: false,
   userData: false,
+  userDataLoaded: false,
   activePageDashboard: 'overflow',
   loadingPage: true,
   modalOpen: false,
@@ -99,6 +100,7 @@ function dashboard(state = initialState, action) {
         ...state,
         loading: false,
         userData: action.data,
+        userDataLoaded: true,
       };
     case SET_ACTIVE_PAGE:
       return {

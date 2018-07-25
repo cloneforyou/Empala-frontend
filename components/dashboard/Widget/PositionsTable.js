@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reduce, uniqueId } from 'lodash';
 import { widgetsPositionFirst } from '../../../localdata/dashboardWidgets';
 import WidgetTable from './WidgetTable';
+import { formatNumberWithFixedPoint } from '../../../utils/dashboardUtils';
 
 const rawNames = {
   net: 'Net value',
@@ -249,9 +250,9 @@ export const parsePositionsTablesData = (tables, data) => {
           return {
             id: uniqueId(),
             exposure: getExposureByType(type),
-            domestic: Math.round(calculatedDomestic * 10000 / calculatedTotal) / 100 || '--',
-            foreign: Math.round(calculatedForeign * 10000 / calculatedTotal) / 100 || '--',
-            total: 100,
+            domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || '--',
+            foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || '--',
+            total: formatNumberWithFixedPoint(100, 1),
             dayChange: getChangeByTitleAndType(title)(type),
           };
         }
@@ -262,17 +263,17 @@ export const parsePositionsTablesData = (tables, data) => {
             value: calculatedTotal,
             dayChange: getChangeByTitleAndType(title)(type),
             allocation: 'allocation',
-            domestic: Math.round(calculatedDomestic * 10000 / calculatedTotal) / 100 || '--',
-            foreign: Math.round(calculatedForeign * 10000 / calculatedTotal) / 100 || '--',
+            domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || '--',
+            foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || '--',
           };
         }
         return {
           id: uniqueId(),
           exposure: getExposureByType(type),
-          domestic: calculatedDomestic,
-          foreign: calculatedForeign,
-          total: calculatedTotal,
-          dayChange: getChangeByTitleAndType(title)(type),
+          domestic: formatNumberWithFixedPoint(calculatedDomestic, 0),
+          foreign: formatNumberWithFixedPoint(calculatedForeign, 0),
+          total: formatNumberWithFixedPoint(calculatedTotal, 0),
+          dayChange: formatNumberWithFixedPoint(getChangeByTitleAndType(title)(type), 1),
         };
       });
     };
