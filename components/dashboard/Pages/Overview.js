@@ -55,7 +55,7 @@ class Overview extends Component {
         news: this.props.userData['internal_news'],
       },
     ];
-    const widgetsWidth = ['630px', '495px','595px'];
+    const widgetsWidth = ['630px', '495px'];
     if (this.props.userDataLoaded) {
       return (
         <div className="container-fluid" >
@@ -74,7 +74,7 @@ class Overview extends Component {
             <DealDevelopmentTable />
                 </div>
               </div>
-            <div className="row">
+            <div className="d-flex">
             {
               widgetNews.map((widget, i) => (
                 <WidgetNews

@@ -32,7 +32,7 @@ const widgetAttributes = {
   },
   active_orders: {
     id: 'active_orders',
-    title: 'Active_orders',
+    title: 'Active orders',
     col: 5,
     height: 290,
     padding_left: 15,
