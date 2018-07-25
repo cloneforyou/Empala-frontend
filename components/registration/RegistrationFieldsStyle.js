@@ -27,6 +27,7 @@ const style = {
   textFieldStyle: {
     width: '100%',
     fontSize: '14px',
+    // color: '#212529',
   },
   selectFieldStyle: {
     width: '100%',

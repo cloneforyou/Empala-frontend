@@ -19,7 +19,7 @@ export const menuItems = {
       title: 'Basic information', key: 'basic-info', completed: true, active: false,
     },
     {
-      title: 'Account', key: 'account', completed: false, active: false,
+      title: 'Account information', key: 'account', completed: false, active: false,
     },
     {
       title: 'Identification', key: 'identification', completed: false, active: false,

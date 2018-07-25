@@ -6,6 +6,11 @@ import {
   setInputFieldValueById,
   setTabName,
   setTabPageIndex, setUserID,
+  verifySendSuccess,
+  verifySendFailure,
+  sendCodeVerifySuccess,
+  sendCodeVerifyFailure,
+  showPopupPIN,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -18,6 +23,9 @@ import {
   SET_MEMBER_DOCUMENT_TYPE,
   VALIDATE_FIELD_VALUE,
   GET_USER_ID_REQUEST,
+  VERIFY_SEND_REQUEST,
+  SEND_CODE_VERIFY,
+  CHECK_EMAIL_VERIFICATION,
 } from '../constants/registration';
 import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -105,9 +113,7 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
-    localStorage.setItem('accessToken', response.data.data.tokens.access);
-    localStorage.setItem('refreshToken', response.data.data.tokens.refresh);
-    window.location.assign('/dashboard');
+    window.location.assign('/');
   } catch (err) {
     yield put(registrationFail(traceError(err)));
   }
@@ -129,6 +135,69 @@ export function* getUserID() {
   }
 }
 
+export function* verifySendRequest() {
+  const id = localStorage.getItem('id');
+  const email = yield select(state => state.registration.registrationData.member_account_email);
+  const url = '/api/auth/email/send';
+  const options = {
+    method: 'POST',
+    data: {
+      email,
+      id,
+    },
+  };
+
+  try {
+    const res = yield call(request, url, options);
+    yield put(verifySendSuccess());
+  } catch (err) {
+    yield put(verifySendFailure(err))
+  }
+}
+
+
+export function* verifySendCodeRequest() {
+  const email = yield select(state => state.registration.registrationData.member_account_email);
+  const id = localStorage.getItem('id');
+  const code = yield select(state => state.registration.codeVerify);
+  const url = '/api/auth/email/verify';
+  const options = {
+    method: 'POST',
+    data: {
+      email,
+      id,
+      code,
+    },
+  };
+  try {
+    const res = yield call(request, url, options);
+    yield put(sendCodeVerifySuccess());
+  } catch (err) {
+    yield put(sendCodeVerifyFailure(err));
+  }
+}
+
+export function* checkEmailVerificationRequest() {
+  const email = yield select(state => state.registration.registrationData.member_account_email);
+  const id = localStorage.getItem('id');
+  const url = '/api/auth/email/checkVerify';
+  const options = {
+    method: 'POST',
+    data: {
+      email,
+      id,
+    },
+  };
+  try {
+    const res = yield call(request, url, options);
+    if (res.data.info === 'EMAIL_NOT_VERIFIED') {
+      yield put(showPopupPIN())
+    }
+  } catch (err) {
+    console.log('checkEmailVerificationRequest ERR -==> ', err);
+  }
+}
+
 export default function* registrationSaga() {
   yield all([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
@@ -141,5 +210,9 @@ export default function* registrationSaga() {
     takeLatest(GET_USER_ID_REQUEST, getUserID),
     takeLatest(REGISTRATION_SUBMIT_REQUEST, sendRegistrationForm),
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields),
+    takeLatest(VERIFY_SEND_REQUEST, verifySendRequest),
+    takeLatest(SEND_CODE_VERIFY, verifySendCodeRequest),
+    takeLatest(CHECK_EMAIL_VERIFICATION, checkEmailVerificationRequest),
   ]);
 }
+

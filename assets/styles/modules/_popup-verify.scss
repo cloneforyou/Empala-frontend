@@ -1,0 +1,62 @@
+.popup-verify {
+  border-radius: 10px;
+  box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: solid 1px #ebebeb;
+  padding: 27px 40px 50px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  z-index: 9;
+  text-align: center;
+  min-height: 412px;
+  &__title {
+    @include fontSize(18px);
+    font-weight: 600;
+    color: #424344;
+    margin-bottom: 34px;
+  }
+  &__icon {
+    margin: 0 auto 25px;
+    width: 42px;
+  }
+  &__sub-title {
+    @include fontSize(18px);
+    line-height: 1.22;
+    color: #424344;
+    margin-bottom: 30px;
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &_h-335 {
+      height: 335px;
+    }
+  }
+  &__foot {
+    padding: 0 20px;
+  }
+  &__btn-green {
+    background: $green;
+    transition: .3s;
+    color: $white;
+    border-color: $green;
+    padding: 5px 25px;
+    border-radius: 3px;
+    font-weight: 600;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+    @include fontSize(16px);
+    &:hover, &:focus {
+      background: transparent;
+      color: $green;
+    }
+  }
+  &__btn-default {
+    background: none;
+    @include button-reset();
+    @include fontSize(18px);
+  }
+}

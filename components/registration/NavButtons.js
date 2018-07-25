@@ -10,7 +10,9 @@ import {
   validateFieldsBlank,
   goBackToPart,
   setTabName,
-  setTabPageIndex, validateFieldValue,
+  setTabPageIndex,
+  validateFieldValue,
+  checkEmailVerificationRequest,
 } from '../../actions/registration';
 import ignoredFields from '../../localdata/noValidatedFiels';
 
@@ -32,12 +34,20 @@ function filterActiveCheckboxes(checkboxesList) {
 const NavButtons = (props) => {
   let disabled = !isFieldsFilled(props.fieldNames, props.registrationData) ||
     (props.fieldNames && props.errors && isFieldError(props.fieldNames, props.errors));
+
   if (props.tabName === 'identity' && props.tabIndex === 4) {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
   }
   if (props.fieldNames.filter(field =>
     (field.includes('zip_code') && props.registrationData[field] && props.registrationData[field].length < 5)).length > 0) {
     disabled = true;
+  }
+
+  function handleChangePage(arrow) {
+    if (props.tabName === 'member' && props.tabIndex === 2 && arrow === 'forward') {
+      props.checkEmailVerificationRequest();
+    }
+    props.changeTabPage(props.tabName, props.tabIndex, arrow);
   }
 
   function goBackToReview() {
@@ -51,7 +61,7 @@ const NavButtons = (props) => {
       <button
         type="button"
         className="btn--navigate btn--prev "
-        onClick={() => props.changeTabPage(props.tabName, props.tabIndex, 'backward')}
+        onClick={() => handleChangePage('backward')}
       >
         <MdArrowBack size={20} />
       </button>
@@ -64,8 +74,8 @@ const NavButtons = (props) => {
       >
         <button
           type="button"
-          className={`btn--navigate btn--next ${disabled ? '' : 'btn--navigate--active'}`}
-          onClick={() => props.changeTabPage(props.tabName, props.tabIndex, 'forward')}
+          className={`btn--navigate btn--next ${!disabled && 'btn--navigate--active'}`}
+          onClick={() => handleChangePage('forward')}
           disabled={disabled}
         >
           <MdArrowForward size={20} />
@@ -99,6 +109,8 @@ NavButtons.propTypes = {
   setTabName: PropTypes.func.isRequired,
   setTabPageIndex: PropTypes.func.isRequired,
   goBackToPart: PropTypes.func.isRequired,
+  showPopupPIN: PropTypes.func.isRequired,
+  checkEmailVerificationRequest: PropTypes.func.isRequired,
 };
 
 NavButtons.defaultProps = {
@@ -127,6 +139,8 @@ function mapDispatchToProps(dispatch) {
     setTabPageIndex: index => dispatch(setTabPageIndex(index)),
     setTabName: tabName => dispatch(setTabName(tabName)),
     goBackToPart: status => dispatch(goBackToPart(status)),
+    showPopupPIN: () => dispatch(showPopupPIN()),
+    checkEmailVerificationRequest: () => dispatch(checkEmailVerificationRequest()),
   });
 }
 

@@ -17,6 +17,7 @@ import {
   setAccountBlocked, toggleModal,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
+import { setColorScheme } from '../actions/dashboard';
 import { selectETNADataRequest } from './dashboard';
 
 
@@ -24,11 +25,9 @@ function* loginRequest(url, options) {
   // console.log(url, options)
   try {
     const result = yield call(request, url, options);
-    if (result.data.info === 'LOGGED_IN') {
+    if (result.data.info === 'CODE_SENT') {
       yield put(loginSuccess());
-      localStorage.setItem('accessToken', result.data.data.tokens.access);
-      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
-      return window.location.assign('/dashboard');
+      return window.location.assign('/mfa');
     }
     if (result.data.info === 'RELATED_ACCOUNT_NOT_FOUND') {
       yield put(toggleModal());
@@ -57,6 +56,29 @@ function* loginRequest(url, options) {
     } else yield put(loginFailed(err.message));
   }
 }
+
+export function* twoFactorAuthentication({ login, password, code }) {
+  const options = {
+    method: 'POST',
+    data: {
+      login,
+      password,
+      code,
+    },
+  };
+  try {
+    const result = yield call(request, '/api/auth/login', options);
+    if (result.data.info === 'LOGGED_IN') {
+      localStorage.setItem('accessToken', result.data.data.tokens.access);
+      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+      yield put(loginSuccess());
+      return window.location.assign('/dashboard');
+    }
+  } catch (err) {
+    console.log(' ** ', err);
+    yield put(loginFailed(err.message));
+  }
+};
 
 export function* authenticate({ provider, data }) {
   const login = yield select(state => state.auth.index_username);
@@ -90,7 +112,7 @@ export function* authenticate({ provider, data }) {
       };
       break;
     default:
-      url = '/api/auth/login';
+      url = '/api/auth/login?code=get';
       options.data = {
         login,
         password,
@@ -109,7 +131,7 @@ export function* authenticate({ provider, data }) {
       return false;
     }
   }
-    yield loginRequest(url, options);
+  yield loginRequest(url, options);
 }
 
 export function* refreshTokens() {
@@ -168,6 +190,7 @@ export function* getUserData() {
   try {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
+    yield put(setColorScheme(data.data.data.profile.MemberPreferences.theme));
     yield all([
       'orders_list',
       'watch_lists',

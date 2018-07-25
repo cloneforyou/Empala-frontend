@@ -10,7 +10,6 @@ import { closeModal } from "../../actions/dashboard";
 
 const EmpalaSelect = (props) => {
   const { currentColorScheme } = props;
-  console.log('currentColorScheme -==> ', currentColorScheme);
   return (
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
       <SelectField
@@ -28,7 +27,7 @@ const EmpalaSelect = (props) => {
         }
         labelStyle={props.disabled ? style.inputStyleDisabled :
           (currentColorScheme === 'light' ?
-              { 'color': '#C5C5C5' } :
+              { 'color': '#808895' } :
               { 'color': '#cacaca' }
           )
         }

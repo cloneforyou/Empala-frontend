@@ -100,7 +100,9 @@ const EnvironmentalCapitalTable = props => (
 
 const MapStateToProps = state => ({
   env_capital: {
-    ...state.dashboard.userData.data.env_capital,
+    ...(state.dashboard.userData.data ?
+      state.dashboard.userData.data.env_capital
+      : {}),
     'Size & growth': {
       'Community assets': '--',
       'Community 1 YR % Return': '--',

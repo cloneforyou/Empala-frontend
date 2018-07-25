@@ -434,6 +434,14 @@ export const fieldsMemberPersonal = [
     field: 'input',
     disabled: true,
   },
+  {
+    id: 'account_information_email',
+    type: 'text',
+    label: 'E-mail address',
+    placeholder: '',
+    field: 'input',
+    disabled: true,
+  },
 ];
 
 export const fieldResetPassword = [
