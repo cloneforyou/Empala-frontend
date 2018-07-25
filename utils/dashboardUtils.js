@@ -5,9 +5,10 @@ const widgetAttributes = {
     id: 'overview_social_capital',
     title: 'Social capital',
     icon: 'groups',
-    col: 5,
+    col: 3,
     height: 390,
-    padding_left: 24,
+    padding_left: 5,
+    padding_right: 35,
   },
   overview_financial_capital_exposure: {
     id: 'overview_financial_capital_exposure',
@@ -15,7 +16,8 @@ const widgetAttributes = {
     icon: 'community',
     col: 5,
     height: 390,
-    padding_left: 10,
+    padding_left: 15,
+    padding_right: 15,
   },
   overview_environmental_capital: {
     id: 'overview_environmental_capital',
@@ -23,7 +25,32 @@ const widgetAttributes = {
     icon: 'environmental',
     col: 4,
     height: 390,
-    padding_left: 18,
+    padding_left: 15,
+    padding_right: 15
+  },
+  active_orders: {
+    id: 'active_orders',
+    title: 'Active orders',
+    col: 5,
+    height: 290,
+    padding_left: 15,
+    padding_right: 15,
+  },
+  overview_working_deals: {
+    id: 'overview_working_deals',
+    title: 'Working deals',
+    col: 3,
+    height: 290,
+    padding_left: 5,
+    padding_right: 14,
+  },
+  overview_deals_development: {
+    id: 'overview_deals_development',
+    title: 'Deals development',
+    col: 3,
+    height: 290,
+    padding_left: 15,
+    padding_right: 37,
   },
 };
 const tableHeaders = {
@@ -302,7 +329,7 @@ const tableHeaders = {
     headers: [
       'Exposure',
       'Value',
-      'Day chg',
+      'D % ch',
     ],
     attrs: {
       align: [
@@ -311,9 +338,9 @@ const tableHeaders = {
         'left',
       ],
       width: [
-        '115px',
-        '85px',
-        '60px',
+        '125px',
+        '95px',
+        '50px',
       ],
       sortable: [
       ],
@@ -361,8 +388,8 @@ const tableHeaders = {
       ],
       width: [
         '115px',
-        '70px',
         '75px',
+        '80px',
       ],
       sortable: [
       ],
@@ -407,8 +434,8 @@ const tableHeaders = {
         'right',
       ],
       width: [
-        '125px',
-        '80px',
+        '185px',
+        '75px',
       ],
       sortable: [
       ],
@@ -427,8 +454,8 @@ const tableHeaders = {
         'right',
       ],
       width: [
-        '115px',
-        '75px',
+        '130px',
+        '45px',
       ],
       sortable: [
       ],
@@ -446,8 +473,8 @@ const tableHeaders = {
         'right',
       ],
       width: [
-        '125px',
-        '80px',
+        '185px',
+        '75px',
       ],
       sortable: [
       ],
@@ -465,8 +492,8 @@ const tableHeaders = {
         'right',
       ],
       width: [
-        '115px',
-        '75px',
+        '130px',
+        '45px',
       ],
       sortable: [
       ],
@@ -480,8 +507,8 @@ const tableHeaders = {
     ],
     attrs: {
       width: [
-        '175px',
-        '80px',
+        '180px',
+        '90px',
       ],
       sortable: [
       ],
@@ -495,8 +522,78 @@ const tableHeaders = {
     ],
     attrs: {
       width: [
-        '175px',
-        '80px',
+        '180px',
+        '90px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  active_orders: {
+    id: 'active_orders',
+    title: 'Active orders',
+    height: 230,
+    dots: true,
+    headers: [
+      'Security & symbol',
+      'Price',
+      'Qty',
+      'Notional',
+      'Diff %',
+    ],
+    attrs: {
+      width: [
+        '230px',
+        '115px',
+        '75px',
+        '95px',
+        '74px',
+      ],
+      sortable: [
+        true
+      ],
+    },
+  },
+  overview_working_deals: {
+    id: 'overview_working_deals',
+    title: 'Working deals',
+    height: 230,
+    dots: true,
+    headers: [
+      'Description',
+      'Amount',
+      'Clearing price',
+      'Diff %',
+      'Status',
+    ],
+    attrs: {
+      width: [
+        '185px',
+        '75px',
+        '90px',
+        '55px',
+        '60px',
+      ],
+      sortable: [
+      ],
+    },
+  },
+  overview_deals_development: {
+    id: 'overview_deals_development',
+    title: 'Deals development',
+    height: 230,
+    headers: [
+      'Description',
+      'Date',
+      'Update type',
+      'Diff %',
+    ],
+    attrs: {
+      width: [
+        '210px',
+        '135px',
+        '130px',
+        '55px',
       ],
       sortable: [
       ],
@@ -507,6 +604,7 @@ const tableHeaders = {
 
 export const getFormattedNumber = number => number.toString().replace(/[^0-9]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 export const formatNumberWithFixedPoint = (number, n) => {
+  if (Number.isNaN(Number(number))) return number;
   if (!n || n === 0) return getFormattedNumber(Math.round(number));
   const vals = Number(number).toFixed(n).split('.');
   return [getFormattedNumber(vals[0]), vals[1]].join('.');
@@ -537,11 +635,11 @@ export const parseOrdersList = list => list.map(order => ({
     symbol: order.Symbol,
     // date: parseOrderDate(order.Date),
     currency: order.SecurityCurrency,
-    price: calculateOrderPrice(order.AveragePrice, order.Quantity),
+    price: order.AveragePrice,
     order_quantity: order.Quantity,
     fill_quantity: order.ExecutedQuantity,
     remain_quantity: order.LeavesQuantity,
-    notional_ammount: '--', // TODO find the way how to calculate
+    notional_ammount: calculateOrderPrice(order.AveragePrice, order.Quantity), // TODO find the way how to calculate
     comission: '--', // TODO find the way how to calculate
     distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
     // start_date: parseOrderDate(order.CreateDate),

@@ -33,12 +33,14 @@ const parsePositioningCapitalData = data => Object.keys(data).map(key => [
 
 const SocialCapitalTable = props => (
   <div
-    className={`widget-col widget-col-${widget.col}`}
+    className={`widget-col d-inline-block`}
     key={widget.id}
   >
     <div
       className="widget"
-      style={{ maxHeight: `${widget.height}px`, paddingLeft: `${widget.padding_left && widget.padding_left}px` }}
+      style={{ maxHeight: `${widget.height}px`,
+        paddingLeft: `${widget.padding_left && widget.padding_left}px`,
+        paddingRight: `${widget.padding_right && widget.padding_right}px`}}
     >
       <WidgetHead
         widget={widget}

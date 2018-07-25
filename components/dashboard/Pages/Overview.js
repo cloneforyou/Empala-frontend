@@ -9,10 +9,14 @@ import { parsePositionsTablesData } from '../Widget/PositionsTable';
 import FinancialCapitalTable from '../Widget/FinancialCapitalTable';
 import SocialCapitalTable from '../Widget/SocialCapitalTable';
 import EnvironmentalCapitalTable from '../Widget/EnvironmentalCapitalTable';
+import ActiveOrdersTable from '../Widget/ActiveOrdersTable';
+import WorkingDealsTable from '../Widget/WorkingDealsTable';
+import DealDevelopmentTable from '../Widget/DealDevelopmentTable';
 
 function mapStateToProps(state) {
   return {
     userData: state.dashboard.userData.data || [],
+    userDataLoaded: state.dashboard.userDataLoaded,
     ordersList: state.dashboard.parsedOrdersList || [],
     positions: state.dashboard.positions ? state.dashboard.positions : [],
   };
@@ -51,38 +55,42 @@ class Overview extends Component {
         news: this.props.userData['internal_news'],
       },
     ];
-    console.log('------->>>>>>', parsePositionsTablesData(widgetsOverflow[0].tables, this.props.positions))
-    return (
-      <div className="container-fluid">
-        <div className="row">
-          <FinancialCapitalTable />
-          <SocialCapitalTable />
-          <EnvironmentalCapitalTable />
-          {
-            widgetsOverflow.slice(3).map(widget => {
-              const tableData = this.mapWidgetTitleToData(widget.title) || widget.tables[0].data;
-              return (<WidgetTable
-              overview
-              widget={{
-              ...widget,
-                  tables: [{
-                  ...widget.tables[0],
-                  data: tableData,
-                }, ...widget.tables.slice(1)],
-              }}
-              key={widget.id} />
-            )
-          })
-          }
-          {
-            widgetNews.map(widget => (
-              <WidgetNews overview widget={widget} key={widget.id} />
-            ))
-          }
-          <WidgetAdvertisement />
+    const widgetsWidth = ['630px', '495px'];
+    if (this.props.userDataLoaded) {
+      return (
+        <div className="container-fluid" >
+        <div style={{overflowX: 'auto'}}> {/* Temporary solution. todo widgets responsive layout */}
+          <div style={{width: '1736px'}}>
+            <FinancialCapitalTable />
+            <SocialCapitalTable />
+            <EnvironmentalCapitalTable />
+          </div>
         </div>
-      </div>
-    );
+
+              <div style={{overflowX: 'auto'}}> {/* Temporary solution. todo widgets responsive layout */}
+                <div style={{width: '1736px'}}>
+            <ActiveOrdersTable />
+            <WorkingDealsTable />
+            <DealDevelopmentTable />
+                </div>
+              </div>
+            <div className="d-flex">
+            {
+              widgetNews.map((widget, i) => (
+                <WidgetNews
+                  overview
+                  widget={widget}
+                  key={widget.id}
+                  maxWidth={widgetsWidth[i]}
+                />
+              ))
+            }
+            <WidgetAdvertisement />
+          </div>
+        </div>
+      );
+    }
+    return <h2>Error while loading user data</h2>
   }
 }
 
