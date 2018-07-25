@@ -160,41 +160,41 @@ const MapStateToProps = state => ({
     state.dashboard.userData.data.financial_capital
     :
     {
-    performance: {
-      '1 Week': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
+      performance: {
+        '1 Week': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
+        '1 Month': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
+        '3 Months': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
+        '6 Months': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
+        '1 Year': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
+        '1 Year RARR': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
+        '1 Year Max DD': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
+        'From start': {
+          '% change': Math.random() * 100,
+          'Vs indexes': Math.random() * 1000,
+        },
       },
-      '1 Month': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
-      },
-      '3 Months': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
-      },
-      '6 Months': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
-      },
-      '1 Year': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
-      },
-      '1 Year RARR': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
-      },
-      '1 Year Max DD': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
-      },
-      'From start': {
-        '% change': Math.random() * 100,
-        'Vs indexes': Math.random() * 1000,
-      },
-    },
-  }, // todo remove this stub later
+    }, // todo remove this stub later
 });
 
 export default connect(MapStateToProps)(FinancialCapitalTable);
