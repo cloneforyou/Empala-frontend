@@ -19,9 +19,13 @@ const WorkingDealsTable = props => (
   >
     <div
       className="widget"
-      style={{ maxHeight: `${widget.height}px`,
-        paddingLeft: `${widget.padding_left && widget.padding_left}px`,
-        paddingRight: `${widget.padding_right && widget.padding_right}px`,}}
+      style={
+        {
+          height: `${widget.height}px`,
+          paddingLeft: `${widget.padding_left && widget.padding_left}px`,
+          paddingRight: `${widget.padding_right && widget.padding_right}px`,
+        }
+      }
     >
       <WidgetHead
         widget={widget}

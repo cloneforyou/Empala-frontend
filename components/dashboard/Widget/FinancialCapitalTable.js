@@ -104,7 +104,7 @@ const FinancialCapitalTable = props => (
       className="widget"
       style={
         {
-          maxHeight: `${widget.height}px`,
+          height: `${widget.height}px`,
           paddingLeft: `${widget.padding_left && widget.padding_left}px`,
           paddingRight: `${widget.padding_right && widget.padding_right}px`,
         }
@@ -131,14 +131,20 @@ const FinancialCapitalTable = props => (
       <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_financial_capital_performance_st"
-          tableData={parsePerformanceData(props.financial.performance, 'overview_financial_capital_performance_st')}
+          tableData={props.financial.performance ?
+            parsePerformanceData(props.financial.performance, 'overview_financial_capital_performance_st')
+          : []
+          }
           small
         />
       </div>
       <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_financial_capital_performance_lt"
-          tableData={parsePerformanceData(props.financial.performance, 'overview_financial_capital_performance_lt')}
+          tableData={props.financial.performance ?
+            parsePerformanceData(props.financial.performance, 'overview_financial_capital_performance_lt')
+            : []
+          }
           small
         />
       </div>
@@ -148,44 +154,7 @@ const FinancialCapitalTable = props => (
 
 const MapStateToProps = state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
-  financial: state.dashboard.userData.data.financial_capital ?
-    state.dashboard.userData.data.financial_capital :
-    {
-      performance: {
-        '1 Week': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-        '1 Month': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-        '3 Months': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-        '6 Months': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-        '1 Year': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-        '1 Year RARR': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-        '1 Year Max DD': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-        'From start': {
-          '% change': Math.random() * 100,
-          'Vs indexes': Math.random() * 1000,
-        },
-      },
-    }, // todo remove this stub later
+  financial: state.dashboard.userData.data.financial_capital || {},
 });
 
 export default connect(MapStateToProps)(FinancialCapitalTable);

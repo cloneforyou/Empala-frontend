@@ -58,7 +58,7 @@ class EmpalaTable extends Component {
     });
   }
   innerHeight(height) {
-    if (height) return `${height - 40}px`;
+    if (height) return `${height}px`;
     return 'auto';
   }
   render() {

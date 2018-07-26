@@ -12,14 +12,14 @@ const widget = getWidgetAttributesByName('overview_social_capital');
 
 // stub for positioning table data. Todo investigate data source
 const positioning = {
-  '1M return': Math.random()*100,
-  'Inception R': Math.random()*100,
-  'Total asset value': Math.random()*100,
-  '% Adj net position': Math.random()*100,
-  '% VAR': Math.random()*100,
-  '% Cash': Math.random()*100,
-  '% Equity': Math.random()*100,
-  '% Debt': Math.random()*100,
+  '1M return': Math.random() * 100,
+  'Inception R': Math.random() * 100,
+  'Total asset value': Math.random() * 100,
+  '% Adj net position': Math.random() * 100,
+  '% VAR': Math.random() * 100,
+  '% Cash': Math.random() * 100,
+  '% Equity': Math.random() * 100,
+  '% Debt': Math.random() * 100,
 };
 const parseNetworkCapitalData = data => Object.keys(data).map(key => [
   { value: key },
@@ -33,14 +33,18 @@ const parsePositioningCapitalData = data => Object.keys(data).map(key => [
 
 const SocialCapitalTable = props => (
   <div
-    className={`widget-col d-inline-block`}
+    className="widget-col d-inline-block"
     key={widget.id}
   >
     <div
       className="widget"
-      style={{ maxHeight: `${widget.height}px`,
-        paddingLeft: `${widget.padding_left && widget.padding_left}px`,
-        paddingRight: `${widget.padding_right && widget.padding_right}px`}}
+      style={
+        {
+          height: `${widget.height}px`,
+          paddingLeft: `${widget.padding_left && widget.padding_left}px`,
+          paddingRight: `${widget.padding_right && widget.padding_right}px`,
+        }
+      }
     >
       <WidgetHead
         widget={widget}
@@ -94,16 +98,16 @@ const MapStateToProps = state => ({
       'Monthly blog views': 232,
     },
     Get: {
-      'Ratings received': Math.random()*1000,
-      'Courses completed': Math.random()*100,
-      'Deals assembled': Math.random()*1000,
-      'EMARA income': Math.random()*1000000,
+      'Ratings received': Math.random() * 1000,
+      'Courses completed': Math.random() * 100,
+      'Deals assembled': Math.random() * 1000,
+      'EMARA income': Math.random() * 1000000,
     },
     Give: {
-      'Ratings given': Math.random()*1000,
-      'Blogs posted': Math.random()*100,
-      'Deals joined': Math.random()*1000,
-      'Opinions given': Math.random()*100,
+      'Ratings given': Math.random() * 1000,
+      'Blogs posted': Math.random() * 100,
+      'Deals joined': Math.random() * 1000,
+      'Opinions given': Math.random() * 100,
     },
   }, // todo remove this stub later
 });

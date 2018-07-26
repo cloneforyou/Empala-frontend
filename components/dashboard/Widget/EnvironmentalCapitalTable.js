@@ -22,7 +22,7 @@ const EnvironmentalCapitalTable = props => (
   >
     <div
       className="widget"
-      style={{ maxHeight: `${widget.height}px`, paddingLeft: `${widget.padding_left && widget.padding_left}px` }}
+      style={{ height: `${widget.height}px`, paddingLeft: `${widget.padding_left && widget.padding_left}px` }}
     >
       <WidgetHead
         widget={widget}

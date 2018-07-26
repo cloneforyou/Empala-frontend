@@ -108,7 +108,7 @@ const tableHeaders = {
     id: 'dashboard_watchlist',
     title: 'Watchlists',
     col: 12,
-    height: 568,
+    height: 528,
     dots: true,
     headers: [
       'Sec name',
@@ -153,7 +153,7 @@ const tableHeaders = {
     id: 'dashboard_orders',
     title: 'Orders',
     col: 12,
-    height: 222,
+    height: 182,
     dots: true,
     headers: [
       'Sec name',
@@ -257,7 +257,7 @@ const tableHeaders = {
   },
   overview_financial_capital_exposure: {
     id: 'overview_financial_capital_exposure',
-    height: 240,
+    height: 200,
     headers: [
       'Exposure',
       'Value',
@@ -275,7 +275,7 @@ const tableHeaders = {
   },
   overview_financial_capital_allocation: {
     id: 'overview_financial_capital_allocation',
-    height: 240,
+    height: 200,
     headers: [
       'Allocation',
       'Domestic',
@@ -295,7 +295,6 @@ const tableHeaders = {
     id: 'overview_financial_capital_performance_st',
     title: 'Financial capital performance',
     col: 5,
-    height: 390,
     padding_left: 10,
     headers: [
       'ST performance',
@@ -316,7 +315,6 @@ const tableHeaders = {
     id: 'overview_financial_capital_performance_lt',
     title: 'Financial capital performance',
     col: 5,
-    height: 390,
     headers: [
       'LT Performance',
       '% change',
@@ -335,7 +333,7 @@ const tableHeaders = {
   overview_social_capital_network: {
     id: 'overview_social_capital_network',
     title: 'Social capital',
-    height: 240,
+    height: 200,
     headers: [
       'Network',
       'No.',
@@ -351,7 +349,7 @@ const tableHeaders = {
   },
   overview_social_capital_positioning: {
     id: 'overview_social_capital_positioning',
-    height: 240,
+    height: 200,
     headers: [
       'Positioning',
       '%ile',
@@ -397,6 +395,7 @@ const tableHeaders = {
   },
   overview_environmental_capital_size_growth: {
     id: 'overview_environmental_capital_size_growth',
+    height: 200,
     headers: [
       'Size & growth',
       'No.',
@@ -428,7 +427,7 @@ const tableHeaders = {
   active_orders: {
     id: 'active_orders',
     title: 'Active orders',
-    height: 230,
+    height: 220,
     dots: true,
     headers: [
       'Security & symbol',
@@ -453,7 +452,7 @@ const tableHeaders = {
   overview_working_deals: {
     id: 'overview_working_deals',
     title: 'Working deals',
-    height: 230,
+    height: 220,
     dots: true,
     headers: [
       'Description',
@@ -477,7 +476,7 @@ const tableHeaders = {
   overview_deals_development: {
     id: 'overview_deals_development',
     title: 'Deals development',
-    height: 230,
+    height: 220,
     headers: [
       'Description',
       'Date',
