@@ -508,7 +508,7 @@ export const formatNumberWithFixedPoint = (number, n) => {
 /* ========= parses the date from specified string ======== */
 /* ========= like '/Date(1530076567409+0000)/' ==========  */
 export const parseOrderDate = str => new Date(parseInt(str.match(/\d+(\+\d+)?/)[0], 10)).toLocaleString();
-const parseDateString = (str, pattern) => {
+export const parseDateString = (str, pattern) => {
   if (!pattern) return moment(str).format('DD-MM-YYYY');
   return moment(str).format(pattern);
 };
@@ -571,7 +571,8 @@ export const parseWatchList = list => ({
 
 export const parsePositionsList = list => (list.map(pos => ({
   id: Math.random(),
-  start_date: parseOrderDate(pos.CreateDate).slice(0, 10),
+  // start_date: parseOrderDate(pos.CreateDate).slice(0, 10),
+  start_date: parseDateString(pos.CreateDate),
   symbol: pos.Symbol,
   sec_name: pos.CompanyName,
   sec_id: pos.SecurityId,
@@ -590,6 +591,7 @@ export const parsePositionsList = list => (list.map(pos => ({
   total_pl: '--', // This is the Total P&L including all components such as carry and M2M - Not Used in Phase 1
   day_chg: '--', // TODO investigate about calculation
   day_pl: '--', // TODO investigate about calculation
+  rpl: pos.RealizedProfitLoss,
 })));
 
 
