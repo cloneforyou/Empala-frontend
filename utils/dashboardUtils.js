@@ -26,7 +26,7 @@ const widgetAttributes = {
     col: 4,
     height: 390,
     padding_left: 15,
-    padding_right: 15
+    padding_right: 15,
   },
   active_orders: {
     id: 'active_orders',
@@ -86,13 +86,13 @@ const tableHeaders = {
         'left',
         'left',
         'left',
+        'right',
+        'right',
         'left',
         'left',
+        'right',
         'left',
-        'left',
-        'left',
-        'left',
-        'left',
+        'right',
         'left',
         'left',
         'left',
@@ -157,7 +157,7 @@ const tableHeaders = {
         'center',
         'center',
         'center',
-        'left',
+        'right',
         'left',
       ],
       width: [
@@ -207,13 +207,13 @@ const tableHeaders = {
         'left',
         'left',
         'left',
-        'center',
         'right',
         'right',
         'right',
-        'center',
-        'left',
-        'left',
+        'right',
+        'right',
+        'right',
+        'right',
         'center',
         'center',
       ],
@@ -319,7 +319,7 @@ const tableHeaders = {
         true,
         false,
         false,
-        true
+        true,
       ],
     },
   },
@@ -383,8 +383,8 @@ const tableHeaders = {
     attrs: {
       align: [
         'left',
-        'left',
-        'left',
+        'right',
+        'right',
       ],
       width: [
         '115px',
@@ -408,8 +408,8 @@ const tableHeaders = {
     attrs: {
       align: [
         'left',
-        'left',
-        'left',
+        'right',
+        'right',
       ],
       width: [
         '120px',
@@ -506,6 +506,10 @@ const tableHeaders = {
       'No.',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+      ],
       width: [
         '180px',
         '90px',
@@ -521,6 +525,10 @@ const tableHeaders = {
       'No.',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+      ],
       width: [
         '180px',
         '90px',
@@ -542,6 +550,13 @@ const tableHeaders = {
       'Diff %',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+        'right',
+        'right',
+        'right',
+      ],
       width: [
         '230px',
         '115px',
@@ -567,6 +582,13 @@ const tableHeaders = {
       'Status',
     ],
     attrs: {
+      align: [
+        'left',
+        'right',
+        'right',
+        'right',
+        'left',
+      ],
       width: [
         '185px',
         '75px',
@@ -589,6 +611,12 @@ const tableHeaders = {
       'Diff %',
     ],
     attrs: {
+      align: [
+        'left',
+        'center',
+        'left',
+        'right',
+      ],
       width: [
         '210px',
         '135px',
