@@ -6,7 +6,7 @@ import PositionsPortfolioTable from '../Widget/PositionsPortfolioTable';
 const Positions = () => (
       <div className="container-fluid">
         <div className="row no-gutters">
-          <div className="col-lg-4">
+          <div className="col-lg-4 px-1">
             <PositionsTable />
           </div>
           <div className="col-lg-8">

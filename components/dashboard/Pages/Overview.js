@@ -35,7 +35,7 @@ class Overview extends Component {
     if (this.props.userDataLoaded) {
       return (
         <div className="container-fluid" >
-          <div style={{ overflowX: 'auto' }}> {/* Temporary solution. todo widgets responsive layout */}
+          <div className="widgets-row"> {/* Temporary solution. todo widgets responsive layout */}
             <div style={{ width: '1736px' }}>
               <FinancialCapitalTable />
               <SocialCapitalTable />
@@ -43,7 +43,7 @@ class Overview extends Component {
             </div>
           </div>
 
-          <div style={{ overflowX: 'auto' }}> {/* Temporary solution. todo widgets responsive layout */}
+          <div className="widgets-row"> {/* Temporary solution. todo widgets responsive layout */}
             <div style={{ width: '1736px' }}>
               <ActiveOrdersTable />
               <WorkingDealsTable />

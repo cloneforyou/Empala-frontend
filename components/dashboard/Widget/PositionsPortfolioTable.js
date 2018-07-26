@@ -39,14 +39,22 @@ class PositionsPortfolioTable extends React.Component {
   componentWillUnmount() {
     this.props.unsubscribeQuotes();
   }
+  mapETNACategoryToEmpala(categoryName) {
+    switch (categoryName) {
+      case 'CommonStock':
+        return 'Stock';
+      default: return categoryName;
+    }
+  }
 
   getPositionsData(position) {
+    const self = this;
     return position && position.map(list => ([
       { value: list.start_date }, // 'Start date'
       { value: list.symbol }, // 'Symbol'
       { value: list.sec_name }, // 'Sec name'
       { value: list.sec_id }, // 'Sec ID'
-      { value: list.category }, // 'Category'
+      { value: self.mapETNACategoryToEmpala(list.category) }, // 'Category'
       { value: 'USA' }, // 'Country'
       { value: list.currency }, // 'Curr'
       { value: list.ann_cf }, // 'Ann CF%'
