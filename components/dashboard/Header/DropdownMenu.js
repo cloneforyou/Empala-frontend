@@ -2,16 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from '../../../routes';
-
 import avatar from '../../../static/images/default-avatar-of-user.svg';
 import { logout, setActivePage } from '../../../actions/dashboard';
 import { changeActiveTabProfile } from '../../../actions/profile';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const DropdownMenu = (props) => {
 
-  const { menuAvatarShow, anchorEl } = props;
+  const { anchorEl } = props;
 
   this.handlerClick = (tab) => {
     props.setActivePage('profile');
@@ -27,6 +25,7 @@ const DropdownMenu = (props) => {
       onClose={props.handleClose}
       PaperProps={{
         style: {
+          marginTop: '55px',
           background: 'transparent',
         },
       }}

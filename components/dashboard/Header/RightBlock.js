@@ -9,18 +9,9 @@ export default class RightBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuAvatarShow: false,
       anchorEl: null,
     };
   }
-
-  toggleMenu = () => {
-    this.setState({ menuAvatarShow: !this.state.menuAvatarShow })
-  };
-
-  closeMenu = () => {
-    this.setState({ menuAvatarShow: false })
-  };
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -76,150 +67,149 @@ export default class RightBlock extends Component {
               }
             </button>
             {/*<Menu*/}
-              {/*id="simple-menu"*/}
-              {/*anchorEl={anchorEl}*/}
-              {/*open={Boolean(anchorEl)}*/}
-              {/*onClose={this.handleClose}*/}
-              {/*// className={(menuAvatarShow === false) ?*/}
-              {/*//   'dropdown-menu dropdown-menu-right profile-menu user-nav__dropdown-menu' :*/}
-              {/*//   'dropdown-menu dropdown-menu-right show profile-menu user-nav__dropdown-menu'}*/}
+            {/*id="simple-menu"*/}
+            {/*anchorEl={anchorEl}*/}
+            {/*open={Boolean(anchorEl)}*/}
+            {/*onClose={this.handleClose}*/}
+            {/*// className={(menuAvatarShow === false) ?*/}
+            {/*//   'dropdown-menu dropdown-menu-right profile-menu user-nav__dropdown-menu' :*/}
+            {/*//   'dropdown-menu dropdown-menu-right show profile-menu user-nav__dropdown-menu'}*/}
             {/*>*/}
-              {/*<div className="profile-menu__head">*/}
-                {/*<div className="row no-gutters align-items-center">*/}
-                  {/*<div className="profile-menu__avatar-wrap"*/}
-                       {/*onClick={this.handleClose}*/}
-                  {/*>*/}
-                    {/*<img*/}
-                      {/*className={userPic ? 'profile-menu__avatar' : 'profile-menu__avatar profile-menu__avatar_bordered'}*/}
-                      {/*src={userPic || avatar}*/}
-                      {/*alt="Avatar"*/}
-                    {/*/>*/}
-                  {/*</div>*/}
-                  {/*<h4 className="profile-menu__user-info-name">{props.memberFullName}</h4>*/}
-                {/*</div>*/}
-                {/*<h4 className="profile-menu__user-info-member-no">Member No: </h4>*/}
-              {/*</div>*/}
-              {/*<h3 className="profile-menu__title">Membership settings</h3>*/}
-              {/*<ul className="profile-menu__list">*/}
-                {/*<li*/}
-                  {/*className="profile-menu__item"*/}
-                  {/*onClick={() => this.handlerClick(0)}*/}
-                {/*>*/}
-                  {/*<Link*/}
-                    {/*route="dashboard"*/}
-                    {/*params={{ page: 'profile' }}*/}
-                  {/*>*/}
-                    {/*Membership*/}
-                  {/*</Link>*/}
-                {/*</li>*/}
-                {/*<li*/}
-                  {/*className="profile-menu__item"*/}
-                  {/*onClick={() => this.handlerClick(1)}*/}
-                {/*>*/}
-                  {/*<Link*/}
-                    {/*route="dashboard"*/}
-                    {/*params={{ page: 'profile' }}*/}
-                  {/*>*/}
-                    {/*Regulatory*/}
-                  {/*</Link>*/}
-                {/*</li>*/}
-                {/*<li*/}
-                  {/*className="profile-menu__item"*/}
-                  {/*onClick={() => this.handlerClick(2)}*/}
-                {/*>*/}
-                  {/*<Link*/}
-                    {/*route="dashboard"*/}
-                    {/*params={{ page: 'profile' }}*/}
-                  {/*>*/}
-                    {/*Investment Experience*/}
-                  {/*</Link>*/}
-                {/*</li>*/}
-                {/*<li*/}
-                  {/*className="profile-menu__item"*/}
-                  {/*onClick={() => this.handlerClick(3)}*/}
-                {/*>*/}
-                  {/*<Link*/}
-                    {/*route="dashboard"*/}
-                    {/*params={{ page: 'profile' }}*/}
-                  {/*>*/}
-                    {/*Accounts*/}
-                  {/*</Link>*/}
-                {/*</li>*/}
-              {/*</ul>*/}
-              {/*<h3 className="profile-menu__title">Account Statements</h3>*/}
-              {/*<ul className="profile-menu__list">*/}
-                {/*<li*/}
-                  {/*className="profile-menu__item"*/}
-                  {/*onClick={() => this.handlerClick(4)}*/}
-                {/*>*/}
-                  {/*<Link*/}
-                    {/*route="dashboard"*/}
-                    {/*params={{ page: 'profile' }}*/}
-                  {/*>*/}
-                    {/*Documents*/}
-                  {/*</Link>*/}
-                {/*</li>*/}
-              {/*</ul>*/}
-              {/*<h3 className="profile-menu__title">Platform Configuration</h3>*/}
-              {/*<ul className="profile-menu__list">*/}
-                {/*<li*/}
-                  {/*className="profile-menu__item"*/}
-                  {/*onClick={() => this.handlerClick(5)}*/}
-                {/*>*/}
-                  {/*<Link*/}
-                    {/*route="dashboard"*/}
-                    {/*params={{ page: 'profile' }}*/}
-                  {/*>*/}
-                    {/*Application Settings*/}
-                  {/*</Link>*/}
-                {/*</li>*/}
-                {/*<li*/}
-                  {/*className="profile-menu__item"*/}
-                  {/*onClick={() => this.handlerClick(6)}*/}
-                {/*>*/}
-                  {/*<Link*/}
-                    {/*route="dashboard"*/}
-                    {/*params={{ page: 'profile' }}*/}
-                  {/*>*/}
-                    {/*Notifications*/}
-                  {/*</Link>*/}
-                {/*</li>*/}
-              {/*</ul>*/}
-              {/*<button*/}
-                {/*className="profile-menu__logout-btn"*/}
-                {/*// onClick={props.logout}*/}
-              {/*>Sign Out*/}
-              {/*</button>*/}
+            {/*<div className="profile-menu__head">*/}
+            {/*<div className="row no-gutters align-items-center">*/}
+            {/*<div className="profile-menu__avatar-wrap"*/}
+            {/*onClick={this.handleClose}*/}
+            {/*>*/}
+            {/*<img*/}
+            {/*className={userPic ? 'profile-menu__avatar' : 'profile-menu__avatar profile-menu__avatar_bordered'}*/}
+            {/*src={userPic || avatar}*/}
+            {/*alt="Avatar"*/}
+            {/*/>*/}
+            {/*</div>*/}
+            {/*<h4 className="profile-menu__user-info-name">{props.memberFullName}</h4>*/}
+            {/*</div>*/}
+            {/*<h4 className="profile-menu__user-info-member-no">Member No: </h4>*/}
+            {/*</div>*/}
+            {/*<h3 className="profile-menu__title">Membership settings</h3>*/}
+            {/*<ul className="profile-menu__list">*/}
+            {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(0)}*/}
+            {/*>*/}
+            {/*<Link*/}
+            {/*route="dashboard"*/}
+            {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+            {/*Membership*/}
+            {/*</Link>*/}
+            {/*</li>*/}
+            {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(1)}*/}
+            {/*>*/}
+            {/*<Link*/}
+            {/*route="dashboard"*/}
+            {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+            {/*Regulatory*/}
+            {/*</Link>*/}
+            {/*</li>*/}
+            {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(2)}*/}
+            {/*>*/}
+            {/*<Link*/}
+            {/*route="dashboard"*/}
+            {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+            {/*Investment Experience*/}
+            {/*</Link>*/}
+            {/*</li>*/}
+            {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(3)}*/}
+            {/*>*/}
+            {/*<Link*/}
+            {/*route="dashboard"*/}
+            {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+            {/*Accounts*/}
+            {/*</Link>*/}
+            {/*</li>*/}
+            {/*</ul>*/}
+            {/*<h3 className="profile-menu__title">Account Statements</h3>*/}
+            {/*<ul className="profile-menu__list">*/}
+            {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(4)}*/}
+            {/*>*/}
+            {/*<Link*/}
+            {/*route="dashboard"*/}
+            {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+            {/*Documents*/}
+            {/*</Link>*/}
+            {/*</li>*/}
+            {/*</ul>*/}
+            {/*<h3 className="profile-menu__title">Platform Configuration</h3>*/}
+            {/*<ul className="profile-menu__list">*/}
+            {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(5)}*/}
+            {/*>*/}
+            {/*<Link*/}
+            {/*route="dashboard"*/}
+            {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+            {/*Application Settings*/}
+            {/*</Link>*/}
+            {/*</li>*/}
+            {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(6)}*/}
+            {/*>*/}
+            {/*<Link*/}
+            {/*route="dashboard"*/}
+            {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+            {/*Notifications*/}
+            {/*</Link>*/}
+            {/*</li>*/}
+            {/*</ul>*/}
+            {/*<button*/}
+            {/*className="profile-menu__logout-btn"*/}
+            {/*// onClick={props.logout}*/}
+            {/*>Sign Out*/}
+            {/*</button>*/}
             {/*</Menu>*/}
             <DropdownMenu
               {...this.props}
               closeMenu={this.closeMenu}
-              menuAvatarShow={menuAvatarShow}
               userPic={userPic}
               anchorEl={anchorEl}
               handleClose={this.handleClose}
             />
           </li>
           {/*<li>*/}
-            {/*<div>*/}
-              {/*<Button*/}
-                {/*aria-owns={anchorEl ? 'simple-menu' : null}*/}
-                {/*aria-haspopup="true"*/}
-                {/*onClick={this.handleClick}*/}
-              {/*>*/}
-                {/*Open Menu*/}
-              {/*</Button>*/}
-              {/*<Menu*/}
-                {/*id="simple-menu"*/}
-                {/*anchorEl={anchorEl}*/}
-                {/*open={Boolean(anchorEl)}*/}
-                {/*onClose={this.handleClose}*/}
-              {/*>*/}
-                {/*<MenuItem onClick={this.handleClose}>Profile</MenuItem>*/}
-                {/*<MenuItem onClick={this.handleClose}>My account</MenuItem>*/}
-                {/*<MenuItem onClick={this.handleClose}>Logout</MenuItem>*/}
-              {/*</Menu>*/}
-            {/*</div>*/}
+          {/*<div>*/}
+          {/*<Button*/}
+          {/*aria-owns={anchorEl ? 'simple-menu' : null}*/}
+          {/*aria-haspopup="true"*/}
+          {/*onClick={this.handleClick}*/}
+          {/*>*/}
+          {/*Open Menu*/}
+          {/*</Button>*/}
+          {/*<Menu*/}
+          {/*id="simple-menu"*/}
+          {/*anchorEl={anchorEl}*/}
+          {/*open={Boolean(anchorEl)}*/}
+          {/*onClose={this.handleClose}*/}
+          {/*>*/}
+          {/*<MenuItem onClick={this.handleClose}>Profile</MenuItem>*/}
+          {/*<MenuItem onClick={this.handleClose}>My account</MenuItem>*/}
+          {/*<MenuItem onClick={this.handleClose}>Logout</MenuItem>*/}
+          {/*</Menu>*/}
+          {/*</div>*/}
           {/*</li>*/}
         </ul>
       </div>
