@@ -18,6 +18,7 @@ import FullName from './Components/FullName';
 import DatePickerField from '../../../../registration/DatePickerField';
 import ResetPasswordModal from '../ResetPasswordModal';
 import avatar from '../../../../../static/images/default-avatar-of-user.svg';
+import { deleteUserPic } from '../../../../../actions/profile';
 
 class Membership extends Component {
   constructor(props) {
@@ -98,8 +99,8 @@ class Membership extends Component {
               <div className="row margin-bt-30">
                 <div className="col-lg-8 no-gutters">
                   {fieldsMemberPersonal.map((item) => {
-                    if (item.id === 'createdat' && userData['createdat']) {
-                      const data = { createdat: new Date(userData['createdat']).toLocaleString().slice(0, 10) };
+                    if (item.id === 'createdat' && userData.createdat) {
+                      const data = { createdat: new Date(userData.createdat).toLocaleString().slice(0, 10) };
                       return this.mappingComponent(item, data);
                     }
                     return this.mappingComponent(item, userData);
@@ -120,11 +121,21 @@ class Membership extends Component {
                       alt="Userpic"
                     />
                   </div>
-                  <button
-                    className="default-btn"
-                    onClick={this.props.showUploadDialog}
-                  >Edit
-                  </button>
+                  <div
+                    className="btn-group"
+                    role="group"
+                  >
+                    <button
+                      className="default-btn mr-3"
+                      onClick={this.props.showUploadDialog}
+                    >Edit
+                    </button>
+                    <button
+                      className="default-btn"
+                      onClick={this.props.deleteUserpic}
+                    >Delete
+                    </button>
+                  </div>
                 </div>
               </div>
               <button
@@ -176,21 +187,22 @@ export default connect(state => ({
   userData: state.profile.profileUserData || {},
   fieldsErrors: state.profile.fieldsErrors || {},
 }), (dispatch => ({
-  setInputValueById: (e) => {
-    const { id, value } = e.target;
-    if (/zip_code/.test(id)) {
-      if (value.length === 5) {
-        dispatch(getInfoByZipCode(id, value));
-      } else if (value.length > 5) {
-        return false;
+    setInputValueById: (e) => {
+      const { id, value } = e.target;
+      if (/zip_code/.test(id)) {
+        if (value.length === 5) {
+          dispatch(getInfoByZipCode(id, value));
+        } else if (value.length > 5) {
+          return false;
+        }
       }
-    }
-    dispatch(setInputFieldValueById(id, value));
-    return false;
-  },
-  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-  showUploadDialog: () => dispatch(openModal('uploadImage')),
-  toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
-  setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
-  showResetModal: () => dispatch(openModal('resetPassword')),
-})))(Membership);
+      dispatch(setInputFieldValueById(id, value));
+      return false;
+    },
+    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+    showUploadDialog: () => dispatch(openModal('uploadImage')),
+    toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
+    setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+    showResetModal: () => dispatch(openModal('resetPassword')),
+    deleteUserpic: () => dispatch(deleteUserPic()),
+  })))(Membership);

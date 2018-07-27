@@ -1,6 +1,14 @@
 import { call, put, select, all, takeLatest, takeEvery } from 'redux-saga/effects';
+import axios from 'axios';
 import request from '../utils/request';
-import { resetPasswordFail, resetPasswordSuccess, updateProfileFail, updateProfileSuccess } from '../actions/profile';
+import {
+  deleteUserPicFail,
+  deleteUserPicSuccess,
+  resetPasswordFail,
+  resetPasswordSuccess,
+  updateProfileFail,
+  updateProfileSuccess,
+} from '../actions/profile';
 import {
   deleteAccountFail,
   deleteAccountSuccess,
@@ -11,7 +19,7 @@ import {
 } from '../actions/dashboard';
 import { cleanErrorMessage, passwordUpdateFailed, passwordUpdateSuccess } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
-import { RESET_PASSWORD_REQUEST, UPDATE_PROFILE_REQUEST } from '../constants/profile';
+import { DELETE_USERPIC_REQUEST, RESET_PASSWORD_REQUEST, UPDATE_PROFILE_REQUEST } from '../constants/profile';
 import { DELETE_ACCOUNT_REQUEST, UPLOAD_IMAGE_REQUEST, SAVE_COLOR_SCHEME } from '../constants/dashboard';
 
 export function* sendProfileData() {
@@ -113,6 +121,25 @@ export function* accountDelete() {
   }
 }
 
+export function* deleteUserpic() {
+  const accessToken = localStorage.getItem('accessToken');
+  const url = 'api/account/avatar';
+  // const text = yield select(state => state.dashboard['membership_account_delete_legal_wording']);
+  const options = {
+    headers: { 'x-access-token': accessToken },
+  };
+  try {
+    // console.log(' ** DELETE');
+    const result = yield axios.delete(url, { headers: options.headers });
+    // const result = yield call(request, url, options);
+    yield put(deleteUserPicSuccess());
+    localStorage.removeItem('accessToken');
+    window.location.assign('/');
+  } catch (err) {
+    yield put(deleteUserPicFail(err.message));
+  }
+}
+
 
 export function* saveColorThem({ colorTheme }) {
   const accessToken = localStorage.getItem('accessToken');
@@ -137,6 +164,7 @@ export default function* profileSaga() {
   yield all([
     takeLatest(UPDATE_PROFILE_REQUEST, sendProfileData),
     takeLatest(RESET_PASSWORD_REQUEST, resetPassword),
+    takeLatest(DELETE_USERPIC_REQUEST, deleteUserpic),
     takeEvery(UPLOAD_IMAGE_REQUEST, uploadImage),
     takeEvery(SAVE_COLOR_SCHEME, saveColorThem),
     takeEvery(DELETE_ACCOUNT_REQUEST, accountDelete),

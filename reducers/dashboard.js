@@ -26,7 +26,12 @@ import {
   SET_PARSED_POSITIONS,
   UPDATE_QUOTES,
 } from '../constants/dashboard';
-import { RESET_PASSWORD_FAIL } from '../constants/profile';
+import {
+  DELETE_USERPIC_FAIL,
+  DELETE_USERPIC_REQUEST,
+  DELETE_USERPIC_SUCCESS,
+  RESET_PASSWORD_FAIL,
+} from '../constants/profile';
 import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
 
 const initialState = {
@@ -119,12 +124,14 @@ function dashboard(state = initialState, action) {
         uploadableImage: false,
       };
     case UPLOAD_IMAGE_REQUEST:
+    case DELETE_USERPIC_REQUEST:
     case DELETE_ACCOUNT_REQUEST:
       return {
         ...state,
         loading: true,
       };
     case UPLOAD_IMAGE_SUCCESS:
+    case DELETE_USERPIC_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -138,6 +145,7 @@ function dashboard(state = initialState, action) {
         error: '',
       };
     case UPLOAD_IMAGE_FAIL:
+    case DELETE_USERPIC_FAIL:
     case DELETE_ACCOUNT_FAIL:
     case RESET_PASSWORD_FAIL:
       return {
