@@ -157,14 +157,12 @@ export function* verifySendRequest() {
 
 
 export function* verifySendCodeRequest() {
-  const email = yield select(state => state.registration.registrationData.member_account_email);
   const id = localStorage.getItem('id');
   const code = yield select(state => state.registration.codeVerify);
   const url = '/api/auth/email/verify';
   const options = {
     method: 'POST',
     data: {
-      email,
       id,
       code,
     },
@@ -178,13 +176,11 @@ export function* verifySendCodeRequest() {
 }
 
 export function* checkEmailVerificationRequest() {
-  const email = yield select(state => state.registration.registrationData.member_account_email);
   const id = localStorage.getItem('id');
-  const url = '/api/auth/email/checkVerify';
+  const url = '/api/auth/email/check';
   const options = {
     method: 'POST',
     data: {
-      email,
       id,
     },
   };

@@ -5,7 +5,7 @@ import Search from './Search';
 import logo from '../../../static/images/logo.svg';
 import iconLogo from '../../../static/images/dashboard-icons/icon-logo.svg';
 
-// eslint-disable-next-line react/prefer-stateless-function
+
 class Header extends Component {
   render() {
     const {
@@ -39,10 +39,7 @@ class Header extends Component {
           </button>
           <Search />
           <RightBlock
-            loading={loading}
-            userPic={userPic}
-            memberNumber={memberNumber}
-            memberFullName={memberFullName}
+            {...this.props}
           />
         </div>
       </div>
@@ -54,11 +51,7 @@ function mapStateToProps(state) {
   const fullNameFields = [
     'basic_information_prefix',
     'basic_information_first_name',
-    // 'basic_information_middle_name',
-    // 'basic_information_second_middle_name',
-    // 'basic_information_third_middle_name',
     'basic_information_last_name',
-    // 'basic_information_suffix',
   ];
   const getFullName = (fields, userData) => {
     let fullName = '';

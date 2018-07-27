@@ -9,7 +9,7 @@ import Menu from '@material-ui/core/Menu';
 
 const DropdownMenu = (props) => {
 
-  const { anchorEl } = props;
+  const { anchorEl, currentColorScheme } = props;
 
   this.handlerClick = (tab) => {
     props.setActivePage('profile');
@@ -35,7 +35,7 @@ const DropdownMenu = (props) => {
         },
       }}
     >
-      <div className="profile-menu user-nav__dropdown-menu">
+      <div className={`profile-menu user-nav__dropdown-menu profile-menu_${currentColorScheme}`}>
         <div className="profile-menu__head">
           <div className="row no-gutters align-items-center">
             <div className="profile-menu__avatar-wrap">
