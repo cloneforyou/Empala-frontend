@@ -59,13 +59,16 @@
       border-color: $dark-bg-blue;
       color: $main-color-text-grey;
     }
-    .list-horizontal__link, .dashboard__copyright, .main-text-helvetica {
+    .list-horizontal__link,
+    .dashboard__copyright,
+    .main-text-helvetica {
       color: $main-color-text-grey;
     }
     .emp-table__th {
       color: #7a7697;
     }
-    .emp-table__td {
+    .emp-table__td,
+    .emp-table.table-striped-row .emp-table__table-cell {
       color: #cacaca;
     }
     .news-card__link {
@@ -74,7 +77,8 @@
     .MuiAppBar-colorDefault-6 {
       background: $dark-bg-blue;
     }
-    .emp-table.table-striped tbody tr:nth-of-type(odd) {
+    .emp-table.table-striped tbody tr:nth-of-type(odd),
+    .emp-table.table-striped-row .emp-table__table-cell:nth-of-type(odd) {
       background-color: rgba(245, 245, 246, 0.2);
     }
     .news-card__title, .news-card__link, .form-range__label, .switcher__label {
