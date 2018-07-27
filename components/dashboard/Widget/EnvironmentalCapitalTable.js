@@ -22,7 +22,7 @@ const EnvironmentalCapitalTable = props => (
   >
     <div
       className="widget"
-      style={{ maxHeight: `${widget.height}px`, paddingLeft: `${widget.padding_left && widget.padding_left}px` }}
+      style={{ height: `${widget.height}px`, paddingLeft: `${widget.padding_left && widget.padding_left}px` }}
     >
       <WidgetHead
         widget={widget}
@@ -66,11 +66,12 @@ const EnvironmentalCapitalTable = props => (
                 <td className="emp-table__td text-left">Volatility</td>
                 <td className="emp-table__td emp-table__td_chart"><img src="../../static/images/sentim-chart1.svg" alt="" />
                 </td>
-              </tr><tr className="emp-table__tr">
+              </tr>
+              <tr className="emp-table__tr">
                 <td className="emp-table__td text-left">Domestic currency</td>
                 <td className="emp-table__td emp-table__td_chart"><img src="../../static/images/sentim-chart1.svg" alt="" />
                 </td>
-                   </tr>
+              </tr>
               <tr className="emp-table__tr">
                 <td className="emp-table__td text-left">Domestic economy</td>
                 <td className="emp-table__td emp-table__td_chart"><img src="../../static/images/sentim-chart2.svg" alt="" />
@@ -80,7 +81,8 @@ const EnvironmentalCapitalTable = props => (
                 <td className="emp-table__td text-left">Global economy</td>
                 <td className="emp-table__td emp-table__td_chart"><img src="../../static/images/sentim-chart1.svg" alt="" />
                 </td>
-              </tr> <tr className="emp-table__tr">
+              </tr>
+              <tr className="emp-table__tr">
                 <td className="emp-table__td text-left">Negative surprise</td>
                 <td className="emp-table__td emp-table__td_chart"><img src="../../static/images/sentim-chart2.svg" alt="" />
                 </td>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import WidgetHead from './Widget/WidgetHead';
+import moment from 'moment';
 import { getTableHeaderByName } from '../../utils/dashboardUtils';
 import EmpalaTableCell from './EmpalaTableCell';
 
@@ -17,6 +17,11 @@ import EmpalaTableCell from './EmpalaTableCell';
 *           default - false.
 /* =============================== */
 
+const datePatterns = [
+  'DD.MM.YYYY',
+  'DD-MM-YYYY',
+  'DD/MM/YYYY',
+];
 class EmpalaTable extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +49,13 @@ class EmpalaTable extends Component {
       if (!a[col]) return 1;
       if (!b[col]) return -1;
       if (a[col].value === b[col].value) return 0;
+      if (moment(a[col].value, datePatterns).isValid() &&
+        moment(b[col].value, datePatterns).isValid()) {
+        const dateA = moment(a[col].value, datePatterns);
+        const dateB = moment(b[col].value, datePatterns);
+        if (order === 'asc') return (dateA > dateB) ? 1 : -1;
+        if (order === 'desc') return (dateA > dateB) ? -1 : 1;
+      }
       if (order === 'asc') {
         if (!isNaN(a[col].value) && !isNaN(b[col].value)) return a[col].value - b[col].value;
         if (a[col].value > b[col].value) return 1;
@@ -58,7 +70,7 @@ class EmpalaTable extends Component {
     });
   }
   innerHeight(height) {
-    if (height) return `${height - 40}px`;
+    if (height) return `${height}px`;
     return 'auto';
   }
   render() {

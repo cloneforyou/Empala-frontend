@@ -21,7 +21,7 @@ const DealsDevelopmentTable = props => (
       className="widget"
       style={
         {
-        maxHeight: `${widget.height}px`,
+        height: `${widget.height}px`,
         paddingLeft: `${widget.padding_left && widget.padding_left}px`,
         paddingRight: `${widget.padding_right && widget.padding_right}px`,
         }

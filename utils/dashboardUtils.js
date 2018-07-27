@@ -125,7 +125,7 @@ const tableHeaders = {
     id: 'dashboard_watchlist',
     title: 'Watchlists',
     col: 12,
-    height: 568,
+    height: 488,
     dots: true,
     headers: [
       'Sec name',
@@ -186,7 +186,7 @@ const tableHeaders = {
     id: 'dashboard_orders',
     title: 'Orders',
     col: 12,
-    height: 222,
+    height: 182,
     dots: true,
     headers: [
       'Sec name',
@@ -325,7 +325,7 @@ const tableHeaders = {
   },
   overview_financial_capital_exposure: {
     id: 'overview_financial_capital_exposure',
-    height: 240,
+    height: 200,
     headers: [
       'Exposure',
       'Value',
@@ -348,7 +348,7 @@ const tableHeaders = {
   },
   overview_financial_capital_allocation: {
     id: 'overview_financial_capital_allocation',
-    height: 240,
+    height: 200,
     headers: [
       'Allocation',
       'Domestic',
@@ -373,7 +373,6 @@ const tableHeaders = {
     id: 'overview_financial_capital_performance_st',
     title: 'Financial capital performance',
     col: 5,
-    height: 390,
     padding_left: 10,
     headers: [
       'ST performance',
@@ -399,7 +398,6 @@ const tableHeaders = {
     id: 'overview_financial_capital_performance_lt',
     title: 'Financial capital performance',
     col: 5,
-    height: 390,
     headers: [
       'LT Performance',
       '% change',
@@ -423,7 +421,7 @@ const tableHeaders = {
   overview_social_capital_network: {
     id: 'overview_social_capital_network',
     title: 'Social capital',
-    height: 240,
+    height: 200,
     headers: [
       'Network',
       'No.',
@@ -443,7 +441,7 @@ const tableHeaders = {
   },
   overview_social_capital_positioning: {
     id: 'overview_social_capital_positioning',
-    height: 240,
+    height: 200,
     headers: [
       'Positioning',
       '%ile',
@@ -501,6 +499,7 @@ const tableHeaders = {
   },
   overview_environmental_capital_size_growth: {
     id: 'overview_environmental_capital_size_growth',
+    height: 200,
     headers: [
       'Size & growth',
       'No.',
@@ -540,7 +539,7 @@ const tableHeaders = {
   active_orders: {
     id: 'active_orders',
     title: 'Active orders',
-    height: 230,
+    height: 220,
     dots: true,
     headers: [
       'Security & symbol',
@@ -572,7 +571,7 @@ const tableHeaders = {
   overview_working_deals: {
     id: 'overview_working_deals',
     title: 'Working deals',
-    height: 230,
+    height: 220,
     dots: true,
     headers: [
       'Description',
@@ -603,7 +602,7 @@ const tableHeaders = {
   overview_deals_development: {
     id: 'overview_deals_development',
     title: 'Deals development',
-    height: 230,
+    height: 220,
     headers: [
       'Description',
       'Date',
@@ -641,7 +640,7 @@ export const formatNumberWithFixedPoint = (number, n) => {
 /* ========= parses the date from specified string ======== */
 /* ========= like '/Date(1530076567409+0000)/' ==========  */
 export const parseOrderDate = str => new Date(parseInt(str.match(/\d+(\+\d+)?/)[0], 10)).toLocaleString();
-const parseDateString = (str, pattern) => {
+export const parseDateString = (str, pattern) => {
   if (!pattern) return moment(str).format('DD-MM-YYYY');
   return moment(str).format(pattern);
 };
@@ -651,7 +650,7 @@ export const calculateOrderDistance = (price, lastPrice) =>
   Math.abs(Math.round(((price - lastPrice) * 100) / price));
 
 export const calculateOrderPrice = (symbolPrice, quantity) =>
-  (Math.round(parseFloat(symbolPrice) * parseInt(quantity, 10) * 100) / 100).toFixed(2);
+  (Math.round(parseFloat(symbolPrice) * parseInt(quantity, 10) * 100) / 100);
 
 export const parseOrdersList = list => list.map(order => ({
   status: order.ExecutionStatus,
@@ -667,11 +666,10 @@ export const parseOrdersList = list => list.map(order => ({
     order_quantity: order.Quantity,
     fill_quantity: order.ExecutedQuantity,
     remain_quantity: order.LeavesQuantity,
-    notional_ammount: calculateOrderPrice(order.AveragePrice, order.Quantity), // TODO find the way how to calculate
+    notional_ammount: calculateOrderPrice(order.AveragePrice, order.LeavesQuantity), // TODO find the way how to calculate
     comission: '--', // TODO find the way how to calculate
     distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
-    // start_date: parseOrderDate(order.CreateDate),
-    start_date: moment(order.CreateDate).format('MM/DD/YY'),
+    start_date: parseDateString(order.CreateDate, 'MM/DD/YY'),
     qct: '--', // TODO Investigate how to calculate
   },
 }));
@@ -704,7 +702,8 @@ export const parseWatchList = list => ({
 
 export const parsePositionsList = list => (list.map(pos => ({
   id: Math.random(),
-  start_date: parseOrderDate(pos.CreateDate).slice(0, 10),
+  // start_date: parseOrderDate(pos.CreateDate).slice(0, 10),
+  start_date: parseDateString(pos.CreateDate),
   symbol: pos.Symbol,
   sec_name: pos.CompanyName,
   sec_id: pos.SecurityId,
@@ -723,6 +722,7 @@ export const parsePositionsList = list => (list.map(pos => ({
   total_pl: '--', // This is the Total P&L including all components such as carry and M2M - Not Used in Phase 1
   day_chg: '--', // TODO investigate about calculation
   day_pl: '--', // TODO investigate about calculation
+  rpl: pos.RealizedProfitLoss,
 })));
 
 

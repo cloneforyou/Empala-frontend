@@ -4,7 +4,7 @@ import { reduce, uniqueId, values } from 'lodash';
 import { widgetsPositions } from '../../../localdata/dashboardWidgets';
 import WidgetTable from './WidgetTable';
 import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
-import { getTableHeaderByName } from '../../../utils/dashboardUtils';
+import { formatNumberWithFixedPoint, getTableHeaderByName } from '../../../utils/dashboardUtils';
 import WidgetHead from './WidgetHead';
 import EmpalaTable from '../EmpalaTable';
 
@@ -25,6 +25,19 @@ import EmpalaTable from '../EmpalaTable';
 // };
 // TODO  remove later if unused
 
+
+const positionsPLs = (positions) => {
+  const out = {};
+  positions.forEach((pos) => {
+    out.pos.sec_id = pos.rpl;
+    return true;
+  });
+  return out;
+};
+const calculateDayRPL = pos => pos && pos[2] ? pos[16] : false;
+
+const calculateDayPL = pos => calculateMarketValue(pos) - calculatePrevMarketValue(pos) + calculateDayRPL(pos);
+
 class PositionsPortfolioTable extends React.Component {
   constructor(props) {
     super(props);
@@ -39,28 +52,47 @@ class PositionsPortfolioTable extends React.Component {
   componentWillUnmount() {
     this.props.unsubscribeQuotes();
   }
+  mapETNACategoryToEmpala(categoryName) {
+    switch (categoryName) {
+      case 'CommonStock':
+        return 'Stock';
+      default: return categoryName;
+    }
+  }
+
+  positionsPLs = (positions) => {
+    const out = {};
+    positions.forEach((pos) => {
+      out.pos.sec_id = pos.rpl;
+      return true;
+    });
+    return out;
+  };
+  calculateDayRPL = pos => pos && pos[2] ? pos[16] : false;
+  calculateDayPL = pos => calculateMarketValue(pos) - calculatePrevMarketValue(pos) + calculateDayRPL(pos);
 
   getPositionsData(position) {
+    const self = this;
     return position && position.map(list => ([
       { value: list.start_date }, // 'Start date'
       { value: list.symbol }, // 'Symbol'
       { value: list.sec_name }, // 'Sec name'
       { value: list.sec_id }, // 'Sec ID'
-      { value: list.category }, // 'Category'
+      { value: self.mapETNACategoryToEmpala(list.category) }, // 'Category'
       { value: 'USA' }, // 'Country'
       { value: list.currency }, // 'Curr'
       { value: list.ann_cf }, // 'Ann CF%'
       { value: list.carry }, // 'Carry'
       { value: list.ann_ret }, // 'Ann Ret'
       { value: list.var_cont }, // 'VAR Count'
-      { value: list.avg_price, mark: 'numeric' }, // 'Avg Price'
+      { value: formatNumberWithFixedPoint(list.avg_price, 2), mark: 'numeric' }, // 'Avg Price'
       { value: list.quantity }, // 'Quantity'
-      { value: list.m2m }, // 'M2M'
-      { value: list.notional }, // 'Notional'
-      { value: list.total_chg, mark: 'numeric' }, // 'Tot % Chg'
-      { value: list.total_pl }, // 'Tot P&L'
-      { value: list.day_chg, mark: 'numeric' }, // 'Day % Chg'
-      { value: list.day_pl, mark: 'numeric' }, // 'Day P&L'
+      { value: formatNumberWithFixedPoint(list.m2m, 2) }, // 'M2M'
+      { value: formatNumberWithFixedPoint(list.notional, 2) }, // 'Notional'
+      { value: formatNumberWithFixedPoint(list.total_chg, 2), mark: 'numeric' }, // 'Tot % Chg'
+      { value: formatNumberWithFixedPoint(list.total_pl, 2) }, // 'Tot P&L'
+      { value: formatNumberWithFixedPoint(list.day_chg, 2), mark: 'numeric' }, // 'Day % Chg'
+      { value: formatNumberWithFixedPoint(list.day_pl, 2), mark: 'numeric' }, // 'Day P&L'
     ]));
   }
   updatePositionsData(positions, quotes) {
@@ -68,10 +100,10 @@ class PositionsPortfolioTable extends React.Component {
       positions.forEach((pos) => {
         const secId = pos[3].value;
         if (quotes[secId]) {
-          pos[13].value = quotes[secId].Last;
-          pos[17].value = Number(quotes[secId].ChangePc).toFixed(1);
-          pos[14].value = (pos[12].value * quotes[secId].Last).toFixed(2);
-          pos[15].value = ((quotes[secId].Last - pos[11].value) * 100 / pos[11].value).toFixed(2);
+          pos[13].value = formatNumberWithFixedPoint(quotes[secId].Last, 2);
+          pos[17].value = formatNumberWithFixedPoint(quotes[secId].ChangePc, 2);
+          pos[14].value = formatNumberWithFixedPoint(pos[12].value * quotes[secId].Last, 2);
+          pos[15].value = formatNumberWithFixedPoint((quotes[secId].Last - pos[11].value) * 100 / pos[11].value, 2);
         }
       });
     }

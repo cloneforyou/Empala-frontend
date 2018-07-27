@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
 import EmpalaTable from '../EmpalaTable';
-import { getTableHeaderByName } from '../../../utils/dashboardUtils';
+import { formatNumberWithFixedPoint, getTableHeaderByName } from '../../../utils/dashboardUtils';
 import WidgetHead from './WidgetHead';
 import { filter } from 'lodash';
 
@@ -46,13 +46,13 @@ class OrdersTable extends React.Component {
       { value: order.values.sec_name },
       { value: order.values.symbol },
       { value: order.values.currency },
-      { value: order.values.price },
+      { value: formatNumberWithFixedPoint(order.values.price, 2) },
       { value: order.values.order_quantity },
       { value: order.values.fill_quantity },
       { value: order.values.remain_quantity },
-      { value: order.values.notional_ammount },
+      { value: formatNumberWithFixedPoint(order.values.notional_ammount, 0) },
       { value: order.values.comission },
-      { value: order.values.distance },
+      { value: formatNumberWithFixedPoint(order.values.distance, 1) },
       { value: order.values.start_date },
       { value: order.values.qct },
     ]);
@@ -64,34 +64,34 @@ class OrdersTable extends React.Component {
       props,
     } = this;
     return (
-      <div style={{ width: '100%' }}>
-      <div
-        className={`widget-col col-lg-${widget.col}`}
-      >
-        <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
-          <WidgetHead
-            widget={widget}
-          />
+      <div className="w-100 px-1">
+        <div
+          className={`widget-col col-lg-${widget.col}`}
+        >
+          <div className="widget" style={{ height: `${widget.height}px` }}>
+            <WidgetHead
+              widget={widget}
+            />
             <EmpalaTable
               tableName="dashboard_orders"
               tableData={getTableDataFromOrders(props.ordersList, 'Orders')}
               striped
             />
+          </div>
         </div>
-      </div>
         <div
           className={`widget-col col-lg-${widget.col}`}
         >
-        <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
-          <WidgetHead
-            widget={{ ...widget, title: 'Fills/cancels' }}
-          />
+          <div className="widget" style={{ height: `${widget.height}px` }}>
+            <WidgetHead
+              widget={{ ...widget, title: 'Fills/cancels' }}
+            />
             <EmpalaTable
               tableName="dashboard_orders"
               tableData={getTableDataFromOrders(props.ordersList, 'Fills/cancels')}
               striped
             />
-        </div>
+          </div>
         </div>
       </div>
     );
