@@ -124,6 +124,8 @@
   padding: 5px 20px 5px 40px;
   height: 40px;
   width: 124px;
+  border: none;
+  margin: 0 5px;
   &:before {
     content: '';
     position: absolute;
@@ -203,8 +205,8 @@
   }
 }
 
-
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+@-webkit-keyframes rotating /* Safari and Chrome */
+{
   from {
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -216,6 +218,7 @@
     transform: rotate(360deg);
   }
 }
+
 @keyframes rotating {
   from {
     -ms-transform: rotate(0deg);
@@ -232,6 +235,7 @@
     transform: rotate(360deg);
   }
 }
+
 .spinner {
   -webkit-animation: rotating 2s linear infinite;
   -moz-animation: rotating 2s linear infinite;

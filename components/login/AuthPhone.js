@@ -24,6 +24,12 @@ class AuthPhone extends Component {
     this.props.twoFactorAuthentication(login, password, code);
   };
 
+  pressEnter = (e) => {
+    if (e.key === 'Enter') {
+      this.handleLogin()
+    }
+  };
+
   render() {
     const { code } = this.state;
     return (
@@ -39,8 +45,8 @@ class AuthPhone extends Component {
             placeholder={code}
             className="mfa__input"
             onChange={this.handleChange}
+            onKeyPress={(e) => this.pressEnter(e)}
           />
-
           <button
             className="login__btn login__btn_sm"
             onClick={this.handleLogin}
@@ -53,6 +59,6 @@ class AuthPhone extends Component {
   }
 }
 
-export default connect(state => {}, dispatch => ({
+export default connect(state => ({}), dispatch => ({
   twoFactorAuthentication: (login, password, code) => dispatch(twoFactorAuthentication(login, password, code))
 }))(AuthPhone);
