@@ -26,16 +26,21 @@ import EmpalaTable from '../EmpalaTable';
 // TODO  remove later if unused
 
 
-const positionsPLs = (positions) => {
+const getPositionsPLs = (positions) => {
+  if (!positions) return false;
   const out = {};
-  positions.forEach((pos) => {
-    out.pos.sec_id = pos.rpl;
+  positions.length>0 && positions.forEach((pos) => {
+    out[pos.sec_id] = pos.rpl;
     return true;
   });
   return out;
 };
-const calculateDayRPL = pos => pos && pos[2] ? pos[16] : false;
 
+const getPositionMark = (pos, quotes) => {
+   if (!pos || !quotes) return false;
+   return quotes[pos.sec_id].Mark
+};
+const calculateDayRPL = pos => pos && pos[19] ? pos[19] : false;
 const calculateDayPL = pos => calculateMarketValue(pos) - calculatePrevMarketValue(pos) + calculateDayRPL(pos);
 
 class PositionsPortfolioTable extends React.Component {
@@ -43,6 +48,7 @@ class PositionsPortfolioTable extends React.Component {
     super(props);
     this.widget = getTableHeaderByName('dashboard_positions_portfolio');
     this.positions = this.getPositionsData(this.props.positionsParsed);
+    this.positionsPLs = getPositionsPLs(this.props.positionsParsed);
   }
 
   componentDidMount() {
@@ -59,17 +65,14 @@ class PositionsPortfolioTable extends React.Component {
       default: return categoryName;
     }
   }
-
-  positionsPLs = (positions) => {
-    const out = {};
-    positions.forEach((pos) => {
-      out.pos.sec_id = pos.rpl;
-      return true;
-    });
-    return out;
+  getPositionMark = pos => {
+    if (!pos || !this.props.quotes) return false;
+    return this.props.quotes[pos[3].value].Mark
   };
-  calculateDayRPL = pos => pos && pos[2] ? pos[16] : false;
-  calculateDayPL = pos => calculateMarketValue(pos) - calculatePrevMarketValue(pos) + calculateDayRPL(pos);
+  calculateMarketValue = pos => this.getPositionMark(pos) * pos[12].value * (pos[4].value === 'Stock' ? 1 : 100);
+  calculatePrevMarketValue = pos => pos[20].value * pos[12].value * (pos[4].value === 'Stock' ? 1 : 100);
+  calculateDayRPL = pos => pos && pos[19].value ? pos[19].value : false;
+  calculateDayPL = pos => this.calculateMarketValue(pos) - this.calculatePrevMarketValue(pos) + this.calculateDayRPL(pos);
 
   getPositionsData(position) {
     const self = this;
@@ -93,6 +96,8 @@ class PositionsPortfolioTable extends React.Component {
       { value: formatNumberWithFixedPoint(list.total_pl, 2) }, // 'Tot P&L'
       { value: formatNumberWithFixedPoint(list.day_chg, 2), mark: 'numeric' }, // 'Day % Chg'
       { value: formatNumberWithFixedPoint(list.day_pl, 2), mark: 'numeric' }, // 'Day P&L'
+      { value: list.rpl }, // RealisedProfitLoss
+      { value: list.prev_close_avg }, // AverageClosePrice
     ]));
   }
   updatePositionsData(positions, quotes) {
@@ -104,6 +109,7 @@ class PositionsPortfolioTable extends React.Component {
           pos[17].value = formatNumberWithFixedPoint(quotes[secId].ChangePc, 2);
           pos[14].value = formatNumberWithFixedPoint(pos[12].value * quotes[secId].Last, 2);
           pos[15].value = formatNumberWithFixedPoint((quotes[secId].Last - pos[11].value) * 100 / pos[11].value, 2);
+          pos[18].value = formatNumberWithFixedPoint(this.calculateDayPL(pos), 2);
         }
       });
     }
@@ -140,6 +146,7 @@ PositionsPortfolioTable.defaultProps = {
 export default connect(
   state => ({
     positionsParsed: state.dashboard.parsedPositions ? state.dashboard.parsedPositions : [],
+    // positions: state.dashboard.positions ? state.dashboard.positions : [],
     quotes: state.dashboard.quotes,
   }),
   dispatch => ({

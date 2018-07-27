@@ -564,7 +564,7 @@ const tableHeaders = {
         '74px',
       ],
       sortable: [
-        true
+        true,
       ],
     },
   },
@@ -645,6 +645,26 @@ export const parseDateString = (str, pattern) => {
   return moment(str).format(pattern);
 };
 
+// const getPositionsPLs = (positions) => {
+//   if (!positions) return false;
+//   const out = {};
+//   positions.length>0 && positions.forEach((pos) => {
+//     out[pos.sec_id] = pos.rpl;
+//     return true;
+//   });
+//   return out;
+// };
+// const calculateDayRPL = pos => pos && pos[2] ? pos[16] : false;
+// const calculateMarketValue = pos => getPositionMark(pos);
+// const getPositionMark = pos => {
+//   switch (pos.SecurityType) {
+//     case 'CommonStock':
+//       return 0;
+//
+//   }
+// }
+// const calculateDayPL = pos => calculateMarketValue(pos) - calculatePrevMarketValue(pos) + calculateDayRPL(pos);
+
 // TODO maybe will need some correction when watchlist appears
 export const calculateOrderDistance = (price, lastPrice) =>
   Math.abs(Math.round(((price - lastPrice) * 100) / price));
@@ -723,6 +743,7 @@ export const parsePositionsList = list => (list.map(pos => ({
   day_chg: '--', // TODO investigate about calculation
   day_pl: '--', // TODO investigate about calculation
   rpl: pos.RealizedProfitLoss,
+  prev_close_avg: pos.AverageClosePrice,
 })));
 
 
