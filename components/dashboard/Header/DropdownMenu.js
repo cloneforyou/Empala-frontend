@@ -10,7 +10,7 @@ import Menu from '@material-ui/core/Menu';
 const DropdownMenu = (props) => {
 
   const { anchorEl, currentColorScheme } = props;
-  console.log('currentColorScheme -==> ', currentColorScheme);
+
   this.handlerClick = (tab) => {
     props.setActivePage('profile');
     props.changeActiveTabProfile(tab);
