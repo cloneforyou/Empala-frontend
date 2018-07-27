@@ -81,15 +81,15 @@ class WatchlistsTable extends React.Component {
       updateWatchlistData(getWatchListsData(props.watchLists[props.listNumber].content), props.quotes);
     // console.log(watchlistData[0])
     return (
-      <div
-        className={`widget-col col-lg-${widget.col}`}
-        key={widget.id}
-      >
-        <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
-          <WidgetHead
-            widget={widget}
-          />
-          <div style={{ width: '100%' }}>
+      <div className="w-100 px-1">
+        <div
+          className={`widget-col col-lg-${widget.col} `}
+          key={widget.id}
+        >
+          <div className="widget" style={{ height: `${widget.height}px` }}>
+            <WidgetHead
+              widget={widget}
+            />
             <EmpalaTable
               tableName="dashboard_watchlist"
               tableData={watchlistData}

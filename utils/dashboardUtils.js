@@ -108,7 +108,7 @@ const tableHeaders = {
     id: 'dashboard_watchlist',
     title: 'Watchlists',
     col: 12,
-    height: 528,
+    height: 488,
     dots: true,
     headers: [
       'Sec name',
@@ -518,7 +518,7 @@ export const calculateOrderDistance = (price, lastPrice) =>
   Math.abs(Math.round(((price - lastPrice) * 100) / price));
 
 export const calculateOrderPrice = (symbolPrice, quantity) =>
-  (Math.round(parseFloat(symbolPrice) * parseInt(quantity, 10) * 100) / 100).toFixed(2);
+  (Math.round(parseFloat(symbolPrice) * parseInt(quantity, 10) * 100) / 100);
 
 export const parseOrdersList = list => list.map(order => ({
   status: order.ExecutionStatus,
@@ -534,11 +534,10 @@ export const parseOrdersList = list => list.map(order => ({
     order_quantity: order.Quantity,
     fill_quantity: order.ExecutedQuantity,
     remain_quantity: order.LeavesQuantity,
-    notional_ammount: calculateOrderPrice(order.AveragePrice, order.Quantity), // TODO find the way how to calculate
+    notional_ammount: calculateOrderPrice(order.AveragePrice, order.LeavesQuantity), // TODO find the way how to calculate
     comission: '--', // TODO find the way how to calculate
     distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
-    // start_date: parseOrderDate(order.CreateDate),
-    start_date: moment(order.CreateDate).format('MM/DD/YY'),
+    start_date: parseDateString(order.CreateDate, 'MM/DD/YY'),
     qct: '--', // TODO Investigate how to calculate
   },
 }));
