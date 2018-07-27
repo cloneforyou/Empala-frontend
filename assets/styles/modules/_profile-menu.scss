@@ -95,4 +95,12 @@
     cursor: pointer;
     border: none;
   }
+  &_dark {
+    background: #292844;
+    .profile-menu__user-info-name,
+    .profile-menu__user-info-member-no,
+    .profile-menu__item a {
+      color: #cacaca;
+    }
+  }
 }
