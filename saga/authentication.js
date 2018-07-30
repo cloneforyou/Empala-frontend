@@ -25,6 +25,12 @@ function* loginRequest(url, options) {
   // console.log(url, options)
   try {
     const result = yield call(request, url, options);
+    if (result.data.info === 'LOGGED_IN') {
+      yield put(loginSuccess());
+      localStorage.setItem('accessToken', result.data.data.tokens.access);
+      localStorage.setItem('refreshToken', result.data.data.tokens.refresh);
+      return window.location.assign('/dashboard');
+    }
     if (result.data.info === 'CODE_SENT') {
       yield put(loginSuccess());
       return window.location.assign('/mfa');
