@@ -106,12 +106,13 @@ function dashboard(state = initialState, action) {
         loading: false,
         userData: action.data,
         userDataLoaded: true,
+        loadingPage: false,
       };
     case SET_ACTIVE_PAGE:
       return {
         ...state,
         activePageDashboard: action.page,
-        loadingPage: false,
+        // loadingPage: false,
       };
     case SET_UPLOADABLE_IMAGE:
       return {
