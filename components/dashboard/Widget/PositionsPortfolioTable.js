@@ -77,7 +77,7 @@ class PositionsPortfolioTable extends React.Component {
   getPositionsData(position) {
     const self = this;
     return position && position.map(list => ([
-      { value: list.start_date }, // 'Start date'
+      { value: list.start_date, type: 'date' }, // 'Start date'
       { value: list.symbol }, // 'Symbol'
       { value: list.sec_name }, // 'Sec name'
       { value: list.sec_id }, // 'Sec ID'
