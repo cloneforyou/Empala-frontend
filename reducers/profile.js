@@ -1,8 +1,13 @@
 import {
   GET_ACTIVE_TAB_PROFILE,
   CHANGE_ACTIVE_TAB_PROFILE,
+  DELETE_USERPIC_SUCCESS,
 } from '../constants/profile';
-import { GET_USER_DATA_SUCCESS, SET_FIELD_VALUE, UPLOAD_IMAGE_SUCCESS } from '../constants/dashboard';
+import {
+  GET_USER_DATA_SUCCESS,
+  SET_FIELD_VALUE,
+  UPLOAD_IMAGE_SUCCESS,
+} from '../constants/dashboard';
 import { flattenObject, renameKeys } from '../utils/additional';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -23,6 +28,11 @@ function profile(state = initialState, action) {
       return {
         ...state,
         profileUserData: renameKeys(flattenObject(action.data.data.profile), /^Member/, ''),
+      };
+    case DELETE_USERPIC_SUCCESS:
+      return {
+        ...state,
+        profileUserData: { ...state.profileUserData, account_avatar: null},
       };
     case SET_FIELD_VALUE:
       return {
