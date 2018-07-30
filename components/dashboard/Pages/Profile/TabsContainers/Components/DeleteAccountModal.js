@@ -65,6 +65,7 @@ const style = {
     overflow: 'auto',
     width: '450px',
     minHeight: '87px',
+    maxHeight: '300px',
     fontStyle: 'oblique',
     border: '1px solid  #dfdfdf',
     margin: '0 6px 18px 6px',
@@ -72,13 +73,13 @@ const style = {
     outline: 'none',
   },
   cancelBtn: {
-    marginLeft: '30px',
-    marginRight: '182px',
     fontSize: '14px',
     marginBottom: '28px',
+    padding: '5px 30px',
   },
   deleteBtn: {
-    padding: '5px 30px',
+    marginLeft: '15px',
+    marginRight: '70px',
     marginBottom: '28px',
   },
 };
@@ -100,14 +101,17 @@ class DeleteAccount extends PureComponent {
         >
           <h2 style={style.confirmationText}>Delete your account?</h2>
           <DialogContent>
-          <textarea
+            {/* <textarea
             id="membership_account_delete_legal_wording"
             onChange={this.props.setInputValue}
             style={style.legalWording}
             maxLength="300"
             value={this.props.legalWordingtext}
             placeholder="Legal wording"
-          />
+          /> */}
+            <div style={style.legalWording}>
+              <p>Text box for legal wording - (to be stored in the database)</p>
+            </div>
             <div style={{ textAlign: 'center' }}>
 
               <p
@@ -128,22 +132,23 @@ class DeleteAccount extends PureComponent {
           </DialogContent>
           <DialogActions>
             <button
+              className="default-btn"
+              style={style.cancelBtn}
+              onClick={this.props.handleCancel}
+              disabled={this.props.confirmationInputValue !== 'yes'}
+            >Cancel
+            </button>
+            <button
               className="profile-btn profile-btn_red"
               onClick={this.props.submitDelete}
               style={style.deleteBtn}
               disabled={!this.isDeletionConfirmed()}
             >Delete Account
             </button>
-            <button
-              className="default-btn"
-              style={style.cancelBtn}
-              onClick={this.props.handleCancel}
-            >Cancel
-            </button>
           </DialogActions>
         </Dialog>
       </div>
-    )
+    );
   }
 }
 
