@@ -12,37 +12,35 @@ const EmpalaSelect = (props) => {
   const { currentColorScheme } = props;
   return (
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
+      <div className="registration-label">{props.label}</div>
       <SelectField
         id={props.id}
         value={props.value}
         autoWidth={props.autoWidth}
-        floatingLabelText={props.label}
-        floatingLabelFixed
-        className="dashboard-select"
+        className="dashboard-select text-field"
         floatingLabelStyle={style.floatingLabelStyle}
         hintText={fieldNeedsLabel(props.id) && (props.hint || props.label)}
         hintStyle={currentColorScheme === 'light' ?
-          { 'color': '#C5C5C5' } :
-          { 'color': '#fff' }
+          style.hintStyleLightTheme :
+          style.hintStyleDarkTheme
         }
         labelStyle={props.disabled ? style.inputStyleDisabled :
+           (currentColorScheme === 'light' ?
+               style.labelStyleLightTheme :
+               style.labelStyleDarkTheme
+           )
+         }
+        inputStyle={props.disabled ? style.inputStyleDisabled :
           (currentColorScheme === 'light' ?
-              { 'color': '#808895' } :
-              { 'color': '#cacaca' }
+              style.inputStyleLightTheme :
+              style.inputStyleDarkTheme
           )
         }
         style={style.selectFieldStyle}
         iconStyle={style.iconSelectStyle}
         menuItemStyle={style.menuItemStyle}
         selectedMenuItemStyle={style.selectedMenuItemStyle}
-        underlineDisabledStyle={style.underlineDisabledStyle}
-        underlineStyle={currentColorScheme === 'light' ?
-          { borderBottom: '2px solid #E0E0E0' } :
-          { borderBottom: '2px solid #676676' }
-        }
-        underlineFocusStyle={props.errorText
-          ? style.underlineErrorStyle
-          : style.underlineFocusStyle}
+        underlineStyle={style.underlineStyle}
         maxHeight={300}
         onChange={(e, i, v) => {
           props.handleChange(props.id, v);
@@ -50,7 +48,6 @@ const EmpalaSelect = (props) => {
         disabled={props.disabled}
         errorText={props.disabled ? '' : props.errorText}
         margin="none"
-
       >
         {props.options.map((option) => (
           <MenuItem

@@ -17,18 +17,19 @@
 }
 
 .pseudo-input {
-  height: 65px;
+  height: 60px;
   &__label {
     color: $green;
     font-size: 12px;
   }
-  &__input {
-    border: none;
-    border-bottom: 2px solid #e0e0e0;
-    box-shadow: none;
+  &__input, &__input:focus {
     width: 100%;
+    height: 33px;
     display: block;
-    padding: 12px 0 0;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.15);
     cursor: text;
     color: $main-color-text-grey;
   }

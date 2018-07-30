@@ -24,22 +24,18 @@ const DatePickerField = (props) => {
         <DatePicker
           id={props.id}
           locale="en-US"
-          underlineStyle={currentColorScheme === 'light' ?
-            { borderBottom: '2px solid #E0E0E0' } :
-            { borderBottom: '2px solid #676676' }
-          }
+          underlineStyle={style.underlineStyle}
           openToYearSelection
           errorText={errorText}
           inputStyle={props.disabled ? style.inputStyleDisabled :
             (currentColorScheme === 'light' ?
-                { color: '#808895' } :
-                { color: '#cacaca' }
+                style.inputStyleLightTheme :
+                style.inputStyleDarkTheme
             )
           }
           firstDayOfWeek={0}
           disabled={props.disabled}
           textFieldStyle={{ width: '100%', color: '#808895', fontSize: '14px' }}
-          underlineDisabledStyle={style.underlineDisabledStyle}
           onChange={(none = null, date) => props.handleDatePick(props.id, date)}
           value={props.value && props.value !== 'Not provided' ? new Date(props.value) : null}
           minDate={props.dateExpiry && currentDate}

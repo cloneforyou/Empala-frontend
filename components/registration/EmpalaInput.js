@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import InputMask from 'react-input-mask';
 import TextField from 'material-ui/TextField';
 import style from './RegistrationFieldsStyle';
-import { ALTO } from "../../constants/colors";
 
 
 class EmpalaInput extends Component {
@@ -24,30 +23,24 @@ class EmpalaInput extends Component {
     const { currentColorScheme } = this.props;
     return (
       <div className={this.props.col ? `registration-group col-md-${this.props.col}` : 'registration-group col-12'}>
+        <div className="registration-label">{this.props.label}</div>
         <TextField
           id={this.props.id}
           type={this.props.type}
-          floatingLabelText={this.props.label}
-          floatingLabelFixed
-          floatingLabelStyle={style.floatingLabelStyle}
           hintText={this.props.placeholder}
           style={style.textFieldStyle}
-          underlineStyle={currentColorScheme === 'light' ?
-            { borderBottom: `2px solid #E0E0E0` } :
-            { borderBottom: `2px solid #676676` }}
+          underlineStyle={style.underlineStyle}
 
           hintStyle={currentColorScheme === 'light' ?
-            { 'color': '#C5C5C5' } :
-            { 'color': '#fff' }
+            style.hintStyleLightTheme :
+            style.hintStyleDarkTheme
           }
           inputStyle={this.props.disabled ? style.inputStyleDisabled :
             (currentColorScheme === 'light' ?
-                { 'color': '#808895' } :
-                { 'color': '#cacaca' }
+                style.inputStyleLightTheme :
+                style.inputStyleDarkTheme
             )
           }
-          underlineFocusStyle={errorText ? style.underlineErrorStyle : style.underlineFocusStyle}
-          underlineDisabledStyle={style.underlineDisabledStyle}
           value={this.props.value}
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}

@@ -1,6 +1,7 @@
 .date-picker {
   &__container {
     position: relative;
+    height: 40px;
   }
   &__block {
     & > div:first-child {
