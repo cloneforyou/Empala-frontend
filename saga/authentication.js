@@ -18,7 +18,7 @@ import {
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
-import { selectETNADataRequest } from './dashboard';
+import { selectETNADataRequest, getNews } from './dashboard';
 
 
 function* loginRequest(url, options) {
@@ -78,7 +78,7 @@ export function* twoFactorAuthentication({ login, password, code }) {
     console.log(' ** ', err);
     yield put(loginFailed(err.message));
   }
-};
+}
 
 export function* authenticate({ provider, data }) {
   const login = yield select(state => state.auth.index_username);
@@ -200,6 +200,7 @@ export function* getUserData() {
     if (data.data.data.profile.should_update_password) {
       yield put(openModal('passwordReminder'));
     }
+    yield getNews();
   } catch (err) {
     // console.log(' ** DASHBOARD ERROR =======>', err);
     if (err.message === 'Missing refresh token' || err.message === 'Refresh token expired') {

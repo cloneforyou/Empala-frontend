@@ -162,7 +162,7 @@ function* internalListenerWatchlist(socket) {
 function* externalListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
-    console.log('acttt ======>', action);
+    // console.log('acttt ======>', action);
     if (action.type === 'quote') {
       if (action.item.Cmd === 'CreateSession.txt' && action.item.SessionId) {
         yield put({ type: 'SET_SESSION_ID', id: action.item.SessionId, name: 'quote' });

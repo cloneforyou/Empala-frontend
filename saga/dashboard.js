@@ -1,24 +1,47 @@
-import { takeEvery, all, take, select, put, call, race, fork, spawn } from 'redux-saga/effects';
+import {
+  takeEvery,
+  all,
+  take,
+  select,
+  put,
+  call,
+} from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import {
   GET_ETNA_DATA,
   GET_USER_DATA_REQUEST,
   LOGOUT,
 } from '../constants/dashboard';
-import { getUserData, logout } from './authentication';
-import { serverOrigins } from '../utils/config';
-import { eventChannel } from 'redux-saga';
+import { getUserData, logout, } from './authentication';
 import request from '../utils/request';
-import axios from 'axios/index';
 import {
   modifyPosition,
   setOrdersList,
   setPositions,
-  setWatchLists,
+  setWatchLists, updateNews,
   updateOrders,
   updateWatchlist,
 } from '../actions/dashboard';
 
 
+export function* getNews() {
+  const url = '/api/dashboard/news';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  while (true) {
+    yield delay(60000);
+    try {
+      const news = yield call(request, url, options);
+      if (news) yield put(updateNews(news.data.data));
+    } catch (err) {
+      console.log(' ** DASHBOARD ERROR =======>', err);
+    }
+  }
+}
 /*  --------- ETNA TEST API FUNCTIONS ---------- */
 const etnaConfig = {
   api_path: '/api/etna_test',
@@ -131,6 +154,7 @@ export function* selectETNADataRequest({ payloadType }) {
 
 export default function* dashboardSaga() {
   yield all([
+    // getNews(),
     takeEvery(GET_USER_DATA_REQUEST, getUserData),
     takeEvery(LOGOUT, logout),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),

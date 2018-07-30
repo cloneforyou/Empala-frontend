@@ -24,7 +24,7 @@ import {
   MODIFY_POSITION_DATA,
   UPDATE_ORDERS_LIST,
   SET_PARSED_POSITIONS,
-  UPDATE_QUOTES,
+  UPDATE_QUOTES, UPDATE_NEWS,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -222,10 +222,21 @@ function dashboard(state = initialState, action) {
         ...state,
         parsedOrdersList: { ...state.parsedOrdersList, id: parseOrdersList([action.data])[0] },
       };
+    case UPDATE_NEWS:
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          data: {
+            ...state.userData.data,
+            internal_news: action.news,
+          },
+        },
+      };
     case MODIFY_POSITION_DATA:
       return {
         ...state,
-        parsedPositions: state.parsedPositions.map(pos => {
+        parsedPositions: state.parsedPositions.map((pos) => {
           if (pos.sec_id === +action.data.Key) {
             return {
               ...pos,

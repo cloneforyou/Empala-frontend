@@ -37,7 +37,7 @@ import {
   SET_PARSED_POSITIONS,
   UPDATE_QUOTES,
   SUBSCRIBE_WATCHLIST_CONTENT,
-  UNSUBSCRIBE_WATCHLIST_CONTENT,
+  UNSUBSCRIBE_WATCHLIST_CONTENT, UPDATE_NEWS,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -243,4 +243,9 @@ export const unsubscribesubscribeWatchlists = () => ({
 export const updateQuotes = quote => ({
   type: UPDATE_QUOTES,
   quote,
+});
+
+export const updateNews = news => ({
+  type: UPDATE_NEWS,
+  news,
 });
