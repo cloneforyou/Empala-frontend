@@ -32,10 +32,9 @@ class FullName extends Component {
     return fullName;
   };
   render() {
-    // console.log('PPPPROOOPPPS', this.props)
     const { formIsOpen } = this.state;
     return (
-      <div className="name-edit col-12">
+      <div className="registration-group name-edit col-12">
         <div className="name-edit__pseudo-input pseudo-input">
           <span className="pseudo-input__label">{this.props.field.label}</span>
           <input

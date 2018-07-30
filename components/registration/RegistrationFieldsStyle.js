@@ -1,15 +1,38 @@
-import { GREEN, MAIN_COLOR_TEXT_GRAY, LIGHT_GREY, IRON, ALTO, WHITE, TORCH_RED, BLACK } from '../../constants/colors';
-
+import {
+  ALTO,
+  BLACK,
+  GREEN,
+  IRON,
+  LIGHT_GREY,
+  MAIN_COLOR_TEXT_GRAY,
+  TORCH_RED,
+  WHITE,
+} from '../../constants/colors';
 
 const style = {
-  inputStyle: {
+  inputStyleLightTheme: {
     color: MAIN_COLOR_TEXT_GRAY,
+    height: '33px',
+    borderRadius: '5px',
+    paddingLeft: '10px',
+    boxShadow: '2px 4px 20px 0 rgba(0, 0, 0, 0.15)',
+  },
+  inputStyleDarkTheme: {
+    color: WHITE,
+    height: '33px',
+    borderRadius: '5px',
+    paddingLeft: '10px',
+    boxShadow: '2px 4px 20px 0 rgba(0, 0, 0, 0.15)',
   },
   inputStyleDisabled: {
     color: IRON,
+    height: '33px',
+    borderRadius: '5px',
+    paddingLeft: '10px',
+    boxShadow: '2px 4px 20px 0 rgba(0, 0, 0, 0.15)',
   },
   underlineStyle: {
-    borderBottom: `2px solid ${ALTO}`,
+    borderBottom: 'none',
   },
   underlineErrorStyle: {
     borderBottom: '2px solid red',
@@ -17,27 +40,46 @@ const style = {
   underlineFocusStyle: {
     borderBottom: `2px solid ${GREEN}`,
   },
-  hintStyle: {
+  hintStyleLightTheme: {
     color: LIGHT_GREY,
+    paddingLeft: '10px',
+    bottom: '4px',
+  },
+  hintStyleDarkTheme: {
+    color: WHITE,
+    paddingLeft: '10px',
+    bottom: '4px',
   },
   floatingLabelStyle: {
     color: GREEN,
-    fontSize: '14px',
+    fontSize: '11px',
+    marginBottom: '5px',
   },
   textFieldStyle: {
     width: '100%',
     fontSize: '14px',
-    // color: '#212529',
   },
   selectFieldStyle: {
     width: '100%',
     margin: 0,
     fontSize: '14px',
   },
+  labelStyleLightTheme: {
+    height: '33px',
+    lineHeight: '33px',
+    top: '0',
+    color: MAIN_COLOR_TEXT_GRAY,
+  },
+  labelStyleDarkTheme: {
+    height: '33px',
+    lineHeight: '33px',
+    top: '0',
+    color: ALTO,
+  },
   calendarIcon: {
     position: 'absolute',
-    top: '20px',
-    right: '0',
+    top: '9px',
+    right: '12px',
     color: GREEN,
   },
   menuItemStyle: {
@@ -47,7 +89,8 @@ const style = {
     color: GREEN,
   },
   iconSelectStyle: {
-    right: '-18px',
+    height: '33px',
+    padding: '6px 0 0 7px',
     fill: MAIN_COLOR_TEXT_GRAY,
   },
   panoramaFishEyeIcon: {
