@@ -139,7 +139,7 @@ class Membership extends Component {
                 </div>
               </div>
               <button
-                className="green-btn"
+                className="profile-btn profile-btn_green"
                 onClick={this.props.showResetModal}
               >Reset password
               </button>
