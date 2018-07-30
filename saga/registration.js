@@ -186,8 +186,8 @@ export function* checkEmailVerificationRequest() {
   };
   try {
     const res = yield call(request, url, options);
-    if (res.data.info === 'EMAIL_NOT_VERIFIED') {
-      yield put(showPopupPIN())
+    if (res.data.info === 'NOT_VERIFIED' && res.data.misc === 'EMAIL_ADDRESS_IS_NOT_VERIFIED') {
+      yield put(showPopupPIN());
     }
   } catch (err) {
     console.log('checkEmailVerificationRequest ERR -==> ', err);
