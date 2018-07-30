@@ -135,7 +135,6 @@ class DeleteAccount extends PureComponent {
               className="default-btn"
               style={style.cancelBtn}
               onClick={this.props.handleCancel}
-              disabled={this.props.confirmationInputValue !== 'yes'}
             >Cancel
             </button>
             <button
