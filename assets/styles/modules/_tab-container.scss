@@ -70,10 +70,13 @@
   box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
   color: #fff;
   font-weight: 600;
-  padding: 3px 35px;
+  padding: 3px 15px;
   min-width: 170px;
   &:hover {
     box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.3);
+  }
+  &:disabled {
+    opacity: .5;
   }
   &_red {
     background: #d50000;
