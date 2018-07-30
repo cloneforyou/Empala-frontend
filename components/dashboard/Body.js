@@ -34,6 +34,6 @@ class Body extends Component {
 }
 
 export default connect(state => ({
-  loadingPage: state.auth.loading,
+  loadingPage: state.dashboard.loadingPage,
 }), {})(Body);
 
