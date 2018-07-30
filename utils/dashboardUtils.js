@@ -723,7 +723,7 @@ export const parseWatchList = list => ({
 export const parsePositionsList = list => (list.map(pos => ({
   id: Math.random(),
   // start_date: parseOrderDate(pos.CreateDate).slice(0, 10),
-  start_date: parseDateString(pos.CreateDate),
+  start_date: pos.CreateDate,
   symbol: pos.Symbol,
   sec_name: pos.CompanyName,
   sec_id: pos.SecurityId,

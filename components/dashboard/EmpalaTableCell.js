@@ -1,4 +1,19 @@
 import React, { Component } from 'react';
+import moment from 'moment/moment';
+
+const parseDateString = (str, pattern) => {
+  if (!pattern) return moment(str).format('DD-MM-YYYY');
+  return moment(str).format(pattern);
+};
+
+const formatValueByType = (value, type) => {
+  if (!type) return value;
+  switch (type) {
+    case 'date':
+      return parseDateString(value);
+    default: return value;
+  }
+};
 
 export default class EmpalaTableCell extends Component {
   constructor(props) {
@@ -70,7 +85,9 @@ export default class EmpalaTableCell extends Component {
          ${this.getColorStyleByAttribute(this.props.color)} text-truncate`}
         onClick={this.props.handleClick}
       >
-        {(this.props.value || this.props.value === 0) ? this.props.value : '--'}
+        {(this.props.value || this.props.value === 0) ?
+          formatValueByType(this.props.value, this.props.type) :
+          '--'}
       </div>
     );
   }

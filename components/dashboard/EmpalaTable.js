@@ -49,13 +49,17 @@ class EmpalaTable extends Component {
       if (!a[col]) return 1;
       if (!b[col]) return -1;
       if (a[col].value === b[col].value) return 0;
-      if (moment(a[col].value, datePatterns).isValid() &&
-        moment(b[col].value, datePatterns).isValid()) {
-        const dateA = moment(a[col].value, datePatterns);
-        const dateB = moment(b[col].value, datePatterns);
-        if (order === 'asc') return (dateA > dateB) ? 1 : -1;
-        if (order === 'desc') return (dateA > dateB) ? -1 : 1;
-      }
+      /* Sorting by date function. Now put raw value to cell, so date fields sorded */
+      /* as strings. Maybe later we'll have to redesign that. */
+      // if (a[col].type === 'date' && b[col].type === 'date') {
+      //   if (moment(a[col].value, datePatterns).isValid() &&
+      //     moment(b[col].value, datePatterns).isValid()) {
+      //     const dateA = moment(a[col].value, datePatterns);
+      //     const dateB = moment(b[col].value, datePatterns);
+      //     if (order === 'asc') return (dateA > dateB) ? 1 : -1;
+      //     if (order === 'desc') return (dateA > dateB) ? -1 : 1;
+      //   }
+      // }
       if (order === 'asc') {
         if (!isNaN(a[col].value) && !isNaN(b[col].value)) return a[col].value - b[col].value;
         if (a[col].value > b[col].value) return 1;
@@ -106,6 +110,7 @@ class EmpalaTable extends Component {
                   key={`${header}-${i}`}
                   handleClick={row[index] ? row[index].onclick : undefined}
                   value={row[index] && row[index].value}
+                  type={row[index] && row[index].type}
                   mark={row[index] && row[index].mark}
                   color={row[index] && row[index].color}
                   small={this.props.small}
