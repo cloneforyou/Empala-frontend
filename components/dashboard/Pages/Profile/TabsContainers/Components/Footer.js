@@ -17,7 +17,7 @@ class Footer extends PureComponent {
           {
             deleteAccountBtnIsShow &&
             <button
-              className="profile-btn profile-btn_red"
+              className="profile-btn profile-btn_red profile-btn_delete"
               onClick={this.props.showDeleteModal}
             >Delete Account
             </button>

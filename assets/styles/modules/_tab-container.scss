@@ -66,15 +66,29 @@
 .profile-btn {
   @include button-reset;
   @include fontSize(16px);
+  border-radius: 5px;
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
   color: #fff;
   font-weight: 600;
   padding: 3px 35px;
   min-width: 170px;
+  &:hover {
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.3);
+  }
   &_red {
     background: #d50000;
   }
   &_green {
     background: $green;
+  }
+  &_delete {
+    background: inherit;
+    border: 1px solid red;
+    box-shadow: 2px 4px 10px 0 rgba(253, 5, 5, 0.1);
+    color: $main-color-text-grey;
+    &:hover {
+      box-shadow: 2px 4px 10px 0 rgba(253, 5, 5, 0.3);
+    }
   }
 }
 
