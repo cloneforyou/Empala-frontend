@@ -46,6 +46,7 @@ const initialState = {
   loading: false,
   id: false,
   showPopupPIN: false,
+  popupPINType: false,
   verifyLoading: false,
   showVerifyEmailForm: false,
   codeVerify: null,
@@ -126,11 +127,13 @@ function registration(state = initialState, action) {
       return {
         ...state,
         showPopupPIN: false,
+        entityType: action.entityType,
       };
     case SHOW_POPUP_PIN:
       return {
         ...state,
         showPopupPIN: true,
+        popupPINType: action.entityType,
       };
     case CLOSE_POPUP_PIN:
       return {

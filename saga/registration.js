@@ -135,14 +135,16 @@ export function* getUserID() {
   }
 }
 
-export function* verifySendRequest() {
+export function* verifySendRequest(action) {
   const id = localStorage.getItem('id');
   const email = yield select(state => state.registration.registrationData.member_account_email);
-  const url = '/api/auth/email/send';
+  const phoneNumber = yield select(state => state.registration.registrationData.member_account_contact_phone);
+  const url = `/api/auth/${action.entityType}/send`;
   const options = {
     method: 'POST',
     data: {
       email,
+      number: `+${phoneNumber.replace(/\D/g, "")}`,
       id,
     },
   };
@@ -151,15 +153,14 @@ export function* verifySendRequest() {
     const res = yield call(request, url, options);
     yield put(verifySendSuccess());
   } catch (err) {
-    yield put(verifySendFailure(err))
+    yield put(verifySendFailure(err));
   }
 }
 
-
-export function* verifySendCodeRequest() {
+export function* verifySendCodeRequest(action) {
   const id = localStorage.getItem('id');
   const code = yield select(state => state.registration.codeVerify);
-  const url = '/api/auth/email/verify';
+  const url = `/api/auth/${action.entityType}/verify`;
   const options = {
     method: 'POST',
     data: {
@@ -170,14 +171,17 @@ export function* verifySendCodeRequest() {
   try {
     const res = yield call(request, url, options);
     yield put(sendCodeVerifySuccess());
+    const tabName = yield select(state => state.registration.tabName);
+    const tabIndex = yield select(state => state.registration.tabIndex);
+    yield changeTabPage({ tabName, tabIndex, direction: 'forward' });
   } catch (err) {
     yield put(sendCodeVerifyFailure(err));
   }
 }
 
-export function* checkEmailVerificationRequest() {
+export function* checkVerificationRequest(action) {
   const id = localStorage.getItem('id');
-  const url = '/api/auth/email/check';
+  const url = `/api/auth/${action.entityType}/check`;
   const options = {
     method: 'POST',
     data: {
@@ -186,11 +190,19 @@ export function* checkEmailVerificationRequest() {
   };
   try {
     const res = yield call(request, url, options);
-    if (res.data.info === 'NOT_VERIFIED' && res.data.misc === 'EMAIL_ADDRESS_IS_NOT_VERIFIED') {
-      yield put(showPopupPIN());
+    if (res.data.info === 'NOT_VERIFIED') {
+      if (res.data.misc === 'EMAIL_ADDRESS_IS_NOT_VERIFIED') {
+        yield put(showPopupPIN('email'));
+      } else if (res.data.misc === 'PHONE_NUMBER_IS_NOT_VERIFIED') {
+        yield put(showPopupPIN('phone'));
+      }
+    } else if (res.data.info === 'VERIFIED') {
+      const tabName = yield select(state => state.registration.tabName);
+      const tabIndex = yield select(state => state.registration.tabIndex);
+      yield changeTabPage({ tabName, tabIndex, direction: 'forward' });
     }
   } catch (err) {
-    console.log('checkEmailVerificationRequest ERR -==> ', err);
+    console.log('checkVerificationRequest ERR => ', err);
   }
 }
 
@@ -208,7 +220,7 @@ export default function* registrationSaga() {
     takeLatest(VALIDATE_FIELDS_BLANK, validateEmptyFields),
     takeLatest(VERIFY_SEND_REQUEST, verifySendRequest),
     takeLatest(SEND_CODE_VERIFY, verifySendCodeRequest),
-    takeLatest(CHECK_EMAIL_VERIFICATION, checkEmailVerificationRequest),
+    takeLatest(CHECK_EMAIL_VERIFICATION, checkVerificationRequest),
   ]);
 }
 
