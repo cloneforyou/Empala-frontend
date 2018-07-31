@@ -27,7 +27,11 @@ const DatePickerField = (props) => {
           underlineStyle={style.underlineStyle}
           openToYearSelection
           errorText={errorText}
-          inputStyle={props.disabled ? style.inputStyleDisabled :
+          inputStyle={props.disabled ?
+            (currentColorScheme === 'light' ?
+                style.inputStyleDisabledLight :
+                style.inputStyleDisabledDark
+            ) :
             (currentColorScheme === 'light' ?
                 style.inputStyleLightTheme :
                 style.inputStyleDarkTheme

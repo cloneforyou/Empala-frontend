@@ -22,7 +22,7 @@
     color: $green;
     font-size: 12px;
   }
-  &__input, &__input:focus {
+  &__input {
     width: 100%;
     height: 33px;
     display: block;
@@ -32,5 +32,16 @@
     box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.15);
     cursor: text;
     color: $main-color-text-grey;
+    &:focus{
+      color: $main-color-text-grey;
+      box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.15);
+    }
+    &_dark {
+      background-color: $dark-blue;
+      color: $white;
+      &:focus{
+        color: $white;
+      }
+    }
   }
 }

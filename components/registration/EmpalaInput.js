@@ -30,12 +30,20 @@ class EmpalaInput extends Component {
           hintText={this.props.placeholder}
           style={style.textFieldStyle}
           underlineStyle={style.underlineStyle}
-
+          underlineShow={false}
+          underlineDisabledStyle={{
+            border: 'none',
+            backgroundColor: '#292844'
+          }}
           hintStyle={currentColorScheme === 'light' ?
             style.hintStyleLightTheme :
             style.hintStyleDarkTheme
           }
-          inputStyle={this.props.disabled ? style.inputStyleDisabled :
+          inputStyle={this.props.disabled ?
+            (currentColorScheme === 'light' ?
+              style.inputStyleDisabledLight :
+              style.inputStyleDisabledDark
+          ) :
             (currentColorScheme === 'light' ?
                 style.inputStyleLightTheme :
                 style.inputStyleDarkTheme

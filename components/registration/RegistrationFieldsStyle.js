@@ -1,6 +1,7 @@
 import {
   ALTO,
   BLACK,
+  DARK_BLUE,
   GREEN,
   IRON,
   LIGHT_GREY,
@@ -19,13 +20,22 @@ const style = {
   },
   inputStyleDarkTheme: {
     color: WHITE,
+    backgroundColor: DARK_BLUE,
     height: '33px',
     borderRadius: '5px',
     paddingLeft: '10px',
     boxShadow: '2px 4px 20px 0 rgba(0, 0, 0, 0.15)',
   },
-  inputStyleDisabled: {
+  inputStyleDisabledLight: {
     color: IRON,
+    height: '33px',
+    borderRadius: '5px',
+    paddingLeft: '10px',
+    boxShadow: '2px 4px 20px 0 rgba(0, 0, 0, 0.15)',
+  },
+  inputStyleDisabledDark: {
+    color: LIGHT_GREY,
+    backgroundColor: DARK_BLUE,
     height: '33px',
     borderRadius: '5px',
     paddingLeft: '10px',
@@ -33,12 +43,6 @@ const style = {
   },
   underlineStyle: {
     borderBottom: 'none',
-  },
-  underlineErrorStyle: {
-    borderBottom: '2px solid red',
-  },
-  underlineFocusStyle: {
-    borderBottom: `2px solid ${GREEN}`,
   },
   hintStyleLightTheme: {
     color: LIGHT_GREY,
@@ -69,6 +73,9 @@ const style = {
     lineHeight: '33px',
     top: '0',
     color: MAIN_COLOR_TEXT_GRAY,
+  },
+  labelStyleDisabled: {
+    color: IRON,
   },
   labelStyleDarkTheme: {
     height: '33px',
