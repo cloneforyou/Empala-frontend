@@ -6,3 +6,4 @@ export const ALTO = '#E0E0E0';
 export const WHITE = '#FFFFFF';
 export const TORCH_RED = '#F80A2E';
 export const BLACK = '#000000';
+export const DARK_BLUE = '#292944';
