@@ -45,7 +45,10 @@ const NavButtons = (props) => {
 
   function handleChangePage(arrow) {
     if (props.tabName === 'member' && props.tabIndex === 2 && arrow === 'forward') {
-      props.checkEmailVerificationRequest();
+      return props.checkEmailVerificationRequest('email');
+    }
+    if (props.tabName === 'final_review' && arrow === 'forward') {
+      return props.checkEmailVerificationRequest('phone');
     }
     props.changeTabPage(props.tabName, props.tabIndex, arrow);
   }
@@ -140,7 +143,7 @@ function mapDispatchToProps(dispatch) {
     setTabName: tabName => dispatch(setTabName(tabName)),
     goBackToPart: status => dispatch(goBackToPart(status)),
     showPopupPIN: () => dispatch(showPopupPIN()),
-    checkEmailVerificationRequest: () => dispatch(checkEmailVerificationRequest()),
+    checkEmailVerificationRequest: entityType => dispatch(checkEmailVerificationRequest(entityType)),
   });
 }
 

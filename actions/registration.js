@@ -197,15 +197,17 @@ export function failUserID(err) {
   };
 }
 
-export function checkEmailVerificationRequest() {
+export function checkEmailVerificationRequest(entityType) {
   return {
     type: CHECK_EMAIL_VERIFICATION,
+    entityType,
   };
 }
 
-export function showPopupPIN() {
+export function showPopupPIN(entityType) {
   return {
     type: SHOW_POPUP_PIN,
+    entityType,
   };
 }
 
@@ -215,9 +217,10 @@ export function closePopupPIN() {
   };
 }
 
-export function verifySendRequest() {
+export function verifySendRequest(entityType) {
   return {
     type: VERIFY_SEND_REQUEST,
+    entityType,
   };
 }
 
@@ -230,13 +233,15 @@ export function verifySendSuccess() {
 export function verifySendFailure(err) {
   return {
     type: VERIFY_SEND_FAILURE,
+    err,
   };
 }
 
-export function sendCodeVerify(code) {
+export function sendCodeVerify(code, entityType) {
   return {
     type: SEND_CODE_VERIFY,
     code,
+    entityType,
   };
 }
 

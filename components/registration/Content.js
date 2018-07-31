@@ -33,7 +33,8 @@ function mapStateToProps(state) {
     showErrorModal: state.registration.showErrorModal,
     errors: state.fieldsErrors,
     showPopupPIN: state.registration.showPopupPIN,
-    verifyLoading: state.registration.verifyLoading
+    popupPINType: state.registration.popupPINType,
+    verifyLoading: state.registration.verifyLoading,
   };
 }
 
@@ -76,6 +77,7 @@ class Content extends PureComponent {
   }
 
   render() {
+    const { showPopupPIN } = this.props;
     if (this.props.tabName === 'info') {
       return (
         <div className="onboard">
@@ -99,6 +101,9 @@ class Content extends PureComponent {
               <FinalReviewPage />
             </div>
           </div>
+          {
+            showPopupPIN && <PopupPIN type={this.props.popupPINType} />
+          }
         </div>);
     } else if (this.props.tabName === 'agreement') {
       return (
@@ -110,8 +115,6 @@ class Content extends PureComponent {
           </div>
         </div>);
     }
-
-
     if (!this.props.menuItems || this.props.menuItems.length === 0) {
       this.props.getMenuItems(this.props.tabName);
     }
@@ -135,8 +138,6 @@ class Content extends PureComponent {
     }
 
     const pageContent = getTabContentByTabName(this.props.tabName, this.props.tabIndex - 1);
-    const { showPopupPIN } = this.props;
-
     return (
       <div className="onboard">
         {
@@ -172,7 +173,7 @@ class Content extends PureComponent {
                   {pageContent.tabContent}
                 </div>
                 {
-                  showPopupPIN && <PopupPIN />
+                  showPopupPIN && <PopupPIN type={this.props.popupPINType} />
                 }
                 <div className="onboard__right-block--bottom">
                   <NavButtons
@@ -196,6 +197,7 @@ Content.propTypes = {
   getMenuItems: PropTypes.func,
   getUserID: PropTypes.func,
   tabIndex: PropTypes.number,
+  showPopupPIN: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
