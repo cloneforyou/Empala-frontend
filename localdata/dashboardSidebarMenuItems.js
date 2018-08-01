@@ -65,7 +65,7 @@ export const sidebarItems = [
         icon: 'invest',
       },
       {
-        label: 'Funding',
+        label: 'InvestmentProfile',
         icon: 'funding',
       },
       {

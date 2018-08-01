@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DropdownMenu from './DropdownMenu';
 import avatar from '../../../static/images/default-avatar-of-user.svg';
+import { Link } from '../../../routes';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -22,7 +23,7 @@ export default class RightBlock extends Component {
   };
 
   render() {
-    const { userPic, loading } = this.props;
+    const { userPic, loading, setActivePage, activePageDashboard } = this.props;
     const { menuAvatarShow, anchorEl } = this.state;
     return (
       <div>
@@ -38,9 +39,18 @@ export default class RightBlock extends Component {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link user-nav__link" href="#">
-              <i className="user-nav__icon user-nav__icon_wallet" />
-            </a>
+             <span
+               className={`nav-link user-nav__link ${activePageDashboard === 'account funding' ? 'user-nav__link_active' : ''}`}
+               onClick={() => setActivePage('account funding')}
+               role='button'
+             >
+              <Link
+                route="dashboard"
+                params={{ page: 'account funding' }}
+              >
+                <i className="user-nav__icon user-nav__icon_wallet" />
+              </Link>
+            </span>
           </li>
           <li className="nav-item dropdown">
             <button

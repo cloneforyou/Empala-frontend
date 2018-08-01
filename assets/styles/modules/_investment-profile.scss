@@ -1,0 +1,69 @@
+.funding {
+  &-wrapper {
+    max-width: 1561px;
+    height: 758px;
+    display: flex;
+    border-radius: 7px;
+    background-color: #ffffff;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+    margin: 53px auto 25px;
+  }
+  &-background {
+    width: 203px;
+    height: 100%;
+    background: url($path-to-images + "EMP410-background.svg") 50% 50% /cover;
+  }
+  &-content {
+    padding: 0 10%;
+    &-header {
+      display: flex;
+      height: 120px;
+      align-items: center;
+      &__title {
+        @include fontSize(18px);
+        font-weight: 600;
+        color: $green;
+      }
+    }
+  }
+  &-wire-transfer{
+    &__text {
+      @include fontSize(18px);
+    }
+    &__text-col{
+      display: inline-block;
+      width: 365px;
+      &_subheader {
+        margin-bottom: 30px;
+      }
+    }
+    &__text-col:first-child {
+      margin-right: 63px;
+    }
+  }
+  &-footer {
+    display: flex;
+    padding-top: 133px;
+    &__text {
+      @include fontSize(16px);
+      padding-left: 58px;
+    }
+  }
+  &-selection-form {
+    width: 376px;
+    //height: 130px;
+  }
+  &__input {
+    @include fontSize(16px);
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    border: solid 1px #efefef;
+    max-width: 105px;
+    text-align: center;
+    padding: 7px 11px;
+    margin-bottom: 95px;
+    &::placeholder {
+      color: #cccaca;
+    }
+  }
+}
