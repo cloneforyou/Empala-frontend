@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 const WireTransfer = props => (
   <div className="funding-wire-transfer">
-    <h1>Wire Transfer</h1>
     <div className="funding-wire-transfer__text">
       <p>
         You can transfer funds into your Empala account by sending a check or wiring our clearing house directly.
@@ -21,7 +20,7 @@ const WireTransfer = props => (
         <div className="funding-wire-transfer__text-col_subheader">
           Checks:
         </div>
-        <p>Payable:  Empala Group LLC</p>
+        <p>Payable: Empala Group LLC</p>
         <p>Member No: 123456789</p>
         <p>123 Cheap Option Way</p>
         <p>San Francisco</p>

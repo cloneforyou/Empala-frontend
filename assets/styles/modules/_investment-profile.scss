@@ -27,11 +27,15 @@
     }
   }
   &-wire-transfer{
+    padding-top: 50px;
     &__text {
       @include fontSize(18px);
     }
     &__text-col{
       display: inline-block;
+      line-height: 1;
+      padding-top: 25px;
+      vertical-align: top;
       width: 365px;
       &_subheader {
         margin-bottom: 30px;
