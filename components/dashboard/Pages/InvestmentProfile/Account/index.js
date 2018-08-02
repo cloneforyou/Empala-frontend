@@ -58,16 +58,17 @@ class Account extends Component {
         <TitleBar />
         {value === 0 && <GlobalPortfolio
           setActivePage={this.props.setActivePage}
+          textButton={'Fund account'}
         />
         }
         {value === 1 && <div className="account__container">Coming Spring 2019</div>}
-        {value === 2 && <div className="account__container"></div>}
+        {value === 2 && <GlobalPortfolio textButton={'Fund US account'}/>}
         {value === 3 && <div className="account__container">Coming Spring 2019</div>}
         {value === 4 && <div className="account__container">Coming as part of phase 2</div>}
         {value === 5 && <div className="account__container">Coming as part of phase 2</div>}
         {value === 6 && <div className="account__container">Coming as part of phase 2</div>}
-        {value === 6 && <div className="account__container">Coming as part of phase 2</div>}
-        {value === 6 && <div className="account__container">Coming as part of phase 3</div>}
+        {value === 7 && <div className="account__container">Coming as part of phase 2</div>}
+        {value === 8 && <div className="account__container">Coming as part of phase 3</div>}
       </div>
     );
   }
@@ -75,7 +76,7 @@ class Account extends Component {
 
 export default withStyles(styles)(connect(
   state => ({
-    activeAccountTab: state.profile.activeAccountTab,
+    activeAccountTab: state.account.activeAccountTab,
     currentColorScheme: state.dashboard.currentColorScheme,
   }),
   dispatch => ({

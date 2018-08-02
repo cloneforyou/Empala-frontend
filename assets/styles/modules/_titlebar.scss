@@ -35,15 +35,15 @@
     //  }
     //}
     &_wallet {
-      width: 20px;
-      height: 21px;
+      width: 30px;
+      height: 28px;
       margin-right: 20px;
       &:before {
         mask: url($path-to-dashboard-icon + 'icon-wallet.svg');
         mask-size: contain;
         mask-repeat: no-repeat;
-        width: 20px;
-        height: 21px;
+        width: 30px;
+        height: 28px;
       }
     }
   }
