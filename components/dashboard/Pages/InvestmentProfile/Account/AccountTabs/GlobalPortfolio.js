@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AnyChart from 'anychart-react';
 import { Link } from '../../../../../../routes';
 import EmpalaInput from '../../../../../registration/EmpalaInput';
 import { Global, GlobalPortfolioData } from '../../../../../../localdata/globalPortfolio';
@@ -36,18 +37,84 @@ export default class GlobalPortfolio extends Component {
                   params={{ page: 'account funding' }}
                 >
                   <span
-                    style={{ fontSize: '18px' }}
+                    style={{ fontSize: '14px' }}
                   >Fund account
                   </span>
                 </Link>
               </button>
             </div>
           </div>
-          <div className="global-portfolio__container_graphics">
-            <div className="graphic__wrapper">Graphics 1</div>
-            <div className="graphic__wrapper">Graphics 2</div>
-            <div className="graphic__wrapper">Graphics 3</div>
-            <div className="graphic__wrapper">Graphics 4</div>
+          <div className="global-portfolio__container_graphics row">
+            <div className="graphic__wrapper col-lg-6">
+              <div style={{
+                'fontSize': '14px',
+                'textAlign': 'center'
+              }}>
+                Global Allocation
+              </div>
+              <AnyChart
+                type="pie3d"
+                height={300}
+                id="chart-container-account-pie"
+                data={
+                  [
+                    { x: "A", value: 637166 },
+                    { x: "B", value: 721630 },
+                    { x: "C", value: 148662 },
+                    { x: "D", value: 78662 },
+                    { x: "E", value: 90000 },
+                  ]
+                }
+              />
+            </div>
+            <div className="graphic__wrapper col-lg-6">
+              <div style={{
+                'fontSize': '14px',
+                'textAlign': 'center'
+              }}>
+                Global Portfolio perfomance against Empala Community
+              </div>
+              <AnyChart
+                type="area"
+                height={300}
+                id="chart-container-account-area"
+                data={
+                  [7.44, 7.20, 6.45, 7.42],
+                  [6.43, 6.16, 6.36, 6.43],
+                  [6.04, 5.58, 6.16, 6.05]
+                }
+              />
+            </div>
+            <div className="graphic__wrapper col-lg-6">
+              <AnyChart
+                type="bubble"
+                height={300}
+                id="chart-container-account-bubble"
+                data={
+                  [
+                    ["2000", 1100, 1],
+                    ["2001", 880, 2],
+                    ["2002", 1100, 5],
+                    ["2003", 1500, 3],
+                    ["2004", 921, 3],
+                    ["2005", 1000, 2],
+                    ["2006", 1400, 1],
+                  ]
+                }
+              />
+            </div>
+            <div className="graphic__wrapper col-lg-6">
+              <AnyChart
+                type="area"
+                height={300}
+                id="chart-container-account-area2"
+                data={
+                  [7.44, 7.20, 6.45, 7.42],
+                  [6.43, 6.16, 6.36, 6.43],
+                  [6.04, 5.58, 6.16, 6.05]
+                }
+              />
+            </div>
           </div>
         </div>
       </div>
