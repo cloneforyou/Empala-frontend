@@ -28,7 +28,10 @@ export default class FundingMemberInfo extends Component {
             value={this.props.member_first_name || ''}
           />
         </div>
-        <div className="pr-2 no-gutters text-truncate" style={{ width: '256px', paddingTop: '18px', paddingBottom: '20px' }} >
+        <div
+          className="pr-2 no-gutters text-truncate funding-member-info__item_bottom20"
+          style={{ width: '256px', paddingTop: '18px' }}
+        >
           <input
             className="pseudo-input__input"
             id="member_last_name"
@@ -36,7 +39,10 @@ export default class FundingMemberInfo extends Component {
           />
         </div>
         <div className="d-flex">
-          <div className="pr-2 no-gutters" style={{ width: '188px', paddingBottom: '20px' }}>
+          <div
+            className="pr-2 no-gutters funding-member-info__item_bottom20"
+            style={{ width: '188px' }}
+          >
             <EmpalaInput
               id="member_primary_ssn"
               type="text"
@@ -45,7 +51,10 @@ export default class FundingMemberInfo extends Component {
               readOnly
             />
           </div>
-          <div className="no-gutters" style={{ width: '176px', paddingBottom: '20px' }}>
+          <div
+            className="no-gutters funding-member-info__item_bottom20"
+            style={{ width: '176px' }}
+          >
             <EmpalaInput
               id="member_secondary_ssn"
               type="text"

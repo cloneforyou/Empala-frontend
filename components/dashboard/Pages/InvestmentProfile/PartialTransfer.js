@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import EmpalaSelect from '../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../registration/EmpalaInput';
+import PatrialTransferSecurities from './PartialTransferSecurities';
 
 export default class PartialTransfer extends Component {
   constructor(props) {
@@ -32,9 +32,8 @@ export default class PartialTransfer extends Component {
   }
   render() {
     return (
-      <div className="funding-partial-wrapper no-gutters" >
-        <h2>Partial transfer form</h2>
-
+      <div className="funding-partial-wrapper" >
+        <div className="funding-partial__comment no-gutters">
           <EmpalaInput
             id="funding_comments"
             label="Comments"
@@ -42,44 +41,10 @@ export default class PartialTransfer extends Component {
             handleChange={this.props.setInputValueById}
             multiLine
           />
-        {/*
-
-        <div className="pr-2 no-gutters text-truncate" style={{ width: '176px', paddingTop: '18px' }} >
-          <input
-            type="text"
-            className="pseudo-input__input"
-            id="member_first_name"
-            value={this.props.member_first_name || ''}
-          />
         </div>
-        <div className="pr-2 no-gutters text-truncate" style={{ width: '256px', paddingTop: '18px'}} >
-          <input
-            className="pseudo-input__input"
-            id="member_last_name"
-            value={this.props.member_last_name || ''}
-          />
-        </div>
-        <div className="w-100 d-block d-md-none" />
-        <div className="pr-2 no-gutters" style={{ width: '188px' }}>
-          <EmpalaInput
-            id="member_primary_ssn"
-            type="text"
-            label="Primary Gov ID/SSN"
-            value={this.props.member_primary_ssn || ''}
-            readOnly
-          />
-        </div>
-        <div className="no-gutters" style={{ width: '176px' }}>
-          <EmpalaInput
-            id="member_secondary_ssn"
-            type="text"
-            label="Secondary Gov ID/SSN"
-            value={this.props.member_secondary_ssn || ''}
-            handleChange={this.props.setInputValueById}
-            mask={this.ssnMask}
-            placeholder="123-45-6789"
-          />
-        </div> */}
+        <PatrialTransferSecurities
+          {...this.props}
+        />
       </div>
     );
   }

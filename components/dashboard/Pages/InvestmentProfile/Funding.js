@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
-import { dropFundingType, setInputFieldValueById } from '../../../../actions/funding';
+import { addNewSecurity, dropFundingType, setInputFieldValueById } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
 import { setActivePage } from '../../../../actions/dashboard';
@@ -68,29 +68,30 @@ class Funding extends Component {
   }
   render() {
     return (
-      <div className="container-fluid">
+      <div>
         <TitleBar />
-        <div className="funding-wrapper">
-          <div className="funding-background" />
-          <div className="funding-content">
-            <div className="funding-content-header">
-              <h1 className="funding-content-header__title">
+        <div className="container-fluid">
+          <div className="funding-wrapper">
+            <div className="funding-background" />
+            <div className="funding-content">
+              <div className="funding-content-header">
+                <h1 className="funding-content-header__title">
                 Account Fund Management
-              </h1>
-            </div>
-            <div className="funding-content-body">
-              <div className="row no-gutters funding-selection-form">
-                <div className="col-6 no-gutters">
-                  <EmpalaSelect
-                    id="funding_type"
-                    options={this.options.funding}
-                    label="Account funding"
-                    value={this.props.funding_type || ''}
-                    handleChange={this.props.setSelectedValueById}
+                </h1>
+              </div>
+              <div className="funding-content-body">
+                <div className="row no-gutters funding-selection-form">
+                  <div className="col-6 no-gutters">
+                    <EmpalaSelect
+                      id="funding_type"
+                      options={this.options.funding}
+                      label="Account funding"
+                      value={this.props.funding_type || ''}
+                      handleChange={this.props.setSelectedValueById}
                 // errorText={this.props.fieldsErrors.funding}
-                    hint="Choose funding type"
-                  />
-                  {
+                      hint="Choose funding type"
+                    />
+                    {
                     this.isSpecifiedTypeSelected('transfer_type') &&
                     <EmpalaInput
                       id="account_no"
@@ -102,8 +103,8 @@ class Funding extends Component {
                       placeholder="1234567890"
                     />
                   }
-                </div>
-                {
+                  </div>
+                  {
                   this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                   <div className="col-6 no-gutters pl-3">
                     <EmpalaSelect
@@ -127,8 +128,8 @@ class Funding extends Component {
                     }
                   </div>
                 }
-              </div>
-              {
+                </div>
+                {
                 this.isSpecifiedTypeSelected('transfer_type') &&
                 <div>
                   <FundingMemberInfo
@@ -144,7 +145,10 @@ class Funding extends Component {
                     this.isSpecifiedTypeSelected('transfer_type', 'Partial transfer') &&
                     <PartialTransfer
                       setInputValueById={this.props.setInputValueById}
+                      setSelectedValueById={this.props.setSelectedValueById}
                       funding_comments={this.props.funding_comments}
+                      partial_symbols={this.props.partial_symbols}
+                      addSecurity={this.props.addSecurity}
                     />
                   }
                   <div style={{ marginTop: '35px' }}>
@@ -175,18 +179,19 @@ class Funding extends Component {
                   </div>
                 </div>
               }
-              {
+                {
                 this.isSpecifiedTypeSelected('funding_type', 'Wire/Check') &&
                 <WireTransfer
                   setActivePage={this.props.setActivePage}
                 />
               }
-              {
+                {
                 this.displayFooter() &&
                   <FundingFooter
                     setActivePage={this.props.setActivePage}
                   />
               }
+              </div>
             </div>
           </div>
         </div>
@@ -206,6 +211,7 @@ const mapStateToProps = state => ({
   member_first_name: state.profile.profileUserData.basic_information_first_name,
   member_last_name: state.profile.profileUserData.basic_information_last_name,
   funding_comments: state.funding.funding_comments,
+  partial_symbols: state.funding.partial_symbols,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
@@ -218,5 +224,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(dropFundingType());
     dispatch(setActivePage(page));
   },
+  addSecurity: () => dispatch(addNewSecurity()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
