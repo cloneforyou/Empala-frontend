@@ -32,17 +32,18 @@ export default class PartialTransfer extends Component {
   }
   render() {
     return (
-      <div className="d-flex">
+      <div className="funding-partial-wrapper no-gutters" >
         <h2>Partial transfer form</h2>
-        {/*
-        <div className="pr-2 no-gutters" style={{ width: '104px' }} >
+
           <EmpalaInput
-            id="member_title"
-            label="Account name"
-            value={this.props.member_title || ''}
-            readOnly
+            id="funding_comments"
+            label="Comments"
+            value={this.props.funding_comments || ''}
+            handleChange={this.props.setInputValueById}
+            multiLine
           />
-        </div>
+        {/*
+
         <div className="pr-2 no-gutters text-truncate" style={{ width: '176px', paddingTop: '18px' }} >
           <input
             type="text"

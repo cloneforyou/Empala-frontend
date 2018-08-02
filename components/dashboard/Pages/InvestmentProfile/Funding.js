@@ -142,7 +142,10 @@ class Funding extends Component {
                   />
                   {
                     this.isSpecifiedTypeSelected('transfer_type', 'Partial transfer') &&
-                    <PartialTransfer />
+                    <PartialTransfer
+                      setInputValueById={this.props.setInputValueById}
+                      funding_comments={this.props.funding_comments}
+                    />
                   }
                   <div style={{ marginTop: '35px' }}>
                     <button
@@ -202,6 +205,7 @@ const mapStateToProps = state => ({
   member_title: state.profile.profileUserData.basic_information_prefix,
   member_first_name: state.profile.profileUserData.basic_information_first_name,
   member_last_name: state.profile.profileUserData.basic_information_last_name,
+  funding_comments: state.funding.funding_comments,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),

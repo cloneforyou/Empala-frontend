@@ -26,7 +26,7 @@
       }
     }
   }
-  &-wire-transfer{
+  &-wire-transfer {
     padding-top: 50px;
     &__text {
       @include fontSize(18px);
@@ -44,6 +44,10 @@
     &__text-col:first-child {
       margin-right: 63px;
     }
+  }
+  &-partial-wrapper {
+    width: 100%;
+    max-width: 900px;
   }
   &-footer {
     display: flex;

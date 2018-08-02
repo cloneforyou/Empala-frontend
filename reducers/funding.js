@@ -10,6 +10,7 @@ const initialState = {
   account_type: 'Single',
   account_no: false,
   fieldsErrors: false,
+  funding_comments: false,
 };
 
 function funding(state = initialState, action) {
