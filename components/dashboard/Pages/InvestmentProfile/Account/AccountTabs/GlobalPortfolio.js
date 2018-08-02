@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import EmpalaInput from '../../../../registration/EmpalaInput';
-import { Global, GlobalPortfolioData } from '../../../../../localdata/globalPortfolio';
+import { Link } from '../../../../../../routes';
+import EmpalaInput from '../../../../../registration/EmpalaInput';
+import { Global, GlobalPortfolioData } from '../../../../../../localdata/globalPortfolio';
 
 
 export default class GlobalPortfolio extends Component {
@@ -26,7 +27,20 @@ export default class GlobalPortfolio extends Component {
               </div>
             </div>
             <div className="vertical-align_center global-portfolio__button_width">
-             <button>Found account</button>
+              <button
+                className="profile-btn profile-btn_green"
+                onClick={() => this.props.setActivePage('account funding')}
+              >
+                <Link
+                  route="dashboard"
+                  params={{ page: 'account funding' }}
+                >
+                  <span
+                    style={{ fontSize: '18px' }}
+                  >Fund account
+                  </span>
+                </Link>
+              </button>
             </div>
           </div>
           <div className="global-portfolio__container_graphics">
@@ -39,4 +53,4 @@ export default class GlobalPortfolio extends Component {
       </div>
     );
   }
-};
+}

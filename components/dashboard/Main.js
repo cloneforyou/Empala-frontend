@@ -12,7 +12,7 @@ import PasswordReminderModal from './PasswordReminderModal';
 import { closeModal } from '../../actions/dashboard';
 import MarketAccessPage from './Pages/MarketAccessPage';
 import Funding from './Pages/InvestmentProfile/Funding';
-import Account from './Pages/Account';
+import Account from './Pages/InvestmentProfile/Account';
 
 class Main extends Component {
   constructor(props) {

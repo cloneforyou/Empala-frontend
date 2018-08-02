@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import TitleBar from '../../../../components/dashboard/TitleBar';
+import TitleBar from '../../../TitleBar';
 import GlobalPortfolio from './AccountTabs/GlobalPortfolio';
 import { withStyles } from '@material-ui/core/styles';
-import { GREEN } from '../../../../constants/colors';
+import { GREEN } from '../../../../../constants/colors';
+import { dropFundingType } from '../../../../../actions/funding';
+import { setActivePage } from '../../../../../actions/dashboard';
 
 const styles = theme => ({
   indicator: {
@@ -22,14 +24,14 @@ class Account extends Component {
         <div className="account__tabs">
           <AppBar
             position="static"
-            style={{ backgroundColor: currentColorScheme === 'light' ? "#f3f3f3" : "#211f39" }}
+            style={{ backgroundColor: currentColorScheme === 'light' ? '#f3f3f3' : '#211f39' }}
           >
             <Tabs
               value="0"
               onChange={this.handleChange}
               scrollable
               scrollButtons="auto"
-              style={{ color: "#808895" }}
+              style={{ color: '#808895' }}
               classes={{
                 indicator: classes.indicator,
               }}
@@ -46,12 +48,19 @@ class Account extends Component {
           </AppBar>
         </div>
         <TitleBar />
-        <GlobalPortfolio />
+        <GlobalPortfolio
+          setActivePage={this.props.setActivePage}
+        />
       </div>
     );
   }
-};
+}
 
-export default withStyles(styles)(connect((state) => ({
-  currentColorScheme: state.dashboard.currentColorScheme,
-}), null)(Account));
+export default withStyles(styles)(connect(
+  state => ({
+    currentColorScheme: state.dashboard.currentColorScheme,
+  }),
+  dispatch => ({
+    setActivePage: page => dispatch(setActivePage(page)),
+  }),
+)(Account));
