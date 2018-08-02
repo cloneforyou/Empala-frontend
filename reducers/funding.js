@@ -3,6 +3,7 @@ import {
   SET_FIELD_VALUE,
   ADD_SECURITY,
   REMOVE_SECURITY,
+  SET_SECURITY_FIELD_VALUE,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -15,8 +16,7 @@ const initialState = {
   fieldsErrors: false,
   funding_comments: false,
   partial_symbols: [
-    { symbol: null, quantity: null, sec_type: 'Shares' },
-    { symbol: "GOOG", quantity: 5554, sec_type: 'Shares' },
+    { symbol: '', quantity: '', sec_type: 'Shares' },
   ],
 };
 
@@ -44,6 +44,20 @@ function funding(state = initialState, action) {
           ...state.partial_symbols,
           ...[{ symbol: null, quantity: null, sec_type: 'Shares' }],
         ],
+      };
+    case SET_SECURITY_FIELD_VALUE:
+      return {
+        ...state,
+        partial_symbols: state.partial_symbols.map((el, index) => {
+            if (index === action.index) {
+              return ({
+                ...el,
+                [action.id]: action.value,
+              });
+            }
+            return el;
+          }),
+
       };
     case REMOVE_SECURITY:
       return {

@@ -3,7 +3,13 @@ import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
-import { addNewSecurity, dropFundingType, removeSecurity, setInputFieldValueById } from '../../../../actions/funding';
+import {
+  addNewSecurity,
+  dropFundingType,
+  removeSecurity,
+  setInputFieldValueById,
+  setSecuritiesInputValue,
+} from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
 import { setActivePage } from '../../../../actions/dashboard';
@@ -215,11 +221,15 @@ const mapStateToProps = state => ({
   partial_symbols: state.funding.partial_symbols,
 });
 const mapDispatchToProps = dispatch => ({
-  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-  setInputValueById: (e) => {
+  setSelectedValueById: (id, value, index) => dispatch(setInputFieldValueById(id, value)),
+  setInputValueById: (e, index) => {
     const { id, value } = e.target;
+    if (index || index === 0) {
+      if (id === 'quantity') return dispatch(setSecuritiesInputValue(id, index, value.replace(/\D/, '')));
+      return dispatch(setSecuritiesInputValue(id, index, value));
+    }
     if (id === 'account_no') return dispatch(setInputFieldValueById(id, value.replace(/\D/, '')));
-    dispatch(setInputFieldValueById(id, value));
+    return dispatch(setInputFieldValueById(id, value));
   },
   setActivePage: (page) => {
     dispatch(dropFundingType());
