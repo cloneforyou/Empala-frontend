@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import DropdownMenu from './DropdownMenu';
 import avatar from '../../../static/images/default-avatar-of-user.svg';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from '../../../routes';
 
 export default class RightBlock extends Component {
   constructor(props) {
@@ -22,7 +20,7 @@ export default class RightBlock extends Component {
   };
 
   render() {
-    const { userPic, loading } = this.props;
+    const { userPic, loading, setActivePage } = this.props;
     const { menuAvatarShow, anchorEl } = this.state;
     return (
       <div>
@@ -38,9 +36,15 @@ export default class RightBlock extends Component {
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link user-nav__link" href="#">
-              <i className="user-nav__icon user-nav__icon_wallet" />
-            </a>
+            <span className="nav-link user-nav__link"
+               onClick={() => setActivePage('global portfolio')}>
+              <Link
+                route="dashboard"
+                params={{ page: 'global' }}
+              >
+                  <i className="user-nav__icon user-nav__icon_wallet" />
+              </Link>
+            </span>
           </li>
           <li className="nav-item dropdown">
             <button

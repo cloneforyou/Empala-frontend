@@ -4,6 +4,7 @@ import RightBlock from './RightBlock';
 import Search from './Search';
 import logo from '../../../static/images/logo.svg';
 import iconLogo from '../../../static/images/dashboard-icons/icon-logo.svg';
+import { setActivePage } from '../../../actions/dashboard';
 
 
 class Header extends Component {
@@ -75,7 +76,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {setActivePage: (name) => dispatch(setActivePage(name))};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
