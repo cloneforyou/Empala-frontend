@@ -16,11 +16,11 @@ const FundingFooter = props => (
     <button
       className="profile-btn profile-btn_green"
       style={{ height: '30px' }}
-      onClick={() => props.setActivePage('overview')}
+      onClick={() => props.setActivePage('global portfolio')}
     >
       <Link
         route="dashboard"
-        params={{ page: 'overview' }}
+        params={{ page: 'global portfolio' }}
       >
         <span >Fund later
         </span>
@@ -160,11 +160,11 @@ class Funding extends Component {
                     </button>
                     <button
                       className="default-btn"
-                      onClick={() => this.props.setActivePage('overview')}
+                      onClick={() => this.props.setActivePage('global portfolio')}
                     >
                       <Link
                         route="dashboard"
-                        params={{ page: 'overview' }}
+                        params={{ page: 'global portfolio' }}
                       >
                         <span
                           style={{ fontSize: '18px' }}

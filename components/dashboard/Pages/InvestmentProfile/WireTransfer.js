@@ -30,11 +30,11 @@ const WireTransfer = props => (
     </div>
     <button
       className="profile-btn profile-btn_green"
-      onClick={() => props.setActivePage('overview')}
+      onClick={() => props.setActivePage('global portfolio')}
     >
       <Link
         route="dashboard"
-        params={{ page: 'overview' }}
+        params={{ page: 'global portfolio' }}
       >
         <span
           style={{ fontSize: '18px' }}
