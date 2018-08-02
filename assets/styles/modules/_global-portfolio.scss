@@ -1,0 +1,81 @@
+.global-portfolio {
+  &__container {
+    margin: 17px;
+    &_payments {
+      min-height: 227px;
+      max-width: 1716px;
+      border: solid 1px #ededed;
+      background: $white;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      @media(max-width: 1461px) {
+        justify-content: space-around;
+      }
+      @media(max-width: 991px) {
+          flex-direction: column;
+          align-items: center;
+      }
+      button {
+        background: $green;
+        color: $white;
+        width: 169px;
+        height: 29px;
+        border-radius: 3px;
+        box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+      }
+    }
+    &_graphics {
+      height: 807px;
+      max-width: 1716px;
+      border: solid 1px #ededed;
+      background: $white;
+      .graphic__wrapper {
+        width: 50%;
+      }
+    }
+  }
+  &__input-group {
+    @media(max-width: 991px) {
+      width: 400px;
+      margin: 0;
+    }
+    & > div {
+      width: 208px;
+      margin: 0 13px 10px;
+      @media(max-width: 1461px) {
+        width: 156px;
+      }
+      @media(max-width: 991px) {
+        width: 100%;
+      }
+    }
+  }
+  .vertical-align_center {
+    display: flex;
+    align-items: center;
+  }
+  .input-group__container {
+    width: 708px;
+    margin: 0 4%;
+    @media(max-width: 1461px) {
+      width: 546px;
+      margin: 0;
+    }
+    @media(max-width: 1199px) {
+      width: 364px;
+    }
+    @media(max-width: 991px) {
+      width: 400px;
+    }
+  }
+  &__button {
+    &_width {
+      @media(max-width: 991px) {
+        width: 400px;
+        padding-left: 13px;
+      }
+    }
+  }
+}

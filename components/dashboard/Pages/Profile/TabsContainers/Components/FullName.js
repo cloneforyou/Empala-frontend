@@ -33,7 +33,8 @@ class FullName extends Component {
   };
   render() {
     const { formIsOpen } = this.state;
-    const colorDark = (this.props.userData.preferences_theme === 'dark');
+    const { currentColorScheme } = this.props;
+
 
     return (
       <div className="registration-group name-edit col-12">
@@ -41,7 +42,8 @@ class FullName extends Component {
           <span className="pseudo-input__label">{this.props.field.label}</span>
           <input
             type="text"
-            className={ `pseudo-input__input ${colorDark && 'pseudo-input__input_dark'}`}
+            className={ `pseudo-input__input ${currentColorScheme === 'dark' && 'pseudo-input__input_dark'}`}
+
             value={this.getFullName(this.props.userData) || 'Mr. Iain David James Clarke Sr.'}
             onFocus={this.openEditForm}
             readOnly

@@ -4,17 +4,14 @@ import RightBlock from './RightBlock';
 import Search from './Search';
 import logo from '../../../static/images/logo.svg';
 import iconLogo from '../../../static/images/dashboard-icons/icon-logo.svg';
+import { setActivePage } from '../../../actions/dashboard';
 
 
 class Header extends Component {
   render() {
     const {
       sidebarCollapsed,
-      userPic,
-      memberFullName,
-      memberNumber,
       currentColorScheme,
-      loading
     } = this.props;
     return (
       <div
@@ -71,11 +68,14 @@ function mapStateToProps(state) {
     memberNumber: state.profile.profileUserData.account_information_account_number,
     memberFullName: getFullName(fullNameFields, state.profile.profileUserData),
     currentColorScheme: state.dashboard.currentColorScheme,
+    activePageDashboard: state.dashboard.activePageDashboard,
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    setActivePage: page => dispatch(setActivePage(page)),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

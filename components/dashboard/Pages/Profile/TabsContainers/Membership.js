@@ -33,7 +33,12 @@ class Membership extends Component {
         mask = phoneMask;
       }
       if (item.label === 'Full name') {
-        return (<FullName {...{ ...this.props, field: item, key: item.id }} />);
+        return (<FullName {...{ ...this.props,
+          field: item,
+          key: item.id,
+          currentColorScheme: this.props.currentColorScheme,
+        }}
+        />);
       }
       switch (item.field) {
         case 'select':
@@ -184,6 +189,7 @@ class Membership extends Component {
 
 
 export default connect(state => ({
+  currentColorScheme: state.dashboard.currentColorScheme,
   userData: state.profile.profileUserData || {},
   fieldsErrors: state.profile.fieldsErrors || {},
 }), (dispatch => ({
