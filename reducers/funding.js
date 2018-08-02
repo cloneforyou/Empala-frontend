@@ -2,8 +2,10 @@ import {
   DROP_FUNDING_TYPE,
   SET_FIELD_VALUE,
   ADD_SECURITY,
+  REMOVE_SECURITY,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
+
 
 const initialState = {
   funding_type: false,
@@ -41,6 +43,14 @@ function funding(state = initialState, action) {
         partial_symbols: [
           ...state.partial_symbols,
           ...[{ symbol: null, quantity: null, sec_type: 'Shares' }],
+        ],
+      };
+    case REMOVE_SECURITY:
+      return {
+        ...state,
+        partial_symbols: [
+          ...state.partial_symbols.slice(0, action.index),
+          ...state.partial_symbols.slice(action.index + 1),
         ],
       };
     default:

@@ -37,13 +37,13 @@ const SecuritiesRow = props => (
     </div>
     <div className="funding-partial-securities-content-row__item
                funding-partial-securities-content-row__item_width60
-               funding-partial-securities-content-row__remove
-               "
+               funding-partial-securities-content-row__remove"
     >
-          <span
-            role="button"
-          >&times;
-          </span>
+      <span
+        role="button"
+        onClick={() => props.removeSecurity(props.index)}
+      >&times;
+      </span>
     </div>
   </div>
 );

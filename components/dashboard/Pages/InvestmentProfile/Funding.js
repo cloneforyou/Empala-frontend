@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
-import { addNewSecurity, dropFundingType, setInputFieldValueById } from '../../../../actions/funding';
+import { addNewSecurity, dropFundingType, removeSecurity, setInputFieldValueById } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
 import { setActivePage } from '../../../../actions/dashboard';
@@ -149,6 +149,7 @@ class Funding extends Component {
                       funding_comments={this.props.funding_comments}
                       partial_symbols={this.props.partial_symbols}
                       addSecurity={this.props.addSecurity}
+                      removeSecurity={this.props.removeSecurity}
                     />
                   }
                   <div style={{ marginTop: '35px' }}>
@@ -225,5 +226,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setActivePage(page));
   },
   addSecurity: () => dispatch(addNewSecurity()),
+  removeSecurity: i => dispatch(removeSecurity(i)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
