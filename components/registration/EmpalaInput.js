@@ -22,7 +22,7 @@ class EmpalaInput extends Component {
     const errorText = this.props.disabled ? '' : this.props.errorText;
     const { currentColorScheme } = this.props;
     return (
-      <div className={this.props.col ? `registration-group col-md-${this.props.col}` : 'registration-group col-12'}>
+      <div className={this.props.col ? `registration-group col-md-${this.props.col}` : this.props.notCol ? '' : 'registration-group col-12'}>
         <div className="registration-label">{this.props.label}</div>
         <TextField
           id={this.props.id}
@@ -30,12 +30,20 @@ class EmpalaInput extends Component {
           hintText={this.props.placeholder}
           style={style.textFieldStyle}
           underlineStyle={style.underlineStyle}
-
+          underlineShow={false}
+          underlineDisabledStyle={{
+            border: 'none',
+            backgroundColor: '#292844'
+          }}
           hintStyle={currentColorScheme === 'light' ?
             style.hintStyleLightTheme :
             style.hintStyleDarkTheme
           }
-          inputStyle={this.props.disabled ? style.inputStyleDisabled :
+          inputStyle={this.props.disabled ?
+            (currentColorScheme === 'light' ?
+              style.inputStyleDisabledLight :
+              style.inputStyleDisabledDark
+          ) :
             (currentColorScheme === 'light' ?
                 style.inputStyleLightTheme :
                 style.inputStyleDarkTheme

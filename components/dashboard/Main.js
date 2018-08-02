@@ -12,6 +12,7 @@ import PasswordReminderModal from './PasswordReminderModal';
 import { closeModal } from '../../actions/dashboard';
 import MarketAccessPage from './Pages/MarketAccessPage';
 import Funding from './Pages/InvestmentProfile/Funding';
+import Account from './Pages/Account';
 
 class Main extends Component {
   constructor(props) {
@@ -41,6 +42,8 @@ class Main extends Component {
         return <MarketAccessPage />;
       case 'account funding':
         return <Funding />;
+      case 'global portfolio':
+        return <Account />;
       default:
         return '';
     }

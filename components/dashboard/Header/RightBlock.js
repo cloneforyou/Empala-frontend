@@ -40,13 +40,14 @@ export default class RightBlock extends Component {
           </li>
           <li className="nav-item">
              <span
-               className={`nav-link user-nav__link ${activePageDashboard === 'account funding' ? 'user-nav__link_active' : ''}`}
-               onClick={() => setActivePage('account funding')}
+               className={`nav-link user-nav__link (${activePageDashboard === 'account funding' ||
+               ${activePageDashboard === 'global portfolio') ? 'user-nav__link_active' : ''}`}
+               onClick={() => setActivePage('global portfolio')}
                role='button'
              >
               <Link
                 route="dashboard"
-                params={{ page: 'account funding' }}
+                params={{ page: 'global portfolio' }}
               >
                 <i className="user-nav__icon user-nav__icon_wallet" />
               </Link>

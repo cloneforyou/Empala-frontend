@@ -24,13 +24,17 @@ const EmpalaSelect = (props) => {
           style.hintStyleLightTheme :
           style.hintStyleDarkTheme
         }
-        labelStyle={props.disabled ? style.inputStyleDisabled :
+        labelStyle={props.disabled ? style.labelStyleDisabled :
            (currentColorScheme === 'light' ?
                style.labelStyleLightTheme :
                style.labelStyleDarkTheme
            )
          }
-        inputStyle={props.disabled ? style.inputStyleDisabled :
+        inputStyle={props.disabled ?
+          (currentColorScheme === 'light' ?
+            style.inputStyleDisabledLight :
+            style.inputStyleDisabledDark
+        ) :
           (currentColorScheme === 'light' ?
               style.inputStyleLightTheme :
               style.inputStyleDarkTheme
@@ -41,6 +45,10 @@ const EmpalaSelect = (props) => {
         menuItemStyle={style.menuItemStyle}
         selectedMenuItemStyle={style.selectedMenuItemStyle}
         underlineStyle={style.underlineStyle}
+        underlineShow={false}
+        underlineDisabledStyle={{
+          border: 'none',
+        }}
         maxHeight={300}
         onChange={(e, i, v) => {
           props.handleChange(props.id, v);

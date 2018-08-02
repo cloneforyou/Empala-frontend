@@ -11,9 +11,12 @@ function mapStateToProps(state) {
 function TitleBar(props) {
   return (
     <div className="titlebar">
-      <span
-        className={`titlebar__icon titlebar__icon_${props.currentPage}`}
-      />
+      <span>
+        <i className="titlebar__icon titlebar__icon_wallet"></i>
+      </span>
+      <span>
+        <i className={`titlebar__icon titlebar__icon_${props.currentPage}`}></i>
+    </span>
       <span className="titlebar__title">{props.currentPage}</span>
     </div>
   );

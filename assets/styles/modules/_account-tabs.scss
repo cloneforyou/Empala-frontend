@@ -1,0 +1,10 @@
+.account {
+  &__tabs {
+    & > button {
+      height: 100%;
+      min-width: 100px;
+      background: transparent;
+      color: #7a7a7c;
+    }
+  }
+}
