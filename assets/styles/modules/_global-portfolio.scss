@@ -27,12 +27,15 @@
       }
     }
     &_graphics {
-      height: 807px;
+      min-height: 807px;
       max-width: 1716px;
       border: solid 1px #ededed;
       background: $white;
       .graphic__wrapper {
-        width: 50%;
+        height: 50%;
+        padding: 20px;
+        font-size: 14px;
+        text-align: center;
       }
     }
   }

@@ -1,7 +1,7 @@
 export const Global = {
   id: 'portfolio_value_global',
   label: 'Portfolio Value',
-  hint: '$45,684,234.79',
+  value: '$45,684,234.79',
   notCol: true,
 };
 

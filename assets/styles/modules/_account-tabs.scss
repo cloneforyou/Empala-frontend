@@ -1,4 +1,5 @@
 .account {
+  margin-top: -12px;
   &__tabs {
     & > button {
       height: 100%;
@@ -6,5 +7,17 @@
       background: transparent;
       color: #7a7a7c;
     }
+  }
+  &__container {
+    min-height: 227px;
+    max-width: 1716px;
+    border: solid 1px #ededed;
+    background: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: $green;
+    margin: 13px;
   }
 }

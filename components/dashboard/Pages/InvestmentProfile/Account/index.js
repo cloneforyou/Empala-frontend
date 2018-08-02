@@ -7,27 +7,34 @@ import TitleBar from '../../../TitleBar';
 import GlobalPortfolio from './AccountTabs/GlobalPortfolio';
 import { withStyles } from '@material-ui/core/styles';
 import { GREEN } from '../../../../../constants/colors';
-import { dropFundingType } from '../../../../../actions/funding';
 import { setActivePage } from '../../../../../actions/dashboard';
+import { getActiveAccountTab, changeActiveAccountTab } from '../../../../../actions/account';
 
 const styles = theme => ({
   indicator: {
     backgroundColor: GREEN,
+    height: '6px',
   },
 });
 
 class Account extends Component {
+  handleChange = (event, value) => {
+    this.props.changeActiveAccountTab(value);
+  };
+
   render() {
     const { classes, currentColorScheme } = this.props;
+    const value = this.props.activeAccountTab;
+
     return (
-      <div>
+      <div className="account">
         <div className="account__tabs">
           <AppBar
             position="static"
             style={{ backgroundColor: currentColorScheme === 'light' ? '#f3f3f3' : '#211f39' }}
           >
             <Tabs
-              value="0"
+              value={value}
               onChange={this.handleChange}
               scrollable
               scrollButtons="auto"
@@ -44,13 +51,24 @@ class Account extends Component {
               <Tab label="France" />
               <Tab label="Singapore" />
               <Tab label="Australia" />
+              <Tab label="Japan" />
             </Tabs>
           </AppBar>
         </div>
         <TitleBar />
-        <GlobalPortfolio
+        {value === 0 && <GlobalPortfolio
           setActivePage={this.props.setActivePage}
+          textButton={'Fund account'}
         />
+        }
+        {value === 1 && <div className="account__container">Coming Spring 2019</div>}
+        {value === 2 && <GlobalPortfolio textButton={'Fund US account'}/>}
+        {value === 3 && <div className="account__container">Coming Spring 2019</div>}
+        {value === 4 && <div className="account__container">Coming as part of phase 2</div>}
+        {value === 5 && <div className="account__container">Coming as part of phase 2</div>}
+        {value === 6 && <div className="account__container">Coming as part of phase 2</div>}
+        {value === 7 && <div className="account__container">Coming as part of phase 2</div>}
+        {value === 8 && <div className="account__container">Coming as part of phase 3</div>}
       </div>
     );
   }
@@ -58,9 +76,12 @@ class Account extends Component {
 
 export default withStyles(styles)(connect(
   state => ({
+    activeAccountTab: state.account.activeAccountTab,
     currentColorScheme: state.dashboard.currentColorScheme,
   }),
   dispatch => ({
     setActivePage: page => dispatch(setActivePage(page)),
+    getActiveAccountTab: () => dispatch(getActiveAccountTab()),
+    changeActiveAccountTab: value => dispatch(changeActiveAccountTab(value)),
   }),
 )(Account));

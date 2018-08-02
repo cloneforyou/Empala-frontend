@@ -4,6 +4,7 @@ import dashboard from './reducers/dashboard';
 import profile from './reducers/profile';
 import auth from './reducers/auth';
 import funding from './reducers/funding';
+import account from './reducers/account';
 
 export const InitialState = {
 };
@@ -21,5 +22,6 @@ export default combineReducers({
   registration,
   profile,
   funding,
+  account,
 });
 
