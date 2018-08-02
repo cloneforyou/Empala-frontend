@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from '../../../../routes';
 
 const WireTransfer = props => (
   <div className="funding-wire-transfer">
@@ -12,21 +13,35 @@ const WireTransfer = props => (
         <div className="funding-wire-transfer__text-col_subheader">
           Wire details:
         </div>
-        <p>Routing Number: 12345678</p>
-        <p>Account Number: 12345678</p>
-        <p>Comment:  Member No: 123456789</p>
+        <div>Routing Number: 12345678</div>
+        <div>Account Number: 12345678</div>
+        <div>Comment:  Member No: 123456789</div>
       </div>
       <div className="funding-wire-transfer__text-col" >
         <div className="funding-wire-transfer__text-col_subheader">
           Checks:
         </div>
-        <p>Payable: Empala Group LLC</p>
-        <p>Member No: 123456789</p>
-        <p>123 Cheap Option Way</p>
-        <p>San Francisco</p>
-        <p>CA 94100</p>
+        <div>Payable: Empala Group LLC</div>
+        <div>Member No: 123456789</div>
+        <div>123 Cheap Option Way</div>
+        <div>San Francisco</div>
+        <div>CA 94100</div>
       </div>
     </div>
+    <button
+      className="profile-btn profile-btn_green"
+      onClick={() => props.setActivePage('overview')}
+    >
+      <Link
+        route="dashboard"
+        params={{ page: 'overview' }}
+      >
+        <span
+          style={{ fontSize: '18px' }}
+        >OK
+        </span>
+      </Link>
+    </button>
   </div>
 );
 

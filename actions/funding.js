@@ -8,13 +8,18 @@ import {
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS, DELETE_USERPIC_SUCCESS, DELETE_USERPIC_REQUEST, DELETE_USERPIC_FAIL,
 } from '../constants/profile';
-import { SET_FIELD_VALUE } from '../constants/funding';
+import { DROP_FUNDING_TYPE, SET_FIELD_VALUE } from '../constants/funding';
 
 export function setInputFieldValueById(id, value) {
   return {
     type: SET_FIELD_VALUE,
     id,
     value,
+  };
+}
+export function dropFundingType() {
+  return {
+    type: DROP_FUNDING_TYPE,
   };
 }
 

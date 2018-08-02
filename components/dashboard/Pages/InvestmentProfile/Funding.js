@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
-import { setInputFieldValueById } from '../../../../actions/funding';
+import { dropFundingType, setInputFieldValueById } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
 import { setActivePage } from '../../../../actions/dashboard';
@@ -11,25 +11,24 @@ import PartialTransfer from './PartialTransfer';
 import WireTransfer from './WireTransfer';
 
 
-const FundingFooter = () => (
+const FundingFooter = props => (
   <div className="funding-footer">
     <button
       className="profile-btn profile-btn_green"
       style={{ height: '30px' }}
-      onClick={() => this.props.setActivePage('overview')}
+      onClick={() => props.setActivePage('overview')}
     >
       <Link
         route="dashboard"
         params={{ page: 'overview' }}
       >
-                    <span
-                    >Fund later
-                    </span>
+        <span >Fund later
+        </span>
       </Link>
     </button>
     <p className="funding-footer__text">
       You have 30 days remaining to access the Empala platform.
-      <p/>
+      <p />
       You can fund your account at any time by clicking the wallet on the top of the screen.
     </p>
   </div>
@@ -59,7 +58,8 @@ class Funding extends Component {
     return value ? this.props[type] === value : this.props[type];
   }
   displayFooter() {
-    if (!this.isSpecifiedTypeSelected('funding_type')) return true;
+    if (!this.isSpecifiedTypeSelected('funding_type') ||
+      this.isSpecifiedTypeSelected('funding_type', 'Fund Later')) return true;
     return this.isSpecifiedTypeSelected('funding_type', 'Account Transfer')
       && !this.isSpecifiedTypeSelected('transfer_type');
   }
@@ -174,11 +174,15 @@ class Funding extends Component {
               }
               {
                 this.isSpecifiedTypeSelected('funding_type', 'Wire/Check') &&
-                <WireTransfer />
+                <WireTransfer
+                  setActivePage={this.props.setActivePage}
+                />
               }
               {
                 this.displayFooter() &&
-                  <FundingFooter />
+                  <FundingFooter
+                    setActivePage={this.props.setActivePage}
+                  />
               }
             </div>
           </div>
@@ -206,6 +210,9 @@ const mapDispatchToProps = dispatch => ({
     if (id === 'account_no') return dispatch(setInputFieldValueById(id, value.replace(/\D/, '')));
     dispatch(setInputFieldValueById(id, value));
   },
-  setActivePage: page => dispatch(setActivePage(page)),
+  setActivePage: (page) => {
+    dispatch(dropFundingType());
+    dispatch(setActivePage(page));
+  },
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
