@@ -2,7 +2,13 @@
   transition: .3s;
   &__form {
     transition: .3s;
-    height: 203px;
+    height: 210px;
+    @media(max-width: 768px) {
+      height: 485px;
+    }
+    .margin-top1 {
+      margin-top: 10px;
+    }
     &_close {
       height: 0;
       transition: .3s;
@@ -18,6 +24,7 @@
 
 .pseudo-input {
   height: 60px;
+  margin-bottom: 10px;
   &__label {
     color: $green;
     font-size: 12px;
