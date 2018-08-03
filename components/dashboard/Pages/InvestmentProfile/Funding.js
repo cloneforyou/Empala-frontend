@@ -7,8 +7,9 @@ import {
   addNewSecurity,
   dropFundingType,
   removeSecurity,
-  setInputFieldValueById,
+  setInputFieldValueById, setPaymentIntitution,
   setSecuritiesInputValue,
+  togglePlaidLink,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -73,14 +74,6 @@ class Funding extends Component {
     alert('Fired fund transfer submission procedure!');
   }
   render() {
-    // if (this.props.funding_type === 'ACH transfer') {
-    //   return (<ACHTransfer
-    //     funding_type={this.props.funding_type}
-    //     linked_accounts={this.props.linked_accounts}
-    //     setSelectedValueById={this.props.setSelectedValueById}
-    //     options={this.options}
-    //   />);
-    // }
     return (
       <div>
         <TitleBar />
@@ -216,8 +209,14 @@ class Funding extends Component {
                     funding_type={this.props.funding_type}
                     linked_accounts={this.props.linked_accounts}
                     setSelectedValueById={this.props.setSelectedValueById}
+                    setInputValueById={this.props.setInputValueById}
                     options={this.options}
                     selected_institution={this.props.selected_institution}
+                    ach_amount={this.props.ach_amount}
+                    handleSubmit={this.handleSubmit}
+                    setPaymentIntitution={this.props.setPaymentIntitution}
+                    togglePlaidLink={this.props.togglePlaidLink}
+                    plaid_link_active={this.props.plaid_link_active}
                   />
               }
             </div>
@@ -241,6 +240,8 @@ const mapStateToProps = state => ({
   funding_comments: state.funding.funding_comments,
   partial_symbols: state.funding.partial_symbols,
   selected_institution: state.funding.selected_institution || '',
+  ach_amount: state.funding.ach_amount,
+  plaid_link_active: state.funding.plaid_link_active,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -254,7 +255,7 @@ const mapDispatchToProps = dispatch => ({
       if (id === 'quantity') return dispatch(setSecuritiesInputValue(id, index, value.replace(/\D/, '')));
       return dispatch(setSecuritiesInputValue(id, index, value));
     }
-    if (id === 'account_no') return dispatch(setInputFieldValueById(id, value.replace(/\D/, '')));
+    if (id === 'account_no' || id === 'ach_ammount') return dispatch(setInputFieldValueById(id, value.replace(/\D/, '')));
     return dispatch(setInputFieldValueById(id, value));
   },
   setActivePage: (page) => {
@@ -263,5 +264,7 @@ const mapDispatchToProps = dispatch => ({
   },
   addSecurity: () => dispatch(addNewSecurity()),
   removeSecurity: i => dispatch(removeSecurity(i)),
+  setPaymentIntitution: name => dispatch(setPaymentIntitution(name)),
+  togglePlaidLink: () => dispatch(togglePlaidLink()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);

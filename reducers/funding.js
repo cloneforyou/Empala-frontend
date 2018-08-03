@@ -4,6 +4,8 @@ import {
   ADD_SECURITY,
   REMOVE_SECURITY,
   SET_SECURITY_FIELD_VALUE,
+  SET_PAYMENT_INSTITUTION,
+  TOGGLE_PLAID,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -19,6 +21,8 @@ const initialState = {
     { symbol: '', quantity: '', sec_type: 'Shares' },
   ],
   selected_institution: false,
+  ach_amount: false,
+  plaid_link_active: false,
 };
 
 function funding(state = initialState, action) {
@@ -37,6 +41,7 @@ function funding(state = initialState, action) {
         ...state,
         funding_type: false,
         transfer_type: false,
+        selected_institution: false,
       };
     case ADD_SECURITY:
       return {
@@ -67,6 +72,16 @@ function funding(state = initialState, action) {
           ...state.partial_symbols.slice(0, action.index),
           ...state.partial_symbols.slice(action.index + 1),
         ],
+      };
+    case SET_PAYMENT_INSTITUTION:
+      return {
+        ...state,
+        selected_institution: state.selected_institution === action.name ? '' : action.name,
+      };
+    case TOGGLE_PLAID:
+      return {
+        ...state,
+        plaid_link_active: !state.plaid_link_active,
       };
     default:
       return state;

@@ -4,6 +4,8 @@ import {
   ADD_SECURITY,
   REMOVE_SECURITY,
   SET_SECURITY_FIELD_VALUE,
+  SET_PAYMENT_INSTITUTION,
+  TOGGLE_PLAID,
 } from '../constants/funding';
 
 export function setInputFieldValueById(id, value) {
@@ -37,3 +39,17 @@ export function setSecuritiesInputValue(id, index, value) {
     value,
   };
 }
+
+export function setPaymentIntitution(name) {
+  return {
+    type: SET_PAYMENT_INSTITUTION,
+    name,
+  };
+}
+
+export function togglePlaidLink() {
+  return {
+    type: TOGGLE_PLAID,
+  };
+}
+

@@ -8,6 +8,7 @@
     background-color: #ffffff;
     box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
     margin: 53px auto 25px;
+    color: #7a7a7c;
   }
   &-background {
     width: 203px;
@@ -71,12 +72,31 @@
       border: solid 1px #ebebeb;
       margin: 0 auto;
       padding: 27px 27px 45px 35px;
+      &_title-margin {
+      margin-bottom: 25px;
+      }
+      &_input-margin {
+        margin-bottom: 25px;
+      }
+      & p {
+        @include fontSize(18px);
+        line-height: .83;
+        letter-spacing: 0.5px;
+        margin: auto;
+        text-align: center;
+        width: 200px;
+        transform: translateY(-10px);
+      }
+      &_button-margin {
+        margin-top: 32px;
+      }
     }
     &_title-margin {
       margin: 50px 0 28px;
     }
     &-tiles {
       &-tile {
+        cursor: pointer;
         width: 250px;
         height: 110px;
         border-radius: 10px;
@@ -86,7 +106,7 @@
         margin: 0 20px 15px 0;
         padding: 10px 45px;
         &__plus,
-        &__check {
+        &__check:before {
           background: $green;
           border-radius: 50%;
           color: #fff;
@@ -106,7 +126,7 @@
           width: 43px;
           height: 43px;
           font-size: 18px;
-          line-height: 445px;
+          line-height: 42px;
           margin: auto;
           top: 50%;
           transform: translateY(50%);
