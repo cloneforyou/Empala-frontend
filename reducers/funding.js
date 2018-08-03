@@ -42,7 +42,7 @@ function funding(state = initialState, action) {
         ...state,
         partial_symbols: [
           ...state.partial_symbols,
-          ...[{ symbol: null, quantity: null, sec_type: 'Shares' }],
+          ...[{ symbol: '', quantity: '', sec_type: 'Shares' }],
         ],
       };
     case SET_SECURITY_FIELD_VALUE:

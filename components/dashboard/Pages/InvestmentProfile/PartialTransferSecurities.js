@@ -1,7 +1,7 @@
 import React from 'react';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
-import { getFormattedNumber } from '../../../../utils/dashboardUtils';
+import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
 
 const SecuritiesRow = props => (
   <div className="funding-partial-securities-content-row">
@@ -21,7 +21,7 @@ const SecuritiesRow = props => (
     >
       <EmpalaInput
         id="quantity"
-        value={getFormattedNumber(props.item.quantity)}
+        value={formatNumberWithFixedPoint(props.item.quantity)}
         handleChange={e => props.setInputValueById(e, props.index)}
       />
     </div>

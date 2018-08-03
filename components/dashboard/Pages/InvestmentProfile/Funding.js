@@ -48,7 +48,6 @@ class Funding extends Component {
         { value: 'ACH transfer', title: 'ACH transfer' },
         { value: 'Account transfer', title: 'Account transfer' },
         { value: 'Wire/Check', title: 'Wire/Check' },
-        { value: 'Fund Later', title: 'Fund Later' },
       ],
       transfer_type: [
         { value: 'Full transfer', title: 'Full transfer' },
@@ -106,7 +105,7 @@ class Funding extends Component {
                       value={this.props.account_no || ''}
                       handleChange={this.props.setInputValueById}
                       // errorText={this.props.fieldsErrors.account_no}
-                      placeholder="1234567890"
+                      // placeholder="1234567890"
                     />
                   }
                   </div>
