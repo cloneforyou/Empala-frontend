@@ -54,6 +54,86 @@
       margin-right: 63px;
     }
   }
+  &-ach {
+    &-selection-box {
+      background: seashell;
+      display: inline-block;
+      &__input {
+        width: 188px;
+      }
+    }
+    &-payment-box {
+      width: 320px;
+      height: 465px;
+      border-radius: 10px;
+      box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+      border: solid 1px #ebebeb;
+      margin: 0 auto;
+      padding: 27px 27px 45px 35px;
+    }
+    &_title-margin {
+      margin: 50px 0 28px;
+    }
+    &-tiles {
+      &-tile {
+        width: 250px;
+        height: 110px;
+        border-radius: 10px;
+        box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border: solid 1px #ebebeb;
+        margin: 0 20px 15px 0;
+        padding: 10px 45px;
+        &__plus,
+        &__check {
+          background: $green;
+          border-radius: 50%;
+          color: #fff;
+          text-align: center;
+        }
+        &__check:before {
+          display: inline-block;
+          content: '✓';
+          width: 22px;
+          height: 22px;
+          font-size: 18px;
+          line-height: 25px;
+          position: absolute;
+          left: -30px;
+        }
+        &__plus {
+          width: 43px;
+          height: 43px;
+          font-size: 18px;
+          line-height: 445px;
+          margin: auto;
+          top: 50%;
+          transform: translateY(50%);
+        }
+        &__image {
+          text-align: center;
+          height: 65px;
+          width: 100%;
+        }
+        &__institution {
+          height: 65px;
+          & p {
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+          @include fontSize(12px);
+          color: $green;
+        }
+        &__text {
+          @include fontSize(12px);
+          color: $green;
+          line-height: 22px;
+          position: relative;
+        }
+      }
+    }
+  }
   &-partial {
     &-wrapper {
       width: 100%;

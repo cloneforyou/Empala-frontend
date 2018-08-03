@@ -18,6 +18,7 @@ const initialState = {
   partial_symbols: [
     { symbol: '', quantity: '', sec_type: 'Shares' },
   ],
+  selected_institution: false,
 };
 
 function funding(state = initialState, action) {
@@ -49,14 +50,14 @@ function funding(state = initialState, action) {
       return {
         ...state,
         partial_symbols: state.partial_symbols.map((el, index) => {
-            if (index === action.index) {
-              return ({
-                ...el,
-                [action.id]: action.value,
-              });
-            }
-            return el;
-          }),
+          if (index === action.index) {
+            return ({
+              ...el,
+              [action.id]: action.value,
+            });
+          }
+          return el;
+        }),
 
       };
     case REMOVE_SECURITY:
