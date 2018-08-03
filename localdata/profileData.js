@@ -597,14 +597,14 @@ const options = [
 
 export const fieldsInvestmentExperienceOne = [
   {
-    id: 'regulatory_family_investment_experience',
+    id: 'profile_experience_investment_experience',
     hint: 'Please select',
     label: 'Investment experience',
     field: 'select',
     options: [
       {
         value: 'None',
-        title: 'No experience',
+        title: 'None',
       },
       {
         value: 'Limited',
@@ -621,8 +621,51 @@ export const fieldsInvestmentExperienceOne = [
     ],
   },
   {
-    id: 'profile_financials_investment_objectives',
+    id: 'profile_experience_equities',
     hint: 'Please select',
+    label: 'Equities',
+    options,
+  },
+  {
+    id: 'profile_experience_options',
+    label: 'Options',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'profile_experience_bonds',
+    label: 'Bonds',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'profile_experience_currencies',
+    label: 'Currencies',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'profile_experience_futures',
+    label: 'Futures',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+  {
+    id: 'profile_experience_foreign_markets',
+    label: 'Foreign markets',
+    options,
+    hint: 'Please select',
+    autoWidth: true,
+  },
+];
+
+export const fieldsInvestmentExperienceTwo = [
+  {
+    id: 'profile_experience_investment_objectives',
     label: 'Investment objectives',
     options: [
       {
@@ -646,89 +689,67 @@ export const fieldsInvestmentExperienceOne = [
         title: 'Speculation (high risk)',
       },
     ],
-  },
-  {
-    id: 'experience_investment_experience_equities',
-    label: 'Equities',
-    options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'experience_investment_experience_options',
-    label: 'Options',
-    options,
-    hint: 'Please select',
-    autoWidth: true,
-  },
-  {
-    id: 'experience_investment_experience_bonds',
-    label: 'Bonds',
-    options,
-    hint: 'Please select',
-    autoWidth: true,
-  },
-  {
-    id: 'experience_investment_experience_margin_currencies',
-    label: 'Currencies',
-    options,
-    hint: 'Please select',
-    autoWidth: true,
-  },
-  {
-    id: 'experience_investment_experience_futures',
-    label: 'Futures',
-    options,
-    hint: 'Please select',
-    autoWidth: true,
-  },
-  {
-    id: 'experience_investment_experience_foreign_markets',
-    label: 'Foreign markets',
-    options,
-    hint: 'Please select',
-    autoWidth: true,
-  },
-];
-
-export const fieldsInvestmentExperienceTwo = [
-  {
-    id: 'experience_investment_experience_cryptocurrencies',
+    id: 'profile_experience_cryptocurrencies',
     label: 'Cryptocurrencies',
-    options,
+    options: [
+      {
+        value: 'Capital preservation (low risk)',
+        title: 'Capital preservation (low risk)',
+      },
+      {
+        value: 'Income (low-medium risk)',
+        title: 'Income (low-medium risk)',
+      },
+      {
+        value: 'Growth & income (medium risk)',
+        title: 'Growth & income (medium risk)',
+      },
+      {
+        value: 'Growth (medium-high risk)',
+        title: 'Growth (medium-high risk)',
+      },
+      {
+        value: 'Speculation (high risk)',
+        title: 'Speculation (high risk)',
+      },
+    ],
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'experience_investment_experience_private_equity',
+    id: 'profile_experience_private_equity',
     label: 'Private equity',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'experience_investment_experience_margin_accounts',
+    id: 'profile_experience_margin_accounts',
     label: 'Margin accounts',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'experience_investment_experience_borrowing_money',
+    id: 'profile_experience_borrowing_money',
     label: 'Borrowing money',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'experience_investment_experience_lending_money',
+    id: 'profile_experience_lending_money',
     label: 'Lending money',
     options,
     hint: 'Please select',
     autoWidth: true,
   },
   {
-    id: 'experience_investment_experience_exotics',
+    id: 'profile_experience_exotics',
     label: 'Exotics',
     options,
     hint: 'Please select',

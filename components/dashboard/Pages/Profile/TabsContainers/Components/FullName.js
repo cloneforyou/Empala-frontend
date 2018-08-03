@@ -37,7 +37,7 @@ class FullName extends Component {
 
 
     return (
-      <div className="registration-group name-edit col-12">
+      <div className="name-edit col-12">
         <div className="name-edit__pseudo-input pseudo-input">
           <span className="pseudo-input__label">{this.props.field.label}</span>
           <input
@@ -51,7 +51,7 @@ class FullName extends Component {
         </div>
 
 
-        <div className={formIsOpen ? 'name-edit__form' : 'name-edit__form  name-edit__form_close'}>
+        <div className={formIsOpen ? 'name-edit__form margin-top10' : 'name-edit__form  name-edit__form_close'}>
           <div className="row">
             {fieldsFullName.map(item => <FormGroupMapping key={item.id} {...{...this.props, item}} />)}
           </div>
