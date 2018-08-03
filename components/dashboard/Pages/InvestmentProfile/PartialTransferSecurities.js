@@ -11,7 +11,7 @@ const SecuritiesRow = props => (
     >
       <EmpalaInput
         id="symbol"
-        value={props.item.symbol}
+        value={(props.item.symbol).toUpperCase()}
         handleChange={e => props.setInputValueById(e, props.index)}
       />
     </div>

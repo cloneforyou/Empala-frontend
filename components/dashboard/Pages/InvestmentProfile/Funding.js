@@ -220,7 +220,11 @@ const mapStateToProps = state => ({
   partial_symbols: state.funding.partial_symbols,
 });
 const mapDispatchToProps = dispatch => ({
-  setSelectedValueById: (id, value, index) => dispatch(setInputFieldValueById(id, value)),
+  setSelectedValueById: (id, value, index) => {
+    if (index || index === 0) return dispatch(setSecuritiesInputValue(id, index, value));
+    if (id === 'funding_type' && value !== 'Account transfer') dispatch(dropFundingType());
+    dispatch(setInputFieldValueById(id, value));
+  },
   setInputValueById: (e, index) => {
     const { id, value } = e.target;
     if (index || index === 0) {
