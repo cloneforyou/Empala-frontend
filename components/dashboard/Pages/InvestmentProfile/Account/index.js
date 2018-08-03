@@ -8,7 +8,11 @@ import GlobalPortfolio from './AccountTabs/GlobalPortfolio';
 import { withStyles } from '@material-ui/core/styles';
 import { GREEN } from '../../../../../constants/colors';
 import { setActivePage } from '../../../../../actions/dashboard';
-import { getActiveAccountTab, changeActiveAccountTab } from '../../../../../actions/account';
+import {
+  getActiveAccountTab,
+  changeActiveAccountTab,
+  changeSectionTitleBar,
+}from '../../../../../actions/account';
 
 const styles = theme => ({
   indicator: {
@@ -43,19 +47,19 @@ class Account extends Component {
                 indicator: classes.indicator,
               }}
             >
-              <Tab label="Global" />
-              <Tab label="EMARA" />
-              <Tab label="North America" />
-              <Tab label="Canada" />
-              <Tab label="UK" />
-              <Tab label="France" />
-              <Tab label="Singapore" />
-              <Tab label="Australia" />
-              <Tab label="Japan" />
+              <Tab label="Global" onClick={() => {this.props.changeSectionTitleBar('Global Portfolio')}} />
+              <Tab label="EMARA" onClick={() => {this.props.changeSectionTitleBar('EMARA Tokens')}} />
+              <Tab label="North America" onClick={() => {this.props.changeSectionTitleBar('North America Account', 'usa')}} />
+              <Tab label="Canada" onClick={() => {this.props.changeSectionTitleBar('Canada Account', 'canada')}} />
+              <Tab label="UK" onClick={() => {this.props.changeSectionTitleBar('United Kingdom Account', 'uk')}} />
+              <Tab label="France" onClick={() => {this.props.changeSectionTitleBar('France Account', 'france')}} />
+              <Tab label="Singapore" onClick={() => {this.props.changeSectionTitleBar('Singapore Account')}} />
+              <Tab label="Australia" onClick={() => {this.props.changeSectionTitleBar('Australia Account', 'australia')}} />
+              <Tab label="Japan" onClick={() => {this.props.changeSectionTitleBar('Japan Account', 'japan')}} />
             </Tabs>
           </AppBar>
         </div>
-        <TitleBar />
+        <TitleBar currentSectionTitleBar={this.props.currentSectionTitleBar} iconAccountTitleBar={this.props.iconAccountTitleBar} />
         {value === 0 && <GlobalPortfolio
           setActivePage={this.props.setActivePage}
           textButton={'Fund account'}
@@ -78,10 +82,13 @@ export default withStyles(styles)(connect(
   state => ({
     activeAccountTab: state.account.activeAccountTab,
     currentColorScheme: state.dashboard.currentColorScheme,
+    currentSectionTitleBar: state.account.currentSectionTitleBar,
+    iconAccountTitleBar: state.account.iconAccountTitleBar,
   }),
   dispatch => ({
     setActivePage: page => dispatch(setActivePage(page)),
     getActiveAccountTab: () => dispatch(getActiveAccountTab()),
     changeActiveAccountTab: value => dispatch(changeActiveAccountTab(value)),
+    changeSectionTitleBar: (tab, icon) => dispatch(changeSectionTitleBar(tab, icon)),
   }),
 )(Account));

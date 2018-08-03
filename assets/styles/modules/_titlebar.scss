@@ -11,39 +11,31 @@
     text-transform: capitalize;
   }
   &__icon {
-    position: relative;
-    display: block;
-    &:before {
-      content: '';
-      background-color: $white;
-      position: absolute;
-      transform: translateY(-50%);
-      top: 50%;
-      left: 0;
-    }
-    //display: inline-block;
-    //margin: 0 10px;
-    //background-color: $main-color-text-grey;
-    //width: 16px;
-    //height: 16px;
-    //vertical-align: text-top;
-    //@each $item in $listItemsSidebar {
-    //  &_#{$item} {
-    //    mask: url($path-to-dashboard-icon + 'icon-' + $item +'.svg');
-    //    mask-size: contain;
-    //    mask-repeat: no-repeat;
-    //  }
-    //}
-    &_wallet {
-      width: 30px;
-      height: 28px;
-      margin-right: 20px;
-      &:before {
-        mask: url($path-to-dashboard-icon + 'icon-wallet.svg');
+    display: inline-block;
+    margin: 0 10px;
+    background-color: $white;
+    width: 30px;
+    height: 28px;
+    vertical-align: middle;
+    @each $item in $listItemsTitleBar {
+      &_#{$item} {
+        mask: url($path-to-dashboard-icon + 'icon-' + $item +'.svg');
         mask-size: contain;
         mask-repeat: no-repeat;
-        width: 30px;
-        height: 28px;
+      }
+    }
+    &_wallet {
+      mask: url($path-to-dashboard-icon + 'icon-wallet.svg');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+    }
+    @each $item in $listCounties {
+      &_flag-#{$item} {
+        background: url($path-to-dashboard-icon + 'flag-' + $item +'.svg') 100% 100% no-repeat;
+        background-size: cover;
+        width: 40px;
+        height: 30px;
+        margin-right: 40px;
       }
     }
   }
