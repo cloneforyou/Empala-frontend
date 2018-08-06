@@ -11,21 +11,31 @@ function mapStateToProps(state) {
 function TitleBar(props) {
   return (
     <div className="titlebar">
-      {props.currentPage && (props.currentPage !== 'global portfolio') ?
-        <div>
+      {props.currentPage && (props.currentPage !== 'global portfolio') && (props.currentPage !== 'account funding') &&
+      <div className="d-flex">
           <span>
           <i className={`titlebar__icon titlebar__icon_${props.currentPage}`}></i>
          </span>
-          <span className="titlebar__title">{props.currentPage}</span>
-        </div> :
-        <div>
+        <span className="titlebar__title">{props.currentPage}</span>
+      </div>}
+
+      {props.currentPage && (props.currentPage === 'global portfolio') &&
+      <div className="d-flex">
           <span>
           <i className="titlebar__icon titlebar__icon_wallet"></i>
-            {props.iconAccountTitleBar ? <i className={`titlebar__icon titlebar__icon_flag-${props.iconAccountTitleBar}`}></i> : ''}
+            {props.iconAccountTitleBar && <i className={`titlebar__icon titlebar__icon_flag-${props.iconAccountTitleBar}`}></i>}
         </span>
-          <span className="titlebar__title">{props.currentSectionTitleBar}</span>
-        </div>
-      }
+        <span className="titlebar__title">{props.currentSectionTitleBar}</span>
+      </div>}
+
+      {props.currentPage && (props.currentPage === 'account funding') &&
+      <div className="d-flex">
+          <span>
+          <i className="titlebar__icon titlebar__icon_wallet"></i>
+            {props.iconAccountTitleBar && <i className={`titlebar__icon titlebar__icon_flag-${props.iconAccountTitleBar}`}></i>}
+        </span>
+        <span className="titlebar__title">{props.currentPage}</span>
+      </div>}
     </div>
   );
 }

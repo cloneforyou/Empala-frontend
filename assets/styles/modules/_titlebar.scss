@@ -12,7 +12,7 @@
   }
   &__icon {
     display: inline-block;
-    margin: 0 10px;
+    margin-right: 20px;
     background-color: $white;
     width: 30px;
     height: 28px;
@@ -33,9 +33,9 @@
       &_flag-#{$item} {
         background: url($path-to-dashboard-icon + 'flag-' + $item +'.svg') 100% 100% no-repeat;
         background-size: cover;
-        width: 40px;
-        height: 30px;
-        margin-right: 40px;
+        width: 50px;
+        height: 33px;
+        margin-right: 50px;
       }
     }
   }
