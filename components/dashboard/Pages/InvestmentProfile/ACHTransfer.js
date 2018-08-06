@@ -85,10 +85,9 @@ const institutions = [
 
 const ACHTransfer = props => (
 
-  <div className="funding-content-body">
-    <div className="row">
-      <div className="funding-ach-selection-box col-6">
-        <div className="funding-selection-form">
+  <div className="funding-content__body">
+      <div className="funding-ach-selection-box">
+        <div>
           <div className="funding-ach-selection-box__input no-gutters">
           <EmpalaSelect
             id="funding_type"
@@ -136,7 +135,6 @@ const ACHTransfer = props => (
           <TransferForm {...props} />
         </div>
       </div>
-    </div>
   </div>
 );
 
