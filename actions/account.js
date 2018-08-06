@@ -1,6 +1,7 @@
 import {
   GET_ACTIVE_ACCOUNT_TAB,
   CHANGE_ACTIVE_ACCOUNT_TAB,
+  CHANGE_SECTION_TITLE_BAR,
 } from '../constants/account';
 
 export function getActiveAccountTab() {
@@ -15,3 +16,8 @@ export const changeActiveAccountTab = tab => ({
   tab,
 });
 
+export const changeSectionTitleBar = (tab, icon) => ({
+  type: CHANGE_SECTION_TITLE_BAR,
+  tab,
+  icon,
+});

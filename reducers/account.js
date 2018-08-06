@@ -1,10 +1,13 @@
 import {
   GET_ACTIVE_ACCOUNT_TAB,
   CHANGE_ACTIVE_ACCOUNT_TAB,
+  CHANGE_SECTION_TITLE_BAR,
 } from '../constants/account';
 
 const initialState = {
   activeAccountTab: 0,
+  currentSectionTitleBar: 'Global Portfolio',
+  iconAccountTitleBar: '',
 };
 
 function account(state = initialState, action) {
@@ -18,6 +21,12 @@ function account(state = initialState, action) {
       return {
         ...state,
         activeAccountTab: action.tab,
+      };
+    case CHANGE_SECTION_TITLE_BAR:
+      return {
+        ...state,
+        currentSectionTitleBar: action.tab,
+        iconAccountTitleBar: action.icon,
       };
     default:
       return state;
