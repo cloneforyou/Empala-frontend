@@ -3,12 +3,20 @@ import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
-import { addNewSecurity, dropFundingType, removeSecurity, setInputFieldValueById } from '../../../../actions/funding';
+import {
+  addNewSecurity,
+  dropFundingType,
+  removeSecurity,
+  setInputFieldValueById, setPaymentIntitution,
+  setSecuritiesInputValue,
+  togglePlaidLink,
+} from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
 import { setActivePage } from '../../../../actions/dashboard';
 import PartialTransfer from './PartialTransfer';
 import WireTransfer from './WireTransfer';
+import ACHTransfer from './ACHTransfer';
 
 
 const FundingFooter = props => (
@@ -42,7 +50,6 @@ class Funding extends Component {
         { value: 'ACH transfer', title: 'ACH transfer' },
         { value: 'Account transfer', title: 'Account transfer' },
         { value: 'Wire/Check', title: 'Wire/Check' },
-        { value: 'Fund Later', title: 'Fund Later' },
       ],
       transfer_type: [
         { value: 'Full transfer', title: 'Full transfer' },
@@ -79,120 +86,139 @@ class Funding extends Component {
                 Account Fund Management
                 </h1>
               </div>
-              <div className="funding-content-body">
-                <div className="row no-gutters funding-selection-form">
-                  <div className="col-6 no-gutters">
-                    <EmpalaSelect
-                      id="funding_type"
-                      options={this.options.funding}
-                      label="Account funding"
-                      value={this.props.funding_type || ''}
-                      handleChange={this.props.setSelectedValueById}
-                // errorText={this.props.fieldsErrors.funding}
-                      hint="Choose funding type"
-                    />
+              {
+                this.props.funding_type !== 'ACH transfer' ?
+                (
+                  <div className="funding-content-body">
+                    <div className="row no-gutters funding-selection-form">
+                      <div className="col-6 no-gutters">
+                        <EmpalaSelect
+                          id="funding_type"
+                          options={this.options.funding}
+                          label="Account funding"
+                          value={this.props.funding_type || ''}
+                          handleChange={this.props.setSelectedValueById}
+                          // errorText={this.props.fieldsErrors.funding}
+                          hint="Choose funding type"
+                        />
+                        {
+                          this.isSpecifiedTypeSelected('transfer_type') &&
+                          <EmpalaInput
+                            id="account_no"
+                            type="text"
+                            label="Account no."
+                            value={this.props.account_no || ''}
+                            handleChange={this.props.setInputValueById}
+                            // errorText={this.props.fieldsErrors.account_no}
+                            // placeholder="1234567890"
+                          />
+                        }
+                      </div>
+                      {
+                        this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                        <div className="col-6 no-gutters pl-3">
+                          <EmpalaSelect
+                            id="transfer_type"
+                            options={this.options.transfer_type}
+                            label="Transfer type"
+                            value={this.props.transfer_type || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.transfer_type}
+                            hint="Choose transfer type"
+                          />
+                          {
+                            this.isSpecifiedTypeSelected('transfer_type') && <EmpalaSelect
+                              id="account_type"
+                              options={this.options.account_type}
+                              label="Account type"
+                              value={this.props.account_type || ''}
+                              handleChange={this.props.setSelectedValueById}
+                              // errorText={this.props.fieldsErrors.account_type}
+                            />
+                          }
+                        </div>
+                      }
+                    </div>
                     {
-                    this.isSpecifiedTypeSelected('transfer_type') &&
-                    <EmpalaInput
-                      id="account_no"
-                      type="text"
-                      label="Account no."
-                      value={this.props.account_no || ''}
-                      handleChange={this.props.setInputValueById}
-                      // errorText={this.props.fieldsErrors.account_no}
-                      placeholder="1234567890"
-                    />
-                  }
-                  </div>
-                  {
-                  this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
-                  <div className="col-6 no-gutters pl-3">
-                    <EmpalaSelect
-                      id="transfer_type"
-                      options={this.options.transfer_type}
-                      label="Transfer type"
-                      value={this.props.transfer_type || ''}
-                      handleChange={this.props.setSelectedValueById}
-                      // errorText={this.props.fieldsErrors.transfer_type}
-                      hint="Choose transfer type"
-                    />
+                      this.isSpecifiedTypeSelected('transfer_type') &&
+                      <div>
+                        <FundingMemberInfo
+                          member_secondary_ssn={this.props.member_secondary_ssn}
+                          member_primary_ssn={this.props.member_primary_ssn}
+                          member_title={this.props.member_title}
+                          member_first_name={this.props.member_first_name}
+                          member_last_name={this.props.member_last_name}
+                          setSelectedValueById={this.props.setSelectedValueById}
+                          setInputValueById={this.props.setInputValueById}
+                        />
+                        {
+                          this.isSpecifiedTypeSelected('transfer_type', 'Partial transfer') &&
+                          <PartialTransfer
+                            setInputValueById={this.props.setInputValueById}
+                            setSelectedValueById={this.props.setSelectedValueById}
+                            funding_comments={this.props.funding_comments}
+                            partial_symbols={this.props.partial_symbols}
+                            addSecurity={this.props.addSecurity}
+                            removeSecurity={this.props.removeSecurity}
+                          />
+                        }
+                        <div style={{ marginTop: '35px' }}>
+                          <button
+                            className="profile-btn profile-btn_green"
+                            onClick={this.handleSubmit}
+                            style={{
+                              width: '170px',
+                              height: '30px',
+                              marginRight: '85px',
+                            }}
+                          >Submit
+                          </button>
+                          <button
+                            className="default-btn"
+                            onClick={() => this.props.setActivePage('global portfolio')}
+                          >
+                            <Link
+                              route="dashboard"
+                              params={{ page: 'global portfolio' }}
+                            >
+                              <span
+                                style={{ fontSize: '18px' }}
+                              >Cancel
+                              </span>
+                            </Link>
+                          </button>
+                        </div>
+                      </div>
+                    }
                     {
-                      this.isSpecifiedTypeSelected('transfer_type') && <EmpalaSelect
-                        id="account_type"
-                        options={this.options.account_type}
-                        label="Account type"
-                        value={this.props.account_type || ''}
-                        handleChange={this.props.setSelectedValueById}
-                        // errorText={this.props.fieldsErrors.account_type}
+                      this.isSpecifiedTypeSelected('funding_type', 'Wire/Check') &&
+                      <WireTransfer
+                        setActivePage={this.props.setActivePage}
+                      />
+                    }
+                    {
+                      this.displayFooter() &&
+                      <FundingFooter
+                        setActivePage={this.props.setActivePage}
                       />
                     }
                   </div>
-                }
-                </div>
-                {
-                this.isSpecifiedTypeSelected('transfer_type') &&
-                <div>
-                  <FundingMemberInfo
-                    member_secondary_ssn={this.props.member_secondary_ssn}
-                    member_primary_ssn={this.props.member_primary_ssn}
-                    member_title={this.props.member_title}
-                    member_first_name={this.props.member_first_name}
-                    member_last_name={this.props.member_last_name}
+                )
+                :
+                  <ACHTransfer
+                    funding_type={this.props.funding_type}
+                    linked_accounts={this.props.linked_accounts}
                     setSelectedValueById={this.props.setSelectedValueById}
                     setInputValueById={this.props.setInputValueById}
-                  />
-                  {
-                    this.isSpecifiedTypeSelected('transfer_type', 'Partial transfer') &&
-                    <PartialTransfer
-                      setInputValueById={this.props.setInputValueById}
-                      setSelectedValueById={this.props.setSelectedValueById}
-                      funding_comments={this.props.funding_comments}
-                      partial_symbols={this.props.partial_symbols}
-                      addSecurity={this.props.addSecurity}
-                      removeSecurity={this.props.removeSecurity}
-                    />
-                  }
-                  <div style={{ marginTop: '35px' }}>
-                    <button
-                      className="profile-btn profile-btn_green"
-                      onClick={this.handleSubmit}
-                      style={{
-                    width: '170px',
-                    height: '30px',
-                    marginRight: '85px',
-                  }}
-                    >Submit
-                    </button>
-                    <button
-                      className="default-btn"
-                      onClick={() => this.props.setActivePage('global portfolio')}
-                    >
-                      <Link
-                        route="dashboard"
-                        params={{ page: 'global portfolio' }}
-                      >
-                        <span
-                          style={{ fontSize: '18px' }}
-                        >Cancel
-                        </span>
-                      </Link>
-                    </button>
-                  </div>
-                </div>
-              }
-                {
-                this.isSpecifiedTypeSelected('funding_type', 'Wire/Check') &&
-                <WireTransfer
-                  setActivePage={this.props.setActivePage}
-                />
-              }
-                {
-                this.displayFooter() &&
-                  <FundingFooter
-                    setActivePage={this.props.setActivePage}
+                    options={this.options}
+                    selected_institution={this.props.selected_institution}
+                    ach_amount={this.props.ach_amount}
+                    handleSubmit={this.handleSubmit}
+                    setPaymentIntitution={this.props.setPaymentIntitution}
+                    togglePlaidLink={this.props.togglePlaidLink}
+                    plaid_link_active={this.props.plaid_link_active}
                   />
               }
-              </div>
             </div>
           </div>
         </div>
@@ -213,13 +239,24 @@ const mapStateToProps = state => ({
   member_last_name: state.profile.profileUserData.basic_information_last_name,
   funding_comments: state.funding.funding_comments,
   partial_symbols: state.funding.partial_symbols,
+  selected_institution: state.funding.selected_institution || '',
+  ach_amount: state.funding.ach_amount,
+  plaid_link_active: state.funding.plaid_link_active,
 });
 const mapDispatchToProps = dispatch => ({
-  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-  setInputValueById: (e) => {
-    const { id, value } = e.target;
-    if (id === 'account_no') return dispatch(setInputFieldValueById(id, value.replace(/\D/, '')));
+  setSelectedValueById: (id, value, index) => {
+    if (index || index === 0) return dispatch(setSecuritiesInputValue(id, index, value));
+    if (id === 'funding_type' && value !== 'Account transfer') dispatch(dropFundingType());
     dispatch(setInputFieldValueById(id, value));
+  },
+  setInputValueById: (e, index) => {
+    const { id, value } = e.target;
+    if (index || index === 0) {
+      if (id === 'quantity') return dispatch(setSecuritiesInputValue(id, index, value.replace(/\D/, '')));
+      return dispatch(setSecuritiesInputValue(id, index, value));
+    }
+    if (id === 'account_no' || id === 'ach_ammount') return dispatch(setInputFieldValueById(id, value.replace(/\D/, '')));
+    return dispatch(setInputFieldValueById(id, value));
   },
   setActivePage: (page) => {
     dispatch(dropFundingType());
@@ -227,5 +264,7 @@ const mapDispatchToProps = dispatch => ({
   },
   addSecurity: () => dispatch(addNewSecurity()),
   removeSecurity: i => dispatch(removeSecurity(i)),
+  setPaymentIntitution: name => dispatch(setPaymentIntitution(name)),
+  togglePlaidLink: () => dispatch(togglePlaidLink()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);

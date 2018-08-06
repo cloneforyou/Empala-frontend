@@ -22,7 +22,7 @@ class WidgetAdvertisement extends Component {
       >
         <div className="widget widget_padding" style={{ height: '365px' }}>
           <div className="widget__head">
-            <h3 className="widget__title">Advertisement</h3>
+            <h3 className="widget__title">Advertisements and Information</h3>
             <div className="widget-menu">
               <button className="widget-menu__btn" onClick={this.toggleMenu} />
               <ul className={menuIsOpen ?
