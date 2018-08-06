@@ -17,6 +17,7 @@ import logo from '../../static/images/login_logo.png';
 import FacebookAuth from '../social/auth/FaceBookAuth';
 import LinkedInAuth from '../social/auth/LinkedInAuth';
 import FaSpinner from 'react-icons/lib/fa/spinner';
+import AuthPhone from './AuthPhone';
 
 const isNode = require('detect-node');
 
@@ -112,6 +113,7 @@ const Login = props => {
   const handleLogin = (e) => {
     if (e.key === 'Enter') props.handleLogin('local', null);
   };
+  if (props.loginMfa || props.socialLoginMfa) return <AuthPhone />;
   return (
     <div className="row login">
       {
@@ -199,6 +201,8 @@ export default connect(
     fieldsError: state.auth.fieldsErrors,
     modalIsOpen: state.auth.modalIsOpen,
     loading: state.auth.loading,
+    loginMfa: state.auth.loginMfa,
+    socialLoginMfa: state.auth.socialLoginMfa,
   }),
   dispatch => ({
     handleLogin: (provider, data) => dispatch(loginRequest(provider, data)),
