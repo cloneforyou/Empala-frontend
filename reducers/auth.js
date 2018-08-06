@@ -16,7 +16,11 @@ import {
   SEND_ACTIVATION_LINK_SUCCESS,
   SET_ACCOUNT_BLOCKED,
   SET_ACCOUNT_UNBLOCKED,
-  SET_PASSWORD_FORGOTTEN, TOGGLE_MODAL,
+  SET_PASSWORD_FORGOTTEN,
+  TOGGLE_MODAL,
+  SET_SOCIAL_LOGIN_MFA,
+  SET_LOGIN_MFA,
+  SET_SOCIAL_LOGIN_DATA,
 } from '../constants/auth';
 import { OPEN_MODAL, LOGOUT } from '../constants/dashboard';
 
@@ -31,6 +35,9 @@ export const InitialState = {
   loading: false,
   forgotPassword: false,
   passwordChanged: false,
+  loginMfa: false,
+  socialLoginMfa: false,
+  socialLoginData: false,
   fieldsErrors: {
     index_username: '',
     index_password: '',
@@ -91,6 +98,12 @@ function auth(state = InitialState, action) {
       return { ...state, authError: false };
     case SET_PASSWORD_FORGOTTEN:
       return { ...state, forgotPassword: true };
+    case SET_SOCIAL_LOGIN_MFA:
+      return { ...state, socialLoginMfa: true };
+    case SET_LOGIN_MFA:
+      return { ...state, loginMfa: true };
+    case SET_SOCIAL_LOGIN_DATA:
+      return { ...state, socialLoginData: action.data };
     case CLEAR_LOGIN_STATE:
       return {
         ...state,

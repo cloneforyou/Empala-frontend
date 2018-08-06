@@ -16,12 +16,12 @@ class AuthPhone extends Component {
   }
 
   handleLogin = () => {
-    const registrationData = localStorage.getItem('registrationData');
-    const data = JSON.parse(registrationData)
-    const login = data.index_username;
-    const password = data.index_password;
+    // const registrationData = localStorage.getItem('registrationData');
+    // const data = JSON.parse(registrationData)
+    // const login = data.index_username;
+    // const password = data.index_password;
     const { code } = this.state;
-    this.props.twoFactorAuthentication(login, password, code);
+    this.props.twoFactorAuthentication(code);
   };
 
   pressEnter = (e) => {
@@ -47,6 +47,7 @@ class AuthPhone extends Component {
             onChange={this.handleChange}
             onKeyPress={(e) => this.pressEnter(e)}
           />
+          <p style={{ color: 'red', fontStyle: 'oblique' }}>{this.props.errorText}</p>
           <button
             className="login__btn login__btn_sm"
             onClick={this.handleLogin}
@@ -59,6 +60,8 @@ class AuthPhone extends Component {
   }
 }
 
-export default connect(state => ({}), dispatch => ({
-  twoFactorAuthentication: (login, password, code) => dispatch(twoFactorAuthentication(login, password, code))
+export default connect(state => ({
+  errorText: state.auth.authError,
+}), dispatch => ({
+  twoFactorAuthentication: (code) => dispatch(twoFactorAuthentication(code))
 }))(AuthPhone);

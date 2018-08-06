@@ -17,6 +17,9 @@ import {
   UNBLOCK_REQUEST,
   UNBLOCK_REQUEST_FAIL,
   UNBLOCK_REQUEST_SUCCESS,
+  SET_SOCIAL_LOGIN_MFA,
+  SET_LOGIN_MFA,
+  SET_SOCIAL_LOGIN_DATA,
 } from '../constants/auth';
 
 export function loginFailed(err) {
@@ -40,11 +43,9 @@ export function loginRequest(provider, data) {
   };
 }
 
-export function twoFactorAuthentication(login, password, code) {
+export function twoFactorAuthentication(code) {
   return {
     type: TWO_FACTOR_AUTHENTICATION,
-    login,
-    password,
     code,
   };
 }
@@ -147,9 +148,27 @@ export function toggleModal() {
   };
 }
 
-
 export function clearRegistrationData() {
   return {
     type: CLEAR_REGISTRATION_DATA,
+  };
+}
+
+export function setLoginMfa() {
+  return {
+    type: SET_LOGIN_MFA,
+  };
+}
+
+export function setSocialLoginMfa() {
+  return {
+    type: SET_SOCIAL_LOGIN_MFA,
+  };
+}
+
+export function setSocialLoginData(data) {
+  return {
+    type: SET_SOCIAL_LOGIN_DATA,
+    data,
   };
 }
