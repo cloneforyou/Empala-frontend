@@ -25,7 +25,7 @@ import {
 
 
 export function* getNews() {
-  const url = '/api/dashboard/news';
+  const url = '/api/dashboard/updates';
   const options = {
     method: 'GET',
     headers: {
@@ -36,7 +36,7 @@ export function* getNews() {
     yield delay(60000);
     try {
       const news = yield call(request, url, options);
-      if (news) yield put(updateNews(news.data.data));
+      if (news) yield put(updateNews(news.data.data.internal_news));
     } catch (err) {
       console.log(' ** DASHBOARD ERROR =======>', err);
     }
