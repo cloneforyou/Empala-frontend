@@ -103,9 +103,17 @@ export function* twoFactorAuthentication({ code }) {
   }
 }
 
-export function* authenticate({ provider, data }) {
+export function* authenticate(action) {
+  let { provider } = action;
+  const { data } = action;
   const login = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
+  const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
+  if (provider === 'resend') {
+    if (isSocialMFA) {
+      provider = yield select(state => state.auth.socialLoginData.provider);
+    }
+  }
   // console.log(' ** AUTH', provider, data);
   let url = '';
   const options = {

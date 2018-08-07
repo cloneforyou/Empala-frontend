@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from '../../static/images/login_logo.png';
-import { twoFactorAuthentication } from '../../actions/auth';
+import { loginRequest, twoFactorAuthentication } from '../../actions/auth';
 
 class AuthPhone extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       code: '000000',
     }
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ code: e.target.value })
-  }
+  };
 
   handleLogin = () => {
-    // const registrationData = localStorage.getItem('registrationData');
-    // const data = JSON.parse(registrationData)
-    // const login = data.index_username;
-    // const password = data.index_password;
     const { code } = this.state;
     this.props.twoFactorAuthentication(code);
   };
@@ -54,6 +50,12 @@ class AuthPhone extends Component {
           >
             CONTINUE
           </button>
+          <button
+            className="login__btn login__btn_sm"
+            onClick={this.handleLogin}
+          >
+            RESEND CODE
+          </button>
         </div>
       </div>
     )
@@ -62,6 +64,8 @@ class AuthPhone extends Component {
 
 export default connect(state => ({
   errorText: state.auth.authError,
+  resendCodeNeeded: state.auth.resendCodeNeeded,
 }), dispatch => ({
-  twoFactorAuthentication: (code) => dispatch(twoFactorAuthentication(code))
+  twoFactorAuthentication: (code) => dispatch(twoFactorAuthentication(code)),
+  resendCode: () => dispatch(loginRequest('resend')),
 }))(AuthPhone);
