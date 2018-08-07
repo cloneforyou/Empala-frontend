@@ -20,7 +20,6 @@ const mapStateToProps = state => (
     registrationData: state.registration.registrationData,
     page: state.registration.tabIndex,
     showModal: state.registration.showIdentityModal,
-    trustedContactActive: state.registration.checkboxes.identity_trusted_contact_person_trusted_contact_checkbox,
     fieldsErrors: state.registration.fieldsErrors,
     checkboxes: state.registration.checkboxes,
   }
@@ -43,9 +42,6 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(validateFieldValue(id, value));
         }
         return false;
-      },
-      toggleCheckboxById: (e, checked) => {
-        dispatch(toggleCheckboxById(e.target.id));
       },
       closeModal: () => dispatch(closeIdentityModal()),
     }
@@ -105,7 +101,6 @@ class IdentityForm extends React.Component {
               label={item.label}
               handleCheck={this.props.toggleCheckboxById}
               checked={this.props.checkboxes[item.id]}
-              active={item.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
             />
           );
         default: return null;
@@ -116,6 +111,10 @@ class IdentityForm extends React.Component {
   render() {
     return (
       <div className="container-fluid">
+        <div className="registration-group__section-title">
+          {this.props.page === 1 && 'Enter your residential address:'}
+          {this.props.page === 2 && 'Enter your mailing address:'}
+        </div>
         <form className="row">
           {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
           <ModalWindow
@@ -134,10 +133,8 @@ IdentityForm.propTypes = {
   fieldsErrors: PropTypes.object,
   checkboxes: PropTypes.object.isRequired,
   showModal: PropTypes.bool,
-  trustedContactActive: PropTypes.bool,
   setInputValueById: PropTypes.func.isRequired,
   setSelectedValueById: PropTypes.func.isRequired,
-  toggleCheckboxById: PropTypes.func.isRequired,
   closeModal: PropTypes.func.isRequired,
 };
 
@@ -145,7 +142,6 @@ IdentityForm.defaultProps = {
   page: 1,
   fieldsErrors: {},
   showModal: false,
-  trustedContactActive: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(IdentityForm);

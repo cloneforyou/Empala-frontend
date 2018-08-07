@@ -1,8 +1,7 @@
-.btn--navigate {
+.btn-navigate {
   background: transparent;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
+  width: 87px;
+  height: 37px;
   border: solid 2px #707070;
   color: #707070;
   padding: 0;
@@ -20,6 +19,11 @@
   border-color: #98c73a;
 }
 
-.btn--next {
-  margin-left: 20px;
+.btn-prev {
+  border-radius: 50px 0 0 50px;
+}
+
+.btn-next {
+  margin-left: 10px;
+  border-radius: 0 50px 50px 0;
 }
