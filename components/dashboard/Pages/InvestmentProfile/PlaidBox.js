@@ -17,15 +17,15 @@ const PlaidBox = props => (
     // onClick={props.togglePlaidLink}
     role="button"
   >
-      <PlaidLink
+    <PlaidLink
       clientName="Empala"
       env="sandbox"
       product={['auth', 'transactions']}
       publicKey={Plaid.PLAID_PUBLIC_KEY}
       onExit={handleOnExit}
-      onSuccess={handleOnSuccess}
+      onSuccess={(token, metadata) => props.addInstitution(token, metadata)}
     >
-        <span className="funding-ach-tiles-tile__plus" >+    </span>
+      <span className="funding-ach-tiles-tile__plus" >+</span>
     </PlaidLink>
 
   </div>
