@@ -10,7 +10,7 @@ import {
   verifySendFailure,
   sendCodeVerifySuccess,
   sendCodeVerifyFailure,
-  showPopupPIN,
+  showPopupPIN, registrationSuccess,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -113,7 +113,8 @@ export function* sendRegistrationForm() {
 
   try {
     const response = yield call(request, url, options);
-    window.location.assign('/');
+    yield put(registrationSuccess());
+    // window.location.assign('/');
   } catch (err) {
     yield put(registrationFail(traceError(err)));
   }
