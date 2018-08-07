@@ -2,10 +2,11 @@ import React from 'react';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
+import PlaidBox from './PlaidBox';
 
 
 const TransferForm = props => {
-  if (props.plaid_link_active) return <PlaidBox />;
+  // if (props.plaid_link_active) return <PlaidBox />;
   return (
     <div>
       <h2 className="funding-content-header__title funding-ach-payment-box_title-margin">Transfer funds</h2>
@@ -53,12 +54,6 @@ const TransferForm = props => {
     </div>
   );
 };
-
-const PlaidBox = props => (
-  <div style={{ background: 'silver', textAlign: 'center', paddingTop: '100px', height: '100%' }}>
-    !!! Plaid Link comes here !!!
-  </div>
-)
 
 const Tile = props => (
   <div
@@ -121,13 +116,14 @@ const ACHTransfer = props => (
               Account: ****1234
             </div>
           </div>
-          <div
+          { /*<div
             className="funding-ach-tiles-tile"
             onClick={props.togglePlaidLink}
             role="button"
           >
             <div className="funding-ach-tiles-tile__plus" >+</div>
-          </div>
+          </div> */ }
+          <PlaidBox />
         </div>
       </div>
       <div className="col no-gutters">
