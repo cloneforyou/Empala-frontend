@@ -24,6 +24,9 @@ export const menuItems = {
     {
       title: 'Identification', key: 'identification', completed: false, active: false,
     },
+    {
+      title: 'Trusted Contact', key: 'trusted-contact', completed: false, active: false,
+    },
 
   ],
   identity: [
@@ -32,9 +35,6 @@ export const menuItems = {
     },
     {
       title: 'Mailing Address', key: 'mailing-address', completed: false, active: false,
-    },
-    {
-      title: 'Trusted Contact', key: 'trusted-contact', completed: false, active: false,
     },
     {
       title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false,
