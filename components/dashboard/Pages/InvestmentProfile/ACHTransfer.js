@@ -53,7 +53,8 @@ const Tile = props => (
     role="button"
   >
     <div className="funding-ach-tiles-tile__image">
-      <img src="..." alt={props.institution_name} />
+      {/*<img src="..." alt={props.institution_name} />*/}
+      <span>{props.institution_name}</span>
     </div>
     <div className="funding-ach-tiles-tile__text">
       <span className={`funding-ach-tiles-tile__check
@@ -91,7 +92,7 @@ export default class ACHTransfer extends React.Component {
               <Tile
                 key={item.institution_id}
                 institution_name={item.name}
-                account_no="" // TODO investigate about account no
+                account_no={item.accounts[0].mask || ''} // TODO investigate about account no
                 setPaymentIntitution={this.props.setPaymentIntitution}
                 selected_institution={this.props.selected_institution}
               />
