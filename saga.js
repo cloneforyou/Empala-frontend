@@ -7,6 +7,7 @@ import profileSaga from './saga/profile';
 import registrationSaga from './saga/registration';
 import dashboardSaga from './saga/dashboard';
 import socketSaga from './saga/ETNASocketParser';
+import fundingSaga from './saga/funding';
 import {
   authenticate,
   changePassword,
@@ -41,6 +42,7 @@ function* rootSaga() {
     dashboardSaga(),
     profileSaga(),
     socketSaga(),
+    fundingSaga(),
     takeLatest(LOGIN_REQUEST, authenticate),
     takeLatest(SEND_ACTIVATION_LINK_REQUEST, sendActivationLink),
     takeLatest(UNBLOCK_REQUEST, unblockAccount),

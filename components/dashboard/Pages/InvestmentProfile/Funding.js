@@ -4,8 +4,9 @@ import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
 import {
+  addInstitution,
   addNewSecurity,
-  dropFundingType,
+  dropFundingType, getInstitutions,
   removeSecurity,
   setInputFieldValueById, setPaymentIntitution,
   setSecuritiesInputValue,
@@ -217,6 +218,9 @@ class Funding extends Component {
                     setPaymentIntitution={this.props.setPaymentIntitution}
                     togglePlaidLink={this.props.togglePlaidLink}
                     plaid_link_active={this.props.plaid_link_active}
+                    addInstitution={this.props.addInstitution}
+                    institutionsList={this.props.institutionsList}
+                    getInstitutions={this.props.getInstitutions}
                   />
               }
             </div>
@@ -242,6 +246,7 @@ const mapStateToProps = state => ({
   selected_institution: state.funding.selected_institution || '',
   ach_amount: state.funding.ach_amount,
   plaid_link_active: state.funding.plaid_link_active,
+  institutionsList: state.funding.institutionsList,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -266,5 +271,7 @@ const mapDispatchToProps = dispatch => ({
   removeSecurity: i => dispatch(removeSecurity(i)),
   setPaymentIntitution: name => dispatch(setPaymentIntitution(name)),
   togglePlaidLink: () => dispatch(togglePlaidLink()),
+  addInstitution: (token, data) => dispatch(addInstitution(token, data)),
+  getInstitutions: () => dispatch(getInstitutions()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
