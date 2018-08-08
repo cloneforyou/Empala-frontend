@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from '../../static/images/login_logo.png';
-import { twoFactorAuthentication } from '../../actions/auth';
+import { loginRequest, toggleCodeResend, twoFactorAuthentication } from '../../actions/auth';
+import { ForgotPasswordForm, SuspendedForm } from './Login';
 
 class AuthPhone extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       code: '000000',
     }
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({ code: e.target.value })
-  }
+  };
 
   handleLogin = () => {
-    // const registrationData = localStorage.getItem('registrationData');
-    // const data = JSON.parse(registrationData)
-    // const login = data.index_username;
-    // const password = data.index_password;
     const { code } = this.state;
     this.props.twoFactorAuthentication(code);
+  };
+
+  handleResend = () => {
+    this.setState({code: '000000'});
+    this.props.resendCode();
+    this.props.toggleCodeResend();
   };
 
   pressEnter = (e) => {
@@ -36,8 +39,15 @@ class AuthPhone extends Component {
       <div className="row login mfa">
         <div className="login__content">
           <img className="login__logo" src={logo} alt="Logotype" />
-          <h1 className="mfa__title">Two-Factor Authentication</h1>
-          <p className="mfa__sub-title">
+          {this.props.accountSuspended && <SuspendedForm {...this.props} />}
+          {this.props.forgotPassword && <ForgotPasswordForm {...this.props} />}
+          {
+
+            !(this.props.accountSuspended || this.props.forgotPassword) &&
+              <div className="text-center">
+            <h1 className="mfa__title">Two-Factor Authentication</h1>
+            <p
+            className="mfa__sub-title">
             Enter the code we have just sent to the mobile phone registered with your account.
           </p>
           <input
@@ -51,9 +61,19 @@ class AuthPhone extends Component {
           <button
             className="login__btn login__btn_sm"
             onClick={this.handleLogin}
+            disabled={this.props.resendCodeNeeded}
           >
             CONTINUE
           </button>
+          <button
+            className="login__btn login__btn_sm mt-2"
+            onClick={this.handleResend}
+            disabled={!this.props.resendCodeNeeded}
+          >
+            RESEND CODE
+          </button>
+            </div>
+          }
         </div>
       </div>
     )
@@ -62,6 +82,9 @@ class AuthPhone extends Component {
 
 export default connect(state => ({
   errorText: state.auth.authError,
+  resendCodeNeeded: state.auth.resendCodeNeeded,
 }), dispatch => ({
-  twoFactorAuthentication: (code) => dispatch(twoFactorAuthentication(code))
+  twoFactorAuthentication: (code) => dispatch(twoFactorAuthentication(code)),
+  resendCode: () => dispatch(loginRequest('resend')),
+  toggleCodeResend: () => dispatch(toggleCodeResend()),
 }))(AuthPhone);

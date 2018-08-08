@@ -17,7 +17,9 @@ import {
   setAccountBlocked,
   toggleModal,
   setSocialLoginMfa,
-  setLoginMfa, setSocialLoginData,
+  setLoginMfa,
+  setSocialLoginData,
+  setMfaLoginData, toggleCodeResend,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
@@ -37,11 +39,11 @@ function* loginRequest(url, options) {
     if (result.data.info === 'CODE_SENT') {
       yield put(loginSuccess());
       yield put(setLoginMfa());
-      if (result.data.misc === 'SOCIAL') {
-        yield put(setSocialLoginData(result.data.data));
-        yield put(setSocialLoginMfa());
-      }
-      // return window.location.assign('/mfa');
+      if (result.data.data) yield put(setMfaLoginData(result.data.data));
+      // if (result.data.misc === 'SOCIAL') {
+      //   yield put(setSocialLoginData(result.data.data));
+      //   yield put(setSocialLoginMfa());
+      //    }
     }
     if (result.data.info === 'RELATED_ACCOUNT_NOT_FOUND') {
       yield put(toggleModal());
@@ -72,23 +74,24 @@ function* loginRequest(url, options) {
 }
 
 export function* twoFactorAuthentication({ code }) {
-  const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
-  let url = '/api/auth/login';
-  const login = yield select(state => state.auth.index_username);
-  const password = yield select(state => state.auth.index_password);
+  // const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
+  // let url = '/api/auth/login';
+  const url = '/api/auth/mfa';
+  // const login = yield select(state => state.auth.index_username);
+  // const password = yield select(state => state.auth.index_password);
+  const mfaData = yield select(state => state.auth.mfaLoginData);
   const options = {
     method: 'POST',
     data: {
-      login,
-      password,
+      ...mfaData,
       code,
     },
   };
-  if (isSocialMFA) {
-    const socialData = yield select(state => state.auth.socialLoginData);
-    url += '/social';
-    options.data = { ...socialData, code };
-  }
+  // if (isSocialMFA) {
+  //   const socialData = yield select(state => state.auth.socialLoginData);
+  //   url += '/social';
+  //   options.data = { ...socialData, code };
+  // }
   try {
     const result = yield call(request, url, options);
     if (result.data.info === 'LOGGED_IN') {
@@ -98,7 +101,12 @@ export function* twoFactorAuthentication({ code }) {
       return window.location.assign('/dashboard');
     }
   } catch (err) {
-    console.log(' ** ', err);
+    console.log(' Mfa err => ', err);
+    if (err.message === 'Invalid security code') yield put(toggleCodeResend());
+    if (err.message === 'Account suspended') {
+      yield put(setAccountBlocked());
+      yield put(cleanErrorMessage());
+    }
     yield put(loginFailed(err.message));
   }
 }
@@ -106,6 +114,13 @@ export function* twoFactorAuthentication({ code }) {
 export function* authenticate({ provider, data }) {
   const login = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
+  const mfaData = yield select(state => state.auth.mfaLoginData);
+  // const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
+  // if (provider === 'resend') {
+  //   if (isSocialMFA) {
+  //     provider = yield select(state => state.auth.socialLoginData.provider);
+  //   }
+  // }
   // console.log(' ** AUTH', provider, data);
   let url = '';
   const options = {
@@ -134,8 +149,12 @@ export function* authenticate({ provider, data }) {
         userData: data,
       };
       break;
+    case 'resend':
+      url = '/api/auth/resend';
+      options.data = mfaData;
+      break;
     default:
-      url = '/api/auth/login?code=get';
+      url = '/api/auth/login';
       options.data = {
         login,
         password,
