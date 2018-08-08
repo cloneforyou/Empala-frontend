@@ -16,10 +16,6 @@ class AuthPhone extends Component {
   }
 
   handleLogin = () => {
-    // const registrationData = localStorage.getItem('registrationData');
-    // const data = JSON.parse(registrationData)
-    // const login = data.index_username;
-    // const password = data.index_password;
     const { code } = this.state;
     this.props.twoFactorAuthentication(code);
   };

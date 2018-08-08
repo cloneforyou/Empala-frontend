@@ -20,6 +20,7 @@ import {
   SET_SOCIAL_LOGIN_MFA,
   SET_LOGIN_MFA,
   SET_SOCIAL_LOGIN_DATA,
+  SET_MFA_LOGIN_DATA,
 } from '../constants/auth';
 
 export function loginFailed(err) {
@@ -169,6 +170,13 @@ export function setSocialLoginMfa() {
 export function setSocialLoginData(data) {
   return {
     type: SET_SOCIAL_LOGIN_DATA,
+    data,
+  };
+}
+
+export function setMfaLoginData(data) {
+  return {
+    type: SET_MFA_LOGIN_DATA,
     data,
   };
 }

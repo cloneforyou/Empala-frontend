@@ -17,7 +17,9 @@ import {
   setAccountBlocked,
   toggleModal,
   setSocialLoginMfa,
-  setLoginMfa, setSocialLoginData,
+  setLoginMfa,
+  setSocialLoginData,
+  setMfaLoginData,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
@@ -37,11 +39,11 @@ function* loginRequest(url, options) {
     if (result.data.info === 'CODE_SENT') {
       yield put(loginSuccess());
       yield put(setLoginMfa());
-      if (result.data.misc === 'SOCIAL') {
-        yield put(setSocialLoginData(result.data.data));
-        yield put(setSocialLoginMfa());
-      }
-      // return window.location.assign('/mfa');
+      yield put(setMfaLoginData(result.data.data));
+      // if (result.data.misc === 'SOCIAL') {
+      //   yield put(setSocialLoginData(result.data.data));
+      //   yield put(setSocialLoginMfa());
+      //    }
     }
     if (result.data.info === 'RELATED_ACCOUNT_NOT_FOUND') {
       yield put(toggleModal());
@@ -72,23 +74,24 @@ function* loginRequest(url, options) {
 }
 
 export function* twoFactorAuthentication({ code }) {
-  const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
-  let url = '/api/auth/login';
-  const login = yield select(state => state.auth.index_username);
-  const password = yield select(state => state.auth.index_password);
+  // const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
+  // let url = '/api/auth/login';
+  const url = '/api/auth/mfa';
+  // const login = yield select(state => state.auth.index_username);
+  // const password = yield select(state => state.auth.index_password);
+  const mfaData = yield select(state => state.auth.mfaLoginData);
   const options = {
     method: 'POST',
     data: {
-      login,
-      password,
+      ...mfaData,
       code,
     },
   };
-  if (isSocialMFA) {
-    const socialData = yield select(state => state.auth.socialLoginData);
-    url += '/social';
-    options.data = { ...socialData, code };
-  }
+  // if (isSocialMFA) {
+  //   const socialData = yield select(state => state.auth.socialLoginData);
+  //   url += '/social';
+  //   options.data = { ...socialData, code };
+  // }
   try {
     const result = yield call(request, url, options);
     if (result.data.info === 'LOGGED_IN') {
