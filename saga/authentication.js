@@ -19,7 +19,7 @@ import {
   setSocialLoginMfa,
   setLoginMfa,
   setSocialLoginData,
-  setMfaLoginData,
+  setMfaLoginData, toggleCodeResend,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
@@ -101,22 +101,23 @@ export function* twoFactorAuthentication({ code }) {
       return window.location.assign('/dashboard');
     }
   } catch (err) {
-    console.log(' ** ', err);
+    console.log(' Mfa err => ', err);
+    if (err.message === 'Invalid security code') yield put(toggleCodeResend());
     yield put(loginFailed(err.message));
   }
 }
 
 export function* authenticate(action) {
-  let { provider } = action;
+  const { provider } = action;
   const { data } = action;
   const login = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
-  const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
-  if (provider === 'resend') {
-    if (isSocialMFA) {
-      provider = yield select(state => state.auth.socialLoginData.provider);
-    }
-  }
+  // const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
+  // if (provider === 'resend') {
+  //   if (isSocialMFA) {
+  //     provider = yield select(state => state.auth.socialLoginData.provider);
+  //   }
+  // }
   // console.log(' ** AUTH', provider, data);
   let url = '';
   const options = {
@@ -145,8 +146,14 @@ export function* authenticate(action) {
         userData: data,
       };
       break;
+    case 'resend':
+      url = '/api/auth/login/resend';
+      options.data = {
+        userData: data,
+      };
+      break;
     default:
-      url = '/api/auth/login?code=get';
+      url = '/api/auth/login';
       options.data = {
         login,
         password,

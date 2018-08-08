@@ -47,12 +47,14 @@ class AuthPhone extends Component {
           <button
             className="login__btn login__btn_sm"
             onClick={this.handleLogin}
+            disabled={this.props.resendCodeNeeded}
           >
             CONTINUE
           </button>
           <button
-            className="login__btn login__btn_sm"
+            className="login__btn login__btn_sm mt-2"
             onClick={this.handleLogin}
+            disabled={!this.props.resendCodeNeeded}
           >
             RESEND CODE
           </button>
