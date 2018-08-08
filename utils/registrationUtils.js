@@ -36,17 +36,14 @@ export const menuItems = {
     {
       title: 'Mailing Address', key: 'mailing-address', completed: false, active: false,
     },
-    {
-      title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false,
-    },
 
   ],
   regulatory: [
     {
-      title: 'Identification', key: 'identification', completed: false, active: false,
+      title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false,
     },
     {
-      title: 'Family', key: 'family', completed: false, active: false,
+      title: 'Identification', key: 'identification', completed: false, active: false,
     },
   ],
   profile: [

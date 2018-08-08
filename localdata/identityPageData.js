@@ -113,38 +113,6 @@ export const dataFields = [
       ],
     },
   ],
-  [
-    {
-      field: 'checkbox',
-      label: `I am (or a an immediate family member who resides
-      in the same household as me is) employed by or a
-      member of a registered broker-dealer, securities or
-      futures exchange, futures commission merchant, retail
-      foreign exchange dealer, or securities or futures industry
-      regulatory  body (e.g. FINRA, NFA).`,
-      id: 'identity_checkbox_1',
-    },
-    {
-      field: 'checkbox',
-      label: 'I am a director, policy maker, or a senior officer of a publicly traded company.',
-      id: 'identity_checkbox_2',
-    },
-    {
-      field: 'checkbox',
-      label: 'I am a 10% shareholder of a publicly traded company.',
-      id: 'identity_checkbox_3',
-    },
-    {
-      field: 'checkbox',
-      label: 'I am a senior military, governmental or political official in a non-US country.',
-      id: 'identity_checkbox_4',
-    },
-    {
-      field: 'checkbox',
-      label: 'I have been notified by the IRS that I am subject to backup withholding.',
-      id: 'identity_checkbox_5',
-    },
-  ],
 ];
 
 export { dataFields as default };

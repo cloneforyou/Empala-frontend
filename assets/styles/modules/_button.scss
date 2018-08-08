@@ -2,10 +2,12 @@
   background: transparent;
   width: 87px;
   height: 37px;
-  border: solid 2px #707070;
-  color: #707070;
+  border: solid 2px rgba(128, 136, 149, 0.75);
+  color: rgba(128, 136, 149, 0.75);
   padding: 0;
   cursor: pointer;
+  box-shadow: 2px 6px 20px 0 rgba(0, 0, 0, 0.16);
+  background: $white;
   &:focus {
     outline: none;
   }

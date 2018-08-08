@@ -55,7 +55,7 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
   };
   if (direction === 'forward') {
     if (tabName === 'identity' && tabIndex === 1 && mailingAddressSameAsResidential) {
-      yield put(setTabPageIndex(3));
+      yield put(setTabName(nextTabs[tabName]));
       return false;
     }
     if (tabName === 'info' || tabName === 'final_review') {

@@ -9,6 +9,7 @@ import { dataFields } from '../../localdata/memberPageData';
 import {
   setInputFieldValueById,
   setMemberDocumentType,
+  toggleCheckboxById,
 } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import DatePickerField from '../registration/DatePickerField';
@@ -23,7 +24,7 @@ const mapStateToProps = state => ({
   registrationData: state.registration.registrationData,
   page: state.registration.tabIndex,
   fieldsErrors: state.registration.fieldsErrors,
-  trustedContactActive: state.registration.checkboxes.identity_trusted_contact_person_trusted_contact_checkbox,
+  trustedContactActive: state.registration.checkboxes.member_trusted_contact_person_trusted_contact_checkbox,
   checkboxes: state.registration.checkboxes,
 });
 
@@ -59,6 +60,7 @@ class MemberInfoForm extends React.PureComponent {
             errorText={this.props.fieldsErrors[item.id]}
             col={item.col}
             hint={item.hint || item.label}
+            disabled={!this.props.trustedContactActive && this.props.page === 4}
           />
         );
       }
@@ -70,7 +72,7 @@ class MemberInfoForm extends React.PureComponent {
             label={item.label}
             handleCheck={this.props.toggleCheckboxById}
             checked={this.props.checkboxes[item.id]}
-            active={item.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
+            active={item.id === 'member_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
           />
         );
       }
@@ -87,6 +89,7 @@ class MemberInfoForm extends React.PureComponent {
           col={item.col}
           mask={mask}
           typeField={item.typeField}
+          disabled={!this.props.trustedContactActive && this.props.page === 4}
         />
       );
     };
@@ -97,7 +100,7 @@ class MemberInfoForm extends React.PureComponent {
     if (this.props.page !== 3) {
       return (
         <div className="container-fluid">
-          <div className="registration-group__section-title">
+          <div className="registration-group__section-title margin-bottom40">
             {this.props.page === 1 && 'Enter your details:'}
             {this.props.page === 2 && 'Enter your details:'}
           </div>
@@ -110,7 +113,7 @@ class MemberInfoForm extends React.PureComponent {
 
     return (
       <div className="container-fluid">
-        <div className="registration-group__section-title_nowrap">
+        <div className="registration-group__section-title title-nowrap margin-bottom20">
           {this.props.page === 3 && 'Select one of the govenment identification to enter.'}
         </div>
         <div className="row">
