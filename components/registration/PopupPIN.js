@@ -12,7 +12,7 @@ class PopupPIN extends Component {
     };
     this.titles = {
       email: 'Verify your email address',
-      phone: 'Phone number confirmation'
+      phone: 'Verify your Contact No.'
     };
     this.formTitle = () => this.titles[this.props.type] || 'title';
   }
@@ -55,13 +55,13 @@ class PopupPIN extends Component {
               <p className="popup-verify__sub-title">Click ‘send’ to receive an email with a one-time code.</p>
               <div className="popup-verify__foot buttons-row">
                 <button
-                  className="popup-verify__btn-green"
+                  className="popup-verify__btn popup-verify__btn_green"
                   onClick={() => this.props.verifySendRequest(type)}
                 >
                   Send
                 </button>
                 <button
-                  className="popup-verify__btn-default"
+                  className="popup-verify__btn_default"
                   onClick={this.closePopup}
                 >
                   Cancel
@@ -73,9 +73,8 @@ class PopupPIN extends Component {
               <img className="popup-verify__icon" src={iconShield} alt="" />
               <p className="popup-verify__sub-title">Enter the code to continue your registration.</p>
               {
-                type === 'phone' && <p className="text-justify mb-4">Due to security policy we use two-factor authorization at log in,
-                  so we you need to ensure you have the access to phone number been provided. <br />
-                We have send you sms containing phone number verification code.</p>
+                type === 'phone' && <p className="text-justify mb-4">Your security is our top priority.
+                  As part of our KYC process, we need to validate the contact no. you entered.</p>
               }
               <div className="short-form-group">
                 <label
@@ -93,18 +92,26 @@ class PopupPIN extends Component {
                   onChange={this.handleChange}
                 />
               </div>
-              <div className="popup-verify__foot buttons-row">
+              <div className="popup-verify__foot buttons-row mb-4">
                 <button
-                  className="popup-verify__btn-green"
+                  className="popup-verify__btn popup-verify__btn_outline"
+                  onClick={() => this.props.verifySendRequest(type)}
+                >
+                  Resend
+                </button>
+                <button
+                  className="popup-verify__btn popup-verify__btn_green"
                   onClick={this.verifyCode}
                 >
                   Verify
                 </button>
+              </div>
+              <div>
                 <button
-                  className="popup-verify__btn-default"
-                  onClick={() => this.props.verifySendRequest(type)}
+                  className="popup-verify__btn_default"
+                  onClick={this.closePopup}
                 >
-                  Resend
+                  Cancel
                 </button>
               </div>
             </div>
