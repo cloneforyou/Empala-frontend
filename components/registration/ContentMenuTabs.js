@@ -23,9 +23,6 @@ const ContentMenuTabs = (props) => {
       <li className={props.tabName === 'profile' ? 'tabs-menu__item tabs-menu__item_active' : 'tabs-menu__item'}>
         <span onClick={() => handleClick('profile')}>Profile</span>
       </li>
-      <li className={props.tabName === 'experience' ? 'tabs-menu__item tabs-menu__item_active' : 'tabs-menu__item'}>
-        <span onClick={() => handleClick('experience')}>Experience</span>
-      </li>
     </ul>
   );
 };
