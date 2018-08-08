@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from '../../static/images/login_logo.png';
 import { loginRequest, toggleCodeResend, twoFactorAuthentication } from '../../actions/auth';
+import { ForgotPasswordForm, SuspendedForm } from './Login';
 
 class AuthPhone extends Component {
   constructor(props) {
@@ -38,8 +39,15 @@ class AuthPhone extends Component {
       <div className="row login mfa">
         <div className="login__content">
           <img className="login__logo" src={logo} alt="Logotype" />
-          <h1 className="mfa__title">Two-Factor Authentication</h1>
-          <p className="mfa__sub-title">
+          {this.props.accountSuspended && <SuspendedForm {...this.props} />}
+          {this.props.forgotPassword && <ForgotPasswordForm {...this.props} />}
+          {
+
+            !(this.props.accountSuspended || this.props.forgotPassword) &&
+              <div className="text-center">
+            <h1 className="mfa__title">Two-Factor Authentication</h1>
+            <p
+            className="mfa__sub-title">
             Enter the code we have just sent to the mobile phone registered with your account.
           </p>
           <input
@@ -64,6 +72,8 @@ class AuthPhone extends Component {
           >
             RESEND CODE
           </button>
+            </div>
+          }
         </div>
       </div>
     )
