@@ -65,7 +65,7 @@ const SuspendedForm = props => (
   <div className="login__text-container">
     <h2>Security warning</h2>
     <p>You have too many failed login attempts on your account.</p>
-    <p>We have sent you <span className="green">activation link</span> to your email to reactivate your account.
+    <p>We {props.linkSent ? 'have sent' : 'will send'} you <span className="green">activation link</span> to your email to reactivate your account.
     </p>
     <span
       className="login__link green"

@@ -39,7 +39,7 @@ function* loginRequest(url, options) {
     if (result.data.info === 'CODE_SENT') {
       yield put(loginSuccess());
       yield put(setLoginMfa());
-      yield put(setMfaLoginData(result.data.data));
+      if (result.data.data) yield put(setMfaLoginData(result.data.data));
       // if (result.data.misc === 'SOCIAL') {
       //   yield put(setSocialLoginData(result.data.data));
       //   yield put(setSocialLoginMfa());
@@ -103,15 +103,18 @@ export function* twoFactorAuthentication({ code }) {
   } catch (err) {
     console.log(' Mfa err => ', err);
     if (err.message === 'Invalid security code') yield put(toggleCodeResend());
+    if (err.message === 'Account suspended') {
+      yield put(setAccountBlocked());
+      yield put(cleanErrorMessage());
+    }
     yield put(loginFailed(err.message));
   }
 }
 
-export function* authenticate(action) {
-  const { provider } = action;
-  const { data } = action;
+export function* authenticate({ provider, data }) {
   const login = yield select(state => state.auth.index_username);
   const password = yield select(state => state.auth.index_password);
+  const mfaData = yield select(state => state.auth.mfaLoginData);
   // const isSocialMFA = yield select(state => state.auth.socialLoginMfa);
   // if (provider === 'resend') {
   //   if (isSocialMFA) {
@@ -147,10 +150,8 @@ export function* authenticate(action) {
       };
       break;
     case 'resend':
-      url = '/api/auth/login/resend';
-      options.data = {
-        userData: data,
-      };
+      url = '/api/auth/resend';
+      options.data = mfaData;
       break;
     default:
       url = '/api/auth/login';

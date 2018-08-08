@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import logo from '../../static/images/login_logo.png';
-import { loginRequest, twoFactorAuthentication } from '../../actions/auth';
+import { loginRequest, toggleCodeResend, twoFactorAuthentication } from '../../actions/auth';
 
 class AuthPhone extends Component {
   constructor(props) {
@@ -18,6 +18,12 @@ class AuthPhone extends Component {
   handleLogin = () => {
     const { code } = this.state;
     this.props.twoFactorAuthentication(code);
+  };
+
+  handleResend = () => {
+    this.setState({code: '000000'});
+    this.props.resendCode();
+    this.props.toggleCodeResend();
   };
 
   pressEnter = (e) => {
@@ -53,7 +59,7 @@ class AuthPhone extends Component {
           </button>
           <button
             className="login__btn login__btn_sm mt-2"
-            onClick={this.handleLogin}
+            onClick={this.handleResend}
             disabled={!this.props.resendCodeNeeded}
           >
             RESEND CODE
@@ -70,4 +76,5 @@ export default connect(state => ({
 }), dispatch => ({
   twoFactorAuthentication: (code) => dispatch(twoFactorAuthentication(code)),
   resendCode: () => dispatch(loginRequest('resend')),
+  toggleCodeResend: () => dispatch(toggleCodeResend()),
 }))(AuthPhone);
