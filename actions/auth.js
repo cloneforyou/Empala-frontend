@@ -20,6 +20,7 @@ import {
   SET_SOCIAL_LOGIN_MFA,
   SET_LOGIN_MFA,
   SET_SOCIAL_LOGIN_DATA,
+  SET_MFA_LOGIN_DATA,
   TOGGLE_CODE_RESEND_NEEDED,
 } from '../constants/auth';
 
@@ -177,5 +178,12 @@ export function setSocialLoginData(data) {
 export function toggleCodeResend() {
   return {
     type: TOGGLE_CODE_RESEND_NEEDED,
+  };
+}
+
+export function setMfaLoginData(data) {
+  return {
+    type: SET_MFA_LOGIN_DATA,
+    data,
   };
 }

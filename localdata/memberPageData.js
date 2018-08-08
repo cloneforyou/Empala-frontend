@@ -140,6 +140,48 @@ export const dataFields = [
     { id: 'member_drivers_license_issue_date', col: 6 },
     { id: 'member_drivers_license_expiry_date', col: 6 },
   ],
+  [
+    {
+      id: 'identity_trusted_contact_person_trusted_contact_checkbox',
+      field: 'checkbox',
+      label: 'Trusted Contact Person',
+    },
+    {
+      field: 'input',
+      label: 'First name',
+      id: 'identity_trusted_contact_person_first_name',
+      type: 'text',
+      placeholder: '',
+    },
+    {
+      field: 'input',
+      label: 'Last name',
+      id: 'identity_trusted_contact_person_last_name',
+      type: 'text',
+      placeholder: '',
+    },
+    {
+      field: 'input',
+      label: 'Email address',
+      id: 'identity_trusted_contact_person_email',
+      type: 'email',
+      placeholder: '',
+    },
+    {
+      field: 'input',
+      label: 'Contact telephone no.',
+      id: 'identity_trusted_contact_person_phone',
+      type: 'text',
+      placeholder: '',
+    },
+    {
+      field: 'input',
+      label: 'Relationship',
+      id: 'identity_trusted_contact_person_relationship',
+      type: 'text',
+      placeholder: '',
+    },
+  ],
 ];
 
 export { dataFields as default };

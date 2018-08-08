@@ -17,6 +17,7 @@ const style = {
     borderRadius: '5px',
     paddingLeft: '10px',
     boxShadow: '2px 4px 20px 0 rgba(0, 0, 0, 0.15)',
+    marginBottom: '10px',
   },
   inputStyleDarkTheme: {
     color: WHITE,
@@ -40,6 +41,7 @@ const style = {
     borderRadius: '5px',
     paddingLeft: '10px',
     boxShadow: '2px 4px 20px 0 rgba(0, 0, 0, 0.15)',
+    marginBottom: '10px',
   },
   underlineStyle: {
     borderBottom: 'none',

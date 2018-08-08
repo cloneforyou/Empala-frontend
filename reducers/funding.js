@@ -3,6 +3,9 @@ import {
   SET_FIELD_VALUE,
   ADD_SECURITY,
   REMOVE_SECURITY,
+  SET_SECURITY_FIELD_VALUE,
+  SET_PAYMENT_INSTITUTION,
+  TOGGLE_PLAID, GET_INSTITUTIONS_SUCCESS, GET_INSTITUTIONS_FAILED, ADD_INSTITUTION_FAILED,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -15,9 +18,13 @@ const initialState = {
   fieldsErrors: false,
   funding_comments: false,
   partial_symbols: [
-    { symbol: null, quantity: null, sec_type: 'Shares' },
-    { symbol: "GOOG", quantity: 5554, sec_type: 'Shares' },
+    { symbol: '', quantity: '', sec_type: 'Shares' },
   ],
+  selected_institution: false,
+  ach_amount: false,
+  plaid_link_active: false,
+  institutionsList: [],
+  error: false,
 };
 
 function funding(state = initialState, action) {
@@ -36,14 +43,29 @@ function funding(state = initialState, action) {
         ...state,
         funding_type: false,
         transfer_type: false,
+        selected_institution: false,
       };
     case ADD_SECURITY:
       return {
         ...state,
         partial_symbols: [
           ...state.partial_symbols,
-          ...[{ symbol: null, quantity: null, sec_type: 'Shares' }],
+          ...[{ symbol: '', quantity: '', sec_type: 'Shares' }],
         ],
+      };
+    case SET_SECURITY_FIELD_VALUE:
+      return {
+        ...state,
+        partial_symbols: state.partial_symbols.map((el, index) => {
+          if (index === action.index) {
+            return ({
+              ...el,
+              [action.id]: action.value,
+            });
+          }
+          return el;
+        }),
+
       };
     case REMOVE_SECURITY:
       return {
@@ -52,6 +74,27 @@ function funding(state = initialState, action) {
           ...state.partial_symbols.slice(0, action.index),
           ...state.partial_symbols.slice(action.index + 1),
         ],
+      };
+    case SET_PAYMENT_INSTITUTION:
+      return {
+        ...state,
+        selected_institution: state.selected_institution === action.name ? '' : action.name,
+      };
+    case GET_INSTITUTIONS_SUCCESS:
+      return {
+        ...state,
+        institutionsList: action.institutionsList,
+      };
+    case GET_INSTITUTIONS_FAILED:
+    case ADD_INSTITUTION_FAILED:
+      return {
+        ...state,
+        error: action.err,
+      };
+    case TOGGLE_PLAID:
+      return {
+        ...state,
+        plaid_link_active: !state.plaid_link_active,
       };
     default:
       return state;

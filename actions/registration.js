@@ -28,7 +28,7 @@ import {
   VERIFY_SEND_FAILURE,
   SEND_CODE_VERIFY,
   SEND_CODE_VERIFY_SUCCESS,
-  SEND_CODE_VERIFY_FAILURE,
+  SEND_CODE_VERIFY_FAILURE, REGISTRATION_SUBMIT_SUCCESS,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -144,6 +144,12 @@ export function registrationFail(err) {
   return {
     type: REGISTRATION_SUBMIT_FAIL,
     err,
+  };
+}
+
+export function registrationSuccess() {
+  return {
+    type: REGISTRATION_SUBMIT_SUCCESS,
   };
 }
 

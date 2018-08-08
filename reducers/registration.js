@@ -51,6 +51,7 @@ const initialState = {
   showVerifyEmailForm: false,
   codeVerify: null,
   codeVerifyError: null,
+  showSuccessModal: false,
 };
 
 function registration(state = initialState, action) {
@@ -91,6 +92,7 @@ function registration(state = initialState, action) {
       return {
         ...state,
         loading: false,
+        showSuccessModal: true,
       };
     case REGISTRATION_SUBMIT_FAIL:
     case GET_USER_ID_REQUEST_FAIL:

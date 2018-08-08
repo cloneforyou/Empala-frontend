@@ -1,6 +1,7 @@
 import React from 'react';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
+import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
 
 const SecuritiesRow = props => (
   <div className="funding-partial-securities-content-row">
@@ -9,9 +10,9 @@ const SecuritiesRow = props => (
                no-gutters"
     >
       <EmpalaInput
-        id="funding_partial_symbol"
-        value={props.item.symbol}
-        handleChange={props.setInputValueById}
+        id="symbol"
+        value={(props.item.symbol).toUpperCase()}
+        handleChange={e => props.setInputValueById(e, props.index)}
       />
     </div>
     <div className="funding-partial-securities-content-row__item
@@ -19,9 +20,9 @@ const SecuritiesRow = props => (
                no-gutters"
     >
       <EmpalaInput
-        id="funding_partial_quantity"
-        value={props.item.quantity}
-        handleChange={props.setInputValueById}
+        id="quantity"
+        value={formatNumberWithFixedPoint(props.item.quantity)}
+        handleChange={e => props.setInputValueById(e, props.index)}
       />
     </div>
     <div className="funding-partial-securities-content-row__item
@@ -29,10 +30,10 @@ const SecuritiesRow = props => (
                no-gutters"
     >
       <EmpalaSelect
-        id="funding_partial_sec_type"
+        id="sec_type"
         options={[{ value: 'Shares', title: 'Shares' }]}
         value={props.item.sec_type}
-        handleChange={props.setSelectedValueById}
+        handleChange={(id, value) => props.setSelectedValueById(id, value, props.index)}
       />
     </div>
     <div className="funding-partial-securities-content-row__item
@@ -59,7 +60,6 @@ const PatrialTransferSecurities = props => (
     <div className="funding-partial-securities-content">
       {props.partial_symbols.map((item, i) => (
         <SecuritiesRow
-          key={Math.random()}
           {...props}
           item={item}
           index={i}

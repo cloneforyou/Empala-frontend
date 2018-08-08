@@ -62,7 +62,7 @@ export default class FundingMemberInfo extends Component {
               value={this.props.member_secondary_ssn || ''}
               handleChange={this.props.setInputValueById}
               mask={this.ssnMask}
-              placeholder="123-45-6789"
+              // placeholder="123-45-6789"
             />
           </div>
         </div>

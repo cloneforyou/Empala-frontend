@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaRadioButton from '../registration/EmpalaRadioButton';
+import EmpalaCheckbox from '../registration/EmpalaCheckbox';
 import { dataFields } from '../../localdata/memberPageData';
 import {
   setInputFieldValueById,
@@ -22,6 +23,8 @@ const mapStateToProps = state => ({
   registrationData: state.registration.registrationData,
   page: state.registration.tabIndex,
   fieldsErrors: state.registration.fieldsErrors,
+  trustedContactActive: state.registration.checkboxes.identity_trusted_contact_person_trusted_contact_checkbox,
+  checkboxes: state.registration.checkboxes,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -29,6 +32,7 @@ const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
   switchDocumentType: e => dispatch(setMemberDocumentType(e.target.value)),
   setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+  toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
 });
 
 
@@ -58,6 +62,18 @@ class MemberInfoForm extends React.PureComponent {
           />
         );
       }
+      if (item.field === 'checkbox') {
+        return (
+          <EmpalaCheckbox
+            key={item.id}
+            id={item.id}
+            label={item.label}
+            handleCheck={this.props.toggleCheckboxById}
+            checked={this.props.checkboxes[item.id]}
+            active={item.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
+          />
+        );
+      }
       return (
         <EmpalaInput
           key={item.id}
@@ -81,6 +97,10 @@ class MemberInfoForm extends React.PureComponent {
     if (this.props.page !== 3) {
       return (
         <div className="container-fluid">
+          <div className="registration-group__section-title">
+            {this.props.page === 1 && 'Enter your details:'}
+            {this.props.page === 2 && 'Enter your details:'}
+          </div>
           <form className="row">
             {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
           </form>
@@ -90,6 +110,9 @@ class MemberInfoForm extends React.PureComponent {
 
     return (
       <div className="container-fluid">
+        <div className="registration-group__section-title_nowrap">
+          {this.props.page === 3 && 'Select one of the govenment identification to enter.'}
+        </div>
         <div className="row">
           <EmpalaRadioButton
             value="passport"
@@ -204,11 +227,14 @@ MemberInfoForm.propTypes = {
   setSelectedValueById: PropTypes.func.isRequired,
   switchDocumentType: PropTypes.func.isRequired,
   setPickedDate: PropTypes.func.isRequired,
+  trustedContactActive: PropTypes.bool,
+  toggleCheckboxById: PropTypes.func.isRequired,
 };
 
 MemberInfoForm.defaultProps = {
   page: 1,
   fieldsErrors: {},
+  trustedContactActive: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MemberInfoForm);

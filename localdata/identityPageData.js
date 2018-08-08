@@ -26,6 +26,7 @@ export const dataFields = [
       type: 'text',
       typeField: 'numberField',
       placeholder: '',
+      col: 6,
     },
     {
       id: 'identity_residential_address_residential_address_state',
@@ -34,6 +35,7 @@ export const dataFields = [
       label: 'State',
       options: usStates,
       autoWidth: true,
+      col: 6,
     },
     {
       id: 'identity_residential_address_residential_address_city',
@@ -82,6 +84,7 @@ export const dataFields = [
       type: 'text',
       typeField: 'numberField',
       placeholder: '',
+      col: 6,
     },
     {
       id: 'identity_mailing_address_state',
@@ -89,6 +92,7 @@ export const dataFields = [
       field: 'select',
       label: 'State',
       options: usStates,
+      col: 6,
     },
     {
       id: 'identity_mailing_address_city',
@@ -107,48 +111,6 @@ export const dataFields = [
           title: 'United States',
         },
       ],
-    },
-  ],
-  [
-    {
-      id: 'identity_trusted_contact_person_trusted_contact_checkbox',
-      field: 'checkbox',
-      label: 'Trusted Contact Person',
-    },
-    {
-      field: 'input',
-      label: 'First name',
-      id: 'identity_trusted_contact_person_first_name',
-      type: 'text',
-      placeholder: '',
-    },
-    {
-      field: 'input',
-      label: 'Last name',
-      id: 'identity_trusted_contact_person_last_name',
-      type: 'text',
-      placeholder: '',
-    },
-    {
-      field: 'input',
-      label: 'Email address',
-      id: 'identity_trusted_contact_person_email',
-      type: 'email',
-      placeholder: '',
-    },
-    {
-      field: 'input',
-      label: 'Contact telephone no.',
-      id: 'identity_trusted_contact_person_phone',
-      type: 'text',
-      placeholder: '',
-    },
-    {
-      field: 'input',
-      label: 'Relationship',
-      id: 'identity_trusted_contact_person_relationship',
-      type: 'text',
-      placeholder: '',
     },
   ],
   [

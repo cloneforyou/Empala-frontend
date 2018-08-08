@@ -631,7 +631,7 @@ const tableHeaders = {
 
 export const getFormattedNumber = number => number.toString().replace(/[^0-9]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 export const formatNumberWithFixedPoint = (number, n) => {
-  if (Number.isNaN(Number(number))) return number;
+  if (Number.isNaN(Number(number)) || Number(number) === 0) return number;
   if (!n || n === 0) return getFormattedNumber(Math.round(number));
   const vals = Number(number).toFixed(n).split('.');
   return [getFormattedNumber(vals[0]), vals[1]].join('.');

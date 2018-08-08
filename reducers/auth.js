@@ -22,6 +22,7 @@ import {
   SET_LOGIN_MFA,
   SET_SOCIAL_LOGIN_DATA,
   TOGGLE_CODE_RESEND_NEEDED,
+  SET_MFA_LOGIN_DATA,
 } from '../constants/auth';
 import { OPEN_MODAL, LOGOUT } from '../constants/dashboard';
 
@@ -38,8 +39,9 @@ export const InitialState = {
   passwordChanged: false,
   loginMfa: false,
   socialLoginMfa: false,
-  socialLoginData: false,
   resendCodeNeeded: false,
+  // socialLoginData: false,
+  mfaLoginData: false,
   fieldsErrors: {
     index_username: '',
     index_password: '',
@@ -104,10 +106,12 @@ function auth(state = InitialState, action) {
       return { ...state, socialLoginMfa: true };
     case SET_LOGIN_MFA:
       return { ...state, loginMfa: true };
-    case SET_SOCIAL_LOGIN_DATA:
-      return { ...state, socialLoginData: action.data };
     case TOGGLE_CODE_RESEND_NEEDED:
       return { ...state, resendCodeNeeded: !state.resendCodeNeeded };
+    // case SET_SOCIAL_LOGIN_DATA:
+    //   return { ...state, socialLoginData: action.data };
+    case SET_MFA_LOGIN_DATA:
+      return { ...state, mfaLoginData: action.data };
     case CLEAR_LOGIN_STATE:
       return InitialState;
     // {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { changeTabPage, sendRegistrationForm, closeErrorModal } from '../../actions/registration';
-import ModalErrorWindow from './ModalErrorWindow';
+import RegistrationResultModal from './RegistrationResultModal';
 
 function mapStateToProps(state) {
   return {
@@ -11,6 +11,7 @@ function mapStateToProps(state) {
     lastName: state.registration.registrationData.member_basic_information_last_name || '',
     errorMessage: state.registration.errorMessage || '',
     showErrorModal: state.registration.showErrorModal,
+    showSuccessModal: state.registration.showSuccessModal,
     loading: state.registration.loading
   };
 }
@@ -234,10 +235,11 @@ class AgreementPage extends PureComponent {
             </p>
           </div>
         </div>
-        <ModalErrorWindow
-          open={this.props.showErrorModal}
+        <RegistrationResultModal
+          open={this.props.showErrorModal || this.props.showSuccessModal}
           handleClose={this.props.closeModal}
           message={this.props.errorMessage}
+          success={this.props.showSuccessModal}
         />
       </div>
     );

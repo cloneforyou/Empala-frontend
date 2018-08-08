@@ -19,7 +19,7 @@ import ContentMenuItems from './ContentMenuItems';
 import InformationPage from './InformationPage';
 import FinalReviewPage from './FinalReviewPage';
 import AgreementPage from './AgreementPage';
-import ModalErrorWindow from './ModalErrorWindow';
+import RegistrationResultModal from './RegistrationResultModal';
 import PopupPIN from './PopupPIN';
 
 function mapStateToProps(state) {
@@ -81,7 +81,7 @@ class Content extends PureComponent {
     if (this.props.tabName === 'info') {
       return (
         <div className="onboard">
-          <ModalErrorWindow
+          <RegistrationResultModal
             open={this.props.showErrorModal}
             handleClose={this.props.closeModal}
             message={this.props.errorMessage}

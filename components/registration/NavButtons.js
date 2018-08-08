@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { every } from 'lodash';
-import MdArrowBack from 'react-icons/lib/md/arrow-back';
-import MdArrowForward from 'react-icons/lib/md/arrow-forward';
+import MdChevronLeft from 'react-icons/lib/md/chevron-left';
+import MdChevronRight from 'react-icons/lib/md/chevron-right';
 import {
   changeTabPage,
   validateFieldsBlank,
@@ -63,10 +63,10 @@ const NavButtons = (props) => {
     <div>
       <button
         type="button"
-        className="btn--navigate btn--prev "
+        className="btn-navigate btn-prev"
         onClick={() => handleChangePage('backward')}
       >
-        <MdArrowBack size={20} />
+        <MdChevronLeft size={30} />
       </button>
       <div
         style={{ display: 'inline-block' }}
@@ -77,11 +77,11 @@ const NavButtons = (props) => {
       >
         <button
           type="button"
-          className={`btn--navigate btn--next ${!disabled && 'btn--navigate--active'}`}
+          className={`btn-navigate btn-next ${!disabled && 'btn--navigate--active'}`}
           onClick={() => handleChangePage('forward')}
           disabled={disabled}
         >
-          <MdArrowForward size={20} />
+          <MdChevronRight size={30} />
         </button>
       </div>
       {
