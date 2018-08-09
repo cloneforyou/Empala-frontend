@@ -25,6 +25,7 @@ class FinalReviewPage extends PureComponent {
   render() {
     const data = this.props.registrationData;
     const empty = ' ';
+    const noExperience = 'No experience';
     return (
       <div className="final-review__outer-wrap">
         <div className="final-review__inner-wrap">
@@ -33,6 +34,9 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="final-review__text">
             <span>Final review before submission. Click the </span>
+            <i
+              className="final-review__icon_arrow-back"
+            />
             <span className="final-review__text_info">headers</span>
             <span> if you need to go back and amend any details.</span>
           </div>
@@ -43,6 +47,9 @@ class FinalReviewPage extends PureComponent {
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 1)}
                 >
+                  <i
+                    className="final-review__icon_arrow-back"
+                  />
                   Member
                 </div>
                 <div className="row">
@@ -98,6 +105,9 @@ class FinalReviewPage extends PureComponent {
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
                 >
+                  <i
+                    className="final-review__icon_arrow-back"
+                  />
                   Passport
                 </div>
                 <div className="row">
@@ -112,13 +122,13 @@ class FinalReviewPage extends PureComponent {
                     value={data.member_passport_number || empty}
                   />
                   <FieldComponent
-                    col={6}
+                    col={12}
                     label="Date of issue"
                     value={data.member_passport_issue_date
                     && (this.convertDate(data.member_passport_issue_date) || empty)}
                   />
                   <FieldComponent
-                    col={6}
+                    col={12}
                     label="Date of expiry"
                     value={data.member_passport_expiry_date
                     && (this.convertDate(data.member_passport_expiry_date) || empty)}
@@ -130,6 +140,9 @@ class FinalReviewPage extends PureComponent {
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
                 >
+                  <i
+                    className="final-review__icon_arrow-back"
+                  />
                   Drivers License
                 </div>
                 <div className="row">
@@ -144,13 +157,13 @@ class FinalReviewPage extends PureComponent {
                     value={data.member_drivers_license_number || empty}
                   />
                   <FieldComponent
-                    col={6}
+                    col={12}
                     label="Date of issue"
                     value={data.member_drivers_license_issue_date
                     && (this.convertDate(data.member_drivers_license_issue_date) || empty)}
                   />
                   <FieldComponent
-                    col={6}
+                    col={12}
                     label="Date of expiry"
                     value={data.member_drivers_license_expiry_date
                     && (this.convertDate(data.member_drivers_license_expiry_date) || empty)}
@@ -166,6 +179,9 @@ class FinalReviewPage extends PureComponent {
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 1)}
                 >
+                  <i
+                    className="final-review__icon_arrow-back"
+                  />
                   Residential Address
                 </div>
                 <div className="row">
@@ -206,6 +222,9 @@ class FinalReviewPage extends PureComponent {
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 2)}
                 >
+                  <i
+                    className="final-review__icon_arrow-back"
+                  />
                   Mailing Address
                 </div>
                 <div className="row">
@@ -248,8 +267,11 @@ class FinalReviewPage extends PureComponent {
               <div className="col-md-6">
                 <div
                   className="fields-group__title pointer"
-                  onClick={() => this.goBack('identity', 3)}
+                  onClick={() => this.goBack('member', 4)}
                 >
+                  <i
+                    className="final-review__icon_arrow-back"
+                  />
                   Trusted Contact Person
                 </div>
                 <div className="row">
@@ -265,26 +287,29 @@ class FinalReviewPage extends PureComponent {
                   />
                   <FieldComponent
                     col={6}
-                    label="Contact no."
+                    label="Contact telephone no."
                     value={data.identity_trusted_contact_person_phone || empty}
-                  />
-                  <FieldComponent
-                    col={6}
-                    label="Email address"
-                    value={data.identity_trusted_contact_person_email || empty}
                   />
                   <FieldComponent
                     col={6}
                     label="Relationship"
                     value={data.identity_trusted_contact_person_relationship || empty}
                   />
+                  <FieldComponent
+                    col={12}
+                    label="Email address"
+                    value={data.identity_trusted_contact_person_email || empty}
+                  />
                 </div>
               </div>
               <div className="col-md-6">
                 <div
                   className="fields-group__title pointer"
-                  onClick={() => this.goBack('regulatory', 1)}
+                  onClick={() => this.goBack('regulatory', 2)}
                 >
+                  <i
+                    className="final-review__icon_arrow-back"
+                  />
                   Identification
                 </div>
                 <div className="row">
@@ -296,7 +321,7 @@ class FinalReviewPage extends PureComponent {
                   />
                   <FieldComponent
                     col={6}
-                    label="Martial status"
+                    label="Marital status"
                     value={data.regulatory_family_martial_status || empty}
                   />
                   <FieldComponent
@@ -310,14 +335,9 @@ class FinalReviewPage extends PureComponent {
                     value={data.regulatory_family_dependents || empty}
                   />
                   <FieldComponent
-                    col={6}
+                    col={12}
                     label="Country of citizenship"
                     value={data.regulatory_identification_citizenship || empty}
-                  />
-                  <FieldComponent
-                    col={6}
-                    label="Investment experience"
-                    value={data.regulatory_family_investment_experience || empty}
                   />
                 </div>
               </div>
@@ -328,6 +348,9 @@ class FinalReviewPage extends PureComponent {
               className="fields-group__title pointer"
               onClick={() => this.goBack('profile', 1)}
             >
+              <i
+                className="final-review__icon_arrow-back"
+              />
               Employment
             </div>
             <div className="fields-group__row row">
@@ -399,8 +422,11 @@ class FinalReviewPage extends PureComponent {
           <div className="fields-group">
             <div
               className="fields-group__title pointer"
-              onClick={() => this.goBack('experience', 1)}
+              onClick={() => this.goBack('profile', 3)}
             >
+              <i
+                className="final-review__icon_arrow-back"
+              />
               Investment experience
             </div>
             <div className="fields-group__row row">
@@ -409,32 +435,50 @@ class FinalReviewPage extends PureComponent {
                   <FieldComponent
                     col={6}
                     label="Equities"
-                    value={data.investment_experience_equities + (data.investment_experience_equities !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_equities !== 'None' && data.profile_investment_experience_equities + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Currencies"
-                    value={data.investment_experience_margin_currencies + (data.investment_experience_margin_currencies !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_margin_currencies !== 'None' && data.profile_investment_experience_margin_currencies + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Options"
-                    value={(data.investment_experience_options + (data.investment_experience_options !== 'None' && ' years')) || empty}
+                    value={
+                      (data.profile_investment_experience_options !== 'None' && data.profile_investment_experience_options + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Futures"
-                    value={data.investment_experience_futures + (data.investment_experience_futures !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_futures !== 'None' && data.profile_investment_experience_futures + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Bonds"
-                    value={data.investment_experience_bonds + (data.investment_experience_bonds !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_bonds !== 'None' && data.profile_investment_experience_bonds + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Foreign markets"
-                    value={data.investment_experience_foreign_markets + (data.investment_experience_foreign_markets !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_foreign_markets !== 'None' && data.profile_investment_experience_foreign_markets + ' years')
+                      || noExperience
+                    }
                   />
                 </div>
               </div>
@@ -443,32 +487,50 @@ class FinalReviewPage extends PureComponent {
                   <FieldComponent
                     col={6}
                     label="Cryptocurrencies"
-                    value={data.investment_experience_cryptocurrencies + (data.investment_experience_cryptocurrencies !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_cryptocurrencies !== 'None' && data.profile_investment_experience_cryptocurrencies + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Borrowing money"
-                    value={data.investment_experience_borrowing_money + (data.investment_experience_borrowing_money !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_borrowing_money !== 'None' && data.profile_investment_experience_borrowing_money + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Private Equity"
-                    value={data.investment_experience_private_equity + (data.investment_experience_private_equity !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_private_equity !== 'None' && data.profile_investment_experience_private_equity + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Lending money"
-                    value={data.investment_experience_lending_money + (data.investment_experience_lending_money !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_lending_money !== 'None' && data.profile_investment_experience_lending_money + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Margin accounts"
-                    value={data.investment_experience_margin_accounts + (data.investment_experience_margin_accounts !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_margin_accounts !== 'None' && data.profile_investment_experience_margin_accounts + ' years')
+                      || noExperience
+                    }
                   />
                   <FieldComponent
                     col={6}
                     label="Exotics"
-                    value={data.investment_experience_exotics + (data.investment_experience_exotics !== 'None' ? ' years' : '') || empty}
+                    value={
+                      (data.profile_investment_experience_exotics !== 'None' && data.profile_investment_experience_exotics + ' years')
+                      || noExperience
+                    }
                   />
                 </div>
               </div>
