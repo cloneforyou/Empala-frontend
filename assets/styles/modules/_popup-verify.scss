@@ -3,7 +3,7 @@
   box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   border: solid 1px #ebebeb;
-  padding: 27px 40px 50px;
+  padding: 27px 40px;
   position: absolute;
   transform: translate(-50%, -50%);
   left: 50%;
@@ -39,25 +39,38 @@
   &__foot {
     padding: 0 20px;
   }
-  &__btn-green {
-    background: $green;
-    transition: .3s;
-    color: $white;
+  &__btn {
+    @include fontSize(16px);
+    width: 88px;
+    padding: 5px 15px;
     border-color: $green;
-    padding: 5px 25px;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
     border-radius: 3px;
     font-weight: 600;
-    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+    height: 30px;
+    line-height: 1;
     cursor: pointer;
-    @include fontSize(16px);
+    transition: .3s;
+  }
+  &__btn_green {
+    background: $green;
+    color: $white;
     &:hover, &:focus {
-      background: transparent;
-      color: $green;
+      box-shadow: 2px 4px 30px 0 rgba(0, 0, 0, 0.35);
     }
   }
-  &__btn-default {
+  &__btn_default {
     background: none;
     @include button-reset();
-    @include fontSize(18px);
+    @include fontSize(14px);
+  }
+  &__btn_outline {
+    background: none;
+    //@include button-reset();
+    border: 1px solid $green;
+    color: $green;
+    &:hover, &:focus {
+      box-shadow: 2px 4px 30px 0 rgba(0, 0, 0, 0.35);
+    }
   }
 }

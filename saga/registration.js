@@ -33,6 +33,7 @@ import validationSaga, { validateCheckbox, validateEmptyFields, validateFieldVal
 import { getAddressInfoByZIP } from './sideServices';
 
 export function* changeTabPage({ tabName, tabIndex, direction }) {
+  if (!(tabName && tabIndex)) return;
   const mailingAddressSameAsResidential = yield select(state =>
     state.registration.checkboxes.identity_residential_address_same_mailing_address_checkbox);
   const nextTabs = {
@@ -62,17 +63,16 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
     }
     if (tabName !== 'info' && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
-        return false;
       }
       yield put(setTabName(nextTabs[tabName]));
       yield put(setTabPageIndex(1));
     } else {
       yield put(setTabPageIndex(+tabIndex + 1));
     }
+    return false;
   } else if (direction === 'backward') {
     if (tabIndex <= 1) {
       if (tabName === 'info') {
-        return false;
       }
       yield put(setTabName(prevTabs[tabName]));
       yield put(setTabPageIndex((tabName === 'member' || tabName === 'agreement') ? 1 : menuItems[prevTabs[tabName]].length));
@@ -136,14 +136,15 @@ export function* getUserID() {
 
 export function* verifySendRequest(action) {
   const id = localStorage.getItem('id');
-  const email = yield select(state => state.registration.registrationData.member_account_email);
+  const email = yield select(state => state.registration.registrationData.member_account_email ||
+    state.profile.profileUserData.account_information_email);
   const phoneNumber = yield select(state => state.registration.registrationData.member_account_contact_phone);
   const url = `/api/auth/${action.entityType}/send`;
   const options = {
     method: 'POST',
     data: {
       email,
-      number: `+${phoneNumber.replace(/\D/g, "")}`,
+      number: phoneNumber && `+${phoneNumber.replace(/\D/g, "")}`,
       id,
     },
   };
@@ -152,7 +153,7 @@ export function* verifySendRequest(action) {
     const res = yield call(request, url, options);
     yield put(verifySendSuccess());
   } catch (err) {
-    yield put(verifySendFailure(err));
+    yield put(verifySendFailure(err.message));
   }
 }
 
@@ -172,7 +173,7 @@ export function* verifySendCodeRequest(action) {
     yield put(sendCodeVerifySuccess());
     const tabName = yield select(state => state.registration.tabName);
     const tabIndex = yield select(state => state.registration.tabIndex);
-    yield changeTabPage({ tabName, tabIndex, direction: 'forward' });
+    if (tabName && tabIndex) yield changeTabPage({ tabName, tabIndex, direction: 'forward' });
   } catch (err) {
     yield put(sendCodeVerifyFailure(err));
   }

@@ -60,12 +60,12 @@ const ConfirmationText = (props) => {
   );
 };
 
-const SuspendedForm = props => (
+export const SuspendedForm = props => (
   /* Text is a sample */
   <div className="login__text-container">
     <h2>Security warning</h2>
     <p>You have too many failed login attempts on your account.</p>
-    <p>We have sent you <span className="green">activation link</span> to your email to reactivate your account.
+    <p>We {props.linkSent ? 'have sent' : 'will send'} you <span className="green">activation link</span> to your email to reactivate your account.
     </p>
     <span
       className="login__link green"
@@ -79,7 +79,7 @@ const SuspendedForm = props => (
   </div>
 );
 
-const ForgotPasswordForm = (props) => {
+export const ForgotPasswordForm = (props) => {
   if (props.linkSent) {
     return (
       <div>
@@ -109,11 +109,11 @@ const ForgotPasswordForm = (props) => {
   );
 };
 
-const Login = props => {
+const Login = (props) => {
   const handleLogin = (e) => {
     if (e.key === 'Enter') props.handleLogin('local', null);
   };
-  if (props.loginMfa || props.socialLoginMfa) return <AuthPhone />;
+  if (props.loginMfa || props.socialLoginMfa) return <AuthPhone {...props} />;
   return (
     <div className="row login">
       {

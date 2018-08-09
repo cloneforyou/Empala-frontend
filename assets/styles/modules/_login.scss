@@ -98,6 +98,10 @@
     &_sm {
       max-width: 255px;
     }
+    &:disabled {
+      background-color: $light-gray;
+      cursor: not-allowed;
+    }
   }
   &__text-container {
     width: 350px;

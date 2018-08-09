@@ -37,7 +37,10 @@ import {
   SET_PARSED_POSITIONS,
   UPDATE_QUOTES,
   SUBSCRIBE_WATCHLIST_CONTENT,
-  UNSUBSCRIBE_WATCHLIST_CONTENT, UPDATE_NEWS,
+  UNSUBSCRIBE_WATCHLIST_CONTENT,
+  UPDATE_NEWS,
+  SHOW_POPUP_PIN,
+  CLOSE_POPUP_PIN,
 } from '../constants/dashboard';
 import { SET_FIELD_VALUE } from '../constants/registration';
 
@@ -249,3 +252,16 @@ export const updateNews = news => ({
   type: UPDATE_NEWS,
   news,
 });
+
+export function showPopupPIN(entityType) {
+  return {
+    type: SHOW_POPUP_PIN,
+    entityType,
+  };
+}
+
+export function closePopupPIN() {
+  return {
+    type: CLOSE_POPUP_PIN,
+  };
+}

@@ -64,6 +64,7 @@ const initialState = {
   codeVerify: null,
   codeVerifyError: null,
   showSuccessModal: false,
+  codeSent: false,
 };
 
 function registration(state = initialState, action) {
@@ -165,6 +166,7 @@ function registration(state = initialState, action) {
         verifyLoading: false,
         showVerifyEmailForm: true,
         codeVerifyError: null,
+        codeSent: true,
       };
     case VERIFY_SEND_FAILURE:
       return {
@@ -187,6 +189,7 @@ function registration(state = initialState, action) {
         showVerifyEmailForm: false,
         showPopupPIN: false,
         codeVerifyError: null,
+        codeSent: false,
       };
     case SEND_CODE_VERIFY_FAILURE:
       return {
