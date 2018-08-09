@@ -8,7 +8,8 @@ class PopupPIN extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      verify_code: ''
+      verify_code: '',
+      resendCode: false,
     };
     this.titles = {
       email: 'Verify your email address',
@@ -36,10 +37,11 @@ class PopupPIN extends Component {
 
 
   render() {
-    const { verify_code } = this.state;
+    const { verify_code, resendCode } = this.state;
     const {
       showVerifyEmailForm,
       codeVerifyError,
+      codeSent,
       type,
     } = this.props;
     return (
@@ -92,10 +94,16 @@ class PopupPIN extends Component {
                   onChange={this.handleChange}
                 />
               </div>
+              {
+                codeSent && resendCode && <span className='text-success'>Code sent</span>
+              }
               <div className="popup-verify__foot buttons-row mb-4">
                 <button
                   className="popup-verify__btn popup-verify__btn_outline"
-                  onClick={() => this.props.verifySendRequest(type)}
+                  onClick={() => {
+                    this.props.verifySendRequest(type);
+                  this.setState({ resendCode:true });
+                  }}
                 >
                   Resend
                 </button>
@@ -124,6 +132,7 @@ class PopupPIN extends Component {
 export default connect((state) => ({
     showVerifyEmailForm: state.registration.showVerifyEmailForm,
     codeVerifyError: state.registration.codeVerifyError,
+    codeSent: state.registration.codeSent,
     tabName: state.registration.tabName || 'member',
     tabIndex: state.registration.tabIndex || 1,
   }),
