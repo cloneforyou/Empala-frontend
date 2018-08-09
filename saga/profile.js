@@ -15,7 +15,7 @@ import {
   uploadImageFail,
   uploadImageSuccess,
   setColorSchemeError,
-  setColorScheme,
+  setColorScheme, openModal, showPopupPIN,
 } from '../actions/dashboard';
 import { cleanErrorMessage, passwordUpdateFailed, passwordUpdateSuccess } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
@@ -36,9 +36,13 @@ export function* sendProfileData() {
 
   try {
     const response = yield call(request, url, options);
+    if (!response.data.data.email_verified) {
+      yield put(showPopupPIN('email'));
+    }
     yield put(updateProfileSuccess(response.data));
   } catch (err) {
     yield put(updateProfileFail(err.message));
+    yield put(openModal('updateError'));
   }
 }
 

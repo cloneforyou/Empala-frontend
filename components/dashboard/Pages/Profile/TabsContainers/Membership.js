@@ -9,7 +9,7 @@ import {
   fieldsPersonalWealth,
   fieldsMemberPersonal,
 } from '../../../../../localdata/profileData';
-import { openModal } from '../../../../../actions/dashboard';
+import { cleanErrorText, closeModal, openModal } from '../../../../../actions/dashboard';
 import DeleteAccountModal from './Components/DeleteAccountModal';
 import { getInfoByZipCode, setInputFieldValueById, toggleCheckboxById } from '../../../../../actions/registration';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
@@ -19,6 +19,7 @@ import DatePickerField from '../../../../registration/DatePickerField';
 import ResetPasswordModal from '../ResetPasswordModal';
 import avatar from '../../../../../static/images/default-avatar-of-user.svg';
 import { deleteUserPic } from '../../../../../actions/profile';
+import ProfileErrorModal from '../../ProfileErrorModal';
 
 class Membership extends Component {
   constructor(props) {
@@ -144,7 +145,7 @@ class Membership extends Component {
                 </div>
               </div>
               <button
-                className="profile-btn profile-btn_green"
+                className="profile-btn profile-btn_green profile-btn_shift-up"
                 onClick={this.props.showResetModal}
               >Reset password
               </button>
@@ -182,6 +183,11 @@ class Membership extends Component {
         <UploadImage />
         <DeleteAccountModal />
         <ResetPasswordModal />
+        <ProfileErrorModal
+          open={this.props.errorModalOpen}
+          handleClose={this.props.handleClose}
+          message={this.props.errorText}
+        />
       </div>
     );
   }
@@ -192,6 +198,8 @@ export default connect(state => ({
   currentColorScheme: state.dashboard.currentColorScheme,
   userData: state.profile.profileUserData || {},
   fieldsErrors: state.profile.fieldsErrors || {},
+  errorModalOpen: state.dashboard.modalOpen && state.dashboard.openModalName === 'updateError',
+  errorText: state.dashboard.error,
 }), (dispatch => ({
     setInputValueById: (e) => {
       const { id, value } = e.target;
@@ -211,4 +219,8 @@ export default connect(state => ({
     setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
     showResetModal: () => dispatch(openModal('resetPassword')),
     deleteUserpic: () => dispatch(deleteUserPic()),
+    handleClose: () => {
+      dispatch(closeModal());
+      dispatch(cleanErrorText());
+    },
   })))(Membership);

@@ -13,6 +13,7 @@ import { closeModal } from '../../actions/dashboard';
 import MarketAccessPage from './Pages/MarketAccessPage';
 import Funding from './Pages/InvestmentProfile/Funding';
 import Account from './Pages/InvestmentProfile/Account';
+import PopupPIN from '../registration/PopupPIN';
 
 class Main extends Component {
   constructor(props) {
@@ -50,7 +51,13 @@ class Main extends Component {
   };
 
   render() {
-    const { sidebarCollapsed, activePageDashboard, currentColorScheme } = this.props;
+    const {
+      sidebarCollapsed,
+      activePageDashboard,
+      currentColorScheme,
+      popupPINType,
+      showPopupPIN,
+    } = this.props;
     return (
       <div
         className={sidebarCollapsed ? `dashboard dashboard_${currentColorScheme}` : `dashboard dashboard_full dashboard_${currentColorScheme}`}>
@@ -60,6 +67,9 @@ class Main extends Component {
           handleClose={this.props.closeModal}
           open={this.props.reminderModalOpen}
          />
+        {
+          showPopupPIN && <PopupPIN type={popupPINType} />
+        }
       </div>
     );
   }
@@ -69,6 +79,8 @@ export default connect(state => ({
   reminderModalOpen: state.dashboard.modalOpen && state.dashboard.openModalName === 'passwordReminder',
   activePageDashboard: state.dashboard.activePageDashboard,
   currentColorScheme: state.dashboard.currentColorScheme,
+  showPopupPIN: state.dashboard.showPopupPIN,
+  popupPINType: state.dashboard.popupPINType,
 }), dispatch => ({
   closeModal: () => dispatch(closeModal()),
 }))(Main);
