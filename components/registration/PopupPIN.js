@@ -65,6 +65,7 @@ class PopupPIN extends Component {
                 <button
                   className="popup-verify__btn_default"
                   onClick={this.closePopup}
+                  style={{ fontSize: '16px' }}
                 >
                   Cancel
                 </button>
