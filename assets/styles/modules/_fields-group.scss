@@ -1,6 +1,6 @@
 .fields-group {
   &:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 40px;
   }
   &__title {
     color: #98c73a;
@@ -8,5 +8,7 @@
     margin-bottom: 20px;
     font-weight: 600;
     cursor: pointer;
+    text-decoration: underline;
+    margin-left: -15px;
   }
 }

@@ -56,16 +56,16 @@ function* validateFieldOnServer({ id, value }) {
 
 export function* validateCheckbox(action) {
   const isChecked = yield select(state => state.registration.checkboxes[action.id]);
-  if (/identity_checkbox/.test(action.id) && isChecked) {
+  if (/regulatory_checkbox/.test(action.id) && isChecked) {
     yield put(showIdentityModal());
   }
   if (action.id === 'identity_residential_address_same_mailing_address_checkbox' && isChecked) {
     yield put(copyMailingAddress());
   }
-  if (action.id === 'identity_trusted_contact_person_trusted_contact_checkbox' && !isChecked) {
+  if (action.id === 'member_trusted_contact_person_trusted_contact_checkbox' && !isChecked) {
     const data = yield select(state => state.registration.registrationData);
-    const trustedContactFields = Object.keys(data).filter(key => (/identity_trusted_contact/.test(key)));
-    yield all(trustedContactFields.map(field => put(setInputFieldValueById(field, ''))));
+    const memberContactFields = Object.keys(data).filter(key => (/member_trusted_contact/.test(key)));
+    yield all(memberContactFields.map(field => put(setInputFieldValueById(field, ''))));
   }
 }
 

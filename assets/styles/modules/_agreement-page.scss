@@ -2,22 +2,25 @@
   display: flex;
   flex-direction: column;
   padding: 19px 40px 13px;
-  background-color: #f9fafb;
+  background-color: $white;
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
   &__title {
     text-align: center;
     margin-bottom: 30px;
-    font-weight: 600;
+    font-size: 16px;
   }
 }
 
 .agreements-info {
-  max-height: 398px;
-  font-size: 12px;
-  border: 2px solid #e0e0e0;
-  padding: 7.5px 11.5px;
+  max-height: 384px;
+  font-size: 11px;
+  line-height: 1.18;
   margin-bottom: 12px;
   overflow-y: auto;
-  background-color: #ffffff;
+  background-color: $white;
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  padding: 20px 200px 20px 30px;
 }
 
 .list-info {
@@ -25,17 +28,17 @@
   padding: 0;
   margin-bottom: 40px;
   &__item {
-    color: #808895;
+    color: $main-color-text-grey;
   }
 }
 
 .link-decoration {
-  color: #808895;
+  color: $main-color-text-grey;
   &:before {
     content: "- ";
   }
   &:hover {
-    color: #98c73a;
+    color: $green;
   }
 }
 
@@ -43,21 +46,24 @@
   display: flex;
   &__form-submission {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
   &__text {
     font-size: 14px;
-    font-weight: 500;
     margin: 0;
-    padding: 0 30px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
+    line-height: 1.23;
     &_link {
-      color: #808895;
+      color: $main-color-text-grey;
       text-decoration: underline;
       &:hover {
-        color: #98c73a;
+        color: $green;
       }
     }
   }
@@ -67,30 +73,24 @@
   }
 }
 
-.form-centering {
-  width: 85%;
-  margin: 0 auto;
-}
-
 .label-confirmation {
-  font-size: 12px;
-  font-weight: 400;
-  color: #98c73a;
+  font-size: 11px;
+  color: $green;
+  margin-bottom: 5px;
 }
 
 .input-confirmation {
-  height: 45px;
-  color: #808895;
-  background-color: #ffffff;
-  border-radius: 0;
-}
-
-.border-default {
-  border: 2px solid #e0e0e0;
-}
-
-.border-error {
-  border: 2px solid #ff0405;
+  height: 44px;
+  font-size: 18px;
+  color: $main-color-text-grey;
+  background-color: $white;
+  border-radius: 5px;
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+  border: none;
+  &:focus {
+    border: none;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+  }
 }
 
 .group-buttons {
@@ -98,28 +98,37 @@
   justify-content: center;
   margin-top: 20px;
   &__button {
-    width: 130px;
-    height: 34px;
-    margin: 0 20px;
+    height: 31px;
     border: 0;
+    font-size: 16px;
   }
 }
 
-.btn--cancel {
+.btn-cancel {
   @extend .group-buttons__button;
-  background-color: #f9fafc;
+  width: 100px;
+  background-color: transparent;
+  margin-right: 20px;
 }
 
-.btn--submit {
+.btn-submit {
   @extend .group-buttons__button;
-  background-color: #808895;
-  color: #ffffff;
+  width: 141px;
+  background-color: $main-color-text-grey;
+  color: $white;
+  border-radius: 5px;
+  margin-left: 20px;
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
 }
 
-.btn--active {
-  background-color: #98c73a;
+.btn-active {
+  background-color: $green;
 }
 
-.text--error {
-  color: #ff0405;
+.text-error {
+  color: $light-red;
+}
+
+.input-wrapper_width {
+  width: 85%;
 }

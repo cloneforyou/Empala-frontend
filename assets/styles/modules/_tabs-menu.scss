@@ -4,17 +4,15 @@
   margin: 0 auto;
   text-align: center;
   &__item {
-    color: #808895;
-    font-size: 14px;
+    color: $main-color-text-grey;
     position: relative;
     display: inline-block;
     span {
       cursor: pointer;
-      font-weight: normal;
     }
     &_active, &:hover {
       span {
-        color: #98c73a;
+        color: $green;
       }
     }
     &:not(:last-child) {

@@ -36,17 +36,14 @@ export const menuItems = {
     {
       title: 'Mailing Address', key: 'mailing-address', completed: false, active: false,
     },
-    {
-      title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false,
-    },
 
   ],
   regulatory: [
     {
-      title: 'Identification', key: 'identification', completed: false, active: false,
+      title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false,
     },
     {
-      title: 'Family', key: 'family', completed: false, active: false,
+      title: 'Identification', key: 'identification', completed: false, active: false,
     },
   ],
   profile: [
@@ -56,8 +53,6 @@ export const menuItems = {
     {
       title: 'Financials', key: 'financials', completed: false, active: false,
     },
-  ],
-  experience: [
     {
       title: 'Investment Experience', key: 'investment-experience', completed: false, active: false,
     },
@@ -131,7 +126,6 @@ const tabContent = {
   identity: <IdentityForm />,
   regulatory: <RegulatoryForm />,
   profile: <ProfileForm />,
-  experience: <ExperienceForm />,
 };
 
 export function getMenuItemsByTabName(tabName) {
@@ -145,8 +139,6 @@ export function getMenuItemsByTabName(tabName) {
       return menuItems.regulatory;
     case 'profile':
       return menuItems.profile;
-    case 'experience':
-      return menuItems.experience;
     default:
       return menuItems.member;
   }
@@ -163,9 +155,6 @@ export function getPageFieldNames(tabName, tabIndex) {
       break;
     case 'identity':
       pageFields = _.cloneDeep(identityPageData[tabIndex - 1]);
-      break;
-    case 'experience':
-      pageFields = _.cloneDeep(experiencePageData[tabIndex - 1]);
       break;
     case 'profile':
       pageFields = _.cloneDeep(profilePageData[tabIndex - 1]);

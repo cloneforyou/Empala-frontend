@@ -27,7 +27,7 @@ function isFieldError(fieldsList, errorsList) {
 
 
 function filterActiveCheckboxes(checkboxesList) {
-  return Object.keys(checkboxesList).filter(key => (/identity_checkbox/.test(key)) && checkboxesList[key]);
+  return Object.keys(checkboxesList).filter(key => (/regulatory_checkbox/.test(key)) && checkboxesList[key]);
 }
 
 
@@ -35,7 +35,7 @@ const NavButtons = (props) => {
   let disabled = !isFieldsFilled(props.fieldNames, props.registrationData) ||
     (props.fieldNames && props.errors && isFieldError(props.fieldNames, props.errors));
 
-  if (props.tabName === 'identity' && props.tabIndex === 4) {
+  if (props.tabName === 'regulatory' && props.tabIndex === 1) {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
   }
   if (props.fieldNames.filter(field =>
@@ -66,7 +66,7 @@ const NavButtons = (props) => {
         className="btn-navigate btn-prev"
         onClick={() => handleChangePage('backward')}
       >
-        <MdChevronLeft size={30} />
+        <MdChevronLeft size={35} />
       </button>
       <div
         style={{ display: 'inline-block' }}
@@ -81,7 +81,7 @@ const NavButtons = (props) => {
           onClick={() => handleChangePage('forward')}
           disabled={disabled}
         >
-          <MdChevronRight size={30} />
+          <MdChevronRight size={35} />
         </button>
       </div>
       {

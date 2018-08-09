@@ -45,7 +45,7 @@ const DatePickerField = (props) => {
           underlineShow={false}
           firstDayOfWeek={0}
           disabled={props.disabled}
-          textFieldStyle={{ width: '100%', color: '#808895', fontSize: '14px' }}
+          textFieldStyle={style.dataPickerTextFieldStyle}
           onChange={(none = null, date) => props.handleDatePick(props.id, date)}
           value={props.value && props.value !== 'Not provided' ? new Date(props.value) : null}
           minDate={(props.dateExpiry && currentDate) || (props.dateIssue && licenseIssueDate)}

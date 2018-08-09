@@ -81,6 +81,11 @@ class ProfileForm extends PureComponent {
   render() {
     return (
       <div className="container-fluid">
+        <div className="registration-group__section-title margin-bottom40">
+          {this.props.page === 1 && 'Enter your details:'}
+          {this.props.page === 2 && 'Enter your details:'}
+          {this.props.page === 3 && 'What is your current investment experience?'}
+        </div>
         <form className="row">
           {dataFields[this.props.page - 1].map((item) => {
             if (item.id === 'profile_financials_liquid_net_worth' && this.props.registrationData.profile_financials_total_net_worth) {
