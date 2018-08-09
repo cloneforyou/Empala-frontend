@@ -63,12 +63,14 @@ const style = {
   },
   textFieldStyle: {
     width: '100%',
-    fontSize: '14px',
+    fontSize: '18px',
+    fontFamily: 'Proxima Nova',
   },
   selectFieldStyle: {
     width: '100%',
     margin: 0,
-    fontSize: '14px',
+    fontSize: '18px',
+    fontFamily: 'Proxima Nova',
   },
   labelStyleLightTheme: {
     height: '33px',
@@ -99,6 +101,7 @@ const style = {
   },
   iconSelectStyle: {
     height: '33px',
+    width: '40px',
     padding: '6px 0 0 7px',
     fill: MAIN_COLOR_TEXT_GRAY,
   },
@@ -117,7 +120,8 @@ const style = {
     width: '25px',
   },
   labelCheckboxStyle: {
-    fontSize: '16px',
+    fontSize: '18px',
+    fontFamily: 'Proxima Nova',
     color: MAIN_COLOR_TEXT_GRAY,
   },
   labelActiveCheckboxStyle: {
@@ -163,6 +167,12 @@ const style = {
   },
   overlayDialogStyle: {
     backgroundColor: 'transparent',
+  },
+  dataPickerTextFieldStyle: {
+    width: '100%',
+    color: MAIN_COLOR_TEXT_GRAY,
+    fontSize: '18px',
+    fontFamily: 'Proxima Nova',
   },
 };
 

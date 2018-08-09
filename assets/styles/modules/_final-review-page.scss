@@ -36,17 +36,30 @@
   font-size: 18px;
   color: #98c73a;
   font-weight: normal;
-  margin-bottom: 27px;
+  margin-bottom: 15px;
 }
 
 .final-review__text {
   font-size: 18px;
   font-weight: 300;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   &_info {
     color: $green;
     text-decoration: underline;
     font-weight: normal;
+  }
+}
+
+.final-review__icon_arrow-back {
+  &:before {
+    content: '';
+    mask: url($path-to-images + 'icon-arrow-back.svg');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: $main-color-text-grey;
+    width: 15px;
+    height: 13px;
+    display: inline-block;
   }
 }
 
@@ -73,10 +86,10 @@
     font-size: 12px;
     font-weight: normal;
     color: #98c73a;
+    margin-bottom: 3px;
   }
   &__field-value {
-    font-size: 16px;
-    font-weight: normal;
+    font-size: 18px;
     height: 33px;
     line-height: 33px;
     padding-left: 10px;

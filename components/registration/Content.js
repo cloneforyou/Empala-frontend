@@ -126,7 +126,7 @@ class Content extends PureComponent {
       });
     } else if (this.props.tabName === 'identity' && this.props.tabIndex === 1) {
       fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_residential_address_same_mailing_address_checkbox');
-    } else if (this.props.tabName === 'identity' && this.props.tabIndex === 3) {
+    } else if (this.props.tabName === 'member' && this.props.tabIndex === 4) {
       if (!this.props.trustedContactActive) {
         fieldNames = [];
       } else {
