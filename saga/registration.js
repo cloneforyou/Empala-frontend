@@ -63,6 +63,7 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
     }
     if (tabName !== 'info' && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
+        return false;
       }
       yield put(setTabName(nextTabs[tabName]));
       yield put(setTabPageIndex(1));
@@ -73,6 +74,7 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
   } else if (direction === 'backward') {
     if (tabIndex <= 1) {
       if (tabName === 'info') {
+        return false;
       }
       yield put(setTabName(prevTabs[tabName]));
       yield put(setTabPageIndex((tabName === 'member' || tabName === 'agreement') ? 1 : menuItems[prevTabs[tabName]].length));
