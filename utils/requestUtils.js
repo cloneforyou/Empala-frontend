@@ -37,6 +37,10 @@ export default function setErrorText(err) {
     if (err.response.data.info === 'EMAIL_ALREADY_IN_USE') {
       return new Error('E-mail is already in use');
     }
+    if (err.response.data.info === 'VERIFICATION_DENIED' &&
+      err.response.data.misc === 'INVALID_CODE') {
+      return new Error('Invalid verification code');
+    }
   }
   if (err.response && err.response.status === 400) {
     if (err.response.data.info === 'MATCHING_PASSWORDS') {
