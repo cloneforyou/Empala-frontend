@@ -24,15 +24,19 @@ import {
   MODIFY_POSITION_DATA,
   UPDATE_ORDERS_LIST,
   SET_PARSED_POSITIONS,
-  UPDATE_QUOTES, UPDATE_NEWS,
+  UPDATE_QUOTES,
+  UPDATE_NEWS,
+  SHOW_POPUP_PIN,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
   DELETE_USERPIC_REQUEST,
   DELETE_USERPIC_SUCCESS,
   RESET_PASSWORD_FAIL,
+  UPDATE_PROFILE_FAIL,
 } from '../constants/profile';
 import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
+import { CLOSE_POPUP_PIN } from '../constants/registration';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -57,6 +61,8 @@ const initialState = {
   watchListNumber: false,
   sessionId: false,
   quotes: false,
+  showPopupPIN: false,
+  popupPINType: false,
 };
 
 
@@ -149,6 +155,7 @@ function dashboard(state = initialState, action) {
     case DELETE_USERPIC_FAIL:
     case DELETE_ACCOUNT_FAIL:
     case RESET_PASSWORD_FAIL:
+    case UPDATE_PROFILE_FAIL:
       return {
         ...state,
         loading: false,
@@ -222,6 +229,17 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         parsedOrdersList: { ...state.parsedOrdersList, id: parseOrdersList([action.data])[0] },
+      };
+    case SHOW_POPUP_PIN:
+      return {
+        ...state,
+        showPopupPIN: true,
+        popupPINType: action.entityType,
+      };
+    case CLOSE_POPUP_PIN:
+      return {
+        ...state,
+        showPopupPIN: false,
       };
     case UPDATE_NEWS:
       return {

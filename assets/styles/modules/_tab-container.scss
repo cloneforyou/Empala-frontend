@@ -2,7 +2,7 @@
   padding: 40px 20px;
   .registration-group {
     margin-bottom: 10px;
-    height: 60px;
+    min-height: 60px;
     .registration-label {
       margin-bottom: 5px;
       font-size: 11px;
@@ -93,6 +93,10 @@
     &:hover {
       box-shadow: 2px 4px 10px 0 rgba(253, 5, 5, 0.3);
     }
+  }
+  &_shift-up {
+    position: relative;
+    top: -25px;
   }
 }
 

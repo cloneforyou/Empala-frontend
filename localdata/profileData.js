@@ -440,6 +440,14 @@ export const fieldsMemberPersonal = [
     label: 'E-mail address',
     placeholder: '',
     field: 'input',
+    // disabled: true,
+  },
+  {
+    id: 'account_information_contact_phone_number',
+    type: 'text',
+    label: 'Contact telephone no.',
+    placeholder: '',
+    field: 'input',
     disabled: true,
   },
 ];
