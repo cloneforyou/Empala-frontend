@@ -7,7 +7,7 @@
     max-width: 1280px;
     min-height: 700px;
     margin: auto;
-    background: #f9fafb;
+    background: $athens-gray;
     border: solid 1px #e0e0e0;
   }
 
@@ -20,7 +20,7 @@
     display: flex;
     flex-direction: column;
     padding: 40px 0;
-    background-color: #f9fafb;
+    background: $white;
     border-left: solid 1px #e0e0e0;
 
     &--center {
@@ -45,7 +45,7 @@
   &__left-block {
     height: 100%;
     padding: 125px 50px;
-    background: #fff;
+    background: $athens-gray;
     @media(max-width: 1366px) {
       padding: 100px 40px;
     }

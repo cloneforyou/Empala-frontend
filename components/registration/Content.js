@@ -28,7 +28,7 @@ function mapStateToProps(state) {
     tabIndex: state.registration.tabIndex || 1,
     menuItems: state.registration.menuItems,
     registrationData: state.registration.registrationData,
-    trustedContactActive: state.registration.checkboxes['identity_trusted_contact_person_trusted_contact_checkbox'],
+    trustedContactActive: state.registration.checkboxes['member_trusted_contact_person_trusted_contact_checkbox'],
     errorMessage: state.registration.errorMessage || '',
     showErrorModal: state.registration.showErrorModal,
     errors: state.fieldsErrors,
@@ -130,7 +130,7 @@ class Content extends PureComponent {
       if (!this.props.trustedContactActive) {
         fieldNames = [];
       } else {
-        fieldNames = fieldNames.filter(fieldName => fieldName !== 'identity_trusted_contact_person_trusted_contact_checkbox');
+        fieldNames = fieldNames.filter(fieldName => fieldName !== 'member_trusted_contact_person_trusted_contact_checkbox');
       }
     } else if (this.props.tabName === 'profile' && this.props.tabIndex === 1 &&
       this.props.registrationData['profile_employment_employment_type'] !== 'Employed') {
@@ -169,7 +169,7 @@ class Content extends PureComponent {
             <div className="col-6">
               <div className="onboard__right-block">
                 <div
-                  className={`onboard__right-block--center ${this.props.tabName === 'experience' && 'experience-page'}`}>
+                  className={`onboard__right-block--center ${this.props.tabName === 'profile' && this.props.tabIndex === 3 && 'experience-page'}`}>
                   {pageContent.tabContent}
                 </div>
                 {

@@ -41,8 +41,7 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
     member: 'identity',
     identity: 'regulatory',
     regulatory: 'profile',
-    profile: 'experience',
-    experience: 'final_review',
+    profile: 'final_review',
     final_review: 'agreement',
   };
   const prevTabs = {
@@ -50,16 +49,17 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
     identity: 'member',
     regulatory: 'identity',
     profile: 'regulatory',
-    experience: 'profile',
-    final_review: 'experience',
+    final_review: 'profile',
     agreement: 'final_review',
   };
   if (direction === 'forward') {
     if (tabName === 'identity' && tabIndex === 1 && mailingAddressSameAsResidential) {
-      yield put(setTabPageIndex(3));
+      yield put(setTabName(nextTabs[tabName]));
+      return false;
     }
     if (tabName === 'info' || tabName === 'final_review') {
       yield put(setTabName(nextTabs[tabName]));
+      return false;
     }
     if (tabName !== 'info' && tabIndex > menuItems[tabName].length - 1) {
       if (tabName === 'agreement') {
@@ -69,6 +69,7 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
     } else {
       yield put(setTabPageIndex(+tabIndex + 1));
     }
+    return false;
   } else if (direction === 'backward') {
     if (tabIndex <= 1) {
       if (tabName === 'info') {

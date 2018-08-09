@@ -1,20 +1,25 @@
 .registration-group {
   min-height: 80px;
   &__section-title {
-    margin-bottom: 40px;
     @include fontSize(18px);
-    &_nowrap {
-      white-space: nowrap;
-      margin-bottom: 15px;
-      @include fontSize(18px);
-      @media(max-width: 1099px) {
-        white-space: normal;
-      }
-    }
   }
   &_height50 {
     height: 50px;
   }
+}
+
+.title-nowrap {
+  white-space: nowrap;
+  @media(max-width: 1099px) {
+    white-space: normal;
+  }
+}
+.margin-bottom40 {
+  margin-bottom: 40px;
+}
+
+.margin-bottom20 {
+  margin-bottom: 20px;
 }
 
 .registration-label {

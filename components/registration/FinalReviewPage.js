@@ -29,7 +29,12 @@ class FinalReviewPage extends PureComponent {
       <div className="final-review__outer-wrap">
         <div className="final-review__inner-wrap">
           <div className="final-review__title">
-            Final review before submission
+            Final Review
+          </div>
+          <div className="final-review__text">
+            <span>Final review before submission. Click the </span>
+            <span className="final-review__text_info">headers</span>
+            <span> if you need to go back and amend any details.</span>
           </div>
           <div className="fields-group">
             <div className="fields-group__row row">

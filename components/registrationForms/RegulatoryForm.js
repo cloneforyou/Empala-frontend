@@ -4,21 +4,31 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import EmpalaInput from '../registration/EmpalaInput';
 import { dataFields } from '../../localdata/regulatoryPageData';
-import { setInputFieldValueById } from '../../actions/registration';
+import {
+  setInputFieldValueById,
+  toggleCheckboxById,
+  closeIdentityModal,
+} from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import DatePickerField from '../registration/DatePickerField';
+import EmpalaCheckbox from '../registration/EmpalaCheckbox';
+import ModalWindow from '../registration/ModalWindow';
 
 
 const mapStateToProps = state => ({
   registrationData: state.registration.registrationData,
   page: state.registration.tabIndex,
   fieldsErrors: state.registration.fieldsErrors,
+  checkboxes: state.registration.checkboxes,
+  showModal: state.registration.showIdentityModal,
 });
 
 const mapDispatchToProps = dispatch => ({
   setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
   setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
   setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
+  toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
+  closeModal: () => dispatch(closeIdentityModal()),
 });
 
 
@@ -60,6 +70,7 @@ class RegulatoryForm extends React.Component {
               errorText={this.props.fieldsErrors[item.id]}
               typeField={item.typeField}
               mask={mask}
+              col={item.col}
             />
           );
         case 'date':
@@ -72,6 +83,17 @@ class RegulatoryForm extends React.Component {
               handleDatePick={this.props.setPickedDate}
               errorText={this.props.fieldsErrors[item.id]}
               birthDay={item.birthDay}
+              col={item.col}
+            />
+          );
+        case 'checkbox':
+          return (
+            <EmpalaCheckbox
+              key={item.id}
+              id={item.id}
+              label={item.label}
+              handleCheck={this.props.toggleCheckboxById}
+              checked={this.props.checkboxes[item.id]}
             />
           );
         default: return null;
@@ -85,8 +107,16 @@ class RegulatoryForm extends React.Component {
   render() {
     return (
       <div className="container-fluid">
+        <div className="registration-group__section-title title-nowrap margin-bottom40">
+          {this.props.page === 1 && 'Select any of the below that applies to you:'}
+          {this.props.page === 2 && 'Enter your details:'}
+        </div>
         <form className="row">
           {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
+          <ModalWindow
+            open={this.props.showModal}
+            handleClose={this.props.closeModal}
+          />
         </form>
       </div>
     );
@@ -100,11 +130,16 @@ RegulatoryForm.propTypes = {
   setInputValueById: PropTypes.func.isRequired,
   setSelectedValueById: PropTypes.func.isRequired,
   setPickedDate: PropTypes.func.isRequired,
+  checkboxes: PropTypes.object.isRequired,
+  toggleCheckboxById: PropTypes.func.isRequired,
+  showModal: PropTypes.bool,
+  closeModal: PropTypes.func.isRequired,
 };
 
 RegulatoryForm.defaultProps = {
   page: 1,
   fieldsErrors: {},
+  showModal: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegulatoryForm);
