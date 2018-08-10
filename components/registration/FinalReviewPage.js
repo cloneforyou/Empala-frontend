@@ -34,12 +34,12 @@ class FinalReviewPage extends PureComponent {
             Final Review
           </div>
           <div className="final-review__text">
-            <span>Final review before submission. Click the </span>
+            <span>Final review before submission. Click the&nbsp;</span>
             <i
               className="final-review__icon_arrow-back"
             />
             <span className="final-review__text_info">headers</span>
-            <span> if you need to go back and amend any details.</span>
+            <span>&nbsp;if you need to go back and amend any details.</span>
           </div>
           <div className="fields-group">
             <div className="fields-group__row row">

@@ -43,6 +43,7 @@
   font-size: 18px;
   font-weight: 300;
   margin-bottom: 35px;
+  display: flex;
   &_info {
     color: $green;
     text-decoration: underline;
@@ -52,14 +53,15 @@
 
 .final-review__icon_arrow-back {
   &:before {
-    content: '';
+    content: ' ';
     mask: url($path-to-images + 'icon-arrow-back.svg');
     mask-size: contain;
     mask-repeat: no-repeat;
     background-color: $main-color-text-grey;
-    width: 15px;
-    height: 13px;
+    width: 24px;
+    height: 24px;
     display: inline-block;
+    margin-right: 3px;
   }
 }
 
