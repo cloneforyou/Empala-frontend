@@ -131,6 +131,7 @@ function mapStateToProps(state) {
     errors: state.registration.fieldsErrors,
     checkboxes: state.registration.checkboxes,
     userBackToPart: state.registration.userBackToPart,
+    showInfoPopup: state.registration.showInfoPopup,
   };
 }
 

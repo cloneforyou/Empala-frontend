@@ -7,15 +7,18 @@ import EmpalaInput from '../registration/EmpalaInput';
 import { dataFields } from '../../localdata/profilePageData';
 import {
   getInfoByZipCode,
-  setInputFieldValueById, validateFieldValue,
+  setInputFieldValueById,
+  validateFieldValue,
 } from '../../actions/registration';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import { statesAbbvs } from '../../localdata/usStatesList';
+import InfoPopup from '../registration/InfoPopup';
 
 const mapStateToProps = state => ({
   registrationData: state.registration.registrationData,
   page: state.registration.tabIndex,
   fieldsErrors: state.registration.fieldsErrors,
+  showInfoPopup: state.registration.showInfoPopup,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -57,6 +60,7 @@ class ProfileForm extends PureComponent {
             disabled={disabled}
             errorText={this.props.fieldsErrors[item.id]}
             autoWidth={item.autoWidth}
+            infoButton={item.infoButton}
           />
         );
       }
@@ -101,6 +105,10 @@ class ProfileForm extends PureComponent {
             }
             return this.mappingComponent(item);
           })}
+          {this.props.showInfoPopup &&
+          <InfoPopup
+            showInfoPopup={this.props.showInfoPopup}
+          />}
         </form>
       </div>
     );

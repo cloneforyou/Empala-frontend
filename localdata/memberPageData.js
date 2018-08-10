@@ -80,6 +80,7 @@ export const dataFields = [
       type: 'text',
       label: 'Account No.',
       placeholder: '',
+      infoButton: true,
     },
     {
       id: 'member_account_account_type',
