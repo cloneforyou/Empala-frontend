@@ -127,15 +127,17 @@ export function* accountDelete() {
 
 export function* deleteUserpic() {
   const accessToken = localStorage.getItem('accessToken');
-  const url = 'http://localhost:9000/api/account/avatar';
+  // const url = 'http://localhost:9000/api/account/avatar';
+  const url = '/api/account/avatar';
   // const text = yield select(state => state.dashboard['membership_account_delete_legal_wording']);
   const options = {
     headers: { 'x-access-token': accessToken },
+    method: 'DELETE',
   };
   try {
     // console.log(' ** DELETE');
-    const result = yield axios.delete(url, { headers: options.headers });
-    // const result = yield call(request, url, options);
+    // const result = yield axios.delete(url, { headers: options.headers });
+    const result = yield call(request, url, options);
     yield put(deleteUserPicSuccess());
   } catch (err) {
     yield put(deleteUserPicFail(err.message));
