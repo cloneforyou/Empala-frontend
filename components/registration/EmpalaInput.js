@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import InputMask from 'react-input-mask';
 import TextField from 'material-ui/TextField';
 import style from './RegistrationFieldsStyle';
+import {openInfoPopup} from '../../actions/registration';
 
 
 class EmpalaInput extends Component {
@@ -20,10 +21,18 @@ class EmpalaInput extends Component {
 
   render() {
     const errorText = this.props.disabled ? '' : this.props.errorText;
-    const { currentColorScheme } = this.props;
+    const {currentColorScheme} = this.props;
     return (
-      <div className={this.props.col ? `registration-group col-md-${this.props.col}` : this.props.notCol ? '' : 'registration-group col-12'}>
-        <div className="registration-label">{this.props.label}</div>
+      <div
+        className={this.props.col ? `registration-group col-md-${this.props.col}` : this.props.notCol ? '' : 'registration-group col-12'}>
+        <div className="registration-label">
+          {this.props.label}
+          {this.props.infoButton && (
+            <button className="info-popup__btn" onClick={this.props.openInfoPopup}>
+              <i className="registration__icon"/>
+            </button>
+          )}
+        </div>
         <TextField
           id={this.props.id}
           type={this.props.type}
@@ -41,9 +50,9 @@ class EmpalaInput extends Component {
           }
           inputStyle={this.props.disabled ?
             (currentColorScheme === 'light' ?
-              style.inputStyleDisabledLight :
-              style.inputStyleDisabledDark
-          ) :
+                style.inputStyleDisabledLight :
+                style.inputStyleDisabledDark
+            ) :
             (currentColorScheme === 'light' ?
                 style.inputStyleLightTheme :
                 style.inputStyleDarkTheme
@@ -78,4 +87,6 @@ class EmpalaInput extends Component {
 
 export default connect(state => ({
   currentColorScheme: state.dashboard.currentColorScheme,
+}), dispatch => ({
+  openInfoPopup: () => dispatch(openInfoPopup()),
 }))(EmpalaInput);

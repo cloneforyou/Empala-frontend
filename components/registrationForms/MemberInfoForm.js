@@ -16,6 +16,7 @@ import DatePickerField from '../registration/DatePickerField';
 import { usStatesList } from '../../localdata/usStatesList';
 import { getValuesForSelectField } from '../../utils/registrationUtils';
 import { countriesList } from '../../localdata/countriesList';
+import InfoPopup from '../registration/InfoPopup';
 import countriesPhoneCodes from '../../localdata/countriesPhoneCodes';
 
 const usStates = getValuesForSelectField(usStatesList);
@@ -27,6 +28,7 @@ const mapStateToProps = state => ({
   fieldsErrors: state.registration.fieldsErrors,
   trustedContactActive: state.registration.checkboxes.member_trusted_contact_person_trusted_contact_checkbox,
   checkboxes: state.registration.checkboxes,
+  showInfoPopup: state.registration.showInfoPopup,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -96,6 +98,7 @@ class MemberInfoForm extends React.PureComponent {
           mask={mask}
           typeField={item.typeField}
           disabled={!this.props.trustedContactActive && this.props.page === 4}
+          infoButton={item.infoButton}
         />
       );
     };
@@ -113,6 +116,10 @@ class MemberInfoForm extends React.PureComponent {
           <form className="row">
             {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
           </form>
+          {this.props.showInfoPopup &&
+          <InfoPopup
+            showInfoPopup={this.props.showInfoPopup}
+          />}
         </div>
       );
     }

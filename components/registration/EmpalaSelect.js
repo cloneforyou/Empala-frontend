@@ -5,14 +5,21 @@ import MenuItem from 'material-ui/MenuItem';
 import PropTypes from 'prop-types';
 import fieldNeedsLabel from '../../localdata/noLabelFields';
 import style from './RegistrationFieldsStyle';
-import { closeModal } from "../../actions/dashboard";
+import { openInfoPopup } from '../../actions/registration';
 
 
 const EmpalaSelect = (props) => {
   const { currentColorScheme } = props;
   return (
     <div className={props.col ? `registration-group col-md-${props.col}` : 'registration-group col-12'}>
-      <div className="registration-label">{props.label}</div>
+      <div className="registration-label">
+        {props.label}
+        {props.infoButton && (
+          <button className="info-popup__btn" onClick={props.openInfoPopup}>
+            <i className="registration__icon" />
+          </button>
+        )}
+      </div>
       <SelectField
         id={props.id}
         value={props.value}
@@ -25,16 +32,16 @@ const EmpalaSelect = (props) => {
           style.hintStyleDarkTheme
         }
         labelStyle={props.disabled ? style.labelStyleDisabled :
-           (currentColorScheme === 'light' ?
-               style.labelStyleLightTheme :
-               style.labelStyleDarkTheme
-           )
-         }
+          (currentColorScheme === 'light' ?
+              style.labelStyleLightTheme :
+              style.labelStyleDarkTheme
+          )
+        }
         inputStyle={props.disabled ?
           (currentColorScheme === 'light' ?
-            style.inputStyleDisabledLight :
-            style.inputStyleDisabledDark
-        ) :
+              style.inputStyleDisabledLight :
+              style.inputStyleDisabledDark
+          ) :
           (currentColorScheme === 'light' ?
               style.inputStyleLightTheme :
               style.inputStyleDarkTheme
@@ -57,7 +64,7 @@ const EmpalaSelect = (props) => {
         errorText={props.disabled ? '' : props.errorText}
         margin="none"
       >
-        {props.options.map((option) => (
+        {props.options.map(option => (
           <MenuItem
             key={option.value}
             value={option.value}
@@ -80,8 +87,14 @@ EmpalaSelect.propTypes = {
   handleCheck: PropTypes.func,
   handleChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  infoButton: PropTypes.bool,
 };
-export default connect(state => ({
-  currentColorScheme: state.dashboard.currentColorScheme,
-}))(EmpalaSelect);
+export default connect(
+  state => ({
+    currentColorScheme: state.dashboard.currentColorScheme,
+  }),
+  dispatch => ({
+    openInfoPopup: () => dispatch(openInfoPopup()),
+  }),
+)(EmpalaSelect);
 

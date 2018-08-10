@@ -24,6 +24,8 @@ import {
   SEND_CODE_VERIFY,
   SEND_CODE_VERIFY_SUCCESS,
   SEND_CODE_VERIFY_FAILURE,
+  OPEN_INFO_POPUP,
+  CLOSE_INFO_POPUP,
 } from '../constants/registration';
 
 // import { generateId } from '../utils/registrationUtils';
@@ -65,6 +67,7 @@ const initialState = {
   codeVerifyError: null,
   showSuccessModal: false,
   codeSent: false,
+  showInfoPopup: false,
 };
 
 function registration(state = initialState, action) {
@@ -207,6 +210,16 @@ function registration(state = initialState, action) {
         verifyLoading: false,
         codeVerify: null,
         codeVerifyError: action.err,
+      };
+    case OPEN_INFO_POPUP:
+      return {
+        ...state,
+        showInfoPopup: true,
+      };
+    case CLOSE_INFO_POPUP:
+      return {
+        ...state,
+        showInfoPopup: false,
       };
     default:
       return state;

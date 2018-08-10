@@ -245,6 +245,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_cryptocurrencies',
@@ -253,6 +254,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_options',
@@ -261,6 +263,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_private_equity',
@@ -269,6 +272,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_bonds',
@@ -277,6 +281,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_margin_accounts',
@@ -285,6 +290,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_margin_currencies',
@@ -293,6 +299,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_borrowing_money',
@@ -302,6 +309,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_futures',
@@ -310,6 +318,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_lending_money',
@@ -318,6 +327,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_foreign_markets',
@@ -326,6 +336,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
     {
       id: 'profile_investment_experience_exotics',
@@ -334,6 +345,7 @@ export const dataFields = [
       options,
       hint: 'Please select',
       autoWidth: true,
+      infoButton: true,
     },
   ],
 ];

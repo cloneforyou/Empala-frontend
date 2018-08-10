@@ -29,6 +29,8 @@ import {
   SEND_CODE_VERIFY,
   SEND_CODE_VERIFY_SUCCESS,
   SEND_CODE_VERIFY_FAILURE, REGISTRATION_SUBMIT_SUCCESS,
+  OPEN_INFO_POPUP,
+  CLOSE_INFO_POPUP,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -262,4 +264,16 @@ export function sendCodeVerifyFailure(err) {
     type: SEND_CODE_VERIFY_FAILURE,
     err
   }
+}
+
+export function openInfoPopup() {
+  return {
+    type: OPEN_INFO_POPUP,
+  };
+}
+
+export function closeInfoPopup() {
+  return {
+    type: CLOSE_INFO_POPUP,
+  };
 }
