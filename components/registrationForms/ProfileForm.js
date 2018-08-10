@@ -19,6 +19,7 @@ const mapStateToProps = state => ({
   page: state.registration.tabIndex,
   fieldsErrors: state.registration.fieldsErrors,
   showInfoPopup: state.registration.showInfoPopup,
+  infoPopupName: state.registration.infoPopupName,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -108,6 +109,7 @@ class ProfileForm extends PureComponent {
           {this.props.showInfoPopup &&
           <InfoPopup
             showInfoPopup={this.props.showInfoPopup}
+            name={this.props.infoPopupName}
           />}
         </form>
       </div>

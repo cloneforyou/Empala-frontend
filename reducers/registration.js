@@ -68,6 +68,7 @@ const initialState = {
   showSuccessModal: false,
   codeSent: false,
   showInfoPopup: false,
+  infoPopupName: false,
 };
 
 function registration(state = initialState, action) {
@@ -215,11 +216,13 @@ function registration(state = initialState, action) {
       return {
         ...state,
         showInfoPopup: true,
+        infoPopupName: action.name,
       };
     case CLOSE_INFO_POPUP:
       return {
         ...state,
         showInfoPopup: false,
+        infoPopupName: false,
       };
     default:
       return state;
