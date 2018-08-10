@@ -29,6 +29,7 @@ const mapStateToProps = state => ({
   trustedContactActive: state.registration.checkboxes.member_trusted_contact_person_trusted_contact_checkbox,
   checkboxes: state.registration.checkboxes,
   showInfoPopup: state.registration.showInfoPopup,
+  infoPopupName: state.registration.infoPopupName,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -119,6 +120,7 @@ class MemberInfoForm extends React.PureComponent {
           {this.props.showInfoPopup &&
           <InfoPopup
             showInfoPopup={this.props.showInfoPopup}
+            name={this.props.infoPopupName}
           />}
         </div>
       );

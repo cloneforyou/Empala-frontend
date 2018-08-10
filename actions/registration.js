@@ -266,9 +266,10 @@ export function sendCodeVerifyFailure(err) {
   }
 }
 
-export function openInfoPopup() {
+export function openInfoPopup(name) {
   return {
     type: OPEN_INFO_POPUP,
+    name,
   };
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { closeInfoPopup } from '../../actions/registration';
+import { getPopupTextById, getPopupTitleById } from '../../utils/registrationUtils';
 
 const mapStateToProps = state => ({
   showInfoPopup: state.registration.showInfoPopup,
@@ -36,13 +37,10 @@ class InfoPopup extends Component {
         <div className="info-popup__container">
           <div className="info-popup__title">
             <i className="registration__icon icon_width15 margin-right10" />
-            Equity Investments
+            { getPopupTitleById(this.props.name) }
           </div>
           <div className="info-popup__text">
-            Liquorice cake marshmallow lemon drops marzipan dragée lollipop
-            marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans
-            pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy
-            tiramisu macaroon donut pie candy canes.
+            { getPopupTextById(this.props.name) }
           </div>
         </div>
         <div className="d-flex justify-content-end">

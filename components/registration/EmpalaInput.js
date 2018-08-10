@@ -28,7 +28,7 @@ class EmpalaInput extends Component {
         <div className="registration-label">
           {this.props.label}
           {this.props.infoButton && (
-            <button className="info-popup__btn" onClick={this.props.openInfoPopup}>
+            <button className="info-popup__btn" onClick={(e) => {e.preventDefault(); this.props.openInfoPopup(this.props.id);}}>
               <i className="registration__icon"/>
             </button>
           )}
@@ -88,5 +88,5 @@ class EmpalaInput extends Component {
 export default connect(state => ({
   currentColorScheme: state.dashboard.currentColorScheme,
 }), dispatch => ({
-  openInfoPopup: () => dispatch(openInfoPopup()),
+  openInfoPopup: (name) => dispatch(openInfoPopup(name)),
 }))(EmpalaInput);

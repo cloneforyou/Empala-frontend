@@ -11,6 +11,7 @@ import { dataFields as regulatoryPageData } from '../localdata/regulatoryPageDat
 import { dataFields as identityPageData } from '../localdata/identityPageData';
 import { dataFields as experiencePageData } from '../localdata/experiencePageData';
 import { dataFields as profilePageData } from '../localdata/profilePageData';
+import React from 'react';
 
 
 export const menuItems = {
@@ -204,3 +205,63 @@ export function traceError(err) {
       return err.response.data.info;
   }
 }
+
+const popupText = {
+  member_account_account_no: {
+    text: 'You can choose to use the system generated Account No. we will provide, or you can enter your own unique code that you will easily remember.',
+    title: 'Account no.',
+  },
+  profile_investment_experience_equities: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Equity Investments',
+  },
+  profile_investment_experience_cryptocurrencies: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Cryptocurrencies Investments',
+  },
+  profile_investment_experience_options: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Options Investments',
+  },
+  profile_investment_experience_private_equity: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Private equity Investments',
+  },
+  profile_investment_experience_bonds: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Bonds Investments',
+  },
+  profile_investment_experience_margin_accounts: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Margin Accounts Investments',
+  },
+  profile_investment_experience_margin_currencies: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Margin currencies Investments',
+  },
+  profile_investment_experience_borrowing_money: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Borrowing Money',
+  },
+  profile_investment_experience_futures: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Futures Investments',
+  },
+  profile_investment_experience_lending_money: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Lending money',
+  },
+  profile_investment_experience_foreign_markets: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Foreign markets Investments',
+  },
+  profile_investment_experience_exotics: {
+    text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
+    title: 'Exotics Investments',
+  },
+
+};
+
+export const getPopupTextById = id => popupText[id].text;
+export const getPopupTitleById = id => popupText[id].title;
+
