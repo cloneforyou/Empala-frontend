@@ -163,7 +163,7 @@ const Login = (props) => {
             <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
           </div>
           <div className="social-auth">
-            <div className="styled-part-separate"><span>or connect with</span></div>
+            <div className="styled-part-separate styled-part-separate_mb15">or connect with</div>
             { !isNode ? (
               <div className="social-auth__row">
                 <FacebookAuth handlelogin={props.handleLogin} />
@@ -175,6 +175,7 @@ const Login = (props) => {
           </div>
 
           <div className="text-center">
+            <div className="styled-part-separate">not a member?</div>
             <Link href="/registration">
               <a className="gray-link">New member registration</a>
             </Link>
