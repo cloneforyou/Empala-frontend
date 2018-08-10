@@ -17,6 +17,7 @@ import { usStatesList } from '../../localdata/usStatesList';
 import { getValuesForSelectField } from '../../utils/registrationUtils';
 import { countriesList } from '../../localdata/countriesList';
 import InfoPopup from '../registration/InfoPopup';
+import countriesPhoneCodes from '../../localdata/countriesPhoneCodes';
 
 const usStates = getValuesForSelectField(usStatesList);
 
@@ -44,10 +45,15 @@ class MemberInfoForm extends React.PureComponent {
     super(props);
 
     this.mappingComponent = (item) => {
+      const memberCountry = this.props.registrationData.member_basic_information_residence;
       let mask = '';
-      const phoneMask = '+9 999 999-9999';
+      // const phoneMask = '+9 999 999-9999';
+      const phoneMask = memberCountry ?
+        countriesPhoneCodes[memberCountry].mask
+        : '';
+      const countryCode = memberCountry ? countriesPhoneCodes[memberCountry].code : '';
       if (item.id.includes('phone')) {
-        mask = phoneMask;
+        mask = phoneMask ? `${countryCode} ${phoneMask}` : `${countryCode} 999 999-9999`;
       }
 
       if (item.options) {
@@ -121,7 +127,7 @@ class MemberInfoForm extends React.PureComponent {
     return (
       <div className="container-fluid">
         <div className="registration-group__section-title title-nowrap margin-bottom20">
-          {this.props.page === 3 && 'Select one of the govenment identification to enter.'}
+          {this.props.page === 3 && 'Select one of the government identification to enter.'}
         </div>
         <div className="row">
           <EmpalaRadioButton

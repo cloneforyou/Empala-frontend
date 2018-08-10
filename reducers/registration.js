@@ -81,6 +81,16 @@ function registration(state = initialState, action) {
     case SET_MEMBER_DOCUMENT_TYPE:
       return { ...state, registrationData: { ...state.registrationData, memberDocument: action.document } };
     case SET_FIELD_VALUE:
+      if (action.id === 'member_basic_information_residence') {
+        return {
+          ...state,
+          registrationData: {
+            ...state.registrationData,
+            [action.id]: action.value,
+            member_account_contact_phone: '',
+          },
+        };
+      }
       return { ...state, registrationData: { ...state.registrationData, [action.id]: action.value } };
     case VALIDATE_FIELD_ERROR:
       return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: action.message } };

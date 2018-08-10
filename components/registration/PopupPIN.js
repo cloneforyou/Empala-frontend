@@ -31,9 +31,9 @@ class PopupPIN extends Component {
     this.props.sendCodeVerify(verify_code, this.props.type)
   };
 
-  closePopup = () => {
-    this.props.closePopupPIN(this.props.tabName, this.props.tabIndex)
-  };
+  // closePopup = () => {
+  //   this.props.closePopupPIN(this.props.tabName, this.props.tabIndex)
+  // };
 
 
   render() {
@@ -41,6 +41,7 @@ class PopupPIN extends Component {
     const {
       showVerifyEmailForm,
       codeVerifyError,
+      closePopupPIN,
       codeSent,
       type,
     } = this.props;
@@ -64,7 +65,7 @@ class PopupPIN extends Component {
                 </button>
                 <button
                   className="popup-verify__btn_default"
-                  onClick={this.closePopup}
+                  onClick={closePopupPIN}
                   style={{ fontSize: '16px' }}
                 >
                   Cancel
@@ -118,7 +119,7 @@ class PopupPIN extends Component {
               <div>
                 <button
                   className="popup-verify__btn_default"
-                  onClick={this.closePopup}
+                  onClick={closePopupPIN}
                 >
                   Cancel
                 </button>
@@ -138,9 +139,7 @@ export default connect((state) => ({
     tabIndex: state.registration.tabIndex || 1,
   }),
   (dispatch) => ({
-    closePopupPIN: (tabName, tabIndex) => {
-      dispatch(closePopupPIN());
-      dispatch(changeTabPage(tabName, tabIndex, 'forward'))},
+    closePopupPIN: () => dispatch(closePopupPIN()),
     verifySendRequest: (type) => dispatch(verifySendRequest(type)),
     sendCodeVerify: (code, entityType) => dispatch(sendCodeVerify(code, entityType))
   })

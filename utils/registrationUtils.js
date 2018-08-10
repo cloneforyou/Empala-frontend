@@ -196,6 +196,10 @@ export function traceError(err) {
       return 'this account identifier is already in use!';
     case 'THIS_DATA_IS_ALREADY_IN_USE':
       return 'some of your identification values are already in use!';
+    case 'EMAIL_IS_NOT_VERIFIED':
+      return 'provided e-mail is not verified!';
+    case 'PHONE_IS_NOT_VERIFIED':
+      return 'provided phone number is not verified!';
     default:
       return err.response.data.info;
   }

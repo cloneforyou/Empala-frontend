@@ -9,6 +9,10 @@ export const dataFields = [
           value: 'United States',
           title: 'United States',
         },
+        {
+          value: 'Russia',
+          title: 'Russia',
+        },
       ],
     },
     {
