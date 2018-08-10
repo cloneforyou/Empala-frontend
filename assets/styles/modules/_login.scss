@@ -39,11 +39,11 @@
   }
   &__form-width {
     width: 250px;
-    margin: 0 auto 55px;
+    margin: 0 auto 30px;
   }
   &__logo {
     width: 243px;
-    margin-bottom: 56px;
+    margin-bottom: 30px;
   }
   &__list {
     & > li {
@@ -58,6 +58,8 @@
     @include fontSize(16px);
     color: #424344;
     text-align: center;
+    margin-bottom: 30px;
+
   }
   &__security-title {
     @include fontSize(24px);
@@ -93,7 +95,7 @@
     width: 100%;
     padding: 8px 10px;
     font-weight: 300;
-    box-shadow: 3px 5px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
     text-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     &_sm {
       max-width: 255px;
@@ -123,7 +125,7 @@
   @include fontSize(16px);
   text-rendering: geometricPrecision;
   font-weight: 300;
-  box-shadow: 3px 5px 6px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
   border-radius: 5px;
   padding: 5px 20px 5px 40px;
   height: 40px;
@@ -171,22 +173,28 @@
 }
 
 .styled-part-separate {
+  @include fontSize(12px);
   position: relative;
   text-align: center;
   line-height: 1rem;
-  margin-bottom: 15px;
+  &_mb15 {
+    margin-bottom: 15px;
+  }
   &:before, &:after {
     content: '';
     width: 18%;
-    height: .5px;
-    background: #b3b4b5;
+    height: 2px;
+    border-bottom: 1px solid #ededed;
     position: absolute;
     top: 50%;
-    left: 61px;
-    transform: translateY(50%);
+    left: 60px;
+    transform: translateY(calc(50% - 3px));
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    background-color: rgba(0, 0, 0, 0);
   }
   &:after {
-    left: 245px;
+    left: 270px;
   }
   span {
     color: #878889;
