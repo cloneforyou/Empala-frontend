@@ -26,6 +26,7 @@ class FinalReviewPage extends PureComponent {
     const data = this.props.registrationData;
     const empty = ' ';
     const noExperience = 'No experience';
+    const fullName = `${data.member_basic_information_prefix || ''} ${data.member_basic_information_first_name || ''} ${data.member_basic_information_last_name || ''} ${data.member_basic_information_suffix || ''}`;
     return (
       <div className="final-review__outer-wrap">
         <div className="final-review__inner-wrap">
@@ -54,24 +55,9 @@ class FinalReviewPage extends PureComponent {
                 </div>
                 <div className="row">
                   <FieldComponent
-                    col={2}
-                    label="Prefix"
-                    value={data.member_basic_information_prefix || empty}
-                  />
-                  <FieldComponent
-                    col={4}
-                    label="First name"
-                    value={data.member_basic_information_first_name || empty}
-                  />
-                  <FieldComponent
-                    col={4}
-                    label="Last name"
-                    value={data.member_basic_information_last_name || empty}
-                  />
-                  <FieldComponent
-                    col={2}
-                    label="Suffix"
-                    value={data.member_basic_information_suffix || empty}
+                    col={12}
+                    label="Name"
+                    value={fullName || empty}
                   />
                   <FieldComponent
                     col={6}
@@ -436,7 +422,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Equities"
                     value={
-                      (data.profile_investment_experience_equities !== 'None' && data.profile_investment_experience_equities + ' years')
+                      (data.profile_investment_experience_equities !== 'None' && `${data.profile_investment_experience_equities} years`)
                       || noExperience
                     }
                   />
@@ -444,7 +430,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Currencies"
                     value={
-                      (data.profile_investment_experience_margin_currencies !== 'None' && data.profile_investment_experience_margin_currencies + ' years')
+                      (data.profile_investment_experience_margin_currencies !== 'None' && `${data.profile_investment_experience_margin_currencies} years`)
                       || noExperience
                     }
                   />
@@ -452,7 +438,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Options"
                     value={
-                      (data.profile_investment_experience_options !== 'None' && data.profile_investment_experience_options + ' years')
+                      (data.profile_investment_experience_options !== 'None' && `${data.profile_investment_experience_options} years`)
                       || noExperience
                     }
                   />
@@ -460,7 +446,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Futures"
                     value={
-                      (data.profile_investment_experience_futures !== 'None' && data.profile_investment_experience_futures + ' years')
+                      (data.profile_investment_experience_futures !== 'None' && `${data.profile_investment_experience_futures} years`)
                       || noExperience
                     }
                   />
@@ -468,7 +454,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Bonds"
                     value={
-                      (data.profile_investment_experience_bonds !== 'None' && data.profile_investment_experience_bonds + ' years')
+                      (data.profile_investment_experience_bonds !== 'None' && `${data.profile_investment_experience_bonds} years`)
                       || noExperience
                     }
                   />
@@ -476,7 +462,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Foreign markets"
                     value={
-                      (data.profile_investment_experience_foreign_markets !== 'None' && data.profile_investment_experience_foreign_markets + ' years')
+                      (data.profile_investment_experience_foreign_markets !== 'None' && `${data.profile_investment_experience_foreign_markets} years`)
                       || noExperience
                     }
                   />
@@ -488,7 +474,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Cryptocurrencies"
                     value={
-                      (data.profile_investment_experience_cryptocurrencies !== 'None' && data.profile_investment_experience_cryptocurrencies + ' years')
+                      (data.profile_investment_experience_cryptocurrencies !== 'None' && `${data.profile_investment_experience_cryptocurrencies} years`)
                       || noExperience
                     }
                   />
@@ -496,7 +482,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Borrowing money"
                     value={
-                      (data.profile_investment_experience_borrowing_money !== 'None' && data.profile_investment_experience_borrowing_money + ' years')
+                      (data.profile_investment_experience_borrowing_money !== 'None' && `${data.profile_investment_experience_borrowing_money} years`)
                       || noExperience
                     }
                   />
@@ -504,7 +490,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Private Equity"
                     value={
-                      (data.profile_investment_experience_private_equity !== 'None' && data.profile_investment_experience_private_equity + ' years')
+                      (data.profile_investment_experience_private_equity !== 'None' && `${data.profile_investment_experience_private_equity} years`)
                       || noExperience
                     }
                   />
@@ -512,7 +498,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Lending money"
                     value={
-                      (data.profile_investment_experience_lending_money !== 'None' && data.profile_investment_experience_lending_money + ' years')
+                      (data.profile_investment_experience_lending_money !== 'None' && `${data.profile_investment_experience_lending_money} years`)
                       || noExperience
                     }
                   />
@@ -520,7 +506,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Margin accounts"
                     value={
-                      (data.profile_investment_experience_margin_accounts !== 'None' && data.profile_investment_experience_margin_accounts + ' years')
+                      (data.profile_investment_experience_margin_accounts !== 'None' && `${data.profile_investment_experience_margin_accounts} years`)
                       || noExperience
                     }
                   />
@@ -528,7 +514,7 @@ class FinalReviewPage extends PureComponent {
                     col={6}
                     label="Exotics"
                     value={
-                      (data.profile_investment_experience_exotics !== 'None' && data.profile_investment_experience_exotics + ' years')
+                      (data.profile_investment_experience_exotics !== 'None' && `${data.profile_investment_experience_exotics} years`)
                       || noExperience
                     }
                   />
@@ -557,9 +543,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return ({
-    setTabPageIndex: (index) => dispatch(setTabPageIndex(index)),
-    setTabName: (tabName) => dispatch(setTabName(tabName)),
-    goBackToPart: (status) => dispatch(goBackToPart(status)),
+    setTabPageIndex: index => dispatch(setTabPageIndex(index)),
+    setTabName: tabName => dispatch(setTabName(tabName)),
+    goBackToPart: status => dispatch(goBackToPart(status)),
   });
 }
 
