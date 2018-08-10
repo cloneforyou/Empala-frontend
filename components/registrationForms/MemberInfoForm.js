@@ -120,7 +120,7 @@ class MemberInfoForm extends React.PureComponent {
     return (
       <div className="container-fluid">
         <div className="registration-group__section-title title-nowrap margin-bottom20">
-          {this.props.page === 3 && 'Select one of the govenment identification to enter.'}
+          {this.props.page === 3 && 'Select one of the government identification to enter.'}
         </div>
         <div className="row">
           <EmpalaRadioButton

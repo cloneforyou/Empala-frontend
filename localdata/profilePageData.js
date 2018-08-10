@@ -1,5 +1,6 @@
 import { getValuesForSelectField } from '../utils/registrationUtils';
 import { usStatesList } from './usStatesList';
+import { countriesList } from './countriesList';
 
 const usStates = getValuesForSelectField(usStatesList);
 
@@ -55,8 +56,10 @@ export const dataFields = [
     {
       id: 'profile_employment_employment_country',
       label: 'Employment сountry',
-      type: 'text',
-      placeholder: '',
+      hint: 'Please select',
+      field: 'select',
+      options: countriesList,
+      autoWidth: true,
     },
 
     {
