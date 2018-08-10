@@ -121,6 +121,7 @@ export function* sendRegistrationForm() {
 }
 
 export function* getUserID() {
+  const data = JSON.parse(localStorage.getItem('registrationData'));
   const id = localStorage.getItem('id');
   const url = `/api/auth/register?id=${id}`;
   const options = {
@@ -130,7 +131,7 @@ export function* getUserID() {
     const res = yield call(request, url, options);
     yield put(setUserID(res.data.data.id));
     localStorage.setItem('id', res.data.data.id);
-    yield put(setInputFieldValueById('member_account_account_no', res.data.data.id));
+    if (!data.member_account_account_no) yield put(setInputFieldValueById('member_account_account_no', res.data.data.id));
   } catch (err) {
     yield put(failUserID(`Sorry, the registration is unavailable right now. ${err.message}`));
   }
