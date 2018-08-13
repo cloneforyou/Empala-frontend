@@ -695,7 +695,7 @@ export const widgetsPositionFirst = [
         title: 'notional',
         headers: [
           {
-            title: 'Notional amount',
+            title: 'Notional amounts',
             width: '165px',
           },
           {

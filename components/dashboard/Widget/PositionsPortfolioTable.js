@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduce, uniqueId, values } from 'lodash';
-import { widgetsPositions } from '../../../localdata/dashboardWidgets';
-import WidgetTable from './WidgetTable';
 import { subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
 import { formatNumberWithFixedPoint, getTableHeaderByName } from '../../../utils/dashboardUtils';
 import WidgetHead from './WidgetHead';
