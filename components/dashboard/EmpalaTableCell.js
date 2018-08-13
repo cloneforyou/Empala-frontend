@@ -23,29 +23,6 @@ export default class EmpalaTableCell extends Component {
       // value: this.props.value,
     };
   }
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   // console.log('pppppppppppppprrrrrr', nextProps, prevState)
-  //   if (nextProps.mark === 'numeric') {
-  //     console.log('NNNNNAAANNNA', isNaN(prevState.value), isNaN(nextProps.value) )
-  //     if (!isNaN(prevState.value) && !isNaN(nextProps.value)) {
-  //       console.log('mmmmmmmmm', nextProps.mark, prevState.value === nextProps.value, nextProps.value, prevState.value);
-  //       if (nextProps.value > prevState.value) return { attr: 'up', value: nextProps.value };
-  //       else if (nextProps.value < prevState.value) return { attr: 'down', value: nextProps.value };
-  //       return { attr: '', value: nextProps.value };
-  //     }
-  //     return false;
-  //   }
-  // }
-  // componentDidUpdate(prevProps) {
-  //   console.log('pppppppppppppprrrrrr===>', prevProps)
-  //   if (prevProps.mark === 'numeric') {
-  //     if (!isNaN(this.props.value) && !isNaN(prevProps.value)) {
-  //       console.log('mmmmmmmmm', prevProps.mark, this.props);
-  //       if (this.props.value > prevProps.value) this.setState(() => ({ attr: 'up' }));
-  //       else if (this.props.value < prevProps.value) this.setState(() => ({ attr: 'down' }));
-  //     }
-  //   }
-  // }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.mark === 'numeric') {
       // console.log('mmmmmmmmm', this.props.mark, nextProps);

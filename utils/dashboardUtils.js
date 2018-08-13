@@ -46,11 +46,11 @@ const widgetAttributes = {
   },
   overview_deals_development: {
     id: 'overview_deals_development',
-    title: 'Deals development',
+    title: 'Deal developments',
     col: 3,
     height: 290,
     padding_left: 15,
-    padding_right: 37,
+    padding_right: 20,
   },
 };
 const tableHeaders = {
@@ -620,7 +620,13 @@ const tableHeaders = {
         '210px',
         '135px',
         '130px',
-        '55px',
+        '75px',
+      ],
+      padding: [
+        null,
+        null,
+        null,
+        '0 30px 0 0',
       ],
       sortable: [
       ],
