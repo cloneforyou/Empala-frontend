@@ -43,7 +43,7 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="fields-group">
             <div className="fields-group__row row">
-              <div className="col-md-6">
+              <div className="col-md-6 padding-right50">
                 <div
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 1)}
@@ -86,7 +86,7 @@ class FinalReviewPage extends PureComponent {
                   />
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 padding-x20">
                 <div
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
@@ -121,7 +121,7 @@ class FinalReviewPage extends PureComponent {
                   />
                 </div>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 padding-x20">
                 <div
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 3)}
@@ -160,7 +160,7 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="fields-group">
             <div className="fields-group__row row">
-              <div className="col-md-6">
+              <div className="col-md-6 padding-right50">
                 <div
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 1)}
@@ -203,7 +203,7 @@ class FinalReviewPage extends PureComponent {
                   />
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 padding-x20">
                 <div
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('identity', 2)}
@@ -250,7 +250,7 @@ class FinalReviewPage extends PureComponent {
           </div>
           <div className="fields-group">
             <div className="fields-group__row row">
-              <div className="col-md-6">
+              <div className="col-md-6 padding-right50">
                 <div
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('member', 4)}
@@ -288,7 +288,7 @@ class FinalReviewPage extends PureComponent {
                   />
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 padding-x20">
                 <div
                   className="fields-group__title pointer"
                   onClick={() => this.goBack('regulatory', 2)}
@@ -340,7 +340,7 @@ class FinalReviewPage extends PureComponent {
               Employment
             </div>
             <div className="fields-group__row row">
-              <div className="col-md-6">
+              <div className="col-md-6 padding-right50">
                 <div className="row">
                   <FieldComponent
                     col={12}
@@ -374,7 +374,7 @@ class FinalReviewPage extends PureComponent {
                   />
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 padding-x20">
                 <div className="row">
                   <FieldComponent
                     col={12}
@@ -416,7 +416,7 @@ class FinalReviewPage extends PureComponent {
               Investment experience
             </div>
             <div className="fields-group__row row">
-              <div className="col-md-6">
+              <div className="col-md-6 padding-right50">
                 <div className="row">
                   <FieldComponent
                     col={6}
@@ -468,7 +468,7 @@ class FinalReviewPage extends PureComponent {
                   />
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6 padding-x20">
                 <div className="row">
                   <FieldComponent
                     col={6}
