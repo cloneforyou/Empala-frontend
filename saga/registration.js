@@ -33,7 +33,7 @@ import validationSaga, { validateCheckbox, validateEmptyFields, validateFieldVal
 import { getAddressInfoByZIP } from './sideServices';
 
 export function* changeTabPage({ tabName, tabIndex, direction }) {
-  if (!(tabName && tabIndex)) return;
+  if (!tabName) return;
   const mailingAddressSameAsResidential = yield select(state =>
     state.registration.checkboxes.identity_residential_address_same_mailing_address_checkbox);
   const nextTabs = {
@@ -200,8 +200,10 @@ export function* checkVerificationRequest(action) {
         yield put(showPopupPIN('phone'));
       }
     } else if (res.data.info === 'VERIFIED') {
+      console.log('number verified!!!!')
       const tabName = yield select(state => state.registration.tabName);
       const tabIndex = yield select(state => state.registration.tabIndex);
+      console.log('------->>>>>>>>>>', tabName, tabIndex)
       yield changeTabPage({ tabName, tabIndex, direction: 'forward' });
     }
   } catch (err) {
