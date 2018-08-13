@@ -72,7 +72,7 @@ class FinalReviewPage extends PureComponent {
                   <FieldComponent
                     col={6}
                     label="Member no."
-                    value={data.member_account_account_no || empty}
+                    value={`${data.member_account_account_no}` || empty}
                   />
                   <FieldComponent
                     col={6}
