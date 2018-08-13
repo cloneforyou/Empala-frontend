@@ -264,27 +264,27 @@ class FinalReviewPage extends PureComponent {
                   <FieldComponent
                     col={6}
                     label="First name"
-                    value={data.identity_trusted_contact_person_first_name || empty}
+                    value={data.member_trusted_contact_person_first_name || empty}
                   />
                   <FieldComponent
                     col={6}
                     label="Last name"
-                    value={data.identity_trusted_contact_person_last_name || empty}
+                    value={data.member_trusted_contact_person_last_name || empty}
                   />
                   <FieldComponent
                     col={6}
                     label="Contact telephone no."
-                    value={data.identity_trusted_contact_person_phone || empty}
+                    value={data.member_trusted_contact_person_phone || empty}
                   />
                   <FieldComponent
                     col={6}
                     label="Relationship"
-                    value={data.identity_trusted_contact_person_relationship || empty}
+                    value={data.member_trusted_contact_person_relationship || empty}
                   />
                   <FieldComponent
                     col={12}
                     label="Email address"
-                    value={data.identity_trusted_contact_person_email || empty}
+                    value={data.member_trusted_contact_person_email || empty}
                   />
                 </div>
               </div>
