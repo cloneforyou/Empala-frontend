@@ -55,7 +55,7 @@ const NavButtons = (props) => {
 
   function goBackToReview() {
     props.setTabName('final_review');
-    props.setTabPageIndex(0);
+    props.setTabPageIndex(1);
     props.goBackToPart(false);
   }
 
