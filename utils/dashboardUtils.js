@@ -46,11 +46,11 @@ const widgetAttributes = {
   },
   overview_deals_development: {
     id: 'overview_deals_development',
-    title: 'Deals development',
+    title: 'Deal developments',
     col: 3,
     height: 290,
     padding_left: 15,
-    padding_right: 37,
+    padding_right: 14,
   },
 };
 const tableHeaders = {
@@ -256,7 +256,7 @@ const tableHeaders = {
       'Ann CF%',
       'Carry',
       'Ann Ret',
-      'VAR Count',
+      'VAR Cont',
       'Avg Price',
       'Quantity',
       'M2M',
@@ -620,7 +620,13 @@ const tableHeaders = {
         '210px',
         '135px',
         '130px',
-        '55px',
+        '75px',
+      ],
+      padding: [
+        null,
+        null,
+        null,
+        '0 30px 0 0',
       ],
       sortable: [
       ],
@@ -686,7 +692,7 @@ export const parseOrdersList = list => list.map(order => ({
     order_quantity: order.Quantity,
     fill_quantity: order.ExecutedQuantity,
     remain_quantity: order.LeavesQuantity,
-    notional_ammount: calculateOrderPrice(order.AveragePrice, order.LeavesQuantity), // TODO find the way how to calculate
+    notional_ammount: calculateOrderPrice(order.AveragePrice, order.Quantity), // TODO find the way how to calculate
     comission: '--', // TODO find the way how to calculate
     distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
     start_date: parseDateString(order.CreateDate, 'MM/DD/YY'),

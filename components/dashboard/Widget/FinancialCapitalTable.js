@@ -4,7 +4,6 @@ import WidgetHead from './WidgetHead';
 import EmpalaTable from '../EmpalaTable';
 import {
   formatNumberWithFixedPoint,
-  getTableHeaderByName,
   getWidgetAttributesByName,
 } from '../../../utils/dashboardUtils';
 import { reduce } from 'lodash';
@@ -55,14 +54,14 @@ const parsePositionsToTableData = (tableName, positions) => {
     }, 0);
   };
   const exposures = [
-    { name: 'Total a/c value', value: calculateTotal(), day_ch: '--' },
-    { name: 'Net position', value: 0, day_ch: '--' },
-    { name: 'Adj net position', value: 0, day_ch: '--' },
-    { name: 'Gross position', value: 0, day_ch: '--' },
-    { name: 'Adj gross position', value: 0, day_ch: '--' },
-    { name: 'Estimated VAR', value: 0, day_ch: '--' },
-    { name: 'Annualized carry', value: 0, day_ch: '--' },
-    { name: 'Credit available', value: 0, day_ch: '--' },
+    { name: 'Total a/c value', value: calculateTotal(), day_ch: 0 },
+    { name: 'Net position', value: 0, day_ch: 0 },
+    { name: 'Adj net position', value: 0, day_ch: 0 },
+    { name: 'Gross position', value: 0, day_ch: 0 },
+    { name: 'Adj gross position', value: 0, day_ch: 0 },
+    { name: 'Estimated VAR', value: 0, day_ch: 0 },
+    { name: 'Annualized carry', value: 0, day_ch: 0 },
+    { name: 'Credit available', value: 0, day_ch: 0 },
   ];
   // Type names just a stub except CommonStock. todo investigate type names
   const allocations = [

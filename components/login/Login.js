@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import EmpalaInput from '../registration/EmpalaInput';
 import { setInputFieldValueById } from '../../actions/registration';
 import {
-  clearLoginState, clearRegistrationData,
+  clearLoginState,
+  clearRegistrationData,
   loginRequest,
   sendActivationLink,
   setPasswordForgotten, toggleModal,

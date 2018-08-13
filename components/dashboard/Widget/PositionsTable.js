@@ -74,7 +74,7 @@ export const parsePositionsTablesData = (tables, data) => {
         private: '--',
       },
       adjusted: {
-        net: 0,
+        net: ' ',
         stocks: '--',
         emara: '--',
         currencies: '--',
@@ -140,7 +140,7 @@ export const parsePositionsTablesData = (tables, data) => {
         private: '--',
       },
       adjusted: {
-        net: 0,
+        net: ' ',
         stocks: '--',
         emara: '--',
         currencies: '--',
@@ -182,7 +182,19 @@ export const parsePositionsTablesData = (tables, data) => {
         credit_available: '--',
       },
     };
-    const getChangeByTitleAndType = title => type => '--';
+    const getChangeByTitleAndType = (title, type) => {
+      switch (title) {
+        case 'adjusted':
+          switch (type) {
+            case 'net':
+              return ' ';
+            default:
+              return ' ';
+          }
+        default:
+          return '--';
+      }
+    };
     const getDomesticByTitleAndType = title => type => domestic[title][type];
     const getForeignByTitleAndType = title => type => foreign[title][type];
     const getExposureByType = type => rawNames[type];
@@ -253,7 +265,7 @@ export const parsePositionsTablesData = (tables, data) => {
             domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || '--',
             foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || '--',
             total: formatNumberWithFixedPoint(100, 1),
-            dayChange: getChangeByTitleAndType(title)(type),
+            dayChange: getChangeByTitleAndType(title, type),
           };
         }
         if (title === 'financialCapital') {
@@ -273,7 +285,7 @@ export const parsePositionsTablesData = (tables, data) => {
           domestic: formatNumberWithFixedPoint(calculatedDomestic, 0),
           foreign: formatNumberWithFixedPoint(calculatedForeign, 0),
           total: formatNumberWithFixedPoint(calculatedTotal, 0),
-          dayChange: formatNumberWithFixedPoint(getChangeByTitleAndType(title)(type), 1),
+          dayChange: formatNumberWithFixedPoint(getChangeByTitleAndType(title, type), 1),
         };
       });
     };
