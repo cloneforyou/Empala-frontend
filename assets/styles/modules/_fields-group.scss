@@ -5,11 +5,14 @@
   &__title {
     color: #98c73a;
     font-size: 16px;
-    margin-bottom: 3px;
+    margin-bottom: 9px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: underline;
     margin-left: -27px;
     display: flex;
+    @media(max-width: 1100px) {
+      margin-left: 0;
+    }
   }
 }
