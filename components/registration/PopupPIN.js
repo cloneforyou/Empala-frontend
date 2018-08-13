@@ -61,9 +61,11 @@ class PopupPIN extends Component {
         {
           !showVerifyEmailForm && type ==='email'?
             <div className="popup-verify__body popup-verify__body_h-335">
-              <h2 className="popup-verify__title">{this.formTitle()}</h2>
-              <img className="popup-verify__icon" src={iconPadlock} alt="" />
-              <p className="popup-verify__sub-title">Click ‘send’ to receive an email with a one-time code.</p>
+              <div>
+                <h2 className="popup-verify__title">{this.formTitle()}</h2>
+                <img className="popup-verify__icon" src={iconPadlock} alt="" />
+                <p className="popup-verify__sub-title">Click ‘send’ to receive an email with a one-time code.</p>
+              </div>
               <div className="popup-verify__foot buttons-row">
                 <button
                   className="popup-verify__btn popup-verify__btn_green"
@@ -85,7 +87,7 @@ class PopupPIN extends Component {
               <img className="popup-verify__icon" src={iconShield} alt="" />
               <p className="popup-verify__sub-title">Enter the code to continue your registration.</p>
               {
-                type === 'phone' && <p className="text-justify mb-4">Your security is our top priority.
+                type === 'phone' && <p className="popup-verify__text-info mb-4">Your security is our top priority.
                   As part of our KYC process, we need to validate the contact no. you entered.</p>
               }
               <div className="short-form-group">
