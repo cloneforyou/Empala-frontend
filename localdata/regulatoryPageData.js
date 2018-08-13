@@ -35,7 +35,7 @@ export const dataFields = [
   ],
   [
     {
-      id: 'regulatory_identificationfilterActiveCheckboxes_dateOfBirth',
+      id: 'regulatory_identification_dateOfBirth',
       field: 'date',
       label: 'Date of birth',
       birthDay: true,
