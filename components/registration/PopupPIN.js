@@ -23,12 +23,20 @@ class PopupPIN extends Component {
     }
   }
   handleChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value })
+    if (e.target.value && e.target.value.length <= 6) {
+      this.setState({ [e.target.id]: e.target.value });
+    }
   };
 
   verifyCode = () => {
     const { verify_code } = this.state;
     this.props.sendCodeVerify(verify_code, this.props.type)
+  };
+
+  handleEnter = (e) => {
+    if (e.key === 'Enter' && e.target.value && e.target.value.length === 6) {
+      this.verifyCode();
+    }
   };
 
   // closePopup = () => {
@@ -94,6 +102,7 @@ class PopupPIN extends Component {
                   value={verify_code}
                   id="verify_code"
                   onChange={this.handleChange}
+                  onKeyPress={this.handleEnter}
                 />
               </div>
               {
