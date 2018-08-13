@@ -48,9 +48,6 @@ function mapStateToProps(state) {
       [{ value: 'Urban Infrastructure - Sydney, AU' }, { value: '07-22-2018' }, { value: 'Successful Completion' }, { value: '0.0', color: 'green' }],
       [{ value: 'IDG Mining Phase 1 Infrastructure' }, { value: '07-21-2018' }, { value: 'Pricing change' }, { value: '9.7', color: 'green' }],
       [{ value: 'Axocanx trials' }, { value: '07-16-2018' }, { value: 'New bidder' }, { value: '11.6', color: 'green' }],
-      [{ value: '--' }, { value: '--' }, { value: '--' }, { value: '--' }, { value: '--' }],
-      [{ value: '--' }, { value: '--' }, { value: '--' }, { value: '--' }, { value: '--' }],
-      [{ value: '--' }, { value: '--' }, { value: '--' }, { value: '--' }, { value: '--' }],
     ],
   };
 }
