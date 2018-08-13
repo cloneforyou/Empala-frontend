@@ -56,6 +56,10 @@ class AgreementPage extends PureComponent {
     this.containerInfo.removeEventListener('scroll', this.handleScroll);
   }
 
+  focusSubmit() {
+    this.submitBtn.focus();
+  }
+
   checkRegistrationName = (e) => {
     const firstName = this.props.firstName.split(' ').join(' ');
     const lastName = this.props.lastName.split(' ').join(' ');
@@ -71,7 +75,8 @@ class AgreementPage extends PureComponent {
       if (fullName.length === prints.length) {
         this.setState({
           signed: true
-        })
+        });
+        this.focusSubmit();
       }
     }
   };
@@ -204,6 +209,7 @@ class AgreementPage extends PureComponent {
                 <button
                   id="submit"
                   className={`btn-submit ${(!this.state.disabled && this.state.signed) && 'btn-active'}`}
+                  ref={ref => this.submitBtn = ref}
                   onClick={() => {
                     this.handleSubmit();
                   }}
