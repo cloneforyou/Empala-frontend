@@ -23,7 +23,7 @@ class PopupPIN extends Component {
     }
   }
   handleChange = (e) => {
-    if (e.target.value && e.target.value.length <= 6) {
+    if (e.target.value && e.target.value.length <= 4) {
       this.setState({ [e.target.id]: e.target.value });
     }
   };
@@ -34,7 +34,7 @@ class PopupPIN extends Component {
   };
 
   handleEnter = (e) => {
-    if (e.key === 'Enter' && e.target.value && e.target.value.length === 6) {
+    if (e.key === 'Enter' && e.target.value && e.target.value.length === 4) {
       this.verifyCode();
     }
   };
