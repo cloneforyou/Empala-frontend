@@ -35,8 +35,6 @@ const style = {
   },
   markedText: {
     color: GREEN,
-    fontStyle: 'oblique',
-    fontWeight: 'bolder',
   },
   errorText: {
     color: TORCH_RED,
@@ -47,6 +45,9 @@ const style = {
     fontSize: '.9rem',
     verticalAlign: 'text-top',
   },
+  notification: {
+    lineHeight: 1,
+  },
 };
 
 class PasswordRecovery extends React.PureComponent {
@@ -54,7 +55,7 @@ class PasswordRecovery extends React.PureComponent {
     super(props);
 
     this.handleSubmit = () => {
-      console.log(this.props)
+      // console.log(this.props)
       if (this.props.password && !this.props.fieldsErrorText.recovery_password && !this.props.fieldsErrorText.recovery_password_confirm) {
         this.props.submitPassword(this.props.password, this.props.code);
       }
@@ -109,6 +110,16 @@ class PasswordRecovery extends React.PureComponent {
                       errorText={this.props.fieldsErrorText.recovery_password_confirm}
                       value={this.props.passwordConfirm}
                     />
+                    { this.props.error &&
+                    <p className="clearfix" style={style.notification}>
+                      <span style={style.errorText}>{this.props.error}</span>
+                    </p>
+                    }
+                    { this.props.changedSuccessfully &&
+                    <p className="clearfix" style={style.notification}>
+                      <span style={style.markedText}>Password successfully changed. You will be redirected to log in.</span>
+                    </p>
+                    }
                     <FlatButton
                       label="Save"
                       style={style.submitBtn}
@@ -116,14 +127,7 @@ class PasswordRecovery extends React.PureComponent {
                       onClick={this.handleSubmit}
                     />
                   </div>
-                  { this.props.error &&
-                  <p><span style={style.errorText}>{this.props.error}</span>
-                  </p>
-                  }
-                  { this.props.changedSuccessfully &&
-                  <p><span style={style.markedText}>Password successfully changed.You will be redirected to log in.</span>
-                  </p>
-                  }
+
                 </div>
               </div>
             </div>
