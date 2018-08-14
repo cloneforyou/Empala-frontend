@@ -10,7 +10,8 @@ import { filter } from 'lodash';
 class OrdersTable extends React.Component {
   constructor(props) {
     super(props);
-    this.widget = getTableHeaderByName('dashboard_orders');
+    this.widgetOrders = getTableHeaderByName('dashboard_orders');
+    this.widgetFills = getTableHeaderByName('dashboard_fills');
   }
   componentDidMount() {
   }
@@ -21,56 +22,71 @@ class OrdersTable extends React.Component {
         orders,
         order => order.status === 'Filled' || order.status === 'PartiallyFilled',
       );
+      /*  ===== HEADERS ==== */
+      // 'Sec name'
+      // 'Symbol'
+      // 'Curr'
+      // 'Price'
+      // 'Order Q'
+      // 'Fill Q'
+      // 'Rem Q'
+      // 'Notional'
+      // 'Commision'
+      // 'Distance (%)'
+      // 'Start date'
+      // 'O/C/T'
+      /* =================== */
+      return filteredOrders.map(order => [
+        { value: order.values.sec_name },
+        { value: order.values.symbol },
+        { value: order.values.currency },
+        { value: formatNumberWithFixedPoint(order.values.price, 2) },
+        { value: order.values.order_quantity },
+        { value: order.values.fill_quantity },
+        { value: order.values.remain_quantity },
+        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 0) },
+        { value: order.values.comission },
+        { value: formatNumberWithFixedPoint(order.values.distance, 1) },
+        { value: order.values.start_date },
+        { value: order.values.qct },
+      ]);
     }
     if (title === 'Fills/cancels') {
       filteredOrders = filter(
         orders,
         order => order.status !== 'Filled',
       );
+      return filteredOrders.map(order => [
+        { value: order.values.sec_name },
+        { value: order.values.symbol },
+        { value: order.values.currency },
+        { value: formatNumberWithFixedPoint(order.values.price, 2) },
+        { value: order.values.order_quantity },
+        { value: order.values.fill_quantity },
+        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 0) }, // Notional
+        { value: '--' }, // Exec fees
+        { value: '--' }, // Reg fees
+        { value: formatNumberWithFixedPoint(order.values.fill_quantity * order.values.price, 2) }, // $ proceeds
+        { value: order.values.start_date },
+        { value: order.values.qct },
+      ]);
     }
-    /*  ===== HEADERS ==== */
-    // 'Sec name'
-    // 'Symbol'
-    // 'Curr'
-    // 'Price'
-    // 'Order Q'
-    // 'Fill Q'
-    // 'Rem Q'
-    // 'Notional'
-    // 'Commision'
-    // 'Distance (%)'
-    // 'Start date'
-    // 'O/C/T'
-    /* =================== */
-    return filteredOrders.map(order => [
-      { value: order.values.sec_name },
-      { value: order.values.symbol },
-      { value: order.values.currency },
-      { value: formatNumberWithFixedPoint(order.values.price, 2) },
-      { value: order.values.order_quantity },
-      { value: order.values.fill_quantity },
-      { value: order.values.remain_quantity },
-      { value: formatNumberWithFixedPoint(order.values.notional_ammount, 0) },
-      { value: order.values.comission },
-      { value: formatNumberWithFixedPoint(order.values.distance, 1) },
-      { value: order.values.start_date },
-      { value: order.values.qct },
-    ]);
   }
   render() {
     const {
-      widget,
+      widgetOrders,
+      widgetFills,
       getTableDataFromOrders,
       props,
     } = this;
     return (
       <div className="w-100 px-1">
         <div
-          className={`widget-col col-lg-${widget.col}`}
+          className={`widget-col col-lg-${widgetOrders.col}`}
         >
-          <div className="widget" style={{ height: `${widget.height}px` }}>
+          <div className="widget" style={{ height: `${widgetOrders.height}px` }}>
             <WidgetHead
-              widget={widget}
+              widget={widgetOrders}
             />
             <EmpalaTable
               tableName="dashboard_orders"
@@ -80,14 +96,14 @@ class OrdersTable extends React.Component {
           </div>
         </div>
         <div
-          className={`widget-col col-lg-${widget.col}`}
+          className={`widget-col col-lg-${widgetFills.col}`}
         >
-          <div className="widget" style={{ height: `${widget.height}px` }}>
+          <div className="widget" style={{ height: `${widgetFills.height}px` }}>
             <WidgetHead
-              widget={{ ...widget, title: 'Fills/cancels' }}
+              widget={widgetFills}
             />
             <EmpalaTable
-              tableName="dashboard_orders"
+              tableName="dashboard_fills"
               tableData={getTableDataFromOrders(props.ordersList, 'Fills/cancels')}
               striped
             />
