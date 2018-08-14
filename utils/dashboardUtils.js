@@ -640,7 +640,7 @@ export const formatNumberWithFixedPoint = (number, n) => {
   if (Number.isNaN(Number(number)) || Number(number) === 0) return number;
   if (!n || n === 0) return getFormattedNumber(Math.round(number));
   const vals = Number(number).toFixed(n).split('.');
-  return [getFormattedNumber(vals[0]), vals[1]].join('.');
+  return number > 0 ? [getFormattedNumber(vals[0]), vals[1]].join('.') : `-${[getFormattedNumber(vals[0]), vals[1]].join('.')}`;
 };
 
 /* ========= parses the date from specified string ======== */
