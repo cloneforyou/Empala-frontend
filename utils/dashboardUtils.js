@@ -52,6 +52,13 @@ const widgetAttributes = {
     padding_left: 15,
     padding_right: 14,
   },
+  dashboard_orders: {
+    id: 'dashboard_orders',
+    title: 'Orders',
+    col: 12,
+    height: 224,
+    dots: true,
+  },
 };
 const tableHeaders = {
   dashboard_cash: {
@@ -158,7 +165,7 @@ const tableHeaders = {
         'center',
         'center',
         'right',
-        'left',
+        'center',
       ],
       width: [
         '210px',
@@ -185,8 +192,7 @@ const tableHeaders = {
   dashboard_orders: {
     id: 'dashboard_orders',
     title: 'Orders',
-    col: 12,
-    height: 182,
+    height: 164,
     dots: true,
     headers: [
       'Sec name',
@@ -229,13 +235,85 @@ const tableHeaders = {
         '125px',
         '120px',
         '130px',
-        '205px',
+        '200px',
       ],
       sortable: [
         false,
         true,
         false,
         true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+      ],
+    },
+  },
+  dashboard_fills: {
+    id: 'dashboard_fills',
+    title: 'Fills/cancels',
+    height: 162,
+    dots: true,
+    headers: [
+      'Sec name',
+      'Symbol',
+      'Curr',
+      'Price',
+      'Order Q',
+      'Fill Q',
+      'Notional',
+      'Exec fees',
+      'Reg fees',
+      '$ proceeds',
+      'Start date',
+      'O/C/T',
+    ],
+    attrs: {
+      align: [
+        'left',
+        'left',
+        'left',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'right',
+        'center',
+        'center',
+      ],
+      width: [
+        '230px',
+        '125px',
+        '86px',
+        '138px',
+        '150px',
+        '150px',
+        '135px',
+        '130px',
+        '125px',
+        '120px',
+        '130px',
+        '200px',
+      ],
+      sortable: [
+        false,
+        true,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
       ],
     },
   },
@@ -640,7 +718,7 @@ export const formatNumberWithFixedPoint = (number, n) => {
   if (Number.isNaN(Number(number)) || Number(number) === 0) return number;
   if (!n || n === 0) return getFormattedNumber(Math.round(number));
   const vals = Number(number).toFixed(n).split('.');
-  return [getFormattedNumber(vals[0]), vals[1]].join('.');
+  return number > 0 ? [getFormattedNumber(vals[0]), vals[1]].join('.') : `-${[getFormattedNumber(vals[0]), vals[1]].join('.')}`;
 };
 
 /* ========= parses the date from specified string ======== */
@@ -725,6 +803,7 @@ export const parseWatchList = list => ({
     }
   )),
 });
+
 
 export const parsePositionsList = list => (list.map(pos => ({
   id: Math.random(),
