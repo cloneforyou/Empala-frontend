@@ -6,7 +6,7 @@
   align-items: center;
   padding-left: 20px;
   &__title {
-    color: #fff;
+    color: $white;
     font-size: 18px;
     text-transform: capitalize;
   }
@@ -29,13 +29,17 @@
       mask-size: contain;
       mask-repeat: no-repeat;
     }
+  }
+  &__icon-country {
     @each $item in $listCounties {
       &_flag-#{$item} {
-        background: url($path-to-dashboard-icon + 'flag-' + $item +'.svg') 100% 100% no-repeat;
+        background: url($path-to-dashboard-icon + 'flag-' + $item +'.svg') $white no-repeat;
         background-size: cover;
         width: 50px;
         height: 33px;
         margin-right: 50px;
+        vertical-align: middle;
+        display: inline-block;
       }
     }
   }
