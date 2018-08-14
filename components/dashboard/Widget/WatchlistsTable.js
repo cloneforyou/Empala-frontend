@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
 import EmpalaTable from '../EmpalaTable';
-import { getTableHeaderByName } from '../../../utils/dashboardUtils';
+import { formatNumberWithFixedPoint, getTableHeaderByName } from '../../../utils/dashboardUtils';
 import WidgetHead from './WidgetHead';
 
 
@@ -10,6 +10,7 @@ class WatchlistsTable extends React.Component {
   constructor(props) {
     super(props);
     this.widget = getTableHeaderByName('dashboard_watchlist');
+    this.listData = this.getWatchListsData(this.reduceWatchlistsToOne(this.props.watchLists));
   }
   componentDidMount() {
     this.props.subscribeQuotes();
@@ -35,13 +36,25 @@ class WatchlistsTable extends React.Component {
     }
     return positions;
   }
+  reduceWatchlistsToOne(watchlists) {
+    if (!watchlists || watchlists.length < 1) return watchlists;
+    const securities = [];
+    const listsContent = watchlists.map(list => list.content).reduce((prev, curr) => [...prev, ...curr]);
+    return listsContent.filter((sec) => {
+      if (!securities.includes(sec.secID)) {
+        securities.push(sec.secID);
+        return true;
+      }
+      return false;
+    });
+  }
 
   getWatchListsData(watchlist) {
     return watchlist && watchlist.map(list => ([
       { value: list.sec_name },
       { value: list.symbol },
       { value: 'USD' },
-      { value: list.last_p, mark: 'numeric' },
+      { value: formatNumberWithFixedPoint(list.last_p, 2), mark: 'numeric' },
       { value: list.bid_sz },
       { value: list.bid, mark: 'numeric' },
       { value: list.off },
@@ -59,10 +72,10 @@ class WatchlistsTable extends React.Component {
       positions.forEach((pos) => {
         const secId = pos[12].value;
         if (quotes[secId]) {
-          pos[3].value = quotes[secId].Last;
-          pos[4].value = quotes[secId].BidSize;
-          pos[5].value = quotes[secId].Bid;
-          pos[8].value = quotes[secId].TotalDailyVolume;
+          pos[3].value = formatNumberWithFixedPoint(quotes[secId].Last, 2);
+          pos[4].value = formatNumberWithFixedPoint(quotes[secId].BidSize);
+          pos[5].value = formatNumberWithFixedPoint(quotes[secId].Bid, 2);
+          pos[8].value = formatNumberWithFixedPoint(quotes[secId].TotalDailyVolume);
         }
       });
     }
@@ -75,11 +88,15 @@ class WatchlistsTable extends React.Component {
       widget,
       props,
       updateWatchlistData,
-      getWatchListsData,
+      listData,
     } = this;
+
+    /*    will be useful if client will decide return to several watchlists
     const watchlistData = props.watchLists[props.listNumber] &&
       updateWatchlistData(getWatchListsData(props.watchLists[props.listNumber].content), props.quotes);
-    // console.log(watchlistData[0])
+    */
+
+    const watchlistData = updateWatchlistData(listData, props.quotes);
     return (
       <div className="w-100 px-1">
         <div

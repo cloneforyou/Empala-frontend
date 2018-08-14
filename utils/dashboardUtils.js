@@ -52,6 +52,13 @@ const widgetAttributes = {
     padding_left: 15,
     padding_right: 14,
   },
+  dashboard_orders: {
+    id: 'dashboard_orders',
+    title: 'Orders',
+    col: 12,
+    height: 224,
+    dots: true,
+  },
 };
 const tableHeaders = {
   dashboard_cash: {
@@ -158,7 +165,7 @@ const tableHeaders = {
         'center',
         'center',
         'right',
-        'left',
+        'center',
       ],
       width: [
         '210px',
@@ -185,8 +192,7 @@ const tableHeaders = {
   dashboard_orders: {
     id: 'dashboard_orders',
     title: 'Orders',
-    col: 12,
-    height: 224,
+    height: 164,
     dots: true,
     headers: [
       'Sec name',
@@ -229,21 +235,28 @@ const tableHeaders = {
         '125px',
         '120px',
         '130px',
-        '205px',
+        '200px',
       ],
       sortable: [
         false,
         true,
         false,
         true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
       ],
     },
   },
   dashboard_fills: {
     id: 'dashboard_fills',
     title: 'Fills/cancels',
-    col: 12,
-    height: 222,
+    height: 162,
     dots: true,
     headers: [
       'Sec name',
@@ -286,13 +299,21 @@ const tableHeaders = {
         '125px',
         '120px',
         '130px',
-        '205px',
+        '200px',
       ],
       sortable: [
         false,
         true,
         false,
         true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
       ],
     },
   },
@@ -782,6 +803,7 @@ export const parseWatchList = list => ({
     }
   )),
 });
+
 
 export const parsePositionsList = list => (list.map(pos => ({
   id: Math.random(),

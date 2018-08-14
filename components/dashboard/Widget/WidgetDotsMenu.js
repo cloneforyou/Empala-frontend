@@ -11,22 +11,23 @@ class WidgetDotsMenu extends PureComponent {
     };
   }
   getMenuContentByWidgetName = name => {
-    if (name === 'Watchlists' || name === 'dashboard_watchlist') {
-      return(
-        <ul className={this.state.menuIsOpen ?
-          'dropdown-menu dropdown-menu-right show widget-menu__list' :
-          'dropdown-menu dropdown-menu-right  widget-menu__list'} >
-          {this.props.watchListsNames.map((name, i) =>
-            <li
-              key={Math.random()}
-              className="dropdown-item widget-menu__item"
-              onClick={()=> {
-                this.props.setWatchListNumber(i);
-                this.toggleMenu();
-              }}
-            >{name}</li>)}
-        </ul>)
-    }
+    // will be useful if client will return to multiple watchlists
+    // if (name === 'Watchlists' || name === 'dashboard_watchlist') {
+    //   return(
+    //     <ul className={this.state.menuIsOpen ?
+    //       'dropdown-menu dropdown-menu-right show widget-menu__list' :
+    //       'dropdown-menu dropdown-menu-right  widget-menu__list'} >
+    //       {this.props.watchListsNames.map((name, i) =>
+    //         <li
+    //           key={Math.random()}
+    //           className="dropdown-item widget-menu__item"
+    //           onClick={()=> {
+    //             this.props.setWatchListNumber(i);
+    //             this.toggleMenu();
+    //           }}
+    //         >{name}</li>)}
+    //     </ul>)
+    // }
     return (
       <ul className={this.state.menuIsOpen ?
         'dropdown-menu dropdown-menu-right show widget-menu__list' :

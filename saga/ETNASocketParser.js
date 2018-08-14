@@ -128,8 +128,12 @@ function* internalListenerQuotes(socket) {
       quotesKeys = yield select(state => state.dashboard.parsedPositions.map(pos => pos.sec_id));
       console.log('Subscribe for positions', quotesKeys);
     } else if (activePage === 'orders') {
+      /*      will be useful if client will decide return to several watchlists
       const activeWatchlistNumber = yield select(state => +state.dashboard.watchListNumber);
       quotesKeys = yield select(state => state.dashboard.parsedWatchLists[activeWatchlistNumber].content.map(pos => pos.secID));
+      */
+      const listsContent = yield select(state => state.dashboard.parsedWatchLists.map(list => list.content));
+      quotesKeys = listsContent.reduce((prev, curr) => [...prev, ...curr]).map(sec => sec.secID);
       console.log('Subscribe for orders', quotesKeys);
     }
     quotesKeys.forEach(key => subscribe(key, sessionQuotesId));

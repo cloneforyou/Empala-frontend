@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { subscribeQuotes, subscribeWatchlists, unsubscribeQuotes } from '../../../actions/dashboard';
 import EmpalaTable from '../EmpalaTable';
-import { formatNumberWithFixedPoint, getTableHeaderByName } from '../../../utils/dashboardUtils';
+import {
+  formatNumberWithFixedPoint,
+  getTableHeaderByName,
+  getWidgetAttributesByName,
+} from '../../../utils/dashboardUtils';
 import WidgetHead from './WidgetHead';
 import { filter } from 'lodash';
 
@@ -10,8 +14,8 @@ import { filter } from 'lodash';
 class OrdersTable extends React.Component {
   constructor(props) {
     super(props);
-    this.widgetOrders = getTableHeaderByName('dashboard_orders');
-    this.widgetFills = getTableHeaderByName('dashboard_fills');
+    this.widgetOrders = getWidgetAttributesByName('dashboard_orders');
+    this.widgetFills = getWidgetAttributesByName('dashboard_orders');
   }
   componentDidMount() {
   }
