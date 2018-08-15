@@ -639,7 +639,7 @@ const tableHeaders = {
         '115px',
         '75px',
         '95px',
-        '77px',
+        '74px',
       ],
       sortable: [
         true,
@@ -698,7 +698,7 @@ const tableHeaders = {
         '210px',
         '135px',
         '130px',
-        '78px',
+        '77px',
       ],
       padding: [
         null,
