@@ -29,16 +29,39 @@ export default class RightBlock extends Component {
       <div>
         <ul className="nav user-nav align-items-center">
           <li className="nav-item">
-            <a className="nav-link user-nav__link" href="#">
-              <i className="user-nav__icon user-nav__icon_chat" />
-            </a>
+            <div className="nav-tooltipe">
+              <a className="nav-link user-nav__link" href="#">
+                <i className="user-nav__icon user-nav__icon_location"/>
+              </a>
+              <span className="tooltiptext">Set default now</span>
+            </div>
           </li>
           <li className="nav-item">
-            <a className="nav-link user-nav__link" href="#">
-              <i className="user-nav__icon user-nav__icon_notification" />
-            </a>
+            <div className="nav-tooltipe">
+              <a className="nav-link user-nav__link" href="#">
+                <i className="user-nav__icon user-nav__icon_location"/>
+              </a>
+              <span className="tooltiptext">Account Name</span>
+            </div>
           </li>
           <li className="nav-item">
+            <div className="nav-tooltipe">
+              <a className="nav-link user-nav__link" href="#">
+                <i className="user-nav__icon user-nav__icon_chat"/>
+              </a>
+              <span className="tooltiptext">Tooltip text</span>
+            </div>
+          </li>
+          <li className="nav-item">
+            <div className="nav-tooltipe">
+              <a className="nav-link user-nav__link" href="#">
+                <i className="user-nav__icon user-nav__icon_notification"/>
+              </a>
+              <span className="tooltiptext">Tooltip text</span>
+            </div>
+          </li>
+          <li className="nav-item">
+            <div className="nav-tooltipe">
              <span
                className={`nav-link user-nav__link ${(activePageDashboard === 'account funding' ||
                activePageDashboard === 'global portfolio') ? 'user-nav__link_active' : ''}`}
@@ -47,11 +70,13 @@ export default class RightBlock extends Component {
              >
               <Link
                 route="dashboard"
-                params={{ page: 'global portfolio' }}
+                params={{page: 'global portfolio'}}
               >
-                <i className="user-nav__icon user-nav__icon_wallet" />
+                <i className="user-nav__icon user-nav__icon_wallet"/>
               </Link>
             </span>
+              <span className="tooltiptext">Tooltip text</span>
+            </div>
           </li>
           <li className="nav-item dropdown">
             <button
