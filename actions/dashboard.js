@@ -41,8 +41,9 @@ import {
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
   CLOSE_POPUP_PIN,
+  SET_FIELD_VALUE, SET_APP_SETTINGS,
 } from '../constants/dashboard';
-import { SET_FIELD_VALUE } from '../constants/registration';
+import { UPDATE_APP_SETTINGS_FAIL } from '../constants/profile';
 
 export function collapseSidebar(bool) {
   return {
@@ -265,3 +266,11 @@ export function closePopupPIN() {
     type: CLOSE_POPUP_PIN,
   };
 }
+
+export function setAppSettings(data) {
+  return {
+    type: SET_APP_SETTINGS,
+    data,
+  };
+}
+

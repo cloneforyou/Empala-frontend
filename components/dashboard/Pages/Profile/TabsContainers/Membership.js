@@ -9,9 +9,9 @@ import {
   fieldsPersonalWealth,
   fieldsMemberPersonal,
 } from '../../../../../localdata/profileData';
-import { cleanErrorText, closeModal, openModal } from '../../../../../actions/dashboard';
+import { cleanErrorText, closeModal, openModal, setInputFieldValueById } from '../../../../../actions/dashboard';
 import DeleteAccountModal from './Components/DeleteAccountModal';
-import { getInfoByZipCode, setInputFieldValueById, toggleCheckboxById } from '../../../../../actions/registration';
+import { getInfoByZipCode, toggleCheckboxById } from '../../../../../actions/registration';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../../registration/EmpalaInput';
 import FullName from './Components/FullName';

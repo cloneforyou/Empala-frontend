@@ -6,7 +6,12 @@ import {
   UPDATE_PROFILE_SUCCESS,
   RESET_PASSWORD_FAIL,
   RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS, DELETE_USERPIC_SUCCESS, DELETE_USERPIC_REQUEST, DELETE_USERPIC_FAIL,
+  RESET_PASSWORD_SUCCESS,
+  DELETE_USERPIC_SUCCESS,
+  DELETE_USERPIC_REQUEST,
+  DELETE_USERPIC_FAIL,
+  UPDATE_APP_SETTINGS_FAIL,
+  UPDATE_APP_SETTINGS_REQUEST,
 } from '../constants/profile';
 
 export function getActiveTabProfile() {
@@ -66,3 +71,15 @@ export const deleteUserPicFail = () => ({
   type: DELETE_USERPIC_FAIL,
 });
 
+export function updateSettingsFail(err) {
+  return {
+    type: UPDATE_APP_SETTINGS_FAIL,
+    err,
+  };
+}
+
+export function updateSettingsRequest() {
+  return {
+    type: UPDATE_APP_SETTINGS_REQUEST,
+  };
+}

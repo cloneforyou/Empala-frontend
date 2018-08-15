@@ -12,10 +12,11 @@ import {
   GET_USER_DATA_REQUEST,
   LOGOUT,
 } from '../constants/dashboard';
-import { getUserData, logout, } from './authentication';
+import { getUserData, logout } from './authentication';
 import request from '../utils/request';
 import {
   modifyPosition,
+  setAppSettings,
   setOrdersList,
   setPositions,
   setWatchLists, updateNews,
@@ -38,10 +39,27 @@ export function* getNews() {
       const news = yield call(request, url, options);
       if (news) yield put(updateNews(news.data.data.internal_news));
     } catch (err) {
-      console.log(' ** DASHBOARD ERROR =======>', err);
+      console.error(' ** DASHBOARD ERROR =======>', err);
     }
   }
 }
+
+export function* getAppSettings() {
+  const url = 'api/settings/';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const resp = yield call(request, url, options);
+    if (resp) yield put(setAppSettings(resp.data.data));
+  } catch (err) {
+    console.error(' ** DASHBOARD ERROR =======>', err);
+  }
+}
+
 /*  --------- ETNA TEST API FUNCTIONS ---------- */
 const etnaConfig = {
   api_path: '/api/etna_test',
@@ -156,6 +174,7 @@ export default function* dashboardSaga() {
   yield all([
     // getNews(),
     takeEvery(GET_USER_DATA_REQUEST, getUserData),
+    takeEvery(GET_USER_DATA_REQUEST, getAppSettings),
     takeEvery(LOGOUT, logout),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
   ]);

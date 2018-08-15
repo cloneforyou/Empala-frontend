@@ -104,3 +104,16 @@
     }
   }
 }
+
+.app-settings {
+  &-col {
+    max-width: 480px;
+    min-width: 480px;
+    &_margin {
+      margin-left: 160px;
+      @media(max-width: 1506px) {
+        margin-left: 0;
+      }
+    }
+  }
+}
