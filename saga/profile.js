@@ -8,6 +8,7 @@ import {
   resetPasswordSuccess,
   updateProfileFail,
   updateProfileSuccess,
+  updateSettingsFail,
 } from '../actions/profile';
 import {
   deleteAccountFail,
@@ -15,11 +16,18 @@ import {
   uploadImageFail,
   uploadImageSuccess,
   setColorSchemeError,
-  setColorScheme, openModal, showPopupPIN,
+  setColorScheme, openModal,
+  showPopupPIN,
+  setAppSettings,
 } from '../actions/dashboard';
 import { cleanErrorMessage, passwordUpdateFailed, passwordUpdateSuccess } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
-import { DELETE_USERPIC_REQUEST, RESET_PASSWORD_REQUEST, UPDATE_PROFILE_REQUEST } from '../constants/profile';
+import {
+  DELETE_USERPIC_REQUEST,
+  RESET_PASSWORD_REQUEST,
+  UPDATE_APP_SETTINGS_REQUEST,
+  UPDATE_PROFILE_REQUEST,
+} from '../constants/profile';
 import { DELETE_ACCOUNT_REQUEST, UPLOAD_IMAGE_REQUEST, SAVE_COLOR_SCHEME } from '../constants/dashboard';
 
 export function* sendProfileData() {
@@ -43,6 +51,24 @@ export function* sendProfileData() {
   } catch (err) {
     yield put(updateProfileFail(err.message));
     yield put(openModal('updateError'));
+  }
+}
+
+export function* updateAppSettings() {
+  const settings = yield select(state => state.dashboard.currentAppSettings);
+  const url = '/api/settings';
+  const options = {
+    method: 'PATCH',
+    data: settings,
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const response = yield call(request, url, options);
+    if (response.data.info === 'SETTINGS_UPDATED') yield put(setAppSettings(settings));
+  } catch (err) {
+    yield put(updateSettingsFail('Error while update settings'));
   }
 }
 
@@ -169,6 +195,7 @@ export default function* profileSaga() {
     takeLatest(UPDATE_PROFILE_REQUEST, sendProfileData),
     takeLatest(RESET_PASSWORD_REQUEST, resetPassword),
     takeLatest(DELETE_USERPIC_REQUEST, deleteUserpic),
+    takeLatest(UPDATE_APP_SETTINGS_REQUEST, updateAppSettings),
     takeEvery(UPLOAD_IMAGE_REQUEST, uploadImage),
     takeEvery(SAVE_COLOR_SCHEME, saveColorThem),
     takeEvery(DELETE_ACCOUNT_REQUEST, accountDelete),

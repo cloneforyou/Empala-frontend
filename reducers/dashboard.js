@@ -27,12 +27,14 @@ import {
   UPDATE_QUOTES,
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
+  SET_APP_SETTINGS,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
   DELETE_USERPIC_REQUEST,
   DELETE_USERPIC_SUCCESS,
   RESET_PASSWORD_FAIL,
+  UPDATE_APP_SETTINGS_FAIL,
   UPDATE_PROFILE_FAIL,
 } from '../constants/profile';
 import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
@@ -63,6 +65,8 @@ const initialState = {
   quotes: false,
   showPopupPIN: false,
   popupPINType: false,
+  appSettings: false,
+  currentAppSettings: {},
 };
 
 
@@ -103,6 +107,12 @@ function dashboard(state = initialState, action) {
         return {
           ...state,
           [action.id]: action.value,
+        };
+      }
+      if (/app_settings_/.test(action.id)) {
+        return {
+          ...state,
+          currentAppSettings: { ...state.currentAppSettings, [action.id]: action.value },
         };
       }
       return state;
@@ -156,6 +166,7 @@ function dashboard(state = initialState, action) {
     case DELETE_ACCOUNT_FAIL:
     case RESET_PASSWORD_FAIL:
     case UPDATE_PROFILE_FAIL:
+    case UPDATE_APP_SETTINGS_FAIL:
       return {
         ...state,
         loading: false,
@@ -182,6 +193,12 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         currentColorScheme: action.colorScheme,
+      };
+    case SET_APP_SETTINGS:
+      return {
+        ...state,
+        appSettings: action.data,
+        currentAppSettings: action.data,
       };
     case SET_ORDERS_LIST:
       return {
