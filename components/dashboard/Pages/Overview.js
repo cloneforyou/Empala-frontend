@@ -36,7 +36,7 @@ class Overview extends Component {
       return (
         <div className="container-fluid" >
           <div className="widgets-row"> {/* Temporary solution. todo widgets responsive layout */}
-            <div style={{ width: '1736px' }}>
+            <div style={{ width: '1732px' }}>
               <FinancialCapitalTable />
               <SocialCapitalTable />
               <EnvironmentalCapitalTable />
@@ -44,7 +44,7 @@ class Overview extends Component {
           </div>
 
           <div className="widgets-row"> {/* Temporary solution. todo widgets responsive layout */}
-            <div style={{ width: '1736px' }}>
+            <div style={{ width: '1732px' }}>
               <ActiveOrdersTable />
               <WorkingDealsTable />
               <DealDevelopmentTable />
