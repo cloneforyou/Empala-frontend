@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import { cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage } from '../../../../actions/dashboard';
-import avatar from '../../../../static/images/default-avatar-of-user.svg';
+import { cleanErrorText, cleanImage, closeModal, setUploadableImage, uploadImage } from '../../../actions/dashboard';
+import avatar from '../../../static/images/default-avatar-of-user.svg';
 
 class UploadImage extends PureComponent {
   constructor(props) {

@@ -1,0 +1,83 @@
+.session-expire {
+  &-container {
+    width: 508px!important;
+    height: 164px;
+  }
+  &__text {
+    @include fontSize(16px);
+    font-weight: bolder;
+    line-height: 1.25;
+    color: #707070;
+    margin-bottom: 15px;
+  }
+  &__icon {
+    &:before {
+      content: url($path-to-dashboard-icon + 'empala-clock.svg');
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+    }
+    &_shift {
+      position: relative;
+      left: -20px;
+      top: .5rem
+    }
+  }
+  &__counter {
+    color: $green;
+    @include fontSize(40px);
+    margin-bottom: 15px;
+  }
+  &__text-wrapper {
+    font-family: "Proxima Nova", serif;
+    width: 300px;
+    margin: auto;
+    text-align: center;
+  }
+  &-action-container {
+    height: 65px;
+    text-align: center !important;
+    &_top-shift25 {
+      position: relative;
+      top: -25px;
+    }
+  }
+}
+.modal {
+  &__btn {
+    @include fontSize(16px);
+    padding: 5px 15px;
+    border-color: $green;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 3px;
+    font-weight: 600;
+    height: 30px;
+    line-height: 1;
+    cursor: pointer;
+    transition: .3s;
+    width: 170px;
+    &_right-shift10 {
+      margin-left: 20px;
+    }
+  }
+  &__btn_green {
+    background: $green;
+    color: $white;
+    &:hover, &:focus {
+      box-shadow: 2px 4px 30px 0 rgba(0, 0, 0, 0.35);
+    }
+  }
+  &__btn_default {
+    background: none;
+    @include button-reset();
+    @include fontSize(14px);
+  }
+  &__btn_outline {
+    background: none;
+    border: 1px solid $green;
+    color: $green;
+    &:hover, &:focus {
+      box-shadow: 2px 4px 30px 0 rgba(0, 0, 0, 0.35);
+    }
+  }
+}

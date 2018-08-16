@@ -21,6 +21,18 @@ const positioning = {
   '% Equity': Math.random() * 100,
   '% Debt': Math.random() * 100,
 };
+const Get = {
+  'Ratings received': Math.random() * 1000,
+  'Courses completed': Math.random() * 100,
+  'Deals assembled': Math.random() * 1000,
+  'EMARA income': Math.random() * 1000000,
+};
+const Give = {
+  'Ratings given': Math.random() * 1000,
+  'Blogs posted': Math.random() * 100,
+  'Deals joined': Math.random() * 1000,
+  'Opinions given': Math.random() * 100,
+};
 const parseNetworkCapitalData = data => Object.keys(data).map(key => [
   { value: key },
   { value: formatNumberWithFixedPoint(data[key]) },
@@ -67,14 +79,14 @@ const SocialCapitalTable = props => (
       <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_social_capital_get"
-          tableData={parseNetworkCapitalData(props.social.Get)}
+          tableData={parseNetworkCapitalData(Object.keys(props.social.Get).length > 0 ? props.social.Give : Get)}
           small
         />
       </div>
       <div className="d-inline-block align-top">
         <EmpalaTable
           tableName="overview_social_capital_give"
-          tableData={parseNetworkCapitalData(props.social.Give)}
+          tableData={parseNetworkCapitalData(Object.keys(props.social.Give).length > 0 ? props.social.Give : Give)}
           small
         />
       </div>
@@ -98,18 +110,6 @@ const MapStateToProps = state => ({
       'Advisory roles': 0,
       'Total followers': 12,
       'Monthly blog views': 232,
-    },
-    Get: {
-      'Ratings received': Math.random() * 1000,
-      'Courses completed': Math.random() * 100,
-      'Deals assembled': Math.random() * 1000,
-      'EMARA income': Math.random() * 1000000,
-    },
-    Give: {
-      'Ratings given': Math.random() * 1000,
-      'Blogs posted': Math.random() * 100,
-      'Deals joined': Math.random() * 1000,
-      'Opinions given': Math.random() * 100,
     },
   }, // todo remove this stub later
 });

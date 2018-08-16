@@ -7,7 +7,7 @@ import {
 } from '../../../../../actions/registration';
 import { saveColorTheme, setInputFieldValueById } from '../../../../../actions/dashboard';
 
-const timeouts = [5, 10, 15, 30, 45, 60, 0];
+const timeouts = [5, 10, 15, 30, 45, 60];
 const options = {
   colorTheme: [
     {
