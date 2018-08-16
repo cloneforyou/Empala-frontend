@@ -1,0 +1,83 @@
+.notifications-container {
+  max-width: 1105px;
+  min-height: 800px;
+  background-color: $white;
+  border: solid 1px $light-gray;
+  margin: 0 10px 10px;
+  @include styledScroll($light-gray);
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 66px 40px 10px;
+    .title {
+      color: $green;
+      font-weight: 600;
+    }
+  }
+  &__cards {
+    max-width: 1025px;
+    height: 674px;
+    margin: 0 38px;
+    padding-right: 20px;
+    overflow-y: scroll;
+    .notifications-card {
+      min-height: 70px;
+      display: flex;
+      position: relative;
+      background-color: $sugar-cane;
+      border: solid 1px $mercury;
+      border-radius: 0;
+      &:not(:last-child) {
+        margin-bottom: 5px;
+      }
+      &__img {
+        display: flex;
+        .img-border  {
+          width: 15px;
+          height: 100%;
+        }
+        .image {
+          width: 60px;
+          border-radius: 5px;
+          margin: 5px;
+        }
+      }
+      &__message {
+        padding: 5px 10px;
+        width: 100%;
+        .message-title {
+          font-weight: 600;
+          margin: 0;
+        }
+        .message-text {
+          margin: 0;
+        }
+        .message-date {
+          font-size: 12px;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.background-green {
+  background: $green;
+}
+.background-red {
+  background: $light-red;
+}
+.background-gray {
+  background: #e9e9e9;
+}
+.icon-dots {
+  @include iconDashboard('dots');
+  &:before {
+    height: 18px;
+    width: 4px;
+    position: absolute;
+    background-color: $main-color-text-grey;
+    right: 4px;
+    top: 4px;
+  }
+}
