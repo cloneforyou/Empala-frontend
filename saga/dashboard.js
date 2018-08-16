@@ -5,26 +5,37 @@ import {
   select,
   put,
   call,
+  takeLatest,
 } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import {
   GET_ETNA_DATA,
   GET_USER_DATA_REQUEST,
   LOGOUT,
+  REFRESH_TOKEN_REQUEST,
+  RESTART_SESSION_TIMEOUT,
 } from '../constants/dashboard';
-import { getUserData, logout } from './authentication';
+import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
 import {
-  modifyPosition,
+  openModal,
   setAppSettings,
   setOrdersList,
-  setPositions,
+  setPositions, setSessionTimeRemain,
   setWatchLists, updateNews,
-  updateOrders,
-  updateWatchlist,
 } from '../actions/dashboard';
 
-
+export function* sessionTimeout() {
+  let timeout = 600 + 30; // TODO change to value from server
+  yield put(setSessionTimeRemain(timeout));
+  while (timeout > 0) {
+    yield delay(1000);
+    yield timeout -= 1;
+    yield put(setSessionTimeRemain(timeout));
+    if (timeout === 120) yield put(openModal('sessionExpire'));
+  }
+  // return yield logout();
+}
 export function* getNews() {
   const url = '/api/dashboard/updates';
   const options = {
@@ -45,7 +56,7 @@ export function* getNews() {
 }
 
 export function* getAppSettings() {
-  const url = 'api/settings/';
+  const url = '/api/settings';
   const options = {
     method: 'GET',
     headers: {
@@ -172,10 +183,11 @@ export function* selectETNADataRequest({ payloadType }) {
 
 export default function* dashboardSaga() {
   yield all([
-    // getNews(),
     takeEvery(GET_USER_DATA_REQUEST, getUserData),
     takeEvery(GET_USER_DATA_REQUEST, getAppSettings),
     takeEvery(LOGOUT, logout),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
+    takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
+    takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
   ]);
 }

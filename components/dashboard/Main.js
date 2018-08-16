@@ -68,10 +68,7 @@ class Main extends Component {
           handleClose={this.props.closeModal}
           open={this.props.reminderModalOpen}
          />
-        <SessionExpire
-          handleClose={this.props.closeModal}
-          open={this.props.sessionExpireModalOpen}
-         />
+        <SessionExpire />
         {
           showPopupPIN && <PopupPIN type={popupPINType} />
         }
@@ -82,7 +79,6 @@ class Main extends Component {
 
 export default connect(state => ({
   reminderModalOpen: state.dashboard.modalOpen && state.dashboard.openModalName === 'passwordReminder',
-  sessionExpireModalOpen: state.dashboard.modalOpen && state.dashboard.openModalName === 'sessionExpire',
   activePageDashboard: state.dashboard.activePageDashboard,
   currentColorScheme: state.dashboard.currentColorScheme,
   showPopupPIN: state.dashboard.showPopupPIN,

@@ -5,7 +5,7 @@ import {
   select,
 } from 'redux-saga/effects';
 import request from '../utils/request';
-import { getETNAData, openModal, setUserData, startSocket } from '../actions/dashboard';
+import { getETNAData, openModal, restartSessionTimeout, setUserData, startSocket } from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
@@ -23,7 +23,7 @@ import {
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
-import { selectETNADataRequest, getNews } from './dashboard';
+import { selectETNADataRequest, getNews, sessionTimeout } from './dashboard';
 
 
 function* loginRequest(url, options) {
@@ -188,14 +188,14 @@ export function* refreshTokens() {
           { 'x-refresh-token': refreshToken },
       },
     );
-
-    localStorage.setItem('accessToken', tokens.data.tokens.access);
-    localStorage.setItem('refreshToken', tokens.data.tokens.refresh);
-    window.location.assign('/dashboard');
+    localStorage.setItem('accessToken', tokens.data.data.access);
+    localStorage.setItem('refreshToken', tokens.data.data.refresh);
+    // window.location.assign('/dashboard');
   } catch (err) {
-    // console.log(' ** ', err);
-    window.location.assign('/');
+    console.log(' Token refresh error >>>', err);
+    localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    window.location.assign('/');
   }
 }
 
@@ -212,12 +212,12 @@ export function* logout() {
   };
   try {
     const result = yield call(request, url, options);
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    window.location.assign('/');
   } catch (err) {
     console.log(err.message);
   }
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  window.location.assign('/');
 }
 
 export function* getUserData() {
@@ -242,6 +242,7 @@ export function* getUserData() {
     if (data.data.data.profile.should_update_password) {
       yield put(openModal('passwordReminder'));
     }
+    yield put(restartSessionTimeout());
     yield getNews();
   } catch (err) {
     // console.log(' ** DASHBOARD ERROR =======>', err);

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { uniqueId } from 'lodash';
 import WidgetNews from '../Widget/WidgetNews';
@@ -19,7 +19,7 @@ function mapStateToProps(state) {
   };
 }
 
-class Overview extends Component {
+class Overview extends PureComponent {
   render() {
     const widgetNews = [
       {

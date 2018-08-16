@@ -28,6 +28,7 @@ import {
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
+  SET_SESSION_TIME_REMAIN,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,

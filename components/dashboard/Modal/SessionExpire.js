@@ -1,7 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
-import { closeModal, setUploadableImage, uploadImage } from '../../../actions/dashboard';
+import {
+  closeModal,
+  logout,
+  refreshTokens,
+  restartSessionTimeout,
+  setUploadableImage,
+  uploadImage,
+} from '../../../actions/dashboard';
 
 
 class SessionExpire extends PureComponent {
@@ -10,12 +17,12 @@ class SessionExpire extends PureComponent {
     this.actions = [
       <button
         className="modal__btn modal__btn_green"
-        onClick={this.props.uploadImage}
+        onClick={this.props.handleContinue}
       >Continue
       </button>,
       <button
         className="modal__btn modal__btn_outline modal__btn_right-shift10"
-        onClick={this.props.handleCancel}
+        onClick={this.props.logout}
       >Log out
       </button>,
     ]
@@ -29,13 +36,14 @@ class SessionExpire extends PureComponent {
         actions={this.actions}
         contentClassName="session-expire-container"
         actionsContainerClassName="session-expire-action-container session-expire-action-container_top-shift25"
-        open={this.props.modalOpen || true}
+        open={this.props.modalOpen}
       >
         <div className="session-expire__text-wrapper">
           <p className="session-expire__text"><i className="session-expire__icon session-expire__icon_shift" />Session Timeout</p>
           <p className="session-expire__text">Your online session will expire in</p>
           <div className="session-expire__counter">
-            <span>1 min </span><span>29 sec</span>
+            <span>{Math.floor(this.props.timeRemain / 60)} min </span>
+            <span>{this.props.timeRemain - Math.floor(this.props.timeRemain / 60) * 60} sec</span>
           </div>
           <p className="session-expire__text">
             Please click “Continue” to keep working;
@@ -50,14 +58,18 @@ class SessionExpire extends PureComponent {
 const mapStateToProps = state => (
   {
     modalOpen: state.dashboard.modalOpen && state.dashboard.openModalName === 'sessionExpire',
+    timeRemain: state.timeout.timeRemain,
   }
 );
 
 const mapDispatchToProps = dispatch => (
   {
-    setUploadableImage: data => dispatch(setUploadableImage(data)),
-    uploadImage: () => dispatch(uploadImage()),
-    handleCancel: () => dispatch(closeModal()),
+    handleContinue: () => {
+      dispatch(closeModal());
+      dispatch(restartSessionTimeout());
+      dispatch(refreshTokens());
+    },
+    logout: () => dispatch(logout()),
   }
 );
 
