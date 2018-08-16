@@ -34,7 +34,7 @@ export function* sessionTimeout() {
     yield put(setSessionTimeRemain(timeout));
     if (timeout === 120) yield put(openModal('sessionExpire'));
   }
-  // return yield logout();
+  return yield logout();
 }
 export function* getNews() {
   const url = '/api/dashboard/updates';
