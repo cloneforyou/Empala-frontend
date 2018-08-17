@@ -28,7 +28,7 @@ import {
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
-  SET_SESSION_TIME_REMAIN,
+  SET_SESSION_TIME_REMAIN, ADD_NOTIFICATION,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -68,6 +68,7 @@ const initialState = {
   popupPINType: false,
   appSettings: false,
   currentAppSettings: {},
+  notifications: [],
 };
 
 
@@ -288,6 +289,11 @@ function dashboard(state = initialState, action) {
           }
           return pos;
         }),
+      };
+    case ADD_NOTIFICATION:
+      return {
+        ...state,
+        notifications: [...state.notifications, action.notification],
       };
     default:
       return state;

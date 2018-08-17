@@ -5,25 +5,28 @@ import {
   select,
   put,
   call,
-  takeLatest,
+  takeLatest, race,
 } from 'redux-saga/effects';
-import { delay } from 'redux-saga';
+import { delay, eventChannel } from 'redux-saga';
+import io from 'socket.io-client';
 import {
   GET_ETNA_DATA,
   GET_USER_DATA_REQUEST,
   LOGOUT,
   REFRESH_TOKEN_REQUEST,
-  RESTART_SESSION_TIMEOUT,
+  RESTART_SESSION_TIMEOUT, START_WEBSOCKET, STOP_WEBSOCKET,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
 import {
+  addNotification,
   openModal,
   setAppSettings,
   setOrdersList,
   setPositions, setSessionTimeRemain,
   setWatchLists, updateNews,
 } from '../actions/dashboard';
+import { serverOrigins } from '../utils/config';
 
 export function* sessionTimeout() {
   let timeout = yield select(state => state.dashboard.appSettings.session_timeout || 600);
@@ -182,8 +185,55 @@ export function* selectETNADataRequest({ payloadType }) {
 
 /*  --------- ETNA TEST API FUNCTIONS  END ---------- */
 
+/* ---------- EMPALA SOCKET IO HANDLING ----------*/
+const socketServerURL = serverOrigins.local;
+// const socket = io();
+const connect = async token => io.connect(socketServerURL, {
+  query: {
+    token,
+  },
+});
+
+const createSocketChannel = socket => eventChannel((emit) => {
+  const handler = (data) => {
+    emit(data);
+  };
+  socket.on('connect', () => console.log('OPEN ====>>>', socket));
+  socket.on('message', handler);
+  socket.on('disconnect', () => console.log('Disconnected:', socket));
+  return () => {
+    socket.off('newTask', handler);
+  };
+});
+
+function* socketListener(socketChannel) {
+  while (true) {
+    const action = yield take(socketChannel);
+    console.log('message:', action);
+    yield put(addNotification(action));
+  }
+}
+
+function* wsHandling() {
+  while (true) {
+    const data = yield take(START_WEBSOCKET);
+    const token = localStorage.getItem('accessToken');
+    const connection = yield connect(token);
+    const empalaChannel = yield call(createSocketChannel, connection);
+    const { cancel } = yield race({
+      task:
+        call(socketListener, empalaChannel),
+      cancel: take(STOP_WEBSOCKET),
+    });
+    if (cancel) {
+      empalaChannel.close();
+    }
+  }
+}
+
 export default function* dashboardSaga() {
   yield all([
+    wsHandling(),
     takeEvery(GET_USER_DATA_REQUEST, getUserData),
     takeEvery(GET_USER_DATA_REQUEST, getAppSettings),
     takeEvery(LOGOUT, logout),
