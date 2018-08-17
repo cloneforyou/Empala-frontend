@@ -1,5 +1,6 @@
 .dashboard-header {
   border: none;
+  min-width: 700px;
   &_collapsed {
     .dashboard-header__logo {
       width: $sidebar-width-full;
@@ -144,20 +145,17 @@
       content: '';
       background-color: $main-color-text-grey;
       position: absolute;
-      transform: translateY(-50%);
-      top: 50%;
       left: 0;
     }
     &_location {
       width: 18px;
       height: 20px;
       &:before {
-        mask: url($path-to-dashboard-icon + 'icon-location.svg');
+        mask: url($path-to-dashboard-icon + 'icon-marker.svg');
         mask-size: contain;
         mask-repeat: no-repeat;
         width: 18px;
         height: 20px;
-
       }
     }
     &_chat {
@@ -243,7 +241,6 @@
       z-index: 3;
     }
   }
-
 }
 
 .nav-tooltipe {
@@ -264,5 +261,11 @@
   }
   &:hover .tooltiptext {
     visibility: visible;
+  }
+}
+
+.background_light-gray {
+  &:before {
+    background-color: $light-gray;
   }
 }

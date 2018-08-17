@@ -110,6 +110,20 @@
   font-weight: 300 !important;
 }
 
+.fw-600 {
+  font-weight: 600 !important;
+}
+
+.fs-12 {
+  @include fontSize(12px);
+  line-height: 12px;
+}
+
+.fs-15 {
+  @include fontSize(15px);
+  line-height: 15px;
+}
+
 .simple-box-shadow {
   box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.16);
 }

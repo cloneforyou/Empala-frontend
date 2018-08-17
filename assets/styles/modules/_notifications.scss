@@ -20,55 +20,150 @@
     margin: 0 38px;
     padding-right: 20px;
     overflow-y: scroll;
-    .notifications-card {
-      min-height: 70px;
-      display: flex;
-      position: relative;
-      background-color: $sugar-cane;
-      border: solid 1px $mercury;
-      border-radius: 0;
-      &:not(:last-child) {
-        margin-bottom: 5px;
+  }
+}
+
+.notifications-card {
+  height: 70px;
+  display: flex;
+  position: relative;
+  background-color: $sugar-cane;
+  border: solid 1px $mercury;
+  border-radius: 0;
+  &:not(:last-child) {
+    margin-bottom: 5px;
+  }
+  &__img {
+    display: flex;
+    .img-border  {
+      width: 15px;
+      height: 100%;
+    }
+    .image {
+      height: 44px;
+      width: 58px;
+      border-radius: 5px;
+      margin: 5px;
+      align-self: center;
+      &:before {
+        content: '';
+        height: 44px;
+        width: 58px;
+        position: absolute;
+        background: url($path-to-dashboard-icon + 'icon-empala.svg') 100% 100% /contain no-repeat;;
       }
-      &__img {
-        display: flex;
-        .img-border  {
-          width: 15px;
-          height: 100%;
-        }
-        .image {
-          width: 60px;
-          border-radius: 5px;
-          margin: 5px;
-        }
-      }
-      &__message {
-        padding: 5px 10px;
-        width: 100%;
-        .message-title {
-          font-weight: 600;
-          margin: 0;
-        }
-        .message-text {
-          margin: 0;
-        }
-        .message-date {
-          font-size: 12px;
-          margin: 0;
-        }
-      }
+    }
+  }
+  &__message {
+    padding: 5px 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .message-title {
+      font-weight: 600;
+      margin: 0;
+    }
+    .message-text {
+      margin: 0;
+    }
+    .message-date {
+      font-size: 12px;
+      margin: 0;
     }
   }
 }
 
-.background-green {
+.notifications-popup {
+  width: 416px;
+  display: none;
+  position: absolute;
+  top: 72px;
+  right: 50px;
+  box-shadow: -1px 1.5px 3px 0 rgba(0, 0, 0, 0.16);
+  background-color: #f9fafa;
+  border: solid 0.5px #ededed;
+  &__notifications {
+    height: 27px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #f9fafa;
+    border: solid 0.5px #e9e9e9;
+    margin: 0 -1px;
+    line-height: 27px;
+    padding: 0 10px 0 30px;
+    .notifications-links {
+      & > a {
+        @include fontSize(12px);
+        color: #7f8894;
+        &:hover, &:focus {
+          color: $gray-700;
+        }
+        &:not(:last-child) {
+          padding-right: 12px;
+        }
+      }
+    }
+  }
+  &__news {
+    height: 27px;
+    line-height: 27px;
+    background-color: #f2f2f2;
+    padding-left: 30px;
+  }
+  &__earlier {
+    height: 27px;
+    line-height: 27px;
+    background-color: #f2f2f2;
+    padding-left: 30px;
+  }
+  &__see-all {
+    height: 27px;
+    @include fontSize(10px);
+    line-height: 27px;
+    text-align: center;
+    a {
+      color: #7f8894;
+      &:hover, &:focus {
+        color: $gray-700;
+      }
+    }
+  }
+  &__cards {
+    & > div {
+      margin: 3px 8px 3px 5px;
+    }
+  }
+}
+
+.background-border_green {
   background: $green;
 }
-.background-red {
-  background: $light-red;
+.background-border_red {
+  background: $mandy;
 }
-.background-gray {
-  background: #e9e9e9;
+.background-border_gray {
+  background: $light-gray;
+}
+.background_green {
+  background: $sugar-cane;
+}
+.background_red {
+  background: $rose-white;
+}
+.background_white {
+  background: $white;
+}
+.min-width-600 {
+  min-width: 600px;
+}
+.horizontal-align {
+  &_end {
+    text-align: end;
+  }
+  &_center {
+    text-align: center;
+  }
 }
 .icon-dots {
   @include iconDashboard('dots');

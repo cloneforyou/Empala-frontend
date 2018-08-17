@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import DropdownMenu from './DropdownMenu';
-import avatar from '../../../static/images/default-avatar-of-user.svg';
 import { Link } from '../../../routes';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import DropdownMenu from './DropdownMenu';
+import NotificationsPopup from './NotificationsPopup';
+import avatar from '../../../static/images/default-avatar-of-user.svg';
 
 export default class RightBlock extends Component {
   constructor(props) {
     super(props);
     this.state = {
       anchorEl: null,
+      notifPopUpIsOpened: false,
     };
   }
 
@@ -22,16 +21,27 @@ export default class RightBlock extends Component {
     this.setState({ anchorEl: null });
   };
 
+  handleClickNotificationsPopup = (event) => {
+    if (!this.state.notifPopUpIsOpened) {
+      event.nativeEvent.stopImmediatePropagation();
+    }
+    this.setState((prevState) => ({ notifPopUpIsOpened: !prevState.notifPopUpIsOpened }));
+  };
+
+  closeNotificationsPopup = () => {
+    this.setState({ notifPopUpIsOpened: false });
+  };
+
   render() {
     const { userPic, loading, setActivePage, activePageDashboard } = this.props;
-    const { menuAvatarShow, anchorEl } = this.state;
+    const { menuAvatarShow, anchorEl, notifPopUpIsOpened } = this.state;
     return (
       <div>
         <ul className="nav user-nav align-items-center">
           <li className="nav-item">
             <div className="nav-tooltipe">
               <a className="nav-link user-nav__link" href="#">
-                <i className="user-nav__icon user-nav__icon_location"/>
+                <i className="user-nav__icon user-nav__icon_location background_light-gray"/>
               </a>
               <span className="tooltiptext">Set default now</span>
             </div>
@@ -54,11 +64,19 @@ export default class RightBlock extends Component {
           </li>
           <li className="nav-item">
             <div className="nav-tooltipe">
-              <a className="nav-link user-nav__link" href="#">
+              <a className="nav-link user-nav__link"
+                 href="#"
+                 onClick={this.handleClickNotificationsPopup}
+              >
                 <i className="user-nav__icon user-nav__icon_notification"/>
               </a>
-              <span className="tooltiptext">Tooltip text</span>
+              <span className="tooltiptext">Notifications</span>
             </div>
+            <NotificationsPopup
+              showNotificationsPopup={notifPopUpIsOpened}
+              closeNotificationsPopup={this.closeNotificationsPopup}
+              setActivePage={setActivePage}
+            />
           </li>
           <li className="nav-item">
             <div className="nav-tooltipe">
