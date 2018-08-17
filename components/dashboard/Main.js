@@ -14,6 +14,7 @@ import MarketAccessPage from './Pages/MarketAccessPage';
 import Funding from './Pages/InvestmentProfile/Funding';
 import Account from './Pages/InvestmentProfile/Account';
 import PopupPIN from '../registration/PopupPIN';
+import GlobalNotifications from './Pages/GlobalNotifications';
 import SessionExpire from './Modal/SessionExpire';
 
 class Main extends Component {
@@ -46,6 +47,8 @@ class Main extends Component {
         return <Funding />;
       case 'global portfolio':
         return <Account />;
+      case 'global notifications':
+        return <GlobalNotifications />;
       default:
         return '';
     }
