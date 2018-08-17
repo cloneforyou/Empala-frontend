@@ -1,5 +1,6 @@
 import { takeEvery, all, take, select, put, call, race, fork, spawn } from 'redux-saga/effects';
 import {
+  START_WEBSOCKET, STOP_WEBSOCKET,
   SUBSCRIBE_QUOTES,
   SUBSCRIBE_WATCHLIST_CONTENT,
   UNSUBSCRIBE_QUOTES,
@@ -265,7 +266,7 @@ function watchMessages(socket, params) {
 
 function* wsHandling() {
   while (true) {
-    const data = yield take('START_WEBSOCKET');
+    const data = yield take(START_WEBSOCKET);
     const ETNACredentials = yield select(state => (
       state.dashboard.userData ? state.dashboard.userData.data.etna_credentials : {}));
     console.log('==>', ETNACredentials);
@@ -296,7 +297,7 @@ function* wsHandling() {
         call(internalListenerQuotes, socketQuotes),
         call(internalListenerWatchlist, socketData),
       ],
-      cancel: take('STOP_WEBSOCKET'),
+      cancel: take(STOP_WEBSOCKET),
     });
     if (cancel) {
       quoteChannel.close();
