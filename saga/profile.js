@@ -18,7 +18,7 @@ import {
   setColorSchemeError,
   setColorScheme, openModal,
   showPopupPIN,
-  setAppSettings,
+  setAppSettings, restartSessionTimeout,
 } from '../actions/dashboard';
 import { cleanErrorMessage, passwordUpdateFailed, passwordUpdateSuccess } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
@@ -66,7 +66,10 @@ export function* updateAppSettings() {
   };
   try {
     const response = yield call(request, url, options);
-    if (response.data.info === 'SETTINGS_UPDATED') yield put(setAppSettings(settings));
+    if (response.data.info === 'SETTINGS_UPDATED') {
+      yield put(setAppSettings(response.data.data));
+      yield put(restartSessionTimeout());
+    }
   } catch (err) {
     yield put(updateSettingsFail('Error while update settings'));
   }

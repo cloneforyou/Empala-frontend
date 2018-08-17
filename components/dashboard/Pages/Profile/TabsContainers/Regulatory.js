@@ -9,8 +9,9 @@ import {
   fieldsEmployment,
   fieldsTrustedContactPerson,
 } from '../../../../../localdata/profileData';
-import { getInfoByZipCode, setInputFieldValueById, validateFieldValue } from '../../../../../actions/registration';
+import { getInfoByZipCode, validateFieldValue } from '../../../../../actions/registration';
 import { countriesList } from '../../../../../localdata/countriesList';
+import { setInputFieldValueById } from '../../../../../actions/dashboard';
 
 class Regulatory extends Component {
   render() {

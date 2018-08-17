@@ -80,6 +80,11 @@ const modifiyPositionsList = (list, data) => {
   });
 };
 
+const parseAppSettings = (settings) => {
+  const out = {};
+  return Object.keys(settings).reduce((curr, el) => ( { ...curr, [`app_settings_${el}`]: settings[el] } ), out);
+};
+
 function dashboard(state = initialState, action) {
   switch (action.type) {
     case UPDATE_QUOTES:
@@ -199,7 +204,7 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         appSettings: action.data,
-        currentAppSettings: action.data,
+        currentAppSettings: parseAppSettings(action.data),
       };
     case SET_ORDERS_LIST:
       return {

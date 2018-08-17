@@ -6,7 +6,7 @@ import {
   fieldsInvestmentExperienceOne,
   fieldsInvestmentExperienceTwo,
 } from '../../../../../localdata/profileData';
-import { setInputFieldValueById } from '../../../../../actions/registration';
+import { setInputFieldValueById } from '../../../../../actions/dashboard';
 
 class Experience extends Component {
   constructor(props) {

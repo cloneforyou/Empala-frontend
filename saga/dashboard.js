@@ -26,7 +26,8 @@ import {
 } from '../actions/dashboard';
 
 export function* sessionTimeout() {
-  let timeout = 600 + 30; // TODO change to value from server
+  let timeout = yield select(state => state.dashboard.appSettings.session_timeout || 600);
+  timeout += 30;
   yield put(setSessionTimeRemain(timeout));
   while (timeout > 0) {
     yield delay(1000);
