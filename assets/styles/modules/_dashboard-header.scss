@@ -130,6 +130,7 @@
   }
   &__link {
     position: relative;
+    padding: 10px 20px;
     &_active, &:hover {
       .user-nav__icon {
         &:before {
@@ -173,6 +174,7 @@
     &_notification {
       width: 16px;
       height: 20px;
+      position: relative;
       &:before {
         mask: url($path-to-dashboard-icon + 'icon-notification.svg');
         mask-size: contain;

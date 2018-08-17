@@ -69,6 +69,7 @@ export default class RightBlock extends Component {
                  onClick={this.handleClickNotificationsPopup}
               >
                 <i className="user-nav__icon user-nav__icon_notification"/>
+                <div className="notifications-badge"></div>
               </a>
               <span className="tooltiptext">Notifications</span>
             </div>
