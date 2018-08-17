@@ -15,6 +15,7 @@ import Funding from './Pages/InvestmentProfile/Funding';
 import Account from './Pages/InvestmentProfile/Account';
 import PopupPIN from '../registration/PopupPIN';
 import GlobalNotifications from './Pages/GlobalNotifications';
+import SessionExpire from './Modal/SessionExpire';
 
 class Main extends Component {
   constructor(props) {
@@ -70,6 +71,7 @@ class Main extends Component {
           handleClose={this.props.closeModal}
           open={this.props.reminderModalOpen}
          />
+        <SessionExpire />
         {
           showPopupPIN && <PopupPIN type={popupPINType} />
         }

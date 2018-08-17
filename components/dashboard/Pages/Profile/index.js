@@ -9,7 +9,7 @@ import Membership from './TabsContainers/Membership';
 import Regulatory from './TabsContainers/Regulatory';
 import Experience from './TabsContainers/Experience';
 import Documents from './TabsContainers/Documents';
-import OrderConfig from './TabsContainers/OrderConfig';
+import AppSettings from './TabsContainers/AppSettings';
 import Account from './TabsContainers/Account';
 import { getActiveTabProfile, changeActiveTabProfile } from '../../../../actions/profile';
 import { withStyles } from '@material-ui/core/styles';
@@ -51,7 +51,7 @@ class Profile extends Component {
             <Tab label="Experience" />
             <Tab label="Account" />
             <Tab label="Documents" />
-            <Tab label="Order Config" />
+            <Tab label="Application Settings" />
             <Tab label="Notifications" />
           </Tabs>
         </AppBar>
@@ -60,7 +60,7 @@ class Profile extends Component {
         {value === 2 && <Experience />}
         {value === 3 && <Account />}
         {value === 4 && <Documents />}
-        {value === 5 && <OrderConfig />}
+        {value === 5 && <AppSettings />}
         {value === 6 && <div>Item Seven</div>}
       </div>
     );

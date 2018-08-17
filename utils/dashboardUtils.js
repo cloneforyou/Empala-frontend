@@ -698,7 +698,7 @@ const tableHeaders = {
         '210px',
         '135px',
         '130px',
-        '75px',
+        '77px',
       ],
       padding: [
         null,

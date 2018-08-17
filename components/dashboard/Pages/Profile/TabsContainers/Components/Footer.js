@@ -1,16 +1,21 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { openModal } from '../../../../../../actions/dashboard';
-import { updateProfileSend } from '../../../../../../actions/profile';
+import { updateProfileSend, updateSettingsRequest } from '../../../../../../actions/profile';
 import * as dashboardActions from '../../../../../../actions/dashboard';
 
 
 class Footer extends PureComponent {
-  constructor(props) {
-    super(props);
+  handleUpdate(entity) {
+    switch (entity) {
+      case 'settings':
+        return this.props.handleUpdateSettings();
+      default:
+        return this.props.handleUpdateInfo();
+    }
   }
   render() {
-    const { deleteAccountBtnIsShow } = this.props;
+    const { deleteAccountBtnIsShow, updateEntity } = this.props;
     return (
       <div className="tab-container__foot buttons-row">
         <div className="buttons-row__right">
@@ -31,7 +36,7 @@ class Footer extends PureComponent {
           </button>
           <button
             className="profile-btn profile-btn_green"
-            onClick={this.props.handleUpdateInfo}
+            onClick={() => this.handleUpdate(updateEntity)}
           >Save
           </button>
           <div className="errorText" >
@@ -53,6 +58,7 @@ function mapDispatchToProps(dispatch) {
   return {
     showDeleteModal: () => dispatch(openModal('accountDelete')),
     handleUpdateInfo: () => dispatch(updateProfileSend()),
+    handleUpdateSettings: () => dispatch(updateSettingsRequest()),
     handleCancel: () => dispatch(dashboardActions.getUserData()),
   };
 }

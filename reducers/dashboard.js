@@ -27,12 +27,15 @@ import {
   UPDATE_QUOTES,
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
+  SET_APP_SETTINGS,
+  SET_SESSION_TIME_REMAIN, ADD_NOTIFICATION,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
   DELETE_USERPIC_REQUEST,
   DELETE_USERPIC_SUCCESS,
   RESET_PASSWORD_FAIL,
+  UPDATE_APP_SETTINGS_FAIL,
   UPDATE_PROFILE_FAIL,
 } from '../constants/profile';
 import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
@@ -63,6 +66,9 @@ const initialState = {
   quotes: false,
   showPopupPIN: false,
   popupPINType: false,
+  appSettings: false,
+  currentAppSettings: {},
+  notifications: [],
 };
 
 
@@ -73,6 +79,11 @@ const modifiyPositionsList = (list, data) => {
       pos.day_chg = data.ChangePc;
     }
   });
+};
+
+const parseAppSettings = (settings) => {
+  const out = {};
+  return Object.keys(settings).reduce((curr, el) => ( { ...curr, [`app_settings_${el}`]: settings[el] } ), out);
 };
 
 function dashboard(state = initialState, action) {
@@ -103,6 +114,12 @@ function dashboard(state = initialState, action) {
         return {
           ...state,
           [action.id]: action.value,
+        };
+      }
+      if (/app_settings_/.test(action.id)) {
+        return {
+          ...state,
+          currentAppSettings: { ...state.currentAppSettings, [action.id]: action.value },
         };
       }
       return state;
@@ -156,6 +173,7 @@ function dashboard(state = initialState, action) {
     case DELETE_ACCOUNT_FAIL:
     case RESET_PASSWORD_FAIL:
     case UPDATE_PROFILE_FAIL:
+    case UPDATE_APP_SETTINGS_FAIL:
       return {
         ...state,
         loading: false,
@@ -182,6 +200,12 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         currentColorScheme: action.colorScheme,
+      };
+    case SET_APP_SETTINGS:
+      return {
+        ...state,
+        appSettings: action.data,
+        currentAppSettings: parseAppSettings(action.data),
       };
     case SET_ORDERS_LIST:
       return {
@@ -265,6 +289,11 @@ function dashboard(state = initialState, action) {
           }
           return pos;
         }),
+      };
+    case ADD_NOTIFICATION:
+      return {
+        ...state,
+        notifications: [...state.notifications, action.notification],
       };
     default:
       return state;
