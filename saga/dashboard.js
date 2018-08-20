@@ -8,16 +8,16 @@ import {
   takeLatest,
   race,
   spawn,
-  cancel
+  cancel,
 } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
 import io from 'socket.io-client';
 import {
   GET_ETNA_DATA,
   GET_USER_DATA_REQUEST,
-  LOGOUT,
+  LOGOUT, MUTE_NOTIFICATIONS,
   REFRESH_TOKEN_REQUEST,
-  RESTART_SESSION_TIMEOUT, START_WEBSOCKET, STOP_WEBSOCKET,
+  RESTART_SESSION_TIMEOUT, SET_NOTIFICATION_READ, START_WEBSOCKET, STOP_WEBSOCKET,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
@@ -30,6 +30,13 @@ import {
   setWatchLists, updateNews,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
+
+const urls = {
+  notifications: {
+    mute: '/api/notifications/settings',
+    read: '/api/notifications/view/',
+  },
+};
 
 export function* sessionTimeout() {
   let timeout = yield select(state => state.dashboard.appSettings.session_timeout || 600);
@@ -241,9 +248,32 @@ function* wsHandling() {
 function* dropNotificationAtTimeout() {
   const timeout = 8000;
   // while (true) {
-    yield delay(timeout);
-    yield put(dropNotification(0));
+  yield delay(timeout);
+  yield put(dropNotification(0));
   // }
+}
+
+function* handleNotifications(action) {
+  let url;
+  const options = {
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+    method: 'GET',
+  };
+  if (action.type === MUTE_NOTIFICATIONS) {
+    url = urls.notifications.mute;
+  } else if (action.type === SET_NOTIFICATION_READ) {
+    url = urls.notifications.read;
+    options.method = 'PATCH';
+    if (!action.id) url += 'all';
+    else url += action.id;
+  }
+  try {
+    const resp = yield call(request, url, options);
+  } catch (err) {
+    console.error(' ** NOTIFICATIONS ERROR =======>', err);
+  }
 }
 
 export default function* dashboardSaga() {
@@ -252,6 +282,8 @@ export default function* dashboardSaga() {
     takeEvery(GET_USER_DATA_REQUEST, getUserData),
     takeEvery(GET_USER_DATA_REQUEST, getAppSettings),
     takeEvery(LOGOUT, logout),
+    takeEvery(SET_NOTIFICATION_READ, handleNotifications),
+    takeEvery(MUTE_NOTIFICATIONS, handleNotifications),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
