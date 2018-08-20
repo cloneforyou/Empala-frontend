@@ -202,7 +202,7 @@ const createSocketChannel = socket => eventChannel((emit) => {
     emit(data);
   };
   socket.on('connect', () => console.log('OPEN ====>>>', socket));
-  socket.on('message', handler);
+  socket.on('notification', handler);
   socket.on('disconnect', () => console.log('Disconnected:', socket));
   return () => {
     socket.off('newTask', handler);

@@ -32,7 +32,7 @@ export default class GlobalPortfolio extends Component {
             <div className="vertical-align_center global-portfolio__button_width">
               <button
                 className="profile-btn profile-btn_green"
-                onClick={() => this.props.setActivePage('account funding')}
+                onClick={() => this.props.setActivePage('funding')}
               >
                 <Link
                   route="dashboard"

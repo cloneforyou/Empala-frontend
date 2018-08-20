@@ -1,7 +1,17 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { parseDateString } from '../../../utils/dashboardUtils';
 
 class NotificationsCard extends Component {
+  getColorByType(type) {
+    switch (type) {
+      case 'action':
+        return 'red';
+      case 'notification':
+        return 'green';
+      default:
+        return 'white';
+    }
+  }
   parseTimestamp(timestamp) {
     if (!timestamp) return '';
     const delta = Math.floor((Date.now() / 1000) - timestamp);
@@ -12,7 +22,7 @@ class NotificationsCard extends Component {
   }
   render() {
     return (
-      <div className="notifications-card notifications-card_popup">
+      <div className={`notifications-card notifications-card_popup background_${this.getColorByType(this.props.type)}`}>
         <div className="notifications-card__img">
           <span className="img-border background-border_green" />
           <i className="image" />

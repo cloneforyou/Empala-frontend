@@ -43,7 +43,7 @@ class Main extends Component {
         return <Profile />;
       case 'market':
         return <MarketAccessPage />;
-      case 'account funding':
+      case 'funding':
         return <Funding />;
       case 'global portfolio':
         return <Account />;
