@@ -24,7 +24,7 @@ class NotificationsCard extends Component {
     return (
       <div className={`notifications-card notifications-card_popup background_${this.getColorByType(this.props.type)}`}>
         <div className="notifications-card__img">
-          <span className="img-border background-border_green" />
+          <span className="img-border" />
           <i className="image" />
         </div>
         <div className={`notifications-card__message ${this.props.page ? 'fs-15' : 'fs-12'}`}>
