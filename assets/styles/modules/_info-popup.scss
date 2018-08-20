@@ -3,8 +3,8 @@
   width: 520px;
   border-radius: 10px;
   box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  border: solid 1px #ebebeb;
+  background-color: $white;
+  border: solid 1px $gallery;
   font-size: 16px;
   padding: 15px;
   position: absolute;
@@ -13,17 +13,18 @@
   transform: translate(-50%, -50%);
   line-height: 1.25;
   &__title {
-    color: #b2d56b;
+    color: $yellow-green;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
   }
   &__text {
-    color: #808895;
+    color: $main-color-text-grey;
   }
   &__btn {
-    color: #b2d56b;
+    color: $yellow-green;
     border: none;
     cursor: pointer;
+    background: transparent;
   }
 }
