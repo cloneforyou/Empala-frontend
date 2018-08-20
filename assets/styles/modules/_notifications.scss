@@ -140,23 +140,23 @@
   }
 }
 
-.background-border_green {
-  background: $green;
-}
-.background-border_red {
-  background: $mandy;
-}
-.background-border_gray {
-  background: $light-gray;
-}
 .background_green {
   background: $sugar-cane;
+  .img-border {
+    background: $green;
+  }
 }
 .background_red {
   background: $rose-white;
+  .img-border {
+    background: $mandy;
+  }
 }
 .background_white {
   background: $white;
+  .img-border {
+    background: $light-gray;
+  }
 }
 .min-width-600 {
   min-width: 600px;
@@ -191,6 +191,7 @@
     right: 2%;
     top: 72px;
   }
+}
   
 .notifications-badge {
   width: 11px;
