@@ -191,4 +191,14 @@
     right: 2%;
     top: 72px;
   }
+  
+.notifications-badge {
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  background-color: $main-color-text-grey;
+  box-shadow: 1px 2px 2.5px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  top: 5px;
+  left: 31px;
 }
