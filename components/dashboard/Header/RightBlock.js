@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from '../../../routes';
 import DropdownMenu from './DropdownMenu';
 import NotificationsPopup from './NotificationsPopup';
+import NotificationsBlock from './NotificationsBlock';
 import avatar from '../../../static/images/default-avatar-of-user.svg';
 
 export default class RightBlock extends Component {
@@ -77,6 +78,7 @@ export default class RightBlock extends Component {
               closeNotificationsPopup={this.closeNotificationsPopup}
               setActivePage={setActivePage}
             />
+            <NotificationsBlock />
           </li>
           <li className="nav-item">
             <div className="nav-tooltipe">
