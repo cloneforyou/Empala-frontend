@@ -66,6 +66,7 @@ class Membership extends Component {
               handleDatePick={this.props.setPickedDate}
               errorText={this.props.fieldsErrors[item.id]}
               birthDay={item.birthDay}
+              col={item.col}
             />
           );
         case 'input':
