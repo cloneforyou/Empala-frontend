@@ -54,6 +54,10 @@
       }
     }
   }
+  &_popup {
+    opacity: 100%;
+    transition: opacity 1000ms;
+  }
   &__message {
     padding: 5px 10px;
     width: 100%;
@@ -176,6 +180,18 @@
     top: 4px;
   }
 }
+
+.notifications-block {
+  width: 400px;
+  max-height: 40vh;
+  overflow: hidden;
+  z-index: 10000;
+  &_position {
+    position: absolute;
+    right: 2%;
+    top: 72px;
+  }
+  
 .notifications-badge {
   width: 11px;
   height: 11px;

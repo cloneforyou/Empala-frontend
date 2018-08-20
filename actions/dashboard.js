@@ -45,7 +45,7 @@ import {
   SET_APP_SETTINGS,
   SET_SESSION_TIME_REMAIN,
   RESTART_SESSION_TIMEOUT,
-  REFRESH_TOKENS, ADD_NOTIFICATION,
+  REFRESH_TOKENS, ADD_NOTIFICATION, DROP_NOTIFICATION,
 } from '../constants/dashboard';
 import { UPDATE_APP_SETTINGS_FAIL } from '../constants/profile';
 
@@ -295,6 +295,13 @@ export function addNotification(notification) {
   return {
     type: ADD_NOTIFICATION,
     notification,
+  };
+}
+
+export function dropNotification(index) {
+  return {
+    type: DROP_NOTIFICATION,
+    index,
   };
 }
 

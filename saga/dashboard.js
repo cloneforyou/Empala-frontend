@@ -5,7 +5,10 @@ import {
   select,
   put,
   call,
-  takeLatest, race,
+  takeLatest,
+  race,
+  spawn,
+  cancel
 } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
 import io from 'socket.io-client';
@@ -19,7 +22,7 @@ import {
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
 import {
-  addNotification,
+  addNotification, dropNotification,
   openModal,
   setAppSettings,
   setOrdersList,
@@ -199,7 +202,7 @@ const createSocketChannel = socket => eventChannel((emit) => {
     emit(data);
   };
   socket.on('connect', () => console.log('OPEN ====>>>', socket));
-  socket.on('message', handler);
+  socket.on('notification', handler);
   socket.on('disconnect', () => console.log('Disconnected:', socket));
   return () => {
     socket.off('newTask', handler);
@@ -209,8 +212,9 @@ const createSocketChannel = socket => eventChannel((emit) => {
 function* socketListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
-    console.log('message:', action);
+    // console.log('message:', action);
     yield put(addNotification(action));
+    yield dropNotificationAtTimeout();
   }
 }
 
@@ -222,13 +226,24 @@ function* wsHandling() {
     const empalaChannel = yield call(createSocketChannel, connection);
     const { cancel } = yield race({
       task:
-        call(socketListener, empalaChannel),
+        [
+          call(socketListener, empalaChannel),
+          // dropNotificationAtTimeout(),
+        ],
       cancel: take(STOP_WEBSOCKET),
     });
     if (cancel) {
       empalaChannel.close();
     }
   }
+}
+
+function* dropNotificationAtTimeout() {
+  const timeout = 8000;
+  // while (true) {
+    yield delay(timeout);
+    yield put(dropNotification(0));
+  // }
 }
 
 export default function* dashboardSaga() {

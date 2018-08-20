@@ -28,7 +28,7 @@ import {
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
-  SET_SESSION_TIME_REMAIN, ADD_NOTIFICATION,
+  SET_SESSION_TIME_REMAIN, ADD_NOTIFICATION, DROP_NOTIFICATION,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -295,6 +295,14 @@ function dashboard(state = initialState, action) {
         ...state,
         notifications: [...state.notifications, action.notification],
       };
+    case DROP_NOTIFICATION:
+      if (state.notifications && state.notifications.length > 0) {
+        return {
+          ...state,
+          notifications:
+            [...state.notifications.slice(0, action.index), ...state.notifications.slice(action.index+1)],
+        };
+      }
     default:
       return state;
   }
