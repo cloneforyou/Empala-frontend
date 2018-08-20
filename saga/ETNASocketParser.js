@@ -5,6 +5,7 @@ import {
   SUBSCRIBE_WATCHLIST_CONTENT,
   UNSUBSCRIBE_QUOTES,
   UNSUBSCRIBE_WATCHLIST_CONTENT,
+  SET_SESSION_ID,
 } from '../constants/dashboard';
 import { serverOrigins } from '../utils/config';
 import { eventChannel } from 'redux-saga';
@@ -170,7 +171,7 @@ function* externalListener(socketChannel) {
     // console.log('acttt ======>', action);
     if (action.type === 'quote') {
       if (action.item.Cmd === 'CreateSession.txt' && action.item.SessionId) {
-        yield put({ type: 'SET_SESSION_ID', id: action.item.SessionId, name: 'quote' });
+        yield put({ type: SET_SESSION_ID, id: action.item.SessionId, name: 'quote' });
       }
       // const parsedPositions = yield select(state => state.dashboard.parsedPositions);
       // yield put(setParsedPositions(modifyPositions(parsedPositions, action.item)));
@@ -179,7 +180,7 @@ function* externalListener(socketChannel) {
       }
     }
     if (action.item.Cmd === 'CreateSession.txt' && action.item.SessionId && action.type !== 'quote') {
-      yield put({ type: 'SET_SESSION_ID', id: action.item.SessionId, name: 'orders' });
+      yield put({ type: SET_SESSION_ID, id: action.item.SessionId, name: 'orders' });
     }
     if (!action.item.Cmd && action.item.EntityType === 'Order') {
       // yield put(updateOrders(action.item));

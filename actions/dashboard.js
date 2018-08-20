@@ -45,9 +45,10 @@ import {
   SET_APP_SETTINGS,
   SET_SESSION_TIME_REMAIN,
   RESTART_SESSION_TIMEOUT,
-  REFRESH_TOKENS, ADD_NOTIFICATION,
+  REFRESH_TOKENS,
+  ADD_NOTIFICATION,
+  CHOOSE_GROUP_COUNTRY,
 } from '../constants/dashboard';
-import { UPDATE_APP_SETTINGS_FAIL } from '../constants/profile';
 
 export function collapseSidebar(bool) {
   return {
@@ -97,7 +98,7 @@ export function setGroupCountry(label) {
     }
   });
   return {
-    type: 'CHOOSE_GROUP_COUNTRY',
+    type: CHOOSE_GROUP_COUNTRY,
     selectedGroup: group,
   };
 }
