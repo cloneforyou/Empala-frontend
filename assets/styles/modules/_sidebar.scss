@@ -41,6 +41,7 @@
     }
     .nav-list__link {
       display: block;
+      white-space: nowrap;
     }
     .nav-list__icon {
       &:before {
