@@ -48,6 +48,7 @@ import {
   REFRESH_TOKENS,
   ADD_NOTIFICATION,
   CHOOSE_GROUP_COUNTRY,
+  REFRESH_TOKENS, ADD_NOTIFICATION, DROP_NOTIFICATION,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -296,6 +297,13 @@ export function addNotification(notification) {
   return {
     type: ADD_NOTIFICATION,
     notification,
+  };
+}
+
+export function dropNotification(index) {
+  return {
+    type: DROP_NOTIFICATION,
+    index,
   };
 }
 
