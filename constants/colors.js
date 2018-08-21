@@ -7,3 +7,5 @@ export const WHITE = '#FFFFFF';
 export const TORCH_RED = '#F80A2E';
 export const BLACK = '#000000';
 export const DARK_BLUE = '#292944';
+export const CONCRETE = '#F3F3F3';
+export const MIRAGE = '#211F39';

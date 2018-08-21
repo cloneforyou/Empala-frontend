@@ -1,10 +1,12 @@
-.registration-group {
-  min-height: 80px;
-  &__section-title {
-    @include fontSize(18px);
-  }
-  &_height50 {
-    height: 50px;
+.onboard {
+  .registration-group {
+    min-height: 80px;
+    &__section-title {
+      @include fontSize(18px);
+    }
+    &_height50 {
+      height: 50px;
+    }
   }
 }
 
