@@ -47,8 +47,10 @@ import {
   RESTART_SESSION_TIMEOUT,
   REFRESH_TOKENS,
   ADD_NOTIFICATION,
+  DROP_NOTIFICATION,
+  SET_NOTIFICATION_READ,
+  MUTE_NOTIFICATIONS,
   CHOOSE_GROUP_COUNTRY,
-  REFRESH_TOKENS, ADD_NOTIFICATION, DROP_NOTIFICATION,
   GET_ALL_NOTIFICATIONS,
   SET_ALL_NOTIFICATIONS,
 } from '../constants/dashboard';
@@ -306,6 +308,19 @@ export function dropNotification(index) {
   return {
     type: DROP_NOTIFICATION,
     index,
+  };
+}
+
+export function setNotificationRead(id) {
+  return {
+    type: SET_NOTIFICATION_READ,
+    id,
+  };
+}
+
+export function muteNotifications() {
+  return {
+    type: MUTE_NOTIFICATIONS,
   };
 }
 

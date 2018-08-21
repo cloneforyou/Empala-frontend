@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from '../../../routes';
 import NotificationsCard from '../Header/NotificationsCard';
+import { connect } from 'react-redux';
+import { muteNotifications, setNotificationRead } from '../../../actions/dashboard';
 
 
 class NotificationsPopup extends Component {
+  constructor(props) {
+    super(props);
+    this.handleMute = this.handleMute.bind(this);
+    this.handleReadAll = this.handleReadAll.bind(this);
+  }
   componentDidMount() {
     document.addEventListener('click', this.handldeClickOutsideBackground);
   }
@@ -18,8 +25,17 @@ class NotificationsPopup extends Component {
     }
   };
 
+  handleReadAll(e) {
+    e.preventDefault();
+    this.props.setNotificationRead();
+  }
+
+  handleMute(e) {
+    e.preventDefault();
+    this.props.muteNotifications();
+  }
   render() {
-    const { showNotificationsPopup: isOpened, setActivePage } = this.props;
+    const { showNotificationsPopup: isOpened, setActivePage, notificationsMuted } = this.props;
     return (
       <div className={`notifications-popup ${isOpened && 'd-block'}`}
            ref={node => this.notificationsPopup = node}
@@ -27,8 +43,14 @@ class NotificationsPopup extends Component {
         <div className="notifications-popup__notifications">
           <span className="green fw-600">Notifications</span>
           <div className="notifications-links">
-            <a href="#">Mark All as Read</a>
-            <a href="#">Mute</a>
+            <a href="#"
+               role="button"
+               onClick={this.handleReadAll}
+            >Mark All as Read</a>
+            <a href="#"
+               role="button"
+               onClick={this.handleMute}
+            >{`${!notificationsMuted ? 'Mute' : 'Unmute'}`}</a>
             <a href="#">Settings</a>
           </div>
         </div>
@@ -59,5 +81,12 @@ class NotificationsPopup extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  notificationsMuted: state.dashboard.notificationsMuted,
+});
+const mapDispatchToProps = dispatch => ({
+  setNotificationRead: (id) => dispatch(setNotificationRead(id)),
+  muteNotifications: () => dispatch(muteNotifications()),
+});
 
-export default NotificationsPopup;
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationsPopup);

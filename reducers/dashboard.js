@@ -29,13 +29,9 @@ import {
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
   SET_SESSION_TIME_REMAIN,
-  ADD_NOTIFICATION,
-  DROP_NOTIFICATION,
-  SET_ALL_NOTIFICATIONS,
-  SET_SESSION_TIME_REMAIN,
-  ADD_NOTIFICATION,
   SET_SESSION_ID,
-  SET_SESSION_TIME_REMAIN,
+  MUTE_NOTIFICATIONS,
+  SET_ALL_NOTIFICATIONS,
   ADD_NOTIFICATION,
   DROP_NOTIFICATION,
 } from '../constants/dashboard';
@@ -78,22 +74,14 @@ const initialState = {
   appSettings: false,
   currentAppSettings: {},
   notifications: [],
+  notificationsMuted: false,
   allNotifications: [],
 };
 
 
-const modifiyPositionsList = (list, data) => {
-  list.map((pos) => {
-    if (pos.sec_id === +data.Key) {
-      pos.m2m = data.Last;
-      pos.day_chg = data.ChangePc;
-    }
-  });
-};
-
 const parseAppSettings = (settings) => {
   const out = {};
-  return Object.keys(settings).reduce((curr, el) => ( { ...curr, [`app_settings_${el}`]: settings[el] } ), out);
+  return Object.keys(settings).reduce((curr, el) => ({ ...curr, [`app_settings_${el}`]: settings[el] }), out);
 };
 
 function dashboard(state = initialState, action) {
@@ -305,15 +293,22 @@ function dashboard(state = initialState, action) {
         ...state,
         notifications: [...state.notifications, action.notification],
       };
+      case MUTE_NOTIFICATIONS:
+      return {
+        ...state,
+        notificationsMuted: !state.notificationsMuted,
+      };
     case DROP_NOTIFICATION:
       if (state.notifications && state.notifications.length > 0) {
         return {
           ...state,
-          notifications:
-            [...state.notifications.slice(0, action.index), ...state.notifications.slice(action.index+1)],
+          notifications: [
+            ...state.notifications.slice(0, action.index),
+            ...state.notifications.slice(action.index + 1),
+          ],
         };
       }
-      break
+      break;
     case SET_ALL_NOTIFICATIONS:
       return {
         ...state,

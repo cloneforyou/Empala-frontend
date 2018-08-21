@@ -23,6 +23,7 @@ export default class RightBlock extends Component {
   };
 
   handleClickNotificationsPopup = (event) => {
+    event.preventDefault();
     if (!this.state.notifPopUpIsOpened) {
       event.nativeEvent.stopImmediatePropagation();
     }
@@ -79,7 +80,7 @@ export default class RightBlock extends Component {
               closeNotificationsPopup={this.closeNotificationsPopup}
               setActivePage={setActivePage}
             />
-            <NotificationsBlock />
+            { !notifPopUpIsOpened && <NotificationsBlock /> }
           </li>
           <li className="nav-item">
             <div className="nav-tooltipe">
