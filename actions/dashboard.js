@@ -49,6 +49,8 @@ import {
   ADD_NOTIFICATION,
   CHOOSE_GROUP_COUNTRY,
   REFRESH_TOKENS, ADD_NOTIFICATION, DROP_NOTIFICATION,
+  GET_ALL_NOTIFICATIONS,
+  SET_ALL_NOTIFICATIONS,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -307,3 +309,15 @@ export function dropNotification(index) {
   };
 }
 
+export function setAllNotifications(data) {
+  return {
+    type: SET_ALL_NOTIFICATIONS,
+    data,
+  };
+}
+
+export function getAllNotifications() {
+  return {
+    type: GET_ALL_NOTIFICATIONS,
+  };
+}
