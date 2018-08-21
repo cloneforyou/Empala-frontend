@@ -35,7 +35,7 @@ class NotificationsPopup extends Component {
     this.props.muteNotifications();
   }
   render() {
-    const { showNotificationsPopup: isOpened, setActivePage } = this.props;
+    const { showNotificationsPopup: isOpened, setActivePage, notificationsMuted } = this.props;
     return (
       <div className={`notifications-popup ${isOpened && 'd-block'}`}
            ref={node => this.notificationsPopup = node}
@@ -50,7 +50,7 @@ class NotificationsPopup extends Component {
             <a href="#"
                role="button"
                onClick={this.handleMute}
-            >Mute</a>
+            >{`${!notificationsMuted ? 'Mute' : 'Unmute'}`}</a>
             <a href="#">Settings</a>
           </div>
         </div>
@@ -81,7 +81,9 @@ class NotificationsPopup extends Component {
   }
 }
 
-const mapStateToProps = state => {};
+const mapStateToProps = state => ({
+  notificationsMuted: state.dashboard.notificationsMuted,
+});
 const mapDispatchToProps = dispatch => ({
   setNotificationRead: (id) => dispatch(setNotificationRead(id)),
   muteNotifications: () => dispatch(muteNotifications()),
