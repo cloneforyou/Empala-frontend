@@ -4,7 +4,7 @@ import RightBlock from './RightBlock';
 import Search from './Search';
 import logo from '../../../static/images/logo.svg';
 import iconLogo from '../../../static/images/dashboard-icons/icon-logo.svg';
-import { setActivePage } from '../../../actions/dashboard';
+import { getNotifications, setActivePage, setNotificationRead } from '../../../actions/dashboard';
 
 
 class Header extends Component {
@@ -12,6 +12,8 @@ class Header extends Component {
     const {
       sidebarCollapsed,
       currentColorScheme,
+      getLatestNotifications,
+      setActivePage,
     } = this.props;
     return (
       <div
@@ -75,6 +77,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setActivePage: page => dispatch(setActivePage(page)),
+    getLatestNotifications: () => dispatch(getNotifications({ collect: 'latest' })),
   };
 }
 

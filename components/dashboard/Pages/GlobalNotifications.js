@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NotificationsCard from '../Header/NotificationsCard';
-import { getAllNotifications } from '../../../actions/dashboard';
+import { getNotifications } from '../../../actions/dashboard';
 
 function mapStateToProps(state) {
   return {
@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return ({
-    getAllNotifications: () => dispatch(getAllNotifications()),
+    getAllNotifications: () => dispatch(getNotifications()),
   });
 }
 

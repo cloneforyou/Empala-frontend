@@ -28,6 +28,7 @@ export default class RightBlock extends Component {
       event.nativeEvent.stopImmediatePropagation();
     }
     this.setState((prevState) => ({ notifPopUpIsOpened: !prevState.notifPopUpIsOpened }));
+    this.props.getLatestNotifications();
   };
 
   closeNotificationsPopup = () => {
@@ -75,7 +76,7 @@ export default class RightBlock extends Component {
                  onClick={this.handleClickNotificationsPopup}
               >
                 <i className="user-nav__icon user-nav__icon_notification"/>
-                <div className="notifications-badge"></div>
+                {/*<div className="notifications-badge"></div>*/}
               </a>
               <span className="tooltiptext">Notifications</span>
             </div>
