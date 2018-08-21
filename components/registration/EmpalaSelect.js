@@ -24,7 +24,7 @@ const EmpalaSelect = (props) => {
         id={props.id}
         value={props.value}
         autoWidth={props.autoWidth}
-        className="dashboard-select text-field"
+        className="dashboard-select text-field fs-18"
         floatingLabelStyle={style.floatingLabelStyle}
         hintText={fieldNeedsLabel(props.id) && (props.hint || props.label)}
         hintStyle={currentColorScheme === 'light' ?

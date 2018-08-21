@@ -63,13 +63,11 @@ const style = {
   },
   textFieldStyle: {
     width: '100%',
-    fontSize: '18px',
     fontFamily: 'Proxima Nova',
   },
   selectFieldStyle: {
     width: '100%',
     margin: 0,
-    fontSize: '18px',
     fontFamily: 'Proxima Nova',
   },
   labelStyleLightTheme: {
