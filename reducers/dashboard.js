@@ -28,7 +28,12 @@ import {
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
-  SET_SESSION_TIME_REMAIN, ADD_NOTIFICATION, DROP_NOTIFICATION, MUTE_NOTIFICATIONS,
+  SET_SESSION_TIME_REMAIN,
+  SET_SESSION_ID,
+  MUTE_NOTIFICATIONS,
+  SET_ALL_NOTIFICATIONS,
+  ADD_NOTIFICATION,
+  DROP_NOTIFICATION,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -70,6 +75,7 @@ const initialState = {
   currentAppSettings: {},
   notifications: [],
   notificationsMuted: false,
+  allNotifications: [],
 };
 
 
@@ -227,7 +233,7 @@ function dashboard(state = initialState, action) {
         ...state,
         watchListNumber: action.number,
       };
-    case 'SET_SESSION_ID':
+    case SET_SESSION_ID:
       if (action.name === 'orders') {
         return ({
           ...state,
@@ -303,6 +309,11 @@ function dashboard(state = initialState, action) {
         };
       }
       break;
+    case SET_ALL_NOTIFICATIONS:
+      return {
+        ...state,
+        allNotifications: action.data,
+      };
     default:
       return state;
   }

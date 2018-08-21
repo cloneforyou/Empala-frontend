@@ -50,8 +50,10 @@ import {
   DROP_NOTIFICATION,
   SET_NOTIFICATION_READ,
   MUTE_NOTIFICATIONS,
+  CHOOSE_GROUP_COUNTRY,
+  GET_ALL_NOTIFICATIONS,
+  SET_ALL_NOTIFICATIONS,
 } from '../constants/dashboard';
-import { UPDATE_APP_SETTINGS_FAIL } from '../constants/profile';
 
 export function collapseSidebar(bool) {
   return {
@@ -101,7 +103,7 @@ export function setGroupCountry(label) {
     }
   });
   return {
-    type: 'CHOOSE_GROUP_COUNTRY',
+    type: CHOOSE_GROUP_COUNTRY,
     selectedGroup: group,
   };
 }
@@ -322,3 +324,15 @@ export function muteNotifications() {
   };
 }
 
+export function setAllNotifications(data) {
+  return {
+    type: SET_ALL_NOTIFICATIONS,
+    data,
+  };
+}
+
+export function getAllNotifications() {
+  return {
+    type: GET_ALL_NOTIFICATIONS,
+  };
+}

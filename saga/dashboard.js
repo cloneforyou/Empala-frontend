@@ -15,19 +15,28 @@ import io from 'socket.io-client';
 import {
   GET_ETNA_DATA,
   GET_USER_DATA_REQUEST,
-  LOGOUT, MUTE_NOTIFICATIONS,
+  LOGOUT,
+  MUTE_NOTIFICATIONS,
   REFRESH_TOKEN_REQUEST,
-  RESTART_SESSION_TIMEOUT, SET_NOTIFICATION_READ, START_WEBSOCKET, STOP_WEBSOCKET,
+  RESTART_SESSION_TIMEOUT,
+  START_WEBSOCKET,
+  STOP_WEBSOCKET,
+  GET_ALL_NOTIFICATIONS,
+  SET_NOTIFICATION_READ,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
 import {
-  addNotification, dropNotification,
+  addNotification,
+  dropNotification,
   openModal,
   setAppSettings,
   setOrdersList,
-  setPositions, setSessionTimeRemain,
-  setWatchLists, updateNews,
+  setPositions,
+  setSessionTimeRemain,
+  setWatchLists,
+  updateNews,
+  setAllNotifications,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 
@@ -276,6 +285,22 @@ function* handleNotifications(action) {
   }
 }
 
+function* getAllNotifications() {
+  const url = '/api/notifications/';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const resp = yield call(request, url, options);
+    if (resp) yield put(setAllNotifications(resp.data.data));
+  } catch (err) {
+    console.error(' ** DASHBOARD ERROR =======>', err);
+  }
+}
+
 export default function* dashboardSaga() {
   yield all([
     wsHandling(),
@@ -285,6 +310,7 @@ export default function* dashboardSaga() {
     takeEvery(SET_NOTIFICATION_READ, handleNotifications),
     takeEvery(MUTE_NOTIFICATIONS, handleNotifications),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
+    takeEvery(GET_ALL_NOTIFICATIONS, getAllNotifications),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
   ]);
