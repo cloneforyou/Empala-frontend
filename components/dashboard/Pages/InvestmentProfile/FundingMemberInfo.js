@@ -12,7 +12,7 @@ export default class FundingMemberInfo extends Component {
   render() {
     return (
       <div className="d-flex flex-wrap">
-        <div className="pr-2 no-gutters" style={{ width: '104px' }} >
+        <div className="pr-2 no-gutters" style={{ width: '104px', marginBottom: '12px' }} >
           <EmpalaInput
             id="member_title"
             label="Account name"
@@ -20,7 +20,7 @@ export default class FundingMemberInfo extends Component {
             readOnly
           />
         </div>
-        <div className="pr-2 no-gutters text-truncate" style={{ width: '176px', paddingTop: '18px' }} >
+        <div className="pr-2 no-gutters text-truncate" style={{ width: '176px', paddingTop: '22px' }} >
           <input
             type="text"
             className="pseudo-input__input"
@@ -30,7 +30,7 @@ export default class FundingMemberInfo extends Component {
         </div>
         <div
           className="pr-2 no-gutters text-truncate funding-member-info__item_bottom20"
-          style={{ width: '256px', paddingTop: '18px' }}
+          style={{ width: '256px', paddingTop: '22px' }}
         >
           <input
             className="pseudo-input__input"
@@ -41,7 +41,7 @@ export default class FundingMemberInfo extends Component {
         <div className="d-flex">
           <div
             className="pr-2 no-gutters funding-member-info__item_bottom20"
-            style={{ width: '188px' }}
+            style={{ width: '188px', marginBottom: '10px' }}
           >
             <EmpalaInput
               id="member_primary_ssn"
@@ -53,7 +53,7 @@ export default class FundingMemberInfo extends Component {
           </div>
           <div
             className="no-gutters funding-member-info__item_bottom20"
-            style={{ width: '176px' }}
+            style={{ width: '176px', marginBottom: '10px' }}
           >
             <EmpalaInput
               id="member_secondary_ssn"

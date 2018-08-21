@@ -11,7 +11,7 @@ function mapStateToProps(state) {
 function TitleBar(props) {
   return (
     <div className="titlebar">
-      {props.currentPage && (props.currentPage !== 'global portfolio') && (props.currentPage !== 'account funding' && props.currentPage !== 'market') &&
+      {props.currentPage && (props.currentPage !== 'global portfolio') && (props.currentPage !== 'funding' && props.currentPage !== 'market') &&
       <div className="d-flex">
           <span>
           <i className={`titlebar__icon titlebar__icon_${props.currentPage}`}></i>
@@ -29,7 +29,7 @@ function TitleBar(props) {
         <span className="titlebar__title">{props.currentSectionTitleBar}</span>
       </div>}
 
-      {props.currentPage && (props.currentPage === 'account funding' || props.currentPage === 'market') &&
+      {props.currentPage && (props.currentPage === 'funding' || props.currentPage === 'market') &&
       <div className="d-flex">
         <span>
           <i className="titlebar__icon titlebar__icon_wallet"></i>
