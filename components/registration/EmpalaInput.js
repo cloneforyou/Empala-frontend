@@ -62,7 +62,7 @@ class EmpalaInput extends Component {
           onChange={this.checkRegistrationField}
           disabled={this.props.disabled}
           errorText={errorText}
-          className="text-field"
+          className="text-field fs-18"
           margin="none"
           onKeyPress={this.props.onKeyPress}
         >

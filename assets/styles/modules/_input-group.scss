@@ -1,4 +1,4 @@
-.onboard {
+.onboard, .login__content {
   .registration-group {
     min-height: 80px;
     &__section-title {
@@ -7,6 +7,9 @@
     &_height50 {
       height: 50px;
     }
+  }
+  .fs-18 {
+    font-size: 18px !important;
   }
 }
 
