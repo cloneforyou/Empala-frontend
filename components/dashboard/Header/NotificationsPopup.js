@@ -23,7 +23,7 @@ class NotificationsPopup extends Component {
     if (this.props.showNotificationsPopup && !this.notificationsPopup.contains(event.target)) {
       this.props.closeNotificationsPopup();
     }
-    this.props.setNotificationRead(this.props.lastNotifications);
+    this.props.setNotificationRead(this.props.lastNotifications.map(item => item.id));
   };
 
   handleReadAll(e) {
@@ -46,6 +46,7 @@ class NotificationsPopup extends Component {
       showNotificationsPopup: isOpened,
       notificationsMuted,
       lastNotifications,
+      setActivePage,
     } = this.props;
     return (
       <div className={`notifications-popup ${isOpened && 'd-block'}`}
@@ -77,6 +78,8 @@ class NotificationsPopup extends Component {
               title={notification.title}
               timestamp={notification.date_created}
               type={notification.notification_type}
+              viewed={notification.viewed}
+              completed={notification.completed}
             />)
           : <div className="horizontal-align_center py-2">
             You have no notifications
@@ -84,7 +87,8 @@ class NotificationsPopup extends Component {
         }
         <div className="notifications-popup__earlier">
           <span className="green fw-600">Earlier</span>
-          {this.filterNotifications(lastNotifications, true).map(notification =>
+        </div>
+        {this.filterNotifications(lastNotifications, true).map(notification =>
           <NotificationsCard
             popup
             key={notification.id}
@@ -92,8 +96,9 @@ class NotificationsPopup extends Component {
             title={notification.title}
             timestamp={notification.date_created}
             type={notification.notification_type}
+            viewed={notification.viewed}
+            completed={notification.completed}
           />)}
-        </div>
         {/*<div className="notifications-popup__cards">*/}
           {/*<NotificationsCard popup />*/}
         {/*</div>*/}

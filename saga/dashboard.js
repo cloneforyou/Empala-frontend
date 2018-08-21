@@ -231,7 +231,7 @@ function* socketListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
     // console.log('message:', action);
-    yield put(addNotification(action));
+    yield put(addNotification(action.notification));
     yield dropNotificationAtTimeout();
   }
 }
@@ -280,13 +280,13 @@ function* handleNotifications(action) {
     if (!action.id) url += 'all';
     else {
       options.method = 'POST';
-      options.data = Array.isArray(action.id) ? action.id : action.id.toString.split(',');
+      options.data = { ids: Array.isArray(action.id) ? action.id : action.id.toString.split(',') };
     }
-  }
-  try {
-    const resp = yield call(request, url, options);
-  } catch (err) {
-    console.error(' ** NOTIFICATIONS ERROR =======>', err);
+    try {
+      const resp = yield call(request, url, options);
+    } catch (err) {
+      console.error(' ** NOTIFICATIONS ERROR =======>', err);
+    }
   }
 }
 

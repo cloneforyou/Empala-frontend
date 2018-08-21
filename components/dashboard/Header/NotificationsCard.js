@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { parseDateString } from '../../../utils/dashboardUtils';
 
 class NotificationsCard extends Component {
-  getColorByType(type) {
+  getColorByType(type, viewed, completed) {
+    if (type !== 'action' && viewed) return 'white';
     switch (type) {
       case 'action':
-        return 'red';
+        return completed ? 'white' : 'red';
       case 'notification':
         return 'green';
       default:
@@ -22,7 +23,7 @@ class NotificationsCard extends Component {
   }
   render() {
     return (
-      <div className={`notifications-card notifications-card_popup background_${this.getColorByType(this.props.type)}`}>
+      <div className={`notifications-card notifications-card_popup background_${this.getColorByType(this.props.type, this.props.viewed, this.props.completed)}`}>
         <div className="notifications-card__img">
           <span className="img-border" />
           <i className="image" />

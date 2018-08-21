@@ -5,7 +5,6 @@ import { dropNotification } from '../../../actions/dashboard';
 
 
 class NotificationsBlock extends Component {
-
   render() {
     const { notificationsList } = this.props;
     return (
@@ -17,12 +16,15 @@ class NotificationsBlock extends Component {
               onClick={() => this.props.dropNotification(index)}
             >
               <NotificationsCard
-            popup
-            text={notification.action}
-            title={notification.title}
-            timestamp={notification.date_created}
-            type={notification.notification_type}
-          />
+                popup
+                key={notification.id}
+                text={notification.action}
+                title={notification.title}
+                timestamp={notification.date_created}
+                type={notification.notification_type}
+                viewed={notification.viewed}
+                completed={notification.completed}
+              />
             </div>)) }
       </div>
     );
@@ -33,7 +35,7 @@ const mapStateToProps = state => ({
   notificationsList: state.dashboard.notifications,
 });
 const mapDispatchToProps = dispatch => ({
-  dropNotification: (index) => dispatch(dropNotification(index)),
+  dropNotification: index => dispatch(dropNotification(index)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationsBlock);
