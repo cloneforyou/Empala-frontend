@@ -28,8 +28,16 @@ import {
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
-  SET_SESSION_TIME_REMAIN, ADD_NOTIFICATION, DROP_NOTIFICATION,
+  SET_SESSION_TIME_REMAIN,
+  ADD_NOTIFICATION,
+  DROP_NOTIFICATION,
   SET_ALL_NOTIFICATIONS,
+  SET_SESSION_TIME_REMAIN,
+  ADD_NOTIFICATION,
+  SET_SESSION_ID,
+  SET_SESSION_TIME_REMAIN,
+  ADD_NOTIFICATION,
+  DROP_NOTIFICATION,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -237,7 +245,7 @@ function dashboard(state = initialState, action) {
         ...state,
         watchListNumber: action.number,
       };
-    case 'SET_SESSION_ID':
+    case SET_SESSION_ID:
       if (action.name === 'orders') {
         return ({
           ...state,
