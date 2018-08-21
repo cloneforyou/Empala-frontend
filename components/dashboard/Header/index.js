@@ -71,6 +71,7 @@ function mapStateToProps(state) {
     memberFullName: getFullName(fullNameFields, state.profile.profileUserData),
     currentColorScheme: state.dashboard.currentColorScheme,
     activePageDashboard: state.dashboard.activePageDashboard,
+    notificationsCounter: state.dashboard.notificationsCounter,
   };
 }
 
