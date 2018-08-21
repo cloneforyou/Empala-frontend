@@ -33,7 +33,7 @@ import {
   MUTE_NOTIFICATIONS,
   SET_ALL_NOTIFICATIONS,
   ADD_NOTIFICATION,
-  DROP_NOTIFICATION,
+  DROP_NOTIFICATION, SET_LAST_NOTIFICATIONS,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -76,6 +76,7 @@ const initialState = {
   notifications: [],
   notificationsMuted: false,
   allNotifications: [],
+  lastNotifications: [],
 };
 
 
@@ -313,6 +314,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         allNotifications: action.data,
+      };
+    case SET_LAST_NOTIFICATIONS:
+      return {
+        ...state,
+        lastNotifications: action.data,
       };
     default:
       return state;

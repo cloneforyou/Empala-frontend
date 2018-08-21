@@ -51,8 +51,8 @@ import {
   SET_NOTIFICATION_READ,
   MUTE_NOTIFICATIONS,
   CHOOSE_GROUP_COUNTRY,
-  GET_ALL_NOTIFICATIONS,
-  SET_ALL_NOTIFICATIONS,
+  GET_NOTIFICATIONS,
+  SET_ALL_NOTIFICATIONS, SET_LAST_NOTIFICATIONS,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -331,8 +331,22 @@ export function setAllNotifications(data) {
   };
 }
 
-export function getAllNotifications() {
+export function setLastNotifications(data) {
   return {
-    type: GET_ALL_NOTIFICATIONS,
+    type: SET_LAST_NOTIFICATIONS,
+    data,
   };
 }
+
+export function getNotifications(options) {
+  /* ====== options:
+   limit - number of notifications to get
+   page - number of pages for pagination
+   collect - enum ['latest', 'all'], for special notifications collect
+   */
+  return {
+    type: GET_NOTIFICATIONS,
+    options,
+  };
+}
+

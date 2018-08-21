@@ -28,6 +28,7 @@ export default class RightBlock extends Component {
       event.nativeEvent.stopImmediatePropagation();
     }
     this.setState((prevState) => ({ notifPopUpIsOpened: !prevState.notifPopUpIsOpened }));
+    this.props.getLatestNotifications();
   };
 
   closeNotificationsPopup = () => {

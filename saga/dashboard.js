@@ -21,7 +21,7 @@ import {
   RESTART_SESSION_TIMEOUT,
   START_WEBSOCKET,
   STOP_WEBSOCKET,
-  GET_ALL_NOTIFICATIONS,
+  GET_NOTIFICATIONS,
   SET_NOTIFICATION_READ,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
@@ -36,7 +36,7 @@ import {
   setSessionTimeRemain,
   setWatchLists,
   updateNews,
-  setAllNotifications,
+  setAllNotifications, setLastNotifications,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 
@@ -44,6 +44,8 @@ const urls = {
   notifications: {
     mute: '/api/notifications/settings',
     read: '/api/notifications/view/',
+    get: '/api/notifications/',
+    complete: '/api/notifications/complete',
   },
 };
 
@@ -272,11 +274,14 @@ function* handleNotifications(action) {
   };
   if (action.type === MUTE_NOTIFICATIONS) {
     url = urls.notifications.mute;
+    options.method = 'PATCH';
   } else if (action.type === SET_NOTIFICATION_READ) {
     url = urls.notifications.read;
-    options.method = 'PATCH';
     if (!action.id) url += 'all';
-    else url += action.id;
+    else {
+      options.method = 'POST';
+      options.data = Array.isArray(action.id) ? action.id : action.id.toString.split(',');
+    }
   }
   try {
     const resp = yield call(request, url, options);
@@ -285,8 +290,15 @@ function* handleNotifications(action) {
   }
 }
 
-function* getAllNotifications() {
-  const url = '/api/notifications/';
+function* getNotifications(action) {
+  const latestQuantity = 5;
+  const { page, limit, collect } = action.options || {};
+  let url = urls.notifications.get;
+  if (page || limit) {
+    url += `?page=${!!page && page}&limit=${!!limit && limit}`;
+  } else if (collect === 'latest') {
+    url += `?limit=${latestQuantity}`;
+  }
   const options = {
     method: 'GET',
     headers: {
@@ -295,9 +307,12 @@ function* getAllNotifications() {
   };
   try {
     const resp = yield call(request, url, options);
-    if (resp) yield put(setAllNotifications(resp.data.data));
+    if (resp) {
+      if (collect === 'latest') yield put(setLastNotifications(resp.data.data));
+      if (!collect || collect === 'all') yield put(setAllNotifications(resp.data.data));
+    }
   } catch (err) {
-    console.error(' ** DASHBOARD ERROR =======>', err);
+    console.error(' ** NOTIFICATIONS GET ERROR =======>', err);
   }
 }
 
@@ -310,7 +325,7 @@ export default function* dashboardSaga() {
     takeEvery(SET_NOTIFICATION_READ, handleNotifications),
     takeEvery(MUTE_NOTIFICATIONS, handleNotifications),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
-    takeEvery(GET_ALL_NOTIFICATIONS, getAllNotifications),
+    takeEvery(GET_NOTIFICATIONS, getNotifications),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
   ]);

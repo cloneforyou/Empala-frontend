@@ -23,6 +23,7 @@ class NotificationsPopup extends Component {
     if (this.props.showNotificationsPopup && !this.notificationsPopup.contains(event.target)) {
       this.props.closeNotificationsPopup();
     }
+    this.props.setNotificationRead(this.props.lastNotifications);
   };
 
   handleReadAll(e) {
@@ -34,8 +35,18 @@ class NotificationsPopup extends Component {
     e.preventDefault();
     this.props.muteNotifications();
   }
+
+  filterNotifications(list, viewed) {
+    if (!list) return [];
+    return list.filter(item => item.viewed === viewed);
+  }
+
   render() {
-    const { showNotificationsPopup: isOpened, setActivePage, notificationsMuted } = this.props;
+    const {
+      showNotificationsPopup: isOpened,
+      notificationsMuted,
+      lastNotifications,
+    } = this.props;
     return (
       <div className={`notifications-popup ${isOpened && 'd-block'}`}
            ref={node => this.notificationsPopup = node}
@@ -57,15 +68,35 @@ class NotificationsPopup extends Component {
         <div className="notifications-popup__news">
           <span className="green fw-600">News</span>
         </div>
-        <div className="horizontal-align_center py-2">
-          You have no notifications
-        </div>
+        {lastNotifications.length > 0 ?
+          this.filterNotifications(lastNotifications, false).map(notification =>
+            <NotificationsCard
+              popup
+              key={notification.id}
+              text={notification.action}
+              title={notification.title}
+              timestamp={notification.date_created}
+              type={notification.notification_type}
+            />)
+          : <div className="horizontal-align_center py-2">
+            You have no notifications
+          </div>
+        }
         <div className="notifications-popup__earlier">
           <span className="green fw-600">Earlier</span>
+          {this.filterNotifications(lastNotifications, true).map(notification =>
+          <NotificationsCard
+            popup
+            key={notification.id}
+            text={notification.action}
+            title={notification.title}
+            timestamp={notification.date_created}
+            type={notification.notification_type}
+          />)}
         </div>
-        <div className="notifications-popup__cards">
-          <NotificationsCard popup={true} />
-        </div>
+        {/*<div className="notifications-popup__cards">*/}
+          {/*<NotificationsCard popup />*/}
+        {/*</div>*/}
         <div className="notifications-popup__see-all">
           <a href="#" onClick={() => setActivePage('global notifications')}>
             <Link
@@ -83,6 +114,7 @@ class NotificationsPopup extends Component {
 
 const mapStateToProps = state => ({
   notificationsMuted: state.dashboard.notificationsMuted,
+  lastNotifications: state.dashboard.lastNotifications,
 });
 const mapDispatchToProps = dispatch => ({
   setNotificationRead: (id) => dispatch(setNotificationRead(id)),

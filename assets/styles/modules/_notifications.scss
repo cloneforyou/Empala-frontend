@@ -55,8 +55,8 @@
     }
   }
   &_popup {
-    opacity: 100%;
-    transition: opacity 1000ms;
+    overflow: hidden;
+    animation: appear 500ms ease;
   }
   &__message {
     padding: 5px 10px;
@@ -64,6 +64,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    opacity: inherit;
+    line-height: 1.25;
     .message-title {
       font-weight: 600;
       margin: 0;
@@ -77,6 +79,8 @@
     }
   }
 }
+
+
 
 .notifications-popup {
   width: 416px;
@@ -202,4 +206,14 @@
   border-radius: 50%;
   top: 5px;
   left: 31px;
+}
+
+@keyframes appear {
+  0% {
+    opacity: .1;
+    height: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
