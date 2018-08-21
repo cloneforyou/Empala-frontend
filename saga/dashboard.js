@@ -18,6 +18,7 @@ import {
   LOGOUT,
   REFRESH_TOKEN_REQUEST,
   RESTART_SESSION_TIMEOUT, START_WEBSOCKET, STOP_WEBSOCKET,
+  GET_ALL_NOTIFICATIONS,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
@@ -28,6 +29,7 @@ import {
   setOrdersList,
   setPositions, setSessionTimeRemain,
   setWatchLists, updateNews,
+  setAllNotifications,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 
@@ -246,6 +248,22 @@ function* dropNotificationAtTimeout() {
   // }
 }
 
+function* getAllNotifications() {
+  const url = '/api/notifications/';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const resp = yield call(request, url, options);
+    if (resp) yield put(setAllNotifications(resp.data.data));
+  } catch (err) {
+    console.error(' ** DASHBOARD ERROR =======>', err);
+  }
+}
+
 export default function* dashboardSaga() {
   yield all([
     wsHandling(),
@@ -253,6 +271,7 @@ export default function* dashboardSaga() {
     takeEvery(GET_USER_DATA_REQUEST, getAppSettings),
     takeEvery(LOGOUT, logout),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
+    takeEvery(GET_ALL_NOTIFICATIONS, getAllNotifications),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
   ]);

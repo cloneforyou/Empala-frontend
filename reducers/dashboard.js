@@ -29,6 +29,7 @@ import {
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
   SET_SESSION_TIME_REMAIN, ADD_NOTIFICATION, DROP_NOTIFICATION,
+  SET_ALL_NOTIFICATIONS,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -69,6 +70,7 @@ const initialState = {
   appSettings: false,
   currentAppSettings: {},
   notifications: [],
+  allNotifications: [],
 };
 
 
@@ -303,6 +305,12 @@ function dashboard(state = initialState, action) {
             [...state.notifications.slice(0, action.index), ...state.notifications.slice(action.index+1)],
         };
       }
+      break
+    case SET_ALL_NOTIFICATIONS:
+      return {
+        ...state,
+        allNotifications: action.data,
+      };
     default:
       return state;
   }

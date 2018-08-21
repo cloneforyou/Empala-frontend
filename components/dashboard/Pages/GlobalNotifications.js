@@ -1,9 +1,27 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import NotificationsCard from '../Header/NotificationsCard';
+import { getAllNotifications } from '../../../actions/dashboard';
 
+function mapStateToProps(state) {
+  return {
+    allNotifications: state.dashboard.allNotifications,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return ({
+    getAllNotifications: () => dispatch(getAllNotifications()),
+  });
+}
 
 class GlobalNotifications extends Component {
+  componentDidMount() {
+    this.props.getAllNotifications();
+  }
+
   render() {
+    const { allNotifications } = this.props;
     return (
       <div className="notifications-container">
         <div className="notifications-container__header">
@@ -11,11 +29,21 @@ class GlobalNotifications extends Component {
           <span className="settings">Notification Settings</span>
         </div>
         <div className="notifications-container__cards">
-          <NotificationsCard page={true} />
+          {allNotifications.map((notification, index) => (
+            <NotificationsCard
+              page
+              key={notification.id}
+              text={notification.action}
+              title={notification.title}
+              timestamp={notification.date_created}
+              type={notification.notification_type}
+            />
+            ))
+          }
         </div>
       </div>
     );
   }
 }
 
-export default GlobalNotifications;
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalNotifications);

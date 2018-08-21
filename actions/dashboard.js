@@ -46,6 +46,8 @@ import {
   SET_SESSION_TIME_REMAIN,
   RESTART_SESSION_TIMEOUT,
   REFRESH_TOKENS, ADD_NOTIFICATION, DROP_NOTIFICATION,
+  GET_ALL_NOTIFICATIONS,
+  SET_ALL_NOTIFICATIONS,
 } from '../constants/dashboard';
 import { UPDATE_APP_SETTINGS_FAIL } from '../constants/profile';
 
@@ -305,3 +307,15 @@ export function dropNotification(index) {
   };
 }
 
+export function setAllNotifications(data) {
+  return {
+    type: SET_ALL_NOTIFICATIONS,
+    data,
+  };
+}
+
+export function getAllNotifications() {
+  return {
+    type: GET_ALL_NOTIFICATIONS,
+  };
+}
