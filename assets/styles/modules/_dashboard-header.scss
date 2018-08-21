@@ -261,8 +261,10 @@
     position: absolute;
     left: -50%;
   }
-  &:hover .tooltiptext {
-    visibility: visible;
+  &:hover {
+    .tooltiptext {
+      visibility: visible;
+    }
   }
 }
 
@@ -270,4 +272,9 @@
   &:before {
     background-color: $light-gray;
   }
+}
+.active-link_red {
+  &:before {
+    background-color: $light-red;
+    }
 }

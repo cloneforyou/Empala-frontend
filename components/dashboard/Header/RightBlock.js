@@ -34,6 +34,10 @@ export default class RightBlock extends Component {
     this.setState({ notifPopUpIsOpened: false });
   };
 
+  setMarketAsActivePage = () => {
+    this.props.setActivePage('market');
+  };
+
   render() {
     const { userPic, loading, setActivePage, activePageDashboard } = this.props;
     const { menuAvatarShow, anchorEl, notifPopUpIsOpened } = this.state;
@@ -50,8 +54,8 @@ export default class RightBlock extends Component {
           </li>
           <li className="nav-item">
             <div className="nav-tooltipe">
-              <a className="nav-link user-nav__link" href="#">
-                <i className="user-nav__icon user-nav__icon_location"/>
+              <a className="nav-link user-nav__link" onClick={this.setMarketAsActivePage}>
+                <i className={`user-nav__icon user-nav__icon_location ${(activePageDashboard === 'market') ? 'active-link_red' : '' }`} />
               </a>
               <span className="tooltiptext">Account Name</span>
             </div>

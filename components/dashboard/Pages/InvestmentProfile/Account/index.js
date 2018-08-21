@@ -6,7 +6,11 @@ import Tab from '@material-ui/core/Tab';
 import TitleBar from '../../../TitleBar';
 import GlobalPortfolio from './AccountTabs/GlobalPortfolio';
 import { withStyles } from '@material-ui/core/styles';
-import { GREEN } from '../../../../../constants/colors';
+import { GREEN,
+  MAIN_COLOR_TEXT_GRAY,
+  CONCRETE,
+  MIRAGE,
+} from '../../../../../constants/colors';
 import { setActivePage } from '../../../../../actions/dashboard';
 import {
   getActiveAccountTab,
@@ -20,6 +24,42 @@ const styles = theme => ({
     height: '6px',
   },
 });
+
+const TABS = [{
+  label: 'Global',
+  pageName: 'Global Portfolio',
+}, {
+  label: 'EMARA',
+  pageName: 'EMARA Tokens',
+}, {
+  label: 'North America',
+  pageName: 'North America Account',
+  flag: 'usa',
+}, {
+  label: 'Canada',
+  pageName: 'Canada Account',
+  flag: 'canada',
+}, {
+  label: 'UK',
+  pageName: 'United Kingdom Account',
+  flag: 'uk',
+}, {
+  label: 'France',
+  pageName: 'France Account',
+  flag: 'france',
+}, {
+  label: 'Singapore',
+  pageName: 'Singapore Account',
+}, {
+  label: 'Australia',
+  pageName: 'Australia Account',
+  flag: 'australia',
+}, {
+  label: 'Japan',
+  pageName: 'Japan Account',
+  flag: 'japan',
+}];
+
 
 class Account extends Component {
   handleChange = (event, value) => {
@@ -35,31 +75,34 @@ class Account extends Component {
         <div className="account__tabs">
           <AppBar
             position="static"
-            style={{ backgroundColor: currentColorScheme === 'light' ? '#f3f3f3' : '#211f39' }}
+            style={{ backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE }}
           >
             <Tabs
               value={value}
               onChange={this.handleChange}
               scrollable
               scrollButtons="auto"
-              style={{ color: '#808895' }}
+              style={{ color: MAIN_COLOR_TEXT_GRAY }}
               classes={{
                 indicator: classes.indicator,
               }}
             >
-              <Tab label="Global" onClick={() => {this.props.changeSectionTitleBar('Global Portfolio')}} />
-              <Tab label="EMARA" onClick={() => {this.props.changeSectionTitleBar('EMARA Tokens')}} />
-              <Tab label="North America" onClick={() => {this.props.changeSectionTitleBar('North America Account', 'usa')}} />
-              <Tab label="Canada" onClick={() => {this.props.changeSectionTitleBar('Canada Account', 'canada')}} />
-              <Tab label="UK" onClick={() => {this.props.changeSectionTitleBar('United Kingdom Account', 'uk')}} />
-              <Tab label="France" onClick={() => {this.props.changeSectionTitleBar('France Account', 'france')}} />
-              <Tab label="Singapore" onClick={() => {this.props.changeSectionTitleBar('Singapore Account')}} />
-              <Tab label="Australia" onClick={() => {this.props.changeSectionTitleBar('Australia Account', 'australia')}} />
-              <Tab label="Japan" onClick={() => {this.props.changeSectionTitleBar('Japan Account', 'japan')}} />
+              {TABS.map(({ label, pageName, flag = null }) => {
+                return  (
+                  <Tab
+                    key={label}
+                    label={label}
+                    onClick={() => {this.props.changeSectionTitleBar(pageName, flag)}}
+                  />
+                );
+              })}
             </Tabs>
           </AppBar>
         </div>
-        <TitleBar currentSectionTitleBar={this.props.currentSectionTitleBar} iconAccountTitleBar={this.props.iconAccountTitleBar} />
+        <TitleBar
+          currentSectionTitleBar={this.props.currentSectionTitleBar}
+          iconAccountTitleBar={this.props.iconAccountTitleBar}
+        />
         {value === 0 && <GlobalPortfolio
           setActivePage={this.props.setActivePage}
           textButton={'Fund account'}
