@@ -39,7 +39,7 @@ const rawNames = {
 };
 
 export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
-  const  getPositionMark = (pos) => {
+  const getPositionMark = (pos) => {
     if (!pos || !quotesData || !quotesData[pos.SecurityId]) return false;
     return quotesData[pos.SecurityId].Mark;
   };
@@ -54,6 +54,15 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         // old calculation. TODO remove later if wrong
         // if (positionsData[index].SecurityType === type) return sum + positionsData[index].CostBasis;
         if (positionsData[index].SecurityType === type) return sum + calculateMarketValue(positionsData[index]);
+        return 0;
+      }, 0);
+    };
+    const getQuoteChange = secId => quotesData[secId] && (quotesData[secId].Last - quotesData[secId].PreviousClose);
+    const calculateChange = reduce(positionsData, (sum, value, index) => sum + getQuoteChange(positionsData[index].SecurityId), 0);
+    const calculateChangeByType = (type) => {
+      if (!type) return calculateChange;
+      return reduce(positionsData, (sum, value, index) => {
+        if (positionsData[index].SecurityType === type) return sum + getQuoteChange(positionsData[index].SecurityId);
         return 0;
       }, 0);
     };
@@ -189,19 +198,74 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         credit_available: '--',
       },
     };
-    const getChangeByTitleAndType = (title, type) => {
-      switch (title) {
-        case 'adjusted':
-          switch (type) {
-            case 'net':
-              return ' ';
-            default:
-              return ' ';
-          }
-        default:
-          return '--';
-      }
+    const change = {
+      notional: {
+        net: calculateChangeByType(),
+        stocks: calculateChangeByType('CommonStock'),
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      percent: {
+        net: 0,
+        stocks: 0,
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      adjusted: {
+        net: ' ',
+        stocks: '--',
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      riskMeasures: {
+        net_position: '--',
+        adjusted_net_position: '--',
+        gross_position: '--',
+        adjusted_gross_position: '--',
+        estimated_var: '--',
+        regulatory_margin: '--',
+      },
+      riskTheoreticals: {
+        portfolio_1pc_delta: '--',
+        portfolio_1pc_gamma: '--',
+        portfolio_1d_theta: '--',
+        portfolio_5pc_vega: '--',
+        portfolio_1pc_Rho: '--',
+      },
+      fundingAnalysis: {
+        annualized_carry: '--',
+      },
+      creditAnalysis: {
+        credit_available: '--',
+      },
+      financialCapital: {
+        total_ac: '--',
+        net_position: '--',
+        adjusted_net_position_short: '--',
+        gross_position: '--',
+        adjusted_gross_position_short: '--',
+        estimated_var: '--',
+        annualized_carry: '--',
+        credit_available: '--',
+      },
     };
+
+    const getChangeByTitleAndType = title => type => change[title][type];
     const getDomesticByTitleAndType = title => type => domestic[title][type];
     const getForeignByTitleAndType = title => type => foreign[title][type];
     const getExposureByType = type => rawNames[type];
@@ -265,6 +329,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         const calculatedDomestic = getDomesticByTitleAndType(title)(type);
         const calculatedForeign = getForeignByTitleAndType(title)(type);
         const calculatedTotal = calculatedDomestic + calculatedForeign;
+        const calculatedChange = getChangeByTitleAndType(title)(type);
         if (title === 'percent') {
           return {
             id: uniqueId(),
@@ -272,7 +337,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
             domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || '--',
             foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || '--',
             total: formatNumberWithFixedPoint(100, 1),
-            dayChange: getChangeByTitleAndType(title, type),
+            dayChange: calculatedChange,
           };
         }
         if (title === 'financialCapital') {
@@ -292,7 +357,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
           domestic: formatNumberWithFixedPoint(calculatedDomestic, 0),
           foreign: formatNumberWithFixedPoint(calculatedForeign, 0),
           total: formatNumberWithFixedPoint(calculatedTotal, 0),
-          dayChange: formatNumberWithFixedPoint(getChangeByTitleAndType(title, type), 1),
+          dayChange: formatNumberWithFixedPoint(calculatedChange),
         };
       });
     };
