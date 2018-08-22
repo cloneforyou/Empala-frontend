@@ -36,7 +36,7 @@ import {
   setSessionTimeRemain,
   setWatchLists,
   updateNews,
-  setAllNotifications, setLastNotifications,
+  setAllNotifications, setLastNotifications, refreshNotificationsCounter,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 
@@ -231,6 +231,9 @@ function* socketListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
     if (action.notification) yield put(addNotification(action.notification));
+    // console.log('message:', action);
+    yield put(addNotification(action.notification));
+    yield put(refreshNotificationsCounter(action.counts));
     yield dropNotificationAtTimeout();
   }
 }

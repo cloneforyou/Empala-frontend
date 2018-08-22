@@ -78,6 +78,7 @@ function mapStateToProps(state) {
     activePageDashboard: state.dashboard.activePageDashboard,
     notificationsMuted: state.dashboard.notificationsMuted,
     lastNotifications: state.dashboard.lastNotifications,
+    notificationsCounter: state.dashboard.notificationsCounter,
   };
 }
 

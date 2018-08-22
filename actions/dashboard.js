@@ -52,7 +52,7 @@ import {
   MUTE_NOTIFICATIONS,
   CHOOSE_GROUP_COUNTRY,
   GET_NOTIFICATIONS,
-  SET_ALL_NOTIFICATIONS, SET_LAST_NOTIFICATIONS,
+  SET_ALL_NOTIFICATIONS, SET_LAST_NOTIFICATIONS, REFRESH_NOTIFICATION_COUNTER,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -301,6 +301,13 @@ export function addNotification(notification) {
   return {
     type: ADD_NOTIFICATION,
     notification,
+  };
+}
+
+export function refreshNotificationsCounter(counter) {
+  return {
+    type: REFRESH_NOTIFICATION_COUNTER,
+    counter,
   };
 }
 

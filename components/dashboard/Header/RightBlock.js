@@ -41,6 +41,11 @@ export default class RightBlock extends Component {
     this.props.setActivePage('market');
   };
 
+  getBadgeColor(count) {
+    if (!!count.new_actions && count.new_actions > 0) return 'red';
+    if (!!count.new_notifications && count.new_notifications > 0) return 'green';
+  }
+
   render() {
     const {
       userPic,
@@ -50,7 +55,8 @@ export default class RightBlock extends Component {
       lastNotifications,
       muteNotifications,
       notificationsMuted,
-      setNotificationRead
+      setNotificationRead,
+      notificationsCounter
     } = this.props;
     const {
       menuAvatarShow,
@@ -92,7 +98,10 @@ export default class RightBlock extends Component {
                  onClick={this.handleClickNotificationsPopup}
               >
                 <i className="user-nav__icon user-nav__icon_notification"/>
-                {/*<div className="notifications-badge"></div>*/}
+                {
+                  notificationsCounter &&
+                <div className={`notifications-badge notifications-badge_${this.getBadgeColor(notificationsCounter)}`} />
+                }
               </a>
               <span className="tooltiptext">Notifications</span>
             </div>
