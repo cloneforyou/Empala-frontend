@@ -38,15 +38,22 @@ const rawNames = {
   adjusted_gross_position_short: 'Adj gross position',
 };
 
-
-
-export const parsePositionsTablesData = (tables, data) => {
+export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
+  const  getPositionMark = (pos) => {
+    if (!pos || !quotesData || !quotesData[pos.SecurityId]) return false;
+    return quotesData[pos.SecurityId].Mark;
+  };
+  const calculateMarketValue = pos => getPositionMark(pos) * pos.Quantity * (pos.SecurityType === 'CommonStock' ? 1 : 100);
   if (tables.length > 0) {
-    const calculateDomestic = reduce(data, (sum, value, index) => sum + data[index].CostBasis, 0);
+    // old calculation. TODO remove later if wrong
+    // const calculateDomestic = reduce(positionsData, (sum, value, index) => sum + positionsData[index].CostBasis, 0);
+    const calculateDomestic = reduce(positionsData, (sum, value, index) => sum + calculateMarketValue(positionsData[index]), 0);
     const calculateDomesticByType = (type) => {
       if (!type) return calculateDomestic;
-      return reduce(data, (sum, value, index) => {
-        if (data[index].SecurityType === type) return sum + data[index].CostBasis;
+      return reduce(positionsData, (sum, value, index) => {
+        // old calculation. TODO remove later if wrong
+        // if (positionsData[index].SecurityType === type) return sum + positionsData[index].CostBasis;
+        if (positionsData[index].SecurityType === type) return sum + calculateMarketValue(positionsData[index]);
         return 0;
       }, 0);
     };
@@ -304,7 +311,7 @@ const PositionsTable = props => (
     <WidgetTable
       widget={{
         ...widget,
-        tables: parsePositionsTablesData(widget.tables, props.positions),
+        tables: parsePositionsTablesData(widget.tables, props.positions, props.quotes),
       }}
       key={widget.id}
 
@@ -313,4 +320,5 @@ const PositionsTable = props => (
 
 export default connect(state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
+  quotes: state.dashboard.quotes,
 }))(PositionsTable);
