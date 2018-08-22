@@ -230,7 +230,7 @@ const createSocketChannel = socket => eventChannel((emit) => {
 function* socketListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
-    console.log('message:', action);
+    // console.log('message:', action);
     yield put(addNotification(action.notification));
     yield put(refreshNotificationsCounter(action.counts));
     yield dropNotificationAtTimeout();
