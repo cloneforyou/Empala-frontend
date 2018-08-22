@@ -37,6 +37,8 @@ class GlobalNotifications extends Component {
               title={notification.title}
               timestamp={notification.date_created}
               type={notification.notification_type}
+              viewed={notification.viewed}
+              completed={notification.completed}
             />
             ))
           }

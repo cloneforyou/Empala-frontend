@@ -27,8 +27,10 @@ export default class RightBlock extends Component {
     if (!this.state.notifPopUpIsOpened) {
       event.nativeEvent.stopImmediatePropagation();
     }
+    if (this.state.notifPopUpIsOpened) {
+      this.props.setNotificationRead(this.props.lastNotifications.map(item => item.id));
+    } else this.props.getLatestNotifications();
     this.setState((prevState) => ({ notifPopUpIsOpened: !prevState.notifPopUpIsOpened }));
-    this.props.getLatestNotifications();
   };
 
   closeNotificationsPopup = () => {
@@ -40,8 +42,22 @@ export default class RightBlock extends Component {
   };
 
   render() {
-    const { userPic, loading, setActivePage, activePageDashboard } = this.props;
-    const { menuAvatarShow, anchorEl, notifPopUpIsOpened } = this.state;
+    const {
+      userPic,
+      loading,
+      setActivePage,
+      activePageDashboard,
+      lastNotifications,
+      muteNotifications,
+      notificationsMuted,
+      setNotificationRead
+    } = this.props;
+    const {
+      menuAvatarShow,
+      anchorEl,
+      notifPopUpIsOpened
+    } = this.state;
+
     return (
       <div>
         <ul className="nav user-nav align-items-center">
@@ -56,7 +72,8 @@ export default class RightBlock extends Component {
           <li className="nav-item">
             <div className="nav-tooltipe">
               <a className="nav-link user-nav__link" onClick={this.setMarketAsActivePage}>
-                <i className={`user-nav__icon user-nav__icon_location ${(activePageDashboard === 'market') ? 'active-link_red' : '' }`} />
+                {/*TODO: Color of icon change depending on the selected MARKET ACCESS*/}
+                <i className="user-nav__icon user-nav__icon_location active-link_red" />
               </a>
               <span className="tooltiptext">Account Name</span>
             </div>
@@ -72,7 +89,6 @@ export default class RightBlock extends Component {
           <li className="nav-item">
             <div className="nav-tooltipe">
               <a className="nav-link user-nav__link"
-                 href="#"
                  onClick={this.handleClickNotificationsPopup}
               >
                 <i className="user-nav__icon user-nav__icon_notification"/>
@@ -80,11 +96,17 @@ export default class RightBlock extends Component {
               </a>
               <span className="tooltiptext">Notifications</span>
             </div>
+            {notifPopUpIsOpened && (
             <NotificationsPopup
               showNotificationsPopup={notifPopUpIsOpened}
               closeNotificationsPopup={this.closeNotificationsPopup}
               setActivePage={setActivePage}
+              lastNotifications={lastNotifications}
+              muteNotifications={muteNotifications}
+              notificationsMuted={notificationsMuted}
+              setNotificationRead={setNotificationRead}
             />
+            )}
             { !notifPopUpIsOpened && <NotificationsBlock /> }
           </li>
           <li className="nav-item">

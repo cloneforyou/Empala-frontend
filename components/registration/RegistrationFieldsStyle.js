@@ -169,7 +169,6 @@ const style = {
   dataPickerTextFieldStyle: {
     width: '100%',
     color: MAIN_COLOR_TEXT_GRAY,
-    fontSize: '18px',
     fontFamily: 'Proxima Nova',
   },
 };

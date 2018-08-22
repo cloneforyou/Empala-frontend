@@ -4,7 +4,12 @@ import RightBlock from './RightBlock';
 import Search from './Search';
 import logo from '../../../static/images/logo.svg';
 import iconLogo from '../../../static/images/dashboard-icons/icon-logo.svg';
-import { getNotifications, setActivePage, setNotificationRead } from '../../../actions/dashboard';
+import {
+  getNotifications,
+  muteNotifications,
+  setActivePage,
+  setNotificationRead,
+} from '../../../actions/dashboard';
 
 
 class Header extends Component {
@@ -71,6 +76,8 @@ function mapStateToProps(state) {
     memberFullName: getFullName(fullNameFields, state.profile.profileUserData),
     currentColorScheme: state.dashboard.currentColorScheme,
     activePageDashboard: state.dashboard.activePageDashboard,
+    notificationsMuted: state.dashboard.notificationsMuted,
+    lastNotifications: state.dashboard.lastNotifications,
   };
 }
 
@@ -78,6 +85,8 @@ function mapDispatchToProps(dispatch) {
   return {
     setActivePage: page => dispatch(setActivePage(page)),
     getLatestNotifications: () => dispatch(getNotifications({ collect: 'latest' })),
+    setNotificationRead: (id) => dispatch(setNotificationRead(id)),
+    muteNotifications: () => dispatch(muteNotifications()),
   };
 }
 

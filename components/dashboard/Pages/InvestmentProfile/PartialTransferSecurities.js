@@ -66,13 +66,13 @@ const PatrialTransferSecurities = props => (
         />
       ))
       }
-      <button
-        className="funding-partial-securities-add-button"
-        onClick={props.addSecurity}
-      >
-        <span className="funding-partial-securities-add-button__plus" />&nbsp;Add new line
-      </button>
     </div>
+    <button
+      className="funding-partial-securities-add-button"
+      onClick={props.addSecurity}
+    >
+      <span className="funding-partial-securities-add-button__plus" />&nbsp;Add new line
+    </button>
   </div>
 );
 

@@ -25,7 +25,7 @@ const DatePickerField = (props) => {
       <label className="registration-label">
         {props.label}
       </label>
-      <div className="date-picker__container">
+      <div className="date-picker__container data-picker_fs-18">
         <DatePicker
           id={props.id}
           locale="en-US"
