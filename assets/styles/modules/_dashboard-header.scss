@@ -132,9 +132,18 @@
     position: relative;
     padding: 10px 20px;
     &_active, &:hover {
-      .user-nav__icon {
+      .user-nav__icon_chat,
+      .user-nav__icon_notification,
+      .user-nav__icon_wallet
+      {
         &:before {
           background-color: $green;
+        }
+      }
+      .user-nav__icon_location
+      {
+        &:before {
+          background-color: $silver;
         }
       }
     }
@@ -168,7 +177,6 @@
         mask-repeat: no-repeat;
         width: 20px;
         height: 21px;
-
       }
     }
     &_notification {
@@ -259,7 +267,7 @@
     color: $main-color-text-grey;
     text-align: center;
     position: absolute;
-    left: -50%;
+    left: -23%;
   }
   &:hover {
     .tooltiptext {

@@ -230,6 +230,7 @@ const createSocketChannel = socket => eventChannel((emit) => {
 function* socketListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
+    if (action.notification) yield put(addNotification(action.notification));
     // console.log('message:', action);
     yield put(addNotification(action.notification));
     yield put(refreshNotificationsCounter(action.counts));
@@ -276,18 +277,18 @@ function* handleNotifications(action) {
   if (action.type === MUTE_NOTIFICATIONS) {
     url = urls.notifications.mute;
     options.method = 'PATCH';
+    options.data = { notifications_mute: 'true' };
   } else if (action.type === SET_NOTIFICATION_READ) {
     url = urls.notifications.read;
     if (!action.id) url += 'all';
-    else {
-      options.method = 'POST';
-      options.data = { ids: Array.isArray(action.id) ? action.id : action.id.toString.split(',') };
-    }
-    try {
-      const resp = yield call(request, url, options);
-    } catch (err) {
-      console.error(' ** NOTIFICATIONS ERROR =======>', err);
-    }
+  } else {
+    options.method = 'POST';
+    options.data = { ids: Array.isArray(action.id) ? action.id : action.id.toString.split(',') };
+  }
+  try {
+    const resp = yield call(request, url, options);
+  } catch (err) {
+    console.error(' ** NOTIFICATIONS ERROR =======>', err);
   }
 }
 

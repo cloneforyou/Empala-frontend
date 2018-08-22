@@ -295,7 +295,7 @@ function dashboard(state = initialState, action) {
         ...state,
         notifications: [...state.notifications, action.notification],
       };
-      case MUTE_NOTIFICATIONS:
+    case MUTE_NOTIFICATIONS:
       return {
         ...state,
         notificationsMuted: !state.notificationsMuted,
@@ -310,7 +310,7 @@ function dashboard(state = initialState, action) {
           ],
         };
       }
-      break;
+      return state;
     case SET_ALL_NOTIFICATIONS:
       return {
         ...state,

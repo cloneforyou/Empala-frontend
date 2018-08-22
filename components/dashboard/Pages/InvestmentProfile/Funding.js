@@ -117,7 +117,7 @@ class Funding extends Component {
                       </div>
                       {
                         this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
-                        <div className="col-6 no-gutters pl-3">
+                        <div className="col-6 no-gutters pl-2">
                           <EmpalaSelect
                             id="transfer_type"
                             options={this.options.transfer_type}
@@ -236,7 +236,7 @@ const mapStateToProps = state => ({
   transfer_type: state.funding.transfer_type,
   account_type: state.funding.account_type,
   account_no: state.funding.account_no,
-  member_secondary_ssn: state.member_secondary_ssn,
+  member_secondary_ssn: state.funding.member_secondary_ssn,
   member_primary_ssn: state.profile.profileUserData.regulatory_identification_ssn,
   member_title: state.profile.profileUserData.basic_information_prefix,
   member_first_name: state.profile.profileUserData.basic_information_first_name,

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '../../../routes';
 import NotificationsCard from '../Header/NotificationsCard';
-import { connect } from 'react-redux';
-import { muteNotifications, setNotificationRead } from '../../../actions/dashboard';
 
 
 class NotificationsPopup extends Component {
@@ -10,6 +8,7 @@ class NotificationsPopup extends Component {
     super(props);
     this.handleMute = this.handleMute.bind(this);
     this.handleReadAll = this.handleReadAll.bind(this);
+    this.handleClickOnSeeAll = this.handleClickOnSeeAll.bind(this);
   }
   componentDidMount() {
     document.addEventListener('click', this.handldeClickOutsideBackground);
@@ -22,8 +21,8 @@ class NotificationsPopup extends Component {
   handldeClickOutsideBackground = event => {
     if (this.props.showNotificationsPopup && !this.notificationsPopup.contains(event.target)) {
       this.props.closeNotificationsPopup();
+      this.props.setNotificationRead(this.props.lastNotifications.map(item => item.id));
     }
-    this.props.setNotificationRead(this.props.lastNotifications.map(item => item.id));
   };
 
   handleReadAll(e) {
@@ -41,15 +40,18 @@ class NotificationsPopup extends Component {
     return list.filter(item => item.viewed === viewed);
   }
 
+  handleClickOnSeeAll() {
+    this.props.setActivePage('global notifications');
+    this.props.closeNotificationsPopup();
+  }
+
   render() {
     const {
-      showNotificationsPopup: isOpened,
       notificationsMuted,
       lastNotifications,
-      setActivePage,
     } = this.props;
     return (
-      <div className={`notifications-popup ${isOpened && 'd-block'}`}
+      <div className="notifications-popup"
            ref={node => this.notificationsPopup = node}
       >
         <div className="notifications-popup__notifications">
@@ -99,11 +101,10 @@ class NotificationsPopup extends Component {
             viewed={notification.viewed}
             completed={notification.completed}
           />)}
-        {/*<div className="notifications-popup__cards">*/}
-          {/*<NotificationsCard popup />*/}
-        {/*</div>*/}
         <div className="notifications-popup__see-all">
-          <a href="#" onClick={() => setActivePage('global notifications')}>
+          <a href="#"
+             role="button"
+             onClick={this.handleClickOnSeeAll}>
             <Link
               route="dashboard"
               params={{page: 'global notifications'}}
@@ -117,13 +118,4 @@ class NotificationsPopup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  notificationsMuted: state.dashboard.notificationsMuted,
-  lastNotifications: state.dashboard.lastNotifications,
-});
-const mapDispatchToProps = dispatch => ({
-  setNotificationRead: (id) => dispatch(setNotificationRead(id)),
-  muteNotifications: () => dispatch(muteNotifications()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NotificationsPopup);
+export default NotificationsPopup;

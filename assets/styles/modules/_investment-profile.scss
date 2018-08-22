@@ -17,7 +17,7 @@
     background: url($path-to-images + "EMP410-background.svg") 50% 50% /cover;
   }
   &-content {
-    padding: 0 2% 45px 10%;
+    padding: 0 2% 26px 10%;
     width: 100%;
     @media(max-width: 1144px) {
       height: 758px;
@@ -194,6 +194,7 @@
     }
     &-securities {
       width: 480px;
+      @include styledScroll($main-color-text-grey);
       &-header {
         &__item {
           @include fontSize(12px);
@@ -230,7 +231,9 @@
       }
       &-content {
         overflow-y: auto;
-        max-height: 256px;
+        max-height: 176px;
+        padding: 10px 0 10px 10px;
+        transform: translateX(-10px);
         &-row {
           &__item {
             display: inline-block;
