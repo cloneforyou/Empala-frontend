@@ -251,7 +251,7 @@ export function* getUserData() {
       window.location.assign('/');
     } else if (err.message === 'Missing access token' || err.message === 'Token expired') {
       localStorage.removeItem('accessToken');
-      yield refreshTokens();
+      // yield refreshTokens();  // maybe needs later
     } else if (err.message === 'Account suspended') {
       localStorage.removeItem('accessToken');
       return window.location.assign('/');
