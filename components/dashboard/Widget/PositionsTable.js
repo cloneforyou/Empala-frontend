@@ -38,15 +38,31 @@ const rawNames = {
   adjusted_gross_position_short: 'Adj gross position',
 };
 
-
-
-export const parsePositionsTablesData = (tables, data) => {
+export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
+  const getPositionMark = (pos) => {
+    if (!pos || !quotesData || !quotesData[pos.SecurityId]) return false;
+    return quotesData[pos.SecurityId].Mark;
+  };
+  const calculateMarketValue = pos => getPositionMark(pos) * pos.Quantity * (pos.SecurityType === 'CommonStock' ? 1 : 100);
   if (tables.length > 0) {
-    const calculateDomestic = reduce(data, (sum, value, index) => sum + data[index].CostBasis, 0);
+    // old calculation. TODO remove later if wrong
+    // const calculateDomestic = reduce(positionsData, (sum, value, index) => sum + positionsData[index].CostBasis, 0);
+    const calculateDomestic = reduce(positionsData, (sum, value, index) => sum + calculateMarketValue(positionsData[index]), 0);
     const calculateDomesticByType = (type) => {
       if (!type) return calculateDomestic;
-      return reduce(data, (sum, value, index) => {
-        if (data[index].SecurityType === type) return sum + data[index].CostBasis;
+      return reduce(positionsData, (sum, value, index) => {
+        // old calculation. TODO remove later if wrong
+        // if (positionsData[index].SecurityType === type) return sum + positionsData[index].CostBasis;
+        if (positionsData[index].SecurityType === type) return sum + calculateMarketValue(positionsData[index]);
+        return 0;
+      }, 0);
+    };
+    const getQuoteChange = secId => quotesData[secId] && (quotesData[secId].Last - quotesData[secId].PreviousClose);
+    const calculateChange = reduce(positionsData, (sum, value, index) => sum + getQuoteChange(positionsData[index].SecurityId), 0);
+    const calculateChangeByType = (type) => {
+      if (!type) return calculateChange;
+      return reduce(positionsData, (sum, value, index) => {
+        if (positionsData[index].SecurityType === type) return sum + getQuoteChange(positionsData[index].SecurityId);
         return 0;
       }, 0);
     };
@@ -182,19 +198,74 @@ export const parsePositionsTablesData = (tables, data) => {
         credit_available: '--',
       },
     };
-    const getChangeByTitleAndType = (title, type) => {
-      switch (title) {
-        case 'adjusted':
-          switch (type) {
-            case 'net':
-              return ' ';
-            default:
-              return ' ';
-          }
-        default:
-          return '--';
-      }
+    const change = {
+      notional: {
+        net: calculateChangeByType(),
+        stocks: calculateChangeByType('CommonStock'),
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      percent: {
+        net: 0,
+        stocks: 0,
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      adjusted: {
+        net: ' ',
+        stocks: '--',
+        emara: '--',
+        currencies: '--',
+        governmentBonds: '--',
+        corporateBonds: '--',
+        hybrids: '--',
+        commodities: '--',
+        private: '--',
+      },
+      riskMeasures: {
+        net_position: '--',
+        adjusted_net_position: '--',
+        gross_position: '--',
+        adjusted_gross_position: '--',
+        estimated_var: '--',
+        regulatory_margin: '--',
+      },
+      riskTheoreticals: {
+        portfolio_1pc_delta: '--',
+        portfolio_1pc_gamma: '--',
+        portfolio_1d_theta: '--',
+        portfolio_5pc_vega: '--',
+        portfolio_1pc_Rho: '--',
+      },
+      fundingAnalysis: {
+        annualized_carry: '--',
+      },
+      creditAnalysis: {
+        credit_available: '--',
+      },
+      financialCapital: {
+        total_ac: '--',
+        net_position: '--',
+        adjusted_net_position_short: '--',
+        gross_position: '--',
+        adjusted_gross_position_short: '--',
+        estimated_var: '--',
+        annualized_carry: '--',
+        credit_available: '--',
+      },
     };
+
+    const getChangeByTitleAndType = title => type => change[title][type];
     const getDomesticByTitleAndType = title => type => domestic[title][type];
     const getForeignByTitleAndType = title => type => foreign[title][type];
     const getExposureByType = type => rawNames[type];
@@ -258,6 +329,7 @@ export const parsePositionsTablesData = (tables, data) => {
         const calculatedDomestic = getDomesticByTitleAndType(title)(type);
         const calculatedForeign = getForeignByTitleAndType(title)(type);
         const calculatedTotal = calculatedDomestic + calculatedForeign;
+        const calculatedChange = getChangeByTitleAndType(title)(type);
         if (title === 'percent') {
           return {
             id: uniqueId(),
@@ -265,7 +337,7 @@ export const parsePositionsTablesData = (tables, data) => {
             domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || '--',
             foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || '--',
             total: formatNumberWithFixedPoint(100, 1),
-            dayChange: getChangeByTitleAndType(title, type),
+            dayChange: calculatedChange,
           };
         }
         if (title === 'financialCapital') {
@@ -285,7 +357,7 @@ export const parsePositionsTablesData = (tables, data) => {
           domestic: formatNumberWithFixedPoint(calculatedDomestic, 0),
           foreign: formatNumberWithFixedPoint(calculatedForeign, 0),
           total: formatNumberWithFixedPoint(calculatedTotal, 0),
-          dayChange: formatNumberWithFixedPoint(getChangeByTitleAndType(title, type), 1),
+          dayChange: formatNumberWithFixedPoint(calculatedChange),
         };
       });
     };
@@ -304,7 +376,7 @@ const PositionsTable = props => (
     <WidgetTable
       widget={{
         ...widget,
-        tables: parsePositionsTablesData(widget.tables, props.positions),
+        tables: parsePositionsTablesData(widget.tables, props.positions, props.quotes),
       }}
       key={widget.id}
 
@@ -313,4 +385,5 @@ const PositionsTable = props => (
 
 export default connect(state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
+  quotes: state.dashboard.quotes,
 }))(PositionsTable);

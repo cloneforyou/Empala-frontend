@@ -101,7 +101,7 @@
       max-width: 255px;
     }
     &:disabled {
-      background-color: $light-gray;
+      background-color: #d0d0d0;
       cursor: not-allowed;
     }
   }
