@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Membership from './TabsContainers/Membership';
 import Regulatory from './TabsContainers/Regulatory';
 import Experience from './TabsContainers/Experience';
+import Notifications from './TabsContainers/Notifications';
 import Documents from './TabsContainers/Documents';
 import AppSettings from './TabsContainers/AppSettings';
 import Account from './TabsContainers/Account';
@@ -61,7 +61,7 @@ class Profile extends Component {
         {value === 3 && <Account />}
         {value === 4 && <Documents />}
         {value === 5 && <AppSettings />}
-        {value === 6 && <div>Item Seven</div>}
+        {value === 6 && <Notifications />}
       </div>
     );
   }

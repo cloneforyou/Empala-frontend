@@ -1,11 +1,12 @@
 import React from 'react';
+import Menu from '@material-ui/core/Menu';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from '../../../routes';
 import avatar from '../../../static/images/default-avatar-of-user.svg';
 import { logout, setActivePage } from '../../../actions/dashboard';
 import { changeActiveTabProfile } from '../../../actions/profile';
-import Menu from '@material-ui/core/Menu';
+
 
 const DropdownMenu = (props) => {
 
@@ -148,10 +149,10 @@ const DropdownMenu = (props) => {
 };
 
 DropdownMenu.propTypes = {
-  menuAvatarShow: PropTypes.bool.isRequired,
+  menuAvatarShow: PropTypes.bool,
   changeActiveTabProfile: PropTypes.func.isRequired,
   setActivePage: PropTypes.func.isRequired,
-  closeMenu: PropTypes.func.isRequired,
+  closeMenu: PropTypes.func,
   logout: PropTypes.func.isRequired,
 };
 

@@ -35,11 +35,10 @@ const FundingFooter = props => (
         </span>
       </Link>
     </button>
-    <p className="funding-footer__text">
-      You have 30 days remaining to access the Empala platform.
-      <p />
-      You can fund your account at any time by clicking the wallet on the top of the screen.
-    </p>
+    <div className="funding-footer__text">
+      <p>You have 30 days remaining to access the Empala platform.</p>
+      <p>You can fund your account at any time by clicking the wallet on the top of the screen.</p>
+    </div>
   </div>
 );
 

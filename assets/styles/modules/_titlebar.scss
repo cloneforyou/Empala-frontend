@@ -33,13 +33,19 @@
   &__icon-country {
     @each $item in $listCounties {
       &_flag-#{$item} {
-        background: url($path-to-dashboard-icon + 'flag-' + $item +'.svg') $white no-repeat;
-        background-size: cover;
-        width: 50px;
-        height: 33px;
         margin-right: 50px;
         vertical-align: middle;
         display: inline-block;
+        width: 50px;
+        height: 33px;
+        &:before {
+          content: '';
+          background: url($path-to-dashboard-icon + 'flag-' + $item +'.svg') $white no-repeat;
+          background-size: cover;
+          width: 50px;
+          height: 33px;
+          position: absolute;
+        }
       }
     }
   }

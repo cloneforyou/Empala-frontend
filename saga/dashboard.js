@@ -232,7 +232,6 @@ function* socketListener(socketChannel) {
     const action = yield take(socketChannel);
     if (action.notification) yield put(addNotification(action.notification));
     // console.log('message:', action);
-    yield put(addNotification(action.notification));
     yield put(refreshNotificationsCounter(action.counts));
     yield dropNotificationAtTimeout();
   }

@@ -41,7 +41,8 @@ class NotificationsPopup extends Component {
   }
 
   handleClickOnSeeAll() {
-    this.props.setActivePage('global notifications');
+    this.props.setActivePage('profile');
+    this.props.changeActiveTabProfile(6);
     this.props.closeNotificationsPopup();
   }
 
@@ -107,7 +108,7 @@ class NotificationsPopup extends Component {
              onClick={this.handleClickOnSeeAll}>
             <Link
               route="dashboard"
-              params={{page: 'global notifications'}}
+              params={{page: 'profile'}}
             >
               <span>See all</span>
             </Link>
