@@ -206,6 +206,7 @@ function dashboard(state = initialState, action) {
         ...state,
         appSettings: action.data,
         currentAppSettings: parseAppSettings(action.data),
+        notificationsMuted: action.data.notifications_mute,
       };
     case SET_ORDERS_LIST:
       return {
