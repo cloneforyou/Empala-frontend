@@ -24,7 +24,7 @@ class OrdersTable extends React.Component {
     if (title === 'Orders') {
       filteredOrders = filter(
         orders,
-        order => order.status === 'Filled' || order.status === 'PartiallyFilled',
+        order => order.status === 'New' || order.status === 'PartiallyFilled',
       );
       /*  ===== HEADERS ==== */
       // 'Sec name'
@@ -48,7 +48,7 @@ class OrdersTable extends React.Component {
         { value: order.values.order_quantity },
         { value: order.values.fill_quantity },
         { value: order.values.remain_quantity },
-        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 0) },
+        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 1) },
         { value: order.values.comission },
         { value: formatNumberWithFixedPoint(order.values.distance, 1) },
         { value: order.values.start_date },
@@ -58,7 +58,7 @@ class OrdersTable extends React.Component {
     if (title === 'Fills/cancels') {
       filteredOrders = filter(
         orders,
-        order => order.status !== 'Filled',
+        order => order.status === 'Filled' || order.status === 'Canceled',
       );
       return filteredOrders.map(order => [
         { value: order.values.sec_name },
@@ -67,7 +67,7 @@ class OrdersTable extends React.Component {
         { value: formatNumberWithFixedPoint(order.values.price, 2) },
         { value: order.values.order_quantity },
         { value: order.values.fill_quantity },
-        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 0) }, // Notional
+        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 1) }, // Notional
         { value: '--' }, // Exec fees
         { value: '--' }, // Reg fees
         { value: formatNumberWithFixedPoint(order.values.fill_quantity * order.values.price, 2) }, // $ proceeds
