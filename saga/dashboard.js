@@ -232,7 +232,6 @@ function* socketListener(socketChannel) {
     const action = yield take(socketChannel);
     if (action.notification) yield put(addNotification(action.notification));
     // console.log('message:', action);
-    yield put(addNotification(action.notification));
     yield put(refreshNotificationsCounter(action.counts));
     yield dropNotificationAtTimeout();
   }
@@ -268,6 +267,7 @@ function* dropNotificationAtTimeout() {
 
 function* handleNotifications(action) {
   let url;
+  const muted = yield select(state => state.dashboard.notificationsMuted);
   const options = {
     headers: {
       'X-Access-Token': localStorage.getItem('accessToken'),
@@ -277,7 +277,7 @@ function* handleNotifications(action) {
   if (action.type === MUTE_NOTIFICATIONS) {
     url = urls.notifications.mute;
     options.method = 'PATCH';
-    options.data = { notifications_mute: 'true' };
+    options.data = { notifications_mute: `${muted}` };
   } else if (action.type === SET_NOTIFICATION_READ) {
     url = urls.notifications.read;
     if (!action.id) url += 'all';
