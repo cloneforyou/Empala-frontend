@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import NotificationsCard from '../Header/NotificationsCard';
-import { getNotifications } from '../../../actions/dashboard';
+import NotificationsCard from '../../../Header/NotificationsCard';
+import { getNotifications } from '../../../../../actions/dashboard';
 
 function mapStateToProps(state) {
   return {
@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch) {
   });
 }
 
-class GlobalNotifications extends Component {
+class Notifications extends Component {
   componentDidMount() {
     this.props.getAllNotifications();
   }
@@ -48,4 +48,4 @@ class GlobalNotifications extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalNotifications);
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

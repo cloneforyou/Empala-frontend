@@ -41,6 +41,11 @@ export default class RightBlock extends Component {
     this.props.setActivePage('market');
   };
 
+  setApplicationSettingsAsActivePage = () => {
+    this.props.setActivePage('profile');
+    this.props.changeActiveTabProfile(5);
+  };
+
   getBadgeColor(count) {
     if (!!count.new_actions && count.new_actions > 0) return 'red';
     if (!!count.new_notifications && count.new_notifications > 0) return 'green';
@@ -56,7 +61,8 @@ export default class RightBlock extends Component {
       muteNotifications,
       notificationsMuted,
       setNotificationRead,
-      notificationsCounter
+      notificationsCounter,
+      changeActiveTabProfile,
     } = this.props;
     const {
       menuAvatarShow,
@@ -69,8 +75,13 @@ export default class RightBlock extends Component {
         <ul className="nav user-nav align-items-center">
           <li className="nav-item">
             <div className="nav-tooltipe">
-              <a className="nav-link user-nav__link" href="#">
-                <i className="user-nav__icon user-nav__icon_location background_light-gray"/>
+              <a className="nav-link user-nav__link" onClick={this.setApplicationSettingsAsActivePage}>
+                <Link
+                  route="dashboard"
+                  params={{page: 'profile'}}
+                >
+                  <i className="user-nav__icon user-nav__icon_location background_light-gray"/>
+                </Link>
               </a>
               <span className="tooltiptext">Set default now</span>
             </div>
@@ -114,6 +125,7 @@ export default class RightBlock extends Component {
               muteNotifications={muteNotifications}
               notificationsMuted={notificationsMuted}
               setNotificationRead={setNotificationRead}
+              changeActiveTabProfile={changeActiveTabProfile}
             />
             )}
             { !notifPopUpIsOpened && <NotificationsBlock /> }

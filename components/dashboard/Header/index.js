@@ -10,6 +10,7 @@ import {
   setActivePage,
   setNotificationRead,
 } from '../../../actions/dashboard';
+import { changeActiveTabProfile } from '../../../actions/profile';
 
 
 class Header extends Component {
@@ -17,8 +18,6 @@ class Header extends Component {
     const {
       sidebarCollapsed,
       currentColorScheme,
-      getLatestNotifications,
-      setActivePage,
     } = this.props;
     return (
       <div
@@ -89,6 +88,7 @@ function mapDispatchToProps(dispatch) {
     getLatestNotifications: () => dispatch(getNotifications({ collect: 'latest' })),
     setNotificationRead: (id) => dispatch(setNotificationRead(id)),
     muteNotifications: () => dispatch(muteNotifications()),
+    changeActiveTabProfile: (value) => dispatch(changeActiveTabProfile(value)),
   };
 }
 
