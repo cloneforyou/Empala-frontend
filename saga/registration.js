@@ -10,7 +10,8 @@ import {
   verifySendFailure,
   sendCodeVerifySuccess,
   sendCodeVerifyFailure,
-  showPopupPIN, registrationSuccess,
+  showPopupPIN,
+  registrationSuccess,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -32,6 +33,11 @@ import request from '../utils/request';
 import validationSaga, { validateCheckbox, validateEmptyFields, validateFieldValue } from './validation';
 import { getAddressInfoByZIP } from './sideServices';
 
+const urls = {
+  registration: '/api/auth/register',
+  auth: '/api/auth',
+  verifyProfile: 'api/member/verify',
+};
 export function* changeTabPage({ tabName, tabIndex, direction }) {
   if (!tabName) return;
   const mailingAddressSameAsResidential = yield select(state =>
@@ -105,7 +111,7 @@ export function* saveData() {
 export function* sendRegistrationForm() {
   const registrationData = yield select(state => state.registration.registrationData);
   const id = localStorage.getItem('id');
-  const url = '/api/auth/register';
+  const url = urls.registration;
   const options = {
     method: 'POST',
     data: { ...registrationData, id },
@@ -123,7 +129,7 @@ export function* sendRegistrationForm() {
 export function* getUserID() {
   const data = JSON.parse(localStorage.getItem('registrationData'));
   const id = localStorage.getItem('id');
-  const url = `/api/auth/register?id=${id}`;
+  const url = `${urls.registration}?id=${id}`;
   const options = {
     method: 'GET',
   };
@@ -142,7 +148,7 @@ export function* verifySendRequest(action) {
   const email = yield select(state => state.registration.registrationData.member_account_email ||
     state.profile.profileUserData.account_information_email);
   const phoneNumber = yield select(state => state.registration.registrationData.member_account_contact_phone);
-  const url = `/api/auth/${action.entityType}/send`;
+  const url = `${urls.auth}/${action.entityType}/send`;
   const options = {
     method: 'POST',
     data: {
@@ -163,7 +169,7 @@ export function* verifySendRequest(action) {
 export function* verifySendCodeRequest(action) {
   const id = localStorage.getItem('id');
   const code = yield select(state => state.registration.codeVerify);
-  const url = `/api/auth/${action.entityType}/verify`;
+  let url = `${urls.auth}/${action.entityType}/verify`;
   const options = {
     method: 'POST',
     data: {
@@ -171,6 +177,15 @@ export function* verifySendCodeRequest(action) {
       code,
     },
   };
+  if (action.source === 'dashboard') {
+    const email = yield select(state => state.profile.profileUserData.account_information_email);
+    // const phone = yield select(state => state.profile.profileUserData.account_information_contact_phone_number);
+    options.data = {
+      code,
+      email,
+    };
+    url = `${urls.verifyProfile}/${action.entityType}`;
+  }
   try {
     const res = yield call(request, url, options);
     yield put(sendCodeVerifySuccess());
@@ -184,7 +199,7 @@ export function* verifySendCodeRequest(action) {
 
 export function* checkVerificationRequest(action) {
   const id = localStorage.getItem('id');
-  const url = `/api/auth/${action.entityType}/check`;
+  const url = `${urls.auth}/${action.entityType}/check`;
   const options = {
     method: 'POST',
     data: {
@@ -200,10 +215,10 @@ export function* checkVerificationRequest(action) {
         yield put(showPopupPIN('phone'));
       }
     } else if (res.data.info === 'VERIFIED') {
-      console.log('number verified!!!!')
+      // console.log('number verified!!!!')
       const tabName = yield select(state => state.registration.tabName);
       const tabIndex = yield select(state => state.registration.tabIndex);
-      console.log('------->>>>>>>>>>', tabName, tabIndex)
+      // console.log('------->>>>>>>>>>', tabName, tabIndex)
       yield changeTabPage({ tabName, tabIndex, direction: 'forward' });
     }
   } catch (err) {

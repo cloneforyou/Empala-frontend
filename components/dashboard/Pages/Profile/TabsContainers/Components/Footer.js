@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { openModal } from '../../../../../../actions/dashboard';
-import { updateProfileSend, updateSettingsRequest } from '../../../../../../actions/profile';
+import { cancelProfileInfoChange, updateProfileSend, updateSettingsRequest } from '../../../../../../actions/profile';
 import * as dashboardActions from '../../../../../../actions/dashboard';
 
 
@@ -59,7 +59,7 @@ function mapDispatchToProps(dispatch) {
     showDeleteModal: () => dispatch(openModal('accountDelete')),
     handleUpdateInfo: () => dispatch(updateProfileSend()),
     handleUpdateSettings: () => dispatch(updateSettingsRequest()),
-    handleCancel: () => dispatch(dashboardActions.getUserData()),
+    handleCancel: () => dispatch(cancelProfileInfoChange()),
   };
 }
 

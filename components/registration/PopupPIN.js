@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import iconPadlock from '../../static/images/dashboard-icons/icon-padlock.svg';
 import iconShield from '../../static/images/dashboard-icons/icon-shield.svg';
 import { verifySendRequest, sendCodeVerify, closePopupPIN, changeTabPage } from '../../actions/registration'
+import { cancelProfileInfoChange } from '../../actions/profile';
 
 class PopupPIN extends Component {
   constructor(props) {
@@ -39,9 +40,10 @@ class PopupPIN extends Component {
     }
   };
 
-  // closePopup = () => {
-  //   this.props.closePopupPIN(this.props.tabName, this.props.tabIndex)
-  // };
+  handleClose = () => {
+    if (this.props.source === 'dashboard') this.props.cancelProfileInfoChange();
+    this.props.closePopupPIN()
+  };
 
 
   render() {
@@ -49,7 +51,6 @@ class PopupPIN extends Component {
     const {
       showVerifyEmailForm,
       codeVerifyError,
-      closePopupPIN,
       codeSent,
       type,
     } = this.props;
@@ -75,7 +76,7 @@ class PopupPIN extends Component {
                 </button>
                 <button
                   className="popup-verify__btn_default"
-                  onClick={closePopupPIN}
+                  onClick={this.handleClose}
                   style={{ fontSize: '16px' }}
                 >
                   Cancel
@@ -130,7 +131,7 @@ class PopupPIN extends Component {
               <div>
                 <button
                   className="popup-verify__btn_default"
-                  onClick={closePopupPIN}
+                  onClick={this.handleClose}
                 >
                   Cancel
                 </button>
@@ -152,7 +153,8 @@ export default connect((state) => ({
   (dispatch) => ({
     closePopupPIN: () => dispatch(closePopupPIN()),
     verifySendRequest: (type) => dispatch(verifySendRequest(type)),
-    sendCodeVerify: (code, entityType) => dispatch(sendCodeVerify(code, entityType))
+    sendCodeVerify: (code, entityType) => dispatch(sendCodeVerify(code, entityType)),
+    cancelProfileInfoChange: () => dispatch(cancelProfileInfoChange()),
   })
 )
 (PopupPIN);

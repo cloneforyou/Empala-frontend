@@ -11,7 +11,7 @@ import {
   DELETE_USERPIC_REQUEST,
   DELETE_USERPIC_FAIL,
   UPDATE_APP_SETTINGS_FAIL,
-  UPDATE_APP_SETTINGS_REQUEST,
+  UPDATE_APP_SETTINGS_REQUEST, DROP_PROFILE_INFO, CANCEL_PROFILE_INFO_CHANGE,
 } from '../constants/profile';
 
 export function getActiveTabProfile() {
@@ -81,5 +81,17 @@ export function updateSettingsFail(err) {
 export function updateSettingsRequest() {
   return {
     type: UPDATE_APP_SETTINGS_REQUEST,
+  };
+}
+
+export function dropProfileInfo(data) {
+  return {
+    type: DROP_PROFILE_INFO,
+    data,
+  };
+}
+export function cancelProfileInfoChange() {
+  return {
+    type: CANCEL_PROFILE_INFO_CHANGE,
   };
 }

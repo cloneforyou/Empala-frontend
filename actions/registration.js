@@ -225,10 +225,11 @@ export function closePopupPIN() {
   };
 }
 
-export function verifySendRequest(entityType) {
+export function verifySendRequest(entityType, source) {
   return {
     type: VERIFY_SEND_REQUEST,
     entityType,
+    source,
   };
 }
 

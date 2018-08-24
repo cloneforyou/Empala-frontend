@@ -3,7 +3,7 @@ import axios from 'axios';
 import request from '../utils/request';
 import {
   deleteUserPicFail,
-  deleteUserPicSuccess,
+  deleteUserPicSuccess, dropProfileInfo,
   resetPasswordFail,
   resetPasswordSuccess,
   updateProfileFail,
@@ -23,6 +23,7 @@ import {
 import { cleanErrorMessage, passwordUpdateFailed, passwordUpdateSuccess } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import {
+  CANCEL_PROFILE_INFO_CHANGE,
   DELETE_USERPIC_REQUEST,
   RESET_PASSWORD_REQUEST,
   UPDATE_APP_SETTINGS_REQUEST,
@@ -30,9 +31,18 @@ import {
 } from '../constants/profile';
 import { DELETE_ACCOUNT_REQUEST, UPLOAD_IMAGE_REQUEST, SAVE_COLOR_SCHEME } from '../constants/dashboard';
 
+const urls = {
+  updateAppSettings: '/api/settings',
+  updateProfileData: '/api/member/update',
+  updatePassword: 'api/member/password',
+  uploadAvatar: '/api/upload/avatar',
+  deleteAccount: '/api/member/delete',
+  deleteAvatar: '/api/member/avatar',
+};
+
 export function* sendProfileData() {
   const profileData = yield select(state => state.profile.profileUserData);
-  const url = '/api/account/update';
+  const url = urls.updateProfileData;
   const options = {
     method: 'PATCH',
     data: profileData,
@@ -54,9 +64,10 @@ export function* sendProfileData() {
   }
 }
 
+
 export function* updateAppSettings() {
   const settings = yield select(state => state.dashboard.currentAppSettings);
-  const url = '/api/settings';
+  const url = urls.updateAppSettings;
   const options = {
     method: 'PATCH',
     data: settings,
@@ -80,7 +91,7 @@ export function* resetPassword() {
   const oldPassword = yield select(state => state.profile.profileUserData.reset_password_old);
   const passwordConfirm = yield select(state => state.profile.profileUserData.reset_password_confirm);
   // console.log(' ** RESET', code);
-  const url = '/api/account/password';
+  const url = urls.updatePassword;
   const options = {
     method: 'PATCH',
     headers: {
@@ -116,7 +127,7 @@ export function* resetPassword() {
 export function* uploadImage() {
   const accessToken = localStorage.getItem('accessToken');
   const data = yield select(state => state.dashboard.uploadableImage);
-  const url = '/api/upload/avatar';
+  const url = urls.uploadAvatar;
   const options = {
     headers: { 'x-access-token': accessToken },
     method: 'POST',
@@ -133,11 +144,11 @@ export function* uploadImage() {
 
 export function* accountDelete() {
   const accessToken = localStorage.getItem('accessToken');
-  const url = '/api/account/delete';
+  const url = urls.deleteAccount;
   const text = yield select(state => state.dashboard['membership_account_delete_legal_wording']);
   const options = {
     headers: { 'x-access-token': accessToken },
-    method: 'POST',
+    method: 'DELETE',
     data: {
       text,
     },
@@ -157,7 +168,7 @@ export function* accountDelete() {
 export function* deleteUserpic() {
   const accessToken = localStorage.getItem('accessToken');
   // const url = 'http://localhost:9000/api/account/avatar';
-  const url = '/api/account/avatar';
+  const url = urls.deleteAvatar;
   // const text = yield select(state => state.dashboard['membership_account_delete_legal_wording']);
   const options = {
     headers: { 'x-access-token': accessToken },
@@ -176,7 +187,7 @@ export function* deleteUserpic() {
 
 export function* saveColorThem({ colorTheme }) {
   const accessToken = localStorage.getItem('accessToken');
-  const url = '/api/account/update/theme';
+  const url = `${urls.updateProfileData}/theme`;
   const options = {
     headers: { 'x-access-token': accessToken },
     method: 'PATCH',
@@ -193,6 +204,11 @@ export function* saveColorThem({ colorTheme }) {
   }
 }
 
+function* cancelInfoChange() {
+  const userData = yield select(state => state.dashboard.userData);
+  yield put(dropProfileInfo(userData));
+}
+
 export default function* profileSaga() {
   yield all([
     takeLatest(UPDATE_PROFILE_REQUEST, sendProfileData),
@@ -202,5 +218,6 @@ export default function* profileSaga() {
     takeEvery(UPLOAD_IMAGE_REQUEST, uploadImage),
     takeEvery(SAVE_COLOR_SCHEME, saveColorThem),
     takeEvery(DELETE_ACCOUNT_REQUEST, accountDelete),
+    takeEvery(CANCEL_PROFILE_INFO_CHANGE, cancelInfoChange),
   ]);
 }
