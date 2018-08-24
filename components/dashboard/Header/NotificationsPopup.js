@@ -11,14 +11,14 @@ class NotificationsPopup extends Component {
     this.handleClickOnSeeAll = this.handleClickOnSeeAll.bind(this);
   }
   componentDidMount() {
-    document.addEventListener('click', this.handldeClickOutsideBackground);
+    document.addEventListener('click', this.handleClickOutsideBackground);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('click', this.handldeClickOutsideBackground);
+    document.removeEventListener('click', this.handleClickOutsideBackground);
   }
 
-  handldeClickOutsideBackground = event => {
+  handleClickOutsideBackground = event => {
     if (this.props.showNotificationsPopup && !this.notificationsPopup.contains(event.target)) {
       this.props.closeNotificationsPopup();
       this.props.setNotificationRead(this.props.lastNotifications.map(item => item.id));
@@ -76,7 +76,9 @@ class NotificationsPopup extends Component {
           this.filterNotifications(lastNotifications, false).map(notification =>
             <NotificationsCard
               popup
+              complete
               key={notification.id}
+              id={notification.id}
               text={notification.action}
               title={notification.title}
               timestamp={notification.date_created}
@@ -94,7 +96,9 @@ class NotificationsPopup extends Component {
         {this.filterNotifications(lastNotifications, true).map(notification =>
           <NotificationsCard
             popup
+            complete
             key={notification.id}
+            id={notification.id}
             text={notification.action}
             title={notification.title}
             timestamp={notification.date_created}

@@ -32,7 +32,9 @@ class Notifications extends Component {
           {allNotifications.map((notification, index) => (
             <NotificationsCard
               page
+              complete
               key={notification.id}
+              id={notification.id}
               text={notification.action}
               title={notification.title}
               timestamp={notification.date_created}
