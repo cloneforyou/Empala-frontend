@@ -54,7 +54,7 @@ export function* sendProfileData() {
 
   try {
     const response = yield call(request, url, options);
-    if (!response.data.data.email_verified) {
+    if (!response.data.data.email_verified && response.data.misc.email_changed) {
       yield put(showPopupPIN('email'));
     }
     yield put(updateProfileSuccess(response.data));
