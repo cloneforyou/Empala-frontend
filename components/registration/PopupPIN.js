@@ -53,6 +53,7 @@ class PopupPIN extends Component {
       codeVerifyError,
       codeSent,
       type,
+      source,
     } = this.props;
     return (
       <div className="popup-verify">
@@ -60,7 +61,7 @@ class PopupPIN extends Component {
           codeVerifyError && <span className="red">Error</span>
         }
         {
-          !showVerifyEmailForm && type ==='email'?
+          !showVerifyEmailForm && source !== 'dashboard' && type === 'email'?
             <div className="popup-verify__body popup-verify__body_h-335">
               <div>
                 <h2 className="popup-verify__title">{this.formTitle()}</h2>
@@ -86,7 +87,11 @@ class PopupPIN extends Component {
             <div className="popup-verify__body">
               <h2 className="popup-verify__title">{this.formTitle()}</h2>
               <img className="popup-verify__icon" src={iconShield} alt="" />
-              <p className="popup-verify__sub-title">Enter the code to continue your registration.</p>
+              <p className="popup-verify__sub-title">
+                {`${source === 'dashboard' ?
+                  'Enter the code to confirm your e-mail' :
+                  'Enter the code to continue your registration.'}`}
+                </p>
               {
                 type === 'phone' && <p className="popup-verify__text-info mb-4">Your security is our top priority.
                   As part of our KYC process, we need to validate the contact no. you entered.</p>
