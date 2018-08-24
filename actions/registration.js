@@ -246,11 +246,12 @@ export function verifySendFailure(err) {
   };
 }
 
-export function sendCodeVerify(code, entityType) {
+export function sendCodeVerify(code, entityType, source) {
   return {
     type: SEND_CODE_VERIFY,
     code,
     entityType,
+    source,
   };
 }
 

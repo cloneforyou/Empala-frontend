@@ -33,7 +33,9 @@ import {
   MUTE_NOTIFICATIONS,
   SET_ALL_NOTIFICATIONS,
   ADD_NOTIFICATION,
-  DROP_NOTIFICATION, SET_LAST_NOTIFICATIONS, REFRESH_NOTIFICATION_COUNTER,
+  DROP_NOTIFICATION,
+  SET_LAST_NOTIFICATIONS,
+  REFRESH_NOTIFICATION_COUNTER,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -44,7 +46,7 @@ import {
   UPDATE_PROFILE_FAIL,
 } from '../constants/profile';
 import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
-import { CLOSE_POPUP_PIN } from '../constants/registration';
+import { CLOSE_POPUP_PIN, SEND_CODE_VERIFY_SUCCESS } from '../constants/registration';
 
 const initialState = {
   sidebarCollapsed: true,
@@ -262,6 +264,7 @@ function dashboard(state = initialState, action) {
         popupPINType: action.entityType,
       };
     case CLOSE_POPUP_PIN:
+    case SEND_CODE_VERIFY_SUCCESS:
       return {
         ...state,
         showPopupPIN: false,

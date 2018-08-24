@@ -36,7 +36,7 @@ import { getAddressInfoByZIP } from './sideServices';
 const urls = {
   registration: '/api/auth/register',
   auth: '/api/auth',
-  verifyProfile: 'api/member/verify',
+  verifyProfile: '/api/member/verify',
 };
 export function* changeTabPage({ tabName, tabIndex, direction }) {
   if (!tabName) return;
@@ -180,6 +180,9 @@ export function* verifySendCodeRequest(action) {
   if (action.source === 'dashboard') {
     const email = yield select(state => state.profile.profileUserData.account_information_email);
     // const phone = yield select(state => state.profile.profileUserData.account_information_contact_phone_number);
+    options.headers = {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    };
     options.data = {
       code,
       email,
@@ -193,7 +196,7 @@ export function* verifySendCodeRequest(action) {
     const tabIndex = yield select(state => state.registration.tabIndex);
     if (tabName && tabIndex) yield changeTabPage({ tabName, tabIndex, direction: 'forward' });
   } catch (err) {
-    yield put(sendCodeVerifyFailure(err));
+    yield put(sendCodeVerifyFailure(err.message));
   }
 }
 

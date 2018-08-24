@@ -31,7 +31,7 @@ class PopupPIN extends Component {
 
   verifyCode = () => {
     const { verify_code } = this.state;
-    this.props.sendCodeVerify(verify_code, this.props.type)
+    this.props.sendCodeVerify(verify_code, this.props.type, this.props.source)
   };
 
   handleEnter = (e) => {
@@ -58,7 +58,7 @@ class PopupPIN extends Component {
     return (
       <div className="popup-verify">
         {
-          codeVerifyError && <span className="red">Error</span>
+          codeVerifyError && <span className="red">Error: {codeVerifyError}</span>
         }
         {
           !showVerifyEmailForm && source !== 'dashboard' && type === 'email'?
@@ -117,17 +117,20 @@ class PopupPIN extends Component {
                 codeSent && resendCode && <span className='text-success'>Code sent</span>
               }
               <div className="popup-verify__foot buttons-row mb-4">
-                <button
-                  className="popup-verify__btn popup-verify__btn_outline"
+                {
+                  source !== 'dashboard' && <button
+                  className="popup-verify__btn popup-verify__btn_outline "
                   onClick={() => {
                     this.props.verifySendRequest(type);
-                  this.setState({ resendCode:true });
+                    this.setState({ resendCode: true });
                   }}
                 >
                   Resend
                 </button>
+                }
                 <button
-                  className="popup-verify__btn popup-verify__btn_green"
+                  className={`popup-verify__btn popup-verify__btn_green
+                  ${source === 'dashboard' ? 'popup-verify__btn-block' : ''}`}
                   onClick={this.verifyCode}
                 >
                   Verify
@@ -158,7 +161,7 @@ export default connect((state) => ({
   (dispatch) => ({
     closePopupPIN: () => dispatch(closePopupPIN()),
     verifySendRequest: (type) => dispatch(verifySendRequest(type)),
-    sendCodeVerify: (code, entityType) => dispatch(sendCodeVerify(code, entityType)),
+    sendCodeVerify: (code, entityType, source) => dispatch(sendCodeVerify(code, entityType, source)),
     cancelProfileInfoChange: () => dispatch(cancelProfileInfoChange()),
   })
 )
