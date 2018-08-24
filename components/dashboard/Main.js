@@ -70,7 +70,10 @@ class Main extends Component {
          />
         <SessionExpire />
         {
-          showPopupPIN && <PopupPIN type={popupPINType} />
+          showPopupPIN && <PopupPIN
+            type={popupPINType}
+            source="dashboard"
+          />
         }
       </div>
     );

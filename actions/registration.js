@@ -225,10 +225,11 @@ export function closePopupPIN() {
   };
 }
 
-export function verifySendRequest(entityType) {
+export function verifySendRequest(entityType, source) {
   return {
     type: VERIFY_SEND_REQUEST,
     entityType,
+    source,
   };
 }
 
@@ -245,11 +246,12 @@ export function verifySendFailure(err) {
   };
 }
 
-export function sendCodeVerify(code, entityType) {
+export function sendCodeVerify(code, entityType, source) {
   return {
     type: SEND_CODE_VERIFY,
     code,
     entityType,
+    source,
   };
 }
 

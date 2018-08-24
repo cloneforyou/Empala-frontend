@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import iconPadlock from '../../static/images/dashboard-icons/icon-padlock.svg';
 import iconShield from '../../static/images/dashboard-icons/icon-shield.svg';
 import { verifySendRequest, sendCodeVerify, closePopupPIN, changeTabPage } from '../../actions/registration'
+import { cancelProfileInfoChange } from '../../actions/profile';
 
 class PopupPIN extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class PopupPIN extends Component {
 
   verifyCode = () => {
     const { verify_code } = this.state;
-    this.props.sendCodeVerify(verify_code, this.props.type)
+    this.props.sendCodeVerify(verify_code, this.props.type, this.props.source)
   };
 
   handleEnter = (e) => {
@@ -39,9 +40,10 @@ class PopupPIN extends Component {
     }
   };
 
-  // closePopup = () => {
-  //   this.props.closePopupPIN(this.props.tabName, this.props.tabIndex)
-  // };
+  handleClose = () => {
+    if (this.props.source === 'dashboard') this.props.cancelProfileInfoChange();
+    this.props.closePopupPIN()
+  };
 
 
   render() {
@@ -49,17 +51,17 @@ class PopupPIN extends Component {
     const {
       showVerifyEmailForm,
       codeVerifyError,
-      closePopupPIN,
       codeSent,
       type,
+      source,
     } = this.props;
     return (
       <div className="popup-verify">
         {
-          codeVerifyError && <span className="red">Error</span>
+          codeVerifyError && <span className="red">Error: {codeVerifyError}</span>
         }
         {
-          !showVerifyEmailForm && type ==='email'?
+          !showVerifyEmailForm && source !== 'dashboard' && type === 'email'?
             <div className="popup-verify__body popup-verify__body_h-335">
               <div>
                 <h2 className="popup-verify__title">{this.formTitle()}</h2>
@@ -75,7 +77,7 @@ class PopupPIN extends Component {
                 </button>
                 <button
                   className="popup-verify__btn_default"
-                  onClick={closePopupPIN}
+                  onClick={this.handleClose}
                   style={{ fontSize: '16px' }}
                 >
                   Cancel
@@ -85,7 +87,11 @@ class PopupPIN extends Component {
             <div className="popup-verify__body">
               <h2 className="popup-verify__title">{this.formTitle()}</h2>
               <img className="popup-verify__icon" src={iconShield} alt="" />
-              <p className="popup-verify__sub-title">Enter the code to continue your registration.</p>
+              <p className="popup-verify__sub-title">
+                {`${source === 'dashboard' ?
+                  'Enter the code to confirm your e-mail' :
+                  'Enter the code to continue your registration.'}`}
+                </p>
               {
                 type === 'phone' && <p className="popup-verify__text-info mb-4">Your security is our top priority.
                   As part of our KYC process, we need to validate the contact no. you entered.</p>
@@ -111,17 +117,20 @@ class PopupPIN extends Component {
                 codeSent && resendCode && <span className='text-success'>Code sent</span>
               }
               <div className="popup-verify__foot buttons-row mb-4">
-                <button
-                  className="popup-verify__btn popup-verify__btn_outline"
+                {
+                  source !== 'dashboard' && <button
+                  className="popup-verify__btn popup-verify__btn_outline "
                   onClick={() => {
                     this.props.verifySendRequest(type);
-                  this.setState({ resendCode:true });
+                    this.setState({ resendCode: true });
                   }}
                 >
                   Resend
                 </button>
+                }
                 <button
-                  className="popup-verify__btn popup-verify__btn_green"
+                  className={`popup-verify__btn popup-verify__btn_green
+                  ${source === 'dashboard' ? 'popup-verify__btn-block' : ''}`}
                   onClick={this.verifyCode}
                 >
                   Verify
@@ -130,7 +139,7 @@ class PopupPIN extends Component {
               <div>
                 <button
                   className="popup-verify__btn_default"
-                  onClick={closePopupPIN}
+                  onClick={this.handleClose}
                 >
                   Cancel
                 </button>
@@ -152,7 +161,8 @@ export default connect((state) => ({
   (dispatch) => ({
     closePopupPIN: () => dispatch(closePopupPIN()),
     verifySendRequest: (type) => dispatch(verifySendRequest(type)),
-    sendCodeVerify: (code, entityType) => dispatch(sendCodeVerify(code, entityType))
+    sendCodeVerify: (code, entityType, source) => dispatch(sendCodeVerify(code, entityType, source)),
+    cancelProfileInfoChange: () => dispatch(cancelProfileInfoChange()),
   })
 )
 (PopupPIN);

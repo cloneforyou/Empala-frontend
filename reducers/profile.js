@@ -1,7 +1,7 @@
 import {
   GET_ACTIVE_TAB_PROFILE,
   CHANGE_ACTIVE_TAB_PROFILE,
-  DELETE_USERPIC_SUCCESS,
+  DELETE_USERPIC_SUCCESS, DROP_PROFILE_INFO,
 } from '../constants/profile';
 import {
   GET_USER_DATA_SUCCESS,
@@ -25,15 +25,16 @@ function profile(state = initialState, action) {
       return { ...state, tabValue: action.activeTab };
     case GET_USER_DATA_SUCCESS:
     case UPLOAD_IMAGE_SUCCESS:
+    case DROP_PROFILE_INFO:
       return {
         ...state,
         profileUserData: renameKeys(flattenObject(action.data.data.profile), /^Member/, ''),
       };
-    case DELETE_USERPIC_SUCCESS:
-      return {
-        ...state,
-        profileUserData: { ...state.profileUserData, account_avatar: null},
-      };
+    // case DROP_PROFILE_INFO:
+    //   return {
+    //     ...state,
+    //     profileUserData: renameKeys(flattenObject(action.data), /^Member/, ''),
+    //   };
     case SET_FIELD_VALUE:
       return {
         ...state,

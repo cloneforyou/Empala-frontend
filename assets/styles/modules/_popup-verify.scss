@@ -59,6 +59,10 @@
       box-shadow: 2px 4px 30px 0 rgba(0, 0, 0, 0.35);
     }
   }
+  &__btn-block {
+    display: block;
+    width: 100%;
+  }
   &__btn_default {
     background: none;
     @include button-reset();
