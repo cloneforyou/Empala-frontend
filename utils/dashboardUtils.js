@@ -767,7 +767,7 @@ export const parseOrdersList = list => list.map(order => ({
     // date: parseOrderDate(order.Date),
     currency: order.SecurityCurrency,
     price: order.AveragePrice,
-    order_quantity: order.Quantity,
+    order_quantity: order.Quantity * (order.Side === 'Sell' ? -1 : 1),
     fill_quantity: order.ExecutedQuantity,
     remain_quantity: order.LeavesQuantity,
     notional_ammount: calculateOrderPrice(order.AveragePrice, order.Quantity), // TODO find the way how to calculate
