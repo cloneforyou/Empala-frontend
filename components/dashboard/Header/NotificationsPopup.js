@@ -61,12 +61,18 @@ class NotificationsPopup extends Component {
             <a href="#"
                role="button"
                onClick={this.handleReadAll}
-            >Mark All as Read</a>
+            >
+              Mark All as Read
+            </a>
             <a href="#"
                role="button"
                onClick={this.handleMute}
-            >{`${!notificationsMuted ? 'Mute' : 'Unmute'}`}</a>
-            <a href="#">Settings</a>
+            >
+              {`${!notificationsMuted ? 'Mute' : 'Unmute'}`}
+            </a>
+            <a href="#">
+              Settings
+            </a>
           </div>
         </div>
         <div className="notifications-popup__news">
@@ -76,7 +82,7 @@ class NotificationsPopup extends Component {
           this.filterNotifications(lastNotifications, false).map(notification =>
             <NotificationsCard
               popup
-              complete
+              cardMenu
               key={notification.id}
               id={notification.id}
               text={notification.action}

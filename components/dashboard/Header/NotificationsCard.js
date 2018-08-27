@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { parseDateString } from '../../../utils/dashboardUtils';
 import { setCompleteAction } from '../../../actions/dashboard';
+import CardMenu from './CardMenu';
 
 
 function mapDispatchToProps(dispatch) {
@@ -11,6 +12,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 class NotificationsCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      notifCardMenuIsOpened: false,
+    };
+  }
+
   getColorByType(type, viewed, completed) {
     if (type !== 'action' && viewed) return 'white';
     switch (type) {
@@ -36,6 +44,13 @@ class NotificationsCard extends Component {
     this.props.setCompleteAction(this.props.id);
   };
 
+  handleClickOnCardMenu = (event) => {
+    if (!this.state.notifCardMenuIsOpened) {
+      event.nativeEvent.stopImmediatePropagation();
+    }
+    this.setState((prevState) => ({ notifCardMenuIsOpened: !prevState.notifCardMenuIsOpened }), console.log('fsfsd', this.state.notifCardMenuIsOpened));
+  };
+
   render() {
     return (
       <div className={`notifications-card notifications-card_popup background_${this.getColorByType(this.props.type, this.props.viewed, this.props.completed)}`}>
@@ -47,14 +62,17 @@ class NotificationsCard extends Component {
           <div className="d-flex justify-content-between">
             <div>
               <p className="message-title">{this.props.title || 'PEGA Earnings Announcement'}</p>
-              <p className="message-text">{this.props.text || 'PEGA announced quarterly of $0.00 per share, missing expectations by $0.21'}</p>
+              <p
+                className="message-text">{this.props.text || 'PEGA announced quarterly of $0.00 per share, missing expectations by $0.21'}</p>
             </div>
-            {this.props.type === 'action' && this.props.complete &&
+            {this.props.type === 'action' && this.props.cardMenu && !this.props.completed &&
             (<div>
-              <button className="icon-dots"/>
-                <div>
-                  <button className="btn-complete" onClick={this.handleClickOnCompleteAction}>Mark as complete</button>
-                </div>
+              <button className="icon-dots" onClick={this.handleClickOnCardMenu}/>
+              {this.state.notifCardMenuIsOpened &&
+              <CardMenu
+                handleClickOnCardMenu={this.handleClickOnCardMenu}
+                handleClickOnCompleteAction={this.handleClickOnCompleteAction}
+              />}
             </div>)}
           </div>
           <p className={`message-date ${this.props.popup && 'horizontal-align_end'}`}>{this.parseTimestamp(this.props.timestamp)}</p>
