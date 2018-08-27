@@ -1,4 +1,5 @@
 import React from 'react';
+import NumberFormat from 'react-number-format';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
@@ -25,12 +26,19 @@ const TransferForm = props => (
       />
     </div>
     <div className="funding-ach-payment-box_input-margin">
-      <EmpalaInput
+      <NumberFormat
+        customInput={EmpalaInput}
+        // value={this.props.value}
         id="ach_amount"
         type="text"
         label="Amount"
-        value={props.ach_amount ? formatNumberWithFixedPoint(props.ach_amount) : ''}
+        // value={props.ach_amount ? `$${formatNumberWithFixedPoint(props.ach_amount)}` : '$'}
+        value={props.ach_amount ? props.ach_amount : ''}
         handleChange={props.setInputValueById}
+        decimalScale={2}
+        allowEmptyFormatting
+        thousandSeparator
+        prefix='$'
       />
     </div>
     <p>
