@@ -65,7 +65,7 @@ class OrdersTable extends React.Component {
         { value: order.values.symbol },
         { value: order.values.currency },
         { value: formatNumberWithFixedPoint(order.values.price, 2) },
-        { value: order.values.order_quantity },
+        { value: order.values.order_quantity, color: order.values.order_quantity > 0 ? 'green' : 'red' },
         { value: order.values.fill_quantity },
         { value: formatNumberWithFixedPoint(order.values.notional_ammount, 1) }, // Notional
         { value: '--' }, // Exec fees
