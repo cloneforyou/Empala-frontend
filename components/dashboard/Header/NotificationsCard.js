@@ -48,7 +48,7 @@ class NotificationsCard extends Component {
     if (!this.state.notifCardMenuIsOpened) {
       event.nativeEvent.stopImmediatePropagation();
     }
-    this.setState((prevState) => ({ notifCardMenuIsOpened: !prevState.notifCardMenuIsOpened }), console.log('fsfsd', this.state.notifCardMenuIsOpened));
+    this.setState((prevState) => ({ notifCardMenuIsOpened: !prevState.notifCardMenuIsOpened }));
   };
 
   render() {

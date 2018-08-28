@@ -11,7 +11,6 @@ class CardMenu extends Component {
   }
 
   handleClickOutsideBackground = event => {
-    console.log('this.cardMenu.contains(event.target)', this.cardMenu.contains(event.target));
     if (!this.cardMenu.contains(event.target)) {
       this.props.handleClickOnCardMenu();
     }
