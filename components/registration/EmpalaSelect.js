@@ -15,7 +15,7 @@ const EmpalaSelect = (props) => {
       <div className="registration-label">
         {props.label}
         {props.infoButton && (
-          <button className="info-popup__btn" onClick={(e) => {e.preventDefault(); props.openInfoPopup(props.id); }}>
+          <button className="info-popup__btn" onClick={(e) => { e.preventDefault(); props.openInfoPopup(props.id); }}>
             <i className="registration__icon" />
           </button>
         )}
@@ -88,13 +88,14 @@ EmpalaSelect.propTypes = {
   handleChange: PropTypes.func.isRequired,
   value: PropTypes.string,
   infoButton: PropTypes.bool,
+  openInfoPopup: PropTypes.func,
 };
 export default connect(
   state => ({
     currentColorScheme: state.dashboard.currentColorScheme,
   }),
   dispatch => ({
-    openInfoPopup: (name) => dispatch(openInfoPopup(name)),
+    openInfoPopup: name => dispatch(openInfoPopup(name)),
   }),
 )(EmpalaSelect);
 

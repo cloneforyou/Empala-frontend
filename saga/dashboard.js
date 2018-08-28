@@ -23,6 +23,7 @@ import {
   STOP_WEBSOCKET,
   GET_NOTIFICATIONS,
   SET_NOTIFICATION_READ,
+  SET_COMPLETE_ACTION,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
@@ -318,6 +319,22 @@ function* getNotifications(action) {
   }
 }
 
+function* setCompleteAction(action) {
+  let url = urls.notifications.get + 'complete?id=' + action.id;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const resp = yield call(request, url, options);
+    yield getNotifications({ options:{} });
+  } catch (err) {
+    console.error(' ** NOTIFICATIONS GET ERROR =======>', err);
+  }
+}
+
 export default function* dashboardSaga() {
   yield all([
     wsHandling(),
@@ -328,6 +345,7 @@ export default function* dashboardSaga() {
     takeEvery(MUTE_NOTIFICATIONS, handleNotifications),
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
     takeEvery(GET_NOTIFICATIONS, getNotifications),
+    takeEvery(SET_COMPLETE_ACTION, setCompleteAction),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
   ]);

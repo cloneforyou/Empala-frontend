@@ -52,7 +52,10 @@ import {
   MUTE_NOTIFICATIONS,
   CHOOSE_GROUP_COUNTRY,
   GET_NOTIFICATIONS,
-  SET_ALL_NOTIFICATIONS, SET_LAST_NOTIFICATIONS, REFRESH_NOTIFICATION_COUNTER,
+  SET_ALL_NOTIFICATIONS,
+  SET_LAST_NOTIFICATIONS,
+  REFRESH_NOTIFICATION_COUNTER,
+  SET_COMPLETE_ACTION,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -357,3 +360,9 @@ export function getNotifications(options) {
   };
 }
 
+export function setCompleteAction(id) {
+  return {
+    type: SET_COMPLETE_ACTION,
+    id,
+  };
+}

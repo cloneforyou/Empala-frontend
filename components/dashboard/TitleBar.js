@@ -13,18 +13,18 @@ function TitleBar(props) {
     <div className="titlebar">
       {props.currentPage && (props.currentPage !== 'global portfolio') && (props.currentPage !== 'funding' && props.currentPage !== 'market') &&
       <div className="d-flex">
-          <span>
-          <i className={`titlebar__icon titlebar__icon_${props.currentPage}`}></i>
-         </span>
+        <span>
+          <i className={`titlebar__icon titlebar__icon_${props.currentPage}`} />
+        </span>
         <span className="titlebar__title">{props.currentPage}</span>
       </div>}
 
       {props.currentPage && (props.currentPage === 'global portfolio') &&
       <div className="d-flex">
         <span>
-          <i className="titlebar__icon titlebar__icon_wallet"></i>
-            {props.iconAccountTitleBar &&
-            <i className={`titlebar__icon-country_flag-${props.iconAccountTitleBar}`}></i>}
+          <i className="titlebar__icon titlebar__icon_wallet" />
+          {props.iconAccountTitleBar &&
+          <i className={`titlebar__icon-country_flag-${props.iconAccountTitleBar}`} />}
         </span>
         <span className="titlebar__title">{props.currentSectionTitleBar}</span>
       </div>}
@@ -32,7 +32,7 @@ function TitleBar(props) {
       {props.currentPage && (props.currentPage === 'funding' || props.currentPage === 'market') &&
       <div className="d-flex">
         <span>
-          <i className="titlebar__icon titlebar__icon_wallet"></i>
+          <i className="titlebar__icon titlebar__icon_wallet" />
         </span>
         <span className="titlebar__title">{props.currentPage}</span>
       </div>}
@@ -42,6 +42,8 @@ function TitleBar(props) {
 
 TitleBar.propTypes = {
   currentPage: PropTypes.string.isRequired,
+  iconAccountTitleBar: PropTypes.string,
+  currentSectionTitleBar: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(TitleBar);
