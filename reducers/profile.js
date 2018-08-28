@@ -30,6 +30,11 @@ function profile(state = initialState, action) {
         ...state,
         profileUserData: renameKeys(flattenObject(action.data.data.profile), /^Member/, ''),
       };
+    case DELETE_USERPIC_SUCCESS:
+      return {
+        ...state,
+        profileUserData: { ...state.profileUserData, account_avatar: null },
+      };
     // case DROP_PROFILE_INFO:
     //   return {
     //     ...state,

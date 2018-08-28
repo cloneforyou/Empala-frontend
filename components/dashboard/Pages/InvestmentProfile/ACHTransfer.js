@@ -32,7 +32,6 @@ const TransferForm = props => (
         id="ach_amount"
         type="text"
         label="Amount"
-        // value={props.ach_amount ? `$${formatNumberWithFixedPoint(props.ach_amount)}` : '$'}
         value={props.ach_amount ? props.ach_amount : ''}
         handleChange={props.setInputValueById}
         decimalScale={2}
