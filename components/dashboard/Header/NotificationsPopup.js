@@ -76,7 +76,7 @@ class NotificationsPopup extends Component {
           </div>
         </div>
         <div className="notifications-popup__news">
-          <span className="green fw-600">News</span>
+          <span className="green fw-600">New</span>
         </div>
         {lastNotifications.length > 0 ?
           this.filterNotifications(lastNotifications, false).map(notification =>

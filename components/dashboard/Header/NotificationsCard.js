@@ -7,7 +7,7 @@ import CardMenu from './CardMenu';
 
 function mapDispatchToProps(dispatch) {
   return ({
-    setCompleteAction: id => dispatch(setCompleteAction(id)),
+    setCompleteAction: (id, popup) => dispatch(setCompleteAction(id, popup)),
   });
 }
 
@@ -41,7 +41,7 @@ class NotificationsCard extends Component {
   }
 
   handleClickOnCompleteAction = () => {
-    this.props.setCompleteAction(this.props.id);
+    this.props.setCompleteAction(this.props.id, this.props.popup);
   };
 
   handleClickOnCardMenu = (event) => {
