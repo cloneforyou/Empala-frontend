@@ -9,6 +9,7 @@ import EnvironmentalCapitalTable from '../Widget/EnvironmentalCapitalTable';
 import ActiveOrdersTable from '../Widget/ActiveOrdersTable';
 import WorkingDealsTable from '../Widget/WorkingDealsTable';
 import DealDevelopmentTable from '../Widget/DealDevelopmentTable';
+import { initGA, logPageView } from '../../../utils/analytics';
 
 function mapStateToProps(state) {
   return {
@@ -20,6 +21,14 @@ function mapStateToProps(state) {
 }
 
 class Overview extends PureComponent {
+  componentDidMount() {
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
+    logPageView();
+  }
+
   render() {
     const widgetNews = [
       {
