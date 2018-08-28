@@ -32,6 +32,7 @@ function funding(state = initialState, action) {
     case SET_FIELD_VALUE:
       return {
         ...state,
+        // [action.id]: action.id === 'ach_amount' ? action.value.replace(/^\d+(?:[\.,]\d+)?$/g, '') : action.value,
         [action.id]: action.value,
       };
     // case VALIDATE_FIELD_ERROR:
@@ -60,7 +61,7 @@ function funding(state = initialState, action) {
           if (index === action.index) {
             return ({
               ...el,
-              [action.id]: action.value,
+              [action.id]: action.id === 'quantity' ? action.value.replace(/\D./g, '') : action.value,
             });
           }
           return el;
