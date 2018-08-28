@@ -360,9 +360,10 @@ export function getNotifications(options) {
   };
 }
 
-export function setCompleteAction(id) {
+export function setCompleteAction(id, popup) {
   return {
     type: SET_COMPLETE_ACTION,
     id,
+    popup,
   };
 }

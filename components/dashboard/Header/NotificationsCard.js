@@ -7,7 +7,7 @@ import CardMenu from './CardMenu';
 
 function mapDispatchToProps(dispatch) {
   return ({
-    setCompleteAction: id => dispatch(setCompleteAction(id)),
+    setCompleteAction: (id, popup) => dispatch(setCompleteAction(id, popup)),
   });
 }
 
@@ -41,14 +41,14 @@ class NotificationsCard extends Component {
   }
 
   handleClickOnCompleteAction = () => {
-    this.props.setCompleteAction(this.props.id);
+    this.props.setCompleteAction(this.props.id, this.props.popup);
   };
 
   handleClickOnCardMenu = (event) => {
     if (!this.state.notifCardMenuIsOpened) {
       event.nativeEvent.stopImmediatePropagation();
     }
-    this.setState((prevState) => ({ notifCardMenuIsOpened: !prevState.notifCardMenuIsOpened }), console.log('fsfsd', this.state.notifCardMenuIsOpened));
+    this.setState((prevState) => ({ notifCardMenuIsOpened: !prevState.notifCardMenuIsOpened }));
   };
 
   render() {

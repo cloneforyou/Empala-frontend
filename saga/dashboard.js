@@ -208,7 +208,7 @@ export function* selectETNADataRequest({ payloadType }) {
 /*  --------- ETNA TEST API FUNCTIONS  END ---------- */
 
 /* ---------- EMPALA SOCKET IO HANDLING ----------*/
-const socketServerURL = serverOrigins.aws;
+const socketServerURL = serverOrigins.local;
 // const socket = io();
 const connect = async token => io.connect(socketServerURL, {
   query: {
@@ -282,9 +282,10 @@ function* handleNotifications(action) {
   } else if (action.type === SET_NOTIFICATION_READ) {
     url = urls.notifications.read;
     if (!action.id) url += 'all';
-  } else {
-    options.method = 'POST';
-    options.data = { ids: Array.isArray(action.id) ? action.id : action.id.toString.split(',') };
+    else {
+      options.method = 'POST';
+      options.data = { ids: Array.isArray(action.id) ? action.id : action.id.toString.split(',') };
+    }
   }
   try {
     const resp = yield call(request, url, options);
@@ -320,7 +321,7 @@ function* getNotifications(action) {
 }
 
 function* setCompleteAction(action) {
-  let url = urls.notifications.get + 'complete?id=' + action.id;
+  const url = urls.notifications.get + 'complete?id=' + action.id;
   const options = {
     method: 'GET',
     headers: {
@@ -329,7 +330,8 @@ function* setCompleteAction(action) {
   };
   try {
     const resp = yield call(request, url, options);
-    yield getNotifications({ options:{} });
+    if (!action.popup) yield getNotifications({ options: {} });
+    else yield getNotifications({ options: { collect: 'latest' } });
   } catch (err) {
     console.error(' ** NOTIFICATIONS GET ERROR =======>', err);
   }
