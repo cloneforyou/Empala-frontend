@@ -85,17 +85,17 @@ const DropdownMenu = (props) => {
               Investment Experience
             </Link>
           </li>
-          <li
-            className="profile-menu__item"
-            onClick={() => this.handlerClick(3)}
-          >
-            <Link
-              route="dashboard"
-              params={{ page: 'profile' }}
-            >
-              Accounts
-            </Link>
-          </li>
+          {/*<li*/}
+            {/*className="profile-menu__item"*/}
+            {/*onClick={() => this.handlerClick(3)}*/}
+          {/*>*/}
+            {/*<Link*/}
+              {/*route="dashboard"*/}
+              {/*params={{ page: 'profile' }}*/}
+            {/*>*/}
+              {/*Accounts*/}
+            {/*</Link>*/}
+          {/*</li>*/}
         </ul>
         <h3 className="profile-menu__title">Account Statements</h3>
         <ul className="profile-menu__list">
