@@ -5,14 +5,48 @@ import NotificationsPopup from './NotificationsPopup';
 import NotificationsBlock from './NotificationsBlock';
 import avatar from '../../../static/images/default-avatar-of-user.svg';
 
+
+const TIMER_INTERVAL = 5 * 60 * 1000;
+
 export default class RightBlock extends Component {
   constructor(props) {
     super(props);
+    this.timer = null;
+    this.audio = null;
     this.state = {
       anchorEl: null,
       notifPopUpIsOpened: false,
     };
   }
+
+  componentDidMount() {
+    this.timer = setInterval(this.props.checkUnreadNotifications, TIMER_INTERVAL);
+    // Cached audio file of a bell ring,
+    // Trick: define audio in lifecycle method for SSR
+    this.audio = new Audio('../../../static/audio/bell-sound.mp3');
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.animationAndRingOfNotifications && !prevProps.animationAndRingOfNotifications) {
+      this.playAudio();
+      this.resetTimer();
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  playAudio = () => {
+     if (this.audio) {
+       this.audio.play();
+     }
+  };
+
+  resetTimer = () => {
+    clearInterval(this.timer);
+    this.timer = setInterval(this.props.checkUnreadNotifications, TIMER_INTERVAL);
+  };
 
   handleClick = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -63,6 +97,8 @@ export default class RightBlock extends Component {
       setNotificationRead,
       notificationsCounter,
       changeActiveTabProfile,
+      animationAndRingOfNotifications,
+      animationOfNotifications,
     } = this.props;
     const {
       menuAvatarShow,
@@ -108,10 +144,13 @@ export default class RightBlock extends Component {
               <a className="nav-link user-nav__link"
                  onClick={this.handleClickNotificationsPopup}
               >
-                <i className="user-nav__icon user-nav__icon_notification"/>
+                <i className={`user-nav__icon user-nav__icon_notification
+                ${animationOfNotifications && 'icon-notifications_animation'}
+                ${animationAndRingOfNotifications && 'icon-notifications_animation'}`}
+                />
                 {
                   notificationsCounter &&
-                <div className={`notifications-badge notifications-badge_${this.getBadgeColor(notificationsCounter)}`} />
+                  <div className={`notifications-badge notifications-badge_${this.getBadgeColor(notificationsCounter)}`} />
                 }
               </a>
               <span className="tooltiptext">Notifications</span>

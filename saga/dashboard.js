@@ -24,6 +24,7 @@ import {
   GET_NOTIFICATIONS,
   SET_NOTIFICATION_READ,
   SET_COMPLETE_ACTION,
+  CHECK_UNREAD_NOTIFICATIONS,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
@@ -37,7 +38,11 @@ import {
   setSessionTimeRemain,
   setWatchLists,
   updateNews,
-  setAllNotifications, setLastNotifications, refreshNotificationsCounter,
+  setAllNotifications,
+  setLastNotifications,
+  refreshNotificationsCounter,
+  updateNotificationReceived,
+  updateNotificationUnread,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 
@@ -62,6 +67,25 @@ export function* sessionTimeout() {
   }
   return yield logout();
 }
+
+export function* callAnimationAndAudioForNotifications() {
+  yield put(updateNotificationReceived(false));
+  yield put(updateNotificationReceived(true));
+  yield delay(2000);
+  yield put(updateNotificationReceived(false));
+}
+
+export function* callAnimationForNotifications() {
+  const notifs = yield select(state => state.dashboard.notificationsCounter);
+  const existsUnread = notifs && (notifs.new_actions > 0 || notifs.new_notifications > 0);
+  if (existsUnread) {
+    yield put(updateNotificationUnread(false));
+    yield put(updateNotificationUnread(true));
+    yield delay(2000);
+    yield put(updateNotificationUnread(false));
+  }
+}
+
 export function* getNews() {
   const url = '/api/dashboard/updates';
   const options = {
@@ -231,8 +255,10 @@ const createSocketChannel = socket => eventChannel((emit) => {
 function* socketListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
-    if (action.notification) yield put(addNotification(action.notification));
-    // console.log('message:', action);
+    if (action.notification) {
+      yield put(addNotification(action.notification));
+      yield callAnimationAndAudioForNotifications();
+    }
     yield put(refreshNotificationsCounter(action.counts));
     yield dropNotificationAtTimeout();
   }
@@ -348,6 +374,7 @@ export default function* dashboardSaga() {
     takeEvery(GET_ETNA_DATA, selectETNADataRequest),
     takeEvery(GET_NOTIFICATIONS, getNotifications),
     takeEvery(SET_COMPLETE_ACTION, setCompleteAction),
+    takeEvery(CHECK_UNREAD_NOTIFICATIONS, callAnimationForNotifications),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
   ]);

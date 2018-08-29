@@ -56,6 +56,9 @@ import {
   SET_LAST_NOTIFICATIONS,
   REFRESH_NOTIFICATION_COUNTER,
   SET_COMPLETE_ACTION,
+  CHECK_UNREAD_NOTIFICATIONS,
+  UPDATE_NOTIFICATION_RECEIVED,
+  UPDATE_NOTIFICATION_UNREAD,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -365,5 +368,25 @@ export function setCompleteAction(id, popup) {
     type: SET_COMPLETE_ACTION,
     id,
     popup,
+  };
+}
+
+export function updateNotificationReceived(flag) {
+  return {
+    type: UPDATE_NOTIFICATION_RECEIVED,
+    flag,
+  };
+}
+
+export function updateNotificationUnread(flag) {
+  return {
+    type: UPDATE_NOTIFICATION_UNREAD,
+    flag,
+  };
+}
+
+export function checkUnreadNotifications() {
+  return {
+    type: CHECK_UNREAD_NOTIFICATIONS,
   };
 }
