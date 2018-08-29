@@ -42,7 +42,7 @@ import {
   setLastNotifications,
   refreshNotificationsCounter,
   updateNotificationReceived,
-  updateNotificationUnread,
+  updateNotificationUnread, updateSocial,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 
@@ -98,7 +98,10 @@ export function* getNews() {
     yield delay(60000);
     try {
       const news = yield call(request, url, options);
-      if (news) yield put(updateNews(news.data.data.internal_news));
+      if (news) {
+        yield put(updateNews(news.data.data.internal_news));
+        yield put(updateSocial(news.data.data.social_capital));
+      }
     } catch (err) {
       console.error(' ** DASHBOARD ERROR =======>', err);
     }
