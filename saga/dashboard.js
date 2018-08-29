@@ -180,7 +180,7 @@ function* get_balance(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  console.log('balance =>', res);
+  console.log('balance =>', JSON.stringify(res.data.Result));
 }
 
 export function* selectETNADataRequest({ payloadType }) {
