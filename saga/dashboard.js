@@ -186,7 +186,7 @@ function* get_positions(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  // console.log('poooooosiiiiiitiiiiiiooooooons =>', res)
+  // console.log('poooooosiiiiiitiiiiiiooooooons =>', JSON.stringify(res.data.Result))
   if (res) yield put(setPositions(res.data.Result));
 }
 
@@ -205,7 +205,7 @@ function* get_balance(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  console.log('balance =>', res);
+  console.log('balance =>', JSON.stringify(res.data.Result));
 }
 
 export function* selectETNADataRequest({ payloadType }) {

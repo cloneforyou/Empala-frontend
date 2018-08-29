@@ -15,7 +15,7 @@ class OrdersTable extends React.Component {
   constructor(props) {
     super(props);
     this.widgetOrders = getWidgetAttributesByName('dashboard_orders');
-    this.widgetFills = getWidgetAttributesByName('dashboard_orders');
+    this.widgetFills = getWidgetAttributesByName('dashboard_fills');
   }
   componentDidMount() {
   }

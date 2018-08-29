@@ -59,6 +59,13 @@ const widgetAttributes = {
     height: 224,
     dots: true,
   },
+  dashboard_fills: {
+    id: 'dashboard_fills',
+    title: 'Fills/cancels',
+    col: 12,
+    height: 222,
+    dots: true,
+  },
 };
 const tableHeaders = {
   dashboard_cash: {
