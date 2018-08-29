@@ -38,6 +38,7 @@ import {
   REFRESH_NOTIFICATION_COUNTER,
   UPDATE_NOTIFICATION_RECEIVED,
   UPDATE_NOTIFICATION_UNREAD,
+  UPDATE_SOCIAL,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -56,6 +57,7 @@ const initialState = {
   loading: true,
   error: false,
   userData: false,
+  userSocial: false,
   userDataLoaded: false,
   activePageDashboard: 'overflow',
   loadingPage: true,
@@ -135,6 +137,7 @@ function dashboard(state = initialState, action) {
         userData: action.data,
         userDataLoaded: true,
         loadingPage: false,
+        userSocial: action.data.data.social_capital,
       };
     case SET_ACTIVE_PAGE:
       return {
@@ -280,6 +283,17 @@ function dashboard(state = initialState, action) {
           data: {
             ...state.userData.data,
             internal_news: action.news,
+          },
+        },
+      };
+    case UPDATE_SOCIAL:
+      return {
+        ...state,
+        userSocial: {
+          ...state.userSocial,
+          Network: {
+            ...state.userSocial.Network,
+            Connections: action.data.connections,
           },
         },
       };
