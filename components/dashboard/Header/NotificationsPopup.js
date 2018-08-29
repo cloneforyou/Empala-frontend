@@ -78,7 +78,7 @@ class NotificationsPopup extends Component {
         <div className="notifications-popup__news">
           <span className="green fw-600">New</span>
         </div>
-        {lastNotifications.length > 0 ?
+        {this.filterNotifications(lastNotifications, false).length > 0 ?
           this.filterNotifications(lastNotifications, false).map(notification =>
             <NotificationsCard
               popup
@@ -93,7 +93,7 @@ class NotificationsPopup extends Component {
               completed={notification.completed}
             />)
           : <div className="horizontal-align_center py-2">
-            You have no notifications
+            You have no new notifications
           </div>
         }
         <div className="notifications-popup__earlier">
@@ -102,7 +102,7 @@ class NotificationsPopup extends Component {
         {this.filterNotifications(lastNotifications, true).map(notification =>
           <NotificationsCard
             popup
-            complete
+            cardMenu
             key={notification.id}
             id={notification.id}
             text={notification.action}
