@@ -636,7 +636,7 @@ export const fieldsInvestmentExperienceOne = [
     options,
   },
   {
-    id: 'profile_investment_experience_currencies',
+    id: 'profile_investment_experience_margin_currencies',
     label: 'Currencies',
     hint: 'Please select',
     autoWidth: true,
