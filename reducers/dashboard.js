@@ -38,7 +38,7 @@ import {
   REFRESH_NOTIFICATION_COUNTER,
   UPDATE_NOTIFICATION_RECEIVED,
   UPDATE_NOTIFICATION_UNREAD,
-  UPDATE_SOCIAL,
+  UPDATE_SOCIAL, SET_ACCOUNT_BALANCE,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -69,6 +69,7 @@ const initialState = {
   ordersList: false,
   watchLists: false,
   positions: false,
+  accountBalance: false,
   parsedPositions: false,
   parsedOrdersList: false,
   parsedWatchLists: false,
@@ -87,6 +88,13 @@ const initialState = {
   animationOfNotifications: false,
 };
 
+const parseAccountBalance = (data) => {
+  if (!data) return {};
+  return data.reduce((out, item) => {
+    out[item.Name] = item;
+    return out;
+  }, {});
+};
 
 const parseAppSettings = (settings) => {
   const out = {};
@@ -238,6 +246,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         parsedPositions: action.data,
+      };
+    case SET_ACCOUNT_BALANCE:
+      return {
+        ...state,
+        accountBalance: parseAccountBalance(action.data['_attributes']),
       };
     case SET_WATCHLIST_NUMBER:
       return {

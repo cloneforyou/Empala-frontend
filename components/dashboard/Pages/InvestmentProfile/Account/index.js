@@ -11,7 +11,7 @@ import { GREEN,
   CONCRETE,
   MIRAGE,
 } from '../../../../../constants/colors';
-import { setActivePage } from '../../../../../actions/dashboard';
+import { getETNAData, setActivePage } from '../../../../../actions/dashboard';
 import {
   getActiveAccountTab,
   changeActiveAccountTab,
@@ -62,6 +62,10 @@ const TABS = [{
 
 
 class Account extends Component {
+  componentDidMount() {
+    this.props.getBalance();
+  }
+
   handleChange = (event, value) => {
     this.props.changeActiveAccountTab(value);
   };
@@ -109,7 +113,10 @@ class Account extends Component {
         />
         }
         {value === 1 && <div className="account__container">Coming Spring 2019</div>}
-        {value === 2 && <GlobalPortfolio textButton={'Fund US account'}/>}
+        {value === 2 && <GlobalPortfolio
+          textButton={'Fund US account'}
+          accountBalance={this.props.accountBalance}
+        />}
         {value === 3 && <div className="account__container">Coming Spring 2019</div>}
         {value === 4 && <div className="account__container">Coming as part of phase 2</div>}
         {value === 5 && <div className="account__container">Coming as part of phase 2</div>}
@@ -123,6 +130,7 @@ class Account extends Component {
 
 export default withStyles(styles)(connect(
   state => ({
+    accountBalance: state.dashboard.accountBalance,
     activeAccountTab: state.account.activeAccountTab,
     currentColorScheme: state.dashboard.currentColorScheme,
     currentSectionTitleBar: state.account.currentSectionTitleBar,
@@ -131,6 +139,7 @@ export default withStyles(styles)(connect(
   dispatch => ({
     setActivePage: page => dispatch(setActivePage(page)),
     getActiveAccountTab: () => dispatch(getActiveAccountTab()),
+    getBalance: () => dispatch(getETNAData('balance')),
     changeActiveAccountTab: value => dispatch(changeActiveAccountTab(value)),
     changeSectionTitleBar: (tab, icon) => dispatch(changeSectionTitleBar(tab, icon)),
   }),
