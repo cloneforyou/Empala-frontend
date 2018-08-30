@@ -6,7 +6,8 @@ import Tab from '@material-ui/core/Tab';
 import TitleBar from '../../../TitleBar';
 import GlobalPortfolio from './AccountTabs/GlobalPortfolio';
 import { withStyles } from '@material-ui/core/styles';
-import { GREEN,
+import {
+  GREEN,
   MAIN_COLOR_TEXT_GRAY,
   CONCRETE,
   MIRAGE,
@@ -17,6 +18,11 @@ import {
   changeActiveAccountTab,
   changeSectionTitleBar,
 }from '../../../../../actions/account';
+import {
+  GlobalPortfolioData,
+  NorthAmericaAccountData,
+} from '../../../../../localdata/globalPortfolio';
+
 
 const styles = theme => ({
   indicator: {
@@ -103,13 +109,22 @@ class Account extends Component {
           currentSectionTitleBar={this.props.currentSectionTitleBar}
           iconAccountTitleBar={this.props.iconAccountTitleBar}
         />
-        {value === 0 && <GlobalPortfolio
+        {
+          value === 0 &&
+          <GlobalPortfolio
           setActivePage={this.props.setActivePage}
           textButton={'Fund account'}
-        />
+          globalData={GlobalPortfolioData}
+          />
         }
         {value === 1 && <div className="account__container">Coming Spring 2019</div>}
-        {value === 2 && <GlobalPortfolio textButton={'Fund US account'}/>}
+        {
+          value === 2 &&
+          <GlobalPortfolio
+          textButton={'Fund US account'}
+          globalData={NorthAmericaAccountData}
+          />
+        }
         {value === 3 && <div className="account__container">Coming Spring 2019</div>}
         {value === 4 && <div className="account__container">Coming as part of phase 2</div>}
         {value === 5 && <div className="account__container">Coming as part of phase 2</div>}

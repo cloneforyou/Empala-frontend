@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import AnyChart from 'anychart-react';
 import { Link } from '../../../../../../routes';
-import EmpalaInput from '../../../../../registration/EmpalaInput';
-import { Global, GlobalPortfolioData } from '../../../../../../localdata/globalPortfolio';
 
 
 export default class GlobalPortfolio extends Component {
   render() {
+    const { globalData, setActivePage, textButton } = this.props;
     return (
       <div className="global-portfolio">
         <div className="global-portfolio__container">
           <div className="global-portfolio__container_payments">
             <div className="global-portfolio__input-group vertical-align_center">
-              {<EmpalaInput {...Global} />}
+              {
+                <div className="pseudo-input">
+                  <span className="pseudo-input__label">{globalData[0].label}</span>
+                  <input type="text" className="pseudo-input__input" readOnly="" value="" />
+                </div>
+              }
             </div>
             <div className="input-group__container">
               <div className="global-portfolio__input-group d-flex flex-wrap">
-                {GlobalPortfolioData.map(item => (
-                  <EmpalaInput{...{
-                    item,
-                    id: item.id,
-                    key: item.id,
-                    label: item.label,
-                    notCol: item.notCol,
-                    value: item.hint,
-                  }}
-                  />
-                ))}
+                {
+                  globalData.slice(1).map(item => (
+                    <div className="pseudo-input">
+                      <span className="pseudo-input__label">{item.label}</span>
+                      <input type="text" className="pseudo-input__input" readOnly="" value="" />
+                    </div>))
+                }
               </div>
             </div>
             <div className="vertical-align_center global-portfolio__button_width">
               <button
                 className="profile-btn profile-btn_green"
-                onClick={() => this.props.setActivePage('funding')}
+                onClick={() => setActivePage('funding')}
               >
                 <Link
                   route="dashboard"
@@ -40,7 +40,7 @@ export default class GlobalPortfolio extends Component {
                 >
                   <span
                     style={{ fontSize: '14px' }}
-                  >{this.props.textButton}
+                  >{textButton}
                   </span>
                 </Link>
               </button>
