@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import _ from 'lodash';
 import nophotoUser from '../../../static/images/default-avatar-of-user.svg';
 
+
 class WidgetNews extends Component {
   constructor(props) {
     super(props);
@@ -20,12 +21,14 @@ class WidgetNews extends Component {
     const { widget } = this.props;
     const { menuIsOpen } = this.state;
     const widgetNews = widget.news || [];
+    const DEFAULT_IMAGE = "../../../../static/images/icon-news.svg";
+
     return (
       <div className={`widget-col widget-col_${widget.id === 'external_news' ? 5 : 4}`}
            key={widget.id}
            style={{ maxWidth: this.props.maxWidth ? this.props.maxWidth : 'auto'}}
       >
-        <div className="widget widget_padding widget_padding-bottom" style={{ height: '365px' }}>
+        <div className="widget widget_padding" style={{ height: '365px' }}>
           <div className="widget__head">
             <h3 className="widget__title">{widget.id === 'external_news' ? 'News' : 'Empala internal news'}</h3>
             <div className="widget-menu">
@@ -44,35 +47,51 @@ class WidgetNews extends Component {
           <div className="widget__body">
             {widget.id === 'external_news' ?
               widgetNews.map(card => (
-                <div className="news-card row no-gutters" key={card.id}>
+                <div className="news-card row no-gutters" key={card.uuid}>
                   <div className="news-card__wrap-image">
-                    <a target="_blank" href={card.link}>
-                      <img
-                        className="news-card__image"
-                        src={card.image_link}
-                        alt={card.title}
-                      />
-                    </a>
+                    {
+                      card.imageUrls ?
+                      (
+                        <a target="_blank" href={card.url}>
+                          <img
+                            className="news-card__image"
+                            src={card.imageUrls}
+                            onError={(e)=>{ e.target.src = card.source.imageUrl }}
+                            alt={card.source.brandName}
+                          />
+                        </a>
+                      ) :
+                        (
+                          <a target="_blank" href={card.url}>
+                            <img
+                            className="news-card__image"
+                            src={card.source.imageUrl}
+                            onError={(e)=>{ e.target.src = DEFAULT_IMAGE }}
+                            alt={card.source.brandName}
+                            />
+                          </a>
+                        )
+                    }
                   </div>
                   <div className="col news-card__body">
                     <div className="news-card__head">
                       <div>
                         {
-                          card.origin_title &&
+                          card.source.brandName &&
                           <a
                             className="news-card__creator"
                             target="_blank"
-                            href={card.origin_link}
+                            href={`https://${card.source.name}`}
                           >
-                            {card.origin_title}
+                            {card.source.brandName}
                           </a>
                         }
                         <span className="news-card__time">
-                            <Moment date={card.pubDate} fromNow />
+                            <Moment date={card.publishTime} fromNow />
                         </span>
                       </div>
-                      <a className="news-card__link" target="_blank" href={card.link}>{_.unescape(card.title)}</a>
-                      <p className="news-card__text m-0">{_.unescape(card.description)}</p>
+                      <a className="news-card__link" target="_blank" href={card.url}>{_.unescape(card.title)}</a>
+                      {/*<p className="news-card__text m-0">{_.unescape(card.description)}</p>*/}
                     </div>
                     {/*<div className="news-card__foot">
                       <div className="news-card__rating">
@@ -93,7 +112,7 @@ class WidgetNews extends Component {
                     <img
                       className={card.feed.subject.image_profile ? "news-card__image" : 'news-card__image news-card__image_bordered'}
                       src={card.feed.subject.image_profile || nophotoUser}
-                      alt=""
+                      alt="user photo"
                     />
                   </div>
                   <div className="col news-card__body">

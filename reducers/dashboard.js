@@ -38,7 +38,9 @@ import {
   REFRESH_NOTIFICATION_COUNTER,
   UPDATE_NOTIFICATION_RECEIVED,
   UPDATE_NOTIFICATION_UNREAD,
-  UPDATE_SOCIAL, SET_ACCOUNT_BALANCE,
+  UPDATE_EXTERNAL_NEWS,
+  UPDATE_SOCIAL,
+  SET_ACCOUNT_BALANCE,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -86,6 +88,7 @@ const initialState = {
   lastNotifications: [],
   notificationsCounter: false,
   animationOfNotifications: false,
+  externalNews: [],
 };
 
 const parseAccountBalance = (data) => {
@@ -372,6 +375,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         animationOfNotifications: action.flag,
+      };
+    case UPDATE_EXTERNAL_NEWS:
+      return {
+        ...state,
+        externalNews: action.data,
       };
     default:
       return state;

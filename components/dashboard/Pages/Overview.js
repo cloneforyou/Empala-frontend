@@ -16,6 +16,7 @@ function mapStateToProps(state) {
     userDataLoaded: state.dashboard.userDataLoaded,
     ordersList: state.dashboard.parsedOrdersList || [],
     positions: state.dashboard.positions ? state.dashboard.positions : [],
+    externalNews: state.dashboard.externalNews,
   };
 }
 
@@ -24,7 +25,7 @@ class Overview extends PureComponent {
     const widgetNews = [
       {
         id: 'external_news',
-        news: this.props.userData.external_news,
+        news: this.props.externalNews,
       },
       {
         id: 'internal_news',

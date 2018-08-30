@@ -57,16 +57,14 @@
   &__body {
     position: relative;
     overflow-y: auto;
-    max-height: 80%;
+    max-height: calc(100% - 39px);
   }
   &_padding {
-    padding: 15px;
+    padding: 16px 16px 0 28px;
     .widget__head {
       padding: 0;
+      margin: 0;
     }
-  }
-  &_padding-bottom {
-    padding-bottom: 0;
   }
 }
 
@@ -84,6 +82,7 @@
 
 .widget-menu {
   position: relative;
+  padding-right: 2px;
   &__btn {
     background: none;
     border: none;
