@@ -58,8 +58,10 @@ import {
   SET_COMPLETE_ACTION,
   CHECK_UNREAD_NOTIFICATIONS,
   UPDATE_NOTIFICATION_RECEIVED,
-  UPDATE_NOTIFICATION_UNREAD,
   UPDATE_EXTERNAL_NEWS,
+  UPDATE_NOTIFICATION_UNREAD,
+  UPDATE_SOCIAL,
+  SET_ACCOUNT_BALANCE,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -226,9 +228,16 @@ export const setPositions = data => ({
   type: SET_POSITIONS,
   data,
 });
+
 export const setParsedPositions = data => ({
   type: SET_PARSED_POSITIONS,
   data,
+});
+
+export const setAccountBalance = (data, provider) => ({
+  type: SET_ACCOUNT_BALANCE,
+  data,
+  provider,
 });
 
 export const modifyPosition = data => ({
@@ -269,6 +278,11 @@ export const updateQuotes = quote => ({
 export const updateNews = news => ({
   type: UPDATE_NEWS,
   news,
+});
+
+export const updateSocial = data => ({
+  type: UPDATE_SOCIAL,
+  data,
 });
 
 export function showPopupPIN(entityType) {

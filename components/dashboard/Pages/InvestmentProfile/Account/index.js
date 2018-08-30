@@ -12,7 +12,7 @@ import {
   CONCRETE,
   MIRAGE,
 } from '../../../../../constants/colors';
-import { setActivePage } from '../../../../../actions/dashboard';
+import { getETNAData, setActivePage } from '../../../../../actions/dashboard';
 import {
   getActiveAccountTab,
   changeActiveAccountTab,
@@ -34,40 +34,53 @@ const styles = theme => ({
 const TABS = [{
   label: 'Global',
   pageName: 'Global Portfolio',
+  prefix: '',
 }, {
   label: 'EMARA',
   pageName: 'EMARA Tokens',
+  prefix: 'emara',
 }, {
   label: 'North America',
   pageName: 'North America Account',
   flag: 'usa',
+  prefix: 'north_america',
 }, {
   label: 'Canada',
   pageName: 'Canada Account',
   flag: 'canada',
+  prefix: 'canada',
 }, {
   label: 'UK',
   pageName: 'United Kingdom Account',
   flag: 'uk',
+  prefix: 'uk',
 }, {
   label: 'France',
   pageName: 'France Account',
   flag: 'france',
+  prefix: 'france',
 }, {
   label: 'Singapore',
   pageName: 'Singapore Account',
+  prefix: 'singapore',
 }, {
   label: 'Australia',
   pageName: 'Australia Account',
   flag: 'australia',
+  prefix: 'australia',
 }, {
   label: 'Japan',
   pageName: 'Japan Account',
   flag: 'japan',
+  prefix: 'japan',
 }];
 
 
 class Account extends Component {
+  componentDidMount() {
+    this.props.getBalance();
+  }
+
   handleChange = (event, value) => {
     this.props.changeActiveAccountTab(value);
   };
@@ -115,6 +128,8 @@ class Account extends Component {
           setActivePage={this.props.setActivePage}
           textButton={'Fund account'}
           globalData={GlobalPortfolioData}
+          prefix={TABS[0].prefix}
+          accountBalance={this.props.accountBalance.ETNA}
           />
         }
         {value === 1 && <div className="account__container">Coming Spring 2019</div>}
@@ -122,7 +137,9 @@ class Account extends Component {
           value === 2 &&
           <GlobalPortfolio
           textButton={'Fund US account'}
-          globalData={NorthAmericaAccountData}
+          globalData={GlobalPortfolioData}
+          prefix={TABS[2].prefix}
+          accountBalance={this.props.accountBalance.ETNA}
           />
         }
         {value === 3 && <div className="account__container">Coming Spring 2019</div>}
@@ -138,6 +155,9 @@ class Account extends Component {
 
 export default withStyles(styles)(connect(
   state => ({
+    accountBalance: state.dashboard.accountBalance || {
+      ETNA: {},
+      },
     activeAccountTab: state.account.activeAccountTab,
     currentColorScheme: state.dashboard.currentColorScheme,
     currentSectionTitleBar: state.account.currentSectionTitleBar,
@@ -146,6 +166,7 @@ export default withStyles(styles)(connect(
   dispatch => ({
     setActivePage: page => dispatch(setActivePage(page)),
     getActiveAccountTab: () => dispatch(getActiveAccountTab()),
+    getBalance: () => dispatch(getETNAData('balance')),
     changeActiveAccountTab: value => dispatch(changeActiveAccountTab(value)),
     changeSectionTitleBar: (tab, icon) => dispatch(changeSectionTitleBar(tab, icon)),
   }),

@@ -96,13 +96,12 @@ const SocialCapitalTable = props => (
 
 const MapStateToProps = state => ({
   social: {
-    ...(state.dashboard.userData.data ?
-      state.dashboard.userData.data.social_capital
+    ...(state.dashboard.userSocial ?
+      state.dashboard.userSocial
       : {}),
     Network: {
-      // Connections: 20,
-      ...(state.dashboard.userData.data ?
-        state.dashboard.userData.data.social_capital.Network
+      ...(state.dashboard.userSocial ?
+        state.dashboard.userSocial.Network
         : {}),
       Partners: 1,
       'Trusted relationship': 0,

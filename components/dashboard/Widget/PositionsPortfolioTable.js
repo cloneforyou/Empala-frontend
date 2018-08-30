@@ -106,7 +106,7 @@ class PositionsPortfolioTable extends React.Component {
           pos[13].value = formatNumberWithFixedPoint(quotes[secId].Last, 2);
           pos[17].value = formatNumberWithFixedPoint(quotes[secId].ChangePc, 2);
           pos[14].value = formatNumberWithFixedPoint(pos[12].value * quotes[secId].Last, 2);
-          pos[15].value = formatNumberWithFixedPoint((quotes[secId].Last - pos[11].value) * 100 / pos[11].value, 2);
+          pos[15].value = formatNumberWithFixedPoint(((quotes[secId].Last - pos[11].value) * 100 / pos[11].value) || "--", 2);
           pos[18].value = formatNumberWithFixedPoint(this.calculateDayPL(pos), 2);
         }
       });

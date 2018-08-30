@@ -259,7 +259,7 @@ const mapDispatchToProps = dispatch => ({
       if (id === 'quantity') return dispatch(setSecuritiesInputValue(id, index, value.replace(/\D/, '')));
       return dispatch(setSecuritiesInputValue(id, index, value));
     }
-    if (id === 'account_no' || id === 'ach_ammount') return dispatch(setInputFieldValueById(id, value.replace(/\D/, '')));
+    if (id === 'account_no' || id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
     return dispatch(setInputFieldValueById(id, value));
   },
   setActivePage: (page) => {

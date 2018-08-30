@@ -44,6 +44,8 @@ import {
   updateNotificationReceived,
   updateNotificationUnread,
   updateExternalNews,
+  updateSocial, 
+  setAccountBalance,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 import requestExternalNews from '../utils/requestExternalNews';
@@ -118,6 +120,7 @@ export function* getNews() {
       if (news) {
         yield put(updateNews(news.data.data.internal_news));
         yield getExternalNews();
+        yield put(updateSocial(news.data.data.social_capital));
       }
     } catch (err) {
       console.error(' ** DASHBOARD ERROR =======>', err);
@@ -206,7 +209,7 @@ function* get_positions(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  // console.log('poooooosiiiiiitiiiiiiooooooons =>', res)
+  // console.log('poooooosiiiiiitiiiiiiooooooons =>', JSON.stringify(res.data.Result))
   if (res) yield put(setPositions(res.data.Result));
 }
 
@@ -225,7 +228,8 @@ function* get_balance(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  console.log('balance =>', res);
+  console.log('balance =>', JSON.stringify(res.data.Result));
+  if (res) yield put(setAccountBalance(res.data.Result, 'ETNA'));
 }
 
 export function* selectETNADataRequest({ payloadType }) {

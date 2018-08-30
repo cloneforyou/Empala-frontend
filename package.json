@@ -55,6 +55,7 @@
     "react-linkedin-login": "^1.0.3",
     "react-linkedin-sdk": "^1.0.8",
     "react-moment": "^0.7.0",
+    "react-number-format": "^3.5.1",
     "react-plaid-link": "^1.0.2",
     "react-redux": "5.0.5",
     "reactstrap": "^5.0.0-beta.3",
