@@ -43,8 +43,11 @@ import {
   refreshNotificationsCounter,
   updateNotificationReceived,
   updateNotificationUnread,
+  updateExternalNews,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
+import requestExternalNews from '../utils/requestExternalNews';
+
 
 const urls = {
   notifications: {
@@ -53,6 +56,7 @@ const urls = {
     get: '/api/notifications/',
     complete: '/api/notifications/complete',
   },
+  cityfalcon: 'http://api.cityfalcon.com/v0.2/stories?identifier_type=assets&identifiers=Apple%2C%20Tesla%2C%20FTSE100&categories=mp%2Cop&min_cityfalcon_score=0&order_by=latest&time_filter=d1&languages=en%2Cde%2Ces%2Cfr%2Cpt&all_languages=false&access_token=',
 };
 
 export function* sessionTimeout() {
@@ -86,6 +90,19 @@ export function* callAnimationForNotifications() {
   }
 }
 
+export function* getExternalNews() {
+  const url = urls.cityfalcon;
+  const options = {
+    method: 'GET',
+  };
+  try {
+    const news = yield call(requestExternalNews, url, options);
+    if (news) yield put(updateExternalNews(news.data.stories));
+  } catch (err) {
+    console.error(' ** DASHBOARD ERROR =======>', err);
+  }
+}
+
 export function* getNews() {
   const url = '/api/dashboard/updates';
   const options = {
@@ -98,7 +115,10 @@ export function* getNews() {
     yield delay(60000);
     try {
       const news = yield call(request, url, options);
-      if (news) yield put(updateNews(news.data.data.internal_news));
+      if (news) {
+        yield put(updateNews(news.data.data.internal_news));
+        yield getExternalNews();
+      }
     } catch (err) {
       console.error(' ** DASHBOARD ERROR =======>', err);
     }

@@ -19,3 +19,7 @@ export const Plaid = {
   PLAID_PUBLIC_KEY: 'b5e336f1d591b5a48d76848f65e1be',
   PLAID_ENV: 'sandbox',
 };
+
+export const cityfalcon = {
+  token: 'b9a54a9a6b850dfba00f08106d010ad8a8a38ee35632477726e1ea644ca858e5',
+};

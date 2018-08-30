@@ -38,6 +38,7 @@ import {
   REFRESH_NOTIFICATION_COUNTER,
   UPDATE_NOTIFICATION_RECEIVED,
   UPDATE_NOTIFICATION_UNREAD,
+  UPDATE_EXTERNAL_NEWS,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -83,6 +84,7 @@ const initialState = {
   lastNotifications: [],
   notificationsCounter: false,
   animationOfNotifications: false,
+  externalNews: [],
 };
 
 
@@ -342,6 +344,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         animationOfNotifications: action.flag,
+      };
+    case UPDATE_EXTERNAL_NEWS:
+      return {
+        ...state,
+        externalNews: action.data,
       };
     default:
       return state;

@@ -19,11 +19,12 @@ import {
   setSocialLoginMfa,
   setLoginMfa,
   setSocialLoginData,
-  setMfaLoginData, toggleCodeResend,
+  setMfaLoginData,
+  toggleCodeResend,
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
-import { selectETNADataRequest, getNews, sessionTimeout } from './dashboard';
+import { selectETNADataRequest, getNews, sessionTimeout, getExternalNews } from './dashboard';
 
 
 function* loginRequest(url, options) {
@@ -243,6 +244,7 @@ export function* getUserData() {
       yield put(openModal('passwordReminder'));
     }
     yield put(restartSessionTimeout());
+    yield getExternalNews();
     yield getNews();
   } catch (err) {
     // console.log(' ** DASHBOARD ERROR =======>', err);

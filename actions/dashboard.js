@@ -59,6 +59,7 @@ import {
   CHECK_UNREAD_NOTIFICATIONS,
   UPDATE_NOTIFICATION_RECEIVED,
   UPDATE_NOTIFICATION_UNREAD,
+  UPDATE_EXTERNAL_NEWS,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -388,5 +389,12 @@ export function updateNotificationUnread(flag) {
 export function checkUnreadNotifications() {
   return {
     type: CHECK_UNREAD_NOTIFICATIONS,
+  };
+}
+
+export function updateExternalNews(data) {
+  return {
+    type: UPDATE_EXTERNAL_NEWS,
+    data,
   };
 }
