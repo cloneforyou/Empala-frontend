@@ -42,7 +42,7 @@ import {
   setLastNotifications,
   refreshNotificationsCounter,
   updateNotificationReceived,
-  updateNotificationUnread, updateSocial,
+  updateNotificationUnread, updateSocial, setAccountBalance,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 
@@ -209,6 +209,7 @@ function* get_balance(credentials) {
   };
   const res = yield getENTAData(url, params);
   console.log('balance =>', JSON.stringify(res.data.Result));
+  if (res) yield put(setAccountBalance(res.data.Result));
 }
 
 export function* selectETNADataRequest({ payloadType }) {
