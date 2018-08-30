@@ -250,7 +250,10 @@ function dashboard(state = initialState, action) {
     case SET_ACCOUNT_BALANCE:
       return {
         ...state,
-        accountBalance: parseAccountBalance(action.data['_attributes']),
+        accountBalance: {
+          ...state.accountBalance,
+          [action.provider]: parseAccountBalance(action.data['_attributes']),
+        },
       };
     case SET_WATCHLIST_NUMBER:
       return {

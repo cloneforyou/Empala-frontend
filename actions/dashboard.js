@@ -231,9 +231,10 @@ export const setParsedPositions = data => ({
   data,
 });
 
-export const setAccountBalance = data => ({
+export const setAccountBalance = (data, provider) => ({
   type: SET_ACCOUNT_BALANCE,
   data,
+  provider,
 });
 
 export const modifyPosition = data => ({
