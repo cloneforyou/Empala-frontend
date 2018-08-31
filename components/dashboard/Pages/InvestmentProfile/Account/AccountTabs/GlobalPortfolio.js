@@ -63,7 +63,8 @@ export default class GlobalPortfolio extends Component {
                 {
                   globalData.slice(1).map(item => (
                     <div className="pseudo-input"
-                         key={item.id}>
+                         key={item.id}
+                    >
                       <span className="pseudo-input__label">{item.label}</span>
                       <input
                         id={`${prefix}_${item.id}`}

@@ -21,6 +21,10 @@ class WatchlistsTable extends React.Component {
     this.props.unsubscribeQuotes();
   }
 
+  componentWillUpdate() {
+    this.listData = this.getWatchListsData(this.reduceWatchlistsToOne(this.props.watchLists));
+  }
+
   updateWatchlist(positions, quotes) {
     if (positions.length > 0 && quotes) {
       return positions.map(pos => (
