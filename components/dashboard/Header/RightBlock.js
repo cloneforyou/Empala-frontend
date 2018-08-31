@@ -119,7 +119,7 @@ export default class RightBlock extends Component {
                   <i className="user-nav__icon user-nav__icon_location background_light-gray"/>
                 </Link>
               </a>
-              <span className="tooltiptext">Set default now</span>
+              <span className="tooltiptext">Set default</span>
             </div>
           </li>
           <li className="nav-item">
@@ -128,7 +128,7 @@ export default class RightBlock extends Component {
                 {/*TODO: Color of icon change depending on the selected MARKET ACCESS*/}
                 <i className="user-nav__icon user-nav__icon_location active-link_red" />
               </a>
-              <span className="tooltiptext">Account Name</span>
+              <span className="tooltiptext">North America</span>
             </div>
           </li>
           <li className="nav-item">
@@ -136,7 +136,7 @@ export default class RightBlock extends Component {
               <a className="nav-link user-nav__link" href="#">
                 <i className="user-nav__icon user-nav__icon_chat"/>
               </a>
-              <span className="tooltiptext">Tooltip text</span>
+              <span className="tooltiptext">Chat</span>
             </div>
           </li>
           <li className="nav-item">
@@ -184,7 +184,7 @@ export default class RightBlock extends Component {
                 <i className="user-nav__icon user-nav__icon_wallet"/>
               </Link>
             </span>
-              <span className="tooltiptext">Tooltip text</span>
+              <span className="tooltiptext">Account</span>
             </div>
           </li>
           <li className="nav-item dropdown">
