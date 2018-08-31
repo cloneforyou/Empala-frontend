@@ -12,6 +12,11 @@ import {
 import { getInfoByZipCode, validateFieldValue } from '../../../../../actions/registration';
 import { countriesList } from '../../../../../localdata/countriesList';
 import { setInputFieldValueById } from '../../../../../actions/dashboard';
+import { usStatesList } from '../../../../../localdata/usStatesList';
+import { getValuesForSelectField } from '../../../../../utils/registrationUtils';
+
+
+const usStates = getValuesForSelectField(usStatesList);
 
 class Regulatory extends Component {
   render() {
@@ -85,8 +90,8 @@ class Regulatory extends Component {
               <div className="row margin-bt-30">
                 <EmpalaSelect
                   id="identification_drivers_license_country_of_issue"
-                  label="Country of issue"
-                  options={countriesList}
+                  label="State of issue"
+                  options={usStates}
                   value={userData.identification_drivers_license_country_of_issue || ''}
                   handleChange={this.props.setSelectedValueById}
                   errorText={this.props.fieldsErrors.identification_drivers_license_country_of_issue}
