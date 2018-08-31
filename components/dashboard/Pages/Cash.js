@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { widgetsCash } from '../../../localdata/dashboardWidgets';
 import WidgetTable from '../Widget/WidgetTable';
 import EmpalaTable from '../EmpalaTable';
 import { formatNumberWithFixedPoint, getTableHeaderByName, parseOrderDate, parseDateString } from '../../../utils/dashboardUtils';
 import WidgetHead from '../Widget/WidgetHead';
+import { initGA, logPageView } from '../../../utils/analytics';
 
 
 const parsePositionsToTableData = (positions) => {
@@ -33,23 +34,35 @@ const parsePositionsToTableData = (positions) => {
 };
 
 const widget = getTableHeaderByName('dashboard_cash');
-const Cash = (props) => (
-  <div
-    className={`widget-col col-lg-${widget.col}`}
-    key={widget.id}
-  >
-    <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
-      <WidgetHead
-        widget={widget}
-      />
-      <EmpalaTable
-        tableName="dashboard_cash"
-        tableData={parsePositionsToTableData(props.positions)}
-        striped
-      />
-    </div>
-  </div>
-);
+class Cash extends Component {
+  componentDidMount() {
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
+    logPageView();
+  }
+
+  render() {
+    return (
+      <div
+        className={`widget-col col-lg-${widget.col}`}
+        key={widget.id}
+      >
+        <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
+          <WidgetHead
+            widget={widget}
+          />
+          <EmpalaTable
+            tableName="dashboard_cash"
+            tableData={parsePositionsToTableData(this.props.positions)}
+            striped
+          />
+        </div>
+      </div>
+    );
+  }
+}
 
 export default connect(state => ({
   positions: state.dashboard.positions || [],

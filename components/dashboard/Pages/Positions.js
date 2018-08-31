@@ -2,8 +2,19 @@ import React, { Component } from 'react';
 import AnyChart from 'anychart-react';
 import PositionsTable from '../Widget/PositionsTable';
 import PositionsPortfolioTable from '../Widget/PositionsPortfolioTable';
+import { initGA, logPageView } from '../../../utils/analytics';
 
-const Positions = () => (
+class Positions extends Component {
+  componentDidMount() {
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
+    logPageView();
+  }
+
+  render() {
+    return (
       <div className="container-fluid">
         <div className="row no-gutters">
           <div className="col-lg-4 px-1">
@@ -98,5 +109,7 @@ const Positions = () => (
         </div>
       </div>
     );
+  }
+}
 
 export default Positions;
