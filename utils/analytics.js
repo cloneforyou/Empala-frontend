@@ -3,7 +3,7 @@ import ReactGA from 'react-ga';
 const dev = process.env.NODE_ENV !== 'production';
 
 export const initGA = () => {
-  ReactGA.initialize('UA-124635950-2', {
+  ReactGA.initialize('UA-124635950-1', {
     debug: dev,
   });
 };
