@@ -168,6 +168,7 @@ function* get_orders_list(credentials) {
       ticket: credentials.ticket,
       accountId: credentials.accountId,
       pageSize: 0,
+      orderStatuses: [],
     },
     headers: {
       'X-Access-Token': localStorage.getItem('accessToken'),

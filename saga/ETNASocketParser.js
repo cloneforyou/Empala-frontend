@@ -17,7 +17,9 @@ import {
   setWatchLists,
   updateOrders,
   updateWatchlist,
-  updateQuotes, subscribeWatchlists,
+  updateQuotes,
+  subscribeWatchlists,
+  subscribeQuotes,
 } from '../actions/dashboard';
 import { calculateOrderDistance, calculateOrderPrice, parseOrderDate } from '../utils/dashboardUtils';
 import { selectETNADataRequest } from './dashboard';
@@ -121,7 +123,6 @@ function* internalListenerQuotes(socket) {
     EntityType: 'Quote',
   }));
   while (true) {
-    // const data = yield take('EXE_COMMAND');
     const quotes = yield take(SUBSCRIBE_QUOTES);
     const activePage = yield select(state => state.dashboard.activePageDashboard);
     const sessionQuotesId = yield select(state => state.dashboard.sessionQuotesId);
@@ -184,7 +185,7 @@ function* externalListener(socketChannel) {
     }
     if (!action.item.Cmd && action.item.EntityType === 'Order') {
       // yield put(updateOrders(action.item));
-      yield call(selectETNADataRequest, { payloadType: 'orders' });
+      yield call(selectETNADataRequest, { payloadType: 'orders_list' });
       yield put(subscribeWatchlists());
     }
     if (!action.item.Cmd && action.item.EntityType === 'Watchlist') {
@@ -194,6 +195,7 @@ function* externalListener(socketChannel) {
     if (!action.item.Cmd && action.item.EntityType === 'WatchlistContent') {
       // yield put(updateWatchlist(action.item));
       yield call(selectETNADataRequest, { payloadType: 'watch_lists' });
+      yield put(subscribeQuotes());
     }
   }
 }
@@ -241,6 +243,7 @@ function watchMessages(socket, params) {
       if (msg.Cmd === 'CreateSession.txt' && msg.SessionId) {
         console.log('WS SessionId:', msg.SessionId);
         if (params.EntityType === 'WatchlistContent') {
+          console.log('WLC')
           params.Keys.forEach(key => socket.send(JSON.stringify({
             ...params,
             EntityType: 'WatchlistContent',
@@ -248,6 +251,7 @@ function watchMessages(socket, params) {
             Keys: key,
           })));
         } else {
+          console.log('all', params.EntityType)
           params.EntityType.forEach(type => socket.send(JSON.stringify({
             ...params,
             EntityType: type,
@@ -257,7 +261,9 @@ function watchMessages(socket, params) {
         }
         return emit({ item: msg });
       }
-      if (msg.Cmd !== 'Ping') emit({ item: msg });
+      if (msg.Cmd !== 'Ping') {
+        emit({ item: msg });
+      }
     };
     return () => {
       socket.close();
@@ -289,12 +295,12 @@ function* wsHandling() {
     // const socketChannel = yield call(watchMessages, socket, request);
     const quoteChannel = yield call(watchQuotes, socketQuotes, { ...params, keys: quotesKeys, EntityType: 'Quote' });
     const ordersChannel = yield call(watchMessages, socketData, params);
-    const watchlistChannel = yield call(watchMessages, socketData, { ...params, EntityType: 'WatchlistContent', Keys: watchlistIds });
+    // const watchlistChannel = yield call(watchMessages, socketData, { ...params, EntityType: 'WatchlistContent', Keys: watchlistIds });
     const { cancel } = yield race({
       task: [
         call(externalListener, quoteChannel),
         call(externalListener, ordersChannel),
-        call(externalListener, watchlistChannel),
+        // call(externalListener, watchlistChannel),
         call(internalListenerQuotes, socketQuotes),
         call(internalListenerWatchlist, socketData),
       ],
