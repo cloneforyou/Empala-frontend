@@ -61,7 +61,7 @@ import {
   UPDATE_EXTERNAL_NEWS,
   UPDATE_NOTIFICATION_UNREAD,
   UPDATE_SOCIAL,
-  SET_ACCOUNT_BALANCE,
+  SET_ACCOUNT_BALANCE, DROP_LATEST_NOTIFICATIONS,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -336,6 +336,12 @@ export function dropNotification(index) {
   return {
     type: DROP_NOTIFICATION,
     index,
+  };
+}
+
+export function dropLatestNotifications() {
+  return {
+    type: DROP_LATEST_NOTIFICATIONS,
   };
 }
 
