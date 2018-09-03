@@ -41,6 +41,9 @@ export default function setErrorText(err) {
       err.response.data.misc === 'INVALID_CODE') {
       return new Error('Invalid verification code');
     }
+    if (err.response.data.info === 'WRONG_FILE_FORMAT') {
+      return new Error('Wrong file format');
+    }
   }
   if (err.response && err.response.status === 400) {
     if (err.response.data.info === 'MATCHING_PASSWORDS') {

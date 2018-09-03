@@ -40,7 +40,7 @@ import {
   UPDATE_NOTIFICATION_UNREAD,
   UPDATE_EXTERNAL_NEWS,
   UPDATE_SOCIAL,
-  SET_ACCOUNT_BALANCE,
+  SET_ACCOUNT_BALANCE, DROP_LATEST_NOTIFICATIONS,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -351,6 +351,11 @@ function dashboard(state = initialState, action) {
         };
       }
       return state;
+    case DROP_LATEST_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: [],
+      };
     case SET_ALL_NOTIFICATIONS:
       return {
         ...state,

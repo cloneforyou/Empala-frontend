@@ -257,7 +257,7 @@ export function* selectETNADataRequest({ payloadType }) {
 /*  --------- ETNA TEST API FUNCTIONS  END ---------- */
 
 /* ---------- EMPALA SOCKET IO HANDLING ----------*/
-const socketServerURL = serverOrigins.aws;
+const socketServerURL = serverOrigins.local;
 // const socket = io();
 const connect = async token => io.connect(socketServerURL, {
   query: {
