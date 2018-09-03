@@ -1,53 +1,59 @@
+const raiseError = text => new Error(text);
 export default function setErrorText(err) {
   if (err.response && err.response.status === 401) {
     if (err.response.data.info === 'INVALID_VALUE') {
-      return new Error('Already in use');
+      return raiseError('Already in use');
     } else if (err.response.data.info === 'MISSING_CHECK_TYPE') {
-      return new Error('Validation failed');
+      return raiseError('Validation failed');
     } else if (err.response.data.info === 'MISSING_ACCESS_TOKEN') {
-      return new Error('Missing access token');
+      return raiseError('Missing access token');
     } else if (err.response.data.info === 'TOKEN_EXPIRED') {
-      return new Error('Token expired');
+      return raiseError('Token expired');
     } else if (err.response.data.info === 'MISSING_REFRESH_TOKEN') {
-      return new Error('Missing refresh token');
+      return raiseError('Missing refresh token');
     } else if (err.response.data.info === 'REFRESH_TOKEN_EXPIRED') {
-      return new Error('Refresh token expired');
+      return raiseError('Refresh token expired');
     } else if (err.response.data.info === 'ACCESS_DENIED' && err.response.data.misc === 'ACCOUNT_NOT_FOUND') {
-      return new Error('We could not find an Empala membership associated to that email address');
+      return raiseError('We could not find an Empala membership associated to that email address');
     } else if (err.response.data.info === 'ACCESS_DENIED' && err.response.data.misc === 'INVALID_CODE') {
-      return new Error('Invalid security code');
+      return raiseError('Invalid security code');
     } else if (err.response.data.info === 'ACCESS_DENIED' &&
       err.response.data.misc === 'ACCOUNT_SUSPENDED') {
-      return new Error('Account suspended');
+      return raiseError('Account suspended');
     } else if (err.response.data.info === 'ACCESS_DENIED' || err.response.data.info === 'WRONG_CREDENTIALS') {
-      return new Error('Invalid credentials');
+      return raiseError('Invalid credentials');
     } else if (err.response.data.info === 'ACCOUNT_SUSPENDED' &&
       err.response.data.misc === 'MAX_AUTH_FAILS') {
-      return new Error('Account suspended');
+      return raiseError('Account suspended');
     } else if (err.response.data.info === 'INVALID_ACTIVATION_CODE') {
-      return new Error('Invalid activation code');
+      return raiseError('Invalid activation code');
     } else if (err.response.data.info === 'WRONG_VERIFICATION_CODE') {
-      return new Error('Wrong verification code');
+      return raiseError('Wrong verification code');
+    } else if (err.response.data.info === 'REGISTRATION_DENIED') {
+      if (err.response.data.misc === 'SE_ERROR_EMAIL_IN_USE') {
+        return raiseError('Email is already in use');
+      }
+      return raiseError('Service error, please try again later');
     }
   }
   if (err.response && err.response.status === 403) {
     if (err.response.data.info === 'INVALID_PASSWORD' && err.response.data.misc === 'PASSWORD_WAS_ALREADY_USED') {
-      return new Error('Password was already used');
+      return raiseError('Password was already used');
     }
     if (err.response.data.info === 'EMAIL_ALREADY_IN_USE') {
-      return new Error('E-mail is already in use');
+      return raiseError('E-mail is already in use');
     }
     if (err.response.data.info === 'VERIFICATION_DENIED' &&
       err.response.data.misc === 'INVALID_CODE') {
-      return new Error('Invalid verification code');
+      return raiseError('Invalid verification code');
     }
     if (err.response.data.info === 'WRONG_FILE_FORMAT') {
-      return new Error('Wrong file format');
+      return raiseError('Wrong file format');
     }
   }
   if (err.response && err.response.status === 400) {
     if (err.response.data.info === 'MATCHING_PASSWORDS') {
-      return new Error('New password matches old password');
+      return raiseError('New password matches old password');
     }
   }
   return false;
