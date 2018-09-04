@@ -8,16 +8,14 @@ class WidgetHead extends PureComponent {
     super(props);
     this.state = {
       fxButtonContent: 'Local',
-    }
+    };
   }
 
-  toggleFX = () => {
+  toggleFX() {
     this.setState((prevState) => {
       return { fxButtonContent: prevState.fxButtonContent === 'Local' ? 'Active' : 'Local' };
-    })
+    });
   }
-
-
   render() {
     const { widget } = this.props;
     const { fxButtonContent } = this.state;
@@ -30,9 +28,20 @@ class WidgetHead extends PureComponent {
           <h3 className="widget__title">{widget.title}</h3>
         </div>
         <div className="widget__row-buttons">
-          {widget.assetAmountRange && <AssetAmountRange />
+          {widget.assetAmountRange &&
+          <AssetAmountRange
+            widgetName={widget.id}
+            assetsRangeFrom={this.props.assetsRangeFrom}
+            assetsRangeTo={this.props.assetsRangeTo}
+            setInputValueById={this.props.setInputValueById}
+            resetRange={this.props.resetRange}
+          />
           }
-          {widget.switcher && <Switcher />}
+          {widget.switcher &&
+          <Switcher
+            selectedLeague={this.props.selectedLeague}
+            toggleLeague={this.props.toggleLeague}
+          />}
           {
             widget.localFX &&
             <button
@@ -47,7 +56,6 @@ class WidgetHead extends PureComponent {
             />
           }
         </div>
-
       </div>
     );
   }

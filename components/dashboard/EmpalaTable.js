@@ -93,8 +93,10 @@ class EmpalaTable extends Component {
               key={header}
               style={{
                 width: table.attrs.width[index] || 'auto',
+                minWidth: '50px',
                 textAlign: table.attrs.align && table.attrs.align[index],
                 padding: table.attrs.padding && table.attrs.padding[index],
+
               }}
             >
               <div
@@ -105,7 +107,10 @@ class EmpalaTable extends Component {
                     table.callbacks[index](e) :
                     this.setSortType(index)))
                   : undefined}
-                style={{ cursor: table.attrs.sortable && table.attrs.sortable[index] ? 'pointer' : '' }}
+                style={{
+                  cursor: table.attrs.sortable && table.attrs.sortable[index] ? 'pointer' : '',
+                  fontSize: this.props.headerSmall && '10px',
+                }}
               >{header}
                 {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort" />}
               </div>

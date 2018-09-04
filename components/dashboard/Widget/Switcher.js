@@ -5,10 +5,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
 const styles = theme => ({
-  iOSSwitchBase: {
-    '&$iOSChecked': {
+  LeagueSwitchBase: {
+    '&$LeagueChecked': {
       color: theme.palette.common.white,
-      '& + $iOSBar': {
+      '& + $LeagueBar': {
         backgroundColor: '#98c73a',
       },
     },
@@ -17,14 +17,14 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
     }),
   },
-  iOSChecked: {
+  LeagueChecked: {
     transform: 'translateX(15px)',
-    '& + $iOSBar': {
+    '& + $LeagueBar': {
       opacity: 1,
       border: 'none',
     },
   },
-  iOSBar: {
+  LeagueBar: {
     borderRadius: 13,
     width: 28,
     height: 13,
@@ -36,36 +36,34 @@ const styles = theme => ({
     opacity: 1,
     transition: theme.transitions.create(['background-color', 'border']),
   },
-  iOSIcon: {
+  LeagueIcon: {
     width: 11,
     height: 11,
   },
-  iOSIconChecked: {
+  LeagueIconChecked: {
     boxShadow: theme.shadows[1],
   },
+  LeagueLabel: {
+    marginRight: -20,
+  }
 });
 
 class Switcher extends Component {
-  state = {
-    checked: true,
-    selected: 'Your'
-  };
-
   handleChange = label => {
-    this.setState((prevState) => {
-      return { checked: label === 'Your', selected: label }
-    });
+    // this.setState((prevState) => {
+    //   return { checked: label === 'Your', selected: label }
+    // });
+    this.props.toggleLeague(label);
   };
 
   render() {
-    const { classes } = this.props;
-    const { selected, checked } = this.state
+    const { classes, selectedLeague } = this.props;
     return (
       <div className="switcher">
         <div className="row align-items-center justify-content-center">
           <button
-            className={selected === 'Empala' ? "switcher__label switcher__label_checked" : "switcher__label"}
-            onClick={() => this.handleChange('Empala')}
+            className={selectedLeague === 'community' ? "switcher__label switcher__label_checked" : "switcher__label"}
+            onClick={() => this.handleChange('community')}
           >
             Empala network
           </button>
@@ -74,22 +72,26 @@ class Switcher extends Component {
               control={
                 <Switch
                   classes={{
-                    switchBase: classes.iOSSwitchBase,
-                    bar: classes.iOSBar,
-                    icon: classes.iOSIcon,
-                    iconChecked: classes.iOSIconChecked,
-                    checked: classes.iOSChecked,
+                    switchBase: classes.LeagueSwitchBase,
+                    bar: classes.LeagueBar,
+                    icon: classes.LeagueIcon,
+                    iconChecked: classes.LeagueIconChecked,
+                    checked: classes.LeagueChecked,
                   }}
+                  onChange={() => this.handleChange()}
                   disableRipple
-                  checked={checked}
-                  value="Your network"
+                  checked={selectedLeague === 'your'}
+                  // value="Your network"
                 />
               }
+              classes={{
+                label: classes.LeagueLabel
+              }}
             />
           </FormGroup>
           <button
-            className={selected === 'Your' ? "switcher__label switcher__label_checked" : "switcher__label"}
-            onClick={() => this.handleChange("Your")}
+            className={selectedLeague === 'your' ? "switcher__label switcher__label_checked" : "switcher__label"}
+            onClick={() => this.handleChange('your')}
           >
             Your network
           </button>

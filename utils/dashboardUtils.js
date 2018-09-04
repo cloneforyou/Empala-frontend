@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { uniqueId } from 'lodash';
 
 const widgetAttributes = {
   overview_social_capital: {
@@ -65,6 +66,17 @@ const widgetAttributes = {
     col: 12,
     height: 222,
     dots: true,
+  },
+  dashboard_community_league: {
+    id: 'dashboard_community_league',
+    title: 'Community league',
+    col: 5,
+    col_md: 12,
+    height: 439,
+    assetAmountRange: true,
+    switcher: {
+      labels: ['Empala network', 'Your network'],
+    },
   },
 };
 const tableHeaders = {
@@ -715,6 +727,38 @@ const tableHeaders = {
       ],
       sortable: [
       ],
+    },
+  },
+  dashboard_community_league: {
+    id: 'dashboard_community_league',
+    title: 'Community league',
+    height: 399,
+    dots: true,
+    headers: [
+      'Rank',
+      'Name',
+      'Ann % R',
+      'Total % R',
+      'Total $ Ret',
+      'Total $ Val',
+      '1YR % R',
+      '3M % R',
+      '1M % R',
+    ],
+    attrs: {
+      align: [...Array(2).fill('left'), ...Array(7).fill('right')],
+      width: [
+        '7%',
+        '21%',
+        '9%',
+        '9%',
+        '12%',
+        '15%',
+        '9%',
+        '9%',
+        '9%',
+      ],
+      sortable: Array(9).fill(true),
     },
   },
 };
