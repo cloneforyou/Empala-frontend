@@ -61,7 +61,11 @@ import {
   UPDATE_EXTERNAL_NEWS,
   UPDATE_NOTIFICATION_UNREAD,
   UPDATE_SOCIAL,
-  SET_ACCOUNT_BALANCE, DROP_LATEST_NOTIFICATIONS, RESET_RANGE, TOGGLE_LEAGUE,
+  SET_ACCOUNT_BALANCE,
+  DROP_LATEST_NOTIFICATIONS,
+  RESET_RANGE,
+  TOGGLE_LEAGUE,
+  GET_LEAGUE_DATA,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -430,5 +434,11 @@ export function toggleLeague(name) {
   return {
     type: TOGGLE_LEAGUE,
     name,
+  };
+}
+
+export function getLeagueData() {
+  return {
+    type: GET_LEAGUE_DATA,
   };
 }

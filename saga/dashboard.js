@@ -24,7 +24,7 @@ import {
   GET_NOTIFICATIONS,
   SET_NOTIFICATION_READ,
   SET_COMPLETE_ACTION,
-  CHECK_UNREAD_NOTIFICATIONS,
+  CHECK_UNREAD_NOTIFICATIONS, GET_LEAGUE_DATA,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
@@ -59,6 +59,7 @@ const urls = {
     complete: '/api/notifications/complete',
   },
   cityfalcon: 'http://api.cityfalcon.com/v0.2/stories?identifier_type=assets&identifiers=Apple%2C%20Tesla%2C%20FTSE100&categories=mp%2Cop&min_cityfalcon_score=0&order_by=latest&time_filter=d1&languages=en%2Cde%2Ces%2Cfr%2Cpt&all_languages=false&access_token=',
+  league: '/api/performance/league',
 };
 
 export function* sessionTimeout() {
@@ -144,6 +145,24 @@ export function* getAppSettings() {
   }
 }
 
+function* getLeagueData() {
+  const isPrivate = yield select(state => state.dashboard.userData.is_private);
+  if (!isPrivate) {
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+    };
+    try {
+      const resp = yield call(request, urls.league, options);
+      console.log('League: ===>', resp.data.data);
+      // if (resp) yield put(setAppSettings(resp.data.data));
+    } catch (err) {
+      console.error(' ** Community league ERROR =======>', err);
+    }
+  }
+}
 /*  --------- ETNA TEST API FUNCTIONS ---------- */
 const etnaConfig = {
   api_path: '/api/etna_test',
@@ -402,5 +421,6 @@ export default function* dashboardSaga() {
     takeEvery(CHECK_UNREAD_NOTIFICATIONS, callAnimationForNotifications),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
+    takeLatest(GET_LEAGUE_DATA, getLeagueData),
   ]);
 }

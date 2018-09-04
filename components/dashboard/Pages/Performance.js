@@ -7,7 +7,7 @@ import WidgetHead from '../Widget/WidgetHead';
 import EmpalaTable from '../EmpalaTable';
 import { formatNumberWithFixedPoint, getWidgetAttributesByName } from '../../../utils/dashboardUtils';
 import { getInfoByZipCode } from '../../../actions/registration';
-import { resetRange, setInputFieldValueById, toggleLeague } from '../../../actions/dashboard';
+import { getLeagueData, resetRange, setInputFieldValueById, toggleLeague } from '../../../actions/dashboard';
 
 
 const PrivacyText = () => (
@@ -30,6 +30,7 @@ class Performance extends Component {
       window.GA_INITIALIZED = true;
     }
     logPageView();
+    if (!this.props.isPrivate) this.props.getLeagueData();
   }
 
   render() {
@@ -58,7 +59,7 @@ class Performance extends Component {
               />
               <div style={{ width: '100%' }}>
                 { // todo add privacy status check
-                 !false ?
+                 !this.props.isPrivate ?
                    <div>
                      <EmpalaTable
                     tableName="dashboard_community_league"
@@ -92,6 +93,7 @@ const mapStateToProps = state => ({
   assetsRangeTo: state.dashboard.dashboard_community_league_rangeInputTo || '',
   selectedLeague: state.dashboard.selectedLeague,
   communityLeagueData: state.dashboard.communityLeagueData || [],
+  isPrivate: state.dashboard.userData.is_private,
 });
 const mapDispatchToProps = dispatch => ({
   setInputValueById: (e) => {
@@ -101,5 +103,6 @@ const mapDispatchToProps = dispatch => ({
   },
   resetRange: widgetName => dispatch(resetRange(widgetName)),
   toggleLeague: () => dispatch(toggleLeague()),
+  getLeagueData: () => dispatch(getLeagueData()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Performance);

@@ -759,10 +759,10 @@ const tableHeaders = {
         '9%',
       ],
       sortable: Array(9).fill(true),
+      callbacks: Array(9).fill((e, name, index) => console.log(e, name, index)),
     },
   },
 };
-
 
 export const getFormattedNumber = number => number.toString().replace(/[^0-9]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 export const formatNumberWithFixedPoint = (number, n) => {
