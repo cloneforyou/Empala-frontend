@@ -5,10 +5,20 @@ import { widgetsPerformance } from '../../../localdata/dashboardWidgets';
 import { initGA, logPageView } from '../../../utils/analytics';
 import WidgetHead from '../Widget/WidgetHead';
 import EmpalaTable from '../EmpalaTable';
-import { getWidgetAttributesByName } from '../../../utils/dashboardUtils';
+import { formatNumberWithFixedPoint, getWidgetAttributesByName } from '../../../utils/dashboardUtils';
 import { getInfoByZipCode } from '../../../actions/registration';
 import { resetRange, setInputFieldValueById, toggleLeague } from '../../../actions/dashboard';
 
+
+const PrivacyText = () => (
+  <div className="performance-privacy-text">
+    <p className="performance-privacy-text__content">
+      Your configuration is set to high privacy. <br />
+      League tables are not available in ‘Ostrich mode’. <br />
+      Check your Application Settings to turn on this feature.
+    </p>
+  </div>
+)
 class Performance extends Component {
   constructor(props) {
     super(props);
@@ -47,12 +57,22 @@ class Performance extends Component {
 
               />
               <div style={{ width: '100%' }}>
-                <EmpalaTable
-                  tableName="dashboard_community_league"
-                  tableData={[]}
-                  striped
-                  headerSmall
-                />
+                { // todo add privacy status check
+                 !false ?
+                   <div>
+                     <EmpalaTable
+                    tableName="dashboard_community_league"
+                    tableData={this.props.communityLeagueData}
+                    striped
+                    headerSmall
+                   />
+                     <div className="performance-community-league__footer">
+                       {formatNumberWithFixedPoint(this.props.communityLeagueData.length)} Total
+                     </div>
+                   </div>
+                   :
+                   <PrivacyText />
+                }
               </div>
             </div>
           </div>
@@ -71,6 +91,7 @@ const mapStateToProps = state => ({
   assetsRangeFrom: state.dashboard.dashboard_community_league_rangeInputFrom || '',
   assetsRangeTo: state.dashboard.dashboard_community_league_rangeInputTo || '',
   selectedLeague: state.dashboard.selectedLeague,
+  communityLeagueData: state.dashboard.communityLeagueData || [],
 });
 const mapDispatchToProps = dispatch => ({
   setInputValueById: (e) => {
