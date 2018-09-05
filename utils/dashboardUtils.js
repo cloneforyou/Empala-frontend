@@ -893,4 +893,4 @@ const popupText = {
 export const getTableHeaderByName = tableName => tableHeaders[tableName];
 export const getWidgetAttributesByName = widgetName => widgetAttributes[widgetName];
 export const getPopupTextById = id => popupText[id].text;
-export const getPopupTitleById = id => {console.log('ttttt', id); return popupText[id].title};
+export const getPopupTitleById = id => popupText[id].title;

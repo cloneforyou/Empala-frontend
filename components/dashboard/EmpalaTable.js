@@ -125,21 +125,23 @@ class EmpalaTable extends Component {
                 </div>
               }
               <div>{tableData.map((row, i) => (
-                i !== this.props.dividerIndex ?
+                (this.props.dividerIndex && tableData.length > 10 && i === this.props.dividerIndex) ?
+                  <div
+                    key='divider'
+                    className={`${index !== 0 ? 'invisible' : 'emp-table__divider'}`}
+                    style={{ width: index === 0 && table.attrs.width[0] ? this.getDividerWidth(table.attrs.width[0]) : '0px' }}
+                  >...
+                  </div> :
                   <EmpalaTableCell
                     key={`${header}-${i}`}
                     handleClick={row[index] ? row[index].onclick : undefined}
                     value={row[index] && row[index].value}
                     type={row[index] && row[index].type}
                     mark={row[index] && row[index].mark}
+                    bold={row[index] && row[index].bold}
                     color={row[index] && row[index].color}
                     small={this.props.small}
-                  /> :
-                  <div
-                    className={`${index !== 0 ? 'invisible' : 'emp-table__divider'}`}
-                    style={{ width: index === 0 && table.attrs.width[0] ? this.getDividerWidth(table.attrs.width[0]) : '0px' }}
-                  >...
-                  </div>
+                  />
                   ))}
               </div>
             </li>

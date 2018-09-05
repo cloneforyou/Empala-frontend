@@ -20,19 +20,29 @@ const PrivacyText = () => (
     </p>
   </div>
 );
-
-const parseLeagueData = data => data.map((item, index) =>
+// const myId = 502;
+const parseLeagueData = (data, myId) => data.map((item, index) =>
   [
-    { value: index + 1 }, // Rank
-    { value: item.FakedRankMember.basic_information.full_name}, // Name
-    { value: formatNumberWithFixedPoint(item.annual_percent_return, 1) }, // 'Ann % R
-    { value: formatNumberWithFixedPoint(item.total_percent_return, 1) }, // Total % R
-    { value: formatNumberWithFixedPoint(item.total_net_return, 1) }, // Total $ Ret
-    { value: formatNumberWithFixedPoint(item.total_net_value, 2) }, // Total $ Val
-    { value: formatNumberWithFixedPoint(item.x1yr_percent_return, 1) }, // 1YR % R
-    { value: formatNumberWithFixedPoint(item.x3m_percent_return, 1) }, // 3M % R
-    { value: formatNumberWithFixedPoint(item.x1m_percent_return, 1) }, // 1M % R
+    { value: index + 1, bold: item.member_id === myId }, // Rank
+    { value: item.FakedRankMember.basic_information.full_name, bold: item.member_id === myId }, // Name
+    { value: formatNumberWithFixedPoint(item.annual_percent_return, 1), bold: item.member_id === myId }, // 'Ann % R
+    { value: formatNumberWithFixedPoint(item.total_percent_return, 1), bold: item.member_id === myId }, // Total % R
+    { value: formatNumberWithFixedPoint(item.total_net_return, 1), bold: item.member_id === myId }, // Total $ Ret
+    { value: formatNumberWithFixedPoint(item.total_net_value, 2), bold: item.member_id === myId }, // Total $ Val
+    { value: formatNumberWithFixedPoint(item.x1yr_percent_return, 1), bold: item.member_id === myId }, // 1YR % R
+    { value: formatNumberWithFixedPoint(item.x3m_percent_return, 1), bold: item.member_id === myId }, // 3M % R
+    { value: formatNumberWithFixedPoint(item.x1m_percent_return, 1), bold: item.member_id === myId }, // 1M % R
   ]);
+
+const getTableData = (data, myId) => {
+  console.log('uuuiiiiddd', myId)
+  if (!data) return [];
+  const myIndex = data.findIndex(el => {console.log(el.member_id); return el.member_id === myId});
+  console.log('indexx======>>>>>>>>>>', myIndex)
+  return myIndex <= 11 ?
+    parseLeagueData(data.slice(0, 10), myId) :
+    parseLeagueData([...data.slice(0, 10), ...data.slice(myIndex - 1, myIndex + 5)], myId);
+};
 
 const CommunityLeagueTable = props => (
   <div
@@ -57,7 +67,7 @@ const CommunityLeagueTable = props => (
             <div>
               <EmpalaTable
                 tableName="dashboard_community_league"
-                tableData={parseLeagueData(props.communityLeagueData)}
+                tableData={getTableData(props.communityLeagueData, props.userId)}
                 striped
                 headerSmall
                 dividerIndex={9}
@@ -76,9 +86,9 @@ const CommunityLeagueTable = props => (
 
 function mapStateToProps(state) {
   return {
-    ordersList: state.dashboard.parsedOrdersList || [],
+    userId: state.dashboard.userData.data.profile.id,
   };
 }
 
-export default CommunityLeagueTable;
+export default connect(mapStateToProps)(CommunityLeagueTable);
 
