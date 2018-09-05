@@ -74,6 +74,7 @@ const widgetAttributes = {
     col_md: 12,
     height: 439,
     assetAmountRange: true,
+    info: true,
     switcher: {
       labels: ['Empala network', 'Your network'],
     },
@@ -732,7 +733,7 @@ const tableHeaders = {
   dashboard_community_league: {
     id: 'dashboard_community_league',
     title: 'Community league',
-    height: 399,
+    height: 336,
     dots: true,
     headers: [
       'Rank',

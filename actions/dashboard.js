@@ -65,7 +65,7 @@ import {
   DROP_LATEST_NOTIFICATIONS,
   RESET_RANGE,
   TOGGLE_LEAGUE,
-  GET_LEAGUE_DATA,
+  GET_LEAGUE_DATA, SET_LOCAL_LOADER, SET_LEAGUE_DATA,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -440,5 +440,20 @@ export function toggleLeague(name) {
 export function getLeagueData() {
   return {
     type: GET_LEAGUE_DATA,
+  };
+}
+
+export function setLeagueData(data) {
+  return {
+    type: SET_LEAGUE_DATA,
+    data,
+  };
+}
+
+export function setLocalLoader(entity, status) {
+  return {
+    type: SET_LOCAL_LOADER,
+    entity,
+    status,
   };
 }

@@ -26,6 +26,9 @@ class WidgetHead extends PureComponent {
             widget.icon && <i className={`widget__icon widget__icon_${widget.icon}`} />
           }
           <h3 className="widget__title">{widget.title}</h3>
+          {
+            widget.info && <span>i</span>
+          }
         </div>
         <div className="widget__row-buttons">
           {widget.assetAmountRange &&

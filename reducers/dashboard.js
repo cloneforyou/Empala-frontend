@@ -40,7 +40,7 @@ import {
   UPDATE_NOTIFICATION_UNREAD,
   UPDATE_EXTERNAL_NEWS,
   UPDATE_SOCIAL,
-  SET_ACCOUNT_BALANCE, DROP_LATEST_NOTIFICATIONS, RESET_RANGE, TOGGLE_LEAGUE,
+  SET_ACCOUNT_BALANCE, DROP_LATEST_NOTIFICATIONS, RESET_RANGE, TOGGLE_LEAGUE, SET_LOCAL_LOADER, SET_LEAGUE_DATA,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -90,6 +90,10 @@ const initialState = {
   animationOfNotifications: false,
   externalNews: [],
   selectedLeague: 'community',
+  communityLeagueData: false,
+  loaders: {
+    league: false,
+  },
 };
 
 const parseAccountBalance = (data) => {
@@ -406,6 +410,16 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         selectedLeague: state.selectedLeague === 'community' ? 'your' : 'community',
+      };
+    case SET_LOCAL_LOADER:
+      return {
+        ...state,
+        loaders: { ...state.loaders, [action.entity]: action.status },
+      };
+    case SET_LEAGUE_DATA:
+      return {
+        ...state,
+        communityLeagueData: action.data,
       };
     default:
       return state;

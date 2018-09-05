@@ -44,8 +44,8 @@ import {
   updateNotificationReceived,
   updateNotificationUnread,
   updateExternalNews,
-  updateSocial, 
-  setAccountBalance,
+  updateSocial,
+  setAccountBalance, setLocalLoader, setLeagueData,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 import requestExternalNews from '../utils/requestExternalNews';
@@ -154,12 +154,15 @@ function* getLeagueData() {
         'X-Access-Token': localStorage.getItem('accessToken'),
       },
     };
+    yield put(setLocalLoader('league', 'loading'));
     try {
       const resp = yield call(request, urls.league, options);
       console.log('League: ===>', resp.data.data);
-      // if (resp) yield put(setAppSettings(resp.data.data));
+      yield put(setLocalLoader('league', 'loaded'));
+      if (resp) yield put(setLeagueData(resp.data.data));
     } catch (err) {
       console.error(' ** Community league ERROR =======>', err);
+      yield put(setLocalLoader('league', 'failed'));
     }
   }
 }

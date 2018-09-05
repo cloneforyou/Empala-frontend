@@ -8,6 +8,7 @@ import EmpalaTable from '../EmpalaTable';
 import { formatNumberWithFixedPoint, getWidgetAttributesByName } from '../../../utils/dashboardUtils';
 import { getInfoByZipCode } from '../../../actions/registration';
 import { getLeagueData, resetRange, setInputFieldValueById, toggleLeague } from '../../../actions/dashboard';
+import CommunityLeagueTable from '../Widget/CommunityLeagueTable';
 
 
 const PrivacyText = () => (
@@ -42,41 +43,17 @@ class Performance extends Component {
               <WidgetTable widget={widget} key={widget.id} />
             ))
           }
-          <div
-            className={`widget-col col ${this.leagueWidget.col_md && `col-md-${this.leagueWidget.col_md}`} col-xl-${this.leagueWidget.col}`}
-            // key={this.widget.id}
-          >
-            <div className="widget" style={{ maxHeight: `${this.leagueWidget.height}px` }}>
-              <WidgetHead
-                widget={this.leagueWidget}
-                assetsRangeFrom={this.props.assetsRangeFrom}
-                assetsRangeTo={this.props.assetsRangeTo}
-                setInputValueById={this.props.setInputValueById}
-                resetRange={this.props.resetRange}
-                selectedLeague={this.props.selectedLeague}
-                toggleLeague={this.props.toggleLeague}
-
-              />
-              <div style={{ width: '100%' }}>
-                { // todo add privacy status check
-                 !this.props.isPrivate ?
-                   <div>
-                     <EmpalaTable
-                    tableName="dashboard_community_league"
-                    tableData={this.props.communityLeagueData}
-                    striped
-                    headerSmall
-                   />
-                     <div className="performance-community-league__footer">
-                       {formatNumberWithFixedPoint(this.props.communityLeagueData.length)} Total
-                     </div>
-                   </div>
-                   :
-                   <PrivacyText />
-                }
-              </div>
-            </div>
-          </div>
+          <CommunityLeagueTable
+            assetsRangeFrom={this.props.assetsRangeFrom}
+            assetsRangeTo={this.props.assetsRangeTo}
+            setInputValueById={this.props.setInputValueById}
+            resetRange={this.props.resetRange}
+            selectedLeague={this.props.selectedLeague}
+            toggleLeague={this.props.toggleLeague}
+            communityLeagueData={this.props.communityLeagueData}
+            isPrivate={this.props.isPrivate}
+            leagueLoadingStatus={this.props.leagueLoadingStatus}
+          />
           {
             widgetsPerformance.slice(3).map(widget => (
               <WidgetTable widget={widget} key={widget.id} />
@@ -93,7 +70,8 @@ const mapStateToProps = state => ({
   assetsRangeTo: state.dashboard.dashboard_community_league_rangeInputTo || '',
   selectedLeague: state.dashboard.selectedLeague,
   communityLeagueData: state.dashboard.communityLeagueData || [],
-  isPrivate: state.dashboard.userData.is_private,
+  isPrivate: state.dashboard.userData.data.profile.is_private,
+  leagueLoadingStatus: state.dashboard.loaders.league,
 });
 const mapDispatchToProps = dispatch => ({
   setInputValueById: (e) => {

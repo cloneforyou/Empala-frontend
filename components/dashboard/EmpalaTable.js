@@ -79,6 +79,12 @@ class EmpalaTable extends Component {
     if (height) return `${height}px`;
     return 'auto';
   }
+  getDividerWidth(colWidth) {
+    const width = parseInt(colWidth, 10);
+    return /%/.test(colWidth) ?
+      `${(100 / width) * 100}%` :
+      'auto';
+  }
   render() {
     const { table, callbacks } = this;
     const { sortDirection, sortColIndex } = this.state;
@@ -119,15 +125,21 @@ class EmpalaTable extends Component {
                 </div>
               }
               <div>{tableData.map((row, i) => (
-                <EmpalaTableCell
-                  key={`${header}-${i}`}
-                  handleClick={row[index] ? row[index].onclick : undefined}
-                  value={row[index] && row[index].value}
-                  type={row[index] && row[index].type}
-                  mark={row[index] && row[index].mark}
-                  color={row[index] && row[index].color}
-                  small={this.props.small}
-                />
+                i !== this.props.dividerIndex ?
+                  <EmpalaTableCell
+                    key={`${header}-${i}`}
+                    handleClick={row[index] ? row[index].onclick : undefined}
+                    value={row[index] && row[index].value}
+                    type={row[index] && row[index].type}
+                    mark={row[index] && row[index].mark}
+                    color={row[index] && row[index].color}
+                    small={this.props.small}
+                  /> :
+                  <div
+                    className={`${index !== 0 ? 'invisible' : 'emp-table__divider'}`}
+                    style={{ width: index === 0 && table.attrs.width[0] ? this.getDividerWidth(table.attrs.width[0]) : '0px' }}
+                  >...
+                  </div>
                   ))}
               </div>
             </li>
