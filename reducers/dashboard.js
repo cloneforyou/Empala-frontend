@@ -40,7 +40,14 @@ import {
   UPDATE_NOTIFICATION_UNREAD,
   UPDATE_EXTERNAL_NEWS,
   UPDATE_SOCIAL,
-  SET_ACCOUNT_BALANCE, DROP_LATEST_NOTIFICATIONS, RESET_RANGE, TOGGLE_LEAGUE, SET_LOCAL_LOADER, SET_LEAGUE_DATA,
+  SET_ACCOUNT_BALANCE,
+  DROP_LATEST_NOTIFICATIONS,
+  RESET_RANGE,
+  TOGGLE_LEAGUE,
+  SET_LOCAL_LOADER,
+  SET_LEAGUE_DATA,
+  OPEN_INFO_POPUP,
+  CLOSE_INFO_POPUP,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -94,6 +101,8 @@ const initialState = {
   loaders: {
     league: false,
   },
+  showInfoPopup: false,
+  infoPopupName: false,
 };
 
 const parseAccountBalance = (data) => {
@@ -420,6 +429,18 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         communityLeagueData: action.data,
+      };
+    case OPEN_INFO_POPUP:
+      return {
+        ...state,
+        showInfoPopup: true,
+        infoPopupName: action.name,
+      };
+    case CLOSE_INFO_POPUP:
+      return {
+        ...state,
+        showInfoPopup: false,
+        infoPopupName: false,
       };
     default:
       return state;

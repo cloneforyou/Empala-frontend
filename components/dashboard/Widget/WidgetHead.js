@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import WidgetDotsMenu from './WidgetDotsMenu';
 import AssetAmountRange from './AssetAmountRange';
 import Switcher from './Switcher';
+import { openInfoPopup } from '../../../actions/dashboard';
+import DashboardInfoPopup from '../Modal/DashboardInfoPopup';
 
 class WidgetHead extends PureComponent {
   constructor(props) {
@@ -12,22 +15,30 @@ class WidgetHead extends PureComponent {
   }
 
   toggleFX() {
-    this.setState((prevState) => {
-      return { fxButtonContent: prevState.fxButtonContent === 'Local' ? 'Active' : 'Local' };
-    });
+    this.setState(prevState => ({ fxButtonContent: prevState.fxButtonContent === 'Local' ? 'Active' : 'Local' }));
   }
   render() {
     const { widget } = this.props;
     const { fxButtonContent } = this.state;
     return (
       <div className="widget__head">
+
         <div className="widget__title-row">
           {
             widget.icon && <i className={`widget__icon widget__icon_${widget.icon}`} />
           }
           <h3 className="widget__title">{widget.title}</h3>
           {
-            widget.info && <span>i</span>
+            widget.info && (
+              <button
+                className="info-popup__btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.props.openInfoPopup(widget.id);
+                }}
+              >
+                <i className="registration__icon" />
+              </button>)
           }
         </div>
         <div className="widget__row-buttons">
@@ -50,7 +61,8 @@ class WidgetHead extends PureComponent {
             <button
               className="btn-widget-head btn-widget-head_green"
               onClick={this.toggleFX}
-            >{fxButtonContent} FX</button>
+            >{fxButtonContent} FX
+            </button>
           }
           {
             widget.dots &&
@@ -64,4 +76,9 @@ class WidgetHead extends PureComponent {
   }
 }
 
-export default WidgetHead;
+export default connect(
+  null,
+  dispatch => ({
+    openInfoPopup: name => dispatch(openInfoPopup(name)),
+  }),
+)(WidgetHead);

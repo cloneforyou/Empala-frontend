@@ -883,6 +883,14 @@ export const parsePositionsList = list => (list.map(pos => ({
   prev_close_avg: pos.AverageClosePrice,
 })));
 
+const popupText = {
+  dashboard_community_league: {
+    text: 'Lorem lorem lorem lorem lorem lorem lorem lorem.',
+    title: 'Community league',
+  },
+};
 
 export const getTableHeaderByName = tableName => tableHeaders[tableName];
 export const getWidgetAttributesByName = widgetName => widgetAttributes[widgetName];
+export const getPopupTextById = id => popupText[id].text;
+export const getPopupTitleById = id => {console.log('ttttt', id); return popupText[id].title};

@@ -6,6 +6,7 @@ import {
   formatNumberWithFixedPoint,
   getWidgetAttributesByName,
 } from '../../../utils/dashboardUtils';
+import DashboardInfoPopup from '../Modal/DashboardInfoPopup';
 
 
 const leagueWidget = getWidgetAttributesByName('dashboard_community_league');
@@ -50,6 +51,7 @@ const CommunityLeagueTable = props => (
 
       />
       <div style={{ width: '100%' }}>
+        <DashboardInfoPopup name={leagueWidget.id} />
         {
           !props.isPrivate ?
             <div>
