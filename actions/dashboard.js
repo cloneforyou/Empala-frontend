@@ -61,7 +61,15 @@ import {
   UPDATE_EXTERNAL_NEWS,
   UPDATE_NOTIFICATION_UNREAD,
   UPDATE_SOCIAL,
-  SET_ACCOUNT_BALANCE, DROP_LATEST_NOTIFICATIONS,
+  SET_ACCOUNT_BALANCE,
+  DROP_LATEST_NOTIFICATIONS,
+  RESET_RANGE,
+  TOGGLE_LEAGUE,
+  GET_LEAGUE_DATA,
+  SET_LOCAL_LOADER,
+  SET_LEAGUE_DATA,
+  OPEN_INFO_POPUP,
+  CLOSE_INFO_POPUP,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -418,3 +426,52 @@ export function updateExternalNews(data) {
     data,
   };
 }
+
+export function resetRange(name) {
+  return {
+    type: RESET_RANGE,
+    name,
+  };
+}
+
+export function toggleLeague(name) {
+  return {
+    type: TOGGLE_LEAGUE,
+    name,
+  };
+}
+
+export function getLeagueData() {
+  return {
+    type: GET_LEAGUE_DATA,
+  };
+}
+
+export function setLeagueData(data) {
+  return {
+    type: SET_LEAGUE_DATA,
+    data,
+  };
+}
+
+export function setLocalLoader(entity, status) {
+  return {
+    type: SET_LOCAL_LOADER,
+    entity,
+    status,
+  };
+}
+
+export function openInfoPopup(name) {
+  return {
+    type: OPEN_INFO_POPUP,
+    name,
+  };
+}
+
+export function closeInfoPopup() {
+  return {
+    type: CLOSE_INFO_POPUP,
+  };
+}
+

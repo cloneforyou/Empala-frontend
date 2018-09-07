@@ -15,6 +15,7 @@ import EmpalaTableCell from './EmpalaTableCell';
 *         Default is sort by column value.
 *         small: bool - table cells without vertical padding
 *           default - false.
+*         hideHeader: bool - show or hide table header
 /* =============================== */
 
 const datePatterns = [
@@ -26,10 +27,11 @@ class EmpalaTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortDirection: false,
-      sortColIndex: false,
+      sortDirection: this.props.sortDirection,
+      sortColIndex: this.props.sortColIndex,
     };
     this.table = getTableHeaderByName(this.props.tableName);
+    this.callbacks = this.table.attrs.callbacks || this.props.callbacks;
   }
 
   setSortType(index) {
@@ -77,8 +79,14 @@ class EmpalaTable extends Component {
     if (height) return `${height}px`;
     return 'auto';
   }
+  getDividerWidth(colWidth) {
+    const width = parseInt(colWidth, 10);
+    return /%/.test(colWidth) ?
+      `${(100 / width) * 100}%` :
+      'auto';
+  }
   render() {
-    const { table } = this;
+    const { table, callbacks } = this;
     const { sortDirection, sortColIndex } = this.state;
     const tableData = this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
     return (
@@ -93,32 +101,47 @@ class EmpalaTable extends Component {
               key={header}
               style={{
                 width: table.attrs.width[index] || 'auto',
+                minWidth: '45px',
                 textAlign: table.attrs.align && table.attrs.align[index],
                 padding: table.attrs.padding && table.attrs.padding[index],
+
               }}
             >
-              <div
-                id={`col${index}`}
-                className="emp-table__th"
-                onClick={(table.attrs.sortable && table.attrs.sortable[index]) ?
-                  (e => (this.props.callbacks && this.props.callbacks[index] ?
-                    table.callbacks[index](e) :
-                    this.setSortType(index)))
-                  : undefined}
-                style={{ cursor: table.attrs.sortable && table.attrs.sortable[index] ? 'pointer' : '' }}
-              >{header}
-                {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort" />}
-              </div>
+              {!this.props.hideHeader &&
+                <div
+                  id={`col${index}`}
+                  className="emp-table__th"
+                  onClick={(table.attrs.sortable && table.attrs.sortable[index]) ?
+                    (e => (callbacks && callbacks[index] ?
+                      callbacks[index](e, this.props.tableName, index) :
+                      this.setSortType(index)))
+                    : undefined}
+                  style={{
+                    cursor: table.attrs.sortable && table.attrs.sortable[index] ? 'pointer' : '',
+                    fontSize: this.props.headerSmall && '10px',
+                  }}
+                >{header}
+                  {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort"/>}
+                </div>
+              }
               <div>{tableData.map((row, i) => (
-                <EmpalaTableCell
-                  key={`${header}-${i}`}
-                  handleClick={row[index] ? row[index].onclick : undefined}
-                  value={row[index] && row[index].value}
-                  type={row[index] && row[index].type}
-                  mark={row[index] && row[index].mark}
-                  color={row[index] && row[index].color}
-                  small={this.props.small}
-                />
+                (this.props.dividerIndex && i === this.props.dividerIndex) ?
+                  <div
+                    key='divider'
+                    className={`${index !== 0 ? 'invisible' : 'emp-table__divider'}`}
+                    style={{ width: index === 0 && table.attrs.width[0] ? this.getDividerWidth(table.attrs.width[0]) : '0px' }}
+                  >...
+                  </div> :
+                  <EmpalaTableCell
+                    key={`${header}-${i}`}
+                    handleClick={row[index] ? row[index].onclick : undefined}
+                    value={row[index] && row[index].value}
+                    type={row[index] && row[index].type}
+                    mark={row[index] && row[index].mark}
+                    bold={row[index] && row[index].bold}
+                    color={row[index] && row[index].color}
+                    small={this.props.small}
+                  />
                   ))}
               </div>
             </li>

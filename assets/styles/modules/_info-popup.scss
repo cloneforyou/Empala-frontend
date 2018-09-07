@@ -12,6 +12,7 @@
   top: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.25;
+  z-index: 1000;
   &__title {
     color: $yellow-green;
     margin-bottom: 15px;

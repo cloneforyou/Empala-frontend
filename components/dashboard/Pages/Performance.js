@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import WidgetTable from '../Widget/WidgetTable';
 import { widgetsPerformance } from '../../../localdata/dashboardWidgets';
 import { initGA, logPageView } from '../../../utils/analytics';
+import WidgetHead from '../Widget/WidgetHead';
+import EmpalaTable from '../EmpalaTable';
+import { formatNumberWithFixedPoint, getWidgetAttributesByName } from '../../../utils/dashboardUtils';
+import { getInfoByZipCode } from '../../../actions/registration';
+import { getLeagueData, resetRange, setInputFieldValueById, toggleLeague } from '../../../actions/dashboard';
+import CommunityLeagueTable from '../Widget/CommunityLeagueTable';
 
+
+const PrivacyText = () => (
+  <div className="performance-privacy-text">
+    <p className="performance-privacy-text__content">
+      Your configuration is set to high privacy. <br />
+      League tables are not available in ‘Ostrich mode’. <br />
+      Check your Application Settings to turn on this feature.
+    </p>
+  </div>
+)
 class Performance extends Component {
   constructor(props) {
     super(props);
+    this.leagueWidget = getWidgetAttributesByName('dashboard_community_league');
   }
   componentDidMount() {
     if (!window.GA_INITIALIZED) {
@@ -13,6 +31,7 @@ class Performance extends Component {
       window.GA_INITIALIZED = true;
     }
     logPageView();
+    if (!this.props.isPrivate) this.props.getLeagueData();
   }
 
   render() {
@@ -20,7 +39,24 @@ class Performance extends Component {
       <div className="container-fluid">
         <div className="row">
           {
-            widgetsPerformance.map(widget => (
+            widgetsPerformance.slice(0, 2).map(widget => (
+              <WidgetTable widget={widget} key={widget.id} />
+            ))
+          }
+          <CommunityLeagueTable
+            assetsRangeFrom={this.props.assetsRangeFrom}
+            assetsRangeTo={this.props.assetsRangeTo}
+            setInputValueById={this.props.setInputValueById}
+            resetRange={this.props.resetRange}
+            selectedLeague={this.props.selectedLeague}
+            toggleLeague={this.props.toggleLeague}
+            communityLeagueData={this.props.communityLeagueData}
+            isPrivate={this.props.isPrivate}
+            leagueLoadingStatus={this.props.leagueLoadingStatus}
+            userId={this.props.userId}
+          />
+          {
+            widgetsPerformance.slice(3).map(widget => (
               <WidgetTable widget={widget} key={widget.id} />
             ))
           }
@@ -30,4 +66,23 @@ class Performance extends Component {
   }
 }
 
-export default Performance;
+const mapStateToProps = state => ({
+  assetsRangeFrom: state.dashboard.dashboard_community_league_rangeInputFrom || '',
+  assetsRangeTo: state.dashboard.dashboard_community_league_rangeInputTo || '',
+  selectedLeague: state.dashboard.selectedLeague,
+  communityLeagueData: state.dashboard.communityLeagueData || [],
+  isPrivate: state.dashboard.userData.data.profile.is_private,
+  leagueLoadingStatus: state.dashboard.loaders.league,
+  userId: state.dashboard.userData.data.profile.id,
+});
+const mapDispatchToProps = dispatch => ({
+  setInputValueById: (e) => {
+    const { id, value } = e.target;
+    dispatch(setInputFieldValueById(id, value));
+    return false;
+  },
+  resetRange: widgetName => dispatch(resetRange(widgetName)),
+  toggleLeague: () => dispatch(toggleLeague()),
+  getLeagueData: () => dispatch(getLeagueData()),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Performance);
