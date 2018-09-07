@@ -53,6 +53,7 @@ class Performance extends Component {
             communityLeagueData={this.props.communityLeagueData}
             isPrivate={this.props.isPrivate}
             leagueLoadingStatus={this.props.leagueLoadingStatus}
+            userId={this.props.userId}
           />
           {
             widgetsPerformance.slice(3).map(widget => (
@@ -72,6 +73,7 @@ const mapStateToProps = state => ({
   communityLeagueData: state.dashboard.communityLeagueData || [],
   isPrivate: state.dashboard.userData.data.profile.is_private,
   leagueLoadingStatus: state.dashboard.loaders.league,
+  userId: state.dashboard.userData.data.profile.id,
 });
 const mapDispatchToProps = dispatch => ({
   setInputValueById: (e) => {

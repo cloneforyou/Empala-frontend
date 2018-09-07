@@ -24,7 +24,7 @@ const PrivacyText = () => (
 const parseLeagueData = (data, myId) => data.map((item, index) =>
   [
     { value: index + 1, bold: item.member_id === myId }, // Rank
-    { value: item.FakedRankMember.basic_information.full_name, bold: item.member_id === myId }, // Name
+    { value: item.FakedRankMember ? item.FakedRankMember.basic_information.full_name : 'Anonymous', bold: item.member_id === myId }, // Name
     { value: formatNumberWithFixedPoint(item.annual_percent_return, 1), bold: item.member_id === myId }, // 'Ann % R
     { value: formatNumberWithFixedPoint(item.total_percent_return, 1), bold: item.member_id === myId }, // Total % R
     { value: formatNumberWithFixedPoint(item.total_net_return, 1), bold: item.member_id === myId }, // Total $ Ret
@@ -35,10 +35,8 @@ const parseLeagueData = (data, myId) => data.map((item, index) =>
   ]);
 
 const getTableData = (data, myId) => {
-  console.log('uuuiiiiddd', myId)
   if (!data) return [];
-  const myIndex = data.findIndex(el => {console.log(el.member_id); return el.member_id === myId});
-  console.log('indexx======>>>>>>>>>>', myIndex)
+  const myIndex = data.findIndex(el => el.member_id === myId);
   return myIndex <= 11 ?
     parseLeagueData(data.slice(0, 10), myId) :
     parseLeagueData([...data.slice(0, 10), ...data.slice(myIndex - 1, myIndex + 5)], myId);
@@ -70,7 +68,7 @@ const CommunityLeagueTable = props => (
                 tableData={getTableData(props.communityLeagueData, props.userId)}
                 striped
                 headerSmall
-                dividerIndex={9}
+                dividerIndex={getTableData(props.communityLeagueData, props.userId).length > 10 && 9}
               />
               <div className="performance-community-league__footer">
                 {formatNumberWithFixedPoint(props.communityLeagueData.length)} Total
@@ -84,11 +82,6 @@ const CommunityLeagueTable = props => (
   </div>
 );
 
-function mapStateToProps(state) {
-  return {
-    userId: state.dashboard.userData.data.profile.id,
-  };
-}
 
-export default connect(mapStateToProps)(CommunityLeagueTable);
+export default CommunityLeagueTable;
 

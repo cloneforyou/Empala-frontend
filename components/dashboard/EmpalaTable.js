@@ -125,7 +125,7 @@ class EmpalaTable extends Component {
                 </div>
               }
               <div>{tableData.map((row, i) => (
-                (this.props.dividerIndex && tableData.length > 10 && i === this.props.dividerIndex) ?
+                (this.props.dividerIndex && i === this.props.dividerIndex) ?
                   <div
                     key='divider'
                     className={`${index !== 0 ? 'invisible' : 'emp-table__divider'}`}
