@@ -53,6 +53,7 @@ const initialState = {
     profile_investment_experience_lending_money: 'None',
     profile_investment_experience_foreign_markets: 'None',
     profile_investment_experience_exotics: 'None',
+    member_account_add_margin: false,
   },
   fieldsErrors: {},
   checkboxes: {},
@@ -103,7 +104,14 @@ function registration(state = initialState, action) {
         registrationData: { ...state.registrationData, ...JSON.parse(localStorage.getItem('registrationData')) },
       };
     case TOGGLE_CHECKBOX:
-      return { ...state, checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] } };
+      return {
+        ...state,
+        checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] },
+        registrationData: {
+          ...state.registrationData,
+          member_account_add_margin: action.id === 'member_account_add_margin' && !state.checkboxes[action.id],
+        },
+      };
     case SHOW_IDENTITY_MODAL:
       return { ...state, showIdentityModal: true };
     case CLOSE_IDENTITY_MODAL:
