@@ -75,14 +75,22 @@ class MemberInfoForm extends React.PureComponent {
       }
       if (item.field === 'checkbox') {
         return (
-          <EmpalaCheckbox
+          <div
             key={item.id}
-            id={item.id}
-            label={item.label}
-            handleCheck={this.props.toggleCheckboxById}
-            checked={this.props.checkboxes[item.id]}
-            active={item.id === 'member_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
-          />
+            style={item.id === 'member_account_add_margin' ?
+          {
+            marginLeft: '45px',
+            marginTop: '10px',
+          } : {}}
+          >
+            <EmpalaCheckbox
+              id={item.id}
+              label={item.label}
+              handleCheck={this.props.toggleCheckboxById}
+              checked={this.props.checkboxes[item.id]}
+              active={item.id === 'member_trusted_contact_person_trusted_contact_checkbox' && this.props.trustedContactActive}
+            />
+          </div>
         );
       }
       return (

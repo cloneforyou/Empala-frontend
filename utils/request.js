@@ -3,7 +3,6 @@ import { serverOrigins } from './config';
 import setErrorText from './requestUtils';
 
 export default function request(url, options = {}) {
-  console.log(url, options)
   const origin = serverOrigins.local;
   if (options.method === 'DELETE') {
     return (axios.delete(`${origin}${url}`, { headers: options.headers }))
