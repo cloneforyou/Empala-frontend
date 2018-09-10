@@ -63,7 +63,10 @@ export default class RightBlock extends Component {
     }
     if (this.state.notifPopUpIsOpened) {
       this.props.setNotificationRead(this.props.lastNotifications.map(item => item.id));
-    } else this.props.getLatestNotifications();
+    } else {
+      this.props.dropLatestNotifications();
+      this.props.getLatestNotifications();
+    }
     this.setState((prevState) => ({ notifPopUpIsOpened: !prevState.notifPopUpIsOpened }));
   };
 

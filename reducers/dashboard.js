@@ -41,6 +41,13 @@ import {
   UPDATE_EXTERNAL_NEWS,
   UPDATE_SOCIAL,
   SET_ACCOUNT_BALANCE,
+  DROP_LATEST_NOTIFICATIONS,
+  RESET_RANGE,
+  TOGGLE_LEAGUE,
+  SET_LOCAL_LOADER,
+  SET_LEAGUE_DATA,
+  OPEN_INFO_POPUP,
+  CLOSE_INFO_POPUP,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -89,6 +96,13 @@ const initialState = {
   notificationsCounter: false,
   animationOfNotifications: false,
   externalNews: [],
+  selectedLeague: 'community',
+  communityLeagueData: false,
+  loaders: {
+    league: false,
+  },
+  showInfoPopup: false,
+  infoPopupName: false,
 };
 
 const parseAccountBalance = (data) => {
@@ -140,7 +154,10 @@ function dashboard(state = initialState, action) {
           currentAppSettings: { ...state.currentAppSettings, [action.id]: action.value },
         };
       }
-      return state;
+      return {
+        ...state,
+        [action.id]: action.value,
+      };
     case GET_USER_DATA_SUCCESS:
       return {
         ...state,
@@ -255,7 +272,7 @@ function dashboard(state = initialState, action) {
         ...state,
         accountBalance: {
           ...state.accountBalance,
-          [action.provider]: parseAccountBalance(action.data['_attributes']),
+          [action.provider]: parseAccountBalance(action.data._attributes),
         },
       };
     case SET_WATCHLIST_NUMBER:
@@ -351,6 +368,11 @@ function dashboard(state = initialState, action) {
         };
       }
       return state;
+    case DROP_LATEST_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: [],
+      };
     case SET_ALL_NOTIFICATIONS:
       return {
         ...state,
@@ -380,6 +402,45 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         externalNews: action.data,
+      };
+    case RESET_RANGE:
+      return {
+        ...state,
+        [`${action.name}_rangeInputFrom`]: '',
+        [`${action.name}_rangeInputTo`]: '',
+      };
+    case TOGGLE_LEAGUE:
+      if (action.name) {
+        return {
+          ...state,
+          selectedLeague: action.name,
+        };
+      }
+      return {
+        ...state,
+        selectedLeague: state.selectedLeague === 'community' ? 'your' : 'community',
+      };
+    case SET_LOCAL_LOADER:
+      return {
+        ...state,
+        loaders: { ...state.loaders, [action.entity]: action.status },
+      };
+    case SET_LEAGUE_DATA:
+      return {
+        ...state,
+        communityLeagueData: action.data,
+      };
+    case OPEN_INFO_POPUP:
+      return {
+        ...state,
+        showInfoPopup: true,
+        infoPopupName: action.name,
+      };
+    case CLOSE_INFO_POPUP:
+      return {
+        ...state,
+        showInfoPopup: false,
+        infoPopupName: false,
       };
     default:
       return state;

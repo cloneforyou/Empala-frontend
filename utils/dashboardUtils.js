@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { uniqueId } from 'lodash';
 
 const widgetAttributes = {
   overview_social_capital: {
@@ -65,6 +66,18 @@ const widgetAttributes = {
     col: 12,
     height: 222,
     dots: true,
+  },
+  dashboard_community_league: {
+    id: 'dashboard_community_league',
+    title: 'Community league',
+    col: 5,
+    col_md: 12,
+    height: 439,
+    assetAmountRange: true,
+    info: true,
+    switcher: {
+      labels: ['Empala network', 'Your network'],
+    },
   },
 };
 const tableHeaders = {
@@ -717,8 +730,40 @@ const tableHeaders = {
       ],
     },
   },
+  dashboard_community_league: {
+    id: 'dashboard_community_league',
+    title: 'Community league',
+    height: 336,
+    dots: true,
+    headers: [
+      'Rank',
+      'Name',
+      'Ann % R',
+      'Total % R',
+      'Total $ Ret',
+      'Total $ Val',
+      '1YR % R',
+      '3M % R',
+      '1M % R',
+    ],
+    attrs: {
+      align: [...Array(2).fill('left'), ...Array(7).fill('right')],
+      width: [
+        '7%',
+        '21%',
+        '9%',
+        '9%',
+        '12%',
+        '15%',
+        '9%',
+        '9%',
+        '9%',
+      ],
+      sortable: Array(9).fill(true),
+      callbacks: Array(9).fill((e, name, index) => console.log(e, name, index)),
+    },
+  },
 };
-
 
 export const getFormattedNumber = number => number.toString().replace(/[^0-9]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 export const formatNumberWithFixedPoint = (number, n) => {
@@ -838,6 +883,14 @@ export const parsePositionsList = list => (list.map(pos => ({
   prev_close_avg: pos.AverageClosePrice,
 })));
 
+const popupText = {
+  dashboard_community_league: {
+    text: 'Lorem lorem lorem lorem lorem lorem lorem lorem.',
+    title: 'Community league',
+  },
+};
 
 export const getTableHeaderByName = tableName => tableHeaders[tableName];
 export const getWidgetAttributesByName = widgetName => widgetAttributes[widgetName];
+export const getPopupTextById = id => popupText[id].text;
+export const getPopupTitleById = id => popupText[id].title;

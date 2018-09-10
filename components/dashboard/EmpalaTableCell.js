@@ -56,10 +56,13 @@ export default class EmpalaTableCell extends Component {
     // this.dropColor();
     return (
       <div
-        className={`emp-table__table-cell
-         ${this.getColorStyleByAttribute(this.state.attr)}
-         ${this.props.small && 'emp-table__table-cell_small'}
-         ${this.getColorStyleByAttribute(this.props.color)} text-truncate`}
+        className={
+          `emp-table__table-cell
+          ${this.getColorStyleByAttribute(this.state.attr)}
+          ${this.props.small && 'emp-table__table-cell_small'}
+          ${this.props.bold && 'emp-table__table-cell_text-bold'}
+          ${this.getColorStyleByAttribute(this.props.color)} text-truncate`
+        }
         onClick={this.props.handleClick}
       >
         {(this.props.value || this.props.value === 0) ?

@@ -24,7 +24,7 @@ import {
   GET_NOTIFICATIONS,
   SET_NOTIFICATION_READ,
   SET_COMPLETE_ACTION,
-  CHECK_UNREAD_NOTIFICATIONS,
+  CHECK_UNREAD_NOTIFICATIONS, GET_LEAGUE_DATA,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
@@ -44,8 +44,8 @@ import {
   updateNotificationReceived,
   updateNotificationUnread,
   updateExternalNews,
-  updateSocial, 
-  setAccountBalance,
+  updateSocial,
+  setAccountBalance, setLocalLoader, setLeagueData,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 import requestExternalNews from '../utils/requestExternalNews';
@@ -59,6 +59,7 @@ const urls = {
     complete: '/api/notifications/complete',
   },
   cityfalcon: 'http://api.cityfalcon.com/v0.2/stories?identifier_type=assets&identifiers=Apple%2C%20Tesla%2C%20FTSE100&categories=mp%2Cop&min_cityfalcon_score=0&order_by=latest&time_filter=d1&languages=en%2Cde%2Ces%2Cfr%2Cpt&all_languages=false&access_token=',
+  league: '/api/performance/league',
 };
 
 export function* sessionTimeout() {
@@ -144,6 +145,27 @@ export function* getAppSettings() {
   }
 }
 
+function* getLeagueData() {
+  const isPrivate = yield select(state => state.dashboard.userData.is_private);
+  if (!isPrivate) {
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+    };
+    yield put(setLocalLoader('league', 'loading'));
+    try {
+      const resp = yield call(request, urls.league, options);
+      console.log('League: ===>', resp.data.data);
+      yield put(setLocalLoader('league', 'loaded'));
+      if (resp) yield put(setLeagueData(resp.data.data));
+    } catch (err) {
+      console.error(' ** Community league ERROR =======>', err);
+      yield put(setLocalLoader('league', 'failed'));
+    }
+  }
+}
 /*  --------- ETNA TEST API FUNCTIONS ---------- */
 const etnaConfig = {
   api_path: '/api/etna_test',
@@ -257,7 +279,7 @@ export function* selectETNADataRequest({ payloadType }) {
 /*  --------- ETNA TEST API FUNCTIONS  END ---------- */
 
 /* ---------- EMPALA SOCKET IO HANDLING ----------*/
-const socketServerURL = serverOrigins.aws;
+const socketServerURL = serverOrigins.local;
 // const socket = io();
 const connect = async token => io.connect(socketServerURL, {
   query: {
@@ -402,5 +424,6 @@ export default function* dashboardSaga() {
     takeEvery(CHECK_UNREAD_NOTIFICATIONS, callAnimationForNotifications),
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
+    takeLatest(GET_LEAGUE_DATA, getLeagueData),
   ]);
 }

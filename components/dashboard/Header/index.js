@@ -9,7 +9,7 @@ import {
   muteNotifications,
   setActivePage,
   setNotificationRead,
-  checkUnreadNotifications,
+  checkUnreadNotifications, dropLatestNotifications,
 } from '../../../actions/dashboard';
 import { changeActiveTabProfile } from '../../../actions/profile';
 
@@ -89,6 +89,7 @@ function mapDispatchToProps(dispatch) {
   return {
     setActivePage: page => dispatch(setActivePage(page)),
     getLatestNotifications: () => dispatch(getNotifications({ collect: 'latest' })),
+    dropLatestNotifications: () => dispatch(dropLatestNotifications()),
     setNotificationRead: id => dispatch(setNotificationRead(id)),
     muteNotifications: () => dispatch(muteNotifications()),
     changeActiveTabProfile: value => dispatch(changeActiveTabProfile(value)),

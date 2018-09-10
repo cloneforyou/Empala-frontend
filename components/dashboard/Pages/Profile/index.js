@@ -39,17 +39,18 @@ class Profile extends Component {
           <Tabs
             value={value}
             onChange={this.handleChange}
-            scrollable
             scrollButtons="auto"
             style={{ color: "#808895" }}
             classes={{
               indicator: classes.indicator,
             }}
+            fullWidth
+            scrollable
           >
             <Tab label="Membership" />
             <Tab label="Regulatory" />
             <Tab label="Experience" />
-            <Tab label="Account" />
+            {/*<Tab label="Account" />*/}
             <Tab label="Documents" />
             <Tab label="Application Settings" />
             <Tab label="Notifications" />
@@ -58,7 +59,7 @@ class Profile extends Component {
         {value === 0 && <Membership />}
         {value === 1 && <Regulatory />}
         {value === 2 && <Experience />}
-        {value === 3 && <Account />}
+        {/*{value === 3 && <Account />}*/}
         {value === 4 && <Documents />}
         {value === 5 && <AppSettings />}
         {value === 6 && <Notifications />}

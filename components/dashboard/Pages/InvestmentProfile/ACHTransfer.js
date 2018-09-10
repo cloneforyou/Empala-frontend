@@ -81,7 +81,7 @@ export default class ACHTransfer extends React.Component {
       <div className="funding-content__body">
         <div className="funding-ach-selection-box">
           <div>
-            <div className="funding-ach-selection-box__input no-gutters">
+            <div className="funding-ach-selection-box__input no-gutters" >
               <EmpalaSelect
                 id="funding_type"
                 options={this.props.options.funding}
