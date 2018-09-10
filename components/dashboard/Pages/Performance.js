@@ -7,7 +7,13 @@ import WidgetHead from '../Widget/WidgetHead';
 import EmpalaTable from '../EmpalaTable';
 import { formatNumberWithFixedPoint, getWidgetAttributesByName } from '../../../utils/dashboardUtils';
 import { getInfoByZipCode } from '../../../actions/registration';
-import { getLeagueData, resetRange, setInputFieldValueById, toggleLeague } from '../../../actions/dashboard';
+import {
+  getLeagueData,
+  resetRange,
+  setInputFieldValueById,
+  setTableSortSettings,
+  toggleLeague,
+} from '../../../actions/dashboard';
 import CommunityLeagueTable from '../Widget/CommunityLeagueTable';
 
 
@@ -54,6 +60,8 @@ class Performance extends Component {
             isPrivate={this.props.isPrivate}
             leagueLoadingStatus={this.props.leagueLoadingStatus}
             userId={this.props.userId}
+            tableSortSettings={this.props.tableSortSettings('dashboard_community_league')}
+            setTableSortSettings={this.props.setTableSortSettings}
           />
           {
             widgetsPerformance.slice(3).map(widget => (
@@ -74,6 +82,10 @@ const mapStateToProps = state => ({
   isPrivate: state.dashboard.userData.data.profile.is_private,
   leagueLoadingStatus: state.dashboard.loaders.league,
   userId: state.dashboard.userData.data.profile.id,
+  tableSortSettings: tableId => state.dashboard.tableSortSettings[tableId] || {
+    direction: false,
+    sortIndex: 0,
+  },
 });
 const mapDispatchToProps = dispatch => ({
   setInputValueById: (e) => {
@@ -84,5 +96,7 @@ const mapDispatchToProps = dispatch => ({
   resetRange: widgetName => dispatch(resetRange(widgetName)),
   toggleLeague: () => dispatch(toggleLeague()),
   getLeagueData: () => dispatch(getLeagueData()),
+  setTableSortSettings: (tableId, sortIndex, direction) =>
+    dispatch(setTableSortSettings(tableId, sortIndex, direction)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Performance);

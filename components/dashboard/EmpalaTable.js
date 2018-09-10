@@ -27,8 +27,8 @@ class EmpalaTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortDirection: this.props.sortDirection,
-      sortColIndex: this.props.sortColIndex,
+      sortDirection: this.props.tableSortSettings.direction,
+      sortColIndex: this.props.tableSortSettings.sortIndex,
     };
     this.table = getTableHeaderByName(this.props.tableName);
     this.callbacks = this.table.attrs.callbacks || this.props.callbacks;
@@ -87,8 +87,12 @@ class EmpalaTable extends Component {
   }
   render() {
     const { table, callbacks } = this;
-    const { sortDirection, sortColIndex } = this.state;
-    const tableData = this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
+    // const { sortDirection, sortColIndex } = this.props || this.state;
+    const sortDirection = this.props.tableSortSettings.direction || this.state.sortDirection;
+    const sortColIndex = this.props.tableSortSettings.sortIndex || this.state.sortDirection;
+    const tableData = this.props.sortExternal ?
+      this.props.tableData :
+      this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
     return (
       <div style={{ overflowY: 'scroll', maxHeight: this.innerHeight(table.height) }} >
         <ul
@@ -113,7 +117,7 @@ class EmpalaTable extends Component {
                   className="emp-table__th"
                   onClick={(table.attrs.sortable && table.attrs.sortable[index]) ?
                     (e => (callbacks && callbacks[index] ?
-                      callbacks[index](e, this.props.tableName, index) :
+                      callbacks[index](e, this.props.tableName, index, sortDirection) :
                       this.setSortType(index)))
                     : undefined}
                   style={{
@@ -121,7 +125,7 @@ class EmpalaTable extends Component {
                     fontSize: this.props.headerSmall && '10px',
                   }}
                 >{header}
-                  {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort"/>}
+                  {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort" />}
                 </div>
               }
               <div>{tableData.map((row, i) => (

@@ -48,6 +48,7 @@ import {
   SET_LEAGUE_DATA,
   OPEN_INFO_POPUP,
   CLOSE_INFO_POPUP,
+  SET_TABLE_SORT_SETTINGS,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -442,6 +443,17 @@ function dashboard(state = initialState, action) {
         ...state,
         showInfoPopup: false,
         infoPopupName: false,
+      };
+    case SET_TABLE_SORT_SETTINGS:
+      return {
+        ...state,
+        tableSortSettings: {
+          ...state.tableSortSettings,
+          [action.tableId]: {
+            sortIndex: action.sortIndex,
+            direction: action.direction,
+          },
+        },
       };
     default:
       return state;

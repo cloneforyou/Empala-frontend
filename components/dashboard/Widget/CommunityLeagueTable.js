@@ -34,12 +34,49 @@ const parseLeagueData = (data, myId) => data.map((item, index) =>
     { value: formatNumberWithFixedPoint(item.x1m_percent_return, 1), bold: item.member_id === myId }, // 1M % R
   ]);
 
-const getTableData = (data, myId) => {
+const setTableSortSettings = (name, sortIndex, direction, setSortSettings) => {
+  console.log(name, direction)
+  setSortSettings(
+    name,
+    sortIndex,
+    (() => {
+      if (!direction) return 'asc';
+      return direction === 'asc' ? 'desc' : 'asc';
+    })(),
+  );
+};
+const sortByColumn = (data, col, order) => {
+  if (!order) return data;
+  return data.sort((a, b) => {
+    if (!a[col]) return 1;
+    if (!b[col]) return -1;
+    if (a[col].value === b[col].value) return 0;
+    if (order === 'asc') {
+      if (!isNaN(a[col].value) && !isNaN(b[col].value)) return a[col].value - b[col].value;
+      if (a[col].value > b[col].value) return 1;
+      if (a[col].value < b[col].value) return -1;
+    }
+    if (order === 'desc') {
+      if (!isNaN(a[col].value) && !isNaN(b[col].value)) return b[col].value - a[col].value;
+      if (a[col].value > b[col].value) return -1;
+      if (a[col].value < b[col].value) return 1;
+    }
+    return false;
+  });
+};
+const limitDataByAssetsRange = (data, min, max, assetType) => {
+  if (!data) return [];
+  if (max && min && (+max < +min)) return [];
+  if (!min || !assetType) return data;
+  return data.filter(el => el[assetType] >= +min && el[assetType] < (max || Number.POSITIVE_INFINITY));
+};
+const getTableData = (data, myId, assetsMin, assetsMax) => {
   if (!data) return [];
   const myIndex = data.findIndex(el => el.member_id === myId);
+  const rangedData = limitDataByAssetsRange(data, assetsMin, assetsMax, 'total_net_value');
   return myIndex <= 11 ?
-    parseLeagueData(data.slice(0, 10), myId) :
-    parseLeagueData([...data.slice(0, 10), ...data.slice(myIndex - 1, myIndex + 5)], myId);
+    parseLeagueData(rangedData.slice(0, 10), myId) :
+    parseLeagueData([...rangedData.slice(0, 10), ...rangedData.slice(myIndex - 1, myIndex + 5)], myId);
 };
 
 const CommunityLeagueTable = props => (
@@ -65,11 +102,14 @@ const CommunityLeagueTable = props => (
             <div>
               <EmpalaTable
                 tableName="dashboard_community_league"
-                tableData={getTableData(props.communityLeagueData, props.userId)}
+                tableData={getTableData(props.communityLeagueData, props.userId, props.assetsRangeFrom, props.assetsRangeTo)}
                 striped
                 headerSmall
                 dividerIndex={getTableData(props.communityLeagueData, props.userId).length > 10 && 9}
-                callbacks={Array(9).fill((e, name, index) => console.log(e, name, index))}
+                callbacks={Array(9).fill((e, name, index, direction) =>
+                  setTableSortSettings(name, index, direction, props.setTableSortSettings))}
+                tableSortSettings={props.tableSortSettings}
+                sortExternal
               />
               <div className="performance-community-league__footer">
                 {formatNumberWithFixedPoint(props.communityLeagueData.length)} Total
