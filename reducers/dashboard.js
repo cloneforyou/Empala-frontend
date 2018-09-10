@@ -103,6 +103,7 @@ const initialState = {
   },
   showInfoPopup: false,
   infoPopupName: false,
+  tableSortSettings: {},
 };
 
 const parseAccountBalance = (data) => {

@@ -69,6 +69,7 @@ const CommunityLeagueTable = props => (
                 striped
                 headerSmall
                 dividerIndex={getTableData(props.communityLeagueData, props.userId).length > 10 && 9}
+                callbacks={Array(9).fill((e, name, index) => console.log(e, name, index))}
               />
               <div className="performance-community-league__footer">
                 {formatNumberWithFixedPoint(props.communityLeagueData.length)} Total

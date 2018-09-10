@@ -760,7 +760,7 @@ const tableHeaders = {
         '9%',
       ],
       sortable: Array(9).fill(true),
-      callbacks: Array(9).fill((e, name, index) => console.log(e, name, index)),
+      // callbacks: Array(9).fill((e, name, index) => console.log(e, name, index)),
     },
   },
 };
