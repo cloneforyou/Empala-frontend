@@ -111,6 +111,11 @@ export const dataFields = [
       ],
     },
     {
+      id: 'member_account_add_margin',
+      field: 'checkbox',
+      label: 'Add Margin to the account',
+    },
+    {
       id: 'member_account_password',
       type: 'password',
       label: 'Password',

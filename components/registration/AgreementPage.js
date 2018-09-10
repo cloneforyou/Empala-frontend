@@ -9,10 +9,11 @@ function mapStateToProps(state) {
   return {
     firstName: state.registration.registrationData.member_basic_information_first_name || '',
     lastName: state.registration.registrationData.member_basic_information_last_name || '',
+    addMarginSelected: state.registration.checkboxes.member_account_add_margin,
     errorMessage: state.registration.errorMessage || '',
     showErrorModal: state.registration.showErrorModal,
     showSuccessModal: state.registration.showSuccessModal,
-    loading: state.registration.loading
+    loading: state.registration.loading,
   };
 }
 
@@ -181,6 +182,13 @@ class AgreementPage extends PureComponent {
             conditions will be deemed an amendment and will be incorporated into and made part of
             these agreements.
           </p>
+          {this.props.addMarginSelected &&
+            <p>
+              Account margin text. Account margin text. Account margin text. Account margin text.
+              Account margin text. Account margin text. Account margin text. Account margin text.
+              Account margin text. Account margin text. Account margin text. Account margin text.
+            </p>
+          }
         </div>
         <div className="confirmation row">
           <div className="confirmation__text col-lg-4">
