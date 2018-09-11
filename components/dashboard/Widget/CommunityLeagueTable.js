@@ -111,7 +111,7 @@ const CommunityLeagueTable = (props) => {
     setTableSortSettings(name, index, direction, props.setTableSortSettings));
   return (
     <div
-      className={`widget-col col ${leagueWidget.col_md && `col-md-${leagueWidget.col_md}`} col-xl-${leagueWidget.col}`}
+      className={`widget-col col ${leagueWidget.col_md && `col-md-${leagueWidget.col_md}`} col-xl-${leagueWidget.col} performance-community-league`}
     >
       <div className="widget" style={{ maxHeight: `${leagueWidget.height}px` }}>
         <WidgetHead

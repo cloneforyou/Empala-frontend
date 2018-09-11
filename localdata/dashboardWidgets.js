@@ -1160,6 +1160,7 @@ export const widgetsPerformance = [
     id: uniqueId(),
     title: 'Performance analysis',
     col: 2,
+    col_md: 4,
     height: 439,
     tables: [
       {

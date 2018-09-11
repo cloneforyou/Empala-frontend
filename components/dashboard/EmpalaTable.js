@@ -132,8 +132,7 @@ class EmpalaTable extends Component {
                 (this.props.leagueDividerShow && this.props.dividerIndex && i === this.props.dividerIndex) ?
                   <div
                     key="divider"
-                    className='emp-table__divider'
-                    style={{ width: '100%', height: '2em' }}
+                    className="emp-table__divider"
                     onClick={this.props.toggleLeagueDivider}
                     role="button"
                   >{index === 4 ? '. . .' : ''}
