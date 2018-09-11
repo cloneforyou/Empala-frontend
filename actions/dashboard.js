@@ -70,6 +70,8 @@ import {
   SET_LEAGUE_DATA,
   OPEN_INFO_POPUP,
   CLOSE_INFO_POPUP,
+  SET_TABLE_SORT_SETTINGS,
+  TOGGLE_LEAGUE_DIVIDER,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -472,6 +474,20 @@ export function openInfoPopup(name) {
 export function closeInfoPopup() {
   return {
     type: CLOSE_INFO_POPUP,
+  };
+}
+
+export function setTableSortSettings(tableId, sortIndex, direction) {
+  return {
+    type: SET_TABLE_SORT_SETTINGS,
+    tableId,
+    sortIndex,
+    direction,
+  };
+}
+export function toggleLeagueDivider() {
+  return {
+    type: TOGGLE_LEAGUE_DIVIDER,
   };
 }
 

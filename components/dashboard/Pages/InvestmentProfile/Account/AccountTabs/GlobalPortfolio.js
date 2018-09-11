@@ -70,7 +70,10 @@ export default class GlobalPortfolio extends Component {
                         id={`${prefix}_${item.id}`}
                         type="text"
                         className="pseudo-input__input"
-                        value={formatNumberWithFixedPoint(getValueByPrefixAndId(prefix || 'north_america', item.id, accountBalance), 2)}
+                        value={formatNumberWithFixedPoint(
+                          getValueByPrefixAndId(prefix || 'north_america', item.id, accountBalance),
+                          /pending_order_count/.test(item.id) ? 0 : 2,
+                        )}
                         readOnly
                       />
                     </div>))

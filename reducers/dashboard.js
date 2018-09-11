@@ -48,6 +48,7 @@ import {
   SET_LEAGUE_DATA,
   OPEN_INFO_POPUP,
   CLOSE_INFO_POPUP,
+  SET_TABLE_SORT_SETTINGS, TOGGLE_LEAGUE_DIVIDER,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -98,11 +99,13 @@ const initialState = {
   externalNews: [],
   selectedLeague: 'community',
   communityLeagueData: false,
+  leagueDividerShow: true,
   loaders: {
     league: false,
   },
   showInfoPopup: false,
   infoPopupName: false,
+  tableSortSettings: {},
 };
 
 const parseAccountBalance = (data) => {
@@ -442,9 +445,26 @@ function dashboard(state = initialState, action) {
         showInfoPopup: false,
         infoPopupName: false,
       };
+    case SET_TABLE_SORT_SETTINGS:
+      return {
+        ...state,
+        tableSortSettings: {
+          ...state.tableSortSettings,
+          [action.tableId]: {
+            sortIndex: action.sortIndex,
+            direction: action.direction,
+          },
+        },
+      };
+    case TOGGLE_LEAGUE_DIVIDER:
+      return {
+        ...state,
+        leagueDividerShow: !state.leagueDividerShow,
+      };
     default:
       return state;
   }
+  return state;
 }
 
 export default dashboard;
