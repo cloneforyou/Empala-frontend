@@ -69,7 +69,9 @@ import {
   SET_LOCAL_LOADER,
   SET_LEAGUE_DATA,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP, SET_TABLE_SORT_SETTINGS,
+  CLOSE_INFO_POPUP,
+  SET_TABLE_SORT_SETTINGS,
+  TOGGLE_LEAGUE_DIVIDER,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -481,6 +483,11 @@ export function setTableSortSettings(tableId, sortIndex, direction) {
     tableId,
     sortIndex,
     direction,
+  };
+}
+export function toggleLeagueDivider() {
+  return {
+    type: TOGGLE_LEAGUE_DIVIDER,
   };
 }
 

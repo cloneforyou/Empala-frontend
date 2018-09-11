@@ -48,7 +48,7 @@ import {
   SET_LEAGUE_DATA,
   OPEN_INFO_POPUP,
   CLOSE_INFO_POPUP,
-  SET_TABLE_SORT_SETTINGS,
+  SET_TABLE_SORT_SETTINGS, TOGGLE_LEAGUE_DIVIDER,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -99,6 +99,7 @@ const initialState = {
   externalNews: [],
   selectedLeague: 'community',
   communityLeagueData: false,
+  leagueDividerShow: true,
   loaders: {
     league: false,
   },
@@ -455,9 +456,15 @@ function dashboard(state = initialState, action) {
           },
         },
       };
+    case TOGGLE_LEAGUE_DIVIDER:
+      return {
+        ...state,
+        leagueDividerShow: !state.leagueDividerShow,
+      };
     default:
       return state;
   }
+  return state;
 }
 
 export default dashboard;

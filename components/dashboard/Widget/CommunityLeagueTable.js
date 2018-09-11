@@ -32,10 +32,11 @@ const parseLeagueData = (data, myId) => data.map((item, index) =>
     { value: formatNumberWithFixedPoint(item.x1yr_percent_return, 1), bold: item.member_id === myId }, // 1YR % R
     { value: formatNumberWithFixedPoint(item.x3m_percent_return, 1), bold: item.member_id === myId }, // 3M % R
     { value: formatNumberWithFixedPoint(item.x1m_percent_return, 1), bold: item.member_id === myId }, // 1M % R
+    // { value: item.member_id },
   ]);
 
 const setTableSortSettings = (name, sortIndex, direction, setSortSettings) => {
-  console.log(name, direction)
+  console.log(name, sortIndex, direction);
   setSortSettings(
     name,
     sortIndex,
@@ -46,20 +47,32 @@ const setTableSortSettings = (name, sortIndex, direction, setSortSettings) => {
   );
 };
 const sortByColumn = (data, col, order) => {
+  const fields = [
+    'rank',
+    'name',
+    'annual_percent_return',
+    'total_percent_return',
+    'total_net_return',
+    'total_net_value',
+    'x1yr_percent_return',
+    'x3m_percent_return',
+    'x1m_percent_return',
+  ];
   if (!order) return data;
-  return data.sort((a, b) => {
-    if (!a[col]) return 1;
-    if (!b[col]) return -1;
-    if (a[col].value === b[col].value) return 0;
+  const newData = [...data];
+  return newData.sort((a, b) => {
+    if (!a[fields[col]]) return 1;
+    if (!b[fields[col]]) return -1;
+    if (a[fields[col]] === b[fields[col]]) return 0;
     if (order === 'asc') {
-      if (!isNaN(a[col].value) && !isNaN(b[col].value)) return a[col].value - b[col].value;
-      if (a[col].value > b[col].value) return 1;
-      if (a[col].value < b[col].value) return -1;
+      if (!isNaN(a[fields[col]]) && !isNaN(b[fields[col]])) return a[fields[col]] - b[fields[col]];
+      if (a[fields[col]].value > b[fields[col]].value) return 1;
+      if (a[fields[col]].value < b[fields[col]].value) return -1;
     }
     if (order === 'desc') {
-      if (!isNaN(a[col].value) && !isNaN(b[col].value)) return b[col].value - a[col].value;
-      if (a[col].value > b[col].value) return -1;
-      if (a[col].value < b[col].value) return 1;
+      if (!isNaN(a[fields[col]]) && !isNaN(b[fields[col]])) return b[fields[col]] - a[fields[col]];
+      if (a[fields[col]] > b[fields[col]]) return -1;
+      if (a[fields[col]] < b[fields[col]]) return 1;
     }
     return false;
   });
@@ -70,46 +83,71 @@ const limitDataByAssetsRange = (data, min, max, assetType) => {
   if (!min || !assetType) return data;
   return data.filter(el => el[assetType] >= +min && el[assetType] < (max || Number.POSITIVE_INFINITY));
 };
+const findMyIndex = (data, myId) => data.findIndex(el => el.member_id === myId);
 const getTableData = (data, myId, assetsMin, assetsMax) => {
   if (!data) return [];
-  const myIndex = data.findIndex(el => el.member_id === myId);
+  const myIndex = findMyIndex(data, myId);
+  console.log('my index ===>>>', myIndex)
   const rangedData = limitDataByAssetsRange(data, assetsMin, assetsMax, 'total_net_value');
-  return myIndex <= 11 ?
-    parseLeagueData(rangedData.slice(0, 10), myId) :
-    parseLeagueData([...rangedData.slice(0, 10), ...rangedData.slice(myIndex - 1, myIndex + 5)], myId);
+  // return myIndex <= 11 ?
+  //   parseLeagueData(rangedData.slice(0, 10), myId) :
+  //   parseLeagueData([...rangedData.slice(0, 10), ...rangedData.slice(myIndex - 1, myIndex + 5)], myId);
+  return parseLeagueData(rangedData, myId);
+  // const myIndex = data.findIndex(el => el[9] === myId);
+  // const rangedData = limitDataByAssetsRange(data, assetsMin, assetsMax, 5);
+  // return myIndex <= 11 ?
+  //   rangedData.slice(0, 10) :
+  //   [...rangedData.slice(0, 10), ...rangedData.slice(myIndex - 1, myIndex + 5)];
 };
 
-const CommunityLeagueTable = props => (
-  <div
-    className={`widget-col col ${leagueWidget.col_md && `col-md-${leagueWidget.col_md}`} col-xl-${leagueWidget.col}`}
-    // key={widget.id}
-  >
-    <div className="widget" style={{ maxHeight: `${leagueWidget.height}px` }}>
-      <WidgetHead
-        widget={leagueWidget}
-        assetsRangeFrom={props.assetsRangeFrom}
-        assetsRangeTo={props.assetsRangeTo}
-        setInputValueById={props.setInputValueById}
-        resetRange={props.resetRange}
-        selectedLeague={props.selectedLeague}
-        toggleLeague={props.toggleLeague}
 
-      />
-      <div style={{ width: '100%' }}>
-        <DashboardInfoPopup name={leagueWidget.id} />
-        {
+const CommunityLeagueTable = (props) => {
+  const sortedData = sortByColumn(
+    props.communityLeagueData,
+    props.tableSortIndex,
+    props.tableSortDirection,
+  );
+  const callbacks = Array(9).fill((e, name, index, direction) =>
+    setTableSortSettings(name, index, direction, props.setTableSortSettings));
+  return (
+    <div
+      className={`widget-col col ${leagueWidget.col_md && `col-md-${leagueWidget.col_md}`} col-xl-${leagueWidget.col}`}
+    >
+      <div className="widget" style={{ maxHeight: `${leagueWidget.height}px` }}>
+        <WidgetHead
+          widget={leagueWidget}
+          assetsRangeFrom={props.assetsRangeFrom}
+          assetsRangeTo={props.assetsRangeTo}
+          setInputValueById={props.setInputValueById}
+          resetRange={props.resetRange}
+          selectedLeague={props.selectedLeague}
+          toggleLeague={props.toggleLeague}
+        />
+        <div style={{ width: '100%' }}>
+          <DashboardInfoPopup name={leagueWidget.id} />
+          {
           !props.isPrivate ?
             <div>
               <EmpalaTable
                 tableName="dashboard_community_league"
-                tableData={getTableData(props.communityLeagueData, props.userId, props.assetsRangeFrom, props.assetsRangeTo)}
+                tableData={
+                  getTableData(
+                    sortedData,
+                    props.userId,
+                    props.assetsRangeFrom,
+                    props.assetsRangeTo,
+                  )
+                }
                 striped
                 headerSmall
-                dividerIndex={getTableData(props.communityLeagueData, props.userId).length > 10 && 9}
-                callbacks={Array(9).fill((e, name, index, direction) =>
-                  setTableSortSettings(name, index, direction, props.setTableSortSettings))}
-                tableSortSettings={props.tableSortSettings}
+                dividerIndex={getTableData(sortedData, props.userId).length > 10 && 9}
+                dividerEndIndex={findMyIndex(sortedData, props.userId) - 1}
+                callbacks={callbacks}
+                tableSortIndex={props.tableSortIndex}
+                tableSortDirection={props.tableSortDirection}
                 sortExternal
+                leagueDividerShow={props.leagueDividerShow}
+                toggleLeagueDivider={props.toggleLeagueDivider}
               />
               <div className="performance-community-league__footer">
                 {formatNumberWithFixedPoint(props.communityLeagueData.length)} Total
@@ -118,10 +156,11 @@ const CommunityLeagueTable = props => (
             :
             <PrivacyText />
         }
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 
 export default CommunityLeagueTable;

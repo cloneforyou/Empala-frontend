@@ -12,7 +12,7 @@ import {
   resetRange,
   setInputFieldValueById,
   setTableSortSettings,
-  toggleLeague,
+  toggleLeague, toggleLeagueDivider,
 } from '../../../actions/dashboard';
 import CommunityLeagueTable from '../Widget/CommunityLeagueTable';
 
@@ -60,8 +60,11 @@ class Performance extends Component {
             isPrivate={this.props.isPrivate}
             leagueLoadingStatus={this.props.leagueLoadingStatus}
             userId={this.props.userId}
-            tableSortSettings={this.props.tableSortSettings('dashboard_community_league')}
+            tableSortIndex={this.props.leagueSortIndex}
+            tableSortDirection={this.props.leagueSortDirection}
             setTableSortSettings={this.props.setTableSortSettings}
+            leagueDividerShow={this.props.leagueDividerShow}
+            toggleLeagueDivider={this.props.toggleLeagueDivider}
           />
           {
             widgetsPerformance.slice(3).map(widget => (
@@ -82,10 +85,11 @@ const mapStateToProps = state => ({
   isPrivate: state.dashboard.userData.data.profile.is_private,
   leagueLoadingStatus: state.dashboard.loaders.league,
   userId: state.dashboard.userData.data.profile.id,
-  tableSortSettings: tableId => state.dashboard.tableSortSettings[tableId] || {
-    direction: false,
-    sortIndex: 0,
-  },
+  leagueSortDirection: state.dashboard.tableSortSettings.dashboard_community_league &&
+    state.dashboard.tableSortSettings.dashboard_community_league.direction,
+  leagueSortIndex: state.dashboard.tableSortSettings.dashboard_community_league &&
+    state.dashboard.tableSortSettings.dashboard_community_league.sortIndex,
+  leagueDividerShow: state.dashboard.leagueDividerShow,
 });
 const mapDispatchToProps = dispatch => ({
   setInputValueById: (e) => {
@@ -98,5 +102,6 @@ const mapDispatchToProps = dispatch => ({
   getLeagueData: () => dispatch(getLeagueData()),
   setTableSortSettings: (tableId, sortIndex, direction) =>
     dispatch(setTableSortSettings(tableId, sortIndex, direction)),
+  toggleLeagueDivider: () => dispatch(toggleLeagueDivider()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Performance);

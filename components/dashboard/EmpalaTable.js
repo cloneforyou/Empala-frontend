@@ -27,8 +27,8 @@ class EmpalaTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortDirection: this.props.tableSortSettings.direction,
-      sortColIndex: this.props.tableSortSettings.sortIndex,
+      sortDirection: false,
+      sortColIndex: false,
     };
     this.table = getTableHeaderByName(this.props.tableName);
     this.callbacks = this.table.attrs.callbacks || this.props.callbacks;
@@ -88,8 +88,8 @@ class EmpalaTable extends Component {
   render() {
     const { table, callbacks } = this;
     // const { sortDirection, sortColIndex } = this.props || this.state;
-    const sortDirection = this.props.tableSortSettings.direction || this.state.sortDirection;
-    const sortColIndex = this.props.tableSortSettings.sortIndex || this.state.sortDirection;
+    const sortDirection = this.props.tableSortDirection || this.state.sortDirection;
+    const sortColIndex = this.props.tableSortIndex || this.state.sortColIndex;
     const tableData = this.props.sortExternal ?
       this.props.tableData :
       this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
@@ -129,23 +129,34 @@ class EmpalaTable extends Component {
                 </div>
               }
               <div>{tableData.map((row, i) => (
-                (this.props.dividerIndex && i === this.props.dividerIndex) ?
+                (this.props.leagueDividerShow && this.props.dividerIndex && i === this.props.dividerIndex) ?
                   <div
-                    key='divider'
+                    key="divider"
                     className={`${index !== 0 ? 'invisible' : 'emp-table__divider'}`}
                     style={{ width: index === 0 && table.attrs.width[0] ? this.getDividerWidth(table.attrs.width[0]) : '0px' }}
+                    onClick={this.props.toggleLeagueDivider}
+                    role="button"
                   >...
                   </div> :
-                  <EmpalaTableCell
+                  <div
                     key={`${header}-${i}`}
-                    handleClick={row[index] ? row[index].onclick : undefined}
-                    value={row[index] && row[index].value}
-                    type={row[index] && row[index].type}
-                    mark={row[index] && row[index].mark}
-                    bold={row[index] && row[index].bold}
-                    color={row[index] && row[index].color}
-                    small={this.props.small}
+                    className={`${
+                    this.props.leagueDividerShow
+                    && this.props.dividerEndIndex
+                    && i > this.props.dividerIndex
+                    && (i < this.props.dividerEndIndex || i > this.props.dividerEndIndex + 5)
+                  ? 'd-none' : ''}`}
+                  >
+                    <EmpalaTableCell
+                      handleClick={row[index] ? row[index].onclick : undefined}
+                      value={row[index] && row[index].value}
+                      type={row[index] && row[index].type}
+                      mark={row[index] && row[index].mark}
+                      bold={row[index] && row[index].bold}
+                      color={row[index] && row[index].color}
+                      small={this.props.small}
                   />
+                  </div>
                   ))}
               </div>
             </li>
