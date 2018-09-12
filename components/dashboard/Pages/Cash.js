@@ -27,8 +27,8 @@ const parsePositionsToTableData = (positions) => {
       { value: formatNumberWithFixedPoint(pos.Quantity * avgPrice, 2) }, // USD Balance
       { value: 0 }, // EUR Balance
       { value: 0 }, // GBP Balance
-      { value: null },
-      { value: null },
+      { value: <a href='#'><i className="cash__icon cash__icon_link" /></a> },
+      { value: <i className="cash__icon cash__icon_comment" /> },
     ];
   });
 };

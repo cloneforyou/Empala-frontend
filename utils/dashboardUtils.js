@@ -59,7 +59,7 @@ export const parseOrdersList = list => list.map(order => ({
     order_quantity: order.Quantity * (order.Side === 'Sell' ? -1 : 1),
     fill_quantity: order.ExecutedQuantity,
     remain_quantity: order.LeavesQuantity,
-    notional_ammount: calculateOrderPrice(order.AveragePrice, order.Quantity), // TODO find the way how to calculate
+    notional_ammount: calculateOrderPrice(order.AveragePrice, order.LeavesQuantity), // TODO find the way how to calculate
     comission: '--', // TODO find the way how to calculate
     distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
     start_date: parseDateString(order.CreateDate, 'MM/DD/YY'),

@@ -138,13 +138,16 @@ class EmpalaTable extends Component {
                   >{index === 4 ? '. . .' : ''}
                   </div> :
                   <div
-                    key={`${header}-${i}`}
-                    className={`emp-table__table-cell ${
-                    this.props.leagueDividerShow
-                    && this.props.dividerEndIndex
-                    && i > this.props.dividerIndex
-                    && (i < this.props.dividerEndIndex || i > this.props.dividerEndIndex + 5)
-                  ? 'd-none' : ''}`}
+                      key={`${header}-${i}`}
+                      className={`emp-table__table-cell
+                      ${this.props.small && 'emp-table__table-cell_small'}
+                      ${
+                      this.props.leagueDividerShow
+                      && this.props.dividerEndIndex
+                      && i > this.props.dividerIndex
+                      && (i < this.props.dividerEndIndex || i > this.props.dividerEndIndex + 5)
+                          ? 'd-none' : ''
+                    }`}
                   >
                     <EmpalaTableCell
                       handleClick={row[index] ? row[index].onclick : undefined}
@@ -153,7 +156,7 @@ class EmpalaTable extends Component {
                       mark={row[index] && row[index].mark}
                       bold={row[index] && row[index].bold}
                       color={row[index] && row[index].color}
-                      small={this.props.small}
+                      // small={this.props.small}
                   />
                   </div>
                   ))}

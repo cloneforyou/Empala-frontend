@@ -124,3 +124,32 @@
     }
   }
 }
+
+.cash {
+  &__icon {
+    &_link {
+      &:before {
+        content: ' ';
+        mask: url($path-to-dashboard-icon + 'icon-link.svg');
+        mask-size: contain;
+        mask-repeat: no-repeat;
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        background-color: $dark-grey;
+      }
+    }
+    &_comment {
+        &:before {
+          content: ' ';
+          mask: url($path-to-dashboard-icon + 'icon-comment.svg');
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          width: 12px;
+          height: 12px;
+          display: inline-block;
+          background-color: $green;
+        }
+    }
+  }
+}

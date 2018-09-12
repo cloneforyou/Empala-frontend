@@ -336,7 +336,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
             exposure: getExposureByType(type),
             domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || '--',
             foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || '--',
-            total: formatNumberWithFixedPoint(100, 1),
+            total: type === 'net' || type === 'stocks' ? formatNumberWithFixedPoint(100, 1) : '--',
             dayChange: calculatedChange,
           };
         }

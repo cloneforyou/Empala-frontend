@@ -59,7 +59,7 @@ class PositionsPortfolioTable extends React.Component {
   mapETNACategoryToEmpala(categoryName) {
     switch (categoryName) {
       case 'CommonStock':
-        return 'Stock';
+        return 'Stocks';
       default: return categoryName;
     }
   }
