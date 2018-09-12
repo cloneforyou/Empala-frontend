@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { widgetsCash } from '../../../localdata/dashboardWidgets';
-import WidgetTable from '../Widget/WidgetTable';
+import Tooltip from '@material-ui/core/Tooltip';
 import EmpalaTable from '../EmpalaTable';
 import { formatNumberWithFixedPoint, getTableHeaderByName, parseOrderDate, parseDateString } from '../../../utils/dashboardUtils';
 import WidgetHead from '../Widget/WidgetHead';
@@ -28,7 +27,11 @@ const parsePositionsToTableData = (positions) => {
       { value: 0 }, // EUR Balance
       { value: 0 }, // GBP Balance
       { value: <a href='#'><i className="cash__icon cash__icon_link" /></a> },
-      { value: <i className="cash__icon cash__icon_comment" /> },
+      { value:
+          <Tooltip title='Comment comment comment comment'>
+            <i className="cash__icon cash__icon_comment" />
+          </Tooltip>
+      },
     ];
   });
 };
