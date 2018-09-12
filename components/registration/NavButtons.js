@@ -27,7 +27,7 @@ function isFieldError(fieldsList, errorsList) {
 
 
 function filterActiveCheckboxes(checkboxesList) {
-  return Object.keys(checkboxesList).filter(key => (/regulatory_checkbox/.test(key)) && checkboxesList[key]);
+  return Object.keys(checkboxesList).filter(key => (/regulatory_checkbox_[2-5]/.test(key)) && checkboxesList[key]);
 }
 
 

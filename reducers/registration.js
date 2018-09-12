@@ -41,6 +41,7 @@ const initialState = {
     // member_account_account_no: generateId(),
     memberDocument: 'passport',
     regulatory_family_dependents: '0',
+    regulatory_407form_need: false,
     profile_investment_experience_equities: 'None',
     profile_investment_experience_cryptocurrencies: 'None',
     profile_investment_experience_options: 'None',
@@ -112,6 +113,7 @@ function registration(state = initialState, action) {
         registrationData: {
           ...state.registrationData,
           member_account_add_margin: action.id === 'member_account_add_margin' && !state.checkboxes[action.id],
+          regulatory_407form_need: action.id === 'regulatory_checkbox_1' && !state.checkboxes[action.id],
         },
       };
     case SHOW_IDENTITY_MODAL:
