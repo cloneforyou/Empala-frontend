@@ -25,7 +25,7 @@ import {
   SEND_CODE_VERIFY_SUCCESS,
   SEND_CODE_VERIFY_FAILURE,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP,
+  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL,
 } from '../constants/registration';
 
 // import { generateId } from '../utils/registrationUtils';
@@ -62,6 +62,8 @@ const initialState = {
   id: false,
   showPopupPIN: false,
   popupPINType: false,
+  showAlertModal: false,
+  alertModalName: false,
   verifyLoading: false,
   showVerifyEmailForm: false,
   codeVerify: null,
@@ -231,6 +233,18 @@ function registration(state = initialState, action) {
         ...state,
         showInfoPopup: false,
         infoPopupName: false,
+      };
+    case SHOW_ALERT_MODAL:
+      return {
+        ...state,
+        showAlertModal: true,
+        alertModalName: action.name,
+      };
+    case CLOSE_ALERT_MODAL:
+      return {
+        ...state,
+        showAlertModal: false,
+        alertModalName: false,
       };
     default:
       return state;

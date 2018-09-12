@@ -19,7 +19,10 @@ import {
   VALIDATE_FIELDS_BLANK,
   ADDRESS_INFO_REQUEST,
   VALIDATE_FIELD_VALUE,
-  EDITABLE_PART, GET_USER_ID_REQUEST, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
+  EDITABLE_PART,
+  GET_USER_ID_REQUEST,
+  SET_USER_ID,
+  GET_USER_ID_REQUEST_FAIL,
   CHECK_EMAIL_VERIFICATION,
   SHOW_POPUP_PIN,
   CLOSE_POPUP_PIN,
@@ -28,9 +31,10 @@ import {
   VERIFY_SEND_FAILURE,
   SEND_CODE_VERIFY,
   SEND_CODE_VERIFY_SUCCESS,
-  SEND_CODE_VERIFY_FAILURE, REGISTRATION_SUBMIT_SUCCESS,
+  SEND_CODE_VERIFY_FAILURE,
+  REGISTRATION_SUBMIT_SUCCESS,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP,
+  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -278,5 +282,18 @@ export function openInfoPopup(name) {
 export function closeInfoPopup() {
   return {
     type: CLOSE_INFO_POPUP,
+  };
+}
+
+export function showAlertModal(name) {
+  return {
+    type: SHOW_ALERT_MODAL,
+    name,
+  };
+}
+
+export function closeAlertModal() {
+  return {
+    type: CLOSE_ALERT_MODAL,
   };
 }
