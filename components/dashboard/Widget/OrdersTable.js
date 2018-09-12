@@ -20,11 +20,30 @@ class OrdersTable extends React.Component {
   componentDidMount() {
   }
   getTableDataFromOrders(orders, title) {
+    const orders_statuses = [
+      'New',
+      'PartiallyFilled',
+      'DoneForDay',
+      'Replaced',
+      'Suspended',
+      'PendingNew',
+      'Calculated',
+      'AcceptedForBidding',
+      'Error',
+    ];
+    const fills_cancels_statuses = [
+      'Filled',
+      'Canceled',
+      'Stopped',
+      'Rejected',
+      'Expired',
+    ];
     let filteredOrders = [];
     if (title === 'Orders') {
       filteredOrders = filter(
         orders,
-        order => order.status === 'New' || order.status === 'PartiallyFilled',
+        // order => order.status === 'New' || order.status === 'PartiallyFilled',
+        order => orders_statuses.includes(order.status),
       );
       /*  ===== HEADERS ==== */
       // 'Sec name'
@@ -58,7 +77,8 @@ class OrdersTable extends React.Component {
     if (title === 'Fills/cancels') {
       filteredOrders = filter(
         orders,
-        order => order.status === 'Filled' || order.status === 'Canceled',
+        // order => order.status === 'Filled' || order.status === 'Canceled',
+        order => fills_cancels_statuses.includes(order.status),
       );
       return filteredOrders.map(order => [
         { value: order.values.sec_name },
