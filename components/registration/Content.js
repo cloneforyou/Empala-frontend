@@ -6,7 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import NavButtons from './NavButtons';
 import {
-  changeTabPage, closeErrorModal,
+  changeTabPage, closeAlertModal, closeErrorModal,
   getMenuItems,
   getRegistrationDataFromCache,
   getUserID,
@@ -21,6 +21,7 @@ import FinalReviewPage from './FinalReviewPage';
 import AgreementPage from './AgreementPage';
 import RegistrationResultModal from './RegistrationResultModal';
 import PopupPIN from './PopupPIN';
+import NAStateModal from './NAStateModal';
 
 function mapStateToProps(state) {
   return {
@@ -35,6 +36,8 @@ function mapStateToProps(state) {
     showPopupPIN: state.registration.showPopupPIN,
     popupPINType: state.registration.popupPINType,
     verifyLoading: state.registration.verifyLoading,
+    showAlertModal: state.registration.showAlertModal,
+    alertModalName: state.registration.alertModalName,
   };
 }
 
@@ -50,6 +53,9 @@ function mapDispatchToProps(dispatch) {
     closeModal: () => {
       dispatch(closeErrorModal());
       dispatch(changeTabPage('info', 1, 'backward'));
+    },
+    closeAlertModal: () => {
+      dispatch(closeAlertModal());
     },
   });
 }
@@ -183,6 +189,10 @@ class Content extends PureComponent {
               </div>
             </div>
           </div>
+          <NAStateModal
+            open={this.props.showAlertModal && this.props.alertModalName === 'NA_state'}
+            handleClose={this.props.closeAlertModal}
+          />
         </div>
       </div>
     );
@@ -196,8 +206,10 @@ Content.propTypes = {
   setTabPageIndex: PropTypes.func,
   getMenuItems: PropTypes.func,
   getUserID: PropTypes.func,
+  closeAlertModal: PropTypes.func,
   tabIndex: PropTypes.number,
   showPopupPIN: PropTypes.bool,
+  showAlertModal: PropTypes.bool,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

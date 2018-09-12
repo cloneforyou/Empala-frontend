@@ -5,10 +5,12 @@ import {
   setFieldInvalid,
   setFieldValid,
   setInputFieldValueById,
+  showAlertModal,
   showIdentityModal,
 } from '../actions/registration';
 import request from '../utils/request';
 import ignoredFields from '../localdata/noValidatedFiels';
+import notAllowedStates from '../localdata/NAStatesList';
 
 function* validatePasswordField(id) {
   const password = yield select(state => state.registration.registrationData['member_account_password']);
@@ -86,6 +88,7 @@ export function* validateFieldValue({ fieldId, fieldValue }) {
       yield put(setFieldInvalid(fieldId, 'Post Office Boxes are not allowed in residential address'));
     }
   }
+
   if (['identity_zip_code', 'identity_mailing_address_zip_code', 'profile_employment_zip_code'].includes(fieldId)) {
     if (fieldValue && fieldValue.length !== 5) {
       yield put(setFieldInvalid(fieldId, 'Invalid ZIP-code format, please provide five digits code'));
@@ -133,6 +136,10 @@ export default function* validationSaga({ id, value }) {
     'reset_password',
   ];
   yield put(setFieldValid(id));
+  if (id === 'identity_residential_address_residential_address_state' &&
+    notAllowedStates.includes(value.toLowerCase())) {
+    yield put(showAlertModal('NA_state'));
+  }
   if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({ id, value });
   } else if (passwordFields.includes(id)) {

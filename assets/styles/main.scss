@@ -59,8 +59,11 @@ html, body {
 body {
   background-color: #ffffff;
   color: $main-color-text-grey;
-  font-family: $ProximaNova;
   min-width: 768px;
   font-weight: 300;
+}
+
+body, div {
+  font-family: $ProximaNova;
 }
 
