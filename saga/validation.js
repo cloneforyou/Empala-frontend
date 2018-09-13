@@ -137,7 +137,7 @@ export default function* validationSaga({ id, value }) {
   ];
   yield put(setFieldValid(id));
   if (id === 'identity_residential_address_residential_address_state' &&
-    notAllowedStates.includes(value.toLowerCase())) {
+    notAllowedStates.includes(value)) {
     yield put(showAlertModal('NA_state'));
   }
   if (serverValidatedFields.includes(id)) {

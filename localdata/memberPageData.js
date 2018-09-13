@@ -82,7 +82,7 @@ export const dataFields = [
     {
       id: 'member_account_account_no',
       type: 'text',
-      label: 'Account No.',
+      label: 'Member No.',
       placeholder: '',
       infoButton: true,
     },

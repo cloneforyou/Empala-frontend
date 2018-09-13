@@ -208,8 +208,8 @@ export function traceError(err) {
 
 const popupText = {
   member_account_account_no: {
-    text: 'You can choose to use the system generated Account No. we will provide, or you can enter your own unique code that you will easily remember.',
-    title: 'Account no.',
+    text: 'You can choose to use the system generated Member No. we will provide, or you can enter your own unique code that you will easily remember.',
+    title: 'Member no.',
   },
   profile_investment_experience_equities: {
     text: 'Liquorice cake marshmallow lemon drops marzipan dragée lollipop marshmallow. Jelly cake ice cream cupcake muffin cookie jelly beans pudding bonbon. Tiramisu pudding wafer croissant tart. Cotton candy tiramisu macaroon donut pie candy canes.',
