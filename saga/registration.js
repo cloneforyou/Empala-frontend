@@ -135,9 +135,10 @@ export function* getUserID() {
   };
   try {
     const res = yield call(request, url, options);
-    yield put(setUserID(res.data.data.id));
-    localStorage.setItem('id', res.data.data.id);
-    if (!(data && data.member_account_account_no)) yield put(setInputFieldValueById('member_account_account_no', res.data.data.id));
+    const memberId = res.data.data.member.id;
+    yield put(setUserID(memberId));
+    localStorage.setItem('id', memberId);
+    if (!(data && data.member_account_account_no)) yield put(setInputFieldValueById('member_account_account_no', memberId));
   } catch (err) {
     yield put(failUserID(`Sorry, the registration is unavailable right now. ${err.message}`));
   }
