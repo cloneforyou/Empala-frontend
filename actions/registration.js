@@ -34,7 +34,7 @@ import {
   SEND_CODE_VERIFY_FAILURE,
   REGISTRATION_SUBMIT_SUCCESS,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL,
+  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL, SET_AVAILABLE_STATES,
 } from '../constants/registration';
 
 export function getMenuItems(items) {
@@ -295,5 +295,12 @@ export function showAlertModal(name) {
 export function closeAlertModal() {
   return {
     type: CLOSE_ALERT_MODAL,
+  };
+}
+
+export function setAvailableStates(data) {
+  return {
+    type: SET_AVAILABLE_STATES,
+    data,
   };
 }

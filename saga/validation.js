@@ -10,7 +10,6 @@ import {
 } from '../actions/registration';
 import request from '../utils/request';
 import ignoredFields from '../localdata/noValidatedFiels';
-import notAllowedStates from '../localdata/NAStatesList';
 
 function* validatePasswordField(id) {
   const password = yield select(state => state.registration.registrationData['member_account_password']);
@@ -120,6 +119,7 @@ export function* validateLiquidWorth({ value }) {
 
 // Spawns validation function according to fieldId
 export default function* validationSaga({ id, value }) {
+  const allowedStatesList = yield select(state => state.registration.availableStatesList);
   const serverValidatedFields = [
     'member_account_email',
     'member_passport_number',
@@ -137,7 +137,7 @@ export default function* validationSaga({ id, value }) {
   ];
   yield put(setFieldValid(id));
   if (id === 'identity_residential_address_residential_address_state' &&
-    notAllowedStates.includes(value)) {
+    !allowedStatesList.includes(value)) {
     yield put(showAlertModal('NA_state'));
   }
   if (serverValidatedFields.includes(id)) {

@@ -41,7 +41,7 @@ const NAStateModal = (props) => {
       contentStyle={style.contentStyle}
       // overlayStyle={style.overlayDialogStyle}
     >
-      <img src="../../static/images/exclaimation.svg" alt="alert icon" style={style.icon} />
+      <img src="../../static/images/Timeline.svg" alt="alert icon" style={style.icon} />
       <p>
         Unfortunately, we are not covering your state at this time.
       </p>

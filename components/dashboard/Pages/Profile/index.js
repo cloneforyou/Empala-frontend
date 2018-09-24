@@ -50,7 +50,6 @@ class Profile extends Component {
             <Tab label="Membership" />
             <Tab label="Regulatory" />
             <Tab label="Experience" />
-            {/*<Tab label="Account" />*/}
             <Tab label="Documents" />
             <Tab label="Application Settings" />
             <Tab label="Notifications" />
@@ -59,10 +58,9 @@ class Profile extends Component {
         {value === 0 && <Membership />}
         {value === 1 && <Regulatory />}
         {value === 2 && <Experience />}
-        {/*{value === 3 && <Account />}*/}
-        {value === 4 && <Documents />}
-        {value === 5 && <AppSettings />}
-        {value === 6 && <Notifications />}
+        {value === 3 && <Documents />}
+        {value === 4 && <AppSettings />}
+        {value === 5 && <Notifications />}
       </div>
     );
   }

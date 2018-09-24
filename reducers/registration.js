@@ -25,7 +25,7 @@ import {
   SEND_CODE_VERIFY_SUCCESS,
   SEND_CODE_VERIFY_FAILURE,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL,
+  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL, SET_AVAILABLE_STATES,
 } from '../constants/registration';
 
 // import { generateId } from '../utils/registrationUtils';
@@ -73,6 +73,7 @@ const initialState = {
   codeSent: false,
   showInfoPopup: false,
   infoPopupName: false,
+  availableStatesList: false,
 };
 
 function registration(state = initialState, action) {
@@ -247,6 +248,11 @@ function registration(state = initialState, action) {
         ...state,
         showAlertModal: false,
         alertModalName: false,
+      };
+    case SET_AVAILABLE_STATES:
+      return {
+        ...state,
+        availableStatesList: action.data,
       };
     default:
       return state;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="461px" height="317px" viewBox="0 0 461 317" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Timeline</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Timeline" transform="translate(7.000000, 7.000000)" fill-rule="nonzero" stroke-width="14">
+            <path d="M117.252304,33.5 L336,33.5" id="Line" stroke="#979797" stroke-linecap="square"></path>
+            <path d="M117.252304,270.25 L336,270.25" id="Line" stroke="#979797" stroke-linecap="square"></path>
+            <path d="M117.252304,151.5 L336,151.5" id="Line" stroke="#979797" stroke-linecap="square"></path>
+            <path d="M339,30.1547538 C411,23.9352905 447,42.8391854 447,86.8664384 C447,130.893691 411,152.252637 339,150.943277" id="Line-2" stroke="#979797" stroke-linecap="square"></path>
+            <path d="M0,152.154754 C72,145.935291 108,164.839185 108,208.866438 C108,252.893691 72,274.252637 0,272.943277" id="Line-2" stroke="#979797" stroke-linecap="square" transform="translate(54.000000, 212.000000) scale(-1, 1) translate(-54.000000, -212.000000) "></path>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="81.5" cy="32.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="224.5" cy="32.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="368.5" cy="32.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="81.5" cy="150.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="224.5" cy="150.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="368.5" cy="150.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="81.5" cy="270.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="224.5" cy="270.5" rx="33.5" ry="32.5"></ellipse>
+            <ellipse id="Oval-2" stroke="#98C73A" fill="#FFFFFF" cx="368.5" cy="270.5" rx="33.5" ry="32.5"></ellipse>
+        </g>
+    </g>
+</svg>

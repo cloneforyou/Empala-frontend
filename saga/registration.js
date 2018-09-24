@@ -11,7 +11,7 @@ import {
   sendCodeVerifySuccess,
   sendCodeVerifyFailure,
   showPopupPIN,
-  registrationSuccess,
+  registrationSuccess, setAvailableStates,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -126,6 +126,7 @@ export function* sendRegistrationForm() {
   }
 }
 
+// get initial registration data: userId and allowed states list
 export function* getUserID() {
   const data = JSON.parse(localStorage.getItem('registrationData'));
   const id = localStorage.getItem('id');
@@ -139,6 +140,7 @@ export function* getUserID() {
     yield put(setUserID(memberId));
     localStorage.setItem('id', memberId);
     if (!(data && data.member_account_account_no)) yield put(setInputFieldValueById('member_account_account_no', memberId));
+    yield put(setAvailableStates(res.data.data.available_states));
   } catch (err) {
     yield put(failUserID(`Sorry, the registration is unavailable right now. ${err.message}`));
   }
