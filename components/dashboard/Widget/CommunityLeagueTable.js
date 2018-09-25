@@ -49,12 +49,13 @@ const getRanks = (list) => {
 };
 
 const parseLeagueData = (data, sortDirection, sortIndex, myId) => {
-  const league = sortDirection === 'desc' ? [...data] : [...data].reverse();
+  console.log(sortDirection, sortIndex, myId)
+  const league = [...data];
   const ranks = getRanks(league.map(item => item[sortingFields[sortIndex] || 'total_net_value']));
   const ranksDesc = [...ranks].reverse();
   return data.map((item, index) =>
     [
-      { value: sortDirection === 'desc' ? ranks[index] : ranksDesc[index], bold: item.member_id === myId }, // Rank
+      { value: sortDirection === 'asc' ? ranksDesc[index] : ranks[index], bold: item.member_id === myId }, // Rank
       { value: item.FakedRankMember ? item.FakedRankMember.basic_information.full_name : 'Anonymous', bold: item.member_id === myId }, // Name
       { value: formatNumberWithFixedPoint(item.annual_percent_return, 1), bold: item.member_id === myId }, // 'Ann % R
       { value: formatNumberWithFixedPoint(item.total_percent_return, 1), bold: item.member_id === myId }, // Total % R

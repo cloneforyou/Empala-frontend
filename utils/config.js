@@ -1,5 +1,5 @@
 export const serverOrigins = {
-  aws: 'http://dev.back.empala.com',
+  aws: 'https://server.empala.com',
   local: 'http://localhost:9000',
   localSecure: 'https://localhost:55553',
 };
