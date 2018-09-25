@@ -49,7 +49,8 @@ const getRanks = (list) => {
 };
 
 const parseLeagueData = (data, sortDirection, sortIndex, myId) => {
-  const ranks = getRanks(data.map(item => item[sortingFields[sortIndex] || 'total_net_value']));
+  const league = sortDirection === 'desc' ? [...data] : [...data].reverse();
+  const ranks = getRanks(league.map(item => item[sortingFields[sortIndex] || 'total_net_value']));
   const ranksDesc = [...ranks].reverse();
   return data.map((item, index) =>
     [
@@ -64,7 +65,7 @@ const parseLeagueData = (data, sortDirection, sortIndex, myId) => {
       { value: formatNumberWithFixedPoint(item.x1m_percent_return, 1), bold: item.member_id === myId }, // 1M % R
       // { value: item.member_id },
     ]);
-}
+};
 
 const setTableSortSettings = (name, sortIndex, direction, setSortSettings) => {
   console.log(name, sortIndex, direction);
