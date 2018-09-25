@@ -180,6 +180,7 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         uploadableImage: action.img,
+        error: false,
       };
     case CLEAN_IMAGE_DATA:
       return {
