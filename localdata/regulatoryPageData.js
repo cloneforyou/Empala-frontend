@@ -92,33 +92,31 @@ export const dataFields = [
       typeField: 'numberField',
       col: 6,
     },
+    {
+      id: 'regulatory_identification_investment_experience',
+      hint: 'Please select',
+      label: 'Investment experience',
+      field: 'select',
+      options: [
+        {
+          value: 'None',
+          title: 'None',
+        },
+        {
+          value: 'Limited',
+          title: 'Limited',
+        },
+        {
+          value: 'Good',
+          title: 'Good',
+        },
+        {
+          value: 'Extensive',
+          title: 'Extensive',
+        },
+      ],
+    },
   ],
-  // [
-  //   {
-  //     id: 'regulatory_family_investment_experience',
-  //     hint: 'Please select',
-  //     label: 'Investment experience',
-  //     field: 'select',
-  //     options: [
-  //       {
-  //         value: 'None',
-  //         title: 'None',
-  //       },
-  //       {
-  //         value: 'Limited',
-  //         title: 'Limited',
-  //       },
-  //       {
-  //         value: 'Good',
-  //         title: 'Good',
-  //       },
-  //       {
-  //         value: 'Excellent',
-  //         title: 'Excellent',
-  //       },
-  //     ],
-  //   },
-  // ],
 ];
 
 export { dataFields as default };
