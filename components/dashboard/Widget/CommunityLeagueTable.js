@@ -50,7 +50,7 @@ const getRanks = (list) => {
 
 const parseLeagueData = (data, sortDirection, sortIndex, myId) => {
   console.log(sortDirection, sortIndex, myId)
-  const league = [...data];
+  const league = sortDirection === 'asc' ? [...data].reverse() : [...data];
   const ranks = getRanks(league.map(item => item[sortingFields[sortIndex] || 'total_net_value']));
   const ranksDesc = [...ranks].reverse();
   return data.map((item, index) =>
@@ -84,8 +84,8 @@ const sortByColumn = (data, col, order) => {
   if (!order) return data;
   const newData = [...data];
   return newData.sort((a, b) => {
-    if (!a[sortingFields[col]]) return 1;
-    if (!b[sortingFields[col]]) return -1;
+    // if (!a[sortingFields[col]]) return 1;
+    // if (!b[sortingFields[col]]) return -1;
     if (a[sortingFields[col]] === b[sortingFields[col]]) return 0;
     if (order === 'asc') {
       if (!isNaN(a[sortingFields[col]]) && !isNaN(b[sortingFields[col]])) return a[sortingFields[col]] - b[sortingFields[col]];
