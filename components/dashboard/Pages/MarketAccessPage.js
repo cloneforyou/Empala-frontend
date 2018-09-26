@@ -12,17 +12,20 @@ const frameStyle = {
 class MarketAccessPage extends React.Component {
 
   render() {
-    return (
-      <div>
-        <TitleBar />
-        <iframe
-          src="https://empala-demo-prod.etnasoft.us/"
-          style={frameStyle}
-          marginHeight={10}
-          title="MarketsFrame"
-        />
-      </div>
-    );
+    if (this.props.activePageMarket === 'united states') {
+      return (
+        <div>
+          <TitleBar/>
+          <iframe
+            src="https://empala-demo-prod.etnasoft.us/"
+            style={frameStyle}
+            marginHeight={10}
+            title="MarketsFrame"
+          />
+        </div>
+      );
+    }
+    return (<h2 style={{ color: 'silver', fontSize: 120 }}>Coming soon</h2>);
   }
 }
 
@@ -34,4 +37,5 @@ MarketAccessPage.defaultProps = {
 export default connect(state => (
   {
     etnaCredentials: state.dashboard.userData.data.etna_credentials || {},
+    activePageMarket: state.dashboard.activePageMarket,
   }), null)(MarketAccessPage);

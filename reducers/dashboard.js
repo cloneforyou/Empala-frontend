@@ -28,7 +28,6 @@ import {
   UPDATE_NEWS,
   SHOW_POPUP_PIN,
   SET_APP_SETTINGS,
-  SET_SESSION_TIME_REMAIN,
   SET_SESSION_ID,
   MUTE_NOTIFICATIONS,
   SET_ALL_NOTIFICATIONS,
@@ -48,7 +47,9 @@ import {
   SET_LEAGUE_DATA,
   OPEN_INFO_POPUP,
   CLOSE_INFO_POPUP,
-  SET_TABLE_SORT_SETTINGS, TOGGLE_LEAGUE_DIVIDER,
+  SET_TABLE_SORT_SETTINGS,
+  TOGGLE_LEAGUE_DIVIDER,
+  SET_ACTIVE_MARKET_PAGE,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -70,6 +71,7 @@ const initialState = {
   userSocial: false,
   userDataLoaded: false,
   activePageDashboard: 'overflow',
+  activePageMarket: false,
   loadingPage: true,
   modalOpen: false,
   openModalName: false,
@@ -174,6 +176,12 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         activePageDashboard: action.page,
+        // loadingPage: false,
+      };
+    case SET_ACTIVE_MARKET_PAGE:
+      return {
+        ...state,
+        activePageMarket: action.page,
         // loadingPage: false,
       };
     case SET_UPLOADABLE_IMAGE:

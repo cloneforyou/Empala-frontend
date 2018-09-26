@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import { setGroupCountry, setActivePage } from '../../actions/dashboard'
+import { setGroupCountry, setActivePage, setActiveMarketPage } from '../../actions/dashboard'
 
 
 class Sidebar extends Component {
@@ -26,8 +26,9 @@ class Sidebar extends Component {
     setTimeout(() => this.setState({ countryMenuIsOpen: !countryMenuIsOpen }), 200);
   };
 
-  handleClick = (label) => {
-    this.props.setActivePage(label.toLowerCase())
+  handleClick = (label, market) => {
+    this.props.setActivePage(label && label.toLowerCase());
+    this.props.setActiveMarketPage(market && market.toLowerCase());
   };
 
 
@@ -109,5 +110,7 @@ export default connect(state => ({
   activePageDashboard: state.dashboard.activePageDashboard,
   currentColorScheme: state.dashboard.currentColorScheme,
 }), {
-  setGroupCountry, setActivePage
+  setGroupCountry,
+  setActivePage,
+  setActiveMarketPage,
 })(Sidebar);

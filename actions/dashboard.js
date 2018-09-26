@@ -71,7 +71,7 @@ import {
   OPEN_INFO_POPUP,
   CLOSE_INFO_POPUP,
   SET_TABLE_SORT_SETTINGS,
-  TOGGLE_LEAGUE_DIVIDER,
+  TOGGLE_LEAGUE_DIVIDER, SET_ACTIVE_MARKET_PAGE,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -130,6 +130,11 @@ export function setGroupCountry(label) {
 
 export const setActivePage = page => ({
   type: SET_ACTIVE_PAGE,
+  page,
+});
+
+export const setActiveMarketPage = page => ({
+  type: SET_ACTIVE_MARKET_PAGE,
   page,
 });
 
