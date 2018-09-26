@@ -130,6 +130,7 @@ class Account extends Component {
           globalData={GlobalPortfolioData}
           prefix={TABS[0].prefix}
           accountBalance={this.props.accountBalance.ETNA}
+          currentColorScheme={currentColorScheme}
           />
         }
         {value === 1 && <div className="account__container">Coming Spring 2019</div>}
@@ -140,6 +141,7 @@ class Account extends Component {
           globalData={GlobalPortfolioData}
           prefix={TABS[2].prefix}
           accountBalance={this.props.accountBalance.ETNA}
+          currentColorScheme={currentColorScheme}
           />
         }
         {value === 3 && <div className="account__container">Coming Spring 2019</div>}

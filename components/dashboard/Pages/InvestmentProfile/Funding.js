@@ -78,7 +78,7 @@ class Funding extends Component {
       <div>
         <TitleBar />
         <div className="container-fluid">
-          <div className="funding-wrapper">
+          <div className="funding-wrapper dark-theme">
             <div className="funding-background" />
             <div className="funding-content">
               <div className="funding-content-header">

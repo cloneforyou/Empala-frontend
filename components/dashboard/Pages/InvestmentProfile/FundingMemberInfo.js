@@ -23,7 +23,7 @@ export default class FundingMemberInfo extends Component {
         <div className="pr-2 no-gutters text-truncate" style={{ width: '176px', paddingTop: '22px' }} >
           <input
             type="text"
-            className="pseudo-input__input"
+            className="pseudo-input__input pseudo-input__input_dark"
             id="member_first_name"
             value={this.props.member_first_name || ''}
           />
@@ -33,7 +33,7 @@ export default class FundingMemberInfo extends Component {
           style={{ width: '256px', paddingTop: '22px' }}
         >
           <input
-            className="pseudo-input__input"
+            className="pseudo-input__input pseudo-input__input_dark"
             id="member_last_name"
             value={this.props.member_last_name || ''}
           />

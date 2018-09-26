@@ -26,7 +26,7 @@ class Main extends Component {
       case 'overview':
         return <Overview />;
       case 'positions':
-        return <Positions />;
+        return <Positions currentColorScheme={this.props.currentColorScheme} />;
       case 'performance':
         return <Performance />;
       case 'cash':

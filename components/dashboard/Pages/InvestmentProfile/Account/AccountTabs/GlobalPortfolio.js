@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AnyChart from 'anychart-react';
 import { Link } from '../../../../../../routes';
 import { formatNumberWithFixedPoint } from '../../../../../../utils/dashboardUtils';
+import { DARK } from '../../../../../../constants/colors';
 
 const balanceFieldsMapTable = {
   north_america: {
@@ -39,11 +40,17 @@ export default class GlobalPortfolio extends Component {
       textButton,
       accountBalance,
       prefix,
+      currentColorScheme,
     } = this.props;
+    const customTheme = currentColorScheme === 'dark' ?
+      {
+        background: DARK,
+      } : '';
+
     return (
       <div className="global-portfolio">
         <div className="global-portfolio__container">
-          <div className="global-portfolio__container_payments">
+          <div className="global-portfolio__container_payments dark-theme">
             <div className="global-portfolio__input-group vertical-align_center">
               {
                 <div className="pseudo-input">
@@ -51,7 +58,7 @@ export default class GlobalPortfolio extends Component {
                   <input
                     id={`${prefix}_${globalData[0].id}`}
                     type="text"
-                    className="pseudo-input__input"
+                    className="pseudo-input__input pseudo-input__input_dark"
                     value={formatNumberWithFixedPoint(getValueByPrefixAndId(prefix || 'north_america', globalData[0].id, accountBalance), 2)}
                     readOnly
                   />
@@ -69,7 +76,7 @@ export default class GlobalPortfolio extends Component {
                       <input
                         id={`${prefix}_${item.id}`}
                         type="text"
-                        className="pseudo-input__input"
+                        className="pseudo-input__input pseudo-input__input_dark"
                         value={formatNumberWithFixedPoint(
                           getValueByPrefixAndId(prefix || 'north_america', item.id, accountBalance),
                           /pending_order_count/.test(item.id) ? 0 : 2,
@@ -97,7 +104,7 @@ export default class GlobalPortfolio extends Component {
               </button>
             </div>
           </div>
-          <div className="global-portfolio__container_graphics row no-gutters">
+          <div className="global-portfolio__container_graphics dark-theme row no-gutters">
             <div className="graphic__wrapper col-lg-6">
               <div style={{
                 fontSize: '14px',
@@ -110,6 +117,7 @@ export default class GlobalPortfolio extends Component {
                 type="pie"
                 height={300}
                 id="chart-container-account-pie"
+                {...customTheme}
                 data={
                   [
                     { x: 'A', value: 637166 },
@@ -129,6 +137,7 @@ export default class GlobalPortfolio extends Component {
                 type="area"
                 height={300}
                 id="chart-container-account-area"
+                {...customTheme}
                 data={
                   [7.44, 7.20, 6.45, 7.42],
                   [6.43, 6.16, 6.36, 6.43],
@@ -141,6 +150,7 @@ export default class GlobalPortfolio extends Component {
                 type="bubble"
                 height={300}
                 id="chart-container-account-bubble"
+                {...customTheme}
                 data={
                   [
                     ['2000', 1100, 1],
@@ -159,6 +169,7 @@ export default class GlobalPortfolio extends Component {
                 series="splineArea"
                 type="area"
                 height={300}
+                {...customTheme}
                 splineArea={
                   [['2018-01-12', 176.179993, 177.360001, 175.649994, 177.089996],
                     ['2018-01-16', 177.899994, 179.389999, 176.139999, 176.190002],

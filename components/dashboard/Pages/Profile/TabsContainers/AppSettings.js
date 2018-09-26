@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EmpalaSelect from '../../../../registration/EmpalaSelect';
 import Footer from './Components/Footer';
-import {
-  toggleCheckboxById,
-} from '../../../../../actions/registration';
+import { toggleCheckboxById } from '../../../../../actions/registration';
 import { saveColorTheme, setInputFieldValueById } from '../../../../../actions/dashboard';
 
 const timeouts = [5, 10, 15, 30, 45, 60];
@@ -24,12 +22,13 @@ const options = {
     title: el === 0 ? 'Unlimited (not recommended)' : `${el} minutes`,
   })),
 };
+
 class AppSettings extends Component {
   render() {
     return (
-      <div className="tab-container">
+      <div className="tab-container tab-container_height">
         <div className="tab-container__wrapper">
-          <div className="row">
+          <div className="row mb-5">
             <div className="col-md-6 app-settings-col">
               <div className="row margin-bt-30">
                 <EmpalaSelect

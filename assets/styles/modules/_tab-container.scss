@@ -18,7 +18,9 @@
       font-size: 12px !important;
     }
   }
-
+  &_height {
+    height: calc(100vh - 124px);
+  }
 }
 
 .MuiTabs-scrollable-41 {
