@@ -29,7 +29,7 @@ const style = {
     verticalAlign: 'top',
   },
   formWrapper: {
-    width: '350px',
+    width: '300px',
     fontSize: '14px',
     textAlign: 'justify',
   },
@@ -77,8 +77,6 @@ class PasswordRecovery extends React.PureComponent {
     }
   }
 
-
-
   render() {
     return (
       <MuiThemeProvider>
@@ -86,30 +84,34 @@ class PasswordRecovery extends React.PureComponent {
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header />
           <div className="index_placeholder noselect">
-            <div className="index_placeholder__inner">
+            <div className="index_placeholder__inner text-center">
               Password reset
               <div style={style.formWrapper}>
                 <div>
-                  <p>Please provide new password for your account</p>
+                  <p >Please provide new password for your account</p>
                   <div>
-                    <EmpalaInput
-                      key="recovery_password"
-                      id="recovery_password"
-                      type="password"
-                      label="New password"
-                      handleChange={e => this.props.setInputValueById(e)}
-                      errorText={this.props.fieldsErrorText.recovery_password}
-                      value={this.props.password}
-                    />
-                    <EmpalaInput
-                      key="recovery_password_confirm"
-                      id="recovery_password_confirm"
-                      type="password"
-                      label="Confirm new password"
-                      handleChange={e => this.props.setInputValueById(e)}
-                      errorText={this.props.fieldsErrorText.recovery_password_confirm}
-                      value={this.props.passwordConfirm}
-                    />
+                    <div className="mb-3 no-gutters">
+                      <EmpalaInput
+                        key="recovery_password"
+                        id="recovery_password"
+                        type="password"
+                        label="New password"
+                        handleChange={e => this.props.setInputValueById(e)}
+                        errorText={this.props.fieldsErrorText.recovery_password}
+                        value={this.props.password}
+                      />
+                    </div>
+                    <div className="mb-4 no-gutters">
+                      <EmpalaInput
+                        key="recovery_password_confirm"
+                        id="recovery_password_confirm"
+                        type="password"
+                        label="Confirm new password"
+                        handleChange={e => this.props.setInputValueById(e)}
+                        errorText={this.props.fieldsErrorText.recovery_password_confirm}
+                        value={this.props.passwordConfirm}
+                      />
+                    </div>
                     { this.props.error &&
                     <p className="clearfix" style={style.notification}>
                       <span style={style.errorText}>{this.props.error}</span>
