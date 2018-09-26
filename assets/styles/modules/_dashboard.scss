@@ -95,6 +95,17 @@
       border: #7a7697 1px solid;
       color: #cacaca;
     }
+    .pseudo-input__input_dark {
+      background-color: $dark-blue;
+      color: $white;
+      &:focus{
+        color: $white;
+      }
+    }
+    .dark-theme {
+      background: $dark-bg-blue;
+      border: $dark-bg-blue;
+    }
   }
 }
 

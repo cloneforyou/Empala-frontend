@@ -7,7 +7,7 @@ import PlaidBox from './PlaidBox';
 
 
 const TransferForm = props => (
-  <div className="funding-ach-payment-box">
+  <div className="funding-ach-payment-box dark-theme">
     <h2 className="funding-content-header__title funding-ach-payment-box_title-margin">Transfer funds</h2>
     <div className="funding-ach-payment-box_input-margin">
       <EmpalaInput

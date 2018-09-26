@@ -13,7 +13,7 @@ const handleOnExit = () => {
 
 const PlaidBox = props => (
   <div
-    className="funding-ach-tiles-tile funding-ach-tiles-tile_add"
+    className="funding-ach-tiles-tile funding-ach-tiles-tile_add dark-theme"
     // onClick={props.togglePlaidLink}
     role="button"
   >

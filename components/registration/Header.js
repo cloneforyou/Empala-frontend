@@ -12,7 +12,7 @@ const Header = (props) => (
         <Link href="/">
           <a className="header__block__left-link">
             <IoIosArrowThinLeft size={52} />
-            <span>Back</span>
+            <span>Cancel</span>
           </a>
         </Link>
       </div>

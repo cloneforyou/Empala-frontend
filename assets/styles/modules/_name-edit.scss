@@ -45,12 +45,5 @@
       color: $main-color-text-grey;
       box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.15);
     }
-    &_dark {
-      background-color: $dark-blue;
-      color: $white;
-      &:focus{
-        color: $white;
-      }
-    }
   }
 }
