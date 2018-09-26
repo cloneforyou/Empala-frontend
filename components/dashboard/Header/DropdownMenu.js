@@ -101,7 +101,7 @@ const DropdownMenu = (props) => {
         <ul className="profile-menu__list">
           <li
             className="profile-menu__item"
-            onClick={() => this.handlerClick(4)}
+            onClick={() => this.handlerClick(3)}
           >
             <Link
               route="dashboard"
@@ -115,7 +115,7 @@ const DropdownMenu = (props) => {
         <ul className="profile-menu__list">
           <li
             className="profile-menu__item"
-            onClick={() => this.handlerClick(5)}
+            onClick={() => this.handlerClick(4)}
           >
             <Link
               route="dashboard"
@@ -126,7 +126,7 @@ const DropdownMenu = (props) => {
           </li>
           <li
             className="profile-menu__item"
-            onClick={() => this.handlerClick(6)}
+            onClick={() => this.handlerClick(5)}
           >
             <Link
               route="dashboard"
