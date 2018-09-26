@@ -181,6 +181,14 @@ class Content extends PureComponent {
                 {
                   showPopupPIN && <PopupPIN type={this.props.popupPINType} />
                 }
+                {this.props.tabIndex === 4 &&
+                <p className="inf-text">
+                  In providing information about a trusted contact person you authorize Empala to contact and disclose<br/>
+                  information about your account to that person in the following circumstances:<br/>
+                  to address possible financial exploitation, to confirm the specifics of your current contact information,<br/>
+                  health status, or the identity of any legal guardian, executor, trustee or holder of power of attorney,<br/>
+                  or as otherwise permitted by applicable law.
+                </p>}
                 <div className="onboard__right-block--bottom">
                   <NavButtons
                     fieldNames={fieldNames}
