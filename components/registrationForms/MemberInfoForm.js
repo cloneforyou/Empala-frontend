@@ -164,11 +164,11 @@ class MemberInfoForm extends React.PureComponent {
             id="member_passport_number"
             type="text"
             label="Passport no."
-            value={this.props.registrationData['member_passport_number'] || ''}
+            value={this.props.registrationData['member_passport_number'].toUpperCase() || ''}
             handleChange={this.props.setInputValueById}
             disabled={!this.isRadioChecked('passport')}
             errorText={this.props.fieldsErrors['member_passport_number']}
-            mask="a999999999"
+            mask="*99999999"
           />
           <DatePickerField
             id="member_passport_issue_date"
