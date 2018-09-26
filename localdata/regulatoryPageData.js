@@ -84,41 +84,56 @@ export const dataFields = [
         },
       ],
     },
+    // {
+    //   label: 'No of dependents',
+    //   id: 'regulatory_family_dependents',
+    //   field: 'input',
+    //   type: 'text',
+    //   typeField: 'numberField',
+    //   col: 6,
+    // },
     {
       label: 'No of dependents',
       id: 'regulatory_family_dependents',
-      field: 'input',
-      type: 'text',
-      typeField: 'numberField',
+      hint: 'Please select',
+      field: 'select',
       col: 6,
+      options: (() => {
+        const out = [];
+        for (let i = 0; i < 100; i++) {
+          out.push({
+            value: `${i}`,
+            title: `${i}`,
+          });
+        }
+        return out;
+      })(),
+    },
+    {
+      id: 'regulatory_identification_investment_experience',
+      hint: 'Please select',
+      label: 'Investment experience',
+      field: 'select',
+      options: [
+        {
+          value: 'None',
+          title: 'None',
+        },
+        {
+          value: 'Limited',
+          title: 'Limited',
+        },
+        {
+          value: 'Good',
+          title: 'Good',
+        },
+        {
+          value: 'Extensive',
+          title: 'Extensive',
+        },
+      ],
     },
   ],
-  // [
-  //   {
-  //     id: 'regulatory_family_investment_experience',
-  //     hint: 'Please select',
-  //     label: 'Investment experience',
-  //     field: 'select',
-  //     options: [
-  //       {
-  //         value: 'None',
-  //         title: 'None',
-  //       },
-  //       {
-  //         value: 'Limited',
-  //         title: 'Limited',
-  //       },
-  //       {
-  //         value: 'Good',
-  //         title: 'Good',
-  //       },
-  //       {
-  //         value: 'Excellent',
-  //         title: 'Excellent',
-  //       },
-  //     ],
-  //   },
-  // ],
 ];
 
 export { dataFields as default };
