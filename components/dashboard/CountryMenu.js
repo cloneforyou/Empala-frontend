@@ -11,8 +11,12 @@ class CountryMenu extends Component {
           {
             country.list && country.list.length > 0 && country.list.map(item => (
               <li className="side-menu__item" key={Math.random()}>
-                <a href="#" onClick={(e) => {e.stopPropagation();selectMarket('market')}}>
-                  <i className={`icon-flag icon-flag_${item.tag}`} />
+                <a href="#" onClick={(e) => {
+                  e.stopPropagation();
+                  selectMarket('market', (e.target.textContent || e.target.attributes['data-market'].nodeValue));
+                  }}
+                >
+                  <i className={`icon-flag icon-flag_${item.tag}`} data-market={item.name} />
                   <span>{item.name}</span>
                 </a>
               </li>
