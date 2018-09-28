@@ -76,12 +76,13 @@ export default class RightBlock extends Component {
 
   setMarketAsActivePage = () => {
     this.props.setActivePage('market');
+    this.props.setActiveMarketPage('united states');
   };
 
-  setApplicationSettingsAsActivePage = () => {
-    this.props.setActivePage('profile');
-    this.props.changeActiveTabProfile(5);
-  };
+  // setApplicationSettingsAsActivePage = () => {
+  //   this.props.setActivePage('profile');
+  //   this.props.changeActiveTabProfile(4);
+  // };
 
   getBadgeColor(count) {
     if (!!count.new_actions && count.new_actions > 0) return 'red';
@@ -114,7 +115,9 @@ export default class RightBlock extends Component {
         <ul className="nav user-nav align-items-center">
           <li className="nav-item">
             <div className="nav-tooltipe">
-              <a className="nav-link user-nav__link" onClick={this.setApplicationSettingsAsActivePage}>
+              <a className="nav-link user-nav__link"
+                 // onClick={this.setApplicationSettingsAsActivePage}
+              >
                 <Link
                   route="dashboard"
                   params={{page: 'profile'}}
@@ -122,16 +125,18 @@ export default class RightBlock extends Component {
                   <i className="user-nav__icon user-nav__icon_location background_light-gray"/>
                 </Link>
               </a>
-              <span className="tooltiptext">Set default</span>
+              <span className="tooltiptext">Account 2</span>
             </div>
           </li>
           <li className="nav-item">
             <div className="nav-tooltipe">
-              <a className="nav-link user-nav__link" onClick={this.setMarketAsActivePage}>
+              <a className="nav-link user-nav__link"
+                 onClick={this.setMarketAsActivePage}
+              >
                 {/*TODO: Color of icon change depending on the selected MARKET ACCESS*/}
                 <i className="user-nav__icon user-nav__icon_location active-link_red" />
               </a>
-              <span className="tooltiptext">North America</span>
+              <span className="tooltiptext">Account 1</span>
             </div>
           </li>
           <li className="nav-item">
