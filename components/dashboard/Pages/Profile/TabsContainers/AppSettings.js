@@ -25,6 +25,14 @@ const options = {
 
 class AppSettings extends Component {
   render() {
+    const {
+      setSelectedValueById,
+      fieldsErrors,
+      appSettings,
+      currentColorScheme,
+      saveColorTheme,
+    } = this.props;
+
     return (
       <div className="tab-container tab-container_height">
         <div className="tab-container__wrapper">
@@ -41,8 +49,8 @@ class AppSettings extends Component {
                   ]}
                   label="Time zone"
                   value="(UTC-08:00) Pacific Time (US & Canada)"
-                  handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors.app_settings_time_zone}
+                  handleChange={setSelectedValueById}
+                  errorText={fieldsErrors.app_settings_time_zone}
                   hint="Time zone"
                 />
                 <EmpalaSelect
@@ -54,9 +62,9 @@ class AppSettings extends Component {
                     },
                   ]}
                   label="Default Market Access Shortcut One"
-                  value={this.props.appSettings.app_settings_market_shortcut_one || "Default Individual Account"}
-                  handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors.app_settings_market_shortcut_one}
+                  value={appSettings.app_settings_market_shortcut_one || "Default Individual Account"}
+                  handleChange={setSelectedValueById}
+                  errorText={fieldsErrors.app_settings_market_shortcut_one}
                   hint="Time zone"
                 />
                 <EmpalaSelect
@@ -68,9 +76,9 @@ class AppSettings extends Component {
                     // },
                   ]}
                   label="Default Market Access Shortcut Two"
-                  value={this.props.appSettings.app_settings_market_shortcut_two || ''}
-                  handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors.app_settings_shortcut_two}
+                  value={appSettings.app_settings_market_shortcut_two || ''}
+                  handleChange={setSelectedValueById}
+                  errorText={fieldsErrors.app_settings_shortcut_two}
                   hint="Default Market Access Shortcut Two"
                 />
               </div>
@@ -81,18 +89,18 @@ class AppSettings extends Component {
                   id="app_settings_theme"
                   options={options.colorTheme}
                   label="Current color scheme"
-                  value={this.props.currentColorScheme}
-                  handleChange={(id, value) => this.props.saveColorTheme(value)}
-                  errorText={this.props.fieldsErrors.app_settings_theme}
+                  value={currentColorScheme}
+                  handleChange={(id, value) => saveColorTheme(value)}
+                  errorText={fieldsErrors.app_settings_theme}
                   hint="Current color scheme"
                 />
                 <EmpalaSelect
                   id="app_settings_session_timeout"
                   options={options.sessionTimeout}
                   label="Default session timeout"
-                  value={this.props.appSettings.app_settings_session_timeout || ''}
-                  handleChange={this.props.setSelectedValueById}
-                  errorText={this.props.fieldsErrors.app_settings_theme}
+                  value={appSettings.app_settings_session_timeout.toString() || ''}
+                  handleChange={setSelectedValueById}
+                  errorText={fieldsErrors.app_settings_theme}
                   hint="Session timeout"
                 />
               </div>
