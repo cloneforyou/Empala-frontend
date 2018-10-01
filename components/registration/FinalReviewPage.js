@@ -76,13 +76,18 @@ class FinalReviewPage extends PureComponent {
                   />
                   <FieldComponent
                     col={6}
-                    label="Account type"
+                    label="Customer type"
                     value={data.member_account_account_type || empty}
                   />
                   <FieldComponent
                     col={6}
                     label="Country of citizenship"
                     value={data.member_basic_information_residence || empty}
+                  />
+                  <FieldComponent
+                    col={6}
+                    label="Account type"
+                    value={data.member_account_add_margin ? 'Margin' : 'Cash'}
                   />
                 </div>
               </div>
