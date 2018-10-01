@@ -88,11 +88,11 @@ export const dataFields = [
     },
     {
       id: 'member_account_account_type',
-      label: 'Account type',
+      label: 'Customer type',
       hint: 'Please select',
       options: [
         {
-          value: 'individual',
+          value: 'Individual',
           title: 'Individual',
         },
         // blocked for MVP
