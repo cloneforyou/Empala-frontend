@@ -87,12 +87,12 @@ export const dataFields = [
       infoButton: true,
     },
     {
-      id: 'member_account_account_type',
-      label: 'Account type',
+      id: 'member_account_customer_type',
+      label: 'Customer type',
       hint: 'Please select',
       options: [
         {
-          value: 'individual',
+          value: 'Individual',
           title: 'Individual',
         },
         // blocked for MVP

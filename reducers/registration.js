@@ -54,7 +54,7 @@ const initialState = {
     profile_investment_experience_lending_money: 'None',
     profile_investment_experience_foreign_markets: 'None',
     profile_investment_experience_exotics: 'None',
-    member_account_add_margin: false,
+    member_account_account_type: 'Cash',
   },
   fieldsErrors: {},
   checkboxes: {},
@@ -113,7 +113,8 @@ function registration(state = initialState, action) {
         checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] },
         registrationData: {
           ...state.registrationData,
-          member_account_add_margin: action.id === 'member_account_add_margin' && !state.checkboxes[action.id],
+          member_account_account_type: action.id === 'member_account_add_margin' &&
+            (state.registrationData.member_account_account_type === 'Cash' ? 'Margin' : 'Cash'),
           regulatory_407form_need: action.id === 'regulatory_checkbox_1' && !state.checkboxes[action.id],
         },
       };

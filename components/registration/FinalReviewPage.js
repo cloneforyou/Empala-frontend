@@ -77,7 +77,7 @@ class FinalReviewPage extends PureComponent {
                   <FieldComponent
                     col={6}
                     label="Customer type"
-                    value={data.member_account_account_type || empty}
+                    value={data.member_account_customer_type || empty}
                   />
                   <FieldComponent
                     col={6}
@@ -87,7 +87,7 @@ class FinalReviewPage extends PureComponent {
                   <FieldComponent
                     col={6}
                     label="Account type"
-                    value={data.member_account_add_margin ? 'Margin' : 'Cash'}
+                    value={data.member_account_account_type}
                   />
                 </div>
               </div>
