@@ -915,7 +915,7 @@ export const widgetsPositionFirst = [
         title: 'fundingAnalysis',
         headers: [
           {
-            title: 'InvestmentProfile analysis',
+            title: 'Funding analysis',
             width: '165px',
           },
           {
