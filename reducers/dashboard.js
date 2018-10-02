@@ -62,6 +62,19 @@ import {
 import { parsePositionsList, parseWatchList, parseOrdersList } from '../utils/dashboardUtils';
 import { CLOSE_POPUP_PIN, SEND_CODE_VERIFY_SUCCESS } from '../constants/registration';
 
+/* todo remove when actual data been available */
+const allowedSectionsStub = [
+  'overview',
+  // 'positions',
+  'performance',
+  // 'cash',
+  'orders',
+  'profile',
+  'market',
+  'funding',
+  'global portfolio',
+];
+
 const initialState = {
   sidebarCollapsed: true,
   selectedGroup: {},
@@ -108,6 +121,7 @@ const initialState = {
   showInfoPopup: false,
   infoPopupName: false,
   tableSortSettings: {},
+  allowedSections: false,
 };
 
 const parseAccountBalance = (data) => {
@@ -171,6 +185,7 @@ function dashboard(state = initialState, action) {
         userDataLoaded: true,
         loadingPage: false,
         userSocial: action.data.data.social_capital,
+        allowedSections: action.data.data.allowedSections || allowedSectionsStub,
       };
     case SET_ACTIVE_PAGE:
       return {

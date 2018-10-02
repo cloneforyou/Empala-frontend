@@ -15,6 +15,7 @@ import Funding from './Pages/InvestmentProfile/Funding';
 import Account from './Pages/InvestmentProfile/Account';
 import PopupPIN from '../registration/PopupPIN';
 import SessionExpire from './Modal/SessionExpire';
+import ShowPageOrRejection from './ShowPageOrRejection';
 
 class Main extends Component {
   constructor(props) {
@@ -22,30 +23,82 @@ class Main extends Component {
   }
 
   mapPageToComponent = (page) => {
+    const { currentColorScheme, allowedSections } = this.props;
     switch (page) {
       case 'overview':
-        return <Overview />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'overview',
+            allowedSections
+          },
+          Overview);
       case 'positions':
-        return <Positions currentColorScheme={this.props.currentColorScheme} />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'positions',
+            currentColorScheme,
+            allowedSections
+          },
+          Positions);
       case 'performance':
-        return <Performance />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'performance',
+            allowedSections
+          },
+          Performance);
       case 'cash':
-        return <Cash />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'cash',
+            allowedSections
+          }, Cash);
       case 'orders':
-        return <Orders />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'orders',
+            allowedSections
+          },
+          Orders);
       case 'timeline':
       case 'community':
       case 'groups':
       case 'blogs':
-        return <GlobalNetworkPage page={page} />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'social',
+            allowedSections,
+            page,
+          },
+          GlobalNetworkPage);
       case 'profile':
-        return <Profile />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'profile',
+            allowedSections
+          },
+          Profile);
       case 'market':
-        return <MarketAccessPage />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'market',
+            allowedSections
+          },
+          MarketAccessPage);
       case 'funding':
-        return <Funding />;
+        return ShowPageOrRejection(
+        {
+          sectionName: 'funding',
+          allowedSections
+        },
+          Funding);
       case 'global portfolio':
-        return <Account />;
+        return ShowPageOrRejection(
+          {
+            sectionName: 'global portfolio',
+            allowedSections
+          },
+          Account);
       default:
         return '';
     }
@@ -86,6 +139,7 @@ export default connect(state => ({
   currentColorScheme: state.dashboard.currentColorScheme,
   showPopupPIN: state.dashboard.showPopupPIN,
   popupPINType: state.dashboard.popupPINType,
+  allowedSections: state.dashboard.allowedSections,
 }), dispatch => ({
   closeModal: () => dispatch(closeModal()),
 }))(Main);

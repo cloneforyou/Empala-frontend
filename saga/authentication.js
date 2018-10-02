@@ -27,6 +27,19 @@ import { setColorScheme } from '../actions/dashboard';
 import { selectETNADataRequest, getNews, sessionTimeout, getExternalNews } from './dashboard';
 
 
+/* todo remove when actual data been available */
+const allowedSectionsStub = [
+  'overview',
+  'positions',
+  'performance',
+  'cash',
+  'orders',
+  'profile',
+  'market',
+  'funding',
+  'global portfolio',
+];
+
 function* loginRequest(url, options) {
   // console.log(url, options)
   try {

@@ -37,19 +37,17 @@ const sortingFields = [
 const getRanks = (list) => {
   /*  get sorted list and sorting direction */
   /*  returns array of ranks  */
-  console.log('list --->>>>', list)
   if (!list) return [];
   let n = 0;
-  const ranks = list.map((el, i) => {
+  return list.map((el, i) => {
     if ((list[i - 1]) && el === list[i - 1]) return n;
     n += 1;
     return n;
   });
-  return ranks;
 };
 
 const parseLeagueData = (data, sortDirection, sortIndex, myId) => {
-  console.log(sortDirection, sortIndex, myId)
+  // console.log(sortDirection, sortIndex, myId)
   const league = sortDirection === 'asc' ? [...data].reverse() : [...data];
   const ranks = getRanks(league.map(item => item[sortingFields[sortIndex] || 'total_net_value']));
   const ranksDesc = [...ranks].reverse();
@@ -69,7 +67,7 @@ const parseLeagueData = (data, sortDirection, sortIndex, myId) => {
 };
 
 const setTableSortSettings = (name, sortIndex, direction, setSortSettings) => {
-  console.log(name, sortIndex, direction);
+  // console.log(name, sortIndex, direction);
   setSortSettings(
     name,
     sortIndex,
@@ -84,8 +82,6 @@ const sortByColumn = (data, col, order) => {
   if (!order) return data;
   const newData = [...data];
   return newData.sort((a, b) => {
-    // if (!a[sortingFields[col]]) return 1;
-    // if (!b[sortingFields[col]]) return -1;
     if (a[sortingFields[col]] === b[sortingFields[col]]) return 0;
     if (order === 'asc') {
       if (!isNaN(a[sortingFields[col]]) && !isNaN(b[sortingFields[col]])) return a[sortingFields[col]] - b[sortingFields[col]];
@@ -110,7 +106,7 @@ const findMyIndex = (data, myId) => data.findIndex(el => el.member_id === myId);
 const getTableData = (data, sortDirection, sortIndex, myId, assetsMin, assetsMax) => {
   if (!data) return [];
   const myIndex = findMyIndex(data, myId);
-  console.log('my index ===>>>', myIndex);
+  // console.log('my index ===>>>', myIndex);
   const rangedData = limitDataByAssetsRange(data, assetsMin, assetsMax, 'total_net_value');
   // return myIndex <= 11 ?
   //   parseLeagueData(rangedData.slice(0, 10), myId) :
