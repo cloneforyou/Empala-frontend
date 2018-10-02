@@ -5,6 +5,7 @@ import EmpalaTable from '../EmpalaTable';
 import { formatNumberWithFixedPoint, getTableHeaderByName, parseOrderDate, parseDateString } from '../../../utils/dashboardUtils';
 import WidgetHead from '../Widget/WidgetHead';
 import { initGA, logPageView } from '../../../utils/analytics';
+import RejectionPage from '../RejectionPage';
 
 
 const parsePositionsToTableData = (positions) => {
@@ -47,6 +48,7 @@ class Cash extends Component {
   }
 
   render() {
+    // return <RejectionPage />
     return (
       <div
         className={`widget-col col-lg-${widget.col}`}
