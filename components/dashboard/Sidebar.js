@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
-import { setGroupCountry, setActivePage, setActiveMarketPage } from '../../actions/dashboard'
+import { setGroupCountry, setActivePage, setActiveMarketPage } from '../../actions/dashboard';
 
 
 class Sidebar extends Component {
@@ -15,15 +15,13 @@ class Sidebar extends Component {
   }
 
   openMenu = (nextLabel) => {
-    const { countryMenuIsOpen } = this.state;
-    this.setState({ countryMenuIsOpen: !countryMenuIsOpen }, () => {
+    this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen }), () => {
       this.props.setGroupCountry(nextLabel)
     });
   };
 
   closeMenu = () => {
-    const { countryMenuIsOpen } = this.state;
-    setTimeout(() => this.setState({ countryMenuIsOpen: !countryMenuIsOpen }), 200);
+    setTimeout(() => this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen })), 200);
   };
 
   handleClick = (label, market) => {
@@ -94,7 +92,8 @@ class Sidebar extends Component {
           </div>
         </div>
         {
-          countryMenuIsOpen && selectedGroup.list && <CountryMenu
+          countryMenuIsOpen && selectedGroup.list &&
+          <CountryMenu
             country={selectedGroup}
             selectMarket={this.handleClick}
           />
