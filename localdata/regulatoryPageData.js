@@ -70,10 +70,10 @@ export const dataFields = [
           value: 'Married',
           title: 'Married',
         },
-        {
-          value: 'Domestic Partner',
-          title: 'Domestic Partner',
-        },
+        // {
+        //   value: 'Domestic Partner',
+        //   title: 'Domestic Partner',
+        // },
         {
           value: 'Divorced',
           title: 'Divorced',
