@@ -5,7 +5,7 @@ import {
   select,
 } from 'redux-saga/effects';
 import request from '../utils/request';
-import { getETNAData, openModal, restartSessionTimeout, setUserData, startSocket } from '../actions/dashboard';
+import { openModal, restartSessionTimeout, setUserData, startSocket } from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
@@ -251,6 +251,7 @@ export function* getUserData() {
       'orders_list',
       'watch_lists',
       'positions',
+      'balance',
     ].map(list => call(selectETNADataRequest, { payloadType: list })));
     yield put(startSocket());
     if (data.data.data.profile.should_update_password) {

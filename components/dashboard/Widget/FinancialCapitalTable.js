@@ -39,7 +39,9 @@ const parsePerformanceData = (data, tableName) => {
   return [];
 };
 
-const parsePositionsToTableData = (tableName, positions) => {
+const parsePositionsToTableData = (tableName, positions, balance) => {
+  // todo maybe need to remove positions;
+  // all data should be get from server?
   const calculateTotal = () => reduce(
     marketAllocations.map(all => calculateDomesticByType(all) + calculateForeignByType(all)),
     (sum, value) => sum + value,
@@ -49,6 +51,7 @@ const parsePositionsToTableData = (tableName, positions) => {
   const calculateDomesticByType = (type) => {
     if (!type) return calculateDomestic;
     return reduce(positions, (sum, value, index) => {
+      if (type === 'CommonStock') return balance.ETNA.marketValue.Value;
       if (positions[index].SecurityType === type) return sum + positions[index].CostBasis;
       return 0;
     }, 0);
@@ -67,7 +70,8 @@ const parsePositionsToTableData = (tableName, positions) => {
   const allocations = [
     { name: 'EMARA & MM', domestic: calculateDomesticByType('Emara'), foreign: calculateForeignByType('Emara') },
     { name: 'Currencies & MM', domestic: calculateDomesticByType('Currencies'), foreign: calculateForeignByType('Currencies') },
-    { name: 'Stocks', domestic: calculateDomesticByType('CommonStock'), foreign: calculateForeignByType('CommonStock') },
+    { name: 'Stocks', domestic: balance.ETNA.marketValue.Value, foreign: calculateForeignByType('CommonStock') },
+    // { name: 'Stocks', domestic: calculateDomesticByType('CommonStock'), foreign: calculateForeignByType('CommonStock') },
     { name: 'Govt bonds', domestic: calculateDomesticByType('Bonds'), foreign: calculateForeignByType('Bonds') },
     { name: 'Corp bonds', domestic: calculateDomesticByType('CorpBonds'), foreign: calculateForeignByType('CorpBonds') },
     { name: 'Hybrid & others', domestic: calculateDomesticByType('Hybrid'), foreign: calculateForeignByType('Hybrid') },
@@ -113,18 +117,24 @@ const FinancialCapitalTable = props => (
         widget={widget}
       />
       <div className="d-inline-block align-top">
-        <EmpalaTable
-          tableName="overview_financial_capital_exposure"
-          tableData={parsePositionsToTableData('overview_financial_capital_exposure', props.positions)}
-          small
-        />
+        {
+          props.accountBalance &&
+          <EmpalaTable
+            tableName="overview_financial_capital_exposure"
+            tableData={parsePositionsToTableData('overview_financial_capital_exposure', props.positions, props.accountBalance)}
+            small
+          />
+        }
       </div>
       <div className="d-inline-block align-top">
-        <EmpalaTable
-          tableName="overview_financial_capital_allocation"
-          tableData={parsePositionsToTableData('overview_financial_capital_allocation', props.positions)}
-          small
-        />
+        {
+          props.accountBalance &&
+          <EmpalaTable
+            tableName="overview_financial_capital_allocation"
+            tableData={parsePositionsToTableData('overview_financial_capital_allocation', props.positions, props.accountBalance)}
+            small
+          />
+        }
       </div>
       <div className="w-100" />
       <div className="d-inline-block align-top">
@@ -154,6 +164,7 @@ const FinancialCapitalTable = props => (
 const MapStateToProps = state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
   financial: state.dashboard.userData.data.financial_capital || {},
+  accountBalance: state.dashboard.accountBalance,
 });
 
 export default connect(MapStateToProps)(FinancialCapitalTable);
