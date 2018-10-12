@@ -11,6 +11,8 @@ import {
   GET_INSTITUTIONS_REQUEST,
   GET_INSTITUTIONS_SUCCESS,
   GET_INSTITUTIONS_FAILED,
+  REMOVE_INSTITUTION_REQUEST,
+  REMOVE_INSTITUTION_FAILED,
 } from '../constants/funding';
 
 export function setInputFieldValueById(id, value) {
@@ -65,7 +67,19 @@ export function addInstitution(token, institutionData) {
     institutionData,
   };
 }
+export function removeInstitution(institutionId) {
+  return {
+    type: REMOVE_INSTITUTION_REQUEST,
+    institutionId,
+  };
+}
 
+export function removeInstitutionFail(err) {
+  return {
+    type: REMOVE_INSTITUTION_FAILED,
+    err,
+  };
+}
 export function addInstitutionFail(err) {
   return {
     type: ADD_INSTITUTION_FAILED,

@@ -59,6 +59,16 @@ const Tile = props => (
     onClick={() => props.setPaymentIntitution(props.institution_name)}
     role="button"
   >
+    <div
+      className="funding-ach-tiles-tile__delete"
+      role="button"
+      onClick={(e) => {
+        e.stopPropagation();
+       props.removeInstitution(props.institutionId);
+      }}
+    >
+      &times;
+    </div>
     <div className="funding-ach-tiles-tile__image">
       {/*<img src="..." alt={props.institution_name} />*/}
       <span>{props.institution_name}</span>
@@ -98,10 +108,12 @@ export default class ACHTransfer extends React.Component {
             {this.props.institutionsList.map(item => (
               <Tile
                 key={item.institution_id}
+                institutionId={item.institution_id}
                 institution_name={item.name}
                 account_no={item.accounts[0].mask || ''} // TODO investigate about account no
                 setPaymentIntitution={this.props.setPaymentIntitution}
                 selected_institution={this.props.selected_institution}
+                removeInstitution={this.props.removeInstitution}
               />
             ))}
             { /* <div className="funding-ach-tiles-tile">

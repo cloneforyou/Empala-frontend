@@ -5,7 +5,11 @@ import {
   REMOVE_SECURITY,
   SET_SECURITY_FIELD_VALUE,
   SET_PAYMENT_INSTITUTION,
-  TOGGLE_PLAID, GET_INSTITUTIONS_SUCCESS, GET_INSTITUTIONS_FAILED, ADD_INSTITUTION_FAILED,
+  TOGGLE_PLAID,
+  GET_INSTITUTIONS_SUCCESS,
+  GET_INSTITUTIONS_FAILED,
+  ADD_INSTITUTION_FAILED,
+  REMOVE_INSTITUTION_FAILED,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -88,6 +92,7 @@ function funding(state = initialState, action) {
       };
     case GET_INSTITUTIONS_FAILED:
     case ADD_INSTITUTION_FAILED:
+    case REMOVE_INSTITUTION_FAILED:
       return {
         ...state,
         error: action.err,

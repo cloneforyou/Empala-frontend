@@ -1,11 +1,12 @@
 import { call, put, select, all, takeLatest, takeEvery } from 'redux-saga/effects';
 import request from '../utils/request';
-import { ADD_INSTITUTION_REQUEST, GET_INSTITUTIONS_REQUEST } from '../constants/funding';
-import { addInstitutionFail, getInstitutionsFail, setInstitutions } from '../actions/funding';
+import { ADD_INSTITUTION_REQUEST, GET_INSTITUTIONS_REQUEST, REMOVE_INSTITUTION_REQUEST } from '../constants/funding';
+import { addInstitutionFail, getInstitutionsFail, removeInstitutionFail, setInstitutions } from '../actions/funding';
 
 const urls = {
   getInstitutions: '/api/funding/institutions/my?limit=100',
   addInstitution: '/api/funding/institution/add',
+  removeInstitution: '/api/funding/institution/delete',
 };
 
 export function* getInstitutionsData() {
@@ -24,7 +25,6 @@ export function* getInstitutionsData() {
 }
 
 export function* addInstitution({ token, institutionData }) {
-  console.log('--->>>>>>>', token, institutionData)
   const options = {
     method: 'POST',
     headers: {
@@ -43,9 +43,27 @@ export function* addInstitution({ token, institutionData }) {
     yield put(addInstitutionFail(err.message));
   }
 }
+
+export function* removeInstitution({ institutionId }) {
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  const url = `${urls.removeInstitution}?id=${institutionId}`;
+  try {
+    const response = yield call(request, url, options);
+    yield getInstitutionsData();
+  } catch (err) {
+    yield put(removeInstitutionFail(err.message));
+  }
+}
+
 export default function* fundingSaga() {
   yield all([
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
     takeLatest(ADD_INSTITUTION_REQUEST, addInstitution),
+    takeLatest(REMOVE_INSTITUTION_REQUEST, removeInstitution),
   ]);
 }

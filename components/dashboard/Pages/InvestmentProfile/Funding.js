@@ -6,9 +6,11 @@ import EmpalaSelect from '../../../registration/EmpalaSelect';
 import {
   addInstitution,
   addNewSecurity,
-  dropFundingType, getInstitutions,
+  dropFundingType,
+  getInstitutions, removeInstitution,
   removeSecurity,
-  setInputFieldValueById, setPaymentIntitution,
+  setInputFieldValueById,
+  setPaymentIntitution,
   setSecuritiesInputValue,
   togglePlaidLink,
 } from '../../../../actions/funding';
@@ -220,6 +222,7 @@ class Funding extends Component {
                     addInstitution={this.props.addInstitution}
                     institutionsList={this.props.institutionsList}
                     getInstitutions={this.props.getInstitutions}
+                    removeInstitution={this.props.removeInstitution}
                   />
               }
             </div>
@@ -271,6 +274,7 @@ const mapDispatchToProps = dispatch => ({
   setPaymentIntitution: name => dispatch(setPaymentIntitution(name)),
   togglePlaidLink: () => dispatch(togglePlaidLink()),
   addInstitution: (token, data) => dispatch(addInstitution(token, data)),
+  removeInstitution: id => dispatch(removeInstitution(id)),
   getInstitutions: () => dispatch(getInstitutions()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
