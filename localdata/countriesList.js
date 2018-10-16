@@ -1,6 +1,6 @@
 export const countriesList = [
   { title: 'Afghanistan', value: 'Afghanistan' },
-  { title: 'Åland Islands', value: 'Åland Islands' },
+  { title: 'Åland Islands', value: 'Aaland Islands' },
   { title: 'Albania', value: 'Albania' },
   { title: 'Algeria', value: 'Algeria' },
   { title: 'American Samoa', value: 'American Samoa' },

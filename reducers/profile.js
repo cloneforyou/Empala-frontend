@@ -13,6 +13,7 @@ import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/regis
 
 const initialState = {
   profileUserData: {},
+  profileUserDataChanged: {},
   fieldsErrors: false,
   tabValue: 0,
 };
@@ -29,6 +30,7 @@ function profile(state = initialState, action) {
       return {
         ...state,
         profileUserData: renameKeys(flattenObject(action.data.data.profile), /^Member/, ''),
+        profileUserDataChanged: {},
       };
     case DELETE_USERPIC_SUCCESS:
       return {
@@ -44,6 +46,7 @@ function profile(state = initialState, action) {
       return {
         ...state,
         profileUserData: { ...state.profileUserData, [action.id]: action.value },
+        profileUserDataChanged: { ...state.profileUserDataChanged, [action.id]: action.value },
       };
     case VALIDATE_FIELD_ERROR:
       return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: action.message } };

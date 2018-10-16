@@ -41,11 +41,18 @@ const urls = {
 };
 
 export function* sendProfileData() {
+  const profileDataChanged = yield select(state => state.profile.profileUserDataChanged);
+  const id = yield select(state => state.profile.profileUserData.id);
   const profileData = yield select(state => state.profile.profileUserData);
+  Object.assign(profileData, id);
   const url = urls.updateProfileData;
   const options = {
     method: 'PATCH',
-    data: profileData,
+    data: {
+      id,
+      updatedUserInfo: profileDataChanged,
+      userInfo: profileData,
+    },
     headers: {
       'X-Access-Token': localStorage.getItem('accessToken'),
       'X-Refresh-Token': localStorage.getItem('refreshToken'),
