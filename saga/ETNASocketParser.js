@@ -202,7 +202,7 @@ function* externalListener(socketChannel) {
 
 function watchQuotes(socket, params) {
   return eventChannel((emit) => {
-    const delta = 500;
+    const delta = 3500; // temporary value for performance optimisation
     const lastMessageTime = {};
     socket.onopen = (i) => {
       console.log('------------> OPEN', i);
