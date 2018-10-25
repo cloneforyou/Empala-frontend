@@ -1,4 +1,5 @@
-import { takeEvery, all, take, select, put, call, race, fork, spawn } from 'redux-saga/effects';
+import { takeEvery, all, take, select, put, call, race, fork, spawn} from 'redux-saga/effects';
+import { eventChannel, delay } from 'redux-saga';
 import {
   START_WEBSOCKET, STOP_WEBSOCKET,
   SUBSCRIBE_QUOTES,
@@ -8,7 +9,6 @@ import {
   SET_SESSION_ID,
 } from '../constants/dashboard';
 import { serverOrigins } from '../utils/config';
-import { eventChannel } from 'redux-saga';
 import {
   modifyPosition,
   setOrdersList,
@@ -18,6 +18,7 @@ import {
   updateOrders,
   updateWatchlist,
   updateQuotes,
+  updateAllQuotes,
   subscribeWatchlists,
   subscribeQuotes,
 } from '../actions/dashboard';
@@ -166,6 +167,8 @@ function* internalListenerWatchlist(socket) {
   watchlistIds.forEach(id => unsubscribe(id, sessionId));
 }
 
+const quotesMap = {};
+
 function* externalListener(socketChannel) {
   while (true) {
     const action = yield take(socketChannel);
@@ -177,7 +180,8 @@ function* externalListener(socketChannel) {
       // const parsedPositions = yield select(state => state.dashboard.parsedPositions);
       // yield put(setParsedPositions(modifyPositions(parsedPositions, action.item)));
       if (action.item.Cmd !== 'Subscribe.txt' && action.item.Cmd !== 'Unsubscribe.txt' && action.item.Cmd !== 'CreateSession.txt') {
-        yield put(updateQuotes(action.item));
+        // yield put(updateQuotes(action.item));
+        quotesMap[action.item.Key] = action.item;
       }
     }
     if (action.item.Cmd === 'CreateSession.txt' && action.item.SessionId && action.type !== 'quote') {
@@ -200,9 +204,10 @@ function* externalListener(socketChannel) {
   }
 }
 
+
 function watchQuotes(socket, params) {
   return eventChannel((emit) => {
-    const delta = 3500; // temporary value for performance optimisation
+    const delta = 500;
     const lastMessageTime = {};
     socket.onopen = (i) => {
       console.log('------------> OPEN', i);
@@ -243,7 +248,7 @@ function watchMessages(socket, params) {
       if (msg.Cmd === 'CreateSession.txt' && msg.SessionId) {
         console.log('WS SessionId:', msg.SessionId);
         if (params.EntityType === 'WatchlistContent') {
-          console.log('WLC')
+          // console.log('WLC')
           params.Keys.forEach(key => socket.send(JSON.stringify({
             ...params,
             EntityType: 'WatchlistContent',
@@ -269,6 +274,13 @@ function watchMessages(socket, params) {
       socket.close();
     };
   });
+}
+
+function* updateQuotesList(timeout) {
+  while (true) {
+    yield delay(timeout);
+    yield put(updateAllQuotes(quotesMap));
+  }
 }
 
 function* wsHandling() {
@@ -303,6 +315,7 @@ function* wsHandling() {
         // call(externalListener, watchlistChannel),
         call(internalListenerQuotes, socketQuotes),
         call(internalListenerWatchlist, socketData),
+        call(updateQuotesList, 250),
       ],
       cancel: take(STOP_WEBSOCKET),
     });

@@ -49,7 +49,7 @@ import {
   CLOSE_INFO_POPUP,
   SET_TABLE_SORT_SETTINGS,
   TOGGLE_LEAGUE_DIVIDER,
-  SET_ACTIVE_MARKET_PAGE,
+  SET_ACTIVE_MARKET_PAGE, UPDATE_QUOTES_LIST,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -65,7 +65,7 @@ import { CLOSE_POPUP_PIN, SEND_CODE_VERIFY_SUCCESS } from '../constants/registra
 /* todo remove when actual data been available */
 const allowedSectionsStub = [
   'overview',
-  // 'positions',
+  'positions',
   'performance',
   // 'cash',
   'orders',
@@ -143,6 +143,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         quotes: { ...state.quotes, [action.quote.Key]: action.quote },
+      };
+    case UPDATE_QUOTES_LIST:
+      return {
+        ...state,
+        quotes: { ...action.quotes },
       };
     case COLLAPSE_SIDEBAR:
       return {
