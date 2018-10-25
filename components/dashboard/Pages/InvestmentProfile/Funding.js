@@ -13,14 +13,18 @@ import {
   setPaymentIntitution,
   setSecuritiesInputValue,
   togglePlaidLink,
+  ACHDeposit,
+  ALPSTransfer
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
-import { setActivePage } from '../../../../actions/dashboard';
+import {cleanErrorText, closeModal, setActivePage} from '../../../../actions/dashboard';
 import PartialTransfer from './PartialTransfer';
 import WireTransfer from './WireTransfer';
 import ACHTransfer from './ACHTransfer';
 
+// Todo move in saga after testing
+import request from '../../../../utils/request';
 
 const FundingFooter = props => (
   <div className="funding-footer">
@@ -75,6 +79,65 @@ class Funding extends Component {
   handleSubmit() {
     alert('Fired fund transfer submission procedure!');
   }
+
+  alpsTransferHandler = () => {
+
+    // Todo add validate after
+    if (!this.props.account_no || !this.props.member_first_name ||
+      !this.props.member_last_name || !this.props.member_primary_ssn) return;
+
+
+    const data = {
+      deliveryAccountType: this.props.account_type,
+      transferType: this.props.transfer_type === 'Full transfer' ? 'FULL_TRANSFER' : 'PARTIAL_TRANSFER_RECEIVER',
+      deliveryAccount: this.props.account_no,
+      deliveryPrimarySsnOrTaxId: this.props.member_primary_ssn.replace(/-/g, ''),
+      deliveryAccountTittle: `${this.props.member_title} ${this.props.member_first_name} ${this.props.member_last_name}`,
+    };
+
+    if (this.props.member_secondary_ssn) {
+      data.deliverySecondarySsnOrTaxId = this.props.member_secondary_ssn.replace(/-/g, '');
+    }
+
+    if (this.props.transfer_type === 'Partial transfer') {
+      data.assets = [];
+      data.comment = this.props.funding_comments;
+
+      if (this.props.partial_symbols.length) {
+        this.props.partial_symbols.forEach((item) => {
+          data.assets.push({
+            assetType: 'symbol',
+            identifier: item.symbol.toUpperCase(),
+            amount: item.quantity,
+            isShort: item.symbol.length <= 3,
+          });
+        })
+      }
+    }
+
+    if (data.assets && data.assets.length === 0) return;
+
+    this.props.ALPSTransfer(data);
+  }
+
+  achDeposit = () => {
+    if (!this.props.selected_institution || !this.props.ach_amount) return;
+
+    let institution_id;
+
+    this.props.institutionsList.forEach((item) => {
+      if (item.name !== this.props.selected_institution) return;
+      institution_id = item.item.institution_id;
+    });
+
+    const data = {
+      amount: this.props.ach_amount,
+      institutionId: institution_id,
+    };
+
+    this.props.ACHDeposit(data);
+  };
+
   render() {
     return (
       <div>
@@ -167,7 +230,8 @@ class Funding extends Component {
                         <div style={{ marginTop: '35px' }}>
                           <button
                             className="profile-btn profile-btn_green"
-                            onClick={this.handleSubmit}
+                            onClick={this.alpsTransferHandler}
+                            // onClick={this.handleSubmit}
                             style={{
                               width: '170px',
                               height: '30px',
@@ -216,6 +280,7 @@ class Funding extends Component {
                     selected_institution={this.props.selected_institution}
                     ach_amount={this.props.ach_amount}
                     handleSubmit={this.handleSubmit}
+                    achDeposit={this.achDeposit}
                     setPaymentIntitution={this.props.setPaymentIntitution}
                     togglePlaidLink={this.props.togglePlaidLink}
                     plaid_link_active={this.props.plaid_link_active}
@@ -223,6 +288,7 @@ class Funding extends Component {
                     institutionsList={this.props.institutionsList}
                     getInstitutions={this.props.getInstitutions}
                     removeInstitution={this.props.removeInstitution}
+                    error={this.props.error}
                   />
               }
             </div>
@@ -239,16 +305,18 @@ const mapStateToProps = state => ({
   account_type: state.funding.account_type,
   account_no: state.funding.account_no,
   member_secondary_ssn: state.funding.member_secondary_ssn,
-  member_primary_ssn: state.profile.profileUserData.regulatory_identification_ssn,
-  member_title: state.profile.profileUserData.basic_information_prefix,
-  member_first_name: state.profile.profileUserData.basic_information_first_name,
-  member_last_name: state.profile.profileUserData.basic_information_last_name,
+  member_primary_ssn: state.funding.member_primary_ssn, // state.profile.profileUserData.regulatory_identification_ssn,
+  member_title: state.funding.member_title, // state.profile.profileUserData.basic_information_prefix,
+  member_first_name: state.funding.member_first_name, // state.profile.profileUserData.basic_information_first_name,
+  member_last_name: state.funding.member_last_name, // state.profile.profileUserData.basic_information_last_name,
   funding_comments: state.funding.funding_comments,
   partial_symbols: state.funding.partial_symbols,
   selected_institution: state.funding.selected_institution || '',
   ach_amount: state.funding.ach_amount,
   plaid_link_active: state.funding.plaid_link_active,
   institutionsList: state.funding.institutionsList,
+  errorDeposit: state.funding.errorDeposit,
+  partial_symbols: state.funding.partial_symbols,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -262,7 +330,10 @@ const mapDispatchToProps = dispatch => ({
       if (id === 'quantity') return dispatch(setSecuritiesInputValue(id, index, value.replace(/\D/, '')));
       return dispatch(setSecuritiesInputValue(id, index, value));
     }
-    if (id === 'account_no' || id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
+    // TODO remove after
+    // if (id === 'account_no' || id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
+    if (id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
+
     return dispatch(setInputFieldValueById(id, value));
   },
   setActivePage: (page) => {
@@ -276,5 +347,7 @@ const mapDispatchToProps = dispatch => ({
   addInstitution: (token, data) => dispatch(addInstitution(token, data)),
   removeInstitution: id => dispatch(removeInstitution(id)),
   getInstitutions: () => dispatch(getInstitutions()),
+  ACHDeposit: (data) => dispatch(ACHDeposit(data)),
+  ALPSTransfer: (data) => dispatch(ALPSTransfer(data)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);

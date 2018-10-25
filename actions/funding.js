@@ -1,10 +1,12 @@
 import {
   DROP_FUNDING_TYPE,
   SET_FIELD_VALUE,
+  UNSET_PAYMENT_VALUE,
   ADD_SECURITY,
   REMOVE_SECURITY,
   SET_SECURITY_FIELD_VALUE,
   SET_PAYMENT_INSTITUTION,
+  UNSET_PAYMENT_INSTITUTION,
   TOGGLE_PLAID,
   ADD_INSTITUTION_REQUEST,
   ADD_INSTITUTION_FAILED,
@@ -13,6 +15,11 @@ import {
   GET_INSTITUTIONS_FAILED,
   REMOVE_INSTITUTION_REQUEST,
   REMOVE_INSTITUTION_FAILED,
+  ACH_DEPOSIT_REQUEST,
+  ACH_DEPOSIT_FAILED,
+  CLEAR_ALPS_TRANSFER_FIELDS,
+  ALPS_TRANSFER,
+  ALPS_TRANSFER_FAIL,
 } from '../constants/funding';
 
 export function setInputFieldValueById(id, value) {
@@ -20,6 +27,16 @@ export function setInputFieldValueById(id, value) {
     type: SET_FIELD_VALUE,
     id,
     value,
+  };
+}
+export function unsetPaymentValue() {
+  return {
+    type: UNSET_PAYMENT_VALUE,
+  };
+}
+export function clearALPSTransferFields() {
+  return {
+    type: CLEAR_ALPS_TRANSFER_FIELDS,
   };
 }
 export function dropFundingType() {
@@ -51,6 +68,12 @@ export function setPaymentIntitution(name) {
   return {
     type: SET_PAYMENT_INSTITUTION,
     name,
+  };
+}
+
+export function unsetPaymentInstitution() {
+  return {
+    type: UNSET_PAYMENT_INSTITUTION,
   };
 }
 
@@ -107,3 +130,31 @@ export function setInstitutions(institutionsList) {
   };
 }
 
+export function ACHDeposit({ amount, institutionId}) {
+  return {
+    type: ACH_DEPOSIT_REQUEST,
+    amount,
+    institutionId,
+  };
+}
+
+export function ACHDepositFail(err) {
+  return {
+    type: ACH_DEPOSIT_FAILED,
+    err,
+  };
+}
+
+export function ALPSTransfer(data) {
+  return {
+    type: ALPS_TRANSFER,
+    data,
+  };
+}
+
+export function ALPSTransferFail(err) {
+  return {
+    type: ALPS_TRANSFER_FAIL,
+    err,
+  };
+}
