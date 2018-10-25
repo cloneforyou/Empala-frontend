@@ -71,7 +71,9 @@ import {
   OPEN_INFO_POPUP,
   CLOSE_INFO_POPUP,
   SET_TABLE_SORT_SETTINGS,
-  TOGGLE_LEAGUE_DIVIDER, SET_ACTIVE_MARKET_PAGE,
+  TOGGLE_LEAGUE_DIVIDER,
+  SET_ACTIVE_MARKET_PAGE,
+  UPDATE_QUOTES_LIST,
 } from '../constants/dashboard';
 
 export function collapseSidebar(bool) {
@@ -288,6 +290,11 @@ export const unsubscribesubscribeWatchlists = () => ({
 export const updateQuotes = quote => ({
   type: UPDATE_QUOTES,
   quote,
+});
+
+export const updateAllQuotes = quotes => ({
+  type: UPDATE_QUOTES_LIST,
+  quotes,
 });
 
 export const updateNews = news => ({
