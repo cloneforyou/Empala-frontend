@@ -17,7 +17,8 @@ export default class FundingMemberInfo extends Component {
             id="member_title"
             label="Account name"
             value={this.props.member_title || ''}
-            readOnly
+            handleChange={this.props.setInputValueById}
+            // readOnly
           />
         </div>
         <div className="pr-2 no-gutters text-truncate" style={{ width: '176px', paddingTop: '22px' }} >
@@ -26,6 +27,7 @@ export default class FundingMemberInfo extends Component {
             className="pseudo-input__input pseudo-input__input_dark"
             id="member_first_name"
             value={this.props.member_first_name || ''}
+            onChange={this.props.setInputValueById}
           />
         </div>
         <div
@@ -36,6 +38,7 @@ export default class FundingMemberInfo extends Component {
             className="pseudo-input__input pseudo-input__input_dark"
             id="member_last_name"
             value={this.props.member_last_name || ''}
+            onChange={this.props.setInputValueById}
           />
         </div>
         <div className="d-flex">
@@ -48,7 +51,9 @@ export default class FundingMemberInfo extends Component {
               type="text"
               label="Primary Gov ID/SSN"
               value={this.props.member_primary_ssn || ''}
-              readOnly
+              handleChange={this.props.setInputValueById}
+              mask={this.ssnMask}
+              // readOnly
             />
           </div>
           <div

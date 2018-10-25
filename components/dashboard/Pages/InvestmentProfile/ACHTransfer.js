@@ -46,10 +46,13 @@ const TransferForm = props => (
     <div style={{ textAlign: 'center' }}>
       <button
         className="profile-btn profile-btn_green funding-ach-payment-box_button-margin"
-        onClick={props.handleSubmit}
+        onClick={props.achDeposit}
       >Confirm
       </button>
     </div>
+    {props.errorDeposit && <div className="funding__error text-center mt-3">
+      some errors occur
+    </div>}
   </div>
 );
 

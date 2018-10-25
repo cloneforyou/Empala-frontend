@@ -1,12 +1,31 @@
 import { call, put, select, all, takeLatest, takeEvery } from 'redux-saga/effects';
 import request from '../utils/request';
-import { ADD_INSTITUTION_REQUEST, GET_INSTITUTIONS_REQUEST, REMOVE_INSTITUTION_REQUEST } from '../constants/funding';
-import { addInstitutionFail, getInstitutionsFail, removeInstitutionFail, setInstitutions } from '../actions/funding';
+import {
+  ACH_DEPOSIT_REQUEST,
+  ADD_INSTITUTION_REQUEST,
+  GET_INSTITUTIONS_REQUEST,
+  REMOVE_INSTITUTION_REQUEST,
+  ALPS_TRANSFER,
+} from '../constants/funding';
+import {
+  addInstitutionFail,
+  getInstitutionsFail,
+  removeInstitutionFail,
+  setInstitutions,
+  unsetPaymentValue,
+  unsetPaymentInstitution,
+  ACHDepositFail,
+  setInputFieldValueById,
+  clearALPSTransferFields,
+  ALPSTransferFail,
+} from '../actions/funding';
 
 const urls = {
   getInstitutions: '/api/funding/institutions/my?limit=100',
   addInstitution: '/api/funding/institution/add',
   removeInstitution: '/api/funding/institution/delete',
+  ACHDeposit: '/api/funding/depositACH',
+  ALPSTransfer: '/api/funding/alpsTransfer',
 };
 
 export function* getInstitutionsData() {
@@ -60,10 +79,54 @@ export function* removeInstitution({ institutionId }) {
   }
 }
 
+export function* achDeposit({ amount, institutionId }) {
+  const options = {
+    method: 'POST',
+    data: {
+      amount,
+      institution_id: institutionId,
+    },
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+
+  try {
+    yield put(setInputFieldValueById('errorDeposit', false));
+    yield put(unsetPaymentValue());
+    yield put(unsetPaymentInstitution());
+    yield call(request, urls.ACHDeposit, options);
+  } catch (err) {
+    console.log(err)
+    yield put(ACHDepositFail(err.message));
+  }
+}
+
+export function* alpsTransfer({ data }) {
+  const options = {
+    method: 'POST',
+    data,
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+
+  try {
+    yield put(setInputFieldValueById('error', false));
+    yield put(clearALPSTransferFields());
+    yield call(request, urls.ALPSTransfer, options);
+  } catch (err) {
+    console.log(err)
+    yield put(ALPSTransferFail(err.message));
+  }
+}
+
 export default function* fundingSaga() {
   yield all([
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
     takeLatest(ADD_INSTITUTION_REQUEST, addInstitution),
     takeLatest(REMOVE_INSTITUTION_REQUEST, removeInstitution),
+    takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
+    takeEvery(ALPS_TRANSFER, alpsTransfer),
   ]);
 }

@@ -1,15 +1,20 @@
 import {
   DROP_FUNDING_TYPE,
   SET_FIELD_VALUE,
+  UNSET_PAYMENT_VALUE,
   ADD_SECURITY,
   REMOVE_SECURITY,
   SET_SECURITY_FIELD_VALUE,
   SET_PAYMENT_INSTITUTION,
+  UNSET_PAYMENT_INSTITUTION,
   TOGGLE_PLAID,
   GET_INSTITUTIONS_SUCCESS,
   GET_INSTITUTIONS_FAILED,
   ADD_INSTITUTION_FAILED,
   REMOVE_INSTITUTION_FAILED,
+  ACH_DEPOSIT_FAILED,
+  CLEAR_ALPS_TRANSFER_FIELDS,
+  ALPS_TRANSFER_FAIL,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -29,10 +34,30 @@ const initialState = {
   plaid_link_active: false,
   institutionsList: [],
   error: false,
+  errorDeposit: '',
+  member_secondary_ssn: false,
+  member_primary_ssn: false,
+  member_title: '',
+  member_first_name: '',
+  member_last_name: '',
 };
 
 function funding(state = initialState, action) {
   switch (action.type) {
+    case CLEAR_ALPS_TRANSFER_FIELDS:
+      return {
+        ...state,
+        partial_symbols: [
+          { symbol: '', quantity: '', sec_type: 'Shares' },
+        ],
+        member_secondary_ssn: false,
+        member_primary_ssn: false,
+        member_title: '',
+        member_first_name: '',
+        member_last_name: '',
+        account_no: false,
+        funding_comments: false,
+      };
     case SET_FIELD_VALUE:
       return {
         ...state,
@@ -43,6 +68,11 @@ function funding(state = initialState, action) {
     //   return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: action.message } };
     // case VALIDATE_FIELD_SUCCESS:
     //   return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: '' } };
+    case UNSET_PAYMENT_VALUE:
+      return {
+        ...state,
+        ach_amount: false,
+      };
     case DROP_FUNDING_TYPE:
       return {
         ...state,
@@ -85,6 +115,11 @@ function funding(state = initialState, action) {
         ...state,
         selected_institution: state.selected_institution === action.name ? '' : action.name,
       };
+    case UNSET_PAYMENT_INSTITUTION:
+      return {
+        ...state,
+        selected_institution: false,
+      };
     case GET_INSTITUTIONS_SUCCESS:
       return {
         ...state,
@@ -93,9 +128,15 @@ function funding(state = initialState, action) {
     case GET_INSTITUTIONS_FAILED:
     case ADD_INSTITUTION_FAILED:
     case REMOVE_INSTITUTION_FAILED:
+    case ALPS_TRANSFER_FAIL:
       return {
         ...state,
         error: action.err,
+      };
+    case ACH_DEPOSIT_FAILED:
+      return {
+        ...state,
+        errorDeposit: action.err,
       };
     case TOGGLE_PLAID:
       return {
