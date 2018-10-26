@@ -116,8 +116,7 @@ export function* alpsTransfer({ data }) {
     yield put(clearALPSTransferFields());
     yield call(request, urls.ALPSTransfer, options);
   } catch (err) {
-    console.log(err)
-    yield put(ALPSTransferFail(err.message));
+    yield put(ALPSTransferFail(err.response.data.data.message));
   }
 }
 
