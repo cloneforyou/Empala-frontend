@@ -3,11 +3,25 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import style from './RegistrationFieldsStyle';
+import logo from '../../static/images/icon-empala.svg';
 
+
+const successContent = () => (
+  <div style={{ paddingTop: '50px' }}>
+    <div className="text-center">
+      <img src={logo} style={style.registrationModalLogo} alt="Logo" />
+    </div>
+    <p style={style.sucessWording}>
+      Thank you for your interest in opening an account with Empala Securities. <br />
+      We are excited to have you as a client.<br />
+      We will email you shortly once your account has been opened.<br />
+    </p>
+  </div>
+);
 const RegistrationResultModal = (props) => {
   const actionsFailed = [
     <FlatButton
-      label="Ok"
+      label="OK"
       style={style.cancelBtn}
       labelStyle={style.labelCancelBtn}
       onClick={props.handleClose}
@@ -15,8 +29,8 @@ const RegistrationResultModal = (props) => {
   ];
   const actionsSuccess = [
     <FlatButton
-      label="Proceed to log in"
-      style={{ ...style.returnBtn, width: 'auto' }}
+      label="OK"
+      style={{ ...style.returnBtn, width: 'auto', marginBottom: '50px' }}
       labelStyle={style.labelReturnBtn}
       onClick={() => window.location.assign('/')}
     />,
@@ -31,7 +45,7 @@ const RegistrationResultModal = (props) => {
       contentStyle={style.contentStyle}
     >
       {
-        props.success ? <h2>Registration successful</h2>
+        props.success ? successContent()
           : <span>Registration denied: {props.message}</span>
       }
     </Dialog>
