@@ -35,6 +35,7 @@ const initialState = {
   institutionsList: [],
   error: false,
   errorDeposit: '',
+  errorALPS: '',
   member_secondary_ssn: false,
   member_primary_ssn: false,
   member_title: '',
@@ -57,6 +58,7 @@ function funding(state = initialState, action) {
         member_last_name: '',
         account_no: false,
         funding_comments: false,
+        errorALPS: '',
       };
     case SET_FIELD_VALUE:
       return {
@@ -128,10 +130,14 @@ function funding(state = initialState, action) {
     case GET_INSTITUTIONS_FAILED:
     case ADD_INSTITUTION_FAILED:
     case REMOVE_INSTITUTION_FAILED:
-    case ALPS_TRANSFER_FAIL:
       return {
         ...state,
         error: action.err,
+      };
+    case ALPS_TRANSFER_FAIL:
+      return {
+        ...state,
+        errorALPS: action.err,
       };
     case ACH_DEPOSIT_FAILED:
       return {
