@@ -254,6 +254,9 @@ class Funding extends Component {
                             </Link>
                           </button>
                         </div>
+                        {this.props.errorALPS && <div className="mt-4 ml-4 funding__error">
+                          {this.props.errorALPS}
+                        </div>}
                       </div>
                     }
                     {
@@ -317,6 +320,7 @@ const mapStateToProps = state => ({
   institutionsList: state.funding.institutionsList,
   errorDeposit: state.funding.errorDeposit,
   partial_symbols: state.funding.partial_symbols,
+  errorALPS: state.funding.errorALPS,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
