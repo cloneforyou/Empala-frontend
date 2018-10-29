@@ -31,6 +31,7 @@ const initialState = {
   ],
   selected_institution: false,
   ach_amount: false,
+  check_amount: false,
   plaid_link_active: false,
   institutionsList: [],
   error: false,
