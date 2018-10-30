@@ -31,7 +31,7 @@ import {
 import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga, { validateCheckbox, validateEmptyFields, validateFieldValue } from './validation';
-import { getAddressInfoByZIP } from './sideServices';
+import getAddressInfoByZIP from './sideServices';
 
 const urls = {
   registration: '/api/auth/register',

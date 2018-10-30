@@ -125,7 +125,7 @@ class WidgetNews extends Component {
                       <div>
                         <p className="news-card__title m-0">{card.feed.subject.displayname}</p>
                         <p className="news-card__text m-0">
-                          {_.unescape(card.feed.subject.status) || _.unescape(card.feed.main_content)}
+                          {_.unescape(card.feed.main_content) || _.unescape(card.feed.subject.status)}
                         </p>
                       </div>
                     </div>
