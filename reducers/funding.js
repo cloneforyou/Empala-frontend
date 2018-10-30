@@ -31,6 +31,8 @@ const initialState = {
   ],
   selected_institution: false,
   ach_amount: false,
+  check_amount: false,
+  check_memo: false,
   plaid_link_active: false,
   institutionsList: [],
   error: false,
@@ -61,6 +63,12 @@ function funding(state = initialState, action) {
         errorALPS: '',
       };
     case SET_FIELD_VALUE:
+      if (action.id === 'funding_type') {
+        return {
+          ...initialState,
+          [action.id]: action.value,
+        };
+      }
       return {
         ...state,
         // [action.id]: action.id === 'ach_amount' ? action.value.replace(/^\d+(?:[\.,]\d+)?$/g, '') : action.value,

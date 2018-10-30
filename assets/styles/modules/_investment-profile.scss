@@ -1,4 +1,5 @@
 .funding {
+  @include fontSize(18px);
   &__error {
     position: relative;
     bottom: 2px;
@@ -60,14 +61,17 @@
     &__text {
       @include fontSize(18px);
     }
-    &__text-col{
+    &__button-wrap {
+      padding-top: 66px;
+    }
+    &__text-col {
       display: inline-block;
       line-height: 1.1;
       padding-top: 25px;
       vertical-align: top;
       width: 365px;
       &_subheader {
-        margin-bottom: 30px;
+        margin-bottom: 25px;
       }
     }
     &__text-col:first-child {
@@ -313,5 +317,10 @@
     &::placeholder {
       color: #cccaca;
     }
+  }
+  &__label {
+    margin-bottom: 5px;
+    color: $green;
+    font-size: 12px;
   }
 }
