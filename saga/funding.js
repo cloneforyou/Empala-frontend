@@ -5,7 +5,7 @@ import {
   ADD_INSTITUTION_REQUEST,
   GET_INSTITUTIONS_REQUEST,
   REMOVE_INSTITUTION_REQUEST,
-  ALPS_TRANSFER,
+  ALPS_TRANSFER, INIT_FUNDS_TRANSFER,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -120,6 +120,16 @@ export function* alpsTransfer({ data }) {
   }
 }
 
+function* transferFunds({ transferMethod }) {
+  if (transferMethod === 'check') {
+    const accountNo = yield select(state => state.funding.account_no || 'No account');
+    let checkAmount = yield select(state => state.funding.check_amount);
+    checkAmount = checkAmount.replace(/\D/g, '');
+    const memo = yield select(state => state.funding.check_amount);
+    alert('Check transfer fired! '+ accountNo + checkAmount + ' \nMemo: ' + memo);
+  }
+}
+
 export default function* fundingSaga() {
   yield all([
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
@@ -127,5 +137,6 @@ export default function* fundingSaga() {
     takeLatest(REMOVE_INSTITUTION_REQUEST, removeInstitution),
     takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
     takeEvery(ALPS_TRANSFER, alpsTransfer),
+    takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
   ]);
 }

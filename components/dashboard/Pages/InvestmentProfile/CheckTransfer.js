@@ -1,9 +1,24 @@
 import React, { Fragment } from 'react';
-import NumberFormat from "react-number-format";
+import NumberFormat from 'react-number-format';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../registration/EmpalaInput';
 
+const style = {
+  availableAmount:
+    { lineHeight: '33px' },
+  transferText:
+    {
+      lineHeight: 1,
+      marginBottom: '20px',
+    },
+};
+const isTransferEnabled = (transferType, transferAmount, totalAmount) => {
+  const transferAmountRaw = transferAmount && +transferAmount.replace(/\D/g, '');
+  const totalAmountRaw = totalAmount && +totalAmount.replace(/\D/g, '');
+  if (transferType === 'Full transfer') return false;
+  return !(transferType && transferAmount && totalAmount && transferAmountRaw <= totalAmountRaw);
+};
 
 const CheckTransferWording = () => (
   <Fragment>
@@ -22,7 +37,7 @@ const transferTypeOptions = [
   { value: 'Partial transfer', title: 'Partial transfer' },
 ];
 
-const TransferBody = props => {
+const TransferBody = (props) => {
   const {
     setSelectedValueById,
     fullName,
@@ -30,10 +45,14 @@ const TransferBody = props => {
     transferType,
     setInputValueById,
     checkAmount,
+    checkMemo,
+    amountAvailable,
+    setActivePage,
+    handleCheckTransfer,
   } = props;
   return (
     <div className="funding-wire-transfer__text">
-      <div>
+      <div style={style.transferText}>
         <div className="funding__label">
           Beneficiary
         </div>
@@ -41,44 +60,89 @@ const TransferBody = props => {
           { fullName }
         </div>
       </div>
-      <div>
-        <div className="funding__label">
+      <div style={style.transferText}>
+        <div className="funding__label" >
           Address
         </div>
         <div>
-          { `${memberAddress.line1}, ${memberAddress.line2}, ${memberAddress.city}, ${memberAddress.state}, ${memberAddress.zipCode}` }
+          { `${memberAddress.line1}, ${memberAddress.line2 && `${memberAddress.line2}, `}${memberAddress.city}, ${memberAddress.state}, ${memberAddress.zipCode}` }
         </div>
       </div>
-      <div className="row no-gutters funding-selection-form">
-        <div className="col-6 no-gutters">
-          <EmpalaSelect
-            id="transfer_type"
-            options={transferTypeOptions}
-            label="Transfer type"
-            value={transferType || ''}
-            handleChange={setSelectedValueById}
+      <div className="row no-gutters">
+        <div className="row no-gutters funding-selection-form">
+          <div className="col-6 no-gutters">
+            <EmpalaSelect
+              id="transfer_type"
+              options={transferTypeOptions}
+              label="Transfer amount"
+              value={transferType || ''}
+              handleChange={setSelectedValueById}
             // errorText={this.props.fieldsErrors.transfer_type}
-            hint="Choose transfer type"
-          />
-        </div>
-        {
-          transferType === 'Partial transfer' &&
+              hint="Choose transfer type"
+            />
+          </div>
+
           <div className="col-6 no-gutters pl-2">
             <NumberFormat
               customInput={EmpalaInput}
-              // value={this.props.value}
               id="check_amount"
               type="text"
-              label="Amount"
-              value={checkAmount ? checkAmount : ''}
+              label="Actual amount"
+              value={transferType === 'Full transfer' ? amountAvailable || '5000' : checkAmount || ''}
               handleChange={setInputValueById}
               decimalScale={2}
               allowEmptyFormatting
               thousandSeparator
-              prefix='$'
-          />
+              prefix="$"
+            />
+          </div>
+        </div>
+        {
+          transferType === 'Partial transfer' &&
+          <div className="d-inline-block pl-2">
+            <div className="funding__label">
+              Funds available
+            </div>
+            <div style={style.availableAmount}>
+              {amountAvailable || '5000'}
+            </div>
           </div>
         }
+        <div className="row no-gutters w-75">
+          <EmpalaInput
+            id="check_memo"
+            type="text"
+            label="Check memo"
+            value={checkMemo || ''}
+            handleChange={setInputValueById}
+            placeholder="Optional"
+          />
+        </div>
+      </div>
+      <div className="funding-wire-transfer__button-wrap">
+      <button
+        className="profile-btn profile-btn_green mr-5"
+        onClick={handleCheckTransfer}
+        disabled={isTransferEnabled(transferType, checkAmount, amountAvailable || '5000')}
+      >
+        <span style={{ fontSize: '18px' }} >
+          Transfer
+        </span>
+      </button>
+      <button
+        className="default-btn"
+        onClick={() => setActivePage('global portfolio')}
+      >
+        <Link
+          route="dashboard"
+          params={{ page: 'global portfolio' }}
+        >
+          <span
+            style={{ fontSize: '18px' }}
+          >Cancel
+          </span>
+        </Link>
+      </button>
       </div>
     </div>
   );
@@ -98,6 +162,22 @@ const CheckTransfer = props => (
             props.fundingType === 'Check' && props.transferDirection === 'Inbound' && CheckTransferWording()
           }
         </div>
+        <div className="funding-wire-transfer__button-wrap">
+          <button
+            className="profile-btn profile-btn_green"
+            onClick={() => setActivePage('global portfolio')}
+          >
+            <Link
+              route="dashboard"
+              params={{ page: 'global portfolio' }}
+            >
+              <span
+                style={{ fontSize: '18px' }}
+              >OK
+              </span>
+            </Link>
+          </button>
+        </div>
       </div>
     }
     {
@@ -105,20 +185,6 @@ const CheckTransfer = props => (
       props.transferDirection === 'Outbound' &&
         <TransferBody {...props} />
     }
-    <button
-      className="profile-btn profile-btn_green"
-      onClick={() => props.setActivePage('global portfolio')}
-    >
-      <Link
-        route="dashboard"
-        params={{ page: 'global portfolio' }}
-      >
-        <span
-          style={{ fontSize: '18px' }}
-        >OK
-        </span>
-      </Link>
-    </button>
   </div>
 );
 

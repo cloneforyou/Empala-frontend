@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
@@ -14,7 +14,7 @@ import {
   setSecuritiesInputValue,
   togglePlaidLink,
   ACHDeposit,
-  ALPSTransfer
+  ALPSTransfer, initFundsTransfer,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -48,7 +48,7 @@ const FundingFooter = props => (
   </div>
 );
 
-class Funding extends Component {
+class Funding extends PureComponent {
   constructor(props) {
     super(props);
     this.options = {
@@ -82,10 +82,15 @@ class Funding extends Component {
     return this.isSpecifiedTypeSelected('funding_type', 'Account Transfer')
       && !this.isSpecifiedTypeSelected('transfer_type');
   }
-  handleSubmit() {
-    alert('Fired fund transfer submission procedure!');
-  }
-
+  //
+  // handleTransfer(fundingType) {
+  //   switch (fundingType) {
+  //     case 'ACH transfer':
+  //       return this.alpsTransferHandler();
+  //     case  'Check':
+  //       return this.props.handleCheckTransfer();
+  //   }
+  // }
   alpsTransferHandler() {
 
     // Todo add validate after
@@ -215,6 +220,7 @@ class Funding extends Component {
                             hint="Choose transfer type"
                           />
                           {
+                            this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                             this.isSpecifiedTypeSelected('transfer_type') &&
                             <EmpalaSelect
                               id="account_type"
@@ -239,17 +245,6 @@ class Funding extends Component {
                             // errorText={this.props.fieldsErrors.transfer_type}
                             hint="Direction"
                           />
-                          {
-                            this.isSpecifiedTypeSelected('transfer_type') &&
-                            <EmpalaSelect
-                              id="account_type"
-                              options={this.options.account_type}
-                              label="Account type"
-                              value={this.props.account_type || ''}
-                              handleChange={this.props.setSelectedValueById}
-                              // errorText={this.props.fieldsErrors.account_type}
-                            />
-                          }
                         </div>
                       }
                     </div>
@@ -321,8 +316,10 @@ class Funding extends Component {
                         transferDirection={this.props.transfer_direction}
                         fullName={this.getMemberFullName(this.props.member_information)}
                         memberAddress={this.props.member_address}
-                        accountNumber={this.props.account_number}
+                        accountNumber={this.props.account_no}
                         checkAmount={this.props.check_amount}
+                        checkMemo={this.props.check_memo}
+                        handleCheckTransfer={this.props.handleCheckTransfer}
                       />
                     }
                     {
@@ -391,6 +388,7 @@ const mapStateToProps = state => ({
   selected_institution: state.funding.selected_institution || '',
   ach_amount: state.funding.ach_amount,
   check_amount: state.funding.check_amount,
+  check_memo: state.funding.check_memo,
   plaid_link_active: state.funding.plaid_link_active,
   institutionsList: state.funding.institutionsList,
   errorDeposit: state.funding.errorDeposit,
@@ -427,5 +425,6 @@ const mapDispatchToProps = dispatch => ({
   getInstitutions: () => dispatch(getInstitutions()),
   ACHDeposit: (data) => dispatch(ACHDeposit(data)),
   ALPSTransfer: (data) => dispatch(ALPSTransfer(data)),
+  handleCheckTransfer: () => dispatch(initFundsTransfer('check')),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
