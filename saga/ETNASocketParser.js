@@ -110,6 +110,8 @@ const modifyPositions = (positionsList, position) => {
 
 /* ----------- SOCKET HANDLING FUNCTIONS ------------ */
 
+let subscribed = false;
+
 function* internalListenerQuotes(socket) {
   const subscribe = (quoteKey, sessionId) => socket.send(JSON.stringify({
     Cmd: 'Subscribe.txt',
@@ -141,8 +143,10 @@ function* internalListenerQuotes(socket) {
       console.log('Subscribe for orders', quotesKeys);
     }
     quotesKeys.forEach(key => subscribe(key, sessionQuotesId));
+    subscribed = true;
     const quotesUnsubcribe = yield take(UNSUBSCRIBE_QUOTES);
     quotesKeys.forEach(key => unsubscribe(key, sessionQuotesId));
+    subscribed = false;
   }
 }
 
@@ -279,7 +283,7 @@ function watchMessages(socket, params) {
 function* updateQuotesList(timeout) {
   while (true) {
     yield delay(timeout);
-    yield put(updateAllQuotes(quotesMap));
+    if (subscribed) yield put(updateAllQuotes(quotesMap));
   }
 }
 
