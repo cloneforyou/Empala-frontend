@@ -67,7 +67,7 @@ const allowedSectionsStub = [
   'overview',
   'positions',
   'performance',
-  // 'cash',
+  'cash',
   'orders',
   'profile',
   'market',
