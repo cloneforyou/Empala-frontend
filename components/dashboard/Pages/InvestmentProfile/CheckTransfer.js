@@ -3,6 +3,7 @@ import NumberFormat from 'react-number-format';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../registration/EmpalaInput';
+import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
 
 const style = {
   availableAmount:
@@ -88,7 +89,7 @@ const TransferBody = (props) => {
               id="check_amount"
               type="text"
               label="Actual amount"
-              value={transferType === 'Full transfer' ? amountAvailable || '5000' : checkAmount || ''}
+              value={transferType === 'Full transfer' ? amountAvailable || '50000' : checkAmount || ''}
               handleChange={setInputValueById}
               decimalScale={2}
               allowEmptyFormatting
@@ -104,7 +105,7 @@ const TransferBody = (props) => {
               Funds available
             </div>
             <div style={style.availableAmount}>
-              {amountAvailable || '5000'}
+              {`$${formatNumberWithFixedPoint(amountAvailable || '50000')}`}
             </div>
           </div>
         }
@@ -115,15 +116,19 @@ const TransferBody = (props) => {
             label="Check memo"
             value={checkMemo || ''}
             handleChange={setInputValueById}
-            placeholder="Optional"
+            placeholder="Optional (up to 30 characters)"
           />
         </div>
       </div>
       <div className="funding-wire-transfer__button-wrap">
+        {props.error &&
+        <div className="mb-4 funding__error">
+          {props.error}
+        </div>}
       <button
         className="profile-btn profile-btn_green mr-5"
         onClick={handleCheckTransfer}
-        disabled={isTransferEnabled(transferType, checkAmount, amountAvailable || '5000')}
+        disabled={isTransferEnabled(transferType, checkAmount, amountAvailable || '50000')}
       >
         <span style={{ fontSize: '18px' }} >
           Transfer
@@ -144,6 +149,7 @@ const TransferBody = (props) => {
         </Link>
       </button>
       </div>
+
     </div>
   );
 };
@@ -178,6 +184,7 @@ const CheckTransfer = props => (
             </Link>
           </button>
         </div>
+
       </div>
     }
     {

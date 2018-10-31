@@ -14,7 +14,7 @@ import {
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_FAILED,
   CLEAR_ALPS_TRANSFER_FIELDS,
-  ALPS_TRANSFER_FAIL, SUBMIT_TRANSFER,
+  ALPS_TRANSFER_FAIL, SUBMIT_TRANSFER, TRANSFER_FAILED,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -139,6 +139,7 @@ function funding(state = initialState, action) {
     case GET_INSTITUTIONS_FAILED:
     case ADD_INSTITUTION_FAILED:
     case REMOVE_INSTITUTION_FAILED:
+    case TRANSFER_FAILED:
       return {
         ...state,
         error: action.err,

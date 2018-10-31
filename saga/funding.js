@@ -18,6 +18,7 @@ import {
   setInputFieldValueById,
   clearALPSTransferFields,
   ALPSTransferFail,
+  submitTransferFail, submitTransferSuccess,
 } from '../actions/funding';
 
 const urls = {
@@ -26,6 +27,7 @@ const urls = {
   removeInstitution: '/api/funding/institution/delete',
   ACHDeposit: '/api/funding/depositACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
+  checkTransfer: '/api/funding/checkTransfer',
 };
 
 export function* getInstitutionsData() {
@@ -121,12 +123,38 @@ export function* alpsTransfer({ data }) {
 }
 
 function* transferFunds({ transferMethod }) {
+  const options = {
+    method: 'POST',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  let url = '';
   if (transferMethod === 'check') {
-    const accountNo = yield select(state => state.funding.account_no || 'No account');
-    let checkAmount = yield select(state => state.funding.check_amount);
-    checkAmount = checkAmount.replace(/\D/g, '');
-    const memo = yield select(state => state.funding.check_amount);
-    alert('Check transfer fired! '+ accountNo + checkAmount + ' \nMemo: ' + memo);
+    const account_no = yield select(state => state.funding.account_no || '5FE05047');
+    const transfer_type = yield select(state => state.funding.transfer_type);
+    let check_amount = transfer_type === 'Partial transfer'
+      ? yield select(state => state.funding.check_amount)
+      : '$50,000';
+    check_amount = check_amount.replace(/\D/g, '');
+    const check_memo = yield select(state => state.funding.check_memo);
+    options.data = {
+      account_no,
+      transfer_type,
+      check_amount,
+      check_memo,
+    };
+    url = urls.checkTransfer;
+
+    // alert('Check transfer fired! '+ accountNo + checkAmount + ' \nMemo: ' + memo);
+  }
+  try {
+    const response = yield call(request, url, options);
+    yield put(submitTransferSuccess());
+    console.log(' ** Transfer', response.data);
+  } catch (err) {
+      console.log('Funds transfer Error:', err.response.data || err, Object.keys(err));
+    yield put(submitTransferFail(err.response.data.data));
   }
 }
 
