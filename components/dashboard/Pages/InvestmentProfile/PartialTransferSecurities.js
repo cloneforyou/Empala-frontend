@@ -61,6 +61,8 @@ const PatrialTransferSecurities = props => (
       {props.partial_symbols.map((item, i) => (
         <SecuritiesRow
           {...props}
+// eslint-disable-next-line react/no-array-index-key
+          key={i}
           item={item}
           index={i}
         />

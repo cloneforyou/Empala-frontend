@@ -40,14 +40,20 @@ const TransferForm = props => (
         prefix='$'
       />
     </div>
-    <p>
-        Your funds will be immediately available on the Empala Platform.
-    </p>
+    {
+      props.submitted &&
+      <p>Your funds will be immediately available on the Empala Platform.</p>
+    }
     <div style={{ textAlign: 'center' }}>
       <button
         className="profile-btn profile-btn_green funding-ach-payment-box_button-margin"
-        onClick={props.achDeposit}
-      >Confirm
+        onClick={
+          props.submitted
+          ? props.achDeposit
+          : props.submit
+        }
+      >
+        {props.submitted ? 'Confirm' : 'Submit'}
       </button>
     </div>
     {props.errorDeposit && <div className="funding__error text-center mt-3">
