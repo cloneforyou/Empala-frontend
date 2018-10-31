@@ -14,7 +14,7 @@ import {
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_FAILED,
   CLEAR_ALPS_TRANSFER_FIELDS,
-  ALPS_TRANSFER_FAIL,
+  ALPS_TRANSFER_FAIL, SUBMIT_TRANSFER, TRANSFER_FAILED,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
@@ -33,6 +33,7 @@ const initialState = {
   ach_amount: false,
   check_amount: false,
   check_memo: false,
+  transferSubmitted: false,
   plaid_link_active: false,
   institutionsList: [],
   error: false,
@@ -138,6 +139,7 @@ function funding(state = initialState, action) {
     case GET_INSTITUTIONS_FAILED:
     case ADD_INSTITUTION_FAILED:
     case REMOVE_INSTITUTION_FAILED:
+    case TRANSFER_FAILED:
       return {
         ...state,
         error: action.err,
@@ -156,6 +158,11 @@ function funding(state = initialState, action) {
       return {
         ...state,
         plaid_link_active: !state.plaid_link_active,
+      };
+      case SUBMIT_TRANSFER:
+      return {
+        ...state,
+        transferSubmitted: true,
       };
     default:
       return state;

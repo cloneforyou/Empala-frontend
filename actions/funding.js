@@ -19,7 +19,7 @@ import {
   ACH_DEPOSIT_FAILED,
   CLEAR_ALPS_TRANSFER_FIELDS,
   ALPS_TRANSFER,
-  ALPS_TRANSFER_FAIL, INIT_FUNDS_TRANSFER,
+  ALPS_TRANSFER_FAIL, INIT_FUNDS_TRANSFER, SUBMIT_TRANSFER, TRANSFER_SUCCESS, TRANSFER_FAILED,
 } from '../constants/funding';
 
 export function setInputFieldValueById(id, value) {
@@ -163,5 +163,24 @@ export function initFundsTransfer(transferMethod) {
   return {
     type: INIT_FUNDS_TRANSFER,
     transferMethod,
+  };
+}
+
+export function submitTransfer() {
+  return {
+    type: SUBMIT_TRANSFER,
+  };
+}
+
+export function submitTransferSuccess() {
+  return {
+    type: TRANSFER_SUCCESS,
+  };
+}
+
+export function submitTransferFail(err) {
+  return {
+    type: TRANSFER_FAILED,
+    err,
   };
 }

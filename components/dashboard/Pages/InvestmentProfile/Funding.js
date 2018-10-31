@@ -14,7 +14,7 @@ import {
   setSecuritiesInputValue,
   togglePlaidLink,
   ACHDeposit,
-  ALPSTransfer, initFundsTransfer,
+  ALPSTransfer, initFundsTransfer, submitTransfer,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -320,6 +320,7 @@ class Funding extends PureComponent {
                         checkAmount={this.props.check_amount}
                         checkMemo={this.props.check_memo}
                         handleCheckTransfer={this.props.handleCheckTransfer}
+                        error={this.props.error}
                       />
                     }
                     {
@@ -339,7 +340,6 @@ class Funding extends PureComponent {
                     options={this.options}
                     selected_institution={this.props.selected_institution}
                     ach_amount={this.props.ach_amount}
-                    handleSubmit={this.handleSubmit}
                     achDeposit={this.achDeposit}
                     setPaymentIntitution={this.props.setPaymentIntitution}
                     togglePlaidLink={this.props.togglePlaidLink}
@@ -348,7 +348,9 @@ class Funding extends PureComponent {
                     institutionsList={this.props.institutionsList}
                     getInstitutions={this.props.getInstitutions}
                     removeInstitution={this.props.removeInstitution}
-                    error={this.props.error}
+                    errorDeposit={this.props.errorDeposit}
+                    submitted={this.props.isTransferSubmitted}
+                    submit={this.props.submitTransfer}
                   />
               }
             </div>
@@ -393,6 +395,8 @@ const mapStateToProps = state => ({
   institutionsList: state.funding.institutionsList,
   errorDeposit: state.funding.errorDeposit,
   errorALPS: state.funding.errorALPS,
+  isTransferSubmitted: state.funding.transferSubmitted,
+  error: state.funding.error,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -409,6 +413,7 @@ const mapDispatchToProps = dispatch => ({
     // TODO remove after
     // if (id === 'account_no' || id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
     if (id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
+    if (id === 'check_memo' && value.length > 30) return false;
 
     return dispatch(setInputFieldValueById(id, value));
   },
@@ -426,5 +431,6 @@ const mapDispatchToProps = dispatch => ({
   ACHDeposit: (data) => dispatch(ACHDeposit(data)),
   ALPSTransfer: (data) => dispatch(ALPSTransfer(data)),
   handleCheckTransfer: () => dispatch(initFundsTransfer('check')),
+  submitTransfer: () => dispatch(submitTransfer()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
