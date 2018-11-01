@@ -28,6 +28,7 @@
   &-content {
     padding: 0 2% 26px 10%;
     width: 100%;
+    position: relative;
     @media(max-width: 1144px) {
       height: 758px;
       overflow-y: auto;
