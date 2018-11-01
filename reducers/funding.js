@@ -14,10 +14,12 @@ import {
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_FAILED,
   CLEAR_ALPS_TRANSFER_FIELDS,
-  ALPS_TRANSFER_FAIL, SUBMIT_TRANSFER, TRANSFER_FAILED,
+  ALPS_TRANSFER_FAIL,
+  SUBMIT_TRANSFER,
+  TRANSFER_FAILED,
+  GET_ACCOUNTS_FAILED,
+  GET_ACCOUNTS_SUCCESS,
 } from '../constants/funding';
-import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
-
 
 const initialState = {
   funding_type: false,
@@ -25,6 +27,7 @@ const initialState = {
   account_type: 'Single',
   account_no: false,
   fieldsErrors: false,
+  memberAccountsData: false,
   funding_comments: false,
   partial_symbols: [
     { symbol: '', quantity: '', sec_type: 'Shares' },
@@ -67,6 +70,7 @@ function funding(state = initialState, action) {
       if (action.id === 'funding_type') {
         return {
           ...initialState,
+          memberAccountsData: state.memberAccountsData,
           [action.id]: action.value,
         };
       }
@@ -75,10 +79,6 @@ function funding(state = initialState, action) {
         // [action.id]: action.id === 'ach_amount' ? action.value.replace(/^\d+(?:[\.,]\d+)?$/g, '') : action.value,
         [action.id]: action.value,
       };
-    // case VALIDATE_FIELD_ERROR:
-    //   return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: action.message } };
-    // case VALIDATE_FIELD_SUCCESS:
-    //   return { ...state, fieldsErrors: { ...state.fieldsErrors, [action.fieldId]: '' } };
     case UNSET_PAYMENT_VALUE:
       return {
         ...state,
@@ -136,10 +136,16 @@ function funding(state = initialState, action) {
         ...state,
         institutionsList: action.institutionsList,
       };
+    case GET_ACCOUNTS_SUCCESS:
+      return {
+        ...state,
+        memberAccountsData: action.data,
+      };
     case GET_INSTITUTIONS_FAILED:
     case ADD_INSTITUTION_FAILED:
     case REMOVE_INSTITUTION_FAILED:
     case TRANSFER_FAILED:
+    case GET_ACCOUNTS_FAILED:
       return {
         ...state,
         error: action.err,

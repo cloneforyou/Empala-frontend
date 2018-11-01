@@ -19,8 +19,36 @@ import {
   ACH_DEPOSIT_FAILED,
   CLEAR_ALPS_TRANSFER_FIELDS,
   ALPS_TRANSFER,
-  ALPS_TRANSFER_FAIL, INIT_FUNDS_TRANSFER, SUBMIT_TRANSFER, TRANSFER_SUCCESS, TRANSFER_FAILED,
+  ALPS_TRANSFER_FAIL,
+  INIT_FUNDS_TRANSFER,
+  SUBMIT_TRANSFER,
+  TRANSFER_SUCCESS,
+  TRANSFER_FAILED,
+  GET_ACCOUNTS_REQUEST,
+  GET_ACCOUNTS_FAILED,
+  GET_ACCOUNTS_SUCCESS,
 } from '../constants/funding';
+
+
+export function getAccounts() {
+  return {
+    type: GET_ACCOUNTS_REQUEST,
+  };
+}
+
+export function getAccountsFail(err) {
+  return {
+    type: GET_ACCOUNTS_FAILED,
+    err,
+  };
+}
+
+export function setAccountsData(data) {
+  return {
+    type: GET_ACCOUNTS_SUCCESS,
+    data,
+  };
+}
 
 export function setInputFieldValueById(id, value) {
   return {
