@@ -124,6 +124,40 @@
   line-height: 15px;
 }
 
+.mw_330 {
+  max-width: 330px;
+  @media(max-width: 991px) {
+    max-width: 100%;
+  }
+}
+
+.mw_210 {
+  max-width: 210px;
+}
+
+.mt-21 {
+  margin-top: 21px;
+}
+
+.t-strong {
+  font-weight: bolder;
+}
+
+.t-black {
+  color: #424344;
+  &:hover {
+    color: #424344;
+  }
+}
+
+.t-ins {
+  text-decoration: underline;
+}
+
+.t-small {
+  @include fontSize(12px);
+}
+
 .simple-box-shadow {
   box-shadow: 0 6px 9px 0 rgba(0, 0, 0, 0.16);
 }

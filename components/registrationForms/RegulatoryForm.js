@@ -37,6 +37,10 @@ class RegulatoryForm extends React.Component {
     super(props);
 
     this.mappingComponent = (item) => {
+      if (this.props.page === 2) {
+        return false;
+      }
+
       let mask = '';
       const ssnMask = '999-99-9999';
       if (item.id.includes('ssn')) {
@@ -109,7 +113,7 @@ class RegulatoryForm extends React.Component {
       <div className="container-fluid">
         <div className="registration-group__section-title title-nowrap margin-bottom40">
           {this.props.page === 1 && 'Select any of the below that applies to you:'}
-          {this.props.page === 2 && 'Enter your details:'}
+          {this.props.page === 3 && 'Enter your details:'}
         </div>
         <form className="row">
           {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}

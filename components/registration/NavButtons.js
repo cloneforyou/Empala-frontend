@@ -38,6 +38,9 @@ const NavButtons = (props) => {
   if (props.tabName === 'regulatory' && props.tabIndex === 1) {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
   }
+  if (props.tabName === 'regulatory' && props.tabIndex === 2) {
+    disabled = false;
+  }
   if (props.fieldNames.filter(field =>
     (field.includes('zip_code') && props.registrationData[field] && props.registrationData[field].length < 5)).length > 0) {
     disabled = true;

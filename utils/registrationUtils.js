@@ -44,6 +44,9 @@ export const menuItems = {
       title: 'Regulatory Questions', key: 'regulatory-questions', completed: false, active: false,
     },
     {
+      title: 'Duplicate', key: 'duplicate', completed: false, active: false,
+    },
+    {
       title: 'Identification', key: 'identification', completed: false, active: false,
     },
   ],
