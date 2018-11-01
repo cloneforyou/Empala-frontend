@@ -5,7 +5,9 @@ import {
   ADD_INSTITUTION_REQUEST,
   GET_INSTITUTIONS_REQUEST,
   REMOVE_INSTITUTION_REQUEST,
-  ALPS_TRANSFER, INIT_FUNDS_TRANSFER,
+  ALPS_TRANSFER,
+  INIT_FUNDS_TRANSFER,
+  GET_ACCOUNTS_REQUEST,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -18,10 +20,14 @@ import {
   setInputFieldValueById,
   clearALPSTransferFields,
   ALPSTransferFail,
-  submitTransferFail, submitTransferSuccess,
+  submitTransferFail,
+  submitTransferSuccess,
+  setAccountsData,
+  getAccountsFail,
 } from '../actions/funding';
 
 const urls = {
+  getAccounts: '/api/funding/accounts',
   getInstitutions: '/api/funding/institutions/my?limit=100',
   addInstitution: '/api/funding/institution/add',
   removeInstitution: '/api/funding/institution/delete',
@@ -29,6 +35,21 @@ const urls = {
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
 };
+
+export function* getAccountsData() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const response = yield call(request, urls.getAccounts, options);
+    yield put(setAccountsData(response.data.data));
+  } catch (err) {
+    yield put(getAccountsFail(err.message));
+  }
+}
 
 export function* getInstitutionsData() {
   const options = {
@@ -166,5 +187,6 @@ export default function* fundingSaga() {
     takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
+    takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
   ]);
 }

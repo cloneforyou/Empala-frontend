@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
@@ -14,7 +15,7 @@ import {
   setSecuritiesInputValue,
   togglePlaidLink,
   ACHDeposit,
-  ALPSTransfer, initFundsTransfer, submitTransfer,
+  ALPSTransfer, initFundsTransfer, submitTransfer, getAccounts,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -72,16 +73,33 @@ class Funding extends PureComponent {
       ],
     };
     this.alpsTransferHandler = this.alpsTransferHandler.bind(this);
+    this.achDeposit = this.achDeposit.bind(this);
+    // this.accountsDropdownOptions = this.getAccountsDropdownOptions(this.props.apexAccounts);
   }
+
+  componentDidMount() {
+    this.props.getAccounts();
+  }
+
+  getAccountsDropdownOptions() {
+    return this.props.apexAccounts.map(el => ({ title: el.account_number, value: el.account_number }));
+  }
+
+  getMemberFullName({ firstName, lastName, prefix }) {
+    return `${prefix} ${firstName} ${lastName}`;
+  }
+
   isSpecifiedTypeSelected(type, value) {
     return value ? this.props[type] === value : this.props[type];
   }
+
   displayFooter() {
     if (!this.isSpecifiedTypeSelected('funding_type') ||
       this.isSpecifiedTypeSelected('funding_type', 'Fund Later')) return true;
     return this.isSpecifiedTypeSelected('funding_type', 'Account Transfer')
       && !this.isSpecifiedTypeSelected('transfer_type');
   }
+
   //
   // handleTransfer(fundingType) {
   //   switch (fundingType) {
@@ -91,8 +109,8 @@ class Funding extends PureComponent {
   //       return this.props.handleCheckTransfer();
   //   }
   // }
-  alpsTransferHandler() {
 
+  alpsTransferHandler() {
     // Todo add validate after
     if (!this.props.account_no || !this.props.member_first_name ||
       !this.props.member_last_name || !this.props.member_primary_ssn) return;
@@ -122,7 +140,7 @@ class Funding extends PureComponent {
             amount: item.quantity,
             isShort: item.symbol.length <= 3,
           });
-        })
+        });
       }
     }
 
@@ -131,7 +149,7 @@ class Funding extends PureComponent {
     this.props.ALPSTransfer(data);
   }
 
-  achDeposit = () => {
+  achDeposit() {
     if (!this.props.selected_institution || !this.props.ach_amount) return;
 
     let institution_id;
@@ -147,10 +165,6 @@ class Funding extends PureComponent {
     };
 
     this.props.ACHDeposit(data);
-  };
-
-  getMemberFullName({firstName, lastName, prefix}){
-    return `${prefix} ${firstName} ${lastName}`
   }
 
   render() {
@@ -197,14 +211,14 @@ class Funding extends PureComponent {
                         {
                           this.isSpecifiedTypeSelected('funding_type', 'Check') &&
                             this.props.transfer_direction === 'Outbound' &&
-                          <EmpalaSelect
-                            id="account_number"
-                            options={[]} // todo parse accounts here
-                            label="Account number"
-                            value={this.props.account_number || ''}
-                            handleChange={this.props.setSelectedValueById}
-                            // errorText={this.props.fieldsErrors.account_type}
-                          />
+                            <EmpalaSelect
+                              id="account_number"
+                              options={this.getAccountsDropdownOptions()}
+                              label="Account number"
+                              value={this.props.account_no || ''}
+                              handleChange={this.props.setSelectedValueById}
+                              // errorText={this.props.fieldsErrors.account_type}
+                            />
                         }
                       </div>
                       {
@@ -300,7 +314,8 @@ class Funding extends PureComponent {
                             </Link>
                           </button>
                         </div>
-                        {this.props.errorALPS && <div className="mt-4 ml-4 funding__error">
+                        {this.props.errorALPS &&
+                        <div className="mt-4 ml-4 funding__error">
                           {this.props.errorALPS}
                         </div>}
                       </div>
@@ -321,6 +336,8 @@ class Funding extends PureComponent {
                         checkMemo={this.props.check_memo}
                         handleCheckTransfer={this.props.handleCheckTransfer}
                         error={this.props.error}
+                        apexAccounts={this.props.apexAccounts}
+                        selectedAccount={this.props.account_no}
                       />
                     }
                     {
@@ -366,12 +383,12 @@ const mapStateToProps = state => ({
   transfer_type: state.funding.transfer_type,
   transfer_direction: state.funding.transfer_direction || 'Inbound',
   account_type: state.funding.account_type,
-  account_no: state.funding.account_no,
+  account_no: state.funding.account_no || state.funding.account_number,
   member_secondary_ssn: state.funding.member_secondary_ssn,
-  member_primary_ssn: state.funding.member_primary_ssn, // state.profile.profileUserData.regulatory_identification_ssn,
-  member_title: state.funding.member_title, // state.profile.profileUserData.basic_information_prefix,
-  member_first_name: state.funding.member_first_name, // state.profile.profileUserData.basic_information_first_name,
-  member_last_name: state.funding.member_last_name, // state.profile.profileUserData.basic_information_last_name,
+  member_primary_ssn: state.funding.member_primary_ssn,
+  member_title: state.funding.member_title,
+  member_first_name: state.funding.member_first_name,
+  member_last_name: state.funding.member_last_name,
   member_address: {
     city: state.profile.profileUserData.identity_residential_address_city,
     state: state.profile.profileUserData.identity_residential_address_state,
@@ -397,6 +414,7 @@ const mapStateToProps = state => ({
   errorALPS: state.funding.errorALPS,
   isTransferSubmitted: state.funding.transferSubmitted,
   error: state.funding.error,
+  apexAccounts: (state.funding.memberAccountsData || {}).apex || [],
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -428,9 +446,10 @@ const mapDispatchToProps = dispatch => ({
   addInstitution: (token, data) => dispatch(addInstitution(token, data)),
   removeInstitution: id => dispatch(removeInstitution(id)),
   getInstitutions: () => dispatch(getInstitutions()),
-  ACHDeposit: (data) => dispatch(ACHDeposit(data)),
-  ALPSTransfer: (data) => dispatch(ALPSTransfer(data)),
+  ACHDeposit: data => dispatch(ACHDeposit(data)),
+  ALPSTransfer: data => dispatch(ALPSTransfer(data)),
   handleCheckTransfer: () => dispatch(initFundsTransfer('check')),
   submitTransfer: () => dispatch(submitTransfer()),
+  getAccounts: () => dispatch(getAccounts()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
