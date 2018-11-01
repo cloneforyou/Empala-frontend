@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import DashboardInfoPopup from '../../Modal/DashboardInfoPopup';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
@@ -170,11 +171,13 @@ class Funding extends PureComponent {
   render() {
     return (
       <div>
+
         <TitleBar />
         <div className="container-fluid">
           <div className="funding-wrapper dark-theme">
             <div className="funding-background" />
             <div className="funding-content">
+              <DashboardInfoPopup name='funding_transfer_approved' />
               <div className="funding-content-header">
                 <h1 className="funding-content-header__title">
                 Account Fund Management
