@@ -58,6 +58,10 @@
       font-size: 16px;
     }
   }
+  .duplicate-container
+  .registration-group {
+    min-height: 70px;
+  }
 }
 
 .experience-page {
@@ -68,6 +72,46 @@
   @media(max-width: 991px) {
     padding: 0 15px;
   }
+}
+
+.duplicate-container {
+  width: 100%;
+  padding: 27px 24px 27px 140px;
+  .popup-info {
+    width: 368px;
+    height: 142px;
+    border: 1px solid $light-gray;
+    border-radius: 5px;
+    padding: 20px;
+  }
+}
+
+.icon-letter {
+  &:before {
+    content: ' ';
+    width: 46px;
+    height: 61px;
+    display: inline-block;
+    background: url($path-to-images + 'icon-letter.svg') 100% 100%/ cover;
+  }
+}
+
+.icon-exclamation {
+  width: 13px;
+  height: 54px;
+  &:before {
+    content: ' ';
+    background: url($path-to-images + 'icon-exclamation.svg') 100% 100%/ cover;
+    width: 13px;
+    height: 54px;
+    display: inline-block;
+  }
+}
+
+.info-icon_position {
+  position: absolute;
+  top: 28px;
+  right: 0;
 }
 
 .check-container {
