@@ -1,0 +1,19 @@
+.plus-button-component {
+  display: inline-flex;
+  border-radius: 50%;
+  position: relative;
+}
+
+.plus-button-component__hor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(-50%);
+}
+
+.plus-button-component__ver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(-50%);
+}

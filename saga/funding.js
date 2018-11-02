@@ -8,6 +8,7 @@ import {
   ALPS_TRANSFER,
   INIT_FUNDS_TRANSFER,
   GET_ACCOUNTS_REQUEST,
+  GET_ACH_TRANSACTION_LIST,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -35,6 +36,7 @@ const urls = {
   ACHDeposit: '/api/funding/depositACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
+  getACHTransactions: '/api/funding/transactions/list',
 };
 
 export function* getAccountsData() {
@@ -181,6 +183,24 @@ function* transferFunds({ transferMethod }) {
   }
 }
 
+export function* getACHTransactionList() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+
+  try {
+
+    const resp = yield call(request, urls.getACHTransactions, options);
+    yield put(setInputFieldValueById('ACHTransactionList', resp.data.data))
+  } catch (err) {
+    //yield put(ALPSTransferFail(err.response.data.data.message));
+    console.log(err.response.data)
+  }
+}
+
 export default function* fundingSaga() {
   yield all([
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
@@ -190,5 +210,6 @@ export default function* fundingSaga() {
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
     takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
+    takeLatest(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
   ]);
 }
