@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import NavButtons from './NavButtons';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
-import { duplicateForm, duplicateDelivery } from '../../localdata/regulatoryPageData';
+// import { duplicateForm, duplicateDelivery } from '../../localdata/regulatoryPageData';
 
 
 class DuplicateForm extends Component {
@@ -59,13 +59,13 @@ class DuplicateForm extends Component {
            <div className="col-12 registration-group__section-title text-center">
              Compliance Officer for Member
            </div>
-           {duplicateForm.map(item => this.mappingComponent(item))}
+           {/*{duplicateForm.map(item => this.mappingComponent(item))}*/}
          </div>
         </div>
         <div className="col-lg-7">
           <div className="row mt-21 mb-4">
             <div className="col-4 mw_210 no-gutters pr-5">
-              {duplicateDelivery.map(item => this.mappingComponent(item))}
+              {/*{duplicateDelivery.map(item => this.mappingComponent(item))}*/}
             </div>
             <div className="col-8">
               <div className="registration-group__section-title mt-4 mb-lg-5">
