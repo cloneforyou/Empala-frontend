@@ -1,11 +1,23 @@
 import { put } from 'redux-saga/effects';
 import { js2xml, xml2js } from 'xml-js';
-import { setFieldInvalid, setFieldValid, setInputFieldValueById, showAlertModal } from '../actions/registration';
+import { setFieldInvalid, setFieldValid, setInputFieldValueById } from '../actions/registration';
 import { statesAbbvs } from '../localdata/usStatesList';
+import { origin, uspsClientId } from '../keys';
 
-export function* getAddressInfoByZIP({ fieldId, zipCode }) {
-  const urlBase = 'http://production.shippingapis.com/ShippingAPI.dll?API=CityStateLookup&XML=';
-  const clientId = '018EMPAL1274';
+const getBaseUrl = (env) => {
+  switch (env) {
+    case 'dev':
+      return 'http://production.shippingapis.com';
+    case 'prod':
+      return 'https://secure.shippingapis.com';
+    default:
+      return 'http://production.shippingapis.com';
+  }
+};
+
+export default function* getAddressInfoByZIP({ fieldId, zipCode }) {
+  const urlBase = `${getBaseUrl(origin)}/ShippingAPI.dll?API=CityStateLookup&XML=`;
+  const clientId = uspsClientId;
   const data = {
     elements: [
       {
@@ -40,7 +52,6 @@ export function* getAddressInfoByZIP({ fieldId, zipCode }) {
     yield fetch(url).then(res => res.text()
       .then((text) => {
         const result = xml2js(text, { compact: true }).CityStateLookupResponse.ZipCode;
-        // console.log('**** CITY *****', result);
         if (!result.Error) {
           info.city = result.City._text;
           info.state = statesAbbvs[result.State._text];

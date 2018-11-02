@@ -20,13 +20,41 @@ import {
   CLEAR_ALPS_TRANSFER_FIELDS,
   ALPS_TRANSFER,
   ALPS_TRANSFER_FAIL,
+  INIT_FUNDS_TRANSFER,
+  SUBMIT_TRANSFER,
+  TRANSFER_SUCCESS,
+  TRANSFER_FAILED,
+  GET_ACCOUNTS_REQUEST,
+  GET_ACCOUNTS_FAILED,
+  GET_ACCOUNTS_SUCCESS,
   GET_ACH_TRANSACTION_LIST,
 } from '../constants/funding';
+
 
 export function getACHTransactionList() {
   return {
     type: GET_ACH_TRANSACTION_LIST,
   }
+}
+
+export function getAccounts() {
+  return {
+    type: GET_ACCOUNTS_REQUEST,
+  };
+}
+
+export function getAccountsFail(err) {
+  return {
+    type: GET_ACCOUNTS_FAILED,
+    err,
+  };
+}
+
+export function setAccountsData(data) {
+  return {
+    type: GET_ACCOUNTS_SUCCESS,
+    data,
+  };
 }
 
 export function setInputFieldValueById(id, value) {
@@ -162,6 +190,32 @@ export function ALPSTransfer(data) {
 export function ALPSTransferFail(err) {
   return {
     type: ALPS_TRANSFER_FAIL,
+    err,
+  };
+}
+
+export function initFundsTransfer(transferMethod) {
+  return {
+    type: INIT_FUNDS_TRANSFER,
+    transferMethod,
+  };
+}
+
+export function submitTransfer() {
+  return {
+    type: SUBMIT_TRANSFER,
+  };
+}
+
+export function submitTransferSuccess() {
+  return {
+    type: TRANSFER_SUCCESS,
+  };
+}
+
+export function submitTransferFail(err) {
+  return {
+    type: TRANSFER_FAILED,
     err,
   };
 }

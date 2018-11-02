@@ -125,6 +125,10 @@ const popupText = {
     text: 'Lorem lorem lorem lorem lorem lorem lorem lorem.',
     title: 'Community league',
   },
+  funding_transfer_approved: {
+    text: 'Transfer approval wording.',
+    title: 'Transfer approved',
+  },
 };
 
 export const getTableHeaderByName = tableName => tableHeaders[tableName];

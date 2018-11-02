@@ -161,15 +161,25 @@ const style = {
   contentStyle: {
     textAlign: 'center',
     border: `1px solid ${BLACK}`,
-    width: '600px',
+    width: '66%',
+    minWidth: '600px',
   },
   overlayDialogStyle: {
     backgroundColor: 'transparent',
+  },
+  sucessWording: {
+    fontSize: '18px',
+    lineHeight: 2.5,
+    marginBottom: '35px',
   },
   dataPickerTextFieldStyle: {
     width: '100%',
     color: MAIN_COLOR_TEXT_GRAY,
     fontFamily: 'Proxima Nova',
+  },
+  registrationModalLogo: {
+    width: '125px',
+    marginBottom: '35px',
   },
 };
 

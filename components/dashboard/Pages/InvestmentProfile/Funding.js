@@ -1,5 +1,7 @@
-import React, {Component, Fragment} from 'react';
+/* eslint-disable camelcase */
+import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'react-redux';
+import DashboardInfoPopup from '../../Modal/DashboardInfoPopup';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
@@ -15,13 +17,16 @@ import {
   togglePlaidLink,
   ACHDeposit,
   ALPSTransfer,
+  initFundsTransfer,
+  submitTransfer,
+  getAccounts,
   getACHTransactionList,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
 import {cleanErrorText, closeModal, setActivePage} from '../../../../actions/dashboard';
 import PartialTransfer from './PartialTransfer';
-import WireTransfer from './WireTransfer';
+import CheckTransfer from './CheckTransfer';
 import ACHTransfer from './ACHTransfer';
 import PlusIcon from '../../../common/PlusIcon';
 
@@ -46,7 +51,6 @@ const TransactionRow = props => {
         transactionId: props.transfer_id,
       },
     };
-    console.log(options)
     const resp = await request('/api/funding/transactions/cancel', options);
     await props.getACHTransactionList();
   };
@@ -107,44 +111,75 @@ const FundingFooter = props => (
   </div>
 );
 
-class Funding extends Component {
+class Funding extends PureComponent {
   constructor(props) {
     super(props);
     this.options = {
       funding: [
         { value: 'ACH transfer', title: 'ACH transfer' },
         { value: 'Account transfer', title: 'Account transfer' },
-        { value: 'Wire/Check', title: 'Wire/Check' },
+        { value: 'Check', title: 'Check' },
+        // { value: 'Wire', title: 'Wire' }, // todo wire will be added later.
       ],
       transfer_type: [
         { value: 'Full transfer', title: 'Full transfer' },
         { value: 'Partial transfer', title: 'Partial transfer' },
+      ],
+      transfer_direction: [
+        { value: 'Inbound', title: 'Transfer In' },
+        { value: 'Outbound', title: 'Transfer Out' },
       ],
       account_type: [
         { value: 'Single', title: 'Single' },
         { value: 'Joint', title: 'Joint' },
       ],
     };
+    this.alpsTransferHandler = this.alpsTransferHandler.bind(this);
+    this.achDeposit = this.achDeposit.bind(this);
+    // this.accountsDropdownOptions = this.getAccountsDropdownOptions(this.props.apexAccounts);
     this.interval = null;
   }
 
+  componentDidMount() {
+    this.props.getAccounts();
+    this.props.getACHTransactionList();
+    this.interval = setInterval(()=> this.props.getACHTransactionList(), 60000);
+  }
 
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  getAccountsDropdownOptions() {
+    return this.props.apexAccounts.map(el => ({ title: el.account_number, value: el.account_number }));
+  }
+
+  getMemberFullName({ firstName, lastName, prefix }) {
+    return `${prefix} ${firstName} ${lastName}`;
+  }
 
   isSpecifiedTypeSelected(type, value) {
     return value ? this.props[type] === value : this.props[type];
   }
+
   displayFooter() {
     if (!this.isSpecifiedTypeSelected('funding_type') ||
       this.isSpecifiedTypeSelected('funding_type', 'Fund Later')) return true;
     return this.isSpecifiedTypeSelected('funding_type', 'Account Transfer')
       && !this.isSpecifiedTypeSelected('transfer_type');
   }
-  handleSubmit() {
-    alert('Fired fund transfer submission procedure!');
-  }
 
-  alpsTransferHandler = () => {
+  //
+  // handleTransfer(fundingType) {
+  //   switch (fundingType) {
+  //     case 'ACH transfer':
+  //       return this.alpsTransferHandler();
+  //     case  'Check':
+  //       return this.props.handleCheckTransfer();
+  //   }
+  // }
 
+  alpsTransferHandler() {
     // Todo add validate after
     if (!this.props.account_no || !this.props.member_first_name ||
       !this.props.member_last_name || (this.props.member_primary_ssn &&
@@ -175,7 +210,7 @@ class Funding extends Component {
             amount: item.quantity,
             isShort: item.symbol.length <= 3,
           });
-        })
+        });
       }
     }
 
@@ -184,7 +219,7 @@ class Funding extends Component {
     this.props.ALPSTransfer(data);
   }
 
-  achDeposit = () => {
+  achDeposit() {
     if (!this.props.selected_institution || !this.props.ach_amount) return;
 
     let institution_id;
@@ -200,29 +235,6 @@ class Funding extends Component {
     };
 
     this.props.ACHDeposit(data);
-  };
-
-  //  Todo move to saga
-  // getTransactionList = async () => {
-  //   const options = {
-  //     method: 'GET',
-  //     headers: {
-  //       'X-Access-Token': localStorage.getItem('accessToken'),
-  //     },
-  //   };
-  //   const resp = await request('/api/funding/transactions/list', options);
-  //   this.setState({tempArrayForTransactionList: resp.data.data})
-  //   console.log(43234, resp)
-  // };
-
-  componentDidMount() {
-    // this.getTransactionList();
-    this.props.getACHTransactionList();
-    this.interval = setInterval(()=> this.props.getACHTransactionList(), 60000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval)
   }
 
   render() {
@@ -233,6 +245,7 @@ class Funding extends Component {
           <div className="funding-wrapper dark-theme">
             <div className="funding-background" />
             <div className="funding-content">
+              <DashboardInfoPopup name='funding_transfer_approved' />
               <div className="funding-content-header">
                 <h1 className="funding-content-header__title">
                 Account Fund Management
@@ -254,6 +267,7 @@ class Funding extends Component {
                           hint="Choose funding type"
                         />
                         {
+                          this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                           this.isSpecifiedTypeSelected('transfer_type') &&
                           <EmpalaInput
                             id="account_no"
@@ -264,6 +278,18 @@ class Funding extends Component {
                             // errorText={this.props.fieldsErrors.account_no}
                             // placeholder="1234567890"
                           />
+                        }
+                        {
+                          this.isSpecifiedTypeSelected('funding_type', 'Check') &&
+                            this.props.transfer_direction === 'Outbound' &&
+                            <EmpalaSelect
+                              id="account_number"
+                              options={this.getAccountsDropdownOptions()}
+                              label="Account number"
+                              value={this.props.account_no || ''}
+                              handleChange={this.props.setSelectedValueById}
+                              // errorText={this.props.fieldsErrors.account_type}
+                            />
                         }
                       </div>
                       {
@@ -279,7 +305,9 @@ class Funding extends Component {
                             hint="Choose transfer type"
                           />
                           {
-                            this.isSpecifiedTypeSelected('transfer_type') && <EmpalaSelect
+                            this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                            this.isSpecifiedTypeSelected('transfer_type') &&
+                            <EmpalaSelect
                               id="account_type"
                               options={this.options.account_type}
                               label="Account type"
@@ -290,8 +318,23 @@ class Funding extends Component {
                           }
                         </div>
                       }
+                      {
+                        this.isSpecifiedTypeSelected('funding_type', 'Check') &&
+                        <div className="col-6 no-gutters pl-2">
+                          <EmpalaSelect
+                            id="transfer_direction"
+                            options={this.options.transfer_direction}
+                            label="Direction"
+                            value={this.props.transfer_direction || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.transfer_type}
+                            hint="Direction"
+                          />
+                        </div>
+                      }
                     </div>
                     {
+                      this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                       this.isSpecifiedTypeSelected('transfer_type') &&
                       <div>
                         <FundingMemberInfo
@@ -304,6 +347,7 @@ class Funding extends Component {
                           setInputValueById={this.props.setInputValueById}
                         />
                         {
+                          this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                           this.isSpecifiedTypeSelected('transfer_type', 'Partial transfer') &&
                           <PartialTransfer
                             setInputValueById={this.props.setInputValueById}
@@ -341,15 +385,30 @@ class Funding extends Component {
                             </Link>
                           </button>
                         </div>
-                        {this.props.errorALPS && <div className="mt-4 ml-4 funding__error">
+                        {this.props.errorALPS &&
+                        <div className="mt-4 ml-4 funding__error">
                           {this.props.errorALPS}
                         </div>}
                       </div>
                     }
                     {
-                      this.isSpecifiedTypeSelected('funding_type', 'Wire/Check') &&
-                      <WireTransfer
+                      this.isSpecifiedTypeSelected('funding_type', 'Check') &&
+                      <CheckTransfer
+                        setInputValueById={this.props.setInputValueById}
+                        setSelectedValueById={this.props.setSelectedValueById}
                         setActivePage={this.props.setActivePage}
+                        fundingType={this.props.funding_type}
+                        transferType={this.props.transfer_type}
+                        transferDirection={this.props.transfer_direction}
+                        fullName={this.getMemberFullName(this.props.member_information)}
+                        memberAddress={this.props.member_address}
+                        accountNumber={this.props.account_no}
+                        checkAmount={this.props.check_amount}
+                        checkMemo={this.props.check_memo}
+                        handleCheckTransfer={this.props.handleCheckTransfer}
+                        error={this.props.error}
+                        apexAccounts={this.props.apexAccounts}
+                        selectedAccount={this.props.account_no}
                       />
                     }
                     {
@@ -369,7 +428,6 @@ class Funding extends Component {
                     options={this.options}
                     selected_institution={this.props.selected_institution}
                     ach_amount={this.props.ach_amount}
-                    handleSubmit={this.handleSubmit}
                     achDeposit={this.achDeposit}
                     setPaymentIntitution={this.props.setPaymentIntitution}
                     togglePlaidLink={this.props.togglePlaidLink}
@@ -378,8 +436,10 @@ class Funding extends Component {
                     institutionsList={this.props.institutionsList}
                     getInstitutions={this.props.getInstitutions}
                     removeInstitution={this.props.removeInstitution}
-                    error={this.props.error}
                     errorDeposit={this.props.errorDeposit}
+                    submitted={this.props.isTransferSubmitted}
+                    submit={this.props.submitTransfer}
+                    error={this.props.error}
                   />
               }
               {this.props.funding_type === 'ACH transfer' && this.props.ACHTransactionList.length && (
@@ -426,21 +486,40 @@ class Funding extends Component {
 const mapStateToProps = state => ({
   funding_type: state.funding.funding_type,
   transfer_type: state.funding.transfer_type,
+  transfer_direction: state.funding.transfer_direction || 'Inbound',
   account_type: state.funding.account_type,
-  account_no: state.funding.account_no,
+  account_no: state.funding.account_no || state.funding.account_number,
   member_secondary_ssn: state.funding.member_secondary_ssn,
-  member_primary_ssn: state.funding.member_primary_ssn, // state.profile.profileUserData.regulatory_identification_ssn,
-  member_title: state.funding.member_title, // state.profile.profileUserData.basic_information_prefix,
-  member_first_name: state.funding.member_first_name, // state.profile.profileUserData.basic_information_first_name,
-  member_last_name: state.funding.member_last_name, // state.profile.profileUserData.basic_information_last_name,
+  member_primary_ssn: state.funding.member_primary_ssn,
+  member_title: state.funding.member_title,
+  member_first_name: state.funding.member_first_name,
+  member_last_name: state.funding.member_last_name,
+  member_address: {
+    city: state.profile.profileUserData.identity_residential_address_city,
+    state: state.profile.profileUserData.identity_residential_address_state,
+    country: state.profile.profileUserData.identity_residential_address_country,
+    zipCode: state.profile.profileUserData.identity_residential_address_zip_code,
+    line1: state.profile.profileUserData.identity_residential_address_residential_address_line_1,
+    line2: state.profile.profileUserData.identity_residential_address_residential_address_line_2,
+  },
+  member_information: {
+    firstName: state.profile.profileUserData.basic_information_first_name,
+    lastName: state.profile.profileUserData.basic_information_last_name,
+    prefix: state.profile.profileUserData.basic_information_prefix,
+  },
   funding_comments: state.funding.funding_comments,
   partial_symbols: state.funding.partial_symbols,
   selected_institution: state.funding.selected_institution || '',
   ach_amount: state.funding.ach_amount,
+  check_amount: state.funding.check_amount,
+  check_memo: state.funding.check_memo,
   plaid_link_active: state.funding.plaid_link_active,
   institutionsList: state.funding.institutionsList,
   errorDeposit: state.funding.errorDeposit,
   errorALPS: state.funding.errorALPS,
+  isTransferSubmitted: state.funding.transferSubmitted,
+  error: state.funding.error,
+  apexAccounts: (state.funding.memberAccountsData || {}).apex || [],
   ACHTransactionList: state.funding.ACHTransactionList,
 });
 const mapDispatchToProps = dispatch => ({
@@ -460,6 +539,7 @@ const mapDispatchToProps = dispatch => ({
     // TODO remove after
     // if (id === 'account_no' || id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
     if (id === 'ach_amount') return dispatch(setInputFieldValueById(id, value.replace(/\D|[^.]/, '')));
+    if (id === 'check_memo' && value.length > 30) return false;
 
     return dispatch(setInputFieldValueById(id, value));
   },
@@ -474,8 +554,11 @@ const mapDispatchToProps = dispatch => ({
   addInstitution: (token, data) => dispatch(addInstitution(token, data)),
   removeInstitution: id => dispatch(removeInstitution(id)),
   getInstitutions: () => dispatch(getInstitutions()),
-  ACHDeposit: (data) => dispatch(ACHDeposit(data)),
-  ALPSTransfer: (data) => dispatch(ALPSTransfer(data)),
+  ACHDeposit: data => dispatch(ACHDeposit(data)),
+  ALPSTransfer: data => dispatch(ALPSTransfer(data)),
+  handleCheckTransfer: () => dispatch(initFundsTransfer('check')),
+  submitTransfer: () => dispatch(submitTransfer()),
+  getAccounts: () => dispatch(getAccounts()),
   getACHTransactionList: () => dispatch(getACHTransactionList()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);

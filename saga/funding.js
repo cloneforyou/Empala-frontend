@@ -6,6 +6,8 @@ import {
   GET_INSTITUTIONS_REQUEST,
   REMOVE_INSTITUTION_REQUEST,
   ALPS_TRANSFER,
+  INIT_FUNDS_TRANSFER,
+  GET_ACCOUNTS_REQUEST,
   GET_ACH_TRANSACTION_LIST,
 } from '../constants/funding';
 import {
@@ -19,16 +21,38 @@ import {
   setInputFieldValueById,
   clearALPSTransferFields,
   ALPSTransferFail,
+  submitTransferFail,
+  submitTransferSuccess,
+  setAccountsData,
+  getAccountsFail,
 } from '../actions/funding';
+import { openInfoPopup } from '../actions/dashboard';
 
 const urls = {
+  getAccounts: '/api/funding/accounts',
   getInstitutions: '/api/funding/institutions/my?limit=100',
   addInstitution: '/api/funding/institution/add',
   removeInstitution: '/api/funding/institution/delete',
   ACHDeposit: '/api/funding/depositACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
+  checkTransfer: '/api/funding/checkTransfer',
   getACHTransactions: '/api/funding/transactions/list',
 };
+
+export function* getAccountsData() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const response = yield call(request, urls.getAccounts, options);
+    yield put(setAccountsData(response.data.data));
+  } catch (err) {
+    yield put(getAccountsFail(err.message));
+  }
+}
 
 export function* getInstitutionsData() {
   const options = {
@@ -122,6 +146,43 @@ export function* alpsTransfer({ data }) {
   }
 }
 
+function* transferFunds({ transferMethod }) {
+  const options = {
+    method: 'POST',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  let url = '';
+  if (transferMethod === 'check') {
+    const account_no = yield select(state => state.funding.account_no);
+    const transfer_type = yield select(state => state.funding.transfer_type);
+    let check_amount = transfer_type === 'Partial transfer'
+      ? yield select(state => state.funding.check_amount)
+      : 'full';
+    check_amount = check_amount.replace(/\D/g, '');
+    const check_memo = yield select(state => state.funding.check_memo);
+    options.data = {
+      account_no,
+      transfer_type,
+      check_amount,
+      check_memo,
+    };
+    url = urls.checkTransfer;
+
+    // alert('Check transfer fired! '+ accountNo + checkAmount + ' \nMemo: ' + memo);
+  }
+  try {
+    const response = yield call(request, url, options);
+    yield put(submitTransferSuccess());
+    yield put(openInfoPopup());
+    console.log(' ** Transfer', response.data);
+  } catch (err) {
+      console.log('Funds transfer Error:', err.response.data || err, Object.keys(err));
+    yield put(submitTransferFail(err.response.data.data));
+  }
+}
+
 export function* getACHTransactionList() {
   const options = {
     method: 'GET',
@@ -145,8 +206,10 @@ export default function* fundingSaga() {
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
     takeLatest(ADD_INSTITUTION_REQUEST, addInstitution),
     takeLatest(REMOVE_INSTITUTION_REQUEST, removeInstitution),
-    takeLatest(ACH_DEPOSIT_REQUEST, achDeposit),
-    takeLatest(ALPS_TRANSFER, alpsTransfer),
+    takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
+    takeEvery(ALPS_TRANSFER, alpsTransfer),
+    takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
+    takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
     takeLatest(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
   ]);
 }

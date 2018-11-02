@@ -31,7 +31,7 @@ import {
 import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
 import validationSaga, { validateCheckbox, validateEmptyFields, validateFieldValue } from './validation';
-import { getAddressInfoByZIP } from './sideServices';
+import getAddressInfoByZIP from './sideServices';
 
 const urls = {
   registration: '/api/auth/register',
@@ -42,6 +42,8 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
   if (!tabName) return;
   const mailingAddressSameAsResidential = yield select(state =>
     state.registration.checkboxes.identity_residential_address_same_mailing_address_checkbox);
+  const regulatory407Form = yield select(state =>
+    state.registration.registrationData.regulatory_407form_need);
   const nextTabs = {
     info: 'member',
     member: 'identity',
@@ -59,6 +61,10 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
     agreement: 'final_review',
   };
   if (direction === 'forward') {
+    if (tabName === 'regulatory' && !regulatory407Form) {
+      yield put(setTabPageIndex(3));
+      return false;
+    }
     if (tabName === 'identity' && tabIndex === 1 && mailingAddressSameAsResidential) {
       yield put(setTabName(nextTabs[tabName]));
       return false;
@@ -78,6 +84,10 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
     }
     return false;
   } else if (direction === 'backward') {
+    if (tabName === 'regulatory' && tabIndex === 3 && !regulatory407Form) {
+      yield put(setTabPageIndex(1));
+      return false;
+    }
     if (tabIndex <= 1) {
       if (tabName === 'info') {
         return false;
