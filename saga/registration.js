@@ -67,6 +67,8 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
         yield put(setTabPageIndex(1));
         return false;
       }
+      yield put(setTabPageIndex(3));
+      return false;
     }
     if (tabName === 'identity' && tabIndex === 1 && mailingAddressSameAsResidential) {
       yield put(setTabName(nextTabs[tabName]));
