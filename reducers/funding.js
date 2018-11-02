@@ -41,6 +41,7 @@ const initialState = {
   member_title: '',
   member_first_name: '',
   member_last_name: '',
+  ACHTransactionList: [],
 };
 
 function funding(state = initialState, action) {

@@ -6,6 +6,7 @@ import {
   GET_INSTITUTIONS_REQUEST,
   REMOVE_INSTITUTION_REQUEST,
   ALPS_TRANSFER,
+  GET_ACH_TRANSACTION_LIST,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -26,6 +27,7 @@ const urls = {
   removeInstitution: '/api/funding/institution/delete',
   ACHDeposit: '/api/funding/depositACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
+  getACHTransactions: '/api/funding/transactions/list',
 };
 
 export function* getInstitutionsData() {
@@ -120,12 +122,31 @@ export function* alpsTransfer({ data }) {
   }
 }
 
+export function* getACHTransactionList() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+
+  try {
+
+    const resp = yield call(request, urls.getACHTransactions, options);
+    yield put(setInputFieldValueById('ACHTransactionList', resp.data.data))
+  } catch (err) {
+    //yield put(ALPSTransferFail(err.response.data.data.message));
+    console.log(err.response.data)
+  }
+}
+
 export default function* fundingSaga() {
   yield all([
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
     takeLatest(ADD_INSTITUTION_REQUEST, addInstitution),
     takeLatest(REMOVE_INSTITUTION_REQUEST, removeInstitution),
-    takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
-    takeEvery(ALPS_TRANSFER, alpsTransfer),
+    takeLatest(ACH_DEPOSIT_REQUEST, achDeposit),
+    takeLatest(ALPS_TRANSFER, alpsTransfer),
+    takeLatest(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
   ]);
 }

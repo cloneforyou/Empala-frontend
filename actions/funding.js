@@ -20,7 +20,14 @@ import {
   CLEAR_ALPS_TRANSFER_FIELDS,
   ALPS_TRANSFER,
   ALPS_TRANSFER_FAIL,
+  GET_ACH_TRANSACTION_LIST,
 } from '../constants/funding';
+
+export function getACHTransactionList() {
+  return {
+    type: GET_ACH_TRANSACTION_LIST,
+  }
+}
 
 export function setInputFieldValueById(id, value) {
   return {

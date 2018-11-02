@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
@@ -14,7 +14,8 @@ import {
   setSecuritiesInputValue,
   togglePlaidLink,
   ACHDeposit,
-  ALPSTransfer
+  ALPSTransfer,
+  getACHTransactionList,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -22,9 +23,67 @@ import {cleanErrorText, closeModal, setActivePage} from '../../../../actions/das
 import PartialTransfer from './PartialTransfer';
 import WireTransfer from './WireTransfer';
 import ACHTransfer from './ACHTransfer';
+import PlusIcon from '../../../common/PlusIcon';
 
 // Todo move in saga after testing
 import request from '../../../../utils/request';
+
+const TransactionRow = props => {
+  const [year, month, day] = props.initiated_time.split('T')[0].split('-');
+  const formattedYear = `${year[2]}${year[3]}`;
+  const formattedDay = `${day[0] === '0' ? '' : day[0]}${day[1] ? day[1] : ''}`
+  const formattedAmount = props.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+
+  // Todo rebuild, move to saga
+  const cancelTransaction = async () => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+      data: {
+        transactionId: props.transfer_id,
+      },
+    };
+    console.log(options)
+    const resp = await request('/api/funding/transactions/cancel', options);
+    await props.getACHTransactionList();
+  };
+
+  return (
+    <div className="ACH-transaction-list__value-container">
+      <div className="ACH-transaction-list__value ACH-transaction-list__initiated-col">
+        {month}/{formattedDay}/{formattedYear}
+      </div>
+      <div className="ACH-transaction-list__value ACH-transaction-list__from-col">
+        {props.transfer_direction === 'INCOMING' ? props.institution_name : props.apex_account_number}
+      </div>
+      <div className="ACH-transaction-list__value ACH-transaction-list__to-col">
+        {props.transfer_direction === 'INCOMING' ? props.apex_account_number : props.institution_name}
+      </div>
+      <div className="ACH-transaction-list__value ACH-transaction-list__amount-col">
+        $ {formattedAmount}
+      </div>
+      <div className="ACH-transaction-list__value ACH-transaction-list__status-col">
+        {props.transfer_state === 'CANCELED' ? 'Canceled' : 'In progress'}
+      </div>
+      <div className="ACH-transaction-list__cancel-col d-flex justify-content-center align-items-center"
+           onClick={cancelTransaction}
+      >
+        {props.transfer_state !== 'CANCELED' ?
+        <PlusIcon backgroundColor="transparent"
+                  color="#b2d56b"
+                  rotate="45deg"
+                  height="20px"
+                  cursor="pointer"
+        /> : ''}
+      </div>
+    </div>
+
+  );
+};
+
 
 const FundingFooter = props => (
   <div className="funding-footer">
@@ -66,7 +125,11 @@ class Funding extends Component {
         { value: 'Joint', title: 'Joint' },
       ],
     };
+    this.interval = null;
   }
+
+
+
   isSpecifiedTypeSelected(type, value) {
     return value ? this.props[type] === value : this.props[type];
   }
@@ -84,7 +147,8 @@ class Funding extends Component {
 
     // Todo add validate after
     if (!this.props.account_no || !this.props.member_first_name ||
-      !this.props.member_last_name || !this.props.member_primary_ssn) return;
+      !this.props.member_last_name || (this.props.member_primary_ssn &&
+        this.props.member_primary_ssn.replace(/-/g, '').length !== 9)) return;
 
 
     const data = {
@@ -138,9 +202,32 @@ class Funding extends Component {
     this.props.ACHDeposit(data);
   };
 
+  //  Todo move to saga
+  // getTransactionList = async () => {
+  //   const options = {
+  //     method: 'GET',
+  //     headers: {
+  //       'X-Access-Token': localStorage.getItem('accessToken'),
+  //     },
+  //   };
+  //   const resp = await request('/api/funding/transactions/list', options);
+  //   this.setState({tempArrayForTransactionList: resp.data.data})
+  //   console.log(43234, resp)
+  // };
+
+  componentDidMount() {
+    // this.getTransactionList();
+    this.props.getACHTransactionList();
+    this.interval = setInterval(()=> this.props.getACHTransactionList(), 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
   render() {
     return (
-      <div>
+      <div className="funding">
         <TitleBar />
         <div className="container-fluid">
           <div className="funding-wrapper dark-theme">
@@ -292,8 +379,42 @@ class Funding extends Component {
                     getInstitutions={this.props.getInstitutions}
                     removeInstitution={this.props.removeInstitution}
                     error={this.props.error}
+                    errorDeposit={this.props.errorDeposit}
                   />
               }
+              {this.props.funding_type === 'ACH transfer' && this.props.ACHTransactionList.length && (
+                <div className="ACH-transaction-list">
+                  <div className="ACH-transaction-list__title">
+                    Transactions list
+                  </div>
+                  <div className="ACH-transaction-list__description-row">
+                    <div className="ACH-transaction-list__description-label ACH-transaction-list__initiated-col">
+                      Intitiated
+                    </div>
+                    <div className="ACH-transaction-list__description-label ACH-transaction-list__from-col">
+                      From account
+                    </div>
+                    <div className="ACH-transaction-list__description-label ACH-transaction-list__to-col">
+                      To account
+                    </div>
+                    <div className="ACH-transaction-list__description-label ACH-transaction-list__amount-col">
+                      Amount
+                    </div>
+                    <div className="ACH-transaction-list__description-label ACH-transaction-list__status-col">
+                      Status
+                    </div>
+                    <div className="ACH-transaction-list__description-label ACH-transaction-list__cancel-col">
+                      Cancel
+                    </div>
+                  </div>
+                  {this.props.ACHTransactionList.map((item) => (
+                    <TransactionRow {...item}
+                                    getACHTransactionList={this.props.getACHTransactionList}
+                                    key={item.id}
+                    />)
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -319,14 +440,16 @@ const mapStateToProps = state => ({
   plaid_link_active: state.funding.plaid_link_active,
   institutionsList: state.funding.institutionsList,
   errorDeposit: state.funding.errorDeposit,
-  partial_symbols: state.funding.partial_symbols,
   errorALPS: state.funding.errorALPS,
+  ACHTransactionList: state.funding.ACHTransactionList,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
     if (index || index === 0) return dispatch(setSecuritiesInputValue(id, index, value));
     if (id === 'funding_type' && value !== 'Account transfer') dispatch(dropFundingType());
     dispatch(setInputFieldValueById(id, value));
+    dispatch(setInputFieldValueById('errorALPS', ''));
+    dispatch(setInputFieldValueById('errorDeposit', ''));
   },
   setInputValueById: (e, index) => {
     const { id, value } = e.target;
@@ -353,5 +476,6 @@ const mapDispatchToProps = dispatch => ({
   getInstitutions: () => dispatch(getInstitutions()),
   ACHDeposit: (data) => dispatch(ACHDeposit(data)),
   ALPSTransfer: (data) => dispatch(ALPSTransfer(data)),
+  getACHTransactionList: () => dispatch(getACHTransactionList()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
