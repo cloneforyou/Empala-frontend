@@ -17,15 +17,15 @@ const style = {
 
 const isTransferEnabled = (transferType, transferAmount, totalAmount) => {
   const transferAmountRaw = transferAmount && +transferAmount.replace(/\D/g, '');
-  const totalAmountRaw = totalAmount && +totalAmount.replace(/\D/g, '');
+  // const totalAmountRaw = totalAmount && +totalAmount.replace(/\D/g, '');
   if (transferType === 'Full transfer' && Number(totalAmount) > 0) return false;
-  return !(transferType && transferAmount && totalAmount && transferAmountRaw <= totalAmountRaw);
+  return !(transferType && transferAmount && totalAmount && transferAmountRaw <= totalAmount);
 };
 
 const getSelectedAccountBalance = (accounts, selectedAccount) => {
   const selectedAccountInfo = accounts.filter(el => el.account_number === selectedAccount);
   return selectedAccountInfo.length > 0 && selectedAccountInfo[0].balance;
-}
+};
 
 const CheckTransferWording = () => (
   <Fragment>
@@ -58,7 +58,8 @@ const TransferBody = (props) => {
     apexAccounts,
     selectedAccount,
   } = props;
-  const amountAvailable = getSelectedAccountBalance(apexAccounts, selectedAccount).unAdjustedTotal;
+  const accountBalance = getSelectedAccountBalance(apexAccounts, selectedAccount);
+  const amountAvailable = Math.abs((accountBalance || {}).total || (accountBalance || {}).totalDeposits || 0);
   return (
     <div className="funding-wire-transfer__text">
       <div style={style.transferText}>
@@ -77,7 +78,7 @@ const TransferBody = (props) => {
           { `${memberAddress.line1}, ${memberAddress.line2 && `${memberAddress.line2}, `}${memberAddress.city}, ${memberAddress.state}, ${memberAddress.zipCode}` }
         </div>
       </div>
-      <div className="row no-gutters">
+      {selectedAccount && <div className="row no-gutters">
         <div className="row no-gutters funding-selection-form">
           <div className="col-6 no-gutters">
             <EmpalaSelect
@@ -128,6 +129,7 @@ const TransferBody = (props) => {
           />
         </div>
       </div>
+      }
       <div className="funding-wire-transfer__button-wrap">
         {props.error &&
         <div className="mb-4 funding__error">

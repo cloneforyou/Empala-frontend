@@ -17,7 +17,7 @@ import {
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_REQUEST,
   ACH_DEPOSIT_FAILED,
-  CLEAR_ALPS_TRANSFER_FIELDS,
+  CLEAR_TRANSFER_FIELDS,
   ALPS_TRANSFER,
   ALPS_TRANSFER_FAIL,
   INIT_FUNDS_TRANSFER,
@@ -69,9 +69,9 @@ export function unsetPaymentValue() {
     type: UNSET_PAYMENT_VALUE,
   };
 }
-export function clearALPSTransferFields() {
+export function clearTransferFields() {
   return {
-    type: CLEAR_ALPS_TRANSFER_FIELDS,
+    type: CLEAR_TRANSFER_FIELDS,
   };
 }
 export function dropFundingType() {
