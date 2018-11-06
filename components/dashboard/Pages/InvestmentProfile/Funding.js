@@ -25,7 +25,7 @@ import {
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
-import {cleanErrorText, closeModal, setActivePage} from '../../../../actions/dashboard';
+import { cleanErrorText, closeModal, openModal, setActivePage } from '../../../../actions/dashboard';
 import PartialTransfer from './PartialTransfer';
 import CheckTransfer from './CheckTransfer';
 import ACHTransfer from './ACHTransfer';
@@ -450,6 +450,7 @@ class Funding extends PureComponent {
                     submitted={this.props.isTransferSubmitted}
                     submit={this.props.submitTransfer}
                     error={this.props.error}
+                    openModal={this.props.openModal}
                   />
               }
               {this.props.funding_type === 'ACH transfer' && this.props.ACHTransactionList.length > 0 && (
@@ -573,5 +574,7 @@ const mapDispatchToProps = dispatch => ({
   getAccounts: () => dispatch(getAccounts()),
   getACHTransactionList: () => dispatch(getACHTransactionList()),
   cancelACHTransfer: data => dispatch(cancelACHTransfer(data)),
+  openModal: name => dispatch(openModal(name)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
