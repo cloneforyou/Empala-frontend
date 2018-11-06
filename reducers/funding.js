@@ -72,6 +72,7 @@ function funding(state = initialState, action) {
         return {
           ...initialState,
           memberAccountsData: state.memberAccountsData,
+          ACHTransactionList: state.ACHTransactionList,
           [action.id]: action.value,
         };
       }

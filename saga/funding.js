@@ -9,6 +9,7 @@ import {
   INIT_FUNDS_TRANSFER,
   GET_ACCOUNTS_REQUEST,
   GET_ACH_TRANSACTION_LIST,
+  CANCEL_ACH_TRANSFER,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -25,6 +26,7 @@ import {
   submitTransferSuccess,
   setAccountsData,
   getAccountsFail,
+  getACHTransactionList as actionGetACHTransactionList,
 } from '../actions/funding';
 import { openInfoPopup } from '../actions/dashboard';
 
@@ -37,6 +39,7 @@ const urls = {
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
   getACHTransactions: '/api/funding/transactions/list',
+  cancelACHTransaction: '/api/funding/transactions/cancel',
 };
 
 export function* getAccountsData() {
@@ -121,7 +124,10 @@ export function* achDeposit({ amount, institutionId }) {
     yield put(setInputFieldValueById('errorDeposit', false));
     yield put(unsetPaymentValue());
     yield put(unsetPaymentInstitution());
+    yield put(setInputFieldValueById('transferSubmitted', false));
     yield call(request, urls.ACHDeposit, options);
+    yield put(actionGetACHTransactionList());
+
   } catch (err) {
     console.log(err)
     yield put(ACHDepositFail(err.message));
@@ -192,12 +198,29 @@ export function* getACHTransactionList() {
   };
 
   try {
-
     const resp = yield call(request, urls.getACHTransactions, options);
-    yield put(setInputFieldValueById('ACHTransactionList', resp.data.data))
+    yield put(setInputFieldValueById('ACHTransactionList', resp.data.data));
   } catch (err) {
     //yield put(ALPSTransferFail(err.response.data.data.message));
-    console.log(err.response.data)
+    console.log(err.response.data);
+  }
+}
+
+export function* cancelACHTransfers({ transactionId }) {
+  try {
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+      data: {
+        transactionId,
+      },
+    };
+    const resp = yield call(request, urls.cancelACHTransaction, options);
+    yield put(actionGetACHTransactionList());
+  } catch (e) {
+    console.log(e)
   }
 }
 
@@ -210,6 +233,7 @@ export default function* fundingSaga() {
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
     takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
-    takeLatest(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
+    takeEvery(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
+    takeEvery(CANCEL_ACH_TRANSFER, cancelACHTransfers),
   ]);
 }

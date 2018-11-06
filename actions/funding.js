@@ -28,13 +28,21 @@ import {
   GET_ACCOUNTS_FAILED,
   GET_ACCOUNTS_SUCCESS,
   GET_ACH_TRANSACTION_LIST,
+  CANCEL_ACH_TRANSFER,
 } from '../constants/funding';
 
+
+export function cancelACHTransfer({ transactionId }) {
+  return {
+    type: CANCEL_ACH_TRANSFER,
+    transactionId,
+  };
+}
 
 export function getACHTransactionList() {
   return {
     type: GET_ACH_TRANSACTION_LIST,
-  }
+  };
 }
 
 export function getAccounts() {
