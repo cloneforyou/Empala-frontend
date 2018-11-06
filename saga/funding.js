@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { call, put, select, all, takeLatest, takeEvery } from 'redux-saga/effects';
 import request from '../utils/request';
 import {
@@ -20,7 +21,7 @@ import {
   unsetPaymentInstitution,
   ACHDepositFail,
   setInputFieldValueById,
-  clearALPSTransferFields,
+  clearTransferFields,
   ALPSTransferFail,
   submitTransferFail,
   submitTransferSuccess,
@@ -145,7 +146,7 @@ export function* alpsTransfer({ data }) {
 
   try {
     yield put(setInputFieldValueById('error', false));
-    yield put(clearALPSTransferFields());
+    yield put(clearTransferFields());
     yield call(request, urls.ALPSTransfer, options);
   } catch (err) {
     yield put(ALPSTransferFail(err.response.data.data.message));
@@ -161,7 +162,7 @@ function* transferFunds({ transferMethod }) {
   };
   let url = '';
   if (transferMethod === 'check') {
-    const account_no = yield select(state => state.funding.account_no);
+    const account_no = yield select(state => state.funding.account_number);
     const transfer_type = yield select(state => state.funding.transfer_type);
     let check_amount = transfer_type === 'Partial transfer'
       ? yield select(state => state.funding.check_amount)
@@ -181,6 +182,7 @@ function* transferFunds({ transferMethod }) {
   try {
     const response = yield call(request, url, options);
     yield put(submitTransferSuccess());
+    yield put(clearTransferFields());
     yield put(openInfoPopup());
     console.log(' ** Transfer', response.data);
   } catch (err) {

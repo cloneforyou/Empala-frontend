@@ -13,7 +13,7 @@ import {
   ADD_INSTITUTION_FAILED,
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_FAILED,
-  CLEAR_ALPS_TRANSFER_FIELDS,
+  CLEAR_TRANSFER_FIELDS,
   ALPS_TRANSFER_FAIL,
   SUBMIT_TRANSFER,
   TRANSFER_FAILED,
@@ -52,7 +52,7 @@ const initialState = {
 
 function funding(state = initialState, action) {
   switch (action.type) {
-    case CLEAR_ALPS_TRANSFER_FIELDS:
+    case CLEAR_TRANSFER_FIELDS:
       return {
         ...state,
         partial_symbols: [
@@ -66,6 +66,10 @@ function funding(state = initialState, action) {
         account_no: false,
         funding_comments: false,
         errorALPS: '',
+        transfer_type: false,
+        check_amount: false,
+        check_memo: false,
+        transferSubmitted: false,
       };
     case SET_FIELD_VALUE:
       if (action.id === 'funding_type') {
@@ -73,6 +77,7 @@ function funding(state = initialState, action) {
           ...initialState,
           memberAccountsData: state.memberAccountsData,
           ACHTransactionList: state.ACHTransactionList,
+          account_number: state.account_number,
           [action.id]: action.value,
         };
       }
