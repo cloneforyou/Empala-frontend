@@ -42,7 +42,7 @@ class NotificationsPopup extends Component {
 
   handleClickOnSeeAll() {
     this.props.setActivePage('profile');
-    this.props.changeActiveTabProfile(6);
+    this.props.changeActiveTabProfile(5);
     this.props.closeNotificationsPopup();
   }
 
