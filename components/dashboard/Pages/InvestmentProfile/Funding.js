@@ -21,6 +21,7 @@ import {
   submitTransfer,
   getAccounts,
   getACHTransactionList,
+  cancelACHTransfer,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -39,20 +40,29 @@ const TransactionRow = props => {
   const formattedDay = `${day[0] === '0' ? '' : day[0]}${day[1] ? day[1] : ''}`
   const formattedAmount = props.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+  const cancelTransaction = () => {
+    props.cancelACHTransfer({ transactionId: props.transfer_id });
+  };
 
-  // Todo rebuild, move to saga
-  const cancelTransaction = async () => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'X-Access-Token': localStorage.getItem('accessToken'),
-      },
-      data: {
-        transactionId: props.transfer_id,
-      },
+  const getStatusTransfer = () => {
+    const result = {
+      inProgress: true,
+      value: '',
     };
-    const resp = await request('/api/funding/transactions/cancel', options);
-    await props.getACHTransactionList();
+
+    if (props.transfer_state === 'CANCELED' || props.transfer_state === 'COMPLETED') {
+      result.inProgress = false;
+    }
+
+    if (props.transfer_state === 'CANCELED') {
+      result.value = 'Canceled';
+    } else if (props.transfer_state === 'COMPLETED') {
+      result.value = 'Completed';
+    } else {
+      result.value = 'In progress';
+    }
+
+    return result;
   };
 
   return (
@@ -70,12 +80,12 @@ const TransactionRow = props => {
         $ {formattedAmount}
       </div>
       <div className="ACH-transaction-list__value ACH-transaction-list__status-col">
-        {props.transfer_state === 'CANCELED' ? 'Canceled' : 'In progress'}
+        {getStatusTransfer().value}
       </div>
       <div className="ACH-transaction-list__cancel-col d-flex justify-content-center align-items-center"
            onClick={cancelTransaction}
       >
-        {props.transfer_state !== 'CANCELED' ?
+        {getStatusTransfer().inProgress ?
         <PlusIcon backgroundColor="transparent"
                   color="#b2d56b"
                   rotate="45deg"
@@ -141,13 +151,13 @@ class Funding extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.getAccounts();
     this.props.getACHTransactionList();
-    this.interval = setInterval(()=> this.props.getACHTransactionList(), 60000);
+    this.props.getAccounts();
+    this.interval = setInterval(()=> this.props.getACHTransactionList(), 15000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
   }
 
   getAccountsDropdownOptions() {
@@ -443,7 +453,7 @@ class Funding extends PureComponent {
                     openModal={this.props.openModal}
                   />
               }
-              {this.props.funding_type === 'ACH transfer' && this.props.ACHTransactionList.length && (
+              {this.props.funding_type === 'ACH transfer' && this.props.ACHTransactionList.length > 0 && (
                 <div className="ACH-transaction-list">
                   <div className="ACH-transaction-list__title">
                     Transactions list
@@ -469,9 +479,11 @@ class Funding extends PureComponent {
                     </div>
                   </div>
                   {this.props.ACHTransactionList.map((item) => (
-                    <TransactionRow {...item}
-                                    getACHTransactionList={this.props.getACHTransactionList}
-                                    key={item.id}
+                    <TransactionRow
+                      {...item}
+                      getACHTransactionList={this.props.getACHTransactionList}
+                      key={item.id}
+                      cancelACHTransfer={this.props.cancelACHTransfer}
                     />)
                   )}
                 </div>
@@ -561,6 +573,8 @@ const mapDispatchToProps = dispatch => ({
   submitTransfer: () => dispatch(submitTransfer()),
   getAccounts: () => dispatch(getAccounts()),
   getACHTransactionList: () => dispatch(getACHTransactionList()),
+  cancelACHTransfer: data => dispatch(cancelACHTransfer(data)),
   openModal: name => dispatch(openModal(name)),
 });
+
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
