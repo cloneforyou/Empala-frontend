@@ -15,7 +15,6 @@ const mapSelectOptions = options =>
       label: states[index],
     }));
 
-
 class DuplicateForm extends Component {
   constructor(props) {
     super(props);

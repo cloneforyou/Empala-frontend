@@ -65,6 +65,7 @@ export function* changeTabPage({ tabName, tabIndex, direction }) {
       if (tabIndex === 3) {
         yield put(setTabName(nextTabs[tabName]));
         yield put(setTabPageIndex(1));
+        return false;
       }
       yield put(setTabPageIndex(3));
       return false;
