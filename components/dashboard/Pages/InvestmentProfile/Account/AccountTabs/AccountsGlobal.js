@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class AccountsGlobal extends Component {
   render() {
     const { accounts } = this.props;
-    console.log('+++++++++', accounts);
 
     this.mappingComponent = (item) => {
       return (
