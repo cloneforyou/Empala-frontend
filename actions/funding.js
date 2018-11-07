@@ -17,7 +17,7 @@ import {
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_REQUEST,
   ACH_DEPOSIT_FAILED,
-  CLEAR_ALPS_TRANSFER_FIELDS,
+  CLEAR_TRANSFER_FIELDS,
   ALPS_TRANSFER,
   ALPS_TRANSFER_FAIL,
   INIT_FUNDS_TRANSFER,
@@ -26,7 +26,46 @@ import {
   TRANSFER_FAILED,
   ADD_ACCOUNTS,
   GET_GLOBAL_ACCOUNTS,
+  GET_ACCOUNTS_REQUEST,
+  GET_ACCOUNTS_FAILED,
+  GET_ACCOUNTS_SUCCESS,
+  GET_ACH_TRANSACTION_LIST,
+  CANCEL_ACH_TRANSFER,
 } from '../constants/funding';
+
+
+export function cancelACHTransfer({ transactionId }) {
+  return {
+    type: CANCEL_ACH_TRANSFER,
+    transactionId,
+  };
+}
+
+export function getACHTransactionList() {
+  return {
+    type: GET_ACH_TRANSACTION_LIST,
+  };
+}
+
+export function getAccounts() {
+  return {
+    type: GET_ACCOUNTS_REQUEST,
+  };
+}
+
+export function getAccountsFail(err) {
+  return {
+    type: GET_ACCOUNTS_FAILED,
+    err,
+  };
+}
+
+export function setAccountsData(data) {
+  return {
+    type: GET_ACCOUNTS_SUCCESS,
+    data,
+  };
+}
 
 export function setInputFieldValueById(id, value) {
   return {
@@ -40,9 +79,9 @@ export function unsetPaymentValue() {
     type: UNSET_PAYMENT_VALUE,
   };
 }
-export function clearALPSTransferFields() {
+export function clearTransferFields() {
   return {
-    type: CLEAR_ALPS_TRANSFER_FIELDS,
+    type: CLEAR_TRANSFER_FIELDS,
   };
 }
 export function dropFundingType() {

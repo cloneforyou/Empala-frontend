@@ -14,11 +14,17 @@ const style = {
       marginBottom: '20px',
     },
 };
+
 const isTransferEnabled = (transferType, transferAmount, totalAmount) => {
   const transferAmountRaw = transferAmount && +transferAmount.replace(/\D/g, '');
-  const totalAmountRaw = totalAmount && +totalAmount.replace(/\D/g, '');
-  if (transferType === 'Full transfer') return false;
-  return !(transferType && transferAmount && totalAmount && transferAmountRaw <= totalAmountRaw);
+  // const totalAmountRaw = totalAmount && +totalAmount.replace(/\D/g, '');
+  if (transferType === 'Full transfer' && Number(totalAmount) > 0) return false;
+  return !(transferType && transferAmount && totalAmount && transferAmountRaw <= totalAmount);
+};
+
+const getSelectedAccountBalance = (accounts, selectedAccount) => {
+  const selectedAccountInfo = accounts.filter(el => el.account_number === selectedAccount);
+  return selectedAccountInfo.length > 0 && selectedAccountInfo[0].balance;
 };
 
 const CheckTransferWording = () => (
@@ -47,10 +53,13 @@ const TransferBody = (props) => {
     setInputValueById,
     checkAmount,
     checkMemo,
-    amountAvailable,
     setActivePage,
     handleCheckTransfer,
+    apexAccounts,
+    selectedAccount,
   } = props;
+  const accountBalance = getSelectedAccountBalance(apexAccounts, selectedAccount);
+  const amountAvailable = Math.abs((accountBalance || {}).total || (accountBalance || {}).totalDeposits || 0);
   return (
     <div className="funding-wire-transfer__text">
       <div style={style.transferText}>
@@ -69,7 +78,7 @@ const TransferBody = (props) => {
           { `${memberAddress.line1}, ${memberAddress.line2 && `${memberAddress.line2}, `}${memberAddress.city}, ${memberAddress.state}, ${memberAddress.zipCode}` }
         </div>
       </div>
-      <div className="row no-gutters">
+      {selectedAccount && <div className="row no-gutters">
         <div className="row no-gutters funding-selection-form">
           <div className="col-6 no-gutters">
             <EmpalaSelect
@@ -89,7 +98,7 @@ const TransferBody = (props) => {
               id="check_amount"
               type="text"
               label="Actual amount"
-              value={transferType === 'Full transfer' ? amountAvailable || '50000' : checkAmount || ''}
+              value={transferType === 'Full transfer' ? amountAvailable : checkAmount || ''}
               handleChange={setInputValueById}
               decimalScale={2}
               allowEmptyFormatting
@@ -105,7 +114,7 @@ const TransferBody = (props) => {
               Funds available
             </div>
             <div style={style.availableAmount}>
-              {`$${formatNumberWithFixedPoint(amountAvailable || '50000')}`}
+              {`$${formatNumberWithFixedPoint(amountAvailable)}`}
             </div>
           </div>
         }
@@ -120,6 +129,7 @@ const TransferBody = (props) => {
           />
         </div>
       </div>
+      }
       <div className="funding-wire-transfer__button-wrap">
         {props.error &&
         <div className="mb-4 funding__error">
@@ -128,7 +138,7 @@ const TransferBody = (props) => {
       <button
         className="profile-btn profile-btn_green mr-5"
         onClick={handleCheckTransfer}
-        disabled={isTransferEnabled(transferType, checkAmount, amountAvailable || '50000')}
+        disabled={isTransferEnabled(transferType, checkAmount, amountAvailable)}
       >
         <span style={{ fontSize: '18px' }} >
           Transfer

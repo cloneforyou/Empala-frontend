@@ -332,7 +332,7 @@ function* wsHandling() {
 }
 
 function* dropNotificationAtTimeout() {
-  const timeout = 8000;
+  const timeout = 7000;
   // while (true) {
   yield delay(timeout);
   yield put(dropNotification(0));

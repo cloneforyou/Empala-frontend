@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { call, put, select, all, takeLatest, takeEvery } from 'redux-saga/effects';
 import request from '../utils/request';
 import {
@@ -8,6 +9,9 @@ import {
   ALPS_TRANSFER,
   INIT_FUNDS_TRANSFER,
   GET_GLOBAL_ACCOUNTS,
+  GET_ACCOUNTS_REQUEST,
+  GET_ACH_TRANSACTION_LIST,
+  CANCEL_ACH_TRANSFER,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -18,14 +22,19 @@ import {
   unsetPaymentInstitution,
   ACHDepositFail,
   setInputFieldValueById,
-  clearALPSTransferFields,
+  clearTransferFields,
   ALPSTransferFail,
   submitTransferFail,
   submitTransferSuccess,
   addAccounts,
+  setAccountsData,
+  getAccountsFail,
+  getACHTransactionList as actionGetACHTransactionList,
 } from '../actions/funding';
+import { openInfoPopup } from '../actions/dashboard';
 
 const urls = {
+  getAccounts: '/api/funding/accounts',
   getInstitutions: '/api/funding/institutions/my?limit=100',
   addInstitution: '/api/funding/institution/add',
   removeInstitution: '/api/funding/institution/delete',
@@ -33,7 +42,24 @@ const urls = {
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
   getAccounts: '/api/accounts/global',
+  getACHTransactions: '/api/funding/transactions/list',
+  cancelACHTransaction: '/api/funding/transactions/cancel',
 };
+
+export function* getAccountsData() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const response = yield call(request, urls.getAccounts, options);
+    yield put(setAccountsData(response.data.data));
+  } catch (err) {
+    yield put(getAccountsFail(err.message));
+  }
+}
 
 export function* getInstitutionsData() {
   const options = {
@@ -102,7 +128,10 @@ export function* achDeposit({ amount, institutionId }) {
     yield put(setInputFieldValueById('errorDeposit', false));
     yield put(unsetPaymentValue());
     yield put(unsetPaymentInstitution());
+    yield put(setInputFieldValueById('transferSubmitted', false));
     yield call(request, urls.ACHDeposit, options);
+    yield put(actionGetACHTransactionList());
+
   } catch (err) {
     console.log(err)
     yield put(ACHDepositFail(err.message));
@@ -120,7 +149,7 @@ export function* alpsTransfer({ data }) {
 
   try {
     yield put(setInputFieldValueById('error', false));
-    yield put(clearALPSTransferFields());
+    yield put(clearTransferFields());
     yield call(request, urls.ALPSTransfer, options);
   } catch (err) {
     yield put(ALPSTransferFail(err.response.data.data.message));
@@ -136,11 +165,11 @@ function* transferFunds({ transferMethod }) {
   };
   let url = '';
   if (transferMethod === 'check') {
-    const account_no = yield select(state => state.funding.account_no || '5FE05047');
+    const account_no = yield select(state => state.funding.account_number);
     const transfer_type = yield select(state => state.funding.transfer_type);
     let check_amount = transfer_type === 'Partial transfer'
       ? yield select(state => state.funding.check_amount)
-      : '$50,000';
+      : 'full';
     check_amount = check_amount.replace(/\D/g, '');
     const check_memo = yield select(state => state.funding.check_memo);
     options.data = {
@@ -150,12 +179,12 @@ function* transferFunds({ transferMethod }) {
       check_memo,
     };
     url = urls.checkTransfer;
-
-    // alert('Check transfer fired! '+ accountNo + checkAmount + ' \nMemo: ' + memo);
   }
   try {
     const response = yield call(request, url, options);
     yield put(submitTransferSuccess());
+    yield put(clearTransferFields());
+    yield put(openInfoPopup());
     console.log(' ** Transfer', response.data);
   } catch (err) {
       console.log('Funds transfer Error:', err.response.data || err, Object.keys(err));
@@ -170,11 +199,45 @@ export function* getGlobalAccounts() {
       'X-Access-Token': localStorage.getItem('accessToken'),
     },
   };
-  try {
+    try {
     const response = yield call(request, urls.getAccounts, options);
     yield put(addAccounts(response));
   } catch (err) {
     console.error(' ** GLOBAL ACCOUNTS ERROR =======>', err);
+  }
+}
+
+export function* getACHTransactionList() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const resp = yield call(request, urls.getACHTransactions, options);
+    yield put(setInputFieldValueById('ACHTransactionList', resp.data.data));
+  } catch (err) {
+    //yield put(ALPSTransferFail(err.response.data.data.message));
+    console.log(err.response.data);
+  }
+}
+
+export function* cancelACHTransfers({ transactionId }) {
+  try {
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+      data: {
+        transactionId,
+      },
+    };
+    const resp = yield call(request, urls.cancelACHTransaction, options);
+    yield put(actionGetACHTransactionList());
+  } catch (e) {
+    console.log(e)
   }
 }
 
@@ -187,5 +250,8 @@ export default function* fundingSaga() {
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
     takeEvery(GET_GLOBAL_ACCOUNTS, getGlobalAccounts),
+    takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
+    takeEvery(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
+    takeEvery(CANCEL_ACH_TRANSFER, cancelACHTransfers),
   ]);
 }

@@ -3,8 +3,17 @@ import React, { Component } from 'react';
 import NavButtons from './NavButtons';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
-import { duplicateForm, duplicateDelivery } from '../../localdata/regulatoryPageData';
+import { duplicateForm, duplicateDelivery } from '../../localdata/duplicateFormData';
+import { statesAbbvs } from '../../localdata/usStatesList';
 
+const states = Object.keys(statesAbbvs);
+const mapSelectOptions = options =>
+  options.map((option, index) =>
+    ({
+      value: option.value,
+      title: option.value,
+      label: states[index],
+    }));
 
 class DuplicateForm extends Component {
   constructor(props) {
@@ -15,19 +24,21 @@ class DuplicateForm extends Component {
       setInputValueById,
     } = this.props;
 
-    this.mappingComponent = item => {
+    this.mappingComponent = (item, options) => {
       switch (item.field) {
         case 'select':
           return (
             <EmpalaSelect
               id={item.id}
               key={item.label}
-              options={item.options}
+              options={options || item.options}
               label={item.label}
-              value={registrationData[item.id] || ''}
-              handleChange={setSelectedValueById}
+              value={this.props.registrationData[item.id] || ''}
+              handleChange={this.props.setSelectedValueById}
               col={item.col}
+              hint={item.hint || item.label}
               autoWidth={item.autoWidth}
+              infoButton={item.infoButton}
             />
           );
         case 'input':
@@ -59,13 +70,20 @@ class DuplicateForm extends Component {
            <div className="col-12 registration-group__section-title text-center">
              Compliance Officer for Member
            </div>
-           {duplicateForm.map(item => this.mappingComponent(item))}
+           {
+             duplicateForm.map((item) => {
+             if (item.id === 'regulatory_duplicate_state') {
+               return this.mappingComponent(item, mapSelectOptions(item.options));
+             }
+             return this.mappingComponent(item);
+           })
+           }
          </div>
         </div>
         <div className="col-lg-7">
           <div className="row mt-21 mb-4">
             <div className="col-4 mw_210 no-gutters pr-5">
-              {duplicateDelivery.map(item => this.mappingComponent(item))}
+              { duplicateDelivery.map(item => this.mappingComponent(item)) }
             </div>
             <div className="col-8">
               <div className="registration-group__section-title mt-4 mb-lg-5">
