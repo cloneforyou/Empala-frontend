@@ -550,7 +550,7 @@ const mapStateToProps = state => ({
   apexAccounts: (state.funding.memberAccountsData || {}).apex || [],
   ACHTransactionList: state.funding.ACHTransactionList,
   selectedAccountForACH: state.funding.selected_account_for_ACH,
-  currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex[0].account_number : '3',
+  currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex.account_number : '',
   transfer_direction_ACH: state.funding.transfer_direction_ACH,
 });
 const mapDispatchToProps = dispatch => ({
@@ -593,7 +593,7 @@ const mapDispatchToProps = dispatch => ({
   getAccounts: () => dispatch(getAccounts()),
   getACHTransactionList: () => dispatch(getACHTransactionList()),
   cancelACHTransfer: data => dispatch(cancelACHTransfer(data)),
-  setPaymentAccount: data => dispatch(setPaymentAccount(data))
+  setPaymentAccount: data => dispatch(setPaymentAccount(data)),
   openModal: name => dispatch(openModal(name)),
 });
 
