@@ -12,6 +12,7 @@ import {
   GET_ACCOUNTS_REQUEST,
   GET_ACH_TRANSACTION_LIST,
   CANCEL_ACH_TRANSFER,
+  ACH_WITHDRAW_REQUEST,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -39,6 +40,7 @@ const urls = {
   addInstitution: '/api/funding/institution/add',
   removeInstitution: '/api/funding/institution/delete',
   ACHDeposit: '/api/funding/depositACH',
+  ACHWithdraw: '/api/funding/withdrawACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
   getAccounts: '/api/accounts/global',
@@ -128,10 +130,39 @@ export function* achDeposit({ amount, institutionId }) {
     yield put(setInputFieldValueById('errorDeposit', false));
     yield put(unsetPaymentValue());
     yield put(unsetPaymentInstitution());
+    yield put(setInputFieldValueById('selected_account_for_ACH', false))
     yield put(setInputFieldValueById('transferSubmitted', false));
+    yield put(setInputFieldValueById('transfer_direction_ACH', false))
     yield call(request, urls.ACHDeposit, options);
     yield put(actionGetACHTransactionList());
 
+  } catch (err) {
+    console.log(err)
+    yield put(ACHDepositFail(err.message));
+  }
+}
+
+export function* achWithdraw({ amount, institutionId }) {
+  const options = {
+    method: 'POST',
+    data: {
+      amount,
+      institution_id: institutionId,
+    },
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+
+  try {
+    yield put(setInputFieldValueById('errorDeposit', false));
+    yield put(unsetPaymentValue());
+    yield put(unsetPaymentInstitution());
+    yield put(setInputFieldValueById('selected_account_for_ACH', false))
+    yield put(setInputFieldValueById('transferSubmitted', false));
+    yield put(setInputFieldValueById('transfer_direction_ACH', false))
+    yield call(request, urls.ACHWithdraw, options);
+    yield put(actionGetACHTransactionList());
   } catch (err) {
     console.log(err)
     yield put(ACHDepositFail(err.message));
@@ -247,6 +278,7 @@ export default function* fundingSaga() {
     takeLatest(ADD_INSTITUTION_REQUEST, addInstitution),
     takeLatest(REMOVE_INSTITUTION_REQUEST, removeInstitution),
     takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
+    takeEvery(ACH_WITHDRAW_REQUEST, achWithdraw),
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
     takeEvery(GET_GLOBAL_ACCOUNTS, getGlobalAccounts),

@@ -22,6 +22,8 @@ import {
   getAccounts,
   getACHTransactionList,
   cancelACHTransfer,
+  setPaymentAccount,
+  ACHWithdraw,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -58,6 +60,8 @@ const TransactionRow = props => {
       result.value = 'Canceled';
     } else if (props.transfer_state === 'COMPLETED') {
       result.value = 'Completed';
+    } else if (props.transfer_state === 'REJECTED') {
+      result.value = 'Rejected';
     } else {
       result.value = 'In progress';
     }
@@ -145,7 +149,7 @@ class Funding extends PureComponent {
       ],
     };
     this.alpsTransferHandler = this.alpsTransferHandler.bind(this);
-    this.achDeposit = this.achDeposit.bind(this);
+    this.achTransfer = this.achTransfer.bind(this);
     // this.accountsDropdownOptions = this.getAccountsDropdownOptions(this.props.apexAccounts);
     this.interval = null;
   }
@@ -229,8 +233,9 @@ class Funding extends PureComponent {
     this.props.ALPSTransfer(data);
   }
 
-  achDeposit() {
-    if (!this.props.selected_institution || !this.props.ach_amount) return;
+  achTransfer() {
+    if (!this.props.selected_institution || !this.props.ach_amount ||
+      !this.props.selectedAccountForACH || !this.props.transfer_direction_ACH) return;
 
     let institution_id;
 
@@ -244,7 +249,13 @@ class Funding extends PureComponent {
       institutionId: institution_id,
     };
 
-    this.props.ACHDeposit(data);
+    if (this.props.transfer_direction_ACH === 'Inbound') {
+      this.props.ACHDeposit(data);
+    } else if (this.props.transfer_direction_ACH === 'Outbound') {
+      this.props.ACHWithdraw(data)
+    }
+
+
   }
 
   render() {
@@ -438,7 +449,7 @@ class Funding extends PureComponent {
                     options={this.options}
                     selected_institution={this.props.selected_institution}
                     ach_amount={this.props.ach_amount}
-                    achDeposit={this.achDeposit}
+                    achTransfer={this.achTransfer}
                     setPaymentIntitution={this.props.setPaymentIntitution}
                     togglePlaidLink={this.props.togglePlaidLink}
                     plaid_link_active={this.props.plaid_link_active}
@@ -450,6 +461,10 @@ class Funding extends PureComponent {
                     submitted={this.props.isTransferSubmitted}
                     submit={this.props.submitTransfer}
                     error={this.props.error}
+                    setPaymentAccount={this.props.setPaymentAccount}
+                    selectedAccount={this.props.selectedAccountForACH}
+                    currentApexAccountNumber={this.props.currentApexAccountNumber}
+                    transfer_direction_ACH={this.props.transfer_direction_ACH}
                     openModal={this.props.openModal}
                   />
               }
@@ -534,6 +549,9 @@ const mapStateToProps = state => ({
   error: state.funding.error,
   apexAccounts: (state.funding.memberAccountsData || {}).apex || [],
   ACHTransactionList: state.funding.ACHTransactionList,
+  selectedAccountForACH: state.funding.selected_account_for_ACH,
+  currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex.account_number : '',
+  transfer_direction_ACH: state.funding.transfer_direction_ACH,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -568,12 +586,14 @@ const mapDispatchToProps = dispatch => ({
   removeInstitution: id => dispatch(removeInstitution(id)),
   getInstitutions: () => dispatch(getInstitutions()),
   ACHDeposit: data => dispatch(ACHDeposit(data)),
+  ACHWithdraw: data => dispatch(ACHWithdraw(data)),
   ALPSTransfer: data => dispatch(ALPSTransfer(data)),
   handleCheckTransfer: () => dispatch(initFundsTransfer('check')),
   submitTransfer: () => dispatch(submitTransfer()),
   getAccounts: () => dispatch(getAccounts()),
   getACHTransactionList: () => dispatch(getACHTransactionList()),
   cancelACHTransfer: data => dispatch(cancelACHTransfer(data)),
+  setPaymentAccount: data => dispatch(setPaymentAccount(data)),
   openModal: name => dispatch(openModal(name)),
 });
 

@@ -99,7 +99,7 @@
     }
     &-payment-box {
       width: 320px;
-      height: 465px;
+      height: 552px;
       border-radius: 10px;
       box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
       background-color: #ffffff;
@@ -404,6 +404,36 @@
     }
 
   }
+
+  &__bank-and-account-list {
+    display: flex;
+
+    .bank-and-account-list {
+      &__item {
+        flex: 1;
+
+        .ach_title-margin {
+          margin-bottom: 25px;
+        }
+      }
+    }
+
+  }
+
+  .test {
+    height: 65px;
+    width: 63px;
+    margin: auto;
+    &:before {
+      content: '';
+      height: 50px;
+      width: 63px;
+      margin-top: 6px;
+      position: absolute;
+      background: url($path-to-dashboard-icon + 'icon-empala.svg') 100% 100% /contain no-repeat;
+    }
+  }
+
 
 
 }
