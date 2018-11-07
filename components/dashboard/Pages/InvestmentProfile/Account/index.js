@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import TitleBar from '../../../TitleBar';
 import GlobalPortfolio from './AccountTabs/GlobalPortfolio';
+import USPortfolio from './AccountTabs//USPortfolio';
 import { withStyles } from '@material-ui/core/styles';
 import {
   GREEN,
@@ -18,6 +19,7 @@ import {
   changeActiveAccountTab,
   changeSectionTitleBar,
 }from '../../../../../actions/account';
+import { getGlobalAccounts } from '../../../../../actions/funding';
 import {
   GlobalPortfolioData,
   NorthAmericaAccountData,
@@ -79,6 +81,7 @@ const TABS = [{
 class Account extends Component {
   componentDidMount() {
     this.props.getBalance();
+    this.props.getGlobalAccounts();
   }
 
   handleChange = (event, value) => {
@@ -86,8 +89,9 @@ class Account extends Component {
   };
 
   render() {
-    const { classes, currentColorScheme } = this.props;
+    const { classes, currentColorScheme, global_accounts } = this.props;
     const value = this.props.activeAccountTab;
+    const accounts = (((global_accounts || {}).data || {}).data || {}).account || [];
 
     return (
       <div className="account">
@@ -125,8 +129,8 @@ class Account extends Component {
         {
           value === 0 &&
           <GlobalPortfolio
+          accounts={accounts}
           setActivePage={this.props.setActivePage}
-          textButton={'Fund account'}
           globalData={GlobalPortfolioData}
           prefix={TABS[0].prefix}
           accountBalance={this.props.accountBalance.ETNA}
@@ -136,8 +140,8 @@ class Account extends Component {
         {value === 1 && <div className="account__container">Coming Spring 2019</div>}
         {
           value === 2 &&
-          <GlobalPortfolio
-          textButton={'Fund US account'}
+          <USPortfolio
+          accounts={accounts}
           globalData={GlobalPortfolioData}
           prefix={TABS[2].prefix}
           accountBalance={this.props.accountBalance.ETNA}
@@ -164,11 +168,13 @@ export default withStyles(styles)(connect(
     currentColorScheme: state.dashboard.currentColorScheme,
     currentSectionTitleBar: state.account.currentSectionTitleBar,
     iconAccountTitleBar: state.account.iconAccountTitleBar,
+    global_accounts: state.funding.global_accounts,
   }),
   dispatch => ({
     setActivePage: page => dispatch(setActivePage(page)),
     getActiveAccountTab: () => dispatch(getActiveAccountTab()),
     getBalance: () => dispatch(getETNAData('balance')),
+    getGlobalAccounts: () => dispatch(getGlobalAccounts()),
     changeActiveAccountTab: value => dispatch(changeActiveAccountTab(value)),
     changeSectionTitleBar: (tab, icon) => dispatch(changeSectionTitleBar(tab, icon)),
   }),
