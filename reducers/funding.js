@@ -14,12 +14,16 @@ import {
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_FAILED,
   CLEAR_ALPS_TRANSFER_FIELDS,
-  ALPS_TRANSFER_FAIL, SUBMIT_TRANSFER, TRANSFER_FAILED,
+  ALPS_TRANSFER_FAIL,
+  SUBMIT_TRANSFER,
+  TRANSFER_FAILED,
+  ADD_ACCOUNTS,
 } from '../constants/funding';
 import { VALIDATE_FIELD_ERROR, VALIDATE_FIELD_SUCCESS } from '../constants/registration';
 
 
 const initialState = {
+  global_accounts: {},
   funding_type: false,
   transfer_type: false,
   account_type: 'Single',
@@ -159,10 +163,14 @@ function funding(state = initialState, action) {
         ...state,
         plaid_link_active: !state.plaid_link_active,
       };
-      case SUBMIT_TRANSFER:
+    case SUBMIT_TRANSFER:
       return {
         ...state,
         transferSubmitted: true,
+      };
+    case ADD_ACCOUNTS:
+      return {
+        global_accounts: action.accounts,
       };
     default:
       return state;

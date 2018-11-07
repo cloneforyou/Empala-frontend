@@ -19,7 +19,13 @@ import {
   ACH_DEPOSIT_FAILED,
   CLEAR_ALPS_TRANSFER_FIELDS,
   ALPS_TRANSFER,
-  ALPS_TRANSFER_FAIL, INIT_FUNDS_TRANSFER, SUBMIT_TRANSFER, TRANSFER_SUCCESS, TRANSFER_FAILED,
+  ALPS_TRANSFER_FAIL,
+  INIT_FUNDS_TRANSFER,
+  SUBMIT_TRANSFER,
+  TRANSFER_SUCCESS,
+  TRANSFER_FAILED,
+  ADD_ACCOUNTS,
+  GET_GLOBAL_ACCOUNTS,
 } from '../constants/funding';
 
 export function setInputFieldValueById(id, value) {
@@ -182,5 +188,18 @@ export function submitTransferFail(err) {
   return {
     type: TRANSFER_FAILED,
     err,
+  };
+}
+
+export function getGlobalAccounts() {
+  return {
+    type: GET_GLOBAL_ACCOUNTS,
+  };
+}
+
+export function addAccounts(accounts) {
+  return {
+    type: ADD_ACCOUNTS,
+    accounts,
   };
 }

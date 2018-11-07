@@ -5,7 +5,7 @@ import { origin as env } from '../keys';
 
 export default function request(url, options = {}) {
   const origin = env === 'dev'
-    ? serverOrigins.local
+    ? serverOrigins.aws
     : serverOrigins.aws;
   if (options.method === 'DELETE') {
     return (axios.delete(`${origin}${url}`, { headers: options.headers }))

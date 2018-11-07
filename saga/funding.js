@@ -5,7 +5,9 @@ import {
   ADD_INSTITUTION_REQUEST,
   GET_INSTITUTIONS_REQUEST,
   REMOVE_INSTITUTION_REQUEST,
-  ALPS_TRANSFER, INIT_FUNDS_TRANSFER,
+  ALPS_TRANSFER,
+  INIT_FUNDS_TRANSFER,
+  GET_GLOBAL_ACCOUNTS,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -18,7 +20,9 @@ import {
   setInputFieldValueById,
   clearALPSTransferFields,
   ALPSTransferFail,
-  submitTransferFail, submitTransferSuccess,
+  submitTransferFail,
+  submitTransferSuccess,
+  addAccounts,
 } from '../actions/funding';
 
 const urls = {
@@ -28,6 +32,7 @@ const urls = {
   ACHDeposit: '/api/funding/depositACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
+  getAccounts: '/api/accounts/global',
 };
 
 export function* getInstitutionsData() {
@@ -158,6 +163,21 @@ function* transferFunds({ transferMethod }) {
   }
 }
 
+export function* getGlobalAccounts() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+  try {
+    const response = yield call(request, urls.getAccounts, options);
+    yield put(addAccounts(response));
+  } catch (err) {
+    console.error(' ** GLOBAL ACCOUNTS ERROR =======>', err);
+  }
+}
+
 export default function* fundingSaga() {
   yield all([
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
@@ -166,5 +186,6 @@ export default function* fundingSaga() {
     takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
+    takeEvery(GET_GLOBAL_ACCOUNTS, getGlobalAccounts),
   ]);
 }

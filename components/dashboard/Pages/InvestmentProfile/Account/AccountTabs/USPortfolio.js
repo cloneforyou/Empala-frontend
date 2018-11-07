@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-import AccountsGlobal from './AccountsGlobal';
+import AccountsUS from './AccountsUS';
 import Graphics from './Graphics';
 import PortfolioValue from './PortfolioValue';
 
 
-export default class GlobalPortfolio extends Component {
+export default class USPortfolio extends Component {
   render() {
     return (
       <div className="global-portfolio">
         <div className="global-portfolio__container">
           <PortfolioValue {...this.props} />
-          <AccountsGlobal {...this.props} />
+          <AccountsUS {...this.props} />
           <Graphics />
         </div>
       </div>
