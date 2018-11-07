@@ -13,15 +13,19 @@ import {
   ADD_INSTITUTION_FAILED,
   REMOVE_INSTITUTION_FAILED,
   ACH_DEPOSIT_FAILED,
-  CLEAR_TRANSFER_FIELDS,
+  CLEAR_ALPS_TRANSFER_FIELDS,
   ALPS_TRANSFER_FAIL,
   SUBMIT_TRANSFER,
   TRANSFER_FAILED,
+  ADD_ACCOUNTS,
+  CLEAR_TRANSFER_FIELDS,
   GET_ACCOUNTS_FAILED,
-  GET_ACCOUNTS_SUCCESS, SET_PAYMENT_ACCOUNT,
+  GET_ACCOUNTS_SUCCESS,
+  SET_PAYMENT_ACCOUNT,
 } from '../constants/funding';
 
 const initialState = {
+  global_accounts: {},
   funding_type: false,
   transfer_type: false,
   account_type: 'Single',
@@ -176,13 +180,16 @@ function funding(state = initialState, action) {
         ...state,
         plaid_link_active: !state.plaid_link_active,
       };
-      case SUBMIT_TRANSFER:
+    case SUBMIT_TRANSFER:
       return {
         ...state,
         transferSubmitted: true,
       };
+    case ADD_ACCOUNTS:
+      return {
+        global_accounts: action.accounts,
+      };
     case SET_PAYMENT_ACCOUNT:
-      console.log(action)
       return {
         ...state,
         selected_account_for_ACH: state.selected_account_for_ACH === action.ApexAccountId ? '' : action.ApexAccountId,

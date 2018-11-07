@@ -2,17 +2,11 @@
   &__container {
     margin: 17px;
     &_payments {
-      min-height: 227px;
       max-width: 1716px;
       border: solid 1px #ededed;
       background: $white;
       margin-bottom: 10px;
-      display: flex;
-      justify-content: center;
       padding: 20px;
-      @media(max-width: 1461px) {
-        justify-content: space-around;
-      }
       @media(max-width: 991px) {
           flex-direction: column;
           align-items: center;
@@ -61,7 +55,6 @@
   }
   .input-group__container {
     width: 708px;
-    margin: 0 4%;
     @media(max-width: 1461px) {
       width: 546px;
       margin: 0;
@@ -81,4 +74,55 @@
       }
     }
   }
+  @media(max-width: 1651px) {
+    .ml-10 {
+      margin-left: 0;
+    }
+    .mr-10 {
+      margin-right: 0;
+    }
+  }
+}
+
+.global-account_padding {
+  padding-left: 4%;
+}
+
+.icon-centering {
+  display: flex;
+  height: calc(100% - 43px);
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-checked {
+  width: 23px;
+  height: 23px;
+  display: block;
+  &:before {
+    position: absolute;
+    top: 21%;
+    left: 30%;
+    width: 23px;
+    height: 23px;
+    content: '';
+    mask: url($path-to-dashboard-icon + 'icon-checked.svg');
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: $green;
+  }
+}
+
+.icon-trash {
+  display: block;
+  width: 20px;
+  height: 22px;
+  background: url('../../../static/images/dashboard-icons/icon-trash.svg') no-repeat 50% 50% /contain;
+}
+
+.icon-duplicate {
+  display: block;
+  width: 20px;
+  height: 22px;
+  background: url('../../../static/images/dashboard-icons/icon-letter.svg') no-repeat 50% 50% /contain;
 }

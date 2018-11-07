@@ -24,6 +24,8 @@ import {
   SUBMIT_TRANSFER,
   TRANSFER_SUCCESS,
   TRANSFER_FAILED,
+  ADD_ACCOUNTS,
+  GET_GLOBAL_ACCOUNTS,
   GET_ACCOUNTS_REQUEST,
   GET_ACCOUNTS_FAILED,
   GET_ACCOUNTS_SUCCESS,
@@ -242,5 +244,18 @@ export function submitTransferFail(err) {
   return {
     type: TRANSFER_FAILED,
     err,
+  };
+}
+
+export function getGlobalAccounts() {
+  return {
+    type: GET_GLOBAL_ACCOUNTS,
+  };
+}
+
+export function addAccounts(accounts) {
+  return {
+    type: ADD_ACCOUNTS,
+    accounts,
   };
 }

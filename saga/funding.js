@@ -8,6 +8,7 @@ import {
   REMOVE_INSTITUTION_REQUEST,
   ALPS_TRANSFER,
   INIT_FUNDS_TRANSFER,
+  GET_GLOBAL_ACCOUNTS,
   GET_ACCOUNTS_REQUEST,
   GET_ACH_TRANSACTION_LIST,
   CANCEL_ACH_TRANSFER,
@@ -26,6 +27,7 @@ import {
   ALPSTransferFail,
   submitTransferFail,
   submitTransferSuccess,
+  addAccounts,
   setAccountsData,
   getAccountsFail,
   getACHTransactionList as actionGetACHTransactionList,
@@ -41,6 +43,7 @@ const urls = {
   ACHWithdraw: '/api/funding/withdrawACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
+  getAccounts: '/api/accounts/global',
   getACHTransactions: '/api/funding/transactions/list',
   cancelACHTransaction: '/api/funding/transactions/cancel',
 };
@@ -207,8 +210,6 @@ function* transferFunds({ transferMethod }) {
       check_memo,
     };
     url = urls.checkTransfer;
-
-    // alert('Check transfer fired! '+ accountNo + checkAmount + ' \nMemo: ' + memo);
   }
   try {
     const response = yield call(request, url, options);
@@ -222,6 +223,21 @@ function* transferFunds({ transferMethod }) {
   }
 }
 
+export function* getGlobalAccounts() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+    try {
+    const response = yield call(request, urls.getAccounts, options);
+    yield put(addAccounts(response));
+  } catch (err) {
+    console.error(' ** GLOBAL ACCOUNTS ERROR =======>', err);
+  }
+}
+
 export function* getACHTransactionList() {
   const options = {
     method: 'GET',
@@ -229,7 +245,6 @@ export function* getACHTransactionList() {
       'X-Access-Token': localStorage.getItem('accessToken'),
     },
   };
-
   try {
     const resp = yield call(request, urls.getACHTransactions, options);
     yield put(setInputFieldValueById('ACHTransactionList', resp.data.data));
@@ -266,6 +281,7 @@ export default function* fundingSaga() {
     takeEvery(ACH_WITHDRAW_REQUEST, achWithdraw),
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
+    takeEvery(GET_GLOBAL_ACCOUNTS, getGlobalAccounts),
     takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
     takeEvery(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
     takeEvery(CANCEL_ACH_TRANSFER, cancelACHTransfers),

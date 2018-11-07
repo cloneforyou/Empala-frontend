@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import NumberFormat from 'react-number-format';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
 import PlaidBox from './PlaidBox';
+import ActionConfirm from '../../Modal/ActionConfirm';
 
 
 const TransferForm = props => {
@@ -98,6 +99,11 @@ const TransferForm = props => {
 };
 
 const Tile = props => (
+  <Fragment>
+    <ActionConfirm
+      text="Are you sure to delete this institution link?"
+      submitFunction={() => props.removeInstitution(props.institutionId)}
+    />
   <div
     className="funding-ach-tiles-tile"
     onClick={() => props.setPaymentIntitution(props.institution_name)}
@@ -108,7 +114,8 @@ const Tile = props => (
       role="button"
       onClick={(e) => {
         e.stopPropagation();
-       props.removeInstitution(props.institutionId);
+       // props.removeInstitution(props.institutionId);
+        props.openModal('actionModal');
       }}
     >
       &times;
@@ -124,6 +131,7 @@ const Tile = props => (
       Account: {`****${props.account_no.slice(-4)}`}
     </div>
   </div>
+  </Fragment>
 );
 
 const EmpalaAccount = props => (
@@ -176,6 +184,7 @@ export default class ACHTransfer extends React.Component {
                     setPaymentIntitution={this.props.setPaymentIntitution}
                     selected_institution={this.props.selected_institution}
                     removeInstitution={this.props.removeInstitution}
+                    openModal={this.props.openModal}
                   />
                 ))}
                 <PlaidBox
@@ -193,7 +202,6 @@ export default class ACHTransfer extends React.Component {
               />
             </div>
           </div>
-
         </div>
         <div className="mx-auto">
           <TransferForm {...this.props} />
