@@ -100,8 +100,11 @@ class DuplicateForm extends Component {
                   <i className="registration__icon info-icon_position" />
                 </div>
                 <div className="text-center mr-5">
-                  <i className="icon-letter" />
-                  <span className="registration-group__section-title t-strong t-black">Upload</span>
+                  <div className="file_upload">
+                    <i className="icon-letter" />
+                    <button type="button" className="fs-18 t-strong t-black">Upload</button>
+                    <input type="file" />
+                  </div>
                 </div>
               </div>
               <p className="t-small">
