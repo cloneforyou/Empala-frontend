@@ -18,7 +18,7 @@ import {
   SUBMIT_TRANSFER,
   TRANSFER_FAILED,
   GET_ACCOUNTS_FAILED,
-  GET_ACCOUNTS_SUCCESS,
+  GET_ACCOUNTS_SUCCESS, SET_PAYMENT_ACCOUNT,
 } from '../constants/funding';
 
 const initialState = {
@@ -48,6 +48,8 @@ const initialState = {
   member_first_name: '',
   member_last_name: '',
   ACHTransactionList: [],
+  selected_account_for_ACH: false,
+  transfer_direction_ACH: '',
 };
 
 function funding(state = initialState, action) {
@@ -70,6 +72,8 @@ function funding(state = initialState, action) {
         check_amount: false,
         check_memo: false,
         transferSubmitted: false,
+        selected_account_for_ACH: false,
+        transfer_direction_ACH: '',
       };
     case SET_FIELD_VALUE:
       if (action.id === 'funding_type') {
@@ -176,6 +180,12 @@ function funding(state = initialState, action) {
       return {
         ...state,
         transferSubmitted: true,
+      };
+    case SET_PAYMENT_ACCOUNT:
+      console.log(action)
+      return {
+        ...state,
+        selected_account_for_ACH: state.selected_account_for_ACH === action.ApexAccountId ? '' : action.ApexAccountId,
       };
     default:
       return state;

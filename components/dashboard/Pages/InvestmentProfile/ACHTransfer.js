@@ -6,61 +6,96 @@ import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
 import PlaidBox from './PlaidBox';
 
 
-const TransferForm = props => (
-  <div className="funding-ach-payment-box dark-theme">
-    <h2 className="funding-content-header__title funding-ach-payment-box_title-margin">Transfer funds</h2>
-    <div className="funding-ach-payment-box_input-margin">
-      <EmpalaInput
-        id="institution"
-        type="text"
-        label="From Account"
-        value={props.selected_institution || ''}
-      />
-    </div>
-    <div className="funding-ach-payment-box_input-margin">
-      <EmpalaInput
-        id="institution"
-        type="text"
-        label="To Account"
-        value="Empala - US Account"
-      />
-    </div>
-    <div className="funding-ach-payment-box_input-margin">
-      <NumberFormat
-        customInput={EmpalaInput}
-        // value={this.props.value}
-        id="ach_amount"
-        type="text"
-        label="Amount"
-        value={props.ach_amount ? props.ach_amount : ''}
-        handleChange={props.setInputValueById}
-        decimalScale={2}
-        allowEmptyFormatting
-        thousandSeparator
-        prefix='$'
-      />
-    </div>
-    {
-      props.submitted &&
-      <p>Your funds will be immediately available on the Empala Platform.</p>
+const TransferForm = props => {
+  const transferFromToFieldsValue = (inputField) => {
+    let result = '';
+
+    if (inputField === 'from') {
+      if (props.transfer_direction_ACH === 'Inbound') {
+        result = props.selected_institution || '';
+      }
+      if (props.transfer_direction_ACH === 'Outbound') {
+        result = props.selectedAccount ? 'Empala - US Account' : '';
+      }
+    } else if (inputField === 'to') {
+      if (props.transfer_direction_ACH === 'Outbound') {
+        result = props.selected_institution || '';
+      }
+      if (props.transfer_direction_ACH === 'Inbound') {
+        result = props.selectedAccount ? 'Empala - US Account' : '';
+      }
     }
-    <div style={{ textAlign: 'center' }}>
-      <button
-        className="profile-btn profile-btn_green funding-ach-payment-box_button-margin"
-        onClick={
-          props.submitted
-          ? props.achDeposit
-          : props.submit
-        }
-      >
-        {props.submitted ? 'Confirm' : 'Submit'}
-      </button>
+    return result;
+  };
+
+  return (
+    <div className="funding-ach-payment-box dark-theme">
+      <h2 className="funding-content-header__title funding-ach-payment-box_title-margin">Transfer funds</h2>
+      <div className="funding-ach-payment-box_input-margin">
+        <EmpalaSelect
+          id="transfer_direction_ACH"
+          options={props.options.transfer_direction}
+          label="Transfer direction"
+          value={props.transfer_direction_ACH || ''}
+          handleChange={props.setSelectedValueById}
+          // errorText={this.props.fieldsErrors.funding}
+          hint="Choose transfer direction"
+        />
+      </div>
+      <div className="funding-ach-payment-box_input-margin">
+        <EmpalaInput
+          id="institution"
+          type="text"
+          label="From Account"
+          value={transferFromToFieldsValue('from')}
+        />
+      </div>
+      <div className="funding-ach-payment-box_input-margin">
+        <EmpalaInput
+          id="institution"
+          type="text"
+          label="To Account"
+          // value="Empala - US Account"
+          value={transferFromToFieldsValue('to')}
+        />
+      </div>
+      <div className="funding-ach-payment-box_input-margin">
+        <NumberFormat
+          customInput={EmpalaInput}
+          // value={this.props.value}
+          id="ach_amount"
+          type="text"
+          label="Amount"
+          value={props.ach_amount ? props.ach_amount : ''}
+          handleChange={props.setInputValueById}
+          decimalScale={2}
+          allowEmptyFormatting
+          thousandSeparator
+          prefix='$'
+        />
+      </div>
+      {
+        props.submitted &&
+        <p>Your funds will be immediately available on the Empala Platform.</p>
+      }
+      <div style={{textAlign: 'center'}}>
+        <button
+          className="profile-btn profile-btn_green funding-ach-payment-box_button-margin"
+          onClick={
+            props.submitted
+              ? props.achTransfer
+              : props.submit
+          }
+        >
+          {props.submitted ? 'Confirm' : 'Submit'}
+        </button>
+      </div>
+      {props.errorDeposit && <div className="funding__error text-center mt-3">
+        some errors occur
+      </div>}
     </div>
-    {props.errorDeposit && <div className="funding__error text-center mt-3">
-      some errors occur
-    </div>}
-  </div>
-);
+    );
+};
 
 const Tile = props => (
   <div
@@ -91,6 +126,23 @@ const Tile = props => (
   </div>
 );
 
+const EmpalaAccount = props => (
+  <div
+    className="funding-ach-tiles-tile"
+    onClick={() => props.setPaymentAccount(props.currentApexAccountNumber)}
+    role="button"
+  >
+    <div className="test" />
+    <div className="funding-ach-tiles-tile__text">
+      <span className={`funding-ach-tiles-tile__check
+       ${(props.selectedAccount !== props.currentApexAccountNumber) && 'd-none'}`}
+      />
+      Individual Cash Account
+    </div>
+  </div>
+);
+
+
 export default class ACHTransfer extends React.Component {
   componentDidMount() {
     this.props.getInstitutions();
@@ -98,49 +150,52 @@ export default class ACHTransfer extends React.Component {
   render() {
     return (
       <div className="funding-content__body">
-        <div className="funding-ach-selection-box">
-          <div>
-            <div className="funding-ach-selection-box__input no-gutters" >
-              <EmpalaSelect
-                id="funding_type"
-                options={this.props.options.funding}
-                label="Account funding"
-                value={this.props.funding_type || ''}
-                handleChange={this.props.setSelectedValueById}
-                // errorText={this.props.fieldsErrors.funding}
-                hint="Choose funding type"
+        <div>
+          <div className="funding-ach-selection-box__input no-gutters" >
+            <EmpalaSelect
+              id="funding_type"
+              options={this.props.options.funding}
+              label="Account funding"
+              value={this.props.funding_type || ''}
+              handleChange={this.props.setSelectedValueById}
+              // errorText={this.props.fieldsErrors.funding}
+              hint="Choose funding type"
+            />
+          </div>
+
+          <div className="funding__bank-and-account-list">
+            <div className="bank-and-account-list__item">
+              <h2 className="funding-content-header__title ach_title-margin">Linked Bank Accounts</h2>
+              <div className="funding-ach-tiles">
+                {this.props.institutionsList.map(item => (
+                  <Tile
+                    key={item.institution_id}
+                    institutionId={item.institution_id}
+                    institution_name={item.name}
+                    account_no={item.accounts[0].mask || ''} // TODO investigate about account no
+                    setPaymentIntitution={this.props.setPaymentIntitution}
+                    selected_institution={this.props.selected_institution}
+                    removeInstitution={this.props.removeInstitution}
+                  />
+                ))}
+                <PlaidBox
+                  addInstitution={this.props.addInstitution}
+                />
+              </div>
+            </div>
+
+            <div className="bank-and-account-list__item">
+              <h2 className="funding-content-header__title ach_title-margin">Empala Accounts</h2>
+              <EmpalaAccount
+                setPaymentAccount={this.props.setPaymentAccount}
+                selectedAccount={this.props.selectedAccount}
+                currentApexAccountNumber={this.props.currentApexAccountNumber}
               />
             </div>
           </div>
-          <h2 className="funding-content-header__title ach_title-margin">Linked accounts</h2>
-          <div className="funding-ach-tiles">
-            {this.props.institutionsList.map(item => (
-              <Tile
-                key={item.institution_id}
-                institutionId={item.institution_id}
-                institution_name={item.name}
-                account_no={item.accounts[0].mask || ''} // TODO investigate about account no
-                setPaymentIntitution={this.props.setPaymentIntitution}
-                selected_institution={this.props.selected_institution}
-                removeInstitution={this.props.removeInstitution}
-              />
-            ))}
-            { /* <div className="funding-ach-tiles-tile">
-              <div className="funding-ach-tiles-tile__institution">
-                <p>Financial Institute name</p>
-                Account Name
-              </div>
-              <div className="funding-ach-tiles-tile__text">
-                <span className="funding-ach-tiles-tile__check"/>
-                Account: ****1234
-              </div>
-            </div> */ }
-            <PlaidBox
-              addInstitution={this.props.addInstitution}
-            />
-          </div>
+
         </div>
-        <div className="col no-gutters">
+        <div className="mx-auto">
           <TransferForm {...this.props} />
         </div>
       </div>

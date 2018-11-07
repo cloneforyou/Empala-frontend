@@ -29,8 +29,17 @@ import {
   GET_ACCOUNTS_SUCCESS,
   GET_ACH_TRANSACTION_LIST,
   CANCEL_ACH_TRANSFER,
+  SET_PAYMENT_ACCOUNT,
+  ACH_WITHDRAW_REQUEST,
 } from '../constants/funding';
 
+
+export function setPaymentAccount(ApexAccountId) {
+  return {
+    type: SET_PAYMENT_ACCOUNT,
+    ApexAccountId,
+  };
+}
 
 export function cancelACHTransfer({ transactionId }) {
   return {
@@ -176,6 +185,14 @@ export function setInstitutions(institutionsList) {
 export function ACHDeposit({ amount, institutionId}) {
   return {
     type: ACH_DEPOSIT_REQUEST,
+    amount,
+    institutionId,
+  };
+}
+
+export function ACHWithdraw({ amount, institutionId}) {
+  return {
+    type: ACH_WITHDRAW_REQUEST,
     amount,
     institutionId,
   };
