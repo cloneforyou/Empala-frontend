@@ -20,7 +20,7 @@ import ContentMenuItems from './ContentMenuItems';
 import InformationPage from './InformationPage';
 import FinalReviewPage from './FinalReviewPage';
 import AgreementPage from './AgreementPage';
-import DuplicateForm from './DuplicateForm';
+import DuplicateForm from '../registrationForms/DuplicateForm';
 import RegistrationResultModal from './RegistrationResultModal';
 import PopupPIN from './PopupPIN';
 import NAStateModal from './NAStateModal';
@@ -130,6 +130,7 @@ class Content extends PureComponent {
     }
 
     let fieldNames = getPageFieldNames(this.props.tabName, this.props.tabIndex);
+
     if (this.props.tabName === 'regulatory' && this.props.tabIndex === 2) {
       return (
         <div className="onboard">
