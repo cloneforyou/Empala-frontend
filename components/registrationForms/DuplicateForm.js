@@ -79,6 +79,7 @@ class DuplicateForm extends Component {
     data.append('file', e.target.files[0]);
     data.append('description', 'form407 signed image');
     data.append('tags', 'DOCUMENT');
+    data.append('id', this.props.userId);
     this.props.setUploadableImage(data);
     console.log(' ** ', data);
     const file = e.target.files[0];
@@ -222,6 +223,7 @@ const mapStateToProps = state => (
     image: state.registration.uploadableImage,
     image407uploaded: state.registration.image407uploaded,
     errorText: state.registration.error,
+    userId: state.registration.id,
   }
 );
 
