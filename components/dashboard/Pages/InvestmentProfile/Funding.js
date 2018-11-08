@@ -32,6 +32,7 @@ import PartialTransfer from './PartialTransfer';
 import CheckTransfer from './CheckTransfer';
 import ACHTransfer from './ACHTransfer';
 import PlusIcon from '../../../common/PlusIcon';
+import ActionConfirm from '../../Modal/ActionConfirm';
 
 // Todo move in saga after testing
 import request from '../../../../utils/request';
@@ -42,35 +43,42 @@ const TransactionRow = props => {
   const formattedDay = `${day[0] === '0' ? '' : day[0]}${day[1] ? day[1] : ''}`
   const formattedAmount = props.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  const cancelTransaction = () => {
-    props.cancelACHTransfer({ transactionId: props.transfer_id });
-  };
+  // const cancelTransaction = () => {
+  //   props.cancelACHTransfer({ transactionId: props.transfer_id });
+  // };
 
-  const getStatusTransfer = () => {
-    const result = {
-      inProgress: true,
-      value: '',
-    };
 
-    if (props.transfer_state === 'CANCELED' || props.transfer_state === 'COMPLETED') {
-      result.inProgress = false;
-    }
-
-    if (props.transfer_state === 'CANCELED') {
-      result.value = 'Canceled';
-    } else if (props.transfer_state === 'COMPLETED') {
-      result.value = 'Completed';
-    } else if (props.transfer_state === 'REJECTED') {
-      result.value = 'Rejected';
-    } else {
-      result.value = 'In progress';
-    }
-
-    return result;
-  };
+  // Todo remove after testing, change backend for sending only transaction in progress
+  // const getStatusTransfer = () => {
+  //   const result = {
+  //     inProgress: true,
+  //     value: '',
+  //   };
+  //
+  //   if (props.transfer_state === 'CANCELED' || props.transfer_state === 'COMPLETED' ||
+  //     props.transfer_state === 'REJECTED') {
+  //     result.inProgress = false;
+  //   }
+  //
+  //   if (props.transfer_state === 'CANCELED') {
+  //     result.value = 'Canceled';
+  //   } else if (props.transfer_state === 'COMPLETED') {
+  //     result.value = 'Completed';
+  //   } else if (props.transfer_state === 'REJECTED') {
+  //     result.value = 'Rejected';
+  //   } else {
+  //     result.value = 'In progress';
+  //   }
+  //
+  //   return result;
+  // };
 
   return (
     <div className="ACH-transaction-list__value-container">
+      <ActionConfirm
+        text="Are you sure to cancel this transaction?"
+        submitFunction={() => props.cancelACHTransfer({ transactionId: props.transfer_id })}
+      />
       <div className="ACH-transaction-list__value ACH-transaction-list__initiated-col">
         {month}/{formattedDay}/{formattedYear}
       </div>
@@ -84,18 +92,17 @@ const TransactionRow = props => {
         $ {formattedAmount}
       </div>
       <div className="ACH-transaction-list__value ACH-transaction-list__status-col">
-        {getStatusTransfer().value}
+        In progress
       </div>
       <div className="ACH-transaction-list__cancel-col d-flex justify-content-center align-items-center"
-           onClick={cancelTransaction}
+           onClick={() => props.openModal('actionModal')}
       >
-        {getStatusTransfer().inProgress ?
         <PlusIcon backgroundColor="transparent"
                   color="#b2d56b"
                   rotate="45deg"
                   height="20px"
                   cursor="pointer"
-        /> : ''}
+        />
       </div>
     </div>
 
@@ -150,6 +157,7 @@ class Funding extends PureComponent {
     };
     this.alpsTransferHandler = this.alpsTransferHandler.bind(this);
     this.achTransfer = this.achTransfer.bind(this);
+    this.validateACHTransferFields = this.validateACHTransferFields.bind(this);
     // this.accountsDropdownOptions = this.getAccountsDropdownOptions(this.props.apexAccounts);
     this.interval = null;
   }
@@ -165,6 +173,7 @@ class Funding extends PureComponent {
   }
 
   getAccountsDropdownOptions() {
+    console.log('apexAccount',this.props.apexAccounts )
     return this.props.apexAccounts.map(el => ({ title: el.account_number, value: el.account_number }));
   }
 
@@ -233,6 +242,13 @@ class Funding extends PureComponent {
     this.props.ALPSTransfer(data);
   }
 
+  validateACHTransferFields() {
+    if (!this.props.selected_institution || !this.props.ach_amount ||
+      !this.props.selectedAccountForACH || !this.props.transfer_direction_ACH) return;
+
+    this.props.submitTransfer();
+  }
+
   achTransfer() {
     if (!this.props.selected_institution || !this.props.ach_amount ||
       !this.props.selectedAccountForACH || !this.props.transfer_direction_ACH) return;
@@ -252,7 +268,7 @@ class Funding extends PureComponent {
     if (this.props.transfer_direction_ACH === 'Inbound') {
       this.props.ACHDeposit(data);
     } else if (this.props.transfer_direction_ACH === 'Outbound') {
-      this.props.ACHWithdraw(data)
+      this.props.ACHWithdraw(data);
     }
 
 
@@ -459,7 +475,7 @@ class Funding extends PureComponent {
                     removeInstitution={this.props.removeInstitution}
                     errorDeposit={this.props.errorDeposit}
                     submitted={this.props.isTransferSubmitted}
-                    submit={this.props.submitTransfer}
+                    submit={this.validateACHTransferFields}
                     error={this.props.error}
                     setPaymentAccount={this.props.setPaymentAccount}
                     selectedAccount={this.props.selectedAccountForACH}
@@ -499,6 +515,7 @@ class Funding extends PureComponent {
                       getACHTransactionList={this.props.getACHTransactionList}
                       key={item.id}
                       cancelACHTransfer={this.props.cancelACHTransfer}
+                      openModal={this.props.openModal}
                     />)
                   )}
                 </div>
@@ -550,7 +567,7 @@ const mapStateToProps = state => ({
   apexAccounts: (state.funding.memberAccountsData || {}).apex || [],
   ACHTransactionList: state.funding.ACHTransactionList,
   selectedAccountForACH: state.funding.selected_account_for_ACH,
-  currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex.account_number : '',
+  currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex[0].account_number : '',
   transfer_direction_ACH: state.funding.transfer_direction_ACH,
 });
 const mapDispatchToProps = dispatch => ({

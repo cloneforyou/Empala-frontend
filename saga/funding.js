@@ -43,7 +43,7 @@ const urls = {
   ACHWithdraw: '/api/funding/withdrawACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
-  getAccounts: '/api/accounts/global',
+  getGlobalAccounts: '/api/accounts/global',
   getACHTransactions: '/api/funding/transactions/list',
   cancelACHTransaction: '/api/funding/transactions/cancel',
 };
@@ -231,7 +231,7 @@ export function* getGlobalAccounts() {
     },
   };
     try {
-    const response = yield call(request, urls.getAccounts, options);
+    const response = yield call(request, urls.getGlobalAccounts, options);
     yield put(addAccounts(response));
   } catch (err) {
     console.error(' ** GLOBAL ACCOUNTS ERROR =======>', err);
