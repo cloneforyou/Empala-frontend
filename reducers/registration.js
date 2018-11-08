@@ -301,6 +301,8 @@ function registration(state = initialState, action) {
       return {
         ...state,
         uploadableImage: false,
+        image407uploaded: false,
+        registrationData: { ...state.registrationData, form407_snap_id: false },
       };
     default:
       return state;

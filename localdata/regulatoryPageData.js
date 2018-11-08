@@ -1,4 +1,5 @@
 import { countriesList } from './countriesList';
+import { duplicateForm } from './duplicateFormData';
 
 export const dataFields = [
   [
@@ -33,11 +34,7 @@ export const dataFields = [
       id: 'regulatory_checkbox_5',
     },
   ],
-  [
-    {
-      id: 'regulatory_duplicTE_FORM',
-    },
-  ],
+  duplicateForm,
   [
     {
       id: 'regulatory_identification_dateOfBirth',

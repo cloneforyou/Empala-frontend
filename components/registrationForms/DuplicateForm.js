@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import NavButtons from './NavButtons';
+import NavButtons from '../registration/NavButtons';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import { duplicateForm, duplicateDelivery } from '../../localdata/duplicateFormData';
@@ -62,12 +62,14 @@ class DuplicateForm extends Component {
     };
 
     this.handleImageChange = this.handleImageChange.bind(this);
+    this.showButtonGroup = this.showButtonGroup.bind(this);
 
     this.state = {
       imagePreviewUrl: '',
     };
 
     this.green = { backgroundColor: '#98c73a' };
+
   }
 
   handleImageChange(e) {
@@ -87,6 +89,56 @@ class DuplicateForm extends Component {
       });
     };
     reader.readAsDataURL(file);
+  }
+
+  showButtonGroup() {
+    if (!this.props.image && !this.props.image407uploaded) {
+      return (
+        <Fragment>
+          <button
+            type="button"
+            className="t-strong t-black"
+          >
+            Select file
+          </button>
+          <input
+            type="file"
+            onChange={this.handleImageChange}
+          />
+        </Fragment>
+      );
+    }
+    if (this.props.image) {
+      return (
+        <Fragment>
+          <button
+            type="button"
+            className="fs-18 t-strong t-black"
+            onClick={this.props.uploadImage}
+          >
+            Upload
+          </button>
+          <button
+            type="button"
+            className="t-strong t-black"
+            onClick={this.props.handleCancel}
+          >
+            Cancel
+          </button>
+        </Fragment>
+      );
+    }
+    if (this.props.image407uploaded) {
+      return (
+        <button
+          type="button"
+          className="t-strong t-black"
+          onClick={this.props.handleCancel}
+        >
+          Cancel
+        </button>
+      );
+    }
   }
 
   render() {
@@ -137,30 +189,7 @@ class DuplicateForm extends Component {
                 <div className="text-center mr-5">
                   <div className="file_upload">
                     <i className={`${image407uploaded ? 'icon-letter icon-letter_green' : 'icon-letter'}`} />
-                    { !image && !image407uploaded &&
-                    <Fragment>
-                      <button
-                        type="button"
-                        className="t-strong t-black"
-                      >
-                      Select file
-                      </button>
-                      <input
-                        type="file"
-                        onChange={this.handleImageChange}
-                      />
-                    </Fragment>
-                    }
-                    {image &&
-                    <button
-                      type="button"
-                      className="fs-18 t-strong t-black"
-                      onClick={this.props.uploadImage}
-                    >
-                      Upload
-                    </button>
-                    }
-
+                    {this.showButtonGroup()}
                   </div>
                 </div>
               </div>
