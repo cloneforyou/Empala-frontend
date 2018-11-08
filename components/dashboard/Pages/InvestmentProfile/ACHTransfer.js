@@ -45,7 +45,7 @@ const TransferForm = props => {
       </div>
       <div className="funding-ach-payment-box_input-margin">
         <EmpalaInput
-          id="institution"
+          id="transfer_from"
           type="text"
           label="From Account"
           value={transferFromToFieldsValue('from')}
@@ -53,7 +53,7 @@ const TransferForm = props => {
       </div>
       <div className="funding-ach-payment-box_input-margin">
         <EmpalaInput
-          id="institution"
+          id="transfer_to"
           type="text"
           label="To Account"
           // value="Empala - US Account"

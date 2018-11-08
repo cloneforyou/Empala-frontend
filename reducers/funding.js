@@ -72,7 +72,7 @@ function funding(state = initialState, action) {
         account_no: false,
         funding_comments: false,
         errorALPS: '',
-        transfer_type: false,
+        // transfer_type: false,  // remove after testing,
         check_amount: false,
         check_memo: false,
         transferSubmitted: false,
