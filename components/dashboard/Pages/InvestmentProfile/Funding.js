@@ -32,7 +32,6 @@ import PartialTransfer from './PartialTransfer';
 import CheckTransfer from './CheckTransfer';
 import ACHTransfer from './ACHTransfer';
 import PlusIcon from '../../../common/PlusIcon';
-import ActionConfirm from '../../Modal/ActionConfirm';
 
 // Todo move in saga after testing
 import request from '../../../../utils/request';
@@ -75,10 +74,6 @@ const TransactionRow = props => {
 
   return (
     <div className="ACH-transaction-list__value-container">
-      <ActionConfirm
-        text="Are you sure to cancel this transaction?"
-        submitFunction={() => props.cancelACHTransfer({ transactionId: props.transfer_id })}
-      />
       <div className="ACH-transaction-list__value ACH-transaction-list__initiated-col">
         {month}/{formattedDay}/{formattedYear}
       </div>
@@ -95,7 +90,7 @@ const TransactionRow = props => {
         In progress
       </div>
       <div className="ACH-transaction-list__cancel-col d-flex justify-content-center align-items-center"
-           onClick={() => props.openModal('actionModal')}
+           onClick={() => props.cancelACHTransfer({ transactionId: props.transfer_id })}
       >
         <PlusIcon backgroundColor="transparent"
                   color="#b2d56b"
