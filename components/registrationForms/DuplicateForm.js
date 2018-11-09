@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import NavButtons from '../registration/NavButtons';
 import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
@@ -75,7 +76,6 @@ class DuplicateForm extends Component {
     };
 
     this.green = { backgroundColor: '#98c73a' };
-
   }
 
   handleImageChange(e) {
@@ -125,6 +125,7 @@ class DuplicateForm extends Component {
           >
             Upload
           </button>
+          <br />
           <button
             type="button"
             className="t-strong t-black"
@@ -154,6 +155,7 @@ class DuplicateForm extends Component {
       image,
       image407uploaded,
       errorText,
+      loading,
     } = this.props;
 
     return (
@@ -185,26 +187,38 @@ class DuplicateForm extends Component {
                 </a>
               </div>
               <div className="d-flex mb-4">
-                <div className="d-flex align-items-center mr-3 pr-3 position-relative">
-                  <span>
+                <div className="d-flex align-items-center mr-3 pr-3">
+                  <div className="position-relative">
                     If you are able to do so, you can
                     upload a signed 3210/407 letter here
-                  </span>
-                  <i
-                    className="registration__icon info-icon_position"
-                  />
+                    <i
+                      className="registration__icon info-icon_position"
+                    />
+                  </div>
+
                 </div>
                 <div className="text-center mr-5">
+
                   <div className="file_upload">
+                    {
+                      loading &&
+                      <div className="loader">
+                        <CircularProgress
+                          size={60}
+                          style={{ color: '#98c73a' }}
+                        />
+                      </div>
+                    }
                     <i className={`${image407uploaded ? 'icon-letter icon-letter_green' : 'icon-letter'}`} />
                     {this.showButtonGroup()}
                   </div>
                 </div>
               </div>
               { errorText &&
-                 <p style={style.errorText} >
-                   {errorText}
-                 </p> }
+                <p style={style.errorText} >
+                  {errorText}
+                </p>
+              }
               <p className="t-small">
                 You can also email us a scanned version of your 3210 at support@empala.com
                 and continue your application.
@@ -235,6 +249,7 @@ const mapStateToProps = state => (
     image407uploaded: state.registration.image407uploaded,
     errorText: state.registration.errorMessage,
     userId: state.registration.id,
+    loading: state.registration.loading,
   }
 );
 
