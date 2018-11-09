@@ -88,9 +88,15 @@ export function* addInstitution({ token, institutionData }) {
       id: institutionData.institution && institutionData.institution.institution_id,
       name: institutionData.institution && institutionData.institution.name,
       token,
+      useMicroDeposit: false, // remove after APEX demo
     },
   };
   try {
+    const useMicroDeposit = yield select(state => state.funding.useMicroDepositApprove); // remove after APEX demo
+    if (useMicroDeposit) { // remove after APEX demo
+      options.data.useMicroDeposit = true; // remove after APEX demo
+    } // remove after APEX demo
+
     const response = yield call(request, urls.addInstitution, options);
     yield getInstitutionsData();
   } catch (err) {
@@ -265,10 +271,10 @@ export function* cancelACHTransfers({ transactionId }) {
         transactionId,
       },
     };
-    const resp = yield call(request, urls.cancelACHTransaction, options);
+    yield call(request, urls.cancelACHTransaction, options);
     yield put(actionGetACHTransactionList());
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
 }
 

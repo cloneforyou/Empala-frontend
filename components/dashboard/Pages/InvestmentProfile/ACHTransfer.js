@@ -159,7 +159,7 @@ export default class ACHTransfer extends React.Component {
     return (
       <div className="funding-content__body">
         <div>
-          <div className="funding-ach-selection-box__input no-gutters" >
+          <div className="funding-ach-selection-box__input no-gutters d-flex" >
             <EmpalaSelect
               id="funding_type"
               options={this.props.options.funding}
@@ -170,7 +170,12 @@ export default class ACHTransfer extends React.Component {
               hint="Choose funding type"
             />
           </div>
-
+          {/*!!!temp checkbox, remove after demo!!!*/}
+          <div className="d-flex align-items-center" style={{ marginBottom: '20px'}}>
+            <input type="checkbox" id="useMicroDepositApprove" defaultChecked={this.props.useMicroDepositApprove} onChange={this.props.changeACHApproveMethod} />
+            <label htmlFor="useMicroDepositApprove" style={{ marginBottom: '0px', marginLeft: '5px' }}>Use micro-deposits</label>
+          </div>
+          {/*!!!end of temp checkbox, remove after demo!!!*/}
           <div className="funding__bank-and-account-list">
             <div className="bank-and-account-list__item">
               <h2 className="funding-content-header__title ach_title-margin">Linked Bank Accounts</h2>
