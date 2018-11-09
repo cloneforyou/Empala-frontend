@@ -71,9 +71,9 @@ class DuplicateForm extends Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.showButtonGroup = this.showButtonGroup.bind(this);
 
-    this.state = {
-      imagePreviewUrl: '',
-    };
+    // this.state = {
+    //   imagePreviewUrl: '',
+    // };
 
     this.green = { backgroundColor: '#98c73a' };
   }
@@ -81,21 +81,12 @@ class DuplicateForm extends Component {
   handleImageChange(e) {
     e.preventDefault();
     const data = new FormData();
-    const reader = new FileReader();
     data.append('file', e.target.files[0]);
     data.append('description', 'form407 signed image');
     data.append('tags', 'DOCUMENT');
     data.append('id', this.props.userId);
     this.props.setUploadableImage(data);
-    console.log(' ** ', data);
-    const file = e.target.files[0];
 
-    reader.onloadend = () => {
-      this.setState({
-        imagePreviewUrl: reader.result,
-      });
-    };
-    reader.readAsDataURL(file);
   }
 
   showButtonGroup() {
@@ -255,7 +246,10 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => (
   {
-    setUploadableImage: data => dispatch(setUploadableImage(data)),
+    setUploadableImage: (data) => {
+      dispatch(setUploadableImage(data));
+      dispatch(cleanErrorText());
+    },
     uploadImage: () => dispatch(uploadImage()),
     handleCancel: () => {
       dispatch(cleanImage());
