@@ -36,6 +36,7 @@ import {
   UPLOAD_IMAGE_FAIL,
   UPLOAD_IMAGE_REQUEST,
   UPLOAD_IMAGE_SUCCESS,
+  CLEAN_ERROR_TEXT,
 } from '../constants/registration';
 
 
@@ -178,6 +179,7 @@ function registration(state = initialState, action) {
         showErrorModal: true,
         errorMessage: action.err,
         loading: false,
+        uploadableImage: false,
       };
     case COPY_MAILING_ADDRESS:
       return {
@@ -303,6 +305,11 @@ function registration(state = initialState, action) {
         uploadableImage: false,
         image407uploaded: false,
         registrationData: { ...state.registrationData, form407_snap_id: false },
+      };
+    case CLEAN_ERROR_TEXT:
+      return {
+        ...state,
+        errorMessage: false,
       };
     default:
       return state;
