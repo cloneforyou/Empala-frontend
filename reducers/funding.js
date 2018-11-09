@@ -22,6 +22,9 @@ import {
   GET_ACCOUNTS_FAILED,
   GET_ACCOUNTS_SUCCESS,
   SET_PAYMENT_ACCOUNT,
+  // temp remove after APEX demo
+  CHANGE_ACH_APPROVE_METHOD,
+  // end of removing block
 } from '../constants/funding';
 
 const initialState = {
@@ -54,6 +57,9 @@ const initialState = {
   ACHTransactionList: [],
   selected_account_for_ACH: false,
   transfer_direction_ACH: '',
+  // remove after APEX demo
+  useMicroDepositApprove: false,
+  // end of removing block
 };
 
 function funding(state = initialState, action) {
@@ -194,6 +200,13 @@ function funding(state = initialState, action) {
         ...state,
         selected_account_for_ACH: state.selected_account_for_ACH === action.ApexAccountId ? '' : action.ApexAccountId,
       };
+    // temp remove after APEX demo
+    case CHANGE_ACH_APPROVE_METHOD:
+      return {
+        ...state,
+        useMicroDepositApprove: !state.useMicroDepositApprove,
+      };
+    // end of removing block
     default:
       return state;
   }

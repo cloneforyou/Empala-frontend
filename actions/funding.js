@@ -33,8 +33,19 @@ import {
   CANCEL_ACH_TRANSFER,
   SET_PAYMENT_ACCOUNT,
   ACH_WITHDRAW_REQUEST,
+  // temp remove after APEX demo
+  CHANGE_ACH_APPROVE_METHOD,
+  // end of removing block
 } from '../constants/funding';
 
+
+// temp remove after APEX demo
+export function changeACHApproveMethod() {
+  return {
+    type: CHANGE_ACH_APPROVE_METHOD,
+  };
+}
+// end of removing block
 
 export function setPaymentAccount(ApexAccountId) {
   return {

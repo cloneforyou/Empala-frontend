@@ -24,6 +24,7 @@ import {
   cancelACHTransfer,
   setPaymentAccount,
   ACHWithdraw,
+  changeACHApproveMethod, // remove after APEX demo
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -477,6 +478,8 @@ class Funding extends PureComponent {
                     currentApexAccountNumber={this.props.currentApexAccountNumber}
                     transfer_direction_ACH={this.props.transfer_direction_ACH}
                     openModal={this.props.openModal}
+                    useMicroDepositApprove={this.props.useMicroDepositApprove}
+                    changeACHApproveMethod={this.props.changeACHApproveMethod}
                   />
               }
               {this.props.funding_type === 'ACH transfer' && this.props.ACHTransactionList.length > 0 && (
@@ -564,6 +567,7 @@ const mapStateToProps = state => ({
   selectedAccountForACH: state.funding.selected_account_for_ACH,
   currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex[0].account_number : '',
   transfer_direction_ACH: state.funding.transfer_direction_ACH,
+  useMicroDepositApprove: state.funding.useMicroDepositApprove,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -607,6 +611,7 @@ const mapDispatchToProps = dispatch => ({
   cancelACHTransfer: data => dispatch(cancelACHTransfer(data)),
   setPaymentAccount: data => dispatch(setPaymentAccount(data)),
   openModal: name => dispatch(openModal(name)),
+  changeACHApproveMethod: () => dispatch(changeACHApproveMethod()), // remove after APEX demo
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);
