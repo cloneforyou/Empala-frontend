@@ -268,7 +268,7 @@ function* uploadDocumentImage() {
     yield put(uploadImageSuccess(result.data));
     yield put(setInputFieldValueById('form407_snap_id', result.data.data.id));
   } catch (err) {
-    yield put(uploadImageFail(err.message));
+    yield put(uploadImageFail(`${((err.response || {}).data && err.response.data.misc)}` || err.message));
   }
 }
 

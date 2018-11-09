@@ -10,7 +10,6 @@ import {
   getMenuItems,
   getRegistrationDataFromCache,
   getUserID,
-  setInputFieldValueById,
   setTabName,
   setTabPageIndex,
 } from '../../actions/registration';
@@ -59,8 +58,6 @@ function mapDispatchToProps(dispatch) {
     closeAlertModal: () => {
       dispatch(closeAlertModal());
     },
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
   });
 }
 
@@ -138,8 +135,6 @@ class Content extends PureComponent {
             <DuplicateForm
               fieldNames={fieldNames}
               registrationData={registrationData}
-              setInputValueById={setInputValueById}
-              setSelectedValueById={setSelectedValueById}
             />
           </div>
         </div>);

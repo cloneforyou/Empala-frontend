@@ -5,8 +5,20 @@ import EmpalaInput from '../registration/EmpalaInput';
 import EmpalaSelect from '../registration/EmpalaSelect';
 import { duplicateForm, duplicateDelivery } from '../../localdata/duplicateFormData';
 import { statesAbbvs } from '../../localdata/usStatesList';
-import { cleanErrorText, cleanImage, setUploadableImage, uploadImage } from '../../actions/registration';
+import {
+  cleanErrorText,
+  cleanImage,
+  setInputFieldValueById,
+  setUploadableImage,
+  uploadImage,
+} from '../../actions/registration';
 
+const style = {
+  errorText: {
+    color: 'red',
+    fontSize: '11px',
+  },
+};
 
 const states = Object.keys(statesAbbvs);
 const mapSelectOptions = options =>
@@ -20,12 +32,6 @@ const mapSelectOptions = options =>
 class DuplicateForm extends Component {
   constructor(props) {
     super(props);
-    const {
-      registrationData,
-      setSelectedValueById,
-      setInputValueById,
-    } = this.props;
-
     this.mappingComponent = (item, options) => {
       switch (item.field) {
         case 'select':
@@ -52,7 +58,7 @@ class DuplicateForm extends Component {
               label={item.label}
               value={this.props.registrationData[item.id] || ''}
               placeholder={item.placeholder}
-              handleChange={setInputValueById}
+              handleChange={this.props.setInputValueById}
               typeField={item.typeField}
               col={item.col}
             />
@@ -147,6 +153,7 @@ class DuplicateForm extends Component {
       fieldNames,
       image,
       image407uploaded,
+      errorText,
     } = this.props;
 
     return (
@@ -194,6 +201,10 @@ class DuplicateForm extends Component {
                   </div>
                 </div>
               </div>
+              { errorText &&
+                 <p style={style.errorText} >
+                   {errorText}
+                 </p> }
               <p className="t-small">
                 You can also email us a scanned version of your 3210 at support@empala.com
                 and continue your application.
@@ -222,7 +233,7 @@ const mapStateToProps = state => (
   {
     image: state.registration.uploadableImage,
     image407uploaded: state.registration.image407uploaded,
-    errorText: state.registration.error,
+    errorText: state.registration.errorMessage,
     userId: state.registration.id,
   }
 );
@@ -235,6 +246,8 @@ const mapDispatchToProps = dispatch => (
       dispatch(cleanImage());
       dispatch(cleanErrorText());
     },
+    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+    setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
   }
 );
 

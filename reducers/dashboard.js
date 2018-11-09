@@ -70,6 +70,7 @@ const allowedSectionsStub = [
   'cash',
   'orders',
   'profile',
+  'social',
   'market',
   'funding',
   'global portfolio',
