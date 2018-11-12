@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -28,6 +28,18 @@ function mapDispatchToProps(dispatch) {
       },
     });
 }
+
+const MarginWording = () => (
+  <Fragment>
+    <li className="list-info__item">
+      <p/>
+      <p>As MARGIN account holder I agreeing to</p>
+      <a href="#" className="link-decoration">
+        <ins>Empala Margin Agreement</ins>
+      </a>
+    </li>
+  </Fragment>
+);
 
 class AgreementPage extends PureComponent {
   constructor(props) {
@@ -160,6 +172,7 @@ class AgreementPage extends PureComponent {
                 <ins>FINRA Public Disclosure Program (BrokerCheck)</ins>
               </a>
             </li>
+            { this.props.addMarginSelected && <MarginWording />}
           </ul>
           <p>
             By clicking the “Submit Application” button, I agree to this Empala Application Agreement (this “Application
@@ -182,13 +195,6 @@ class AgreementPage extends PureComponent {
             conditions will be deemed an amendment and will be incorporated into and made part of
             these agreements.
           </p>
-          {this.props.addMarginSelected &&
-            <p>
-              Account margin text. Account margin text. Account margin text. Account margin text.
-              Account margin text. Account margin text. Account margin text. Account margin text.
-              Account margin text. Account margin text. Account margin text. Account margin text.
-            </p>
-          }
         </div>
         <div className="confirmation row">
           <div className="confirmation__text col-lg-4">

@@ -18,6 +18,7 @@ import ignoredFields from '../../localdata/noValidatedFiels';
 
 function isFieldsFilled(fieldNames, fields) {
   const remainingFields = fieldNames.filter(name => !ignoredFields.includes(name));
+  console.log(remainingFields, fieldNames)
   return every(remainingFields, name => (fields[name] && fields[name] !== ''));
 }
 
@@ -39,7 +40,7 @@ const NavButtons = (props) => {
     disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
   }
   if (props.tabName === 'regulatory' && props.tabIndex === 2) {
-    disabled = false;
+    disabled = !isFieldsFilled(props.fieldNames, props.registrationData) || !props.image407uploaded;
   }
   if (props.fieldNames.filter(field =>
     (field.includes('zip_code') && props.registrationData[field] && props.registrationData[field].length < 5)).length > 0) {
@@ -135,6 +136,7 @@ function mapStateToProps(state) {
     checkboxes: state.registration.checkboxes,
     userBackToPart: state.registration.userBackToPart,
     showInfoPopup: state.registration.showInfoPopup,
+    image407uploaded: state.registration.image407uploaded,
   };
 }
 

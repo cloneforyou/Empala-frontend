@@ -1,8 +1,9 @@
-import { getValuesForSelectField } from '../utils/registrationUtils';
 import { usStatesList } from './usStatesList';
 
-const usStates = getValuesForSelectField(usStatesList);
-
+const usStates = usStatesList.map(el => ({
+  value: el,
+  title: el,
+}));
 
 const options = {
   prefix: [{

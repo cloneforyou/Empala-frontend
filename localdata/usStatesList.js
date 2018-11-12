@@ -1,4 +1,4 @@
-export const usStatesList = [
+const usStatesList = [
   'Alabama',
   'Alaska',
   'American Samoa',
@@ -60,8 +60,7 @@ export const usStatesList = [
   'Wyoming',
 ];
 
-
-export const statesAbbvs = {
+const statesAbbvs = {
   AL: 'Alabama',
   AK: 'Alaska',
   AS: 'American Samoa',
@@ -129,3 +128,7 @@ export const statesAbbvs = {
   // AP: 'Armed Forces Pacific',
 };
 
+export {
+  usStatesList,
+  statesAbbvs,
+};

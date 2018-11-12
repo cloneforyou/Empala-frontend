@@ -5,13 +5,17 @@ import {
   registrationFail,
   setInputFieldValueById,
   setTabName,
-  setTabPageIndex, setUserID,
+  setTabPageIndex,
+  setUserID,
   verifySendSuccess,
   verifySendFailure,
   sendCodeVerifySuccess,
   sendCodeVerifyFailure,
   showPopupPIN,
-  registrationSuccess, setAvailableStates,
+  registrationSuccess,
+  setAvailableStates,
+  uploadImageFail,
+  uploadImageSuccess,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -27,6 +31,7 @@ import {
   VERIFY_SEND_REQUEST,
   SEND_CODE_VERIFY,
   CHECK_EMAIL_VERIFICATION,
+  UPLOAD_IMAGE_REQUEST,
 } from '../constants/registration';
 import { menuItems, traceError } from '../utils/registrationUtils';
 import request from '../utils/request';
@@ -37,6 +42,7 @@ const urls = {
   registration: '/api/auth/register',
   auth: '/api/auth',
   verifyProfile: '/api/member/verify',
+  upload407: '/api/upload/407',
 };
 export function* changeTabPage({ tabName, tabIndex, direction }) {
   if (!tabName) return;
@@ -247,6 +253,25 @@ export function* checkVerificationRequest(action) {
   }
 }
 
+function* uploadDocumentImage() {
+  const accessToken = localStorage.getItem('accessToken');
+  const data = yield select(state => state.registration.uploadableImage);
+  const url = urls.upload407;
+  const options = {
+    headers: { 'x-access-token': accessToken },
+    method: 'POST',
+    data,
+  };
+  try {
+    // console.log(' ** UPLOAD');
+    const result = yield call(request, url, options);
+    yield put(uploadImageSuccess(result.data));
+    yield put(setInputFieldValueById('form407_snap_id', result.data.data.id));
+  } catch (err) {
+    yield put(uploadImageFail(`${((err.response || {}).data && err.response.data.misc)}` || err.message));
+  }
+}
+
 export default function* registrationSaga() {
   yield all([
     takeEvery(CHANGE_TAB_PAGE_INDEX, changeTabPage),
@@ -262,6 +287,7 @@ export default function* registrationSaga() {
     takeLatest(VERIFY_SEND_REQUEST, verifySendRequest),
     takeLatest(SEND_CODE_VERIFY, verifySendCodeRequest),
     takeLatest(CHECK_EMAIL_VERIFICATION, checkVerificationRequest),
+    takeLatest(UPLOAD_IMAGE_REQUEST, uploadDocumentImage),
   ]);
 }
 

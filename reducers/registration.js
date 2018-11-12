@@ -14,7 +14,9 @@ import {
   CLOSE_ERROR_MODAL,
   REGISTRATION_SUBMIT_REQUEST,
   REGISTRATION_SUBMIT_FAIL,
-  REGISTRATION_SUBMIT_SUCCESS, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
+  REGISTRATION_SUBMIT_SUCCESS,
+  SET_USER_ID,
+  GET_USER_ID_REQUEST_FAIL,
   CHECK_EMAIL_VERIFICATION,
   SHOW_POPUP_PIN,
   CLOSE_POPUP_PIN,
@@ -25,8 +27,18 @@ import {
   SEND_CODE_VERIFY_SUCCESS,
   SEND_CODE_VERIFY_FAILURE,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL, SET_AVAILABLE_STATES,
+  CLOSE_INFO_POPUP,
+  SHOW_ALERT_MODAL,
+  CLOSE_ALERT_MODAL,
+  SET_AVAILABLE_STATES,
+  CLEAN_IMAGE_DATA,
+  SET_UPLOADABLE_IMAGE,
+  UPLOAD_IMAGE_FAIL,
+  UPLOAD_IMAGE_REQUEST,
+  UPLOAD_IMAGE_SUCCESS,
+  CLEAN_ERROR_TEXT,
 } from '../constants/registration';
+
 
 // import { generateId } from '../utils/registrationUtils';
 
@@ -88,6 +100,8 @@ const initialState = {
   showInfoPopup: false,
   infoPopupName: false,
   availableStatesList: false,
+  uploadableImage: false,
+  image407uploaded: false,
 };
 
 function registration(state = initialState, action) {
@@ -138,9 +152,18 @@ function registration(state = initialState, action) {
     case CLOSE_ERROR_MODAL:
       return { ...state, showErrorModal: false };
     case REGISTRATION_SUBMIT_REQUEST:
+    case UPLOAD_IMAGE_REQUEST:
       return {
         ...state,
         loading: true,
+      };
+    case UPLOAD_IMAGE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        image407uploaded: true,
+        uploadableImage: false,
+        errorMessage: false,
       };
     case REGISTRATION_SUBMIT_SUCCESS:
       return {
@@ -148,6 +171,7 @@ function registration(state = initialState, action) {
         loading: false,
         showSuccessModal: true,
       };
+    case UPLOAD_IMAGE_FAIL:
     case REGISTRATION_SUBMIT_FAIL:
     case GET_USER_ID_REQUEST_FAIL:
       return {
@@ -155,6 +179,7 @@ function registration(state = initialState, action) {
         showErrorModal: true,
         errorMessage: action.err,
         loading: false,
+        uploadableImage: false,
       };
     case COPY_MAILING_ADDRESS:
       return {
@@ -267,6 +292,24 @@ function registration(state = initialState, action) {
       return {
         ...state,
         availableStatesList: action.data,
+      };
+    case SET_UPLOADABLE_IMAGE:
+      return {
+        ...state,
+        uploadableImage: action.img,
+        error: false,
+      };
+    case CLEAN_IMAGE_DATA:
+      return {
+        ...state,
+        uploadableImage: false,
+        image407uploaded: false,
+        registrationData: { ...state.registrationData, form407_snap_id: false },
+      };
+    case CLEAN_ERROR_TEXT:
+      return {
+        ...state,
+        errorMessage: false,
       };
     default:
       return state;

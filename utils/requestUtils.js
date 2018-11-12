@@ -34,6 +34,8 @@ export default function setErrorText(err) {
         return raiseError('Email is already in use');
       }
       return raiseError('Service error, please try again later');
+    } else if (err.response.data.info === 'CANNOT_CLOSE_ACCOUNT' && err.response.data.misc === 'ACCOUNT_HAS_ASSETS') {
+      return raiseError("Account could'n be closed at the moment cause it has assets.");
     }
   }
   if (err.response && err.response.status === 403) {
