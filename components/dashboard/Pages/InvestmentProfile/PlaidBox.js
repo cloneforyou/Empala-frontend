@@ -1,6 +1,6 @@
 import React from 'react';
 import PlaidLink from 'react-plaid-link';
-import { Plaid } from '../../../../utils/config';
+import { Plaid } from '../../../../keys';
 
 const handleOnSuccess = (token, metadata) => {
   // send token to client server
@@ -19,7 +19,7 @@ const PlaidBox = props => (
   >
     <PlaidLink
       clientName="Empala"
-      env="sandbox"
+      env={Plaid.PLAID_ENV}
       product={['auth', 'transactions']}
       publicKey={Plaid.PLAID_PUBLIC_KEY}
       onExit={handleOnExit}

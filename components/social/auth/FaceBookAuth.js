@@ -1,6 +1,6 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
-import { clientsId } from '../../../utils/config';
+import { clientsId } from '../../../keys';
 
 const responseFacebook = (response) => {
   if (!response) return false;
@@ -8,11 +8,10 @@ const responseFacebook = (response) => {
     console.log(response.error.message);
     return false;
   }
-  console.log(response)
   return response;
 };
 
-const FacebookAuth = (props) => (
+const FacebookAuth = props => (
   <FacebookLogin
     appId={clientsId.faceBook}
     scope="public_profile, email, user_birthday, user_hometown"
