@@ -100,37 +100,37 @@ const TransferForm = props => {
 
 const Tile = props => (
   <Fragment>
-    <ActionConfirm
-      text="Are you sure to delete this institution link?"
-      submitFunction={() => props.removeInstitution(props.institutionId)}
-    />
-  <div
-    className="funding-ach-tiles-tile"
-    onClick={() => props.setPaymentIntitution(props.institution_name)}
-    role="button"
-  >
     <div
-      className="funding-ach-tiles-tile__delete"
+      className="funding-ach-tiles-tile"
+      onClick={() => props.setPaymentIntitution(props.institution_name)}
       role="button"
-      onClick={(e) => {
-        e.stopPropagation();
-       // props.removeInstitution(props.institutionId);
-        props.openModal('actionModal');
-      }}
     >
-      &times;
-    </div>
-    <div className="funding-ach-tiles-tile__image">
-      {/*<img src="..." alt={props.institution_name} />*/}
-      <span>{props.institution_name}</span>
-    </div>
-    <div className="funding-ach-tiles-tile__text">
-      <span className={`funding-ach-tiles-tile__check
-       ${(props.selected_institution !== props.institution_name) && 'd-none'}`}
+      <div
+        className="funding-ach-tiles-tile__delete"
+        role="button"
+        onClick={(e) => {
+          e.stopPropagation();
+         // props.removeInstitution(props.institutionId);
+          props.openModal('actionModal');
+        }}
+      >
+        &times;
+      </div>
+      <div className="funding-ach-tiles-tile__image">
+        {/*<img src="..." alt={props.institution_name} />*/}
+        <span>{props.institution_name}</span>
+      </div>
+      <div className="funding-ach-tiles-tile__text">
+        <span className={`funding-ach-tiles-tile__check
+         ${(props.selected_institution !== props.institution_name) && 'd-none'}`}
+        />
+        Account: {`****${props.account_no.slice(-4)}`}
+      </div>
+      <ActionConfirm
+        text="Are you sure to delete this institution link?"
+        submitFunction={() => props.removeInstitution(props.institutionId)}
       />
-      Account: {`****${props.account_no.slice(-4)}`}
     </div>
-  </div>
   </Fragment>
 );
 
@@ -158,7 +158,7 @@ export default class ACHTransfer extends React.Component {
   render() {
     return (
       <div className="funding-content__body">
-        <div>
+        <div className="funding__bank-and-account-list-container">
           <div className="funding-ach-selection-box__input no-gutters d-flex" >
             <EmpalaSelect
               id="funding_type"
@@ -197,18 +197,20 @@ export default class ACHTransfer extends React.Component {
                 />
               </div>
             </div>
-
+            <div className="bank-and-account-list__divider" />
             <div className="bank-and-account-list__item">
               <h2 className="funding-content-header__title ach_title-margin">Empala Accounts</h2>
-              <EmpalaAccount
-                setPaymentAccount={this.props.setPaymentAccount}
-                selectedAccount={this.props.selectedAccount}
-                currentApexAccountNumber={this.props.currentApexAccountNumber}
-              />
+              <div className="funding-ach-tiles">
+                <EmpalaAccount
+                  setPaymentAccount={this.props.setPaymentAccount}
+                  selectedAccount={this.props.selectedAccount}
+                  currentApexAccountNumber={this.props.currentApexAccountNumber}
+                />
+              </div>
             </div>
           </div>
         </div>
-        <div className="mx-auto">
+        <div>
           <TransferForm {...this.props} />
         </div>
       </div>

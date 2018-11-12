@@ -128,15 +128,17 @@
     &-tiles {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-between;
       &-tile {
-        width: 250px;
+        width: calc((100% - 20px) / 2);
+        min-width: 200px;
         height: 110px;
         border-radius: 10px;
         box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
         border: solid 1px #ebebeb;
-        margin: 0 20px 15px 0;
-        padding: 10px 45px;
+        margin: 0 0 15px 0;
+        padding: 10px 35px;
         cursor: pointer;
         position: relative;
         &__delete {
@@ -405,16 +407,30 @@
 
   }
 
+  &__bank-and-account-list-container {
+    width: calc(100% - 320px);
+    margin-right: 20px;
+  }
+
   &__bank-and-account-list {
     display: flex;
 
     .bank-and-account-list {
       &__item {
-        flex: 1;
+        width: calc((100% - 21px) / 2);
+        //display: flex;
+        //justify-content: space-between;
+        //flex-wrap: wrap;
 
         .ach_title-margin {
           margin-bottom: 25px;
         }
+      }
+
+      &__divider {
+        margin: 20px 20px 0;
+        width: 1px;
+        background: #e0e1e3;
       }
     }
 
