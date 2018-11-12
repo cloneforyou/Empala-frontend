@@ -87,7 +87,7 @@ export const dataFields = [
       infoButton: true,
     },
     {
-      id: 'member_account_account_type',
+      id: 'member_account_customer_type',
       label: 'Customer type',
       hint: 'Please select',
       options: [
@@ -111,9 +111,19 @@ export const dataFields = [
       ],
     },
     {
-      id: 'member_account_add_margin',
-      field: 'checkbox',
-      label: 'Add Margin to the account',
+      id: 'member_account_account_type',
+      label: 'Account type',
+      hint: 'Please select',
+      options: [
+        {
+          value: 'Cash',
+          title: 'Cash',
+        },
+        {
+          value: 'Margin',
+          title: 'Regulatory Margin',
+        },
+      ],
     },
     {
       id: 'member_account_password',
