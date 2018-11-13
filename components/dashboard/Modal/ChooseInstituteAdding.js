@@ -8,7 +8,7 @@ import {
   openModalAddManualBankAccount,
 } from '../../../actions/funding';
 import PlaidLink from 'react-plaid-link';
-import { Plaid } from '../../../utils/config';
+import { Plaid } from '../../../keys.js';
 
 class ChooseInstituteAdding extends React.Component {
   handleClose = (e) => {
