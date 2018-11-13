@@ -1,5 +1,5 @@
 import React from 'react';
-import { clientsId } from '../../../utils/config';
+import { clientsId } from '../../../keys';
 
 const isNode = require('detect-node');
 const LinkedAuth = isNode ? () => (<button className="social-btn social-btn__linkedin">linkedin</button>)

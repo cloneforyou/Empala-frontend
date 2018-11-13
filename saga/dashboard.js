@@ -48,6 +48,7 @@ import {
   setAccountBalance, setLocalLoader, setLeagueData,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
+import { origin } from '../keys';
 import requestExternalNews from '../utils/requestExternalNews';
 
 
@@ -251,7 +252,7 @@ function* get_balance(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  console.log('balance =>', JSON.stringify(res.data.Result));
+  // console.log('balance =>', JSON.stringify(res.data.Result));
   if (res) yield put(setAccountBalance(res.data.Result, 'ETNA'));
 }
 
@@ -279,7 +280,7 @@ export function* selectETNADataRequest({ payloadType }) {
 /*  --------- ETNA TEST API FUNCTIONS  END ---------- */
 
 /* ---------- EMPALA SOCKET IO HANDLING ----------*/
-const socketServerURL = serverOrigins.local;
+const socketServerURL = origin === 'dev' ? serverOrigins.local : serverOrigins.aws;
 // const socket = io();
 const connect = async token => io.connect(socketServerURL, {
   query: {
