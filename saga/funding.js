@@ -13,6 +13,8 @@ import {
   GET_ACH_TRANSACTION_LIST,
   CANCEL_ACH_TRANSFER,
   ACH_WITHDRAW_REQUEST,
+  ADD_MANUAL_BANK_ACCOUNT,
+  APPROVE_MICRO_DEPOSITS_REQUEST,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -31,6 +33,7 @@ import {
   setAccountsData,
   getAccountsFail,
   getACHTransactionList as actionGetACHTransactionList,
+  closeModalMicroDepositsApprove,
 } from '../actions/funding';
 import { openInfoPopup } from '../actions/dashboard';
 
@@ -46,6 +49,8 @@ const urls = {
   getGlobalAccounts: '/api/accounts/global',
   getACHTransactions: '/api/funding/transactions/list',
   cancelACHTransaction: '/api/funding/transactions/cancel',
+  addManualBankAccount: '/api/funding/institution/addManual',
+  approveMicroDeposits: '/api/funding/institution/addManual/approve',
 };
 
 export function* getAccountsData() {
@@ -88,15 +93,9 @@ export function* addInstitution({ token, institutionData }) {
       id: institutionData.institution && institutionData.institution.institution_id,
       name: institutionData.institution && institutionData.institution.name,
       token,
-      useMicroDeposit: false, // remove after APEX demo
     },
   };
   try {
-    const useMicroDeposit = yield select(state => state.funding.useMicroDepositApprove); // remove after APEX demo
-    if (useMicroDeposit) { // remove after APEX demo
-      options.data.useMicroDeposit = true; // remove after APEX demo
-    } // remove after APEX demo
-
     const response = yield call(request, urls.addInstitution, options);
     yield getInstitutionsData();
   } catch (err) {
@@ -278,6 +277,49 @@ export function* cancelACHTransfers({ transactionId }) {
   }
 }
 
+export function* addManualBank({ bankName, accountType, routingNumber, accountNumber }) {
+  try {
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+      data: {
+        bankName,
+        accountType,
+        routingNumber,
+        accountNumber,
+      },
+    };
+    yield call(request, urls.addManualBankAccount, options);
+    yield getInstitutionsData();
+  } catch (e) {
+    yield put(addInstitutionFail(e.message));
+  }
+}
+
+export function* approveMicroDeposits({ institutionId, value1, value2 }) {
+  try {
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+      data: {
+        institutionId,
+        value1,
+        value2,
+      },
+    };
+    yield call(request, urls.approveMicroDeposits, options);
+    yield put(closeModalMicroDepositsApprove())
+    yield getInstitutionsData();
+  } catch (e) {
+    yield put(addInstitutionFail(e.message));
+  }
+
+}
+
 export default function* fundingSaga() {
   yield all([
     takeLatest(GET_INSTITUTIONS_REQUEST, getInstitutionsData),
@@ -291,5 +333,7 @@ export default function* fundingSaga() {
     takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
     takeEvery(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
     takeEvery(CANCEL_ACH_TRANSFER, cancelACHTransfers),
+    takeEvery(ADD_MANUAL_BANK_ACCOUNT, addManualBank),
+    takeEvery(APPROVE_MICRO_DEPOSITS_REQUEST, approveMicroDeposits),
   ]);
 }

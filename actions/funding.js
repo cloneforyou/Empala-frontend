@@ -33,19 +33,90 @@ import {
   CANCEL_ACH_TRANSFER,
   SET_PAYMENT_ACCOUNT,
   ACH_WITHDRAW_REQUEST,
-  // temp remove after APEX demo
-  CHANGE_ACH_APPROVE_METHOD,
-  // end of removing block
+  OPEN_MODAL_CHOOSE_INSTITUTE_ADDING,
+  CLOSE_MODAL_CHOOSE_INSTITUTE_ADDING,
+  OPEN_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  CLOSE_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  CHANGE_MODAL_ADD_MANUAL_BANK_ACCOUNT_VALUE_BY_ID,
+  ADD_MANUAL_BANK_ACCOUNT,
+  OPEN_MODAL_MICRO_DEPOSITS_APPROVE,
+  CLOSE_MODAL_MICRO_DEPOSITS_APPROVE,
+  CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID,
+  APPROVE_MICRO_DEPOSITS_REQUEST,
 } from '../constants/funding';
 
 
-// temp remove after APEX demo
-export function changeACHApproveMethod() {
+export function approveMicroDepositRequest({institutionId, value1, value2}) {
   return {
-    type: CHANGE_ACH_APPROVE_METHOD,
+    type: APPROVE_MICRO_DEPOSITS_REQUEST,
+    institutionId,
+    value1,
+    value2,
+  }
+}
+
+export function changeModalMicroDepositsApproveValueById(id, value) {
+  return {
+    type: CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID,
+    id,
+    value,
   };
 }
-// end of removing block
+
+export function openModalMicroDepositsApprove(institutionId) {
+  return {
+    type: OPEN_MODAL_MICRO_DEPOSITS_APPROVE,
+    institutionId,
+  };
+}
+
+export function closeModalMicroDepositsApprove() {
+  return {
+    type: CLOSE_MODAL_MICRO_DEPOSITS_APPROVE,
+  };
+}
+
+export function addManualBankAccount({ bankName, accountType, routingNumber, accountNumber }) {
+  return {
+    type: ADD_MANUAL_BANK_ACCOUNT,
+    bankName,
+    accountType,
+    routingNumber,
+    accountNumber,
+  };
+}
+
+export function changeModalAddManualBankAccountValueById(id, value) {
+  return {
+    type: CHANGE_MODAL_ADD_MANUAL_BANK_ACCOUNT_VALUE_BY_ID,
+    value,
+    id,
+  };
+}
+
+export function openModalAddManualBankAccount() {
+  return {
+    type: OPEN_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  };
+}
+
+export function closeModalAddManualBankAccount() {
+  return {
+    type: CLOSE_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  };
+}
+
+export function openModalChooseInstituteAdding() {
+  return {
+    type: OPEN_MODAL_CHOOSE_INSTITUTE_ADDING,
+  };
+}
+
+export function closeModalChooseInstituteAdding() {
+  return {
+    type: CLOSE_MODAL_CHOOSE_INSTITUTE_ADDING,
+  };
+}
 
 export function setPaymentAccount(ApexAccountId) {
   return {

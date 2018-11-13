@@ -13,12 +13,14 @@ class ActionConfirm extends React.Component {
     this.setState({ open: true });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.stopPropagation();
     this.props.submitFunction();
     this.props.close();
   };
 
-  handleClose = () => {
+  handleClose = (e) => {
+    e.stopPropagation();
     this.props.close();
   };
 
