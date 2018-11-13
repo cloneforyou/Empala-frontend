@@ -22,9 +22,14 @@ import {
   GET_ACCOUNTS_FAILED,
   GET_ACCOUNTS_SUCCESS,
   SET_PAYMENT_ACCOUNT,
-  // temp remove after APEX demo
-  CHANGE_ACH_APPROVE_METHOD,
-  // end of removing block
+  OPEN_MODAL_CHOOSE_INSTITUTE_ADDING,
+  CLOSE_MODAL_CHOOSE_INSTITUTE_ADDING,
+  OPEN_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  CLOSE_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  CHANGE_MODAL_ADD_MANUAL_BANK_ACCOUNT_VALUE_BY_ID,
+  OPEN_MODAL_MICRO_DEPOSITS_APPROVE,
+  CLOSE_MODAL_MICRO_DEPOSITS_APPROVE,
+  CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID,
 } from '../constants/funding';
 
 const initialState = {
@@ -57,9 +62,20 @@ const initialState = {
   ACHTransactionList: [],
   selected_account_for_ACH: false,
   transfer_direction_ACH: '',
-  // remove after APEX demo
-  useMicroDepositApprove: false,
-  // end of removing block
+  isOpenModalChooseInstituteAdding: false,
+  isOpenModalAddManualBankAccount: false,
+  modalCreateBankAccount: {
+    bankName: '',
+    accountType: '',
+    routingNumber: '',
+    accountNumber: '',
+  },
+  isOpenModalMicroDepositsApprove: false,
+  modalMicroDepositsApprove: {
+    value1: '',
+    value2: '',
+    institutionId: '',
+  },
 };
 
 function funding(state = initialState, action) {
@@ -200,13 +216,67 @@ function funding(state = initialState, action) {
         ...state,
         selected_account_for_ACH: state.selected_account_for_ACH === action.ApexAccountId ? '' : action.ApexAccountId,
       };
-    // temp remove after APEX demo
-    case CHANGE_ACH_APPROVE_METHOD:
+    case OPEN_MODAL_CHOOSE_INSTITUTE_ADDING:
       return {
         ...state,
-        useMicroDepositApprove: !state.useMicroDepositApprove,
+        isOpenModalChooseInstituteAdding: true,
       };
-    // end of removing block
+    case CLOSE_MODAL_CHOOSE_INSTITUTE_ADDING:
+      return {
+        ...state,
+        isOpenModalChooseInstituteAdding: false,
+      };
+    case OPEN_MODAL_ADD_MANUAL_BANK_ACCOUNT:
+      return {
+        ...state,
+        isOpenModalAddManualBankAccount: true,
+      };
+    case CLOSE_MODAL_ADD_MANUAL_BANK_ACCOUNT:
+      return {
+        ...state,
+        isOpenModalAddManualBankAccount: false,
+        modalCreateBankAccount: {
+          bankName: '',
+          accountType: '',
+          routingNumber: '',
+          accountNumber: '',
+        },
+      };
+    case CHANGE_MODAL_ADD_MANUAL_BANK_ACCOUNT_VALUE_BY_ID:
+      return {
+        ...state,
+        modalCreateBankAccount: {
+          ...state.modalCreateBankAccount,
+          [action.id]: action.value,
+        },
+      };
+    case OPEN_MODAL_MICRO_DEPOSITS_APPROVE:
+      return {
+        ...state,
+        isOpenModalMicroDepositsApprove: true,
+        modalMicroDepositsApprove: {
+          ...state.modalMicroDepositsApprove,
+          institutionId: action.institutionId,
+        },
+      };
+    case CLOSE_MODAL_MICRO_DEPOSITS_APPROVE:
+      return {
+        ...state,
+        isOpenModalMicroDepositsApprove: false,
+        modalMicroDepositsApprove: {
+          value1: '',
+          value2: '',
+          institutionId: '',
+        },
+      };
+    case CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID:
+      return {
+        ...state,
+        modalMicroDepositsApprove: {
+          ...state.modalMicroDepositsApprove,
+          [action.id]: action.value,
+        },
+      };
     default:
       return state;
   }

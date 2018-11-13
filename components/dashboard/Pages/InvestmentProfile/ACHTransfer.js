@@ -3,9 +3,9 @@ import NumberFormat from 'react-number-format';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
-import PlaidBox from './PlaidBox';
+import AddInstitutionContainer from './AddInstitutionContainer';
 import ActionConfirm from '../../Modal/ActionConfirm';
-
+import MicroDepositsApprove from '../../Modal/MicroDepositsApprove';
 
 const TransferForm = props => {
   const transferFromToFieldsValue = (inputField) => {
@@ -102,7 +102,13 @@ const Tile = props => (
   <Fragment>
     <div
       className="funding-ach-tiles-tile"
-      onClick={() => props.setPaymentIntitution(props.institution_name)}
+      onClick={() => {
+        if (props.isCustom && props.currentStatus === 'PENDING') {
+          props.openModalMicroDepositsApprove(props.institutionId);
+          return;
+        };
+        props.setPaymentIntitution(props.institution_name);
+      }}
       role="button"
     >
       <div
@@ -110,8 +116,8 @@ const Tile = props => (
         role="button"
         onClick={(e) => {
           e.stopPropagation();
-         // props.removeInstitution(props.institutionId);
-          props.openModal('actionModal');
+          props.removeInstitution(props.institutionId);
+         //  props.openModal('actionModal');
         }}
       >
         &times;
@@ -119,6 +125,7 @@ const Tile = props => (
       <div className="funding-ach-tiles-tile__image">
         {/*<img src="..." alt={props.institution_name} />*/}
         <span>{props.institution_name}</span>
+        {props.isCustom && <div>{props.currentStatus}</div>}
       </div>
       <div className="funding-ach-tiles-tile__text">
         <span className={`funding-ach-tiles-tile__check
@@ -126,10 +133,10 @@ const Tile = props => (
         />
         Account: {`****${props.account_no.slice(-4)}`}
       </div>
-      <ActionConfirm
-        text="Are you sure to delete this institution link?"
-        submitFunction={() => props.removeInstitution(props.institutionId)}
-      />
+      {/*<ActionConfirm*/}
+        {/*text="Are you sure to delete this institution link?"*/}
+        {/*submitFunction={() => props.removeInstitution(props.institutionId)}*/}
+      {/*/>*/}
     </div>
   </Fragment>
 );
@@ -155,65 +162,73 @@ export default class ACHTransfer extends React.Component {
   componentDidMount() {
     this.props.getInstitutions();
   }
+
+  componentWillUnmount() {
+    this.props.closeModalChooseInstituteAdding();
+    this.props.closeModalAddManualBankAccount();
+    this.props.closeModalMicroDepositsApprove();
+  }
+
   render() {
     return (
-      <div className="funding-content__body">
-        <div className="funding__bank-and-account-list-container">
-          <div className="funding-ach-selection-box__input no-gutters d-flex" >
-            <EmpalaSelect
-              id="funding_type"
-              options={this.props.options.funding}
-              label="Account funding"
-              value={this.props.funding_type || ''}
-              handleChange={this.props.setSelectedValueById}
-              // errorText={this.props.fieldsErrors.funding}
-              hint="Choose funding type"
-            />
-          </div>
-          {/*!!!temp checkbox, remove after demo!!!*/}
-          <div className="d-flex align-items-center" style={{ marginBottom: '20px'}}>
-            <input type="checkbox" id="useMicroDepositApprove" defaultChecked={this.props.useMicroDepositApprove} onChange={this.props.changeACHApproveMethod} />
-            <label htmlFor="useMicroDepositApprove" style={{ marginBottom: '0px', marginLeft: '5px' }}>Use micro-deposits</label>
-          </div>
-          {/*!!!end of temp checkbox, remove after demo!!!*/}
-          <div className="funding__bank-and-account-list">
-            <div className="bank-and-account-list__item">
-              <h2 className="funding-content-header__title ach_title-margin">Linked Bank Accounts</h2>
-              <div className="funding-ach-tiles">
-                {this.props.institutionsList.map(item => (
-                  <Tile
-                    key={item.institution_id}
-                    institutionId={item.institution_id}
-                    institution_name={item.name}
-                    account_no={item.accounts[0].mask || ''} // TODO investigate about account no
-                    setPaymentIntitution={this.props.setPaymentIntitution}
-                    selected_institution={this.props.selected_institution}
-                    removeInstitution={this.props.removeInstitution}
-                    openModal={this.props.openModal}
+      <Fragment>
+        <div className="funding-content__body">
+          <div className="funding__bank-and-account-list-container">
+            <div className="funding-ach-selection-box__input no-gutters d-flex" >
+              <EmpalaSelect
+                id="funding_type"
+                options={this.props.options.funding}
+                label="Account funding"
+                value={this.props.funding_type || ''}
+                handleChange={this.props.setSelectedValueById}
+                // errorText={this.props.fieldsErrors.funding}
+                hint="Choose funding type"
+              />
+            </div>
+            <div className="funding__bank-and-account-list">
+              <div className="bank-and-account-list__item">
+                <h2 className="funding-content-header__title ach_title-margin">Linked Bank Accounts</h2>
+                <div className="funding-ach-tiles">
+                  {this.props.institutionsList.map(item => (
+                    <Tile
+                      key={item.institution_id}
+                      institutionId={item.institution_id}
+                      institution_name={item.name}
+                      account_no={item.accounts[0].mask || ''} // TODO investigate about account no
+                      setPaymentIntitution={this.props.setPaymentIntitution}
+                      selected_institution={this.props.selected_institution}
+                      removeInstitution={this.props.removeInstitution}
+                      openModal={this.props.openModal}
+                      isCustom={item.custom}
+                      currentStatus={item.status}
+                      openModalMicroDepositsApprove={this.props.openModalMicroDepositsApprove}
+                    />
+                  ))}
+                  <AddInstitutionContainer
+                    addInstitution={this.props.addInstitution}
+                    openModalChooseInstituteAdding={this.props.openModalChooseInstituteAdding}
                   />
-                ))}
-                <PlaidBox
-                  addInstitution={this.props.addInstitution}
-                />
+                </div>
               </div>
-            </div>
-            <div className="bank-and-account-list__divider" />
-            <div className="bank-and-account-list__item">
-              <h2 className="funding-content-header__title ach_title-margin">Empala Accounts</h2>
-              <div className="funding-ach-tiles">
-                <EmpalaAccount
-                  setPaymentAccount={this.props.setPaymentAccount}
-                  selectedAccount={this.props.selectedAccount}
-                  currentApexAccountNumber={this.props.currentApexAccountNumber}
-                />
+              <div className="bank-and-account-list__divider" />
+              <div className="bank-and-account-list__item">
+                <h2 className="funding-content-header__title ach_title-margin">Empala Accounts</h2>
+                <div className="funding-ach-tiles">
+                  <EmpalaAccount
+                    setPaymentAccount={this.props.setPaymentAccount}
+                    selectedAccount={this.props.selectedAccount}
+                    currentApexAccountNumber={this.props.currentApexAccountNumber}
+                  />
+                </div>
               </div>
             </div>
           </div>
+          <div>
+            <TransferForm {...this.props} />
+          </div>
         </div>
-        <div>
-          <TransferForm {...this.props} />
-        </div>
-      </div>
+        <MicroDepositsApprove />
+      </Fragment>
     );
   }
 }
