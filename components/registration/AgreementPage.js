@@ -9,7 +9,7 @@ function mapStateToProps(state) {
   return {
     firstName: state.registration.registrationData.member_basic_information_first_name || '',
     lastName: state.registration.registrationData.member_basic_information_last_name || '',
-    addMarginSelected: state.registration.checkboxes.member_account_add_margin,
+    addMarginSelected: state.registration.registrationData.member_account_account_type === 'Margin',
     errorMessage: state.registration.errorMessage || '',
     showErrorModal: state.registration.showErrorModal,
     showSuccessModal: state.registration.showSuccessModal,
@@ -33,7 +33,7 @@ const MarginWording = () => (
   <Fragment>
     <li className="list-info__item">
       <p/>
-      <p>As MARGIN account holder I agreeing to</p>
+      <p>As MARGIN account holder I'm agreeing to</p>
       <a href="#" className="link-decoration">
         <ins>Empala Margin Agreement</ins>
       </a>
