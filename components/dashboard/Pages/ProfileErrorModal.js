@@ -21,8 +21,8 @@ const ProfileErrorModal = (props) => {
       actionsContainerStyle={style.actionsContainer}
       contentStyle={style.contentStyle}
     >
-      <h2>Error while saving data</h2>
-      <span>{props.message}</span>
+      <h2>Data not saved</h2>
+      <span>{'Some of your data is still being processed. Please try again later.' || props.message}</span> { /* todo: change message after apex demo */ }
     </Dialog>
   );
 };
