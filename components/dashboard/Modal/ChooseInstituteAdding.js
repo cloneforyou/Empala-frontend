@@ -11,8 +11,7 @@ import PlaidLink from 'react-plaid-link';
 import { Plaid } from '../../../keys.js';
 
 class ChooseInstituteAdding extends React.Component {
-  handleClose = (e) => {
-    e.stopPropagation();
+  handleClose = () => {
     this.props.closeModal();
   };
 
@@ -22,9 +21,23 @@ class ChooseInstituteAdding extends React.Component {
     this.props.openModalAddManualBankAccount();
   };
 
+  closeModalWhenOpenPlaid = (e) => {
+    if (e !== 'OPEN') return;
+    this.props.closeModal();
+  }
+
+  fixOverflow = () => {
+    setTimeout(() => {
+      const body = document.body;
+      body.style.overflow = null;
+    }, 0)
+  };
+
   render() {
     return (
-      <div onClick={e => e.stopPropagation()}>
+      <div onClick={e => e.stopPropagation()}
+           className="modal-choose-institute-adding"
+      >
         <Dialog
           open={this.props.open}
           onClose={this.handleClose}
@@ -32,31 +45,44 @@ class ChooseInstituteAdding extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            Choose bank
+            Choose bank account
           </DialogTitle>
           <DialogContent>
             <div className="d-flex">
               <div style={{width: '200px', marginRight: '20px'}} >
-                Find bank in Plaid
-                <PlaidLink
-                  onEvent={this.props.closeModal}
+                Find account in Plaid
+                {!this.props.plaidDisabled && <PlaidLink
+                  onEvent={this.closeModalWhenOpenPlaid}
                   className="shadow"
                   style={{width: '200px', height: '100px'}}
                   clientName="Empala"
                   env="sandbox"
                   product={['auth', 'transactions']}
                   publicKey={Plaid.PLAID_PUBLIC_KEY}
-                  onExit={this.props.handleOnExit}
-                  onSuccess={(token, metadata) => this.props.addInstitution(token, metadata)}
+                  onExit={this.fixOverflow}
+                  onSuccess={(token, metadata) => {
+                    this.props.addInstitution(token, metadata);
+                    this.fixOverflow();
+                  }}
                 >
                   <span className="funding-ach-tiles-tile__plus" >+</span>
-                </PlaidLink>
+                </PlaidLink>}
+                {this.props.plaidDisabled && <div>
+                  You can't add more this accounts
+                </div>}
               </div>
               <div style={{width: '200px'}}>
                 Create manual account
-                <div className="shadow" style={{width: '200px', height: '100px', display: 'flex'}} onClick={this.handleOpenAddManualBankAccount}>
+                {!this.props.manualCreateDisabled &&
+                <button className="shadow"
+                     style={{width: '200px', height: '100px', display: 'flex'}}
+                     onClick={this.handleOpenAddManualBankAccount}
+                >
                   <span className="funding-ach-tiles-tile__plus align-self-center" >+</span>
-                </div>
+                </button>}
+                {this.props.manualCreateDisabled && <div>
+                  You can't add more this accounts
+                </div>}
               </div>
             </div>
           </DialogContent>

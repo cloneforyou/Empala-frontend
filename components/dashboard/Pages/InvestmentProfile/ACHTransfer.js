@@ -207,6 +207,7 @@ export default class ACHTransfer extends React.Component {
                   <AddInstitutionContainer
                     addInstitution={this.props.addInstitution}
                     openModalChooseInstituteAdding={this.props.openModalChooseInstituteAdding}
+                    institutionsList={this.props.institutionsList}
                   />
                 </div>
               </div>
