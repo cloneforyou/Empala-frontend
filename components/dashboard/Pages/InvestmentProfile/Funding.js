@@ -151,7 +151,7 @@ class Funding extends PureComponent {
         { value: 'Outbound', title: 'Transfer Out' },
       ],
       account_type: [
-        { value: 'Single', title: 'Single' },
+        { value: 'Single', title: 'Individual' },
         { value: 'Joint', title: 'Joint' },
       ],
     };
