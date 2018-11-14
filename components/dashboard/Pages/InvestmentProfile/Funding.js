@@ -301,6 +301,51 @@ class Funding extends PureComponent {
                           // errorText={this.props.fieldsErrors.funding}
                           hint="Choose funding type"
                         />
+                      </div>
+                      <div className="col-6 no-gutters pl-2">
+                        {
+                          this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                          <EmpalaSelect
+                            id="transfer_type"
+                            options={this.options.transfer_type}
+                            label="Transfer type"
+                            value={this.props.transfer_type || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.transfer_type}
+                            hint="Choose transfer type"
+                          />
+                        }
+                        {
+                          this.isSpecifiedTypeSelected('funding_type', 'Check') &&
+                          <EmpalaSelect
+                            id="transfer_direction"
+                            options={this.options.transfer_direction}
+                            label="Direction"
+                            value={this.props.transfer_direction || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.transfer_type}
+                            hint="Direction"
+                          />
+                        }
+                      </div>
+                    </div>
+                    {
+                      this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                      this.isSpecifiedTypeSelected('transfer_type') &&
+                      <div className="row no-gutters funding-selection-form">
+                        <EmpalaSelect
+                          id="brokerage_firm"
+                          options={[{ value: 'Charles Schwab', title: 'Charles Schwab' }]}
+                          label="Brokerage firm"
+                          value="Charles Schwab"
+                          // errorText={this.props.fieldsErrors.funding}
+                          hint="Choose brokerage firm"
+                          handleChange={()=>{}}
+                        />
+                      </div>
+                    }
+                    <div className="row no-gutters funding-selection-form">
+                      <div className="col-6 no-gutters">
                         {
                           this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                           this.isSpecifiedTypeSelected('transfer_type') &&
@@ -316,57 +361,31 @@ class Funding extends PureComponent {
                         }
                         {
                           this.isSpecifiedTypeSelected('funding_type', 'Check') &&
-                            this.props.transfer_direction === 'Outbound' &&
-                            <EmpalaSelect
-                              id="account_number"
-                              options={this.getAccountsDropdownOptions()}
-                              label="Account number"
-                              value={this.props.account_no || ''}
-                              handleChange={this.props.setSelectedValueById}
-                              // errorText={this.props.fieldsErrors.account_type}
-                            />
+                          this.props.transfer_direction === 'Outbound' &&
+                          <EmpalaSelect
+                            id="account_number"
+                            options={this.getAccountsDropdownOptions()}
+                            label="Account number"
+                            value={this.props.account_no || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.account_type}
+                          />
                         }
                       </div>
-                      {
-                        this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
-                        <div className="col-6 no-gutters pl-2">
+                      <div className="col-6 no-gutters pl-2">
+                        {
+                          this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                          this.isSpecifiedTypeSelected('transfer_type') &&
                           <EmpalaSelect
-                            id="transfer_type"
-                            options={this.options.transfer_type}
-                            label="Transfer type"
-                            value={this.props.transfer_type || ''}
+                            id="account_type"
+                            options={this.options.account_type}
+                            label="Account type"
+                            value={this.props.account_type || ''}
                             handleChange={this.props.setSelectedValueById}
-                            // errorText={this.props.fieldsErrors.transfer_type}
-                            hint="Choose transfer type"
+                            // errorText={this.props.fieldsErrors.account_type}
                           />
-                          {
-                            this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
-                            this.isSpecifiedTypeSelected('transfer_type') &&
-                            <EmpalaSelect
-                              id="account_type"
-                              options={this.options.account_type}
-                              label="Account type"
-                              value={this.props.account_type || ''}
-                              handleChange={this.props.setSelectedValueById}
-                              // errorText={this.props.fieldsErrors.account_type}
-                            />
-                          }
-                        </div>
-                      }
-                      {
-                        this.isSpecifiedTypeSelected('funding_type', 'Check') &&
-                        <div className="col-6 no-gutters pl-2">
-                          <EmpalaSelect
-                            id="transfer_direction"
-                            options={this.options.transfer_direction}
-                            label="Direction"
-                            value={this.props.transfer_direction || ''}
-                            handleChange={this.props.setSelectedValueById}
-                            // errorText={this.props.fieldsErrors.transfer_type}
-                            hint="Direction"
-                          />
-                        </div>
-                      }
+                        }
+                      </div>
                     </div>
                     {
                       this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
