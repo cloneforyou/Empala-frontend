@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 
+import ActionConfirm from '../../../../Modal/ActionConfirm';
+
 
 class AccountsUS extends Component {
+  constructor(props) {
+    super(props);
+    this.state =
+      {
+        textSubmit: '',
+        funcSubmit: null,
+      };
+  }
+
   render() {
-    const { accounts } = this.props;
+    const { accounts, openModal, submitDelete } = this.props;
+    const textDeletingAcc = 'Are you sure to delete this account?';
+    const textCreatingAcc = 'Sorry... You are currently unable to create a new account.';
+
+    this.handleClick = (text, func) => {
+      this.setState({
+        textSubmit: text,
+        funcSubmit: func,
+      })
+    };
 
     this.mappingComponent = item => {
       return (
@@ -77,7 +97,16 @@ class AccountsUS extends Component {
           <div>
             <div className="pseudo-input__label text-center">Delete Account</div>
             <div className="icon-centering">
-              <i className="icon-trash" />
+              <button
+                type="button"
+                className="default-btn"
+                onClick={() => {
+                  this.handleClick(textDeletingAcc, submitDelete);
+                  openModal('actionModal');
+                }}
+              >
+                <i className="icon-trash" />
+              </button>
             </div>
           </div>
         </div>
@@ -93,9 +122,19 @@ class AccountsUS extends Component {
           {
             [accounts].map(item => this.mappingComponent(item))
           }
+          <ActionConfirm
+            text={this.state.textSubmit}
+            submitFunction={this.state.funcSubmit}
+          />
         </div>
         <div className="global-portfolio__container_payments d-flex justify-content-end">
-          <button className="profile-btn profile-btn_green mr-10">
+          <button
+            className="profile-btn profile-btn_green mr-10"
+            onClick={() => {
+              this.handleClick(textCreatingAcc);
+              openModal('actionModal');
+            }}
+          >
             New Account
           </button>
         </div>
