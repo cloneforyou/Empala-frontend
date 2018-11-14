@@ -19,6 +19,26 @@ const AddInstitutionContainer = props => {
     props.openModalChooseInstituteAdding();
   };
 
+  const checkDisablingAddPlaidAccount = () => {
+    let plaidAccountCount = 0;
+
+    props.institutionsList.forEach((item) => {
+      if (item.custom === false) plaidAccountCount += 1;
+    })
+
+    return plaidAccountCount >= 1;
+  };
+
+  const checkDisablingAddManualAccount = () => {
+    let manualAccountCount = 0;
+
+    props.institutionsList.forEach((item) => {
+      if (item.custom) manualAccountCount += 1;
+    })
+
+    return manualAccountCount >= 3;
+  };
+
 
   return (
     <div
@@ -40,6 +60,8 @@ const AddInstitutionContainer = props => {
       <ChooseInstituteAdding
         addInstitution={props.addInstitution}
         handleOnExit={handleOnExit}
+        plaidDisabled={checkDisablingAddPlaidAccount()}
+        manualCreateDisabled={checkDisablingAddManualAccount()}
       />
       <AddManualBankAccount />
     </div>
