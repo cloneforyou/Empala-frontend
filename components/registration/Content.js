@@ -10,7 +10,6 @@ import {
   getMenuItems,
   getRegistrationDataFromCache,
   getUserID,
-  setInputFieldValueById,
   setTabName,
   setTabPageIndex,
 } from '../../actions/registration';
@@ -20,7 +19,7 @@ import ContentMenuItems from './ContentMenuItems';
 import InformationPage from './InformationPage';
 import FinalReviewPage from './FinalReviewPage';
 import AgreementPage from './AgreementPage';
-import DuplicateForm from './DuplicateForm';
+import DuplicateForm from '../registrationForms/DuplicateForm';
 import RegistrationResultModal from './RegistrationResultModal';
 import PopupPIN from './PopupPIN';
 import NAStateModal from './NAStateModal';
@@ -59,8 +58,6 @@ function mapDispatchToProps(dispatch) {
     closeAlertModal: () => {
       dispatch(closeAlertModal());
     },
-    setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
-    setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
   });
 }
 
@@ -130,6 +127,7 @@ class Content extends PureComponent {
     }
 
     let fieldNames = getPageFieldNames(this.props.tabName, this.props.tabIndex);
+
     if (this.props.tabName === 'regulatory' && this.props.tabIndex === 2) {
       return (
         <div className="onboard">
@@ -137,8 +135,6 @@ class Content extends PureComponent {
             <DuplicateForm
               fieldNames={fieldNames}
               registrationData={registrationData}
-              setInputValueById={setInputValueById}
-              setSelectedValueById={setSelectedValueById}
             />
           </div>
         </div>);

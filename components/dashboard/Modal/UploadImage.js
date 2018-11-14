@@ -35,7 +35,7 @@ class UploadImage extends PureComponent {
     e.preventDefault();
     const data = new FormData();
     const reader = new FileReader();
-    data.append('avatar', e.target.files[0]);
+    data.append('file', e.target.files[0]);
     this.props.setUploadableImage(data);
     console.log(' ** ', data);
     const file = e.target.files[0];

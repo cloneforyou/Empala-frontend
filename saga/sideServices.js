@@ -2,7 +2,7 @@ import { put } from 'redux-saga/effects';
 import { js2xml, xml2js } from 'xml-js';
 import { setFieldInvalid, setFieldValid, setInputFieldValueById } from '../actions/registration';
 import { statesAbbvs } from '../localdata/usStatesList';
-import { origin, uspsClientId } from '../keys';
+import { origin, clientsId } from '../keys';
 
 const getBaseUrl = (env) => {
   switch (env) {
@@ -17,7 +17,7 @@ const getBaseUrl = (env) => {
 
 export default function* getAddressInfoByZIP({ fieldId, zipCode }) {
   const urlBase = `${getBaseUrl(origin)}/ShippingAPI.dll?API=CityStateLookup&XML=`;
-  const clientId = uspsClientId;
+  const clientId = clientsId.usps;
   const data = {
     elements: [
       {

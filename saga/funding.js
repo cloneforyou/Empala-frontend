@@ -12,6 +12,9 @@ import {
   GET_ACCOUNTS_REQUEST,
   GET_ACH_TRANSACTION_LIST,
   CANCEL_ACH_TRANSFER,
+  ACH_WITHDRAW_REQUEST,
+  ADD_MANUAL_BANK_ACCOUNT,
+  APPROVE_MICRO_DEPOSITS_REQUEST,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -30,6 +33,7 @@ import {
   setAccountsData,
   getAccountsFail,
   getACHTransactionList as actionGetACHTransactionList,
+  closeModalMicroDepositsApprove,
 } from '../actions/funding';
 import { openInfoPopup } from '../actions/dashboard';
 
@@ -39,11 +43,14 @@ const urls = {
   addInstitution: '/api/funding/institution/add',
   removeInstitution: '/api/funding/institution/delete',
   ACHDeposit: '/api/funding/depositACH',
+  ACHWithdraw: '/api/funding/withdrawACH',
   ALPSTransfer: '/api/funding/alpsTransfer',
   checkTransfer: '/api/funding/checkTransfer',
-  getAccounts: '/api/accounts/global',
+  getGlobalAccounts: '/api/accounts/global',
   getACHTransactions: '/api/funding/transactions/list',
   cancelACHTransaction: '/api/funding/transactions/cancel',
+  addManualBankAccount: '/api/funding/institution/addManual',
+  approveMicroDeposits: '/api/funding/institution/addManual/approve',
 };
 
 export function* getAccountsData() {
@@ -128,10 +135,39 @@ export function* achDeposit({ amount, institutionId }) {
     yield put(setInputFieldValueById('errorDeposit', false));
     yield put(unsetPaymentValue());
     yield put(unsetPaymentInstitution());
+    yield put(setInputFieldValueById('selected_account_for_ACH', false))
     yield put(setInputFieldValueById('transferSubmitted', false));
+    yield put(setInputFieldValueById('transfer_direction_ACH', false))
     yield call(request, urls.ACHDeposit, options);
     yield put(actionGetACHTransactionList());
 
+  } catch (err) {
+    console.log(err)
+    yield put(ACHDepositFail(err.message));
+  }
+}
+
+export function* achWithdraw({ amount, institutionId }) {
+  const options = {
+    method: 'POST',
+    data: {
+      amount,
+      institution_id: institutionId,
+    },
+    headers: {
+      'X-Access-Token': localStorage.getItem('accessToken'),
+    },
+  };
+
+  try {
+    yield put(setInputFieldValueById('errorDeposit', false));
+    yield put(unsetPaymentValue());
+    yield put(unsetPaymentInstitution());
+    yield put(setInputFieldValueById('selected_account_for_ACH', false))
+    yield put(setInputFieldValueById('transferSubmitted', false));
+    yield put(setInputFieldValueById('transfer_direction_ACH', false))
+    yield call(request, urls.ACHWithdraw, options);
+    yield put(actionGetACHTransactionList());
   } catch (err) {
     console.log(err)
     yield put(ACHDepositFail(err.message));
@@ -200,7 +236,7 @@ export function* getGlobalAccounts() {
     },
   };
     try {
-    const response = yield call(request, urls.getAccounts, options);
+    const response = yield call(request, urls.getGlobalAccounts, options);
     yield put(addAccounts(response));
   } catch (err) {
     console.error(' ** GLOBAL ACCOUNTS ERROR =======>', err);
@@ -234,11 +270,54 @@ export function* cancelACHTransfers({ transactionId }) {
         transactionId,
       },
     };
-    const resp = yield call(request, urls.cancelACHTransaction, options);
+    yield call(request, urls.cancelACHTransaction, options);
     yield put(actionGetACHTransactionList());
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
+}
+
+export function* addManualBank({ bankName, accountType, routingNumber, accountNumber }) {
+  try {
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+      data: {
+        bankName,
+        accountType,
+        routingNumber,
+        accountNumber,
+      },
+    };
+    yield call(request, urls.addManualBankAccount, options);
+    yield getInstitutionsData();
+  } catch (e) {
+    yield put(addInstitutionFail(e.message));
+  }
+}
+
+export function* approveMicroDeposits({ institutionId, value1, value2 }) {
+  try {
+    const options = {
+      method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+      data: {
+        institutionId,
+        value1,
+        value2,
+      },
+    };
+    yield call(request, urls.approveMicroDeposits, options);
+    yield put(closeModalMicroDepositsApprove())
+    yield getInstitutionsData();
+  } catch (e) {
+    yield put(addInstitutionFail(e.message));
+  }
+
 }
 
 export default function* fundingSaga() {
@@ -247,11 +326,14 @@ export default function* fundingSaga() {
     takeLatest(ADD_INSTITUTION_REQUEST, addInstitution),
     takeLatest(REMOVE_INSTITUTION_REQUEST, removeInstitution),
     takeEvery(ACH_DEPOSIT_REQUEST, achDeposit),
+    takeEvery(ACH_WITHDRAW_REQUEST, achWithdraw),
     takeEvery(ALPS_TRANSFER, alpsTransfer),
     takeEvery(INIT_FUNDS_TRANSFER, transferFunds),
     takeEvery(GET_GLOBAL_ACCOUNTS, getGlobalAccounts),
     takeEvery(GET_ACCOUNTS_REQUEST, getAccountsData),
     takeEvery(GET_ACH_TRANSACTION_LIST, getACHTransactionList),
     takeEvery(CANCEL_ACH_TRANSFER, cancelACHTransfers),
+    takeEvery(ADD_MANUAL_BANK_ACCOUNT, addManualBank),
+    takeEvery(APPROVE_MICRO_DEPOSITS_REQUEST, approveMicroDeposits),
   ]);
 }

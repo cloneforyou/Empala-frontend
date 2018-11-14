@@ -22,6 +22,13 @@ import {
   getAccounts,
   getACHTransactionList,
   cancelACHTransfer,
+  setPaymentAccount,
+  ACHWithdraw,
+  openModalChooseInstituteAdding,
+  closeModalChooseInstituteAdding,
+  closeModalAddManualBankAccount,
+  openModalMicroDepositsApprove,
+  closeModalMicroDepositsApprove,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -40,30 +47,35 @@ const TransactionRow = props => {
   const formattedDay = `${day[0] === '0' ? '' : day[0]}${day[1] ? day[1] : ''}`
   const formattedAmount = props.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  const cancelTransaction = () => {
-    props.cancelACHTransfer({ transactionId: props.transfer_id });
-  };
+  // const cancelTransaction = () => {
+  //   props.cancelACHTransfer({ transactionId: props.transfer_id });
+  // };
 
-  const getStatusTransfer = () => {
-    const result = {
-      inProgress: true,
-      value: '',
-    };
 
-    if (props.transfer_state === 'CANCELED' || props.transfer_state === 'COMPLETED') {
-      result.inProgress = false;
-    }
-
-    if (props.transfer_state === 'CANCELED') {
-      result.value = 'Canceled';
-    } else if (props.transfer_state === 'COMPLETED') {
-      result.value = 'Completed';
-    } else {
-      result.value = 'In progress';
-    }
-
-    return result;
-  };
+  // Todo remove after testing, change backend for sending only transaction in progress
+  // const getStatusTransfer = () => {
+  //   const result = {
+  //     inProgress: true,
+  //     value: '',
+  //   };
+  //
+  //   if (props.transfer_state === 'CANCELED' || props.transfer_state === 'COMPLETED' ||
+  //     props.transfer_state === 'REJECTED') {
+  //     result.inProgress = false;
+  //   }
+  //
+  //   if (props.transfer_state === 'CANCELED') {
+  //     result.value = 'Canceled';
+  //   } else if (props.transfer_state === 'COMPLETED') {
+  //     result.value = 'Completed';
+  //   } else if (props.transfer_state === 'REJECTED') {
+  //     result.value = 'Rejected';
+  //   } else {
+  //     result.value = 'In progress';
+  //   }
+  //
+  //   return result;
+  // };
 
   return (
     <div className="ACH-transaction-list__value-container">
@@ -80,18 +92,17 @@ const TransactionRow = props => {
         $ {formattedAmount}
       </div>
       <div className="ACH-transaction-list__value ACH-transaction-list__status-col">
-        {getStatusTransfer().value}
+        In progress
       </div>
       <div className="ACH-transaction-list__cancel-col d-flex justify-content-center align-items-center"
-           onClick={cancelTransaction}
+           onClick={() => props.cancelACHTransfer({ transactionId: props.transfer_id })}
       >
-        {getStatusTransfer().inProgress ?
         <PlusIcon backgroundColor="transparent"
                   color="#b2d56b"
                   rotate="45deg"
                   height="20px"
                   cursor="pointer"
-        /> : ''}
+        />
       </div>
     </div>
 
@@ -140,12 +151,13 @@ class Funding extends PureComponent {
         { value: 'Outbound', title: 'Transfer Out' },
       ],
       account_type: [
-        { value: 'Single', title: 'Single' },
+        { value: 'Single', title: 'Individual' },
         { value: 'Joint', title: 'Joint' },
       ],
     };
     this.alpsTransferHandler = this.alpsTransferHandler.bind(this);
-    this.achDeposit = this.achDeposit.bind(this);
+    this.achTransfer = this.achTransfer.bind(this);
+    this.validateACHTransferFields = this.validateACHTransferFields.bind(this);
     // this.accountsDropdownOptions = this.getAccountsDropdownOptions(this.props.apexAccounts);
     this.interval = null;
   }
@@ -161,6 +173,7 @@ class Funding extends PureComponent {
   }
 
   getAccountsDropdownOptions() {
+    console.log('apexAccount',this.props.apexAccounts )
     return this.props.apexAccounts.map(el => ({ title: el.account_number, value: el.account_number }));
   }
 
@@ -229,14 +242,22 @@ class Funding extends PureComponent {
     this.props.ALPSTransfer(data);
   }
 
-  achDeposit() {
-    if (!this.props.selected_institution || !this.props.ach_amount) return;
+  validateACHTransferFields() {
+    if (!this.props.selected_institution || !this.props.ach_amount ||
+      !this.props.selectedAccountForACH || !this.props.transfer_direction_ACH) return;
+
+    this.props.submitTransfer();
+  }
+
+  achTransfer() {
+    if (!this.props.selected_institution || !this.props.ach_amount ||
+      !this.props.selectedAccountForACH || !this.props.transfer_direction_ACH) return;
 
     let institution_id;
 
     this.props.institutionsList.forEach((item) => {
       if (item.name !== this.props.selected_institution) return;
-      institution_id = item.item.institution_id;
+      institution_id = item.institution_id;
     });
 
     const data = {
@@ -244,7 +265,11 @@ class Funding extends PureComponent {
       institutionId: institution_id,
     };
 
-    this.props.ACHDeposit(data);
+    if (this.props.transfer_direction_ACH === 'Inbound') {
+      this.props.ACHDeposit(data);
+    } else if (this.props.transfer_direction_ACH === 'Outbound') {
+      this.props.ACHWithdraw(data);
+    }
   }
 
   render() {
@@ -276,6 +301,51 @@ class Funding extends PureComponent {
                           // errorText={this.props.fieldsErrors.funding}
                           hint="Choose funding type"
                         />
+                      </div>
+                      <div className="col-6 no-gutters pl-2">
+                        {
+                          this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                          <EmpalaSelect
+                            id="transfer_type"
+                            options={this.options.transfer_type}
+                            label="Transfer type"
+                            value={this.props.transfer_type || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.transfer_type}
+                            hint="Choose transfer type"
+                          />
+                        }
+                        {
+                          this.isSpecifiedTypeSelected('funding_type', 'Check') &&
+                          <EmpalaSelect
+                            id="transfer_direction"
+                            options={this.options.transfer_direction}
+                            label="Direction"
+                            value={this.props.transfer_direction || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.transfer_type}
+                            hint="Direction"
+                          />
+                        }
+                      </div>
+                    </div>
+                    {
+                      this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                      this.isSpecifiedTypeSelected('transfer_type') &&
+                      <div className="row no-gutters funding-selection-form">
+                        <EmpalaSelect
+                          id="brokerage_firm"
+                          options={[{ value: 'Charles Schwab', title: 'Charles Schwab' }]}
+                          label="Brokerage firm"
+                          value="Charles Schwab"
+                          // errorText={this.props.fieldsErrors.funding}
+                          hint="Choose brokerage firm"
+                          handleChange={()=>{}}
+                        />
+                      </div>
+                    }
+                    <div className="row no-gutters funding-selection-form">
+                      <div className="col-6 no-gutters">
                         {
                           this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                           this.isSpecifiedTypeSelected('transfer_type') &&
@@ -291,57 +361,31 @@ class Funding extends PureComponent {
                         }
                         {
                           this.isSpecifiedTypeSelected('funding_type', 'Check') &&
-                            this.props.transfer_direction === 'Outbound' &&
-                            <EmpalaSelect
-                              id="account_number"
-                              options={this.getAccountsDropdownOptions()}
-                              label="Account number"
-                              value={this.props.account_no || ''}
-                              handleChange={this.props.setSelectedValueById}
-                              // errorText={this.props.fieldsErrors.account_type}
-                            />
+                          this.props.transfer_direction === 'Outbound' &&
+                          <EmpalaSelect
+                            id="account_number"
+                            options={this.getAccountsDropdownOptions()}
+                            label="Account number"
+                            value={this.props.account_no || ''}
+                            handleChange={this.props.setSelectedValueById}
+                            // errorText={this.props.fieldsErrors.account_type}
+                          />
                         }
                       </div>
-                      {
-                        this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
-                        <div className="col-6 no-gutters pl-2">
+                      <div className="col-6 no-gutters pl-2">
+                        {
+                          this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
+                          this.isSpecifiedTypeSelected('transfer_type') &&
                           <EmpalaSelect
-                            id="transfer_type"
-                            options={this.options.transfer_type}
-                            label="Transfer type"
-                            value={this.props.transfer_type || ''}
+                            id="account_type"
+                            options={this.options.account_type}
+                            label="Account type"
+                            value={this.props.account_type || ''}
                             handleChange={this.props.setSelectedValueById}
-                            // errorText={this.props.fieldsErrors.transfer_type}
-                            hint="Choose transfer type"
+                            // errorText={this.props.fieldsErrors.account_type}
                           />
-                          {
-                            this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
-                            this.isSpecifiedTypeSelected('transfer_type') &&
-                            <EmpalaSelect
-                              id="account_type"
-                              options={this.options.account_type}
-                              label="Account type"
-                              value={this.props.account_type || ''}
-                              handleChange={this.props.setSelectedValueById}
-                              // errorText={this.props.fieldsErrors.account_type}
-                            />
-                          }
-                        </div>
-                      }
-                      {
-                        this.isSpecifiedTypeSelected('funding_type', 'Check') &&
-                        <div className="col-6 no-gutters pl-2">
-                          <EmpalaSelect
-                            id="transfer_direction"
-                            options={this.options.transfer_direction}
-                            label="Direction"
-                            value={this.props.transfer_direction || ''}
-                            handleChange={this.props.setSelectedValueById}
-                            // errorText={this.props.fieldsErrors.transfer_type}
-                            hint="Direction"
-                          />
-                        </div>
-                      }
+                        }
+                      </div>
                     </div>
                     {
                       this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
@@ -438,7 +482,7 @@ class Funding extends PureComponent {
                     options={this.options}
                     selected_institution={this.props.selected_institution}
                     ach_amount={this.props.ach_amount}
-                    achDeposit={this.achDeposit}
+                    achTransfer={this.achTransfer}
                     setPaymentIntitution={this.props.setPaymentIntitution}
                     togglePlaidLink={this.props.togglePlaidLink}
                     plaid_link_active={this.props.plaid_link_active}
@@ -448,9 +492,18 @@ class Funding extends PureComponent {
                     removeInstitution={this.props.removeInstitution}
                     errorDeposit={this.props.errorDeposit}
                     submitted={this.props.isTransferSubmitted}
-                    submit={this.props.submitTransfer}
+                    submit={this.validateACHTransferFields}
                     error={this.props.error}
+                    setPaymentAccount={this.props.setPaymentAccount}
+                    selectedAccount={this.props.selectedAccountForACH}
+                    currentApexAccountNumber={this.props.currentApexAccountNumber}
+                    transfer_direction_ACH={this.props.transfer_direction_ACH}
                     openModal={this.props.openModal}
+                    openModalChooseInstituteAdding={this.props.openModalChooseInstituteAdding}
+                    closeModalChooseInstituteAdding={this.props.closeModalChooseInstituteAdding}
+                    closeModalAddManualBankAccount={this.props.closeModalAddManualBankAccount}
+                    openModalMicroDepositsApprove={this.props.openModalMicroDepositsApprove}
+                    closeModalMicroDepositsApprove={this.props.closeModalMicroDepositsApprove}
                   />
               }
               {this.props.funding_type === 'ACH transfer' && this.props.ACHTransactionList.length > 0 && (
@@ -484,6 +537,7 @@ class Funding extends PureComponent {
                       getACHTransactionList={this.props.getACHTransactionList}
                       key={item.id}
                       cancelACHTransfer={this.props.cancelACHTransfer}
+                      openModal={this.props.openModal}
                     />)
                   )}
                 </div>
@@ -534,6 +588,9 @@ const mapStateToProps = state => ({
   error: state.funding.error,
   apexAccounts: (state.funding.memberAccountsData || {}).apex || [],
   ACHTransactionList: state.funding.ACHTransactionList,
+  selectedAccountForACH: state.funding.selected_account_for_ACH,
+  currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex[0].account_number : '',
+  transfer_direction_ACH: state.funding.transfer_direction_ACH,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -568,13 +625,20 @@ const mapDispatchToProps = dispatch => ({
   removeInstitution: id => dispatch(removeInstitution(id)),
   getInstitutions: () => dispatch(getInstitutions()),
   ACHDeposit: data => dispatch(ACHDeposit(data)),
+  ACHWithdraw: data => dispatch(ACHWithdraw(data)),
   ALPSTransfer: data => dispatch(ALPSTransfer(data)),
   handleCheckTransfer: () => dispatch(initFundsTransfer('check')),
   submitTransfer: () => dispatch(submitTransfer()),
   getAccounts: () => dispatch(getAccounts()),
   getACHTransactionList: () => dispatch(getACHTransactionList()),
   cancelACHTransfer: data => dispatch(cancelACHTransfer(data)),
+  setPaymentAccount: data => dispatch(setPaymentAccount(data)),
   openModal: name => dispatch(openModal(name)),
+  openModalChooseInstituteAdding: () => dispatch(openModalChooseInstituteAdding()),
+  closeModalChooseInstituteAdding: () => dispatch(closeModalChooseInstituteAdding()),
+  closeModalAddManualBankAccount: () => dispatch(closeModalAddManualBankAccount()),
+  openModalMicroDepositsApprove: institutionId => dispatch(openModalMicroDepositsApprove(institutionId)),
+  closeModalMicroDepositsApprove: () => dispatch(closeModalMicroDepositsApprove()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);

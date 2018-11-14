@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { cityfalcon } from './config';
+import { cityfalcon } from '../keys';
 
 
 export default function requestExternalNews(url, options = {}) {

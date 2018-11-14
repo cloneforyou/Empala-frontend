@@ -59,7 +59,8 @@ const TransferBody = (props) => {
     selectedAccount,
   } = props;
   const accountBalance = getSelectedAccountBalance(apexAccounts, selectedAccount);
-  const amountAvailable = Math.abs((accountBalance || {}).total || (accountBalance || {}).totalDeposits || 0);
+  const amountAvailable = Math.abs(((accountBalance || {}).total || (accountBalance || {}).totalDeposits) || 0)
+    - ((accountBalance || {}).totalDisbursements || 0);
   return (
     <div className="funding-wire-transfer__text">
       <div style={style.transferText}>

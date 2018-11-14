@@ -34,8 +34,18 @@ import {
   SEND_CODE_VERIFY_FAILURE,
   REGISTRATION_SUBMIT_SUCCESS,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL, SET_AVAILABLE_STATES,
+  CLOSE_INFO_POPUP,
+  SHOW_ALERT_MODAL,
+  CLOSE_ALERT_MODAL,
+  SET_AVAILABLE_STATES,
+  UPLOAD_IMAGE_FAIL,
+  UPLOAD_IMAGE_REQUEST,
+  UPLOAD_IMAGE_SUCCESS,
+  CLEAN_IMAGE_DATA,
+  SET_UPLOADABLE_IMAGE,
+  CLEAN_ERROR_TEXT,
 } from '../constants/registration';
+
 
 export function getMenuItems(items) {
   return {
@@ -304,3 +314,31 @@ export function setAvailableStates(data) {
     data,
   };
 }
+
+export const cleanImage = () => ({
+  type: CLEAN_IMAGE_DATA,
+});
+
+export const setUploadableImage = img => ({
+  type: SET_UPLOADABLE_IMAGE,
+  img,
+});
+
+export const uploadImage = data => ({
+  type: UPLOAD_IMAGE_REQUEST,
+  data,
+});
+
+export const uploadImageFail = err => ({
+  type: UPLOAD_IMAGE_FAIL,
+  err,
+});
+
+export const uploadImageSuccess = data => ({
+  type: UPLOAD_IMAGE_SUCCESS,
+  data,
+});
+
+export const cleanErrorText = () => ({
+  type: CLEAN_ERROR_TEXT,
+});

@@ -31,8 +31,99 @@ import {
   GET_ACCOUNTS_SUCCESS,
   GET_ACH_TRANSACTION_LIST,
   CANCEL_ACH_TRANSFER,
+  SET_PAYMENT_ACCOUNT,
+  ACH_WITHDRAW_REQUEST,
+  OPEN_MODAL_CHOOSE_INSTITUTE_ADDING,
+  CLOSE_MODAL_CHOOSE_INSTITUTE_ADDING,
+  OPEN_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  CLOSE_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  CHANGE_MODAL_ADD_MANUAL_BANK_ACCOUNT_VALUE_BY_ID,
+  ADD_MANUAL_BANK_ACCOUNT,
+  OPEN_MODAL_MICRO_DEPOSITS_APPROVE,
+  CLOSE_MODAL_MICRO_DEPOSITS_APPROVE,
+  CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID,
+  APPROVE_MICRO_DEPOSITS_REQUEST,
 } from '../constants/funding';
 
+
+export function approveMicroDepositRequest({institutionId, value1, value2}) {
+  return {
+    type: APPROVE_MICRO_DEPOSITS_REQUEST,
+    institutionId,
+    value1,
+    value2,
+  }
+}
+
+export function changeModalMicroDepositsApproveValueById(id, value) {
+  return {
+    type: CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID,
+    id,
+    value,
+  };
+}
+
+export function openModalMicroDepositsApprove(institutionId) {
+  return {
+    type: OPEN_MODAL_MICRO_DEPOSITS_APPROVE,
+    institutionId,
+  };
+}
+
+export function closeModalMicroDepositsApprove() {
+  return {
+    type: CLOSE_MODAL_MICRO_DEPOSITS_APPROVE,
+  };
+}
+
+export function addManualBankAccount({ bankName, accountType, routingNumber, accountNumber }) {
+  return {
+    type: ADD_MANUAL_BANK_ACCOUNT,
+    bankName,
+    accountType,
+    routingNumber,
+    accountNumber,
+  };
+}
+
+export function changeModalAddManualBankAccountValueById(id, value) {
+  return {
+    type: CHANGE_MODAL_ADD_MANUAL_BANK_ACCOUNT_VALUE_BY_ID,
+    value,
+    id,
+  };
+}
+
+export function openModalAddManualBankAccount() {
+  return {
+    type: OPEN_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  };
+}
+
+export function closeModalAddManualBankAccount() {
+  return {
+    type: CLOSE_MODAL_ADD_MANUAL_BANK_ACCOUNT,
+  };
+}
+
+export function openModalChooseInstituteAdding() {
+  return {
+    type: OPEN_MODAL_CHOOSE_INSTITUTE_ADDING,
+  };
+}
+
+export function closeModalChooseInstituteAdding() {
+  return {
+    type: CLOSE_MODAL_CHOOSE_INSTITUTE_ADDING,
+  };
+}
+
+export function setPaymentAccount(ApexAccountId) {
+  return {
+    type: SET_PAYMENT_ACCOUNT,
+    ApexAccountId,
+  };
+}
 
 export function cancelACHTransfer({ transactionId }) {
   return {
@@ -178,6 +269,14 @@ export function setInstitutions(institutionsList) {
 export function ACHDeposit({ amount, institutionId}) {
   return {
     type: ACH_DEPOSIT_REQUEST,
+    amount,
+    institutionId,
+  };
+}
+
+export function ACHWithdraw({ amount, institutionId}) {
+  return {
+    type: ACH_WITHDRAW_REQUEST,
     amount,
     institutionId,
   };

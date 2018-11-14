@@ -7,14 +7,18 @@ import {
   SET_FIELD_VALUE,
   SET_MEMBER_DOCUMENT_TYPE,
   SET_TAB_NAME,
-  SET_TAB_PAGE_INDEX, SHOW_IDENTITY_MODAL, TOGGLE_CHECKBOX,
+  SET_TAB_PAGE_INDEX,
+  SHOW_IDENTITY_MODAL,
+  TOGGLE_CHECKBOX,
   VALIDATE_FIELD_ERROR,
   VALIDATE_FIELD_SUCCESS,
   EDITABLE_PART,
   CLOSE_ERROR_MODAL,
   REGISTRATION_SUBMIT_REQUEST,
   REGISTRATION_SUBMIT_FAIL,
-  REGISTRATION_SUBMIT_SUCCESS, SET_USER_ID, GET_USER_ID_REQUEST_FAIL,
+  REGISTRATION_SUBMIT_SUCCESS,
+  SET_USER_ID,
+  GET_USER_ID_REQUEST_FAIL,
   CHECK_EMAIL_VERIFICATION,
   SHOW_POPUP_PIN,
   CLOSE_POPUP_PIN,
@@ -25,8 +29,18 @@ import {
   SEND_CODE_VERIFY_SUCCESS,
   SEND_CODE_VERIFY_FAILURE,
   OPEN_INFO_POPUP,
-  CLOSE_INFO_POPUP, SHOW_ALERT_MODAL, CLOSE_ALERT_MODAL, SET_AVAILABLE_STATES,
+  CLOSE_INFO_POPUP,
+  SHOW_ALERT_MODAL,
+  CLOSE_ALERT_MODAL,
+  SET_AVAILABLE_STATES,
+  CLEAN_IMAGE_DATA,
+  SET_UPLOADABLE_IMAGE,
+  UPLOAD_IMAGE_FAIL,
+  UPLOAD_IMAGE_REQUEST,
+  UPLOAD_IMAGE_SUCCESS,
+  CLEAN_ERROR_TEXT,
 } from '../constants/registration';
+
 
 // import { generateId } from '../utils/registrationUtils';
 
@@ -54,7 +68,8 @@ const initialState = {
     profile_investment_experience_lending_money: 'None',
     profile_investment_experience_foreign_markets: 'None',
     profile_investment_experience_exotics: 'None',
-    member_account_add_margin: false,
+    // member_account_add_margin: false,
+    member_account_account_type: false,
     regulatory_duplicate_prefix: 'Mr',
     regulatory_duplicate_first_name: 'John',
     regulatory_duplicate_surname: 'Kennedy',
@@ -88,6 +103,8 @@ const initialState = {
   showInfoPopup: false,
   infoPopupName: false,
   availableStatesList: false,
+  uploadableImage: false,
+  image407uploaded: false,
 };
 
 function registration(state = initialState, action) {
@@ -127,7 +144,7 @@ function registration(state = initialState, action) {
         checkboxes: { ...state.checkboxes, [action.id]: !state.checkboxes[action.id] },
         registrationData: {
           ...state.registrationData,
-          member_account_add_margin: action.id === 'member_account_add_margin' && !state.checkboxes[action.id],
+          // member_account_add_margin: action.id === 'member_account_add_margin' && !state.checkboxes[action.id],
           regulatory_407form_need: action.id === 'regulatory_checkbox_1' && !state.checkboxes[action.id],
         },
       };
@@ -138,9 +155,18 @@ function registration(state = initialState, action) {
     case CLOSE_ERROR_MODAL:
       return { ...state, showErrorModal: false };
     case REGISTRATION_SUBMIT_REQUEST:
+    case UPLOAD_IMAGE_REQUEST:
       return {
         ...state,
         loading: true,
+      };
+    case UPLOAD_IMAGE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        image407uploaded: true,
+        uploadableImage: false,
+        errorMessage: false,
       };
     case REGISTRATION_SUBMIT_SUCCESS:
       return {
@@ -148,6 +174,7 @@ function registration(state = initialState, action) {
         loading: false,
         showSuccessModal: true,
       };
+    case UPLOAD_IMAGE_FAIL:
     case REGISTRATION_SUBMIT_FAIL:
     case GET_USER_ID_REQUEST_FAIL:
       return {
@@ -155,6 +182,7 @@ function registration(state = initialState, action) {
         showErrorModal: true,
         errorMessage: action.err,
         loading: false,
+        uploadableImage: false,
       };
     case COPY_MAILING_ADDRESS:
       return {
@@ -267,6 +295,24 @@ function registration(state = initialState, action) {
       return {
         ...state,
         availableStatesList: action.data,
+      };
+    case SET_UPLOADABLE_IMAGE:
+      return {
+        ...state,
+        uploadableImage: action.img,
+        error: false,
+      };
+    case CLEAN_IMAGE_DATA:
+      return {
+        ...state,
+        uploadableImage: false,
+        image407uploaded: false,
+        registrationData: { ...state.registrationData, form407_snap_id: false },
+      };
+    case CLEAN_ERROR_TEXT:
+      return {
+        ...state,
+        errorMessage: false,
       };
     default:
       return state;

@@ -1,8 +1,8 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
-import { clientsId } from '../../../utils/config';
+import { clientsId } from '../../../keys';
 
-const responseError = (response) => {
+const responseError = response => {
 };
 
 

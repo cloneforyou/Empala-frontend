@@ -88,13 +88,20 @@
 
 .icon-letter {
   &:before {
+    background-color: $silver;
     content: ' ';
     width: 46px;
     height: 61px;
     display: inline-block;
-    background: url($path-to-images + 'icon-letter.svg') 100% 100%/ cover;
+    mask: url($path-to-images + 'icon-letter.svg') 50% 50%/ cover;
+  }
+  &_green {
+    &:before {
+      background-color: $green;
+    }
   }
 }
+
 
 .icon-exclamation {
   width: 13px;
@@ -110,8 +117,8 @@
 
 .info-icon_position {
   position: absolute;
-  top: 28px;
-  right: 0;
+  top: 6px;
+  right: -10px;
 }
 
 .check-container {
