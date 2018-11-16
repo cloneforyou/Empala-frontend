@@ -63,10 +63,13 @@ export function changeModalMicroDepositsApproveValueById(id, value) {
   };
 }
 
-export function openModalMicroDepositsApprove(institutionId) {
+export function openModalMicroDepositsApprove({ institutionId, institutionName, institutionMask, institutionType }) {
   return {
     type: OPEN_MODAL_MICRO_DEPOSITS_APPROVE,
     institutionId,
+    institutionName,
+    institutionMask,
+    institutionType,
   };
 }
 

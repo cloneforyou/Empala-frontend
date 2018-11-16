@@ -1,0 +1,54 @@
+.modal-choose-institute-adding {
+
+  .title {
+    padding: 30px;
+    font-size: 20px;
+    text-align: left;
+    color: #98c73a;
+  }
+
+  .body {
+    padding: 0 30px 30px;
+    display: flex;
+
+    &__left-block {
+      width: 200px;
+      margin-right: 20px;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.25;
+      letter-spacing: 0.4px;
+      text-align: left;
+      color: #7a7a7c;
+    }
+
+    &__right-block {
+      width: 200px;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.25;
+      letter-spacing: 0.4px;
+      text-align: left;
+      color: #7a7a7c;
+    }
+
+    .adding-block {
+      width: 200px;
+      height: 100px;
+      box-shadow:  0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+    }
+
+    .count-limit-message {
+      height: 100px;
+      line-height: 50px;
+    }
+  }
+}
