@@ -42,7 +42,7 @@ class AddManualBankAccount extends React.Component {
   addBank = () => {
     if (!this.props.bankName || !this.props.accountType ||
       !this.props.routingNumber || !this.props.accountNumber ||
-      this.props.routingNumber.length !== 9
+      this.props.routingNumber.length !== 9 || this.props.accountNumber.length < 8
     ) {
       return;
     }
@@ -64,13 +64,12 @@ class AddManualBankAccount extends React.Component {
         <Dialog
           open={this.props.open}
           onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          classes={{root: 'modal-add-manual-bank-account'}}
         >
-          <DialogTitle id="alert-dialog-title">
-            Create manual account
-          </DialogTitle>
-          <DialogContent>
+          <div className="title">
+            Manual account
+          </div>
+          <div className="body no-gutters">
             <EmpalaInput
               id="modalCreateBankAccount.bankName"
               type="text"
@@ -101,21 +100,21 @@ class AddManualBankAccount extends React.Component {
               value={this.props.accountNumber}
               handleChange={this.handleChangeValue}
             />
-          </DialogContent>
-          <DialogActions>
+          </div>
+          <div className="footer">
             <button
-              className="modal__btn modal__btn_green"
+              className="confirm"
               onClick={this.addBank}
             >
-              OK
+              Create
             </button>
             <button
-              className="default-btn"
+              className="cancel"
               onClick={this.handleClose}
             >
               Cancel
             </button>
-          </DialogActions>
+          </div>
         </Dialog>
       </div>
     );

@@ -104,7 +104,12 @@ const Tile = props => (
       className="funding-ach-tiles-tile"
       onClick={() => {
         if (props.isCustom && props.currentStatus === 'PENDING') {
-          props.openModalMicroDepositsApprove(props.institutionId);
+          props.openModalMicroDepositsApprove({
+            institutionId: props.institutionId,
+            institutionName: props.institution_name,
+            institutionMask: props.account_no,
+            institutionType: props.institutionType,
+          });
           return;
         };
         props.setPaymentIntitution(props.institution_name);
@@ -202,6 +207,7 @@ export default class ACHTransfer extends React.Component {
                       isCustom={item.custom}
                       currentStatus={item.status}
                       openModalMicroDepositsApprove={this.props.openModalMicroDepositsApprove}
+                      institutionType={item.institutionType}
                     />
                   ))}
                   <AddInstitutionContainer

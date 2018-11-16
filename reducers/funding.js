@@ -75,6 +75,9 @@ const initialState = {
     value1: '',
     value2: '',
     institutionId: '',
+    institutionName: '',
+    institutionMask: '',
+    institutionType: '',
   },
 };
 
@@ -257,6 +260,9 @@ function funding(state = initialState, action) {
         modalMicroDepositsApprove: {
           ...state.modalMicroDepositsApprove,
           institutionId: action.institutionId,
+          institutionName: action.institutionName,
+          institutionMask: action.institutionMask,
+          institutionType: action.institutionType,
         },
       };
     case CLOSE_MODAL_MICRO_DEPOSITS_APPROVE:
@@ -267,6 +273,9 @@ function funding(state = initialState, action) {
           value1: '',
           value2: '',
           institutionId: '',
+          institutionName: '',
+          institutionMask: '',
+          institutionType: '',
         },
       };
     case CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID:

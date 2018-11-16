@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import {
   closeModalChooseInstituteAdding,
   openModalAddManualBankAccount,
 } from '../../../actions/funding';
 import PlaidLink from 'react-plaid-link';
 import { Plaid } from '../../../keys.js';
+import PlusIcon from '../../common/PlusIcon';
 
 class ChooseInstituteAdding extends React.Component {
   handleClose = () => {
@@ -24,7 +23,7 @@ class ChooseInstituteAdding extends React.Component {
   closeModalWhenOpenPlaid = (e) => {
     if (e !== 'OPEN') return;
     this.props.closeModal();
-  }
+  };
 
   fixOverflow = () => {
     setTimeout(() => {
@@ -41,51 +40,55 @@ class ChooseInstituteAdding extends React.Component {
         <Dialog
           open={this.props.open}
           onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+          classes={{root: 'modal-choose-institute-adding'}}
         >
-          <DialogTitle id="alert-dialog-title">
+          <div className="title">
             Choose bank account
-          </DialogTitle>
-          <DialogContent>
-            <div className="d-flex">
-              <div style={{width: '200px', marginRight: '20px'}} >
-                Find account in Plaid
-                {!this.props.plaidDisabled && <PlaidLink
-                  onEvent={this.closeModalWhenOpenPlaid}
-                  className="shadow"
-                  style={{width: '200px', height: '100px'}}
-                  clientName="Empala"
-                  env="sandbox"
-                  product={['auth', 'transactions']}
-                  publicKey={Plaid.PLAID_PUBLIC_KEY}
-                  onExit={this.fixOverflow}
-                  onSuccess={(token, metadata) => {
-                    this.props.addInstitution(token, metadata);
-                    this.fixOverflow();
-                  }}
-                >
-                  <span className="funding-ach-tiles-tile__plus" >+</span>
-                </PlaidLink>}
-                {this.props.plaidDisabled && <div>
-                  You can't add more this accounts
-                </div>}
-              </div>
-              <div style={{width: '200px'}}>
-                Create manual account
-                {!this.props.manualCreateDisabled &&
-                <button className="shadow"
-                     style={{width: '200px', height: '100px', display: 'flex'}}
-                     onClick={this.handleOpenAddManualBankAccount}
-                >
-                  <span className="funding-ach-tiles-tile__plus align-self-center" >+</span>
-                </button>}
-                {this.props.manualCreateDisabled && <div>
-                  You can't add more this accounts
-                </div>}
-              </div>
+          </div>
+          <div className="body">
+            <div className="body__left-block">
+              Find account in Plaid
+              {!this.props.plaidDisabled && <PlaidLink
+                onEvent={this.closeModalWhenOpenPlaid}
+                className="adding-block"
+                clientName="Empala"
+                style={{}}
+                env="sandbox"
+                product={['auth', 'transactions']}
+                publicKey={Plaid.PLAID_PUBLIC_KEY}
+                onExit={this.fixOverflow}
+                onSuccess={(token, metadata) => {
+                  this.props.addInstitution(token, metadata);
+                  this.fixOverflow();
+                }}
+              >
+                <PlusIcon backgroundColor="#b2d56b"
+                          height="43px"
+                          lineWidth="13px"
+                          cursor="pointer"
+                />
+              </PlaidLink>}
+              {this.props.plaidDisabled && <div className="count-limit-message">
+                You can't add more this accounts
+              </div>}
             </div>
-          </DialogContent>
+            <div className="body__right-block">
+              Create manual account
+              {!this.props.manualCreateDisabled &&
+              <div className="adding-block"
+                      onClick={this.handleOpenAddManualBankAccount}
+              >
+                <PlusIcon backgroundColor="#b2d56b"
+                          height="43px"
+                          lineWidth="13px"
+                          cursor="pointer"
+                />
+              </div>}
+              {this.props.manualCreateDisabled && <div className="count-limit-message">
+                You can't add more this accounts
+              </div>}
+            </div>
+          </div>
         </Dialog>
       </div>
     );
