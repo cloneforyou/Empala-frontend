@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {
   getEDocumentsListRequest,
 } from "../../../../../actions/dashboard";
+import { generateId } from '../../../../../utils/dashboardUtils';
 
 // import { AccountStatements } from '../../../../../localdata/profileData';
 //
@@ -36,11 +37,11 @@ class Documents extends Component {
             {
               this.props.documentsList.map(item => (
                 <li className="default-list__item" key={item.id}>
-                  <a href={item.url} target="_blank" className="default-list__item-link">
+                  <a href={item.link} target="_blank" className="default-list__item-link">
                     {item.name} {item.date}
                   </a>
                   {item.inserts && item.inserts.length > 0 && item.inserts.map((insert, index) => (
-                    <a href={insert} target="_blank" key={index} className="default-list__item-link ml-3">
+                    <a href={insert} target="_blank" key={generateId()} className="default-list__item-link ml-3">
                       insert{index + 1}
                     </a>
                   ))}

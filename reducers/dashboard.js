@@ -500,7 +500,7 @@ function dashboard(state = initialState, action) {
         ...state,
         eDocumentsList: action.list,
       };
-      // TODO add error ahndler
+      // TODO add error handler
     case GET_EDOCUMENTS_LIST_FAILED:
       return {
         ...state,

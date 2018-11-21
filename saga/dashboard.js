@@ -450,6 +450,6 @@ export default function* dashboardSaga() {
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
     takeLatest(GET_LEAGUE_DATA, getLeagueData),
-    takeEvery(GET_EDOCUMENTS_LIST_REQUEST, getEDocumentsList)
+    takeEvery(GET_EDOCUMENTS_LIST_REQUEST, getEDocumentsList),
   ]);
 }

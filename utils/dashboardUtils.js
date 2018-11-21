@@ -131,6 +131,10 @@ const popupText = {
   },
 };
 
+export function generateId() {
+  return String(Date.now() + Math.floor(Math.random() * Math.random() * 1000000)).substr(3, 12);
+}
+
 export const getTableHeaderByName = tableName => tableHeaders[tableName];
 export const getWidgetAttributesByName = widgetName => widgetAttributes[widgetName];
 export const getPopupTextById = id => popupText[id].text;
