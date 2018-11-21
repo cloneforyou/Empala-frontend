@@ -49,7 +49,10 @@ import {
   CLOSE_INFO_POPUP,
   SET_TABLE_SORT_SETTINGS,
   TOGGLE_LEAGUE_DIVIDER,
-  SET_ACTIVE_MARKET_PAGE, UPDATE_QUOTES_LIST,
+  SET_ACTIVE_MARKET_PAGE,
+  UPDATE_QUOTES_LIST,
+  GET_EDOCUMENTS_LIST_SUCCESS,
+  GET_EDOCUMENTS_LIST_FAILED,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -123,6 +126,7 @@ const initialState = {
   infoPopupName: false,
   tableSortSettings: {},
   allowedSections: false,
+  eDocumentsList: [],
 };
 
 const parseAccountBalance = (data) => {
@@ -490,6 +494,16 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         leagueDividerShow: !state.leagueDividerShow,
+      };
+    case GET_EDOCUMENTS_LIST_SUCCESS:
+      return {
+        ...state,
+        eDocumentsList: action.list,
+      };
+      // TODO add error ahndler
+    case GET_EDOCUMENTS_LIST_FAILED:
+      return {
+        ...state,
       };
     default:
       return state;

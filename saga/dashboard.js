@@ -24,7 +24,9 @@ import {
   GET_NOTIFICATIONS,
   SET_NOTIFICATION_READ,
   SET_COMPLETE_ACTION,
-  CHECK_UNREAD_NOTIFICATIONS, GET_LEAGUE_DATA,
+  CHECK_UNREAD_NOTIFICATIONS,
+  GET_LEAGUE_DATA,
+  GET_EDOCUMENTS_LIST_REQUEST,
 } from '../constants/dashboard';
 import { getUserData, logout, refreshTokens } from './authentication';
 import request from '../utils/request';
@@ -45,7 +47,11 @@ import {
   updateNotificationUnread,
   updateExternalNews,
   updateSocial,
-  setAccountBalance, setLocalLoader, setLeagueData,
+  setAccountBalance,
+  setLocalLoader,
+  setLeagueData,
+  getEDocumentsListSuccess,
+  getEDocumentsListFailed,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
 import { origin } from '../keys';
@@ -61,6 +67,7 @@ const urls = {
   },
   cityfalcon: 'http://api.cityfalcon.com/v0.2/stories?identifier_type=assets&identifiers=Apple%2C%20Tesla%2C%20FTSE100&categories=mp%2Cop&min_cityfalcon_score=0&order_by=latest&time_filter=d1&languages=en%2Cde%2Ces%2Cfr%2Cpt&all_languages=false&access_token=',
   league: '/api/performance/league',
+  eDocuments: '/api/documents',
 };
 
 export function* sessionTimeout() {
@@ -411,6 +418,23 @@ function* setCompleteAction(action) {
   }
 }
 
+function* getEDocumentsList() {
+  try {
+    const url = urls.eDocuments;
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+    };
+    const response = yield call(request, url, options);
+    yield put(getEDocumentsListSuccess(response.data.data));
+  } catch (err) {
+    console.log('error occur in edocuments, todo need display', err, err.response.data);
+    yield put(getEDocumentsListFailed(err.response.data));
+  }
+}
+
 export default function* dashboardSaga() {
   yield all([
     wsHandling(),
@@ -426,5 +450,6 @@ export default function* dashboardSaga() {
     takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
     takeLatest(GET_LEAGUE_DATA, getLeagueData),
+    takeEvery(GET_EDOCUMENTS_LIST_REQUEST, getEDocumentsList)
   ]);
 }
