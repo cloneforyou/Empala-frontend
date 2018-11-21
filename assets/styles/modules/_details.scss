@@ -93,6 +93,16 @@
     &:not(:last-child) {
       margin-bottom: 25px;
     }
+
+    &-link {
+      color: $main-color-text-grey;
+      text-decoration: none;
+
+      &:hover {
+        color: #98c73a;
+        text-decoration: none;
+      }
+    }
   }
 }
 

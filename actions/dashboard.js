@@ -74,7 +74,31 @@ import {
   TOGGLE_LEAGUE_DIVIDER,
   SET_ACTIVE_MARKET_PAGE,
   UPDATE_QUOTES_LIST,
+  GET_EDOCUMENTS_LIST_REQUEST,
+  GET_EDOCUMENTS_LIST_SUCCESS,
+  GET_EDOCUMENTS_LIST_FAILED,
 } from '../constants/dashboard';
+
+
+export function getEDocumentsListFailed(err) {
+  return {
+    type: GET_EDOCUMENTS_LIST_FAILED,
+    err,
+  };
+}
+
+export function getEDocumentsListSuccess(list) {
+  return {
+    type: GET_EDOCUMENTS_LIST_SUCCESS,
+    list,
+  };
+}
+
+export function getEDocumentsListRequest() {
+  return {
+    type: GET_EDOCUMENTS_LIST_REQUEST,
+  };
+}
 
 export function collapseSidebar(bool) {
   return {
