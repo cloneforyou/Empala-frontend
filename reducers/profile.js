@@ -16,7 +16,7 @@ const initialState = {
   profileUserDataChanged: {},
   fieldsErrors: false,
   tabValue: 0,
-  activeDocumentsTab: false,
+  activeDocumentsTab: null,
 };
 
 function profile(state = initialState, action) {
