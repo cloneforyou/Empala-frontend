@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { getEDocumentsListRequest } from '../../../../../actions/dashboard';
 import { generateId } from '../../../../../utils/dashboardUtils';
 import { changeActiveDocumentsTab } from '../../../../../actions/profile';
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 
 class Documents extends Component {
   constructor(props) {
@@ -26,6 +27,19 @@ class Documents extends Component {
   }
 
   render() {
+    if (!this.props.documentsList || this.props.loading) {
+      return (
+
+       <div className="tab-container position-relative">
+        <div className="loader">
+          <CircularProgress
+            size={50}
+            style={{ color: '#98c73a' }}
+          />
+        </div>
+       </div>
+      );
+    }
     return (
       <div className="tab-container">
         <div className="documents-tabs">
@@ -74,10 +88,7 @@ class Documents extends Component {
                 </li>
               ))
             }
-            { !this.props.documentsList &&
-            <li className="default-list__item">
-              EDocuments not found
-            </li> }
+
           </ul>
         </div>
       </div>
@@ -86,8 +97,9 @@ class Documents extends Component {
 }
 
 Documents.propTypes = {
-  documentsList: PropTypes.array,
+  documentsList: PropTypes.object,
   activeDocumentsTab: PropTypes.string,
+  loading: PropTypes.bool,
   getEDocumentsListRequest: PropTypes.func.isRequired,
   setActiveDocumentTab: PropTypes.func.isRequired,
 };
@@ -96,6 +108,7 @@ const mapStateToProps = state => (
   {
     documentsList: state.dashboard.eDocumentsList,
     activeDocumentsTab: state.profile.activeDocumentsTab,
+    loading: state.dashboard.loading,
   }
 );
 

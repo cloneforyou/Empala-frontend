@@ -52,7 +52,7 @@ import {
   SET_ACTIVE_MARKET_PAGE,
   UPDATE_QUOTES_LIST,
   GET_EDOCUMENTS_LIST_SUCCESS,
-  GET_EDOCUMENTS_LIST_FAILED,
+  GET_EDOCUMENTS_LIST_FAILED, GET_EDOCUMENTS_LIST_REQUEST,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -126,7 +126,7 @@ const initialState = {
   infoPopupName: false,
   tableSortSettings: {},
   allowedSections: false,
-  eDocumentsList: [],
+  eDocumentsList: null,
 };
 
 const parseAccountBalance = (data) => {
@@ -164,6 +164,7 @@ function dashboard(state = initialState, action) {
         ...state,
         selectedGroup: action.selectedGroup,
       };
+    case GET_EDOCUMENTS_LIST_REQUEST:
     case GET_USER_DATA_REQUEST:
       return {
         ...state,
@@ -499,6 +500,7 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         eDocumentsList: action.list,
+        loading: false,
       };
       // TODO add error handler
     case GET_EDOCUMENTS_LIST_FAILED:
