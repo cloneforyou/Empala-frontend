@@ -1,41 +1,67 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-import {
-  getEDocumentsListRequest,
-} from "../../../../../actions/dashboard";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getEDocumentsListRequest } from '../../../../../actions/dashboard';
 import { generateId } from '../../../../../utils/dashboardUtils';
-
-// import { AccountStatements } from '../../../../../localdata/profileData';
-//
-// const Documents = () => (
-//   <div className="tab-container">
-//     <div className="tab-container__wrapper">
-//       <h2 className="title-part title-part_md-big">Account Statements</h2>
-//       <ul className="default-list">
-//         {
-//           AccountStatements.map(item => (
-//             <li className="default-list__item" key={item.id}>{item.title}</li>
-//           ))
-//         }
-//       </ul>
-//     </div>
-//   </div>
-// );
+import { changeActiveDocumentsTab } from '../../../../../actions/profile';
 
 class Documents extends Component {
+  constructor(props) {
+    super(props);
+    this.setActiveDocumentTab = this.setActiveDocumentTab.bind(this);
+    this.setActiveClassForTabName = this.setActiveClassForTabName.bind(this);
+  }
   componentDidMount() {
+    if (!this.props.activeDocumentsTab) this.props.setActiveDocumentTab('account_statements');
     this.props.getEDocumentsListRequest();
   }
-
+  setActiveDocumentTab(e) {
+    this.props.setActiveDocumentTab(e.target.getAttribute('name'));
+  }
+  setActiveClassForTabName(tabName) {
+    if (this.props.activeDocumentsTab === tabName) {
+      return 'documents-tabs-bar__item_active';
+    }
+    return '';
+  }
 
   render() {
     return (
       <div className="tab-container">
+        <div className="documents-tabs">
+          <ul className="documents-tabs-bar">
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('account_statements')}`}
+              name="account_statements"
+              onClick={this.setActiveDocumentTab}
+            >Account Statements
+            </li>
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('trade_confirmations')}`}
+              name="trade_confirmations"
+              onClick={this.setActiveDocumentTab}
+            >Trade Confirmations
+            </li>
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('tax_documents')}`}
+              name="tax_documents"
+              onClick={this.setActiveDocumentTab}
+            >Tax Documents
+            </li>
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('compliance')}`}
+              name="compliance"
+              onClick={this.setActiveDocumentTab}
+            >Compliance
+            </li>
+          </ul>
+          <hr className="documents-tabs-bar__line" />
+        </div>
         <div className="tab-container__wrapper">
-          <h2 className="title-part title-part_md-big">EDocuments</h2>
           <ul className="default-list">
-            {
-              this.props.documentsList.map(item => (
+            { !this.props.documentsList[this.props.activeDocumentsTab] && 'No eDocuments found' }
+            { this.props.documentsList[this.props.activeDocumentsTab] &&
+              this.props.documentsList[this.props.activeDocumentsTab].map(item => (
                 <li className="default-list__item" key={item.id}>
                   <a href={item.link} target="_blank" className="default-list__item-link">
                     {item.name} {item.date}
@@ -48,9 +74,10 @@ class Documents extends Component {
                 </li>
               ))
             }
-            {this.props.documentsList.length === 0 && <li className="default-list__item">
+            { !this.props.documentsList &&
+            <li className="default-list__item">
               EDocuments not found
-            </li>}
+            </li> }
           </ul>
         </div>
       </div>
@@ -58,15 +85,24 @@ class Documents extends Component {
   }
 }
 
+Documents.propTypes = {
+  documentsList: PropTypes.array,
+  activeDocumentsTab: PropTypes.string,
+  getEDocumentsListRequest: PropTypes.func.isRequired,
+  setActiveDocumentTab: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => (
   {
     documentsList: state.dashboard.eDocumentsList,
+    activeDocumentsTab: state.profile.activeDocumentsTab,
   }
 );
 
 const mapDispatchToProps = dispatch => (
   {
     getEDocumentsListRequest: () => dispatch(getEDocumentsListRequest()),
+    setActiveDocumentTab: name => dispatch(changeActiveDocumentsTab(name)),
   }
 );
 
