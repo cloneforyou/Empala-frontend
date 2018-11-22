@@ -11,7 +11,10 @@ import {
   DELETE_USERPIC_REQUEST,
   DELETE_USERPIC_FAIL,
   UPDATE_APP_SETTINGS_FAIL,
-  UPDATE_APP_SETTINGS_REQUEST, DROP_PROFILE_INFO, CANCEL_PROFILE_INFO_CHANGE,
+  UPDATE_APP_SETTINGS_REQUEST,
+  DROP_PROFILE_INFO,
+  CANCEL_PROFILE_INFO_CHANGE,
+  CHANGE_ACTIVE_DOCUMENT_TAB,
 } from '../constants/profile';
 
 export function getActiveTabProfile() {
@@ -24,6 +27,13 @@ export function changeActiveTabProfile(activeTab) {
   return {
     type: CHANGE_ACTIVE_TAB_PROFILE,
     activeTab,
+  };
+}
+
+export function changeActiveDocumentsTab(tabName) {
+  return {
+    type: CHANGE_ACTIVE_DOCUMENT_TAB,
+    tabName,
   };
 }
 
