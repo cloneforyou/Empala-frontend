@@ -18,7 +18,7 @@ const options = {
     },
   ],
   sessionTimeout: timeouts.map(el => ({
-    value: el * 60 * 60,
+    value: (el * 60).toString(),
     title: el === 0 ? 'Unlimited (not recommended)' : `${el} minutes`,
   })),
 };
