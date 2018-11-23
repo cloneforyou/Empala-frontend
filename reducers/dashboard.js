@@ -285,8 +285,9 @@ function dashboard(state = initialState, action) {
     case SET_ORDERS_LIST:
       return {
         ...state,
-        ordersList: action.data,
-        parsedOrdersList: parseOrdersList(action.data),
+        // ordersList: action.data,
+        // parsedOrdersList: parseOrdersList(action.data),
+        parsedOrdersList: action.data,
       };
     case SET_WATCH_LISTS:
       return {
