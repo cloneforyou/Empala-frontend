@@ -81,9 +81,13 @@ class Documents extends Component {
                     {item.name} {item.date}
                   </a>
                   {item.inserts && item.inserts.length > 0 && item.inserts.map((insert, index) => (
-                    <a href={insert} target="_blank" key={generateId()} className="default-list__item-link ml-3">
-                      insert{index + 1}
-                    </a>
+                    <ul className="default-list">
+                      <li>
+                        <a href={insert} target="_blank" key={generateId()} className="default-list__item-link ml-3">
+                          insert{index + 1}
+                        </a>
+                      </li>
+                    </ul>
                   ))}
                 </li>
               ))

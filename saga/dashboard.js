@@ -56,6 +56,7 @@ import {
 import { serverOrigins } from '../utils/config';
 import { origin } from '../keys';
 import requestExternalNews from '../utils/requestExternalNews';
+import { parseOrdersList } from '../utils/dashboardUtils';
 
 
 const urls = {
@@ -190,6 +191,33 @@ function* getENTAData(url, params) {
   }
 }
 
+function calculateOCT(orders, positions) {
+  if (!(orders && positions)) return;
+  const positionsSymbols = [];
+  const positionsValues = [];
+  positions.forEach((pos) => {
+    positionsSymbols.push(pos.Symbol);
+    positionsValues.push(pos.Quantity);
+  });
+  const processOrder = (order) => {
+    const i = positionsSymbols.findIndex((el) => el === order.values.symbol);
+    if (i !== -1) {
+      if (order.side === 'Buy') {
+        order.values.oct = 'O';
+      } else if (order.side === 'Sell') {
+        if (order.values.order_quantity <= positionsValues[i]) {
+          order.values.oct = 'O';
+        } else if (order.values.order_quantity > positionsValues[i]){
+          order.values.oct = 'T';
+        }
+      }
+      return false;
+    }
+    order.values.oct = 'O';
+  }
+  orders.forEach(order => processOrder(order));
+}
+
 function* get_orders_list(credentials) {
   const url = `${etnaConfig.api_path}/orders_list_page`;
   const params = {
@@ -206,7 +234,13 @@ function* get_orders_list(credentials) {
     },
   };
   const res = yield getENTAData(url, params);
-  if (res) yield put(setOrdersList(res.data.Result.Orders));
+  if (res.data) {
+    const parsedOrders = parseOrdersList((res.data.Result || {}).Orders);
+    const positions = yield select(state => state.dashboard.positions || []);
+    console.log('** POsitions ===>>>> ',positions)
+    calculateOCT(parsedOrders, positions);
+    yield put(setOrdersList(parsedOrders));
+  }
 }
 
 function* get_watchlists(credentials) {
