@@ -8,7 +8,7 @@ import style from './RegistrationFieldsStyle';
 
 const EmpalaCheckbox = (props) => {
   return (
-    <div className="check-container">
+    <div className={`check-container ${!props.id.includes('login') && 'fs-18'}`}>
       <Checkbox
         id={props.id}
         label={props.label}

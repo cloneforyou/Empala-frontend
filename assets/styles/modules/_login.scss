@@ -39,7 +39,7 @@
   }
   &__form-width {
     width: 250px;
-    margin: 0 auto 30px;
+    margin: 0 auto 20px;
   }
   &__logo {
     width: 243px;
@@ -116,6 +116,9 @@
     display: inline-block;
     margin: 10px 0;
     font-weight: 600;
+  }
+  .check-container {
+    margin-left: 0;
   }
 }
 

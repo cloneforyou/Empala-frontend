@@ -63,12 +63,10 @@ const style = {
   },
   textFieldStyle: {
     width: '100%',
-    fontFamily: 'Proxima Nova',
   },
   selectFieldStyle: {
     width: '100%',
     margin: 0,
-    fontFamily: 'Proxima Nova',
   },
   labelStyleLightTheme: {
     height: '33px',
@@ -118,8 +116,6 @@ const style = {
     width: '25px',
   },
   labelCheckboxStyle: {
-    fontSize: '18px',
-    fontFamily: 'Proxima Nova',
     color: MAIN_COLOR_TEXT_GRAY,
   },
   labelActiveCheckboxStyle: {

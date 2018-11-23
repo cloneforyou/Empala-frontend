@@ -2,8 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
+
 import EmpalaInput from '../registration/EmpalaInput';
-import { setInputFieldValueById } from '../../actions/registration';
+import EmpalaCheckbox from '../registration/EmpalaCheckbox';
+import {setInputFieldValueById, toggleCheckboxById} from '../../actions/registration';
 import {
   clearLoginState,
   clearRegistrationData,
@@ -19,6 +21,7 @@ import FacebookAuth from '../social/auth/FaceBookAuth';
 import LinkedInAuth from '../social/auth/LinkedInAuth';
 import FaSpinner from 'react-icons/lib/fa/spinner';
 import AuthPhone from './AuthPhone';
+
 
 const isNode = require('detect-node');
 
@@ -161,7 +164,13 @@ const Login = (props) => {
             >
               forgot password?
             </button>
-            <button className="login__btn" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
+            <button className="login__btn mb-4" onClick={() => props.handleLogin('local', null)}>SIGN IN</button>
+            <EmpalaCheckbox
+              id="login_remove_mfa"
+              label="Trust this device (remove MFA)"
+              handleCheck={props.toggleCheckboxById}
+              checked={props.checkboxes.login_remove_mfa}
+            />
           </div>
           <div className="social-auth">
             <div className="styled-part-separate styled-part-separate_mb15">or connect with</div>
@@ -205,6 +214,7 @@ export default connect(
     loading: state.auth.loading,
     loginMfa: state.auth.loginMfa,
     socialLoginMfa: state.auth.socialLoginMfa,
+    checkboxes: state.registration.checkboxes,
   }),
   dispatch => ({
     handleLogin: (provider, data) => dispatch(loginRequest(provider, data)),
@@ -218,5 +228,6 @@ export default connect(
       dispatch(clearRegistrationData());
       dispatch(toggleModal());
     },
+    toggleCheckboxById: e => dispatch(toggleCheckboxById(e.target.id)),
   }),
 )(Login);
