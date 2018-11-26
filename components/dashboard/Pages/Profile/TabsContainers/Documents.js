@@ -29,15 +29,14 @@ class Documents extends Component {
   render() {
     if (!this.props.documentsList || this.props.loading) {
       return (
-
-       <div className="tab-container position-relative">
-        <div className="loader">
-          <CircularProgress
-            size={50}
-            style={{ color: '#98c73a' }}
-          />
+        <div className="tab-container position-relative">
+          <div className="loader">
+            <CircularProgress
+              size={50}
+              style={{ color: '#98c73a' }}
+            />
+          </div>
         </div>
-       </div>
       );
     }
     return (
@@ -77,7 +76,7 @@ class Documents extends Component {
             { this.props.documentsList[this.props.activeDocumentsTab] &&
               this.props.documentsList[this.props.activeDocumentsTab].map(item => (
                 <li className="default-list__item" key={item.id}>
-                  <a href={item.link} target="_blank" className="default-list__item-link">
+                  <a href={`${item.link}&auth=${this.props.token}`} target="_blank" className="default-list__item-link">
                     {item.name} {item.date}
                   </a>
                   {item.inserts && item.inserts.length > 0 && item.inserts.map((insert, index) => (
@@ -103,6 +102,7 @@ class Documents extends Component {
 Documents.propTypes = {
   documentsList: PropTypes.object,
   activeDocumentsTab: PropTypes.string,
+  token: PropTypes.string,
   loading: PropTypes.bool,
   getEDocumentsListRequest: PropTypes.func.isRequired,
   setActiveDocumentTab: PropTypes.func.isRequired,
@@ -113,6 +113,7 @@ const mapStateToProps = state => (
     documentsList: state.dashboard.eDocumentsList,
     activeDocumentsTab: state.profile.activeDocumentsTab,
     loading: state.dashboard.loading,
+    token: state.dashboard.token,
   }
 );
 

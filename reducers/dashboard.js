@@ -52,7 +52,7 @@ import {
   SET_ACTIVE_MARKET_PAGE,
   UPDATE_QUOTES_LIST,
   GET_EDOCUMENTS_LIST_SUCCESS,
-  GET_EDOCUMENTS_LIST_FAILED, GET_EDOCUMENTS_LIST_REQUEST,
+  GET_EDOCUMENTS_LIST_FAILED, GET_EDOCUMENTS_LIST_REQUEST, SET_ACCESS_TOKEN,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -127,6 +127,7 @@ const initialState = {
   tableSortSettings: {},
   allowedSections: false,
   eDocumentsList: null,
+  token: false,
 };
 
 const parseAccountBalance = (data) => {
@@ -144,6 +145,12 @@ const parseAppSettings = (settings) => {
 
 function dashboard(state = initialState, action) {
   switch (action.type) {
+    case SET_ACCESS_TOKEN: {
+      return {
+        ...state,
+        token: action.token,
+      };
+    }
     case UPDATE_QUOTES:
       return {
         ...state,

@@ -77,6 +77,7 @@ import {
   GET_EDOCUMENTS_LIST_REQUEST,
   GET_EDOCUMENTS_LIST_SUCCESS,
   GET_EDOCUMENTS_LIST_FAILED,
+  SET_ACCESS_TOKEN,
 } from '../constants/dashboard';
 
 
@@ -521,9 +522,17 @@ export function setTableSortSettings(tableId, sortIndex, direction) {
     direction,
   };
 }
+
 export function toggleLeagueDivider() {
   return {
     type: TOGGLE_LEAGUE_DIVIDER,
+  };
+}
+
+export function setAccessToken(token) {
+  return {
+    type: SET_ACCESS_TOKEN,
+    token,
   };
 }
 

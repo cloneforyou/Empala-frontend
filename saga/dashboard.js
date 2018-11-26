@@ -7,8 +7,6 @@ import {
   call,
   takeLatest,
   race,
-  spawn,
-  cancel,
 } from 'redux-saga/effects';
 import { delay, eventChannel } from 'redux-saga';
 import io from 'socket.io-client';
