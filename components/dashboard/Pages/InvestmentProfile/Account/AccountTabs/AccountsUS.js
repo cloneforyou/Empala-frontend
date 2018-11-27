@@ -10,6 +10,7 @@ class AccountsUS extends Component {
       {
         textSubmit: '',
         funcSubmit: null,
+        blockNewAccount: false,
       };
   }
 
@@ -22,7 +23,13 @@ class AccountsUS extends Component {
       this.setState({
         textSubmit: text,
         funcSubmit: func,
-      })
+      });
+    };
+
+    this.handleNewAccount = () => {
+      this.setState(prevState => ({
+        blockNewAccount: !prevState.blockNewAccount,
+      }));
     };
 
     this.mappingComponent = item => {
@@ -127,17 +134,49 @@ class AccountsUS extends Component {
             submitFunction={this.state.funcSubmit}
           />
         </div>
-        <div className="global-portfolio__container_payments d-flex justify-content-end">
-          <button
-            className="profile-btn profile-btn_green mr-10"
-            onClick={() => {
-              this.handleClick(textCreatingAcc);
-              openModal('actionModal');
-            }}
-          >
-            New Account
-          </button>
-        </div>
+        {
+          !this.state.blockNewAccount &&
+          <div className="global-portfolio__container_payments d-flex justify-content-end">
+            <button
+              className="profile-btn profile-btn_green mr-10"
+              onClick={() => {
+                this.handleNewAccount();
+              }}
+            >
+              New Account
+            </button>
+          </div>
+        }
+
+        {
+          this.state.blockNewAccount &&
+          <div className="global-portfolio__container_payments mb-4">
+            <div className="mb-4">
+              {
+                this.mappingComponent({})
+              }
+            </div>
+            <div className="text-center mb-4">
+              <button
+                className="profile-btn profile-btn_green mr-5"
+                onClick={() => {
+                  this.handleClick(textCreatingAcc);
+                  openModal('actionModal');
+                }}
+              >
+                Apply
+              </button>
+              <button
+                className="default-btn"
+                onClick={() => {
+                  this.handleNewAccount();
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        }
       </div>
     );
   }
