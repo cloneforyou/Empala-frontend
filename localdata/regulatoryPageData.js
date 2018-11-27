@@ -1,5 +1,23 @@
 import { countriesList } from './countriesList';
 import { duplicateForm } from './duplicateFormData';
+import { getValuesForSelectField } from '../utils/registrationUtils';
+
+const residencyOptions = getValuesForSelectField(['Permanent Resident', 'Business Visa', 'Other']);
+const visaTypes = getValuesForSelectField([
+  'B1',
+  'C1',
+  'E1',
+  'E2',
+  'E3',
+  'F1',
+  'H1B',
+  'H2B',
+  'H3',
+  'K1',
+  'L1',
+  'TN',
+  'OTHER',
+]);
 
 export const dataFields = [
   [
@@ -57,6 +75,30 @@ export const dataFields = [
       field: 'select',
       options: countriesList,
       autoWidth: true,
+    },
+    {
+      id: 'regulatory_identification_residency_status',
+      label: 'Residency Status',
+      hint: 'Please select',
+      field: 'select',
+      options: residencyOptions,
+      autoWidth: true,
+    },
+    {
+      id: 'regulatory_identification_visa_type',
+      label: 'Visa type',
+      hint: 'Please select',
+      field: 'select',
+      options: visaTypes,
+      // autoWidth: true,
+      col: 6,
+    },
+    {
+      id: 'member_passport_visa_expiry_date',
+      label: 'Visa expiry date',
+      field: 'date',
+      col: 6,
+      dateExpiry: true,
     },
     {
       id: 'regulatory_family_martial_status',

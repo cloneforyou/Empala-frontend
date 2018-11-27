@@ -58,6 +58,7 @@ class RegulatoryForm extends React.Component {
               handleChange={this.props.setSelectedValueById}
               errorText={this.props.fieldsErrors[item.id]}
               autoWidth={item.autoWidth}
+              col={item.col}
             />
           );
         case 'input':
@@ -88,6 +89,7 @@ class RegulatoryForm extends React.Component {
               errorText={this.props.fieldsErrors[item.id]}
               birthDay={item.birthDay}
               col={item.col}
+              dateExpiry={!!item.dateExpiry}
             />
           );
         case 'checkbox':
@@ -105,10 +107,20 @@ class RegulatoryForm extends React.Component {
     };
 
     this.isRadioChecked = name => (this.props.registrationData.memberDocument === name);
+    this.isUSCitizen = () => this.props.registrationData.member_basic_information_residence === 'United States'
+      && this.props.registrationData.regulatory_identification_citizenship === 'United States';
+    this.dataFields = dataFields;
   }
 
 
   render() {
+    const data = [...dataFields];
+    if (this.isUSCitizen()) {
+      data[2] = [...dataFields[2].slice(0, 3), ...dataFields[2].slice(6)];
+    } else if (!this.isUSCitizen() && this.props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
+      data[2] = [...dataFields[2].slice(0, 4), ...dataFields[2].slice(6)];
+    }
+    console.log('US citizen', this.isUSCitizen(), this.props.registrationData.member_basic_information_residence, this.props.registrationData.regulatory_identification_citizenship)
     return (
       <div className="container-fluid">
         <div className="registration-group__section-title title-nowrap margin-bottom40">
@@ -116,7 +128,7 @@ class RegulatoryForm extends React.Component {
           {this.props.page === 3 && 'Enter your details:'}
         </div>
         <form className="row">
-          {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
+          {data[this.props.page - 1].map(item => this.mappingComponent(item))}
           <ModalWindow
             open={this.props.showModal}
             handleClose={this.props.closeModal}
