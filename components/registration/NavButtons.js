@@ -18,7 +18,7 @@ import ignoredFields from '../../localdata/noValidatedFiels';
 
 function isFieldsFilled(fieldNames, fields) {
   const remainingFields = fieldNames.filter(name => !ignoredFields.includes(name));
-  console.log(remainingFields, fieldNames)
+  console.log(remainingFields, fieldNames);
   return every(remainingFields, name => (fields[name] && fields[name] !== ''));
 }
 
@@ -52,10 +52,13 @@ const NavButtons = (props) => {
       if (isUSCitizen) {
         const shouldBeFilled = [...props.fieldNames].filter(name => !fieldsToSkip.includes(name));
         disabled = !isFieldsFilled(shouldBeFilled, props.registrationData);
-      } else if (!isUSCitizen
-          && props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
-        const shouldBeFilled = [...props.fieldNames].slice(1).filter(name => !fieldsToSkip.includes(name));
-        disabled = !isFieldsFilled(shouldBeFilled, props.registrationData);
+      } else if (!isUSCitizen) {
+        if (props.registrationData.regulatory_identification_residency_status === 'Other') {
+          disabled = true;
+        } else if (props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
+          const shouldBeFilled = [...props.fieldNames].slice(1).filter(name => !fieldsToSkip.includes(name));
+          disabled = !isFieldsFilled(shouldBeFilled, props.registrationData);
+        }
       }
     }
   }
