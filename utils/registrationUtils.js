@@ -1,17 +1,14 @@
 /* eslint-disable react/react-in-jsx-scope */
 import _ from 'lodash';
-import UploadUserFile from '../components/registration/UploadUserFile';
+import React from 'react';
 import MemberInfoForm from '../components/registrationForms/MemberInfoForm';
 import IdentityForm from '../components/registrationForms/IdentityForm';
-import ExperienceForm from '../components/registrationForms/ExperienceForm';
 import RegulatoryForm from '../components/registrationForms/RegulatoryForm';
 import ProfileForm from '../components/registrationForms/ProfileForm';
 import { dataFields as memberPageData } from '../localdata/memberPageData';
 import { dataFields as regulatoryPageData } from '../localdata/regulatoryPageData';
 import { dataFields as identityPageData } from '../localdata/identityPageData';
-import { dataFields as experiencePageData } from '../localdata/experiencePageData';
 import { dataFields as profilePageData } from '../localdata/profilePageData';
-import React from 'react';
 
 
 export const menuItems = {
