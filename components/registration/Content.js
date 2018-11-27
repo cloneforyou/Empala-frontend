@@ -22,7 +22,7 @@ import AgreementPage from './AgreementPage';
 import DuplicateForm from '../registrationForms/DuplicateForm';
 import RegistrationResultModal from './RegistrationResultModal';
 import PopupPIN from './PopupPIN';
-import NAStateModal from './NAStateModal';
+import AlertModal from './AlertModal';
 
 function mapStateToProps(state) {
   return {
@@ -211,9 +211,10 @@ class Content extends PureComponent {
               </div>
             </div>
           </div>
-          <NAStateModal
-            open={this.props.showAlertModal && this.props.alertModalName === 'NA_state'}
+          <AlertModal
+            open={this.props.showAlertModal}
             handleClose={this.props.closeAlertModal}
+            name={this.props.alertModalName}
           />
         </div>
       </div>

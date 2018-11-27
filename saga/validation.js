@@ -138,7 +138,11 @@ export default function* validationSaga({ id, value }) {
   yield put(setFieldValid(id));
   if (id === 'identity_residential_address_residential_address_state' &&
     !allowedStatesList.includes(value)) {
-    yield put(showAlertModal('NA_state'));
+    yield put(showAlertModal('invalidState'));
+  }
+  if (id === 'regulatory_identification_residency_status' &&
+    value === 'Other') {
+    yield put(showAlertModal('invalidResidential'));
   }
   if (serverValidatedFields.includes(id)) {
     yield validateFieldOnServer({ id, value });
