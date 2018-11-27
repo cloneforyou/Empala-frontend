@@ -25,7 +25,19 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  setSelectedValueById: (id, value) => {
+    const fieldsToDrop = [
+      'regulatory_identification_residency_status',
+      'regulatory_identification_visa_type',
+      'regulatory_identification_visa_expiry_date',
+    ];
+    if (id === 'regulatory_identification_citizenship' && value === 'United States') {
+      fieldsToDrop.forEach(field => dispatch(setInputFieldValueById(field, '')));
+    } else if (id === 'regulatory_identification_residency_status' && value === 'Permanent Resident') {
+      fieldsToDrop.slice(1).forEach(field => dispatch(setInputFieldValueById(field, '')));
+    }
+    return dispatch(setInputFieldValueById(id, value));
+  },
   setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
   toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
   closeModal: () => dispatch(closeIdentityModal()),
@@ -120,7 +132,6 @@ class RegulatoryForm extends React.Component {
     } else if (!this.isUSCitizen() && this.props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
       data[2] = [...dataFields[2].slice(0, 4), ...dataFields[2].slice(6)];
     }
-    console.log('US citizen', this.isUSCitizen(), this.props.registrationData.member_basic_information_residence, this.props.registrationData.regulatory_identification_citizenship)
     return (
       <div className="container-fluid">
         <div className="registration-group__section-title title-nowrap margin-bottom40">

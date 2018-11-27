@@ -94,7 +94,7 @@ export const dataFields = [
       col: 6,
     },
     {
-      id: 'member_passport_visa_expiry_date',
+      id: 'regulatory_identification_visa_expiry_date',
       label: 'Visa expiry date',
       field: 'date',
       col: 6,
