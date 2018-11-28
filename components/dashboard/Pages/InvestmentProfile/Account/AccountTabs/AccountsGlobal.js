@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { generateId } from '../../../../../../utils/dashboardUtils';
 
 
 class AccountsGlobal extends Component {
@@ -7,7 +8,7 @@ class AccountsGlobal extends Component {
 
     this.mappingComponent = (item) => {
       return (
-        <div className="d-flex global-account_padding" key={item.id}>
+        <div className="d-flex global-account_padding" key={generateId()}>
           <div className="d-flex align-items-center mx-2">
             <i className="icon-flag icon-flag_usa" />
           </div>

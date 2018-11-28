@@ -105,16 +105,33 @@
   }
 }
 
+.icon-duplicate {
+  display: block;
+  width: 20px;
+  height: 21px;
+  mask: url('../../../static/images/dashboard-icons/icon-letter.svg') no-repeat 50% 50% /contain;
+  background-color: $main-color-text-grey;
+}
+
+.icon-members {
+  display: block;
+  width: 29px;
+  height: 29px;
+  mask: url('../../../static/images/dashboard-icons/icon-members.svg') no-repeat 50% 50% /contain;
+  background-color: $green;
+}
+
+.icon-delegates {
+  display: block;
+  width: 29px;
+  height: 29px;
+  mask: url('../../../static/images/dashboard-icons/icon-group.svg') no-repeat 50% 50% /contain;
+  background-color: $main-color-text-grey;
+}
+
 .icon-trash {
   display: block;
   width: 20px;
   height: 22px;
   background: url('../../../static/images/dashboard-icons/icon-trash.svg') no-repeat 50% 50% /contain;
-}
-
-.icon-duplicate {
-  display: block;
-  width: 20px;
-  height: 22px;
-  background: url('../../../static/images/dashboard-icons/icon-letter.svg') no-repeat 50% 50% /contain;
 }
