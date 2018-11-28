@@ -119,8 +119,9 @@ class RegulatoryForm extends React.Component {
     };
 
     this.isRadioChecked = name => (this.props.registrationData.memberDocument === name);
-    this.isUSCitizen = () => this.props.registrationData.member_basic_information_residence === 'United States'
-      && this.props.registrationData.regulatory_identification_citizenship === 'United States';
+    this.isUSCitizen = () => /* this.props.registrationData.member_basic_information_residence === 'United States'
+      && */ this.props.registrationData.regulatory_identification_citizenship === 'United States';
+      // todo: do we need to check residence country?
     this.dataFields = dataFields;
   }
 

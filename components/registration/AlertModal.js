@@ -42,9 +42,12 @@ const getContentByName = (name) => {
       return (
         <Fragment>
           <img src="../../static/images/exclaimation.svg" alt="alert icon" style={style.icon} />
-          <p>As the Empala... Lorem Lorem Lorem Lorem Lorem Lorem Lorem ...</p>
+          <p>At this time, Empala is only available to U.S. citizens,
+            permanent residents, and certain valid U.S. visa holders.
+          </p>
           <p>
-            Thank you for... Lorem Lorem Lorem Lorem Lorem....
+            Thank you for visiting empala.com. Please keep watch on our
+            website to see when this situation changes.
           </p>
         </Fragment>
       );
@@ -53,17 +56,37 @@ const getContentByName = (name) => {
   }
 };
 
+
+
 const AlertModal = (props) => {
   const handleClose = () => {
     props.handleClose();
     if (props.name === 'invalidResidential') window.location.href = '/';
   };
+  const getButtonByName = (name) => {
+    switch (name) {
+      case 'invalidState':
+        return (
+          <button
+            className="modal__btn modal__btn_green"
+            onClick={handleClose}
+          >Continue
+          </button>
+        );
+      case 'invalidResidential':
+        return (
+          <button
+            className="modal__btn modal__btn_green"
+            onClick={handleClose}
+          >Continue
+          </button>
+        );
+      default:
+        return null;
+    }
+  };
   const actions = [
-    <button
-      className="modal__btn modal__btn_green"
-      onClick={handleClose}
-    >Continue
-    </button>,
+    getButtonByName(props.name),
   ];
 
   return (

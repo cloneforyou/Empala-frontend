@@ -18,7 +18,6 @@ import ignoredFields from '../../localdata/noValidatedFiels';
 
 function isFieldsFilled(fieldNames, fields) {
   const remainingFields = fieldNames.filter(name => !ignoredFields.includes(name));
-  console.log(remainingFields, fieldNames);
   return every(remainingFields, name => (fields[name] && fields[name] !== ''));
 }
 
@@ -42,8 +41,9 @@ const NavButtons = (props) => {
     } else if (props.tabIndex === 2) {
       disabled = !isFieldsFilled(props.fieldNames, props.registrationData) || !props.image407uploaded;
     } else if (props.tabIndex === 3) {
-      const isUSCitizen = props.registrationData.member_basic_information_residence === 'United States'
-        && props.registrationData.regulatory_identification_citizenship === 'United States';
+      const isUSCitizen = /* props.registrationData.member_basic_information_residence === 'United States'
+        && */ props.registrationData.regulatory_identification_citizenship === 'United States';
+      // todo: do we need to check residence country?
       const fieldsToSkip = [
         'regulatory_identification_residency_status',
         'regulatory_identification_visa_type',
