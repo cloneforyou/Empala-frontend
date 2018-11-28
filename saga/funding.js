@@ -48,6 +48,7 @@ const urls = {
   checkTransfer: '/api/funding/checkTransfer',
   getGlobalAccounts: '/api/accounts/global',
   getACHTransactions: '/api/funding/transactions/list',
+  achTransactionsByState: '/api/funding/transactions/filtered',
   cancelACHTransaction: '/api/funding/transactions/cancel',
   addManualBankAccount: '/api/funding/institution/addManual',
   approveMicroDeposits: '/api/funding/institution/addManual/approve',
@@ -243,19 +244,25 @@ export function* getGlobalAccounts() {
   }
 }
 
-export function* getACHTransactionList() {
+export function* getACHTransactionList({ status }) {
   const options = {
     method: 'GET',
     headers: {
       'X-Access-Token': localStorage.getItem('accessToken'),
     },
   };
+  if (status) {
+    options.method = 'POST';
+    options.data = {
+      status,
+    };
+  }
   try {
     const resp = yield call(request, urls.getACHTransactions, options);
     yield put(setInputFieldValueById('ACHTransactionList', resp.data.data));
   } catch (err) {
-    //yield put(ALPSTransferFail(err.response.data.data.message));
-    console.log(err.response.data);
+    yield put(ALPSTransferFail(err.response.data.data.message));
+    console.log('** TRANSACTIONS LIST ERROR: ', err.response.data);
   }
 }
 
