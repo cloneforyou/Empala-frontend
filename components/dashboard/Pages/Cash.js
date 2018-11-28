@@ -36,6 +36,27 @@ const parsePositionsToTableData = positions => positions.map((pos) => {
   ];
 });
 
+const parseTransactions = transactions => transactions
+  .filter(transaction => transaction.transfer_state === 'COMPLETE')
+  .map(transaction => [
+    { value: parseDateString(transaction.initiated_time) },
+    { value: '' },
+    { value: transaction.institution_name },
+    { value: '' },
+    { value: '' },
+    { value: '' },
+    { value: 0 }, // Exec fees
+    { value: 0 }, // Reg fees
+    { value: formatNumberWithFixedPoint(transaction.amount, 2) },
+    { value: 'USD' },
+    { value: formatNumberWithFixedPoint(transaction.amount * (transaction.transfer_direction === 'INCOMING' ? 1 : -1), 2) }, // Currency Effect
+    { value: 0 }, // Emara Balance
+    { value: formatNumberWithFixedPoint(transaction.amount) }, // USD Balance
+    { value: 0 }, // EUR Balance
+    { value: 0 }, // GBP Balance
+    { value: '' },
+    { value: '' },
+  ]);
 const widget = getTableHeaderByName('dashboard_cash');
 class Cash extends Component {
   componentDidMount() {
@@ -60,7 +81,10 @@ class Cash extends Component {
           />
           <EmpalaTable
             tableName="dashboard_cash"
-            tableData={parsePositionsToTableData(this.props.positions)}
+            tableData={[
+              ...parsePositionsToTableData(this.props.positions),
+              ...parseTransactions(this.props.ACHTransactionList),
+              ]}
             striped
           />
         </div>
@@ -71,7 +95,7 @@ class Cash extends Component {
 
 export default connect(state => ({
   positions: state.dashboard.positions || [],
-  ACHTransactionList: state.funding.ACHTransactionList,
+  ACHTransactionList: state.funding.ACHTransactionList || [],
 }), dispatch => ({
-  getACHTransactionList: (status) => dispatch(getACHTransactionList(status)),
+  getACHTransactionList: status => dispatch(getACHTransactionList(status)),
 }))(Cash);
