@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -296,7 +296,7 @@ class FinalReviewPage extends PureComponent {
               <div className="col-md-6 padding-x20">
                 <div
                   className="fields-group__title pointer"
-                  onClick={() => this.goBack('regulatory', 2)}
+                  onClick={() => this.goBack('regulatory', 3)}
                 >
                   <i
                     className="final-review__icon_arrow-back"
@@ -330,6 +330,26 @@ class FinalReviewPage extends PureComponent {
                     label="Country of citizenship"
                     value={data.regulatory_identification_citizenship || empty}
                   />
+                  <FieldComponent
+                    col={12}
+                    label="Residency Status"
+                    value={data.regulatory_identification_residency_status || empty}
+                  />
+                  {
+                    data.regulatory_identification_residency_status !== 'Permanent Resident' &&
+                      <Fragment>
+                        <FieldComponent
+                          col={6}
+                          label="Visa type"
+                          value={data.regulatory_identification_visa_type || empty}
+                        />
+                        <FieldComponent
+                          col={6}
+                          label="Visa expiry date"
+                          value={this.convertDate(data.regulatory_identification_visa_expiry_date) || empty}
+                        />
+                      </Fragment>
+                  }
                 </div>
               </div>
             </div>
