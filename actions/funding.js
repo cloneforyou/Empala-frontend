@@ -135,9 +135,10 @@ export function cancelACHTransfer({ transactionId }) {
   };
 }
 
-export function getACHTransactionList() {
+export function getACHTransactionList(status) {
   return {
     type: GET_ACH_TRANSACTION_LIST,
+    status,
   };
 }
 
