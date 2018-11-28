@@ -48,7 +48,6 @@ const urls = {
   checkTransfer: '/api/funding/checkTransfer',
   getGlobalAccounts: '/api/accounts/global',
   getACHTransactions: '/api/funding/transactions/list',
-  achTransactionsByState: '/api/funding/transactions/filtered',
   cancelACHTransaction: '/api/funding/transactions/cancel',
   addManualBankAccount: '/api/funding/institution/addManual',
   approveMicroDeposits: '/api/funding/institution/addManual/approve',
@@ -236,7 +235,7 @@ export function* getGlobalAccounts() {
       'X-Access-Token': localStorage.getItem('accessToken'),
     },
   };
-    try {
+  try {
     const response = yield call(request, urls.getGlobalAccounts, options);
     yield put(addAccounts(response));
   } catch (err) {
