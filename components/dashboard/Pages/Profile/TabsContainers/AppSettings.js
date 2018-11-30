@@ -62,7 +62,7 @@ class AppSettings extends Component {
                     },
                   ]}
                   label="Default Market Access Shortcut One"
-                  value={appSettings.app_settings_market_shortcut_one || "Default Individual Account"}
+                  value={appSettings.app_settings_market_shortcut_one || 'Default Individual Account'}
                   handleChange={setSelectedValueById}
                   errorText={fieldsErrors.app_settings_market_shortcut_one}
                   hint="Time zone"

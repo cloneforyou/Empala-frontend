@@ -1,12 +1,16 @@
 .dashboard-header {
   border: none;
-  min-width: 700px;
+  min-width: 768px;
+  height: 72px;
   &_collapsed {
     .dashboard-header__logo {
       width: $sidebar-width-full;
     }
     .dashboard-header__main {
       width: calc(100% - #{$sidebar-width-full});
+      height: 100%;
+      border-bottom: 1px solid #EDEDED;
+      align-items: center;
     }
   }
   &__logo {

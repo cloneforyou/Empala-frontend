@@ -53,6 +53,11 @@
     color: $green;
     margin: 0;
     font-weight: normal;
+    max-width: calc(100% - 10px);
+    height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &__body {
     position: relative;
@@ -62,7 +67,7 @@
   &_padding {
     padding: 16px 16px 0 28px;
     .widget__head {
-      padding: 0;
+      padding: 9px 0;
       margin: 0;
     }
   }
@@ -83,6 +88,7 @@
 .widget-menu {
   position: relative;
   padding-right: 2px;
+  float: right;
   &__btn {
     background: none;
     border: none;

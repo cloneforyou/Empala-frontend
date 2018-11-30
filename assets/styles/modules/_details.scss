@@ -18,7 +18,8 @@
 .main-text-helvetica {
   font-family: Helvetica, serif;
   &_12 {
-    @include fontSize(12px)
+    @include fontSize(12px);
+    line-height: normal;
   }
 }
 
