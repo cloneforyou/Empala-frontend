@@ -123,6 +123,7 @@ export function* getNews() {
   };
   while (true) {
     yield delay(60000);
+    options.headers['X-Access-Token'] = localStorage.getItem('accessToken');
     try {
       const news = yield call(request, url, options);
       if (news) {
