@@ -1,7 +1,7 @@
 import {
   GET_ACTIVE_TAB_PROFILE,
   CHANGE_ACTIVE_TAB_PROFILE,
-  DELETE_USERPIC_SUCCESS, DROP_PROFILE_INFO,
+  DELETE_USERPIC_SUCCESS, DROP_PROFILE_INFO, CHANGE_ACTIVE_DOCUMENT_TAB,
 } from '../constants/profile';
 import {
   GET_USER_DATA_SUCCESS,
@@ -16,6 +16,7 @@ const initialState = {
   profileUserDataChanged: {},
   fieldsErrors: false,
   tabValue: 0,
+  activeDocumentsTab: null,
 };
 
 function profile(state = initialState, action) {
@@ -24,6 +25,8 @@ function profile(state = initialState, action) {
       return { ...state, tabValue: action.tabValue };
     case CHANGE_ACTIVE_TAB_PROFILE:
       return { ...state, tabValue: action.activeTab };
+    case CHANGE_ACTIVE_DOCUMENT_TAB:
+      return { ...state, activeDocumentsTab: action.tabName };
     case GET_USER_DATA_SUCCESS:
     case UPLOAD_IMAGE_SUCCESS:
     case DROP_PROFILE_INFO:

@@ -12,6 +12,7 @@ class WidgetHead extends PureComponent {
     this.state = {
       fxButtonContent: 'Local',
     };
+    this.toggleFX = this.toggleFX.bind(this);
   }
 
   toggleFX() {

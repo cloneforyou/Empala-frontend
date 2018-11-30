@@ -71,9 +71,6 @@ class DuplicateForm extends Component {
     this.handleImageChange = this.handleImageChange.bind(this);
     this.showButtonGroup = this.showButtonGroup.bind(this);
 
-    // this.state = {
-    //   imagePreviewUrl: '',
-    // };
 
     this.green = { backgroundColor: '#98c73a' };
   }
@@ -83,7 +80,7 @@ class DuplicateForm extends Component {
     const data = new FormData();
     data.append('file', e.target.files[0]);
     data.append('description', 'form407 signed image');
-    data.append('tags', 'DOCUMENT');
+    data.append('tags', 'AFFILIATED_APPROVAL');
     data.append('id', this.props.userId);
     this.props.setUploadableImage(data);
 

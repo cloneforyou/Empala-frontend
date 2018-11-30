@@ -71,7 +71,7 @@ class OrdersTable extends React.Component {
         { value: order.values.comission },
         { value: formatNumberWithFixedPoint(order.values.distance, 1) },
         { value: order.values.start_date },
-        { value: order.values.qct },
+        { value: order.values.oct },
       ]);
     }
     if (title === 'Fills/cancels') {
@@ -92,7 +92,7 @@ class OrdersTable extends React.Component {
         { value: '--' }, // Reg fees
         { value: formatNumberWithFixedPoint(order.values.fill_quantity * order.values.price, 2) }, // $ proceeds
         { value: order.values.start_date },
-        { value: order.values.qct },
+        { value: order.values.oct },
       ]);
     }
   }

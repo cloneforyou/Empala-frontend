@@ -13,7 +13,7 @@ import {
   CONCRETE,
   MIRAGE,
 } from '../../../../../constants/colors';
-import { getETNAData, setActivePage } from '../../../../../actions/dashboard';
+import {getETNAData, setActivePage, openModal, deleteAccount} from '../../../../../actions/dashboard';
 import {
   getActiveAccountTab,
   changeActiveAccountTab,
@@ -89,7 +89,7 @@ class Account extends Component {
   };
 
   render() {
-    const { classes, currentColorScheme, global_accounts } = this.props;
+    const { classes, currentColorScheme, global_accounts, openModal, submitDelete } = this.props;
     const value = this.props.activeAccountTab;
     const accounts = (((global_accounts || {}).data || {}).data || {}).account || [];
 
@@ -146,6 +146,8 @@ class Account extends Component {
           prefix={TABS[2].prefix}
           accountBalance={this.props.accountBalance.ETNA}
           currentColorScheme={currentColorScheme}
+          openModal={openModal}
+          submitDelete={submitDelete}
           />
         }
         {value === 3 && <div className="account__container">Coming Spring 2019</div>}
@@ -177,5 +179,7 @@ export default withStyles(styles)(connect(
     getGlobalAccounts: () => dispatch(getGlobalAccounts()),
     changeActiveAccountTab: value => dispatch(changeActiveAccountTab(value)),
     changeSectionTitleBar: (tab, icon) => dispatch(changeSectionTitleBar(tab, icon)),
+    openModal: name => dispatch(openModal(name)),
+    submitDelete: () => dispatch(deleteAccount()),
   }),
 )(Account));

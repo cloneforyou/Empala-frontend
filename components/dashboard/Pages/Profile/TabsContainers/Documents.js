@@ -1,55 +1,97 @@
 import React, { Component } from 'react';
-import {connect} from "react-redux";
-import {
-  getEDocumentsListRequest,
-} from "../../../../../actions/dashboard";
-
-// import { AccountStatements } from '../../../../../localdata/profileData';
-//
-// const Documents = () => (
-//   <div className="tab-container">
-//     <div className="tab-container__wrapper">
-//       <h2 className="title-part title-part_md-big">Account Statements</h2>
-//       <ul className="default-list">
-//         {
-//           AccountStatements.map(item => (
-//             <li className="default-list__item" key={item.id}>{item.title}</li>
-//           ))
-//         }
-//       </ul>
-//     </div>
-//   </div>
-// );
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getEDocumentsListRequest } from '../../../../../actions/dashboard';
+import { generateId } from '../../../../../utils/dashboardUtils';
+import { changeActiveDocumentsTab } from '../../../../../actions/profile';
+import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress';
 
 class Documents extends Component {
+  constructor(props) {
+    super(props);
+    this.setActiveDocumentTab = this.setActiveDocumentTab.bind(this);
+    this.setActiveClassForTabName = this.setActiveClassForTabName.bind(this);
+  }
   componentDidMount() {
+    if (!this.props.activeDocumentsTab) this.props.setActiveDocumentTab('account_statements');
     this.props.getEDocumentsListRequest();
   }
-
+  setActiveDocumentTab(e) {
+    this.props.setActiveDocumentTab(e.target.getAttribute('name'));
+  }
+  setActiveClassForTabName(tabName) {
+    if (this.props.activeDocumentsTab === tabName) {
+      return 'documents-tabs-bar__item_active';
+    }
+    return '';
+  }
 
   render() {
+    if (!this.props.documentsList || this.props.loading) {
+      return (
+        <div className="tab-container position-relative">
+          <div className="loader">
+            <CircularProgress
+              size={50}
+              style={{ color: '#98c73a' }}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="tab-container">
+        <div className="documents-tabs">
+          <ul className="documents-tabs-bar">
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('account_statements')}`}
+              name="account_statements"
+              onClick={this.setActiveDocumentTab}
+            >Account Statements
+            </li>
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('trade_confirmations')}`}
+              name="trade_confirmations"
+              onClick={this.setActiveDocumentTab}
+            >Trade Confirmations
+            </li>
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('tax_documents')}`}
+              name="tax_documents"
+              onClick={this.setActiveDocumentTab}
+            >Tax Documents
+            </li>
+            <li
+              className={`documents-tabs-bar__item ${this.setActiveClassForTabName('compliance')}`}
+              name="compliance"
+              onClick={this.setActiveDocumentTab}
+            >Compliance
+            </li>
+          </ul>
+          <hr className="documents-tabs-bar__line" />
+        </div>
         <div className="tab-container__wrapper">
-          <h2 className="title-part title-part_md-big">EDocuments</h2>
           <ul className="default-list">
-            {
-              this.props.documentsList.map(item => (
+            { !this.props.documentsList[this.props.activeDocumentsTab] && 'No eDocuments found' }
+            { this.props.documentsList[this.props.activeDocumentsTab] &&
+              this.props.documentsList[this.props.activeDocumentsTab].map(item => (
                 <li className="default-list__item" key={item.id}>
-                  <a href={item.url} target="_blank" className="default-list__item-link">
+                  <a href={`${item.link}&auth=${this.props.token}`} target="_blank" className="default-list__item-link">
                     {item.name} {item.date}
                   </a>
                   {item.inserts && item.inserts.length > 0 && item.inserts.map((insert, index) => (
-                    <a href={insert} target="_blank" key={index} className="default-list__item-link ml-3">
-                      insert{index + 1}
-                    </a>
+                    <ul className="default-list">
+                      <li>
+                        <a href={`${insert}&auth=${this.props.token}`} target="_blank" key={generateId()} className="default-list__item-link ml-3">
+                          insert{index + 1}
+                        </a>
+                      </li>
+                    </ul>
                   ))}
                 </li>
               ))
             }
-            {this.props.documentsList.length === 0 && <li className="default-list__item">
-              EDocuments not found
-            </li>}
+
           </ul>
         </div>
       </div>
@@ -57,15 +99,28 @@ class Documents extends Component {
   }
 }
 
+Documents.propTypes = {
+  documentsList: PropTypes.object,
+  activeDocumentsTab: PropTypes.string,
+  token: PropTypes.string,
+  loading: PropTypes.bool,
+  getEDocumentsListRequest: PropTypes.func.isRequired,
+  setActiveDocumentTab: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => (
   {
     documentsList: state.dashboard.eDocumentsList,
+    activeDocumentsTab: state.profile.activeDocumentsTab,
+    loading: state.dashboard.loading,
+    token: state.dashboard.token,
   }
 );
 
 const mapDispatchToProps = dispatch => (
   {
     getEDocumentsListRequest: () => dispatch(getEDocumentsListRequest()),
+    setActiveDocumentTab: name => dispatch(changeActiveDocumentsTab(name)),
   }
 );
 

@@ -25,7 +25,19 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setInputValueById: e => dispatch(setInputFieldValueById(e.target.id, e.target.value)),
-  setSelectedValueById: (id, value) => dispatch(setInputFieldValueById(id, value)),
+  setSelectedValueById: (id, value) => {
+    const fieldsToDrop = [
+      'regulatory_identification_residency_status',
+      'regulatory_identification_visa_type',
+      'regulatory_identification_visa_expiry_date',
+    ];
+    if (id === 'regulatory_identification_citizenship' && value === 'United States') {
+      fieldsToDrop.forEach(field => dispatch(setInputFieldValueById(field, '')));
+    } else if (id === 'regulatory_identification_residency_status' && value === 'Permanent Resident') {
+      fieldsToDrop.slice(1).forEach(field => dispatch(setInputFieldValueById(field, '')));
+    }
+    return dispatch(setInputFieldValueById(id, value));
+  },
   setPickedDate: (id, date) => dispatch(setInputFieldValueById(id, date)),
   toggleCheckboxById: (e, checked) => dispatch(toggleCheckboxById(e.target.id)),
   closeModal: () => dispatch(closeIdentityModal()),
@@ -58,6 +70,7 @@ class RegulatoryForm extends React.Component {
               handleChange={this.props.setSelectedValueById}
               errorText={this.props.fieldsErrors[item.id]}
               autoWidth={item.autoWidth}
+              col={item.col}
             />
           );
         case 'input':
@@ -88,6 +101,7 @@ class RegulatoryForm extends React.Component {
               errorText={this.props.fieldsErrors[item.id]}
               birthDay={item.birthDay}
               col={item.col}
+              dateExpiry={!!item.dateExpiry}
             />
           );
         case 'checkbox':
@@ -105,10 +119,20 @@ class RegulatoryForm extends React.Component {
     };
 
     this.isRadioChecked = name => (this.props.registrationData.memberDocument === name);
+    this.isUSCitizen = () => /* this.props.registrationData.member_basic_information_residence === 'United States'
+      && */ this.props.registrationData.regulatory_identification_citizenship === 'United States';
+      // todo: do we need to check residence country?
+    this.dataFields = dataFields;
   }
 
 
   render() {
+    const data = [...dataFields];
+    if (this.isUSCitizen()) {
+      data[2] = [...dataFields[2].slice(0, 3), ...dataFields[2].slice(6)];
+    } else if (!this.isUSCitizen() && this.props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
+      data[2] = [...dataFields[2].slice(0, 4), ...dataFields[2].slice(6)];
+    }
     return (
       <div className="container-fluid">
         <div className="registration-group__section-title title-nowrap margin-bottom40">
@@ -116,7 +140,7 @@ class RegulatoryForm extends React.Component {
           {this.props.page === 3 && 'Enter your details:'}
         </div>
         <form className="row">
-          {dataFields[this.props.page - 1].map(item => this.mappingComponent(item))}
+          {data[this.props.page - 1].map(item => this.mappingComponent(item))}
           <ModalWindow
             open={this.props.showModal}
             handleClose={this.props.closeModal}

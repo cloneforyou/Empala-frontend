@@ -48,6 +48,7 @@ export const calculateOrderPrice = (symbolPrice, quantity) =>
 export const parseOrdersList = list => list.map(order => ({
   status: order.ExecutionStatus,
   id: order.Id,
+  side: order.Side,
   values: {
     id: Math.random(),
     // sec_name: order.Name,
@@ -63,7 +64,7 @@ export const parseOrdersList = list => list.map(order => ({
     comission: '--', // TODO find the way how to calculate
     distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
     start_date: parseDateString(order.CreateDate, 'MM/DD/YY'),
-    qct: '--', // TODO Investigate how to calculate
+    oct: '--', // TODO Investigate how to calculate
   },
 }));
 
@@ -130,6 +131,10 @@ const popupText = {
     title: 'Transfer approved',
   },
 };
+
+export function generateId() {
+  return String(Date.now() + Math.floor(Math.random() * Math.random() * 1000000)).substr(3, 12);
+}
 
 export const getTableHeaderByName = tableName => tableHeaders[tableName];
 export const getWidgetAttributesByName = widgetName => widgetAttributes[widgetName];

@@ -52,7 +52,7 @@ import {
   SET_ACTIVE_MARKET_PAGE,
   UPDATE_QUOTES_LIST,
   GET_EDOCUMENTS_LIST_SUCCESS,
-  GET_EDOCUMENTS_LIST_FAILED,
+  GET_EDOCUMENTS_LIST_FAILED, GET_EDOCUMENTS_LIST_REQUEST, SET_ACCESS_TOKEN,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -126,7 +126,8 @@ const initialState = {
   infoPopupName: false,
   tableSortSettings: {},
   allowedSections: false,
-  eDocumentsList: [],
+  eDocumentsList: null,
+  token: false,
 };
 
 const parseAccountBalance = (data) => {
@@ -144,6 +145,12 @@ const parseAppSettings = (settings) => {
 
 function dashboard(state = initialState, action) {
   switch (action.type) {
+    case SET_ACCESS_TOKEN: {
+      return {
+        ...state,
+        token: action.token,
+      };
+    }
     case UPDATE_QUOTES:
       return {
         ...state,
@@ -164,6 +171,7 @@ function dashboard(state = initialState, action) {
         ...state,
         selectedGroup: action.selectedGroup,
       };
+    case GET_EDOCUMENTS_LIST_REQUEST:
     case GET_USER_DATA_REQUEST:
       return {
         ...state,
@@ -284,8 +292,9 @@ function dashboard(state = initialState, action) {
     case SET_ORDERS_LIST:
       return {
         ...state,
-        ordersList: action.data,
-        parsedOrdersList: parseOrdersList(action.data),
+        // ordersList: action.data,
+        // parsedOrdersList: parseOrdersList(action.data),
+        parsedOrdersList: action.data,
       };
     case SET_WATCH_LISTS:
       return {
@@ -499,8 +508,9 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         eDocumentsList: action.list,
+        loading: false,
       };
-      // TODO add error ahndler
+      // TODO add error handler
     case GET_EDOCUMENTS_LIST_FAILED:
       return {
         ...state,

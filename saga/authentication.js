@@ -5,7 +5,13 @@ import {
   select,
 } from 'redux-saga/effects';
 import request from '../utils/request';
-import { openModal, restartSessionTimeout, setUserData, startSocket } from '../actions/dashboard';
+import {
+  openModal,
+  restartSessionTimeout,
+  setAccessToken,
+  setUserData,
+  startSocket,
+} from '../actions/dashboard';
 import {
   cleanErrorMessage,
   loginFailed,
@@ -234,6 +240,12 @@ export function* logout() {
   window.location.assign('/');
 }
 
+function* getAccessToken() {
+  const token = localStorage.getItem('accessToken');
+  if (token) yield put(setAccessToken(token));
+  return null;
+}
+
 export function* getUserData() {
   const url = '/api/dashboard';
   const options = {
@@ -247,6 +259,7 @@ export function* getUserData() {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
     yield put(setColorScheme(data.data.data.profile.MemberPreferences.theme));
+    yield getAccessToken();
     yield all([
       'orders_list',
       'watch_lists',

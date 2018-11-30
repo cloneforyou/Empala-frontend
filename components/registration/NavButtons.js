@@ -18,7 +18,6 @@ import ignoredFields from '../../localdata/noValidatedFiels';
 
 function isFieldsFilled(fieldNames, fields) {
   const remainingFields = fieldNames.filter(name => !ignoredFields.includes(name));
-  console.log(remainingFields, fieldNames)
   return every(remainingFields, name => (fields[name] && fields[name] !== ''));
 }
 
@@ -36,11 +35,32 @@ const NavButtons = (props) => {
   let disabled = !isFieldsFilled(props.fieldNames, props.registrationData) ||
     (props.fieldNames && props.errors && isFieldError(props.fieldNames, props.errors));
 
-  if (props.tabName === 'regulatory' && props.tabIndex === 1) {
-    disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
-  }
-  if (props.tabName === 'regulatory' && props.tabIndex === 2) {
-    disabled = !isFieldsFilled(props.fieldNames, props.registrationData) || !props.image407uploaded;
+  if (props.tabName === 'regulatory') {
+    if (props.tabIndex === 1) {
+      disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
+    } else if (props.tabIndex === 2) {
+      disabled = !isFieldsFilled(props.fieldNames, props.registrationData) || !props.image407uploaded;
+    } else if (props.tabIndex === 3) {
+      const isUSCitizen = /* props.registrationData.member_basic_information_residence === 'United States'
+        && */ props.registrationData.regulatory_identification_citizenship === 'United States';
+      // todo: do we need to check residence country?
+      const fieldsToSkip = [
+        'regulatory_identification_residency_status',
+        'regulatory_identification_visa_type',
+        'regulatory_identification_visa_expiry_date',
+      ];
+      if (isUSCitizen) {
+        const shouldBeFilled = [...props.fieldNames].filter(name => !fieldsToSkip.includes(name));
+        disabled = !isFieldsFilled(shouldBeFilled, props.registrationData);
+      } else if (!isUSCitizen) {
+        if (props.registrationData.regulatory_identification_residency_status === 'Other') {
+          disabled = true;
+        } else if (props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
+          const shouldBeFilled = [...props.fieldNames].slice(1).filter(name => !fieldsToSkip.includes(name));
+          disabled = !isFieldsFilled(shouldBeFilled, props.registrationData);
+        }
+      }
+    }
   }
   if (props.fieldNames.filter(field =>
     (field.includes('zip_code') && props.registrationData[field] && props.registrationData[field].length < 5)).length > 0) {
