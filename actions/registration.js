@@ -44,8 +44,16 @@ import {
   CLEAN_IMAGE_DATA,
   SET_UPLOADABLE_IMAGE,
   CLEAN_ERROR_TEXT,
+  SET_LEGAL_MESSAGES,
 } from '../constants/registration';
 
+
+export function setLegalMessages(messages) {
+  return {
+    type: SET_LEGAL_MESSAGES,
+    messages,
+  };
+}
 
 export function getMenuItems(items) {
   return {
