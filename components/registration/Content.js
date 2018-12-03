@@ -84,7 +84,7 @@ class Content extends PureComponent {
   }
 
   render() {
-    const { showPopupPIN, registrationData, setInputValueById, setSelectedValueById } = this.props;
+    const { showPopupPIN, registrationData } = this.props;
     if (this.props.tabName === 'info') {
       return (
         <div className="onboard">
