@@ -25,7 +25,7 @@ class Sidebar extends Component {
   };
 
   handleClick = (label, market) => {
-    this.props.setActivePage(label && label.toLowerCase());
+    label !== 'Funding' && this.props.setActivePage(label && label.toLowerCase()); // TODO update on clarified which section is 'Funding' should lead to
     this.props.setActiveMarketPage(market && market.toLowerCase());
   };
 
