@@ -16,6 +16,7 @@ import {
   setAvailableStates,
   uploadImageFail,
   uploadImageSuccess,
+  setLegalMessages,
 } from '../actions/registration';
 import {
   CHANGE_TAB_PAGE_INDEX,
@@ -162,6 +163,7 @@ export function* getUserID() {
     localStorage.setItem('id', memberId);
     if (!(data && data.member_account_account_no)) yield put(setInputFieldValueById('member_account_account_no', memberId));
     yield put(setAvailableStates(res.data.data.available_states));
+    yield put(setLegalMessages(res.data.data.legalMessages));
   } catch (err) {
     yield put(failUserID(`Sorry, the registration is unavailable right now. ${err.message}`));
   }

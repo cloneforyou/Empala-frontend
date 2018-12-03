@@ -39,6 +39,7 @@ function mapStateToProps(state) {
     verifyLoading: state.registration.verifyLoading,
     showAlertModal: state.registration.showAlertModal,
     alertModalName: state.registration.alertModalName,
+    legalMessages: state.registration.legalMessages,
   };
 }
 
@@ -84,7 +85,22 @@ class Content extends PureComponent {
   }
 
   render() {
-    const { showPopupPIN, registrationData } = this.props;
+    const {
+      showPopupPIN,
+      registrationData,
+      legalMessages,
+    } = this.props;
+    let annualFeesDisclaimer, registrationFooterDisclaimer;
+    if (legalMessages) {
+      legalMessages.forEach(item => {
+        if (item.page === 'Annual Fees Disclaimer') {
+          annualFeesDisclaimer = item.text;
+        }
+        if (item.page === 'Registration Footer Disclaimer') {
+          registrationFooterDisclaimer = item.text;
+        }
+      });
+    }
     if (this.props.tabName === 'info') {
       return (
         <div className="onboard">
@@ -95,7 +111,9 @@ class Content extends PureComponent {
           />
           <div className="onboard__container">
             <div className="row no-gutters onboard__col">
-              <InformationPage />
+              <InformationPage
+                annualFeesDisclaimer={annualFeesDisclaimer}
+              />
             </div>
           </div>
         </div>

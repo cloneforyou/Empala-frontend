@@ -39,6 +39,7 @@ import {
   UPLOAD_IMAGE_REQUEST,
   UPLOAD_IMAGE_SUCCESS,
   CLEAN_ERROR_TEXT,
+  SET_LEGAL_MESSAGES,
 } from '../constants/registration';
 
 
@@ -105,6 +106,7 @@ const initialState = {
   availableStatesList: false,
   uploadableImage: false,
   image407uploaded: false,
+  legalMessages: false,
 };
 
 function registration(state = initialState, action) {
@@ -313,6 +315,11 @@ function registration(state = initialState, action) {
       return {
         ...state,
         errorMessage: false,
+      };
+    case SET_LEGAL_MESSAGES:
+      return {
+        ...state,
+        legalMessages: action.messages,
       };
     default:
       return state;
