@@ -10,6 +10,12 @@
     background: $athens-gray;
     border: solid 1px #e0e0e0;
   }
+  &__popup-window {
+    &--bottom-centered {
+      position: relative;
+      bottom: 50vh;
+    }
+  }
 
   &__col {
     min-height: 700px;

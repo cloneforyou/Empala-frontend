@@ -23,7 +23,7 @@ export const dataFields = [
   [
     {
       field: 'checkbox',
-      label: `I am (or a an immediate family member who resides
+      label: `I am (or an immediate family member who resides
       in the same household as me is) employed by or a
       member of a registered broker-dealer, securities or
       futures exchange, futures commission merchant, retail
