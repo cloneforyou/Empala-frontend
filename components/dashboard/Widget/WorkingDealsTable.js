@@ -43,10 +43,11 @@ const WorkingDealsTable = props => (
 function mapStateToProps(state) {
   return {
     workingDeals: [
-      [{ value: 'Mariposa Short-Term house' }, { value: '450,000' }, { value: '3,725,000' }, { value: '0.0', color: 'green' }, { value: 'Closed' }],
-      [{ value: '3rd St Office complex' }, { value: '1,750,000' }, { value: '9,550,500' }, { value: '0.0', color: 'green' }, { value: 'Closed' }],
-      [{ value: 'Singapore Wind Farms' }, { value: '500,000' }, { value: '5,325,647' }, { value: '1.3', color: 'green' }, { value: 'Action', color: 'red' }],
-      [{ value: 'SantaCruz Hemp Farms' }, { value: '3,000,000' }, { value: '14,753,675' }, { value: '3.9', color: 'green' }, { value: 'Active', color: 'green' }],
+      // TODO: change to actual data from server
+      // [{ value: 'Mariposa Short-Term house' }, { value: '450,000' }, { value: '3,725,000' }, { value: '0.0', color: 'green' }, { value: 'Closed' }],
+      // [{ value: '3rd St Office complex' }, { value: '1,750,000' }, { value: '9,550,500' }, { value: '0.0', color: 'green' }, { value: 'Closed' }],
+      // [{ value: 'Singapore Wind Farms' }, { value: '500,000' }, { value: '5,325,647' }, { value: '1.3', color: 'green' }, { value: 'Action', color: 'red' }],
+      // [{ value: 'SantaCruz Hemp Farms' }, { value: '3,000,000' }, { value: '14,753,675' }, { value: '3.9', color: 'green' }, { value: 'Active', color: 'green' }],
     ],
   };
 }

@@ -43,11 +43,12 @@ const DealsDevelopmentTable = props => (
 function mapStateToProps(state) {
   return {
     workingDeals: [
-      [{ value: 'Greenway Toll Road Project' }, { value: '07-27-2018' }, { value: 'New - bids needed' }, { value: '-', color: 'green' }],
-      [{ value: 'Madrid Solar Farm Project' }, { value: '07-26-2018' }, { value: 'Data room update' }, { value: '15.7', color: 'green' }],
-      [{ value: 'Urban Infrastructure - Sydney, AU' }, { value: '07-22-2018' }, { value: 'Successful Completion' }, { value: '0.0', color: 'green' }],
-      [{ value: 'IDG Mining Phase 1 Infrastructure' }, { value: '07-21-2018' }, { value: 'Pricing change' }, { value: '9.7', color: 'green' }],
-      [{ value: 'Axocanx trials' }, { value: '07-16-2018' }, { value: 'New bidder' }, { value: '11.6', color: 'green' }],
+      // TODO: change to actual data from server
+      // [{ value: 'Greenway Toll Road Project' }, { value: '07-27-2018' }, { value: 'New - bids needed' }, { value: '-', color: 'green' }],
+      // [{ value: 'Madrid Solar Farm Project' }, { value: '07-26-2018' }, { value: 'Data room update' }, { value: '15.7', color: 'green' }],
+      // [{ value: 'Urban Infrastructure - Sydney, AU' }, { value: '07-22-2018' }, { value: 'Successful Completion' }, { value: '0.0', color: 'green' }],
+      // [{ value: 'IDG Mining Phase 1 Infrastructure' }, { value: '07-21-2018' }, { value: 'Pricing change' }, { value: '9.7', color: 'green' }],
+      // [{ value: 'Axocanx trials' }, { value: '07-16-2018' }, { value: 'New bidder' }, { value: '11.6', color: 'green' }],
     ],
   };
 }
