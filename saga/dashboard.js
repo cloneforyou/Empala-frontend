@@ -52,7 +52,7 @@ import {
   getEDocumentsListFailed,
 } from '../actions/dashboard';
 import { serverOrigins } from '../utils/config';
-import { origin } from '../keys';
+import { origin, cityfalcon } from '../keys';
 import requestExternalNews from '../utils/requestExternalNews';
 import { parseOrdersList } from '../utils/dashboardUtils';
 
@@ -64,7 +64,7 @@ const urls = {
     get: '/api/notifications/',
     complete: '/api/notifications/complete',
   },
-  cityfalcon: 'http://api.cityfalcon.com/v0.2/stories?identifier_type=assets&identifiers=Apple%2C%20Tesla%2C%20FTSE100&categories=mp%2Cop&min_cityfalcon_score=0&order_by=latest&time_filter=d1&languages=en%2Cde%2Ces%2Cfr%2Cpt&all_languages=false&access_token=',
+  cityfalcon: 'https://api.cityfalcon.com/v0.2/stories?identifier_type=assets&identifiers=Apple%2C%20Tesla%2C%20FTSE100&categories=mp%2Cop&min_cityfalcon_score=20&order_by=top&time_filter=d1&languages=en%2Cde%2Ces%2Cfr%2Cpt&all_languages=false&&&access_token=',
   league: '/api/performance/league',
   eDocuments: '/api/documents',
 };
@@ -101,7 +101,7 @@ export function* callAnimationForNotifications() {
 }
 
 export function* getExternalNews() {
-  const url = urls.cityfalcon;
+  const url = urls.cityfalcon + cityfalcon.token;
   const options = {
     method: 'GET',
   };
