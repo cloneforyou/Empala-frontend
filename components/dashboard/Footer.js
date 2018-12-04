@@ -1,9 +1,13 @@
+/* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 
 class Footer extends PureComponent {
   render() {
     return (
-      <div className="dashboard__footer">
+      <div className={
+        `${this.props.full ? 'dashboard__footer dashboard__footer_full' : 'dashboard__footer'}
+        dashboard__footer_${this.props.theme}`}
+      >
         <p className="main-text-helvetica main-text-helvetica_12">
           Empala Securities, LLC and Empala Network, LLC are wholly-owned subsidiaries of Empala Group, LLC. Equities,
           options, ETF’s, Mutual Funds and bonds are offered to self-directed customers by Empala Securities. Empala

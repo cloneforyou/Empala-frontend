@@ -44,7 +44,7 @@ class Overview extends PureComponent {
     const widgetsWidth = ['630px', '495px'];
     if (this.props.userDataLoaded) {
       return (
-        <div className="container-fluid" >
+        <div className="container-fluid" style={{ marginBottom: '60px' }}>
           <div className="widgets-row"> {/* Temporary solution. todo widgets responsive layout */}
             <div style={{ width: '1732px' }}>
               <FinancialCapitalTable />

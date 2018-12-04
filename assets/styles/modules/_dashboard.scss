@@ -1,11 +1,12 @@
 .dashboard {
+  border-bottom: 1px solid;
   margin-left: $sidebar-width-full;
   max-width: calc(100% - #{$sidebar-width-full});
   display: block;
   width: 100%;
   padding-top: 84px;
   transition: .4s;
-  min-height: 100%;
+  min-height: 100vh;
   .container-fluid {
     padding: 0 2.5px;
     & > .row {
@@ -24,23 +25,45 @@
     max-width: calc(100% - #{$sidebar-width});
   }
   &__footer {
-    padding: 10px 20px;
-    border-top: 1px solid;
+    padding: 10px 10px 10px;
+    padding-left: calc(#{$sidebar-width} + 20px);
+    transition: .4s;
+    //border-top: 1px solid;
+    &_full {
+      padding-left: calc(#{$sidebar-width-full} + 20px);
+    }
+    &_light {
+      background: $white;
+      //border-color: #EDEDED;
+      .list-horizontal__link, .dashboard__copyright, .main-text-helvetica {
+        color: #000;
+      }
+    }
+    &_dark {
+      background: $dark-bg-blue;
+      //border-color: $dark-bg-blue;
+      color: $main-color-text-grey;
+      .list-horizontal__link,
+      .dashboard__copyright,
+      .main-text-helvetica {
+        color: $main-color-text-grey;
+      }
+    }
   }
   &__copyright {
     @include fontSize(12px);
   }
   &_light {
     background: #f9fafa;
+    border-color: #EDEDED;
     .widget {
       background: $white;
       border-color: #EDEDED;
     }
-    .dashboard__footer {
-      background: $white;
-      border-color: #EDEDED;
-    }
-
+    //.dashboard__footer {
+    //  background: $white;
+    //  border-color: #EDEDED;
+    //}
     .list-horizontal__link, .dashboard__copyright, .main-text-helvetica {
       color: #000;
     }
@@ -49,16 +72,17 @@
     }
   }
   &_dark {
+    border-color: #EFEFEF;
     background: $dark-bg-blue;
     .widget {
       background: $dark-blue;
       border-color: $dark-blue;
     }
-    .dashboard__footer {
-      background: $dark-bg-blue;
-      border-color: $dark-bg-blue;
-      color: $main-color-text-grey;
-    }
+    //.dashboard__footer {
+    //  background: $dark-bg-blue;
+    //  border-color: $dark-bg-blue;
+    //  color: $main-color-text-grey;
+    //}
     .list-horizontal__link,
     .dashboard__copyright,
     .main-text-helvetica {
