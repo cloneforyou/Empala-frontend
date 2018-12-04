@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
 import Main from './Main';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Footer from './Footer';
 
 class Body extends Component {
   constructor(props) {
@@ -10,8 +11,9 @@ class Body extends Component {
   }
 
   render() {
-    const { sidebarCollapsed, loadingPage } = this.props;
+    const { sidebarCollapsed, loadingPage, currentColorScheme } = this.props;
     return (
+      <Fragment>
       <div className="container-fluid">
         <div className="row">
           <Sidebar sidebarCollapsed={sidebarCollapsed} />
@@ -29,11 +31,19 @@ class Body extends Component {
           }
         </div>
       </div>
+        { !['timeline', 'community', 'groups', 'blogs'].includes(this.props.activePageDashboard)
+        && <Footer
+          full={sidebarCollapsed}
+          theme={currentColorScheme}
+        /> }
+      </Fragment>
     );
   }
 }
 
 export default connect(state => ({
   loadingPage: state.dashboard.loadingPage,
+  activePageDashboard: state.dashboard.activePageDashboard,
+  currentColorScheme: state.dashboard.currentColorScheme,
 }), {})(Body);
 
