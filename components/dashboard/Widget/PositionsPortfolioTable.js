@@ -99,6 +99,7 @@ class PositionsPortfolioTable extends React.Component {
     ]));
   }
   updatePositionsData(positions, quotes) {
+    console.log('update props');
     if (positions && quotes) {
       positions.forEach((pos) => {
         const secId = pos[3].value;
@@ -106,7 +107,7 @@ class PositionsPortfolioTable extends React.Component {
           pos[13].value = formatNumberWithFixedPoint(quotes[secId].Last, 2);
           pos[17].value = formatNumberWithFixedPoint(quotes[secId].ChangePc, 2);
           pos[14].value = formatNumberWithFixedPoint(pos[12].value * quotes[secId].Last, 2);
-          pos[15].value = formatNumberWithFixedPoint(((quotes[secId].Last - pos[11].value) * 100 / pos[11].value) || "--", 2);
+          pos[15].value = formatNumberWithFixedPoint(((quotes[secId].Last - pos[11].value.replace(',','')) * 100 / pos[11].value.replace(',','')) || "--", 2);
           pos[18].value = formatNumberWithFixedPoint(this.calculateDayPL(pos), 2);
         }
       });
