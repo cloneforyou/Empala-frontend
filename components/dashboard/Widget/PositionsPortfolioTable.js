@@ -67,10 +67,10 @@ class PositionsPortfolioTable extends React.Component {
     if (!pos || !this.props.quotes) return false;
     return this.props.quotes[pos[3].value].Mark
   };
-  calculateMarketValue = pos => this.getPositionMark(pos) * pos[12].value * (pos[4].value === 'Stock' ? 1 : 100);
-  calculatePrevMarketValue = pos => pos[20].value * pos[12].value * (pos[4].value === 'Stock' ? 1 : 100);
+  calculateMarketValue = pos => this.getPositionMark(pos) * pos[12].value * (pos[4].value === 'Stocks' ? 1 : 100);
+  calculatePrevMarketValue = (pos, quote) => (quote.Close && quote.Close * pos[12].value * (pos[4].value === 'Stocks' ? 1 : 100)) || pos[21].value;
   calculateDayRPL = pos => pos && pos[19].value ? pos[19].value : false;
-  calculateDayPL = pos => this.calculateMarketValue(pos) - this.calculatePrevMarketValue(pos) + this.calculateDayRPL(pos);
+  calculateDayPL = (pos, quote) => this.calculateMarketValue(pos) - this.calculatePrevMarketValue(pos, quote) + this.calculateDayRPL(pos);
 
   getPositionsData(position) {
     const self = this;
@@ -96,10 +96,10 @@ class PositionsPortfolioTable extends React.Component {
       { value: formatNumberWithFixedPoint(list.day_pl, 2), mark: 'numeric' }, // 'Day P&L'
       { value: list.rpl }, // RealisedProfitLoss
       { value: list.prev_close_avg }, // AverageClosePrice
+      { value: list.daily_cost_basis }, // DailyCostBasis
     ]));
   }
   updatePositionsData(positions, quotes) {
-    console.log('update props');
     if (positions && quotes) {
       positions.forEach((pos) => {
         const secId = pos[3].value;
@@ -108,7 +108,7 @@ class PositionsPortfolioTable extends React.Component {
           pos[17].value = formatNumberWithFixedPoint(quotes[secId].ChangePc, 2);
           pos[14].value = formatNumberWithFixedPoint(pos[12].value * quotes[secId].Last, 2);
           pos[15].value = formatNumberWithFixedPoint(((quotes[secId].Last - pos[11].value.replace(',','')) * 100 / pos[11].value.replace(',','')) || "--", 2);
-          pos[18].value = formatNumberWithFixedPoint(this.calculateDayPL(pos), 2);
+          pos[18].value = formatNumberWithFixedPoint(this.calculateDayPL(pos, quotes[secId]), 2);
         }
       });
     }

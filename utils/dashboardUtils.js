@@ -119,6 +119,7 @@ export const parsePositionsList = list => (list.map(pos => ({
   day_pl: '--', // TODO investigate about calculation
   rpl: pos.RealizedProfitLoss,
   prev_close_avg: pos.AverageClosePrice,
+  daily_cost_basis: pos.DailyCostBasis,
 })));
 
 const popupText = {
