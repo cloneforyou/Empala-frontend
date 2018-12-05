@@ -137,7 +137,6 @@ NavButtons.propTypes = {
   setTabName: PropTypes.func.isRequired,
   setTabPageIndex: PropTypes.func.isRequired,
   goBackToPart: PropTypes.func.isRequired,
-  showPopupPIN: PropTypes.func.isRequired,
   checkEmailVerificationRequest: PropTypes.func.isRequired,
 };
 
@@ -169,7 +168,6 @@ function mapDispatchToProps(dispatch) {
     setTabPageIndex: index => dispatch(setTabPageIndex(index)),
     setTabName: tabName => dispatch(setTabName(tabName)),
     goBackToPart: status => dispatch(goBackToPart(status)),
-    showPopupPIN: () => dispatch(showPopupPIN()),
     checkEmailVerificationRequest: entityType => dispatch(checkEmailVerificationRequest(entityType)),
   });
 }
