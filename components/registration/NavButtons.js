@@ -53,7 +53,8 @@ const NavButtons = (props) => {
         const shouldBeFilled = [...props.fieldNames].filter(name => !fieldsToSkip.includes(name));
         disabled = !isFieldsFilled(shouldBeFilled, props.registrationData);
       } else if (!isUSCitizen) {
-        if (props.registrationData.regulatory_identification_residency_status === 'Other') {
+        if (props.registrationData.regulatory_identification_residency_status === 'Other'
+        || props.registrationData.regulatory_identification_visa_type === 'OTHER') {
           disabled = true;
         } else if (props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
           const shouldBeFilled = [...props.fieldNames].slice(1).filter(name => !fieldsToSkip.includes(name));
@@ -138,7 +139,6 @@ NavButtons.propTypes = {
   setTabName: PropTypes.func.isRequired,
   setTabPageIndex: PropTypes.func.isRequired,
   goBackToPart: PropTypes.func.isRequired,
-  showPopupPIN: PropTypes.func.isRequired,
   checkEmailVerificationRequest: PropTypes.func.isRequired,
 };
 
@@ -170,7 +170,6 @@ function mapDispatchToProps(dispatch) {
     setTabPageIndex: index => dispatch(setTabPageIndex(index)),
     setTabName: tabName => dispatch(setTabName(tabName)),
     goBackToPart: status => dispatch(goBackToPart(status)),
-    showPopupPIN: () => dispatch(showPopupPIN()),
     checkEmailVerificationRequest: entityType => dispatch(checkEmailVerificationRequest(entityType)),
   });
 }

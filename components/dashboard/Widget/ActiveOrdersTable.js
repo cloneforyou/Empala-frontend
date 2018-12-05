@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { connect } from 'react-redux';
 import WidgetHead from './WidgetHead';
@@ -10,19 +11,19 @@ import {
 
 const widget = getWidgetAttributesByName('active_orders');
 
-const parseOrdersData = data => data.filter(order => order.status === 'Filled').map(order =>
-  // seems here might be order.status === 'PartiallyFilled' or 'New'
-  [
-    { value: `${order.values.sec_name} (${order.values.symbol})` }, // 'Security & symbol'
-    { value: formatNumberWithFixedPoint(order.values.price, 2) }, // 'Price'
-    { value: formatNumberWithFixedPoint(order.values.order_quantity) }, // 'Qty'
-    { value: formatNumberWithFixedPoint(order.values.notional_ammount) }, // 'Notional'
-    { value: null }, // 'Diff %' TODO Investigate about calculation. 1point digit
-  ]);
+const parseOrdersData = data => data.filter(order => (order.status === 'PartiallyFilled' || order.status === 'New'))
+  .map(order =>
+    [
+      { value: `${order.values.sec_name} (${order.values.symbol})` }, // 'Security & symbol'
+      { value: formatNumberWithFixedPoint(order.values.price, 2) }, // 'Price'
+      { value: formatNumberWithFixedPoint(order.values.order_quantity) }, // 'Qty'
+      { value: formatNumberWithFixedPoint(order.values.notional_ammount) }, // 'Notional'
+      { value: formatNumberWithFixedPoint(order.distance, 1) }, // 'Diff %' TODO Investigate if it right value
+    ]);
 
 const ActiveOrdersTable = props => (
   <div
-    className={`widget-col d-inline-block align-top`}
+    className="widget-col d-inline-block align-top"
     key={widget.id}
   >
     <div

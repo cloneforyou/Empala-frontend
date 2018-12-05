@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -14,7 +15,10 @@ class Footer extends PureComponent {
       })
     }
     return (
-      <div className="dashboard__footer">
+      <div className={
+        `${this.props.full ? 'dashboard__footer dashboard__footer_full' : 'dashboard__footer'}
+        dashboard__footer_${this.props.theme}`}
+      >
         <div
           dangerouslySetInnerHTML={{ __html: platformDisclaimerFooter }}
         />

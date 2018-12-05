@@ -91,7 +91,7 @@ class Account extends Component {
   render() {
     const { classes, currentColorScheme, global_accounts, openModal, submitDelete } = this.props;
     const value = this.props.activeAccountTab;
-    const accounts = (((global_accounts || {}).data || {}).data || {}).account || [];
+    const accounts = ((global_accounts || {}).data || {}).data || {};
 
     return (
       <div className="account">

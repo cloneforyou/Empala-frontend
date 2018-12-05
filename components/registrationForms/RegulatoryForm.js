@@ -128,7 +128,7 @@ class RegulatoryForm extends React.Component {
 
   render() {
     const data = [...dataFields];
-    if (this.isUSCitizen()) {
+    if (this.isUSCitizen() || !this.props.registrationData.regulatory_identification_citizenship) {
       data[2] = [...dataFields[2].slice(0, 3), ...dataFields[2].slice(6)];
     } else if (!this.isUSCitizen() && this.props.registrationData.regulatory_identification_residency_status === 'Permanent Resident') {
       data[2] = [...dataFields[2].slice(0, 4), ...dataFields[2].slice(6)];

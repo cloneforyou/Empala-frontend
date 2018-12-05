@@ -107,7 +107,7 @@ class AgreementPage extends PureComponent {
     this.setState({
       submitted: true,
     });
-
+    this.submitBtn.disabled = true;
     if (this.state.signed && !this.state.disabled) this.props.submitRegistration();
   }
 

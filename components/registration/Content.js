@@ -88,8 +88,6 @@ class Content extends PureComponent {
     const {
       showPopupPIN,
       registrationData,
-      setInputValueById,
-      setSelectedValueById,
       legalMessages,
     } = this.props;
     let annualFeesDisclaimer;
@@ -124,10 +122,12 @@ class Content extends PureComponent {
             <div className="row no-gutters onboard__col">
               <FinalReviewPage />
             </div>
+            <div className="onboard__popup-window--bottom-centered">
+              {
+                showPopupPIN && <PopupPIN type={this.props.popupPINType} />
+              }
+            </div>
           </div>
-          {
-            showPopupPIN && <PopupPIN type={this.props.popupPINType} />
-          }
         </div>);
     } else if (this.props.tabName === 'agreement') {
       return (
