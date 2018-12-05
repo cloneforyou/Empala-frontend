@@ -213,7 +213,7 @@ function calculateOCT(orders, positions) {
       return false;
     }
     order.values.oct = 'O';
-  }
+  };
   orders.forEach(order => processOrder(order));
 }
 
@@ -236,7 +236,6 @@ function* get_orders_list(credentials) {
   if (res.data) {
     const parsedOrders = parseOrdersList((res.data.Result || {}).Orders);
     const positions = yield select(state => state.dashboard.positions || []);
-    console.log('** POsitions ===>>>> ',positions)
     calculateOCT(parsedOrders, positions);
     yield put(setOrdersList(parsedOrders));
   }

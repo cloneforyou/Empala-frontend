@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduce, uniqueId } from 'lodash';
@@ -57,7 +58,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         return 0;
       }, 0);
     };
-    const getQuoteChange = secId => quotesData[secId] && (quotesData[secId].Last - quotesData[secId].PreviousClose);
+    const getQuoteChange = secId =>
+      (quotesData[secId] ? (quotesData[secId].Last - quotesData[secId].PreviousClose) : 0);
     const calculateChange = reduce(positionsData, (sum, value, index) => sum + getQuoteChange(positionsData[index].SecurityId), 0);
     const calculateChangeByType = (type) => {
       if (!type) return calculateChange;
