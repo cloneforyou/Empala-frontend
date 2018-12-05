@@ -90,6 +90,7 @@ const NavButtons = (props) => {
         type="button"
         className="btn-navigate btn-prev"
         onClick={() => handleChangePage('backward')}
+        style={{ boxShadow: '2px 6px 20px 0 rgba(0, 0, 0, 0.16)' }}
       >
         <MdChevronLeft size={35} />
       </button>
@@ -103,6 +104,7 @@ const NavButtons = (props) => {
         <button
           type="button"
           className={`btn-navigate btn-next ${!disabled && 'btn--navigate--active'}`}
+          style={{ boxShadow: '2px 6px 20px 0 rgba(0, 0, 0, 0.16)' }}
           onClick={() => handleChangePage('forward')}
           disabled={disabled}
         >

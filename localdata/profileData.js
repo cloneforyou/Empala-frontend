@@ -592,7 +592,7 @@ const options = [
 
 export const fieldsInvestmentExperienceOne = [
   {
-    id: 'profile_experience_investment_experience',
+    id: 'regulatory_identification_investment_experience',
     hint: 'Please select',
     label: 'Investment experience',
     field: 'select',
