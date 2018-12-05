@@ -92,14 +92,11 @@ class Content extends PureComponent {
       setSelectedValueById,
       legalMessages,
     } = this.props;
-    let annualFeesDisclaimer, registrationFooterDisclaimer;
+    let annualFeesDisclaimer;
     if (legalMessages) {
-      legalMessages.forEach(item => {
+      legalMessages.forEach((item) => {
         if (item.page === 'Annual Fees Disclaimer') {
           annualFeesDisclaimer = item.text;
-        }
-        if (item.page === 'Registration Footer Disclaimer') {
-          registrationFooterDisclaimer = item.text;
         }
       });
     }

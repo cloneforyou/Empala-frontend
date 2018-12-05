@@ -78,8 +78,16 @@ import {
   GET_EDOCUMENTS_LIST_SUCCESS,
   GET_EDOCUMENTS_LIST_FAILED,
   SET_ACCESS_TOKEN,
+  SET_LEGAL_MESSAGES,
 } from '../constants/dashboard';
 
+
+export function setLegalMessages(messages) {
+  return {
+    type: SET_LEGAL_MESSAGES,
+    messages,
+  };
+}
 
 export function getEDocumentsListFailed(err) {
   return {

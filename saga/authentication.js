@@ -11,6 +11,7 @@ import {
   setAccessToken,
   setUserData,
   startSocket,
+  setLegalMessages,
 } from '../actions/dashboard';
 import {
   cleanErrorMessage,
@@ -259,6 +260,7 @@ export function* getUserData() {
     const data = yield call(request, url, options);
     yield put(setUserData(data.data));
     yield put(setColorScheme(data.data.data.profile.MemberPreferences.theme));
+    yield put(setLegalMessages(data.data.data.legalMessages))
     yield getAccessToken();
     yield all([
       'orders_list',

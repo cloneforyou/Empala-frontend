@@ -51,7 +51,7 @@
     align-items: flex-end;
   }
   &__text {
-    font-size: 14px;
+    font-size: 13px;
     margin: 0;
     padding: 30px;
     display: flex;
@@ -59,6 +59,7 @@
     text-align: center;
     justify-content: center;
     line-height: 1.23;
+    font-weight: 500;
     &_link {
       color: $main-color-text-grey;
       text-decoration: underline;

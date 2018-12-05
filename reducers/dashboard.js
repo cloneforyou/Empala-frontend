@@ -52,7 +52,10 @@ import {
   SET_ACTIVE_MARKET_PAGE,
   UPDATE_QUOTES_LIST,
   GET_EDOCUMENTS_LIST_SUCCESS,
-  GET_EDOCUMENTS_LIST_FAILED, GET_EDOCUMENTS_LIST_REQUEST, SET_ACCESS_TOKEN,
+  GET_EDOCUMENTS_LIST_FAILED,
+  GET_EDOCUMENTS_LIST_REQUEST,
+  SET_ACCESS_TOKEN,
+  SET_LEGAL_MESSAGES,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -128,6 +131,7 @@ const initialState = {
   allowedSections: false,
   eDocumentsList: null,
   token: false,
+  legalMessages: false,
 };
 
 const parseAccountBalance = (data) => {
@@ -515,6 +519,11 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
       };
+    case SET_LEGAL_MESSAGES:
+      return {
+        ...state,
+        legalMessages: action.messages,
+      }
     default:
       return state;
   }
