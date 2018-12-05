@@ -140,8 +140,8 @@ export default function* validationSaga({ id, value }) {
     !allowedStatesList.includes(value)) {
     yield put(showAlertModal('invalidState'));
   }
-  if (id === 'regulatory_identification_residency_status' &&
-    value === 'Other') {
+  if ((id === 'regulatory_identification_residency_status' || id === 'regulatory_identification_visa_type')
+    && value.toLowerCase() === 'other') {
     yield put(showAlertModal('invalidResidential'));
   }
   if (serverValidatedFields.includes(id)) {
