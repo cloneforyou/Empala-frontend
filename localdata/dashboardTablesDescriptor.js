@@ -149,7 +149,7 @@ export const tableHeaders = {
     id: 'dashboard_watchlist',
     title: 'Watchlists',
     col: 12,
-    height: 488,
+    height: 429,
     dots: true,
     headers: [
       'Sec name',

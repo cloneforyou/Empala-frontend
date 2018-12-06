@@ -55,7 +55,7 @@ class WidgetNews extends Component {
             <Scrollbars
               className="widget__scroll-block"
               renderThumbVertical={this.renderThumbVertical}
-              style={{height: '100%'}}
+              style={{height: '290px'}}
               universal
             >
             {widget.id === 'external_news' ?
