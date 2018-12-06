@@ -38,7 +38,7 @@ function mapStateToProps(state) {
     popupPINType: state.registration.popupPINType,
     verifyLoading: state.registration.verifyLoading,
     showAlertModal: state.registration.showAlertModal,
-    alertModalName: state.registration.alertModalName,
+    alertModalName: state.registration.alertModalName || '',
     legalMessages: state.registration.legalMessages,
   };
 }

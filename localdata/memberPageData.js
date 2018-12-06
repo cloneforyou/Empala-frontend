@@ -1,19 +1,27 @@
+import { origin } from '../keys';
+
+// trick for enabling quick page navigation in dev
+const memberCountryOfResidenceOptions = [
+  {
+    value: 'United States',
+    title: 'United States',
+  },
+];
+
+if (origin === 'dev') {
+  memberCountryOfResidenceOptions.push({
+    value: 'Russia',
+    title: 'Russia',
+  });
+}
+
 export const dataFields = [
   [
     {
       id: 'member_basic_information_residence',
       label: 'Country of residence',
       hint: 'Please select',
-      options: [
-        {
-          value: 'United States',
-          title: 'United States',
-        },
-        {
-          value: 'Russia',
-          title: 'Russia',
-        },
-      ],
+      options: memberCountryOfResidenceOptions,
     },
     {
       id: 'member_basic_information_prefix',
