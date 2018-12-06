@@ -110,6 +110,10 @@ class Content extends PureComponent {
             <div className="row no-gutters onboard__col">
               <InformationPage
                 annualFeesDisclaimer={annualFeesDisclaimer}
+                accountId={registrationData && registrationData.member_account_account_no ?
+                  registrationData.member_account_account_no :
+                  ''
+                }
               />
             </div>
           </div>
