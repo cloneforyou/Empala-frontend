@@ -1,12 +1,16 @@
 import React from 'react';
 import NavButtons from './NavButtons';
 
-const InformationPage = ({ annualFeesDisclaimer }) => {
+const InformationPage = ({ annualFeesDisclaimer, accountId }) => {
+  let replacedAnnualFeesDisclaimer;
+  if (accountId && annualFeesDisclaimer) {
+    replacedAnnualFeesDisclaimer = annualFeesDisclaimer.replace(/%%MEMBER_ID%%/, accountId);
+  }
   return (
     <div className="information-container">
       <div
         className="h-100"
-        dangerouslySetInnerHTML={{__html: annualFeesDisclaimer }}
+        dangerouslySetInnerHTML={{ __html: replacedAnnualFeesDisclaimer || annualFeesDisclaimer }}
       />
       <NavButtons
         tabName="info"
