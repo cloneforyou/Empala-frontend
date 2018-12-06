@@ -30,8 +30,8 @@ const RegistrationResultModal = (props) => {
   const actionsSuccess = [
     <FlatButton
       label="OK"
-      style={{ ...style.returnBtn, width: 'auto', marginBottom: '50px' }}
-      labelStyle={style.labelReturnBtn}
+      style={style.cancelResultBtn}
+      labelStyle={style.labelResultBtn}
       onClick={() => window.location.assign('/')}
     />,
   ];
