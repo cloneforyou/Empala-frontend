@@ -6,8 +6,8 @@ import { setTabName, setTabPageIndex } from '../../actions/registration';
 
 const ContentMenuTabs = (props) => {
   const handleClick = (name) => {
-    props.dispatch(setTabName(name));
-    props.dispatch(setTabPageIndex(1));
+    // props.dispatch(setTabName(name));
+    // props.dispatch(setTabPageIndex(1));
   };
   return (
     <ul className="tabs-menu">

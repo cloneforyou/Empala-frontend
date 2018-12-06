@@ -7,10 +7,7 @@
     color: $main-color-text-grey;
     position: relative;
     display: inline-block;
-    span {
-      cursor: pointer;
-    }
-    &_active, &:hover {
+    &_active {
       span {
         color: $green;
       }
