@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import _ from 'lodash';
+import { Scrollbars } from 'react-custom-scrollbars';
 import nophotoUser from '../../../static/images/default-avatar-of-user.svg';
 
 
@@ -15,6 +16,12 @@ class WidgetNews extends Component {
   toggleMenu = () => {
     const { menuIsOpen } = this.state;
     this.setState({ menuIsOpen: !menuIsOpen });
+  };
+
+  renderThumbVertical = (props) => {
+    return (
+      <div {...props} className="widget__scroll-block-thumb-vertical" />
+    );
   };
 
   render() {
@@ -45,6 +52,12 @@ class WidgetNews extends Component {
             </div>
           </div>
           <div className="widget__body">
+            <Scrollbars
+              className="widget__scroll-block"
+              renderThumbVertical={this.renderThumbVertical}
+              style={{height: '100%'}}
+              universal
+            >
             {widget.id === 'external_news' ?
               widgetNews.map(card => (
                 <div className="news-card row no-gutters" key={card.uuid}>
@@ -133,7 +146,7 @@ class WidgetNews extends Component {
                 </div>
               ))
             }
-
+            </Scrollbars>
           </div>
         </div>
       </div>

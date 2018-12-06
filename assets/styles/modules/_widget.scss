@@ -3,7 +3,6 @@
   height: 100%;
   overflow: hidden;
   padding-bottom: 10px;
-  @include styledScroll($light-gray);
 
   &__head {
     padding: 18px 10px 0;
@@ -61,8 +60,7 @@
   }
   &__body {
     position: relative;
-    overflow-y: auto;
-    max-height: calc(100% - 39px);
+    height: 290px;
   }
   &_padding {
     padding: 16px 16px 0 28px;
@@ -70,6 +68,29 @@
       padding: 9px 0;
       margin: 0;
     }
+  }
+}
+
+.widget__scroll-block {
+  overflow-x: auto;
+  overflow-y: auto;
+  &:hover .widget__scroll-block-thumb-horizontal {
+    background-color: $silver;
+  }
+  &-thumb-horizontal {
+    background-color: transparent;
+    transition: background-color 0.5s;
+    border-radius: 5px;
+    max-height: 3px;
+  }
+  &:hover .widget__scroll-block-thumb-vertical {
+    background-color: $silver;
+  }
+  &-thumb-vertical {
+    background-color: transparent;
+    transition: background-color 0.5s;
+    border-radius: 5px;
+    max-width: 3px;
   }
 }
 
