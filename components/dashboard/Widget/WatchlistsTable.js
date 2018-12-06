@@ -107,7 +107,7 @@ class WatchlistsTable extends React.Component {
           className={`widget-col col-lg-${widget.col} `}
           key={widget.id}
         >
-          <div className="widget" style={{ height: `${widget.height}px` }}>
+          <div className="widget" style={{ height: '488px' }}>
             <WidgetHead
               widget={widget}
             />

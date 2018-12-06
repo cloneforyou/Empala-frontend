@@ -60,7 +60,7 @@
   }
   &__body {
     position: relative;
-    height: 290px;
+    height: calc(100% - 39px);
   }
   &_padding {
     padding: 16px 16px 0 28px;
