@@ -107,8 +107,10 @@ class AgreementPage extends PureComponent {
     this.setState({
       submitted: true,
     });
-    this.submitBtn.disabled = true;
-    if (this.state.signed && !this.state.disabled) this.props.submitRegistration();
+    if (this.state.signed && !this.state.disabled) {
+      this.submitBtn.disabled = true;
+      this.props.submitRegistration();
+    }
   }
 
   render() {
@@ -179,7 +181,7 @@ class AgreementPage extends PureComponent {
                 <button className="btn-cancel" onClick={this.props.changeTabPage}>Cancel</button>
                 <button
                   id="submit"
-                  className={`btn-submit ${(!this.state.disabled && this.state.signed) && 'btn-active'}`}
+                  className={(!this.state.disabled && this.state.signed) ? 'btn-submit btn-active' : 'btn-submit'}
                   ref={ref => this.submitBtn = ref}
                   onClick={() => {
                     this.handleSubmit();
