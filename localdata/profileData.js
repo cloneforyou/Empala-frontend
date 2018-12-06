@@ -418,18 +418,6 @@ export const fieldsMemberPersonal = [
     disabled: true,
   },
   {
-    id: 'account_information_account_type',
-    label: 'Account type',
-    hint: 'Please select',
-    options: [
-      {
-        value: 'individual',
-        title: 'Individual',
-      },
-    ],
-    field: 'select',
-  },
-  {
     id: 'createdat',
     type: 'text',
     label: 'Member since',

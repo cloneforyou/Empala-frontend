@@ -144,12 +144,14 @@ class Membership extends Component {
                     </button>
                   </div>
                 </div>
+                <div className="col-12">
+                  <button
+                    className="profile-btn profile-btn_green"
+                    onClick={this.props.showResetModal}
+                  >Reset password
+                  </button>
+                </div>
               </div>
-              <button
-                className="profile-btn profile-btn_green profile-btn_shift-up"
-                onClick={this.props.showResetModal}
-              >Reset password
-              </button>
             </div>
           </div>
           <div className="row margin-bt-30">

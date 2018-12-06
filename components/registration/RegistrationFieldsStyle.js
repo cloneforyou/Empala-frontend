@@ -181,6 +181,17 @@ const style = {
     width: '125px',
     marginBottom: '35px',
   },
+  cancelResultBtn: {
+    backgroundColor: GREEN,
+    width: '141px',
+    height: '31px',
+    marginBottom: '50px',
+    borderRadius: '5px',
+  },
+  labelResultBtn: {
+    color: WHITE,
+    fontSize: '16px',
+  },
 };
 
 export default style;

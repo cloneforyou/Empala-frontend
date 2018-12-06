@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
 import moment from 'moment';
 import { getTableHeaderByName } from '../../utils/dashboardUtils';
 import EmpalaTableCell from './EmpalaTableCell';
@@ -85,19 +86,40 @@ class EmpalaTable extends Component {
       `${(100 / width) * 100}%` :
       'auto';
   }
+
+  renderThumbHorizontal = (props) => {
+    return (
+      <div {...props} className="widget__scroll-block-thumb-horizontal" />
+    );
+  };
+
+  renderThumbVertical = (props) => {
+    return (
+      <div {...props} className="widget__scroll-block-thumb-vertical" />
+    );
+  };
+
   render() {
     const { table, callbacks } = this;
-    // const { sortDirection, sortColIndex } = this.props || this.state;
     const sortDirection = this.props.tableSortDirection || this.state.sortDirection;
     const sortColIndex = this.props.tableSortIndex || this.state.sortColIndex;
     const tableData = this.props.sortExternal ?
       this.props.tableData :
       this.sortByColumn(this.props.tableData, sortColIndex, sortDirection);
     return (
-      <div style={{ overflowY: 'scroll', maxHeight: this.innerHeight(table.height) }} >
+      <Scrollbars
+        className="widget__scroll-block"
+        style={{height: this.innerHeight(table.height)}}
+        renderThumbVertical={this.renderThumbVertical}
+        renderThumbHorizontal={this.renderThumbHorizontal}
+        autoHeightMin={this.innerHeight(table.height)}
+        autoHeightMax={this.innerHeight(table.height)}
+        autoHeight
+        universal
+      >
         <ul
-          className="d-flex flex-row no-gutters list-unstyled "
-          style={{ overflowX: 'scroll', margin: 0, padding: 0 }}
+          className="d-flex flex-row no-gutters list-unstyled"
+          style={{margin: 0, paddingRight: '9px'}}
         >
           {table.headers.map((header, index) => (
             <li
@@ -112,21 +134,21 @@ class EmpalaTable extends Component {
               }}
             >
               {!this.props.hideHeader &&
-                <div
-                  id={`col${index}`}
-                  className="emp-table__th"
-                  onClick={(table.attrs.sortable && table.attrs.sortable[index]) ?
-                    (e => (callbacks && callbacks[index] ?
-                      callbacks[index](e, this.props.tableName, index, sortDirection) :
-                      this.setSortType(index)))
-                    : undefined}
-                  style={{
-                    cursor: table.attrs.sortable && table.attrs.sortable[index] ? 'pointer' : '',
-                    fontSize: this.props.headerSmall && '10px',
-                  }}
-                >{header}
-                  {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort" />}
-                </div>
+              <div
+                id={`col${index}`}
+                className="emp-table__th"
+                onClick={(table.attrs.sortable && table.attrs.sortable[index]) ?
+                  (e => (callbacks && callbacks[index] ?
+                    callbacks[index](e, this.props.tableName, index, sortDirection) :
+                    this.setSortType(index)))
+                  : undefined}
+                style={{
+                  cursor: table.attrs.sortable && table.attrs.sortable[index] ? 'pointer' : '',
+                  fontSize: this.props.headerSmall && '10px',
+                }}
+              >{header}
+                {table.attrs.sortable && table.attrs.sortable[index] && <i className="icon-sort"/>}
+              </div>
               }
               <div>{tableData.map((row, i) => (
                 (this.props.leagueDividerShow && this.props.dividerIndex && i === this.props.dividerIndex) ?
@@ -138,16 +160,16 @@ class EmpalaTable extends Component {
                   >{index === 4 ? '. . .' : ''}
                   </div> :
                   <div
-                      key={`${header}-${i}`}
-                      className={`emp-table__table-cell
-                      ${this.props.small && 'emp-table__table-cell_small'}
-                      ${
+                    key={`${header}-${i}`}
+                    className={`emp-table__table-cell
+                        ${this.props.small && 'emp-table__table-cell_small'}
+                        ${
                       this.props.leagueDividerShow
                       && this.props.dividerEndIndex
                       && i > this.props.dividerIndex
                       && (i < this.props.dividerEndIndex || i > this.props.dividerEndIndex + 5)
-                          ? 'd-none' : ''
-                    }`}
+                        ? 'd-none' : ''
+                      }`}
                   >
                     <EmpalaTableCell
                       handleClick={row[index] ? row[index].onclick : undefined}
@@ -156,15 +178,14 @@ class EmpalaTable extends Component {
                       mark={row[index] && row[index].mark}
                       bold={row[index] && row[index].bold}
                       color={row[index] && row[index].color}
-                      // small={this.props.small}
-                  />
+                    />
                   </div>
-                  ))}
+              ))}
               </div>
             </li>
-              ))}
+          ))}
         </ul>
-      </div>
+      </Scrollbars>
     );
   }
 }

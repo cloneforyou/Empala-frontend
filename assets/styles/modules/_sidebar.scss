@@ -7,7 +7,17 @@
   padding: 74px 0 0;
   width: $sidebar-width;
   transition: .4s;
-  @include styledScroll($silver);
+  &__scroll-block {
+    overflow-y: auto;
+    &:hover .sidebar__scroll-block-thumb-vertical {
+      background-color: $silver;
+    }
+    &-thumb-vertical {
+      background-color: transparent;
+      transition: background-color 0.5s;
+      border-radius: 5px;
+    }
+  }
   &_light-theme {
     background: $dark-grey;
     .user-status {
@@ -66,7 +76,6 @@
     width: 100%;
   }
   .sidebar-sticky {
-    overflow-y: auto;
     height: 100%;
     padding-bottom: 40px;
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Scrollbars } from 'react-custom-scrollbars';
 import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
@@ -29,6 +30,12 @@ class Sidebar extends Component {
     this.props.setActiveMarketPage(market && market.toLowerCase());
   };
 
+  renderThumbVertical = (props) => {
+    return (
+      <div {...props} className="sidebar__scroll-block-thumb-vertical" />
+    );
+  };
+
 
   render() {
     const { countryMenuIsOpen } = this.state;
@@ -37,6 +44,11 @@ class Sidebar extends Component {
       <div>
         <div className={sidebarCollapsed ? `sidebar sidebar_collapsed sidebar_${currentColorScheme}-theme` : `sidebar sidebar_${currentColorScheme}-theme`}>
           <div className="sidebar-sticky">
+            <Scrollbars
+              className="sidebar__scroll-block"
+              renderThumbVertical={this.renderThumbVertical}
+              universal
+            >
             {
               sidebarItems.map((part, index) => (
                 <div className="sidebar__part-nav" key={index}>
@@ -86,6 +98,7 @@ class Sidebar extends Component {
                 </div>
               ))
             }
+            </Scrollbars>
             <div className="sidebar__user-status user-status user-status_online">
               <span>Online</span>
             </div>

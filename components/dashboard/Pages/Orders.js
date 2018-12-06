@@ -24,9 +24,6 @@ export default class Orders extends Component {
           <OrdersTable />
           <WatchlistsTable />
         </div>
-        {/* For debug. TODO  Remove later. */}
-        {/* {this.props.ordersList && this.props.ordersList.map(order => (<p key={Math.random()}>{JSON.stringify(order)}</p>))} */}
-        {/* {this.props.watchLists && this.props.watchLists.map(list => (<p key={Math.random()}>{JSON.stringify(list)}</p>))} */}
       </div>
     );
   }
