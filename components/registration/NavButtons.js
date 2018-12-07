@@ -35,6 +35,10 @@ const NavButtons = (props) => {
   let disabled = !isFieldsFilled(props.fieldNames, props.registrationData) ||
     (props.fieldNames && props.errors && isFieldError(props.fieldNames, props.errors));
 
+  if (props.tabName === 'identity' &&
+      !props.allowedStates.includes(props.registrationData.identity_residential_address_residential_address_state)) {
+    disabled = true;
+  }
   if (props.tabName === 'regulatory') {
     if (props.tabIndex === 1) {
       disabled = filterActiveCheckboxes(props.checkboxes).length > 0;
@@ -140,6 +144,7 @@ NavButtons.propTypes = {
   setTabPageIndex: PropTypes.func.isRequired,
   goBackToPart: PropTypes.func.isRequired,
   checkEmailVerificationRequest: PropTypes.func.isRequired,
+  allowedStates: PropTypes.array,
 };
 
 NavButtons.defaultProps = {
@@ -147,6 +152,7 @@ NavButtons.defaultProps = {
   tabName: 'info',
   fieldNames: [],
   userBackToPart: false,
+  allowedStates: [],
 };
 
 function mapStateToProps(state) {
@@ -159,6 +165,7 @@ function mapStateToProps(state) {
     userBackToPart: state.registration.userBackToPart,
     showInfoPopup: state.registration.showInfoPopup,
     image407uploaded: state.registration.image407uploaded,
+    allowedStates: state.registration.availableStatesList || [],
   };
 }
 
