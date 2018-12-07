@@ -15,7 +15,7 @@
   max-height: 384px;
   font-size: 11px;
   line-height: 1.18;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
   overflow-y: auto;
   background-color: $white;
   box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.16);
@@ -45,7 +45,6 @@
 .confirmation {
   display: flex;
   &__form-submission {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -72,6 +71,12 @@
     margin: 0;
     font-size: 10px;
   }
+  .check-container {
+    margin-left: 0;
+    & > div {
+      margin-bottom: 0 !important;
+    }
+  }
 }
 
 .label-confirmation {
@@ -97,7 +102,7 @@
 .group-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-bottom: 20px;
   &__button {
     height: 31px;
     border: 0;

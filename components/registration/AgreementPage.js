@@ -2,8 +2,9 @@ import React, { Fragment, PureComponent } from 'react';
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { changeTabPage, sendRegistrationForm, closeErrorModal } from '../../actions/registration';
+import {changeTabPage, sendRegistrationForm, closeErrorModal, toggleCheckboxById} from '../../actions/registration';
 import RegistrationResultModal from './RegistrationResultModal';
+import EmpalaCheckbox from '../registration/EmpalaCheckbox';
 
 function mapStateToProps(state) {
   return {
@@ -15,6 +16,7 @@ function mapStateToProps(state) {
     showSuccessModal: state.registration.showSuccessModal,
     loading: state.registration.loading,
     legalMessages: state.registration.legalMessages,
+    checkboxes: state.registration.checkboxes,
   };
 }
 
@@ -27,6 +29,7 @@ function mapDispatchToProps(dispatch) {
         dispatch(closeErrorModal());
         dispatch(changeTabPage('agreement', 1, 'backward'));
       },
+      toggleCheckboxById: e => dispatch(toggleCheckboxById(e.target.id)),
     });
 }
 
@@ -46,28 +49,9 @@ class AgreementPage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      disabled: true,
       signed: false,
       submitted: false,
     };
-    this.handleScroll = this.handleScroll.bind(this);
-  }
-
-  removeButtonLock = () => {
-    this.setState({
-      disabled: false,
-    });
-  };
-
-  componentDidMount() {
-    this.containerInfo.addEventListener('scroll', this.handleScroll);
-    if(this.containerInfo.scrollHeight === this.containerInfo.offsetHeight) {
-      this.removeButtonLock();
-    }
-  }
-
-  componentWillUnmount() {
-    this.containerInfo.removeEventListener('scroll', this.handleScroll);
   }
 
   focusSubmit() {
@@ -77,8 +61,9 @@ class AgreementPage extends PureComponent {
   checkRegistrationName = (e) => {
     const firstName = this.props.firstName.split(' ').join(' ');
     const lastName = this.props.lastName.split(' ').join(' ');
-    const fullName = firstName + ' ' + lastName;
-    let prints = e.target.value.split(' ').join(' ');
+    // const fullName = firstName + ' ' + lastName;
+    const fullName = `${firstName} ${lastName}`.toLowerCase();
+    let prints = e.target.value.split(' ').join(' ').toLowerCase();
 
     this.setState({
       submitted: false,
@@ -95,19 +80,11 @@ class AgreementPage extends PureComponent {
     }
   };
 
-  handleScroll(event) {
-    const scroll = event.target.scrollTop;
-    const height = event.target.scrollHeight - event.target.clientHeight;
-    if (height === scroll) {
-      this.removeButtonLock();
-    }
-  }
-
   handleSubmit() {
     this.setState({
       submitted: true,
     });
-    if (this.state.signed && !this.state.disabled) {
+    if (this.state.signed && this.props.checkboxes.agreements_info_checkbox) {
       this.submitBtn.disabled = true;
       this.props.submitRegistration();
     }
@@ -159,6 +136,7 @@ class AgreementPage extends PureComponent {
               registrationSubmissionMainCash
           }}
         />
+        <div className="label-confirmation d-flex justify-content-end">(You have to scroll to the bottom to continue)</div>
         <div className="confirmation row">
           <div className="confirmation__text col-lg-4"
                dangerouslySetInnerHTML={{ __html: registrationSubmissionPerjury }}
@@ -166,8 +144,8 @@ class AgreementPage extends PureComponent {
 
           <div className="col-lg-8">
             <div className="confirmation__form-submission">
-              <div className="form-group input-wrapper_width">
-                <div>
+              <div className="input-wrapper_width">
+                <div className="mb-3">
                   <label className="label-confirmation">Signature (First name Last name)</label>
                   <input type="text"
                          className="input-confirmation form-control"
@@ -176,12 +154,18 @@ class AgreementPage extends PureComponent {
                   <p className="text-error">Please make sure that you provided the correct First name and Last
                     name</p>}
                 </div>
+                <EmpalaCheckbox
+                  id="agreements_info_checkbox"
+                  label="Click to confirm you have read and agree to our terms and conditions."
+                  handleCheck={this.props.toggleCheckboxById}
+                  checked={this.props.checkboxes.agreements_info_checkbox}
+                />
               </div>
               <div className="group-buttons">
                 <button className="btn-cancel" onClick={this.props.changeTabPage}>Cancel</button>
                 <button
                   id="submit"
-                  className={(!this.state.disabled && this.state.signed) ? 'btn-submit btn-active' : 'btn-submit'}
+                  className={(this.props.checkboxes.agreements_info_checkbox && this.state.signed) ? 'btn-submit btn-active' : 'btn-submit'}
                   ref={ref => this.submitBtn = ref}
                   onClick={() => {
                     this.handleSubmit();
