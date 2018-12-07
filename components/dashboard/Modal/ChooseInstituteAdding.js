@@ -8,7 +8,10 @@ import {
 import PlaidLink from 'react-plaid-link';
 import { Plaid } from '../../../keys.js';
 import PlusIcon from '../../common/PlusIcon';
+import { origin } from '../../../keys';
 
+
+const getPlaidMode = originName => ((originName === 'prod' ? 'production' : 'sandbox'));
 class ChooseInstituteAdding extends React.Component {
   handleClose = () => {
     this.props.closeModal();
@@ -53,7 +56,7 @@ class ChooseInstituteAdding extends React.Component {
                 className="adding-block"
                 clientName="Empala"
                 style={{}}
-                env="sandbox"
+                env={getPlaidMode(origin)}
                 product={['auth', 'transactions']}
                 publicKey={Plaid.PLAID_PUBLIC_KEY}
                 onExit={this.fixOverflow}

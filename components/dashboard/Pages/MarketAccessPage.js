@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TitleBar from '../TitleBar';
-import * as axios from 'axios';
+import { origin } from '../../../keys';
 
 const frameStyle = {
   width: '100%',
@@ -9,15 +9,22 @@ const frameStyle = {
   border: 'none',
 };
 
+const getSubdomain = originName => (
+  (originName === 'prod')
+    ? 'trading-us'
+    : 'papertrading'
+);
+
+// eslint-disable-next-line react/prefer-stateless-function
 class MarketAccessPage extends React.Component {
 
   render() {
     if (this.props.activePageMarket === 'united states') {
       return (
         <div>
-          <TitleBar/>
+          <TitleBar />
           <iframe
-            src="https://papertrading.empala.com/UserSecurity"
+            src={`https://${getSubdomain()}.empala.com/UserSecurity`}
             style={frameStyle}
             marginHeight={10}
             title="MarketsFrame"
