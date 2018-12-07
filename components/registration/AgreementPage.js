@@ -59,8 +59,8 @@ class AgreementPage extends PureComponent {
   }
 
   checkRegistrationName = (e) => {
-    const firstName = this.props.firstName.trim().split(' ').join(' ');
-    const lastName = this.props.lastName.trim().split(' ').join(' ');
+    const firstName = this.props.firstName.trim().split(' ').filter(el => el !== '').join(' ');
+    const lastName = this.props.lastName.trim().split(' ').filter(el => el !== '').join(' ');
     const fullName = `${firstName} ${lastName}`.toLowerCase();
     let prints = e.target.value.split(' ').filter(el => el !== '').join(' ').toLowerCase();
 
