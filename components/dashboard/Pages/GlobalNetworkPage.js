@@ -1,6 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TitleBar from '../TitleBar';
+import { origin } from '../../../keys';
+
+const getUrl = originName => (
+  originName === 'prod'
+    ? 'http://community.empala.com'
+    : 'http://socialenginealb-949568690.us-west-2.elb.amazonaws.com'
+);
 
 function getUrlByPageName(pageName) {
   switch (pageName) {
@@ -27,7 +34,7 @@ const GlobalNetworkPage = props => (
     <div>
       <TitleBar />
       <iframe
-        src={`http://socialenginealb-949568690.us-west-2.elb.amazonaws.com/${getUrlByPageName(props.page)}?token=${props.seToken}`}
+        src={`${getUrl(origin)}/${getUrlByPageName(props.page)}?token=${props.seToken}`}
         style={frameStyle}
         marginHeight={10}
         title="SocialEngineFrame"
