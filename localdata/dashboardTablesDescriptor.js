@@ -430,7 +430,7 @@ export const tableHeaders = {
       align: [
         'left',
         'right',
-        'left',
+        'right',
       ],
       width: [
         '125px',
