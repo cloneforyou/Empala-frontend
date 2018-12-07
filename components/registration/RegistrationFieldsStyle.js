@@ -187,6 +187,7 @@ const style = {
     height: '31px',
     marginBottom: '50px',
     borderRadius: '5px',
+    lineHeight: '16.5px',
   },
   labelResultBtn: {
     color: WHITE,
