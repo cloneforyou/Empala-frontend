@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { reduce } from 'lodash';
 import WidgetHead from './WidgetHead';
 import EmpalaTable from '../EmpalaTable';
 import {
   formatNumberWithFixedPoint,
   getWidgetAttributesByName,
 } from '../../../utils/dashboardUtils';
-import { reduce } from 'lodash';
 
 
 const widget = getWidgetAttributesByName('overview_financial_capital_exposure');
@@ -23,14 +23,14 @@ const marketAllocations = [
 
 const parsePerformanceData = (data, tableName) => {
   if (tableName === 'overview_financial_capital_performance_st') {
-    return Object.keys(data).slice(0, 4).map(key => [
+    return Object.keys(data).slice(1, 5).map(key => [
       { value: key },
       { value: formatNumberWithFixedPoint(data[key]['% change'], 1) },
       { value: formatNumberWithFixedPoint(data[key]['Vs indexes'], 1) },
     ]);
   }
   if (tableName === 'overview_financial_capital_performance_lt') {
-    return Object.keys(data).slice(4).map(key => [
+    return Object.keys(data).slice(5).map(key => [
       { value: key },
       { value: formatNumberWithFixedPoint(data[key]['% change'], 1) },
       { value: formatNumberWithFixedPoint(data[key]['Vs indexes'], 1) },
@@ -46,12 +46,13 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
     marketAllocations.map(all => calculateDomesticByType(all) + calculateForeignByType(all)),
     (sum, value) => sum + value,
   );
-  const calculateDomestic = reduce(positions, (sum, value, index) => sum + positions[index].CostBasis, 0);
+  const calculateDomestic =
+    reduce(positions, (sum, value, index) => sum + positions[index].CostBasis, 0);
   const calculateForeignByType = type => 0; // todo calculation workflow
   const calculateDomesticByType = (type) => {
     if (!type) return calculateDomestic;
     return reduce(positions, (sum, value, index) => {
-      if (type === 'CommonStock') return balance.ETNA.marketValue.Value;
+      if (type === 'CommonStock') return balance.ETNA.netLiquidity.Value;
       if (positions[index].SecurityType === type) return sum + positions[index].CostBasis;
       return 0;
     }, 0);
@@ -78,29 +79,38 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
     { name: 'Commodities', domestic: calculateDomesticByType('Commodities'), foreign: calculateForeignByType('Commodities') },
     { name: 'Private markets', domestic: calculateDomesticByType('Private'), foreign: calculateForeignByType('Private') },
   ];
-  const getTableDataByName = (tableName) => {
-    if (tableName === 'overview_financial_capital_exposure') {
-      return exposures.map(exp => [
-        { value: exp.name },
-        { value: formatNumberWithFixedPoint(exp.value) },
-        { value: formatNumberWithFixedPoint(exp.day_ch, 1) },
-      ]);
-    }
-    if (tableName === 'overview_financial_capital_allocation') {
-      return allocations.map(all => [
-        { value: all.name },
-        { value: formatNumberWithFixedPoint(all.domestic) },
-        { value: formatNumberWithFixedPoint(all.foreign) },
-      ]);
-    }
-    return [];
+
+  // return getTableDataByName(tableName);
+  return {
+    exposures,
+    allocations,
   };
-  return getTableDataByName(tableName);
+};
+
+const getTableDataByName = (tableName, positions, balance, dayChange) => {
+  const { exposures, allocations } = parsePositionsToTableData(tableName, positions, balance);
+  const dayChangePercent = (dayChange || {})['% change'];
+  if (dayChangePercent) exposures[0].day_ch = dayChangePercent;
+  if (tableName === 'overview_financial_capital_exposure') {
+    return exposures.map(exp => [
+      { value: exp.name },
+      { value: formatNumberWithFixedPoint(exp.value) },
+      { value: formatNumberWithFixedPoint(exp.day_ch, 1) },
+    ]);
+  }
+  if (tableName === 'overview_financial_capital_allocation') {
+    return allocations.map(all => [
+      { value: all.name },
+      { value: formatNumberWithFixedPoint(all.domestic) },
+      { value: formatNumberWithFixedPoint(all.foreign) },
+    ]);
+  }
+  return [];
 };
 
 const FinancialCapitalTable = props => (
   <div
-    className={`widget-col d-inline-block`}
+    className="widget-col d-inline-block"
     key={widget.id}
   >
     <div
@@ -121,7 +131,7 @@ const FinancialCapitalTable = props => (
           props.accountBalance &&
           <EmpalaTable
             tableName="overview_financial_capital_exposure"
-            tableData={parsePositionsToTableData('overview_financial_capital_exposure', props.positions, props.accountBalance)}
+            tableData={getTableDataByName('overview_financial_capital_exposure', props.positions, props.accountBalance, props.financial.performance['1 Day'])}
             small
           />
         }
@@ -131,7 +141,7 @@ const FinancialCapitalTable = props => (
           props.accountBalance &&
           <EmpalaTable
             tableName="overview_financial_capital_allocation"
-            tableData={parsePositionsToTableData('overview_financial_capital_allocation', props.positions, props.accountBalance)}
+            tableData={getTableDataByName('overview_financial_capital_allocation', props.positions, props.accountBalance)}
             small
           />
         }
