@@ -7,31 +7,31 @@ import {
   getWidgetAttributesByName,
 } from '../../../utils/dashboardUtils';
 
-
+const filler = '--';
 const widget = getWidgetAttributesByName('overview_social_capital');
 
 // stub for positioning table data. Todo investigate data source
 const positioning = {
-  '1M return': Math.random() * 100,
-  'Inception R': Math.random() * 100,
-  'Total asset value': Math.random() * 100,
-  '% Adj net position': Math.random() * 100,
-  '% VAR': Math.random() * 100,
-  '% Cash': Math.random() * 100,
-  '% Equity': Math.random() * 100,
-  '% Debt': Math.random() * 100,
+  '1M return': filler,
+  'Inception R': filler,
+  'Total asset value': filler,
+  '% Adj net position': filler,
+  '% VAR': filler,
+  '% Cash': filler,
+  '% Equity': filler,
+  '% Debt': filler,
 };
 const Get = {
-  'Ratings received': Math.random() * 1000,
-  'Courses completed': Math.random() * 100,
-  'Deals assembled': Math.random() * 1000,
-  'EMARA income': Math.random() * 1000000,
+  'Ratings received': filler,
+  'Courses completed': filler,
+  'Deals assembled': filler,
+  'EMARA income': filler,
 };
 const Give = {
-  'Ratings given': Math.random() * 1000,
-  'Blogs posted': Math.random() * 100,
-  'Deals joined': Math.random() * 1000,
-  'Opinions given': Math.random() * 100,
+  'Ratings given': filler,
+  'Blogs posted': filler,
+  'Deals joined': filler,
+  'Opinions given': filler,
 };
 const parseNetworkCapitalData = data => Object.keys(data).map(key => [
   { value: key },
@@ -103,12 +103,12 @@ const MapStateToProps = state => ({
       ...(state.dashboard.userSocial ?
         state.dashboard.userSocial.Network
         : {}),
-      Partners: 1,
-      'Trusted relationship': 0,
-      'Board seats': 0,
-      'Advisory roles': 0,
-      'Total followers': 12,
-      'Monthly blog views': 232,
+      Partners: filler,
+      'Trusted relationship': filler,
+      'Board seats': filler,
+      'Advisory roles': filler,
+      'Total followers': filler,
+      'Monthly blog views': filler,
     },
   }, // todo remove this stub later
 });
