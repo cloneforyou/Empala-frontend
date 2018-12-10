@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import AnyChart from 'anychart-react';
 import PositionsTable from '../Widget/PositionsTable';
 import PositionsPortfolioTable from '../Widget/PositionsPortfolioTable';
@@ -90,10 +91,14 @@ class Positions extends Component {
       <div className="container-fluid">
         <div className="row no-gutters">
           <div className="col-lg-4 px-1">
-            <PositionsTable />
+            {
+              this.props.ETNASocketStarted && <PositionsTable />
+            }
           </div>
           <div className="col-lg-8">
-            <PositionsPortfolioTable />
+            {
+              this.props.ETNASocketStarted && <PositionsPortfolioTable />
+            }
             <div className="widget-col col-lg-12">
               <div className="widget">
                 <div className="widget__head">
@@ -121,4 +126,9 @@ class Positions extends Component {
   }
 }
 
-export default Positions;
+export default connect(state => (
+  {
+    ETNASocketStarted: state.dashboard.etnaSocket,
+  }
+))(Positions);
+

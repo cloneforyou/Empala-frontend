@@ -55,7 +55,7 @@ import {
   GET_EDOCUMENTS_LIST_FAILED,
   GET_EDOCUMENTS_LIST_REQUEST,
   SET_ACCESS_TOKEN,
-  SET_LEGAL_MESSAGES,
+  SET_LEGAL_MESSAGES, ETNA_SOCKET_STARTED, ETNA_SOCKET_STOPPED,
 } from '../constants/dashboard';
 import {
   DELETE_USERPIC_FAIL,
@@ -132,6 +132,7 @@ const initialState = {
   eDocumentsList: null,
   token: false,
   legalMessages: false,
+  etnaSocket: false,
 };
 
 const parseAccountBalance = (data) => {
@@ -523,7 +524,17 @@ function dashboard(state = initialState, action) {
       return {
         ...state,
         legalMessages: action.messages,
-      }
+      };
+    case ETNA_SOCKET_STARTED:
+      return {
+        ...state,
+        etnaSocket: true,
+      };
+    case ETNA_SOCKET_STOPPED:
+      return {
+        ...state,
+        etnaSocket: false,
+      };
     default:
       return state;
   }
