@@ -127,9 +127,7 @@ function* internalListenerQuotes(socket) {
   }));
   while (true) {
     const quotes = yield take(SUBSCRIBE_QUOTES);
-    console.log('SUUUBSCRIBE')
     const activePage = yield select(state => state.dashboard.activePageDashboard);
-    console.log('pppage --->', activePage)
     const sessionQuotesId = yield select(state => state.dashboard.sessionQuotesId);
     let quotesKeys = [];
     if (activePage === 'positions') {
