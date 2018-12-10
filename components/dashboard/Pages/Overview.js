@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { uniqueId } from 'lodash';
+import { Scrollbars } from 'react-custom-scrollbars';
 import WidgetNews from '../Widget/WidgetNews';
 import WidgetAdvertisement from '../Widget/WidgetAdvertisement';
 import FinancialCapitalTable from '../Widget/FinancialCapitalTable';
@@ -30,6 +31,12 @@ class Overview extends PureComponent {
     logPageView();
   }
 
+  renderThumbHorizontal = (props) => {
+    return (
+      <div {...props} className="widgets-row__scroll-block-thumb-horizontal" />
+    );
+  };
+
   render() {
     const widgetNews = [
       {
@@ -45,22 +52,34 @@ class Overview extends PureComponent {
     if (this.props.userDataLoaded) {
       return (
         <div className="container-fluid" style={{ marginBottom: '60px' }}>
-          <div className="widgets-row"> {/* Temporary solution. todo widgets responsive layout */}
-            <div style={{ width: '1732px' }}>
+          {/* Temporary solution. todo widgets responsive layout */}
+          <Scrollbars
+            className="widgets-row"
+            renderThumbHorizontal={this.renderThumbHorizontal}
+            style={{height: '400px'}}
+            universal
+          >
+            <div style={{width: '1732px'}}>
               <FinancialCapitalTable />
               <SocialCapitalTable />
               <EnvironmentalCapitalTable />
             </div>
-          </div>
+          </Scrollbars>
 
-          <div className="widgets-row"> {/* Temporary solution. todo widgets responsive layout */}
-            <div style={{ width: '1732px' }}>
+          {/* Temporary solution. todo widgets responsive layout */}
+          <Scrollbars
+            className="widgets-row"
+            renderThumbHorizontal={this.renderThumbHorizontal}
+            style={{height: '300px'}}
+            universal
+          >
+            <div style={{width: '1732px'}}>
               <ActiveOrdersTable />
               <WorkingDealsTable />
               <DealDevelopmentTable />
             </div>
-          </div>
-          <div className="d-flex">
+          </Scrollbars>
+          <div className="d-flex justify-content-center">
             {
               widgetNews.map((widget, i) => (
                 <WidgetNews
