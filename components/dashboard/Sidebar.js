@@ -16,13 +16,17 @@ class Sidebar extends Component {
   }
 
   openMenu = (nextLabel) => {
-    this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen }), () => {
+    this.setState( () => {
+      if (this.state.countryMenuIsOpen) return { countryMenuIsOpen: false };
+      return { countryMenuIsOpen: true }
+      }, () => {
       this.props.setGroupCountry(nextLabel)
     });
   };
 
   closeMenu = () => {
-    setTimeout(() => this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen })), 200);
+    setTimeout(() => this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen })), 100);
+    // this.setState( prevState => ({ countryMenuIsOpen: false }))
   };
 
   handleClick = (label, market) => {
