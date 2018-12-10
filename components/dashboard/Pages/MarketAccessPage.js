@@ -24,7 +24,7 @@ class MarketAccessPage extends React.Component {
         <div>
           <TitleBar />
           <iframe
-            src={`https://${getSubdomain()}.empala.com/UserSecurity`}
+            src={`https://${getSubdomain(origin)}.empala.com/UserSecurity`}
             style={frameStyle}
             marginHeight={10}
             title="MarketsFrame"
