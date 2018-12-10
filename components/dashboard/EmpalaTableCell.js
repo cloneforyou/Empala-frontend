@@ -25,8 +25,14 @@ export default class EmpalaTableCell extends Component {
   }
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.mark === 'numeric') {
+      const current = typeof this.props.value === 'string'
+        ? parseFloat(this.props.value.replace(',', ''))
+        : this.props.value;
+      const next = typeof nextProps.value === 'string'
+        ? parseFloat(nextProps.value.replace(',', ''))
+        : nextProps.value;
       // console.log('mmmmmmmmm', this.props.mark, nextProps);
-      if (!isNaN(this.props.value) && !isNaN(nextProps.value)) {
+      if (!isNaN(current) && !isNaN(next)) {
         if (this.props.value < nextProps.value) this.setState(() => ({ attr: 'up' }));
         else if (this.props.value > nextProps.value) this.setState(() => ({ attr: 'down' }));
         // else if (this.props.value === nextProps.value) this.setState(() => ({ attr: '' }));
