@@ -57,9 +57,18 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
       return 0;
     }, 0);
   };
+  const calculateTotalAcValue = () => {
+    // TODO modify later to support other BD data
+    const equities = Object.keys(balance).map(el => (balance[el].equityTotal || {}).Value || 0);
+    return equities.reduce((a, b) => a + b, 0);
+  };
   const exposures = [
-    { name: 'Total a/c value', value: calculateTotal(), day_ch: 0 },
-    { name: 'Net position', value: 0, day_ch: 0 },
+    {
+      name: 'Total a/c value',
+      value: calculateTotalAcValue(),
+      day_ch: (balance.ETNA.changePercent || {}).Value,
+    },
+    { name: 'Net position', value: calculateTotal(), day_ch: 0 },
     { name: 'Adj net position', value: 0, day_ch: 0 },
     { name: 'Gross position', value: 0, day_ch: 0 },
     { name: 'Adj gross position', value: 0, day_ch: 0 },
@@ -131,7 +140,13 @@ const FinancialCapitalTable = props => (
           props.accountBalance &&
           <EmpalaTable
             tableName="overview_financial_capital_exposure"
-            tableData={getTableDataByName('overview_financial_capital_exposure', props.positions, props.accountBalance, props.financial.performance['1 Day'])}
+            tableData={
+              getTableDataByName(
+                'overview_financial_capital_exposure',
+                props.positions, props.accountBalance,
+                props.financial.performance['1 Day'],
+              )
+            }
             small
           />
         }
