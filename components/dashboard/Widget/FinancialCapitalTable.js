@@ -9,6 +9,10 @@ import {
 } from '../../../utils/dashboardUtils';
 
 
+const getColorForNumericValue = (value) => {
+  if (!value || Number.isNaN(value) || value === '--') return null;
+  return value > 0 ? 'green' : 'red';
+};
 const widget = getWidgetAttributesByName('overview_financial_capital_exposure');
 const marketAllocations = [
   'Emara',
@@ -25,14 +29,20 @@ const parsePerformanceData = (data, tableName) => {
   if (tableName === 'overview_financial_capital_performance_st') {
     return Object.keys(data).slice(1, 5).map(key => [
       { value: key },
-      { value: formatNumberWithFixedPoint(data[key]['% change'], 1) },
+      {
+        value: formatNumberWithFixedPoint(data[key]['% change'], 1),
+        color: getColorForNumericValue(data[key]['% change']),
+      },
       { value: formatNumberWithFixedPoint(data[key]['Vs indexes'], 1) },
     ]);
   }
   if (tableName === 'overview_financial_capital_performance_lt') {
     return Object.keys(data).slice(5).map(key => [
       { value: key },
-      { value: formatNumberWithFixedPoint(data[key]['% change'], 1) },
+      {
+        value: formatNumberWithFixedPoint(data[key]['% change'], 1),
+        color: getColorForNumericValue(data[key]['% change']),
+      },
       { value: formatNumberWithFixedPoint(data[key]['Vs indexes'], 1) },
     ]);
   }
@@ -57,9 +67,19 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
       return 0;
     }, 0);
   };
+  const calculateTotalAcValue = () => {
+    // TODO modify later to support other BD data
+    const equities = Object.keys(balance).map(el => (balance[el].equityTotal || {}).Value || 0);
+    return equities.reduce((a, b) => a + b, 0);
+  };
   const exposures = [
-    { name: 'Total a/c value', value: calculateTotal(), day_ch: 0 },
-    { name: 'Net position', value: 0, day_ch: 0 },
+    {
+      name: 'Total a/c value',
+      value: calculateTotalAcValue(),
+      day_ch: (balance.ETNA.changePercent || {}).Value,
+      color: getColorForNumericValue((balance.ETNA.changePercent || {}).Value),
+    },
+    { name: 'Net position', value: calculateTotal(), day_ch: 0 },
     { name: 'Adj net position', value: 0, day_ch: 0 },
     { name: 'Gross position', value: 0, day_ch: 0 },
     { name: 'Adj gross position', value: 0, day_ch: 0 },
@@ -95,7 +115,7 @@ const getTableDataByName = (tableName, positions, balance, dayChange) => {
     return exposures.map(exp => [
       { value: exp.name },
       { value: formatNumberWithFixedPoint(exp.value) },
-      { value: formatNumberWithFixedPoint(exp.day_ch, 1) },
+      { value: formatNumberWithFixedPoint(exp.day_ch, 1), color: exp.color },
     ]);
   }
   if (tableName === 'overview_financial_capital_allocation') {
@@ -131,7 +151,13 @@ const FinancialCapitalTable = props => (
           props.accountBalance &&
           <EmpalaTable
             tableName="overview_financial_capital_exposure"
-            tableData={getTableDataByName('overview_financial_capital_exposure', props.positions, props.accountBalance, props.financial.performance['1 Day'])}
+            tableData={
+              getTableDataByName(
+                'overview_financial_capital_exposure',
+                props.positions, props.accountBalance,
+                props.financial.performance['1 Day'],
+              )
+            }
             small
           />
         }
