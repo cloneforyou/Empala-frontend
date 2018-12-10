@@ -6,7 +6,7 @@ import {
   SUBSCRIBE_WATCHLIST_CONTENT,
   UNSUBSCRIBE_QUOTES,
   UNSUBSCRIBE_WATCHLIST_CONTENT,
-  SET_SESSION_ID,
+  SET_SESSION_ID, ETNA_SOCKET_STARTED, ETNA_SOCKET_STOPPED,
 } from '../constants/dashboard';
 import { serverOrigins } from '../utils/config';
 import {
@@ -20,7 +20,7 @@ import {
   updateQuotes,
   updateAllQuotes,
   subscribeWatchlists,
-  subscribeQuotes,
+  subscribeQuotes, setETNASocketStarted, setETNASocketStopped,
 } from '../actions/dashboard';
 import { calculateOrderDistance, calculateOrderPrice, parseOrderDate } from '../utils/dashboardUtils';
 import { selectETNADataRequest } from './dashboard';
@@ -127,7 +127,9 @@ function* internalListenerQuotes(socket) {
   }));
   while (true) {
     const quotes = yield take(SUBSCRIBE_QUOTES);
+    console.log('SUUUBSCRIBE')
     const activePage = yield select(state => state.dashboard.activePageDashboard);
+    console.log('pppage --->', activePage)
     const sessionQuotesId = yield select(state => state.dashboard.sessionQuotesId);
     let quotesKeys = [];
     if (activePage === 'positions') {
@@ -187,6 +189,7 @@ function* externalListener(socketChannel) {
         // yield put(updateQuotes(action.item));
         quotesMap[action.item.Key] = action.item;
       }
+      yield put(setETNASocketStarted());
     }
     if (action.item.Cmd === 'CreateSession.txt' && action.item.SessionId && action.type !== 'quote') {
       yield put({ type: SET_SESSION_ID, id: action.item.SessionId, name: 'orders' });
@@ -290,6 +293,7 @@ function* updateQuotesList(timeout) {
 function* wsHandling() {
   while (true) {
     const data = yield take(START_WEBSOCKET);
+    // if (data) yield put(setETNASocketStarted());
     const ETNACredentials = yield select(state => (
       state.dashboard.userData ? state.dashboard.userData.data.etna_credentials : {}));
     console.log('==>', ETNACredentials);
@@ -326,6 +330,7 @@ function* wsHandling() {
     if (cancel) {
       quoteChannel.close();
       ordersChannel.close();
+      yield put(setETNASocketStopped());
     }
   }
 }

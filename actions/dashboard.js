@@ -78,7 +78,7 @@ import {
   GET_EDOCUMENTS_LIST_SUCCESS,
   GET_EDOCUMENTS_LIST_FAILED,
   SET_ACCESS_TOKEN,
-  SET_LEGAL_MESSAGES,
+  SET_LEGAL_MESSAGES, ETNA_SOCKET_STARTED, ETNA_SOCKET_STOPPED,
 } from '../constants/dashboard';
 
 
@@ -145,6 +145,18 @@ export function refreshTokens() {
 export function startSocket() {
   return {
     type: START_WEBSOCKET,
+  };
+}
+
+export function setETNASocketStarted() {
+  return {
+    type: ETNA_SOCKET_STARTED,
+  };
+}
+
+export function setETNASocketStopped() {
+  return {
+    type: ETNA_SOCKET_STOPPED,
   };
 }
 

@@ -11,14 +11,14 @@ class Body extends Component {
   }
 
   render() {
-    const { sidebarCollapsed, loadingPage, currentColorScheme } = this.props;
+    const { sidebarCollapsed, loadingPage, currentColorScheme, ETNASocketStarted } = this.props;
     return (
       <Fragment>
       <div className="container-fluid">
         <div className="row">
           <Sidebar sidebarCollapsed={sidebarCollapsed} />
           {
-            !loadingPage ?
+            (!loadingPage && ETNASocketStarted) ?
               <Main sidebarCollapsed={sidebarCollapsed} /> :
               <div className="loader__wrap">
                 <div className="loader">
@@ -45,5 +45,6 @@ export default connect(state => ({
   loadingPage: state.dashboard.loadingPage,
   activePageDashboard: state.dashboard.activePageDashboard,
   currentColorScheme: state.dashboard.currentColorScheme,
+  ETNASocketStarted: state.dashboard.etnaSocket,
 }), {})(Body);
 
