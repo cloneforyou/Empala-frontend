@@ -253,16 +253,16 @@ class Funding extends PureComponent {
     if (!this.props.selected_institution || !this.props.ach_amount ||
       !this.props.selectedAccountForACH || !this.props.transfer_direction_ACH) return;
 
-    let institution_id;
+    let ACH_relation_id;
 
     this.props.institutionsList.forEach((item) => {
-      if (item.name !== this.props.selected_institution) return;
-      institution_id = item.institution_id;
+      if (item.ACHRelationshipId !== this.props.selected_institution) return;
+      ACH_relation_id = item.ACHRelationshipId;
     });
 
     const data = {
       amount: this.props.ach_amount,
-      institutionId: institution_id,
+      ACHRelationshipId: ACH_relation_id,
     };
 
     if (this.props.transfer_direction_ACH === 'Inbound') {

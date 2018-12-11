@@ -84,6 +84,7 @@ export function* getInstitutionsData() {
 }
 
 export function* addInstitution({ token, institutionData }) {
+  console.log('test', institutionData)
   const options = {
     method: 'POST',
     headers: {
@@ -92,6 +93,7 @@ export function* addInstitution({ token, institutionData }) {
     data: {
       id: institutionData.institution && institutionData.institution.institution_id,
       name: institutionData.institution && institutionData.institution.name,
+      accounts: institutionData.accounts,
       token,
     },
   };
@@ -103,14 +105,14 @@ export function* addInstitution({ token, institutionData }) {
   }
 }
 
-export function* removeInstitution({ institutionId }) {
+export function* removeInstitution({ ACHRelationshipId }) {
   const options = {
     method: 'DELETE',
     headers: {
       'X-Access-Token': localStorage.getItem('accessToken'),
     },
   };
-  const url = `${urls.removeInstitution}?id=${institutionId}`;
+  const url = `${urls.removeInstitution}?id=${ACHRelationshipId}`;
   try {
     const response = yield call(request, url, options);
     yield getInstitutionsData();
@@ -119,12 +121,12 @@ export function* removeInstitution({ institutionId }) {
   }
 }
 
-export function* achDeposit({ amount, institutionId }) {
+export function* achDeposit({ amount, ACHRelationshipId }) {
   const options = {
     method: 'POST',
     data: {
       amount,
-      institution_id: institutionId,
+      ACH_relation_id: ACHRelationshipId,
     },
     headers: {
       'X-Access-Token': localStorage.getItem('accessToken'),
@@ -147,12 +149,12 @@ export function* achDeposit({ amount, institutionId }) {
   }
 }
 
-export function* achWithdraw({ amount, institutionId }) {
+export function* achWithdraw({ amount, ACHRelationshipId }) {
   const options = {
     method: 'POST',
     data: {
       amount,
-      institution_id: institutionId,
+      ACH_relation_id: ACHRelationshipId,
     },
     headers: {
       'X-Access-Token': localStorage.getItem('accessToken'),

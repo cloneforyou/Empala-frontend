@@ -22,6 +22,8 @@ const AddInstitutionContainer = props => {
   const checkDisablingAddPlaidAccount = () => {
     let plaidAccountCount = 0;
 
+    return false // enable create multiple plaid account
+
     props.institutionsList.forEach((item) => {
       if (item.custom === false) plaidAccountCount += 1;
     })
@@ -31,6 +33,8 @@ const AddInstitutionContainer = props => {
 
   const checkDisablingAddManualAccount = () => {
     let manualAccountCount = 0;
+
+    return true; // disable create manual account
 
     props.institutionsList.forEach((item) => {
       if (item.custom) manualAccountCount += 1;

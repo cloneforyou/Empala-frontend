@@ -204,10 +204,10 @@ export function setSecuritiesInputValue(id, index, value) {
   };
 }
 
-export function setPaymentIntitution(name) {
+export function setPaymentIntitution(ACHRelationshipId) {
   return {
     type: SET_PAYMENT_INSTITUTION,
-    name,
+    ACHRelationshipId,
   };
 }
 
@@ -230,10 +230,10 @@ export function addInstitution(token, institutionData) {
     institutionData,
   };
 }
-export function removeInstitution(institutionId) {
+export function removeInstitution(ACHRelationshipId) {
   return {
     type: REMOVE_INSTITUTION_REQUEST,
-    institutionId,
+    ACHRelationshipId,
   };
 }
 
@@ -270,19 +270,19 @@ export function setInstitutions(institutionsList) {
   };
 }
 
-export function ACHDeposit({ amount, institutionId}) {
+export function ACHDeposit({ amount, ACHRelationshipId }) {
   return {
     type: ACH_DEPOSIT_REQUEST,
     amount,
-    institutionId,
+    ACHRelationshipId,
   };
 }
 
-export function ACHWithdraw({ amount, institutionId}) {
+export function ACHWithdraw({ amount, ACHRelationshipId }) {
   return {
     type: ACH_WITHDRAW_REQUEST,
     amount,
-    institutionId,
+    ACHRelationshipId,
   };
 }
 
