@@ -164,7 +164,7 @@ function funding(state = initialState, action) {
     case SET_PAYMENT_INSTITUTION:
       return {
         ...state,
-        selected_institution: state.selected_institution === action.name ? '' : action.name,
+        selected_institution: state.selected_institution === action.ACHRelationshipId ? '' : action.ACHRelationshipId,
       };
     case UNSET_PAYMENT_INSTITUTION:
       return {

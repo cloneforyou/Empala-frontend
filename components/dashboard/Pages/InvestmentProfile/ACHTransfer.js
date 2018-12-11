@@ -13,14 +13,22 @@ const TransferForm = props => {
 
     if (inputField === 'from') {
       if (props.transfer_direction_ACH === 'Inbound') {
-        result = props.selected_institution || '';
+        props.institutionsList.forEach((item) => {
+          if (item.ACHRelationshipId === props.selected_institution) {
+            result = `****${item.accountMask}`;
+          }
+        });
       }
       if (props.transfer_direction_ACH === 'Outbound') {
         result = props.selectedAccount ? 'Empala - US Account' : '';
       }
     } else if (inputField === 'to') {
       if (props.transfer_direction_ACH === 'Outbound') {
-        result = props.selected_institution || '';
+        props.institutionsList.forEach((item) => {
+          if (item.ACHRelationshipId === props.selected_institution) {
+            result = `****${item.accountMask}`;
+          }
+        });
       }
       if (props.transfer_direction_ACH === 'Inbound') {
         result = props.selectedAccount ? 'Empala - US Account' : '';
@@ -112,7 +120,7 @@ const Tile = props => (
           });
           return;
         };
-        props.setPaymentIntitution(props.institution_name);
+        props.setPaymentIntitution(props.ACHRelationshipId);
       }}
       role="button"
     >
@@ -121,7 +129,7 @@ const Tile = props => (
         role="button"
         onClick={(e) => {
           e.stopPropagation();
-          props.removeInstitution(props.institutionId);
+          props.removeInstitution(props.ACHRelationshipId);
          //  props.openModal('actionModal');
         }}
       >
@@ -134,7 +142,7 @@ const Tile = props => (
       </div>
       <div className="funding-ach-tiles-tile__text">
         <span className={`funding-ach-tiles-tile__check
-         ${(props.selected_institution !== props.institution_name) && 'd-none'}`}
+         ${(props.selected_institution !== props.ACHRelationshipId) && 'd-none'}`}
         />
         Account: {`****${props.account_no.slice(-4)}`}
       </div>
@@ -196,10 +204,11 @@ export default class ACHTransfer extends React.Component {
                 <div className="funding-ach-tiles">
                   {this.props.institutionsList.map(item => (
                     <Tile
-                      key={item.institution_id}
+                      key={item.ACHRelationshipId}
                       institutionId={item.institution_id}
+                      ACHRelationshipId={item.ACHRelationshipId}
                       institution_name={item.name}
-                      account_no={item.accounts[0].mask || ''} // TODO investigate about account no
+                      account_no={item.accountMask}
                       setPaymentIntitution={this.props.setPaymentIntitution}
                       selected_institution={this.props.selected_institution}
                       removeInstitution={this.props.removeInstitution}
