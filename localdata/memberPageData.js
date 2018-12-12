@@ -154,7 +154,7 @@ export const dataFields = [
     {
       id: 'member_account_contact_phone',
       type: 'text',
-      label: 'Contact telephone no.',
+      label: 'Mobile No. (we will text you to verify the number)',
       placeholder: '',
     },
   ],

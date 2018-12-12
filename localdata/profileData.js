@@ -111,7 +111,7 @@ export const fieldsMembership = [
   {
     id: 'account_information_contact_phone_number',
     type: 'text',
-    label: 'Contact telephone no.',
+    label: 'Mobile No.  (we will text you to verify the number)',
     placeholder: '',
     field: 'input',
     disabled: true,
