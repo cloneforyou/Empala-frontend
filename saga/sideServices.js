@@ -4,15 +4,15 @@ import { setFieldInvalid, setFieldValid, setInputFieldValueById } from '../actio
 import { statesAbbvs } from '../localdata/usStatesList';
 import { origin, clientsId } from '../keys';
 
+/**
+ * Get base URL for USPS service
+ * @param env
+ * @returns {boolean|string|string}
+ */
 const getBaseUrl = (env) => {
-  switch (env) {
-    case 'dev':
-      return 'http://production.shippingapis.com';
-    case 'prod':
-      return 'https://secure.shippingapis.com';
-    default:
-      return 'http://production.shippingapis.com';
-  }
+  const insecure = 'http://production.shippingapis.com';
+  const secure = 'https://secure.shippingapis.com';
+  return (env === 'dev' && insecure) || secure;
 };
 
 export default function* getAddressInfoByZIP({ fieldId, zipCode }) {
