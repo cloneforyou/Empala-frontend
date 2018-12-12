@@ -60,13 +60,13 @@ class FinalReviewPage extends PureComponent {
                     value={fullName || empty}
                   />
                   <FieldComponent
-                    col={6}
+                    col={12}
                     label="Email address"
                     value={data.member_account_email || empty}
                   />
                   <FieldComponent
-                    col={6}
-                    label="Contact number"
+                    col={12}
+                    label="Mobile No. (we will text you to verify the number)"
                     value={data.member_account_contact_phone || empty}
                   />
                   <FieldComponent
