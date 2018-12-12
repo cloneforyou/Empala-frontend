@@ -8,7 +8,7 @@ const memberCountryOfResidenceOptions = [
   },
 ];
 
-if (origin === 'dev') {
+if (origin !== 'prod') {
   memberCountryOfResidenceOptions.push({
     value: 'Russia',
     title: 'Russia',
