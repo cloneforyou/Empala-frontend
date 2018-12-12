@@ -51,7 +51,7 @@ import {
   getEDocumentsListSuccess,
   getEDocumentsListFailed,
 } from '../actions/dashboard';
-import { serverOrigins } from '../utils/config';
+import backendOrigins from '../utils/config';
 import { origin, cityfalcon } from '../keys';
 import requestExternalNews from '../utils/requestExternalNews';
 import { parseOrdersList } from '../utils/dashboardUtils';
@@ -319,7 +319,9 @@ export function* selectETNADataRequest({ payloadType }) {
 /*  --------- ETNA TEST API FUNCTIONS  END ---------- */
 
 /* ---------- EMPALA SOCKET IO HANDLING ----------*/
-const socketServerURL = origin === 'dev' ? serverOrigins.local : serverOrigins.aws;
+let socketServerURL = backendOrigins.dev;
+if (origin === 'stage') socketServerURL = backendOrigins.stage;
+if (origin === 'prod') socketServerURL = backendOrigins.prod;
 // const socket = io();
 const connect = async token => io.connect(socketServerURL, {
   query: {

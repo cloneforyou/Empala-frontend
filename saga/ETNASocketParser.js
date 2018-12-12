@@ -8,7 +8,6 @@ import {
   UNSUBSCRIBE_WATCHLIST_CONTENT,
   SET_SESSION_ID, ETNA_SOCKET_STARTED, ETNA_SOCKET_STOPPED,
 } from '../constants/dashboard';
-import { serverOrigins } from '../utils/config';
 import {
   modifyPosition,
   setOrdersList,
