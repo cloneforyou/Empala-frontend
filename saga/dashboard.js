@@ -101,7 +101,7 @@ export function* callAnimationForNotifications() {
 }
 
 export function* getExternalNews() {
-  const url = urls.cityfalcon + cityfalcon.token;
+  const url = urls.cityfalcon;
   const options = {
     method: 'GET',
   };
@@ -134,6 +134,13 @@ export function* getNews() {
     } catch (err) {
       console.error(' ** DASHBOARD ERROR =======>', err);
     }
+  }
+}
+
+export function* balancesUpdates() {
+  while (true) {
+    yield delay(30000);
+    yield selectETNADataRequest({ payloadType: 'balance' });
   }
 }
 
