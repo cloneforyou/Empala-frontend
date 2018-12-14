@@ -186,14 +186,17 @@ function* externalListener(socketChannel) {
         // yield put(updateQuotes(action.item));
         quotesMap[action.item.Key] = action.item;
       }
-      yield put(setETNASocketStarted());
+      if (action.item.EntityType !== 'Quote') yield put(setETNASocketStarted());
     }
     if (action.item.Cmd === 'CreateSession.txt' && action.item.SessionId && action.type !== 'quote') {
       yield put({ type: SET_SESSION_ID, id: action.item.SessionId, name: 'orders' });
     }
     if (!action.item.Cmd && action.item.EntityType === 'Order') {
       // yield put(updateOrders(action.item));
-      yield call(selectETNADataRequest, { payloadType: 'orders_list' });
+      yield all([
+        selectETNADataRequest({ payloadType: 'orders_list' }),
+        selectETNADataRequest({ payloadType: 'positions' }),
+      ]);
       yield put(subscribeWatchlists());
     }
     if (!action.item.Cmd && action.item.EntityType === 'Watchlist') {
@@ -246,11 +249,10 @@ function watchMessages(socket, params) {
       // socket.send(JSON.stringify(request)); // Send data to server
     };
     socket.onmessage = (event) => {
-      // console.log('msssg', event);
       const msg = JSON.parse(event.data);
       // console.log('===> msssg', msg)
       if (msg.Cmd === 'CreateSession.txt' && msg.SessionId) {
-        console.log('WS SessionId:', msg.SessionId);
+        // console.log('WS SessionId:', msg.SessionId);
         if (params.EntityType === 'WatchlistContent') {
           // console.log('WLC')
           params.Keys.forEach(key => socket.send(JSON.stringify({
@@ -260,7 +262,6 @@ function watchMessages(socket, params) {
             Keys: key,
           })));
         } else {
-          console.log('all', params.EntityType)
           params.EntityType.forEach(type => socket.send(JSON.stringify({
             ...params,
             EntityType: type,

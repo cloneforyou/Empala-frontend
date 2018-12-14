@@ -101,7 +101,7 @@ export function* callAnimationForNotifications() {
 }
 
 export function* getExternalNews() {
-  const url = urls.cityfalcon + cityfalcon.token;
+  const url = urls.cityfalcon;
   const options = {
     method: 'GET',
   };
