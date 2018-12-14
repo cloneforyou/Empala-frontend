@@ -45,7 +45,7 @@ class PositionsPortfolioTable extends React.Component {
   constructor(props) {
     super(props);
     this.widget = getTableHeaderByName('dashboard_positions_portfolio');
-    this.positions = this.getPositionsData(this.props.positionsParsed);
+    // this.positions = this.getPositionsData(this.props.positionsParsed);
     this.positionsPLs = getPositionsPLs(this.props.positionsParsed);
   }
 
@@ -116,7 +116,7 @@ class PositionsPortfolioTable extends React.Component {
   }
 
   render() {
-    const positions = this.updatePositionsData(this.positions, this.props.quotes);
+    const positions = this.updatePositionsData(this.getPositionsData(this.props.positionsParsed), this.props.quotes);
     return (
       <div
         className={`widget-col col-lg-${this.widget.col}`}
