@@ -137,6 +137,13 @@ export function* getNews() {
   }
 }
 
+export function* balancesUpdates() {
+  while (true) {
+    yield delay(30000);
+    yield selectETNADataRequest({ payloadType: 'balance' });
+  }
+}
+
 export function* getAppSettings() {
   const url = '/api/settings';
   const options = {

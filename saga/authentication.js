@@ -31,7 +31,7 @@ import {
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
-import { selectETNADataRequest, getNews, sessionTimeout, getExternalNews } from './dashboard';
+import { selectETNADataRequest, getNews, sessionTimeout, getExternalNews, balancesUpdates } from './dashboard';
 
 
 /* todo remove when actual data been available */
@@ -274,7 +274,9 @@ export function* getUserData() {
     }
     yield put(restartSessionTimeout());
     yield getExternalNews();
-    yield getNews();
+    yield all([
+      getNews(),
+      balancesUpdates()]);
   } catch (err) {
     // console.log(' ** DASHBOARD ERROR =======>', err);
     if (err.message === 'Missing refresh token' || err.message === 'Refresh token expired') {
