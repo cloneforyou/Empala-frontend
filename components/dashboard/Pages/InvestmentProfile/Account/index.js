@@ -13,11 +13,18 @@ import {
   CONCRETE,
   MIRAGE,
 } from '../../../../../constants/colors';
-import {getETNAData, setActivePage, openModal, deleteAccount} from '../../../../../actions/dashboard';
+import {
+  getETNAData,
+  setActivePage,
+  openModal,
+  deleteAccount,
+} from '../../../../../actions/dashboard';
 import {
   getActiveAccountTab,
   changeActiveAccountTab,
   changeSectionTitleBar,
+  setInputValueForAccount,
+  saveInputValueForAccount,
 }from '../../../../../actions/account';
 import { getGlobalAccounts } from '../../../../../actions/funding';
 import {
@@ -135,6 +142,9 @@ class Account extends Component {
           prefix={TABS[0].prefix}
           accountBalance={this.props.accountBalance.ETNA}
           currentColorScheme={currentColorScheme}
+          setInputValueForAccount={this.props.setInputValueForAccount}
+          saveInputValueForAccount={this.props.saveInputValueForAccount}
+          fieldsErrors={this.props.fieldsErrors}
           />
         }
         {value === 1 && <div className="account__container">Coming Spring 2019</div>}
@@ -171,6 +181,7 @@ export default withStyles(styles)(connect(
     currentSectionTitleBar: state.account.currentSectionTitleBar,
     iconAccountTitleBar: state.account.iconAccountTitleBar,
     global_accounts: state.funding.global_accounts,
+    fieldsErrors: state.profile.fieldsErrors,
   }),
   dispatch => ({
     setActivePage: page => dispatch(setActivePage(page)),
@@ -181,5 +192,7 @@ export default withStyles(styles)(connect(
     changeSectionTitleBar: (tab, icon) => dispatch(changeSectionTitleBar(tab, icon)),
     openModal: name => dispatch(openModal(name)),
     submitDelete: () => dispatch(deleteAccount()),
+    setInputValueForAccount: (account, id) => dispatch(setInputValueForAccount(account, id)),
+    saveInputValueForAccount: id => dispatch(saveInputValueForAccount(id)),
   }),
 )(Account));
