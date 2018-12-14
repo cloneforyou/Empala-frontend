@@ -1,15 +1,30 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { generateId, formatNumberWithFixedPoint } from '../../../../../../utils/dashboardUtils';
 
 
 class AccountsGlobal extends Component {
+  static propTypes = {
+    fieldsErrors: PropTypes.oneOfType([PropTypes.shape(), PropTypes.bool]).isRequired,
+  };
+
   constructor(props) {
     super(props);
-    this.mappingComponent = (item) => {
+
+    this.setInputValueForAccount = (account, name) => {
+      this.props.setInputValueForAccount(account, name);
+    };
+
+    this.saveChanging = e => {
+      this.props.saveInputValueForAccount(e.target.id);
+    };
+
+    this.mappingComponent = (item, index) => {
+      const { fieldsErrors, accountBalance } = this.props;
       return (
         <div className="d-flex global-account_padding" key={generateId()}>
           <div className="d-flex align-items-center mx-2">
-            <i className="icon-flag icon-flag_usa"/>
+            <i className="icon-flag icon-flag_usa" />
           </div>
           <div className="pseudo-input mw_208 mx-2">
             <span className="pseudo-input__label">Account no</span>
@@ -24,12 +39,15 @@ class AccountsGlobal extends Component {
           <div className="pseudo-input mw_350 mx-2">
             <span className="pseudo-input__label">Account name</span>
             <input
-              id="accounts_global_account_name"
+              id={`accounts_global_account_name_${index}`}
               type="text"
               className="pseudo-input__input pseudo-input__input_dark"
-              value={item.account_name}
-              readOnly
+              defaultValue={item.account_name}
+              onChange={e => this.setInputValueForAccount(item.accountNo, e.target.value, e.target.id)}
+              onBlur={this.saveChanging}
             />
+            {fieldsErrors[`accounts_global_account_name_${index}`] &&
+            <span className="text-error fs-12">{fieldsErrors[`accounts_global_account_name_${index}`]}</span>}
           </div>
           <div className="pseudo-input mw_150 mx-2">
             <span className="pseudo-input__label">Customer Type</span>
@@ -57,7 +75,7 @@ class AccountsGlobal extends Component {
               id="accounts_global_net_value"
               type="text"
               className="pseudo-input__input pseudo-input__input_dark"
-              value={formatNumberWithFixedPoint(this.getTotalBalance(this.props.accountBalance),2)}
+              value={formatNumberWithFixedPoint(this.getTotalBalance(accountBalance),2)}
               readOnly
             />
           </div>

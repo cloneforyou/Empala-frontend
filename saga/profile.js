@@ -1,5 +1,5 @@
 import { call, put, select, all, takeLatest, takeEvery } from 'redux-saga/effects';
-import axios from 'axios';
+import { delay } from 'redux-saga';
 import request from '../utils/request';
 import {
   deleteUserPicFail,
@@ -20,8 +20,9 @@ import {
   showPopupPIN,
   setAppSettings, restartSessionTimeout,
 } from '../actions/dashboard';
-import { cleanErrorMessage, passwordUpdateFailed, passwordUpdateSuccess } from '../actions/auth';
-import { setFieldInvalid } from '../actions/registration';
+import { cleanErrorMessage } from '../actions/auth';
+import { clearInputValueForAccount } from '../actions/account';
+import { setFieldInvalid, setFieldValid } from '../actions/registration';
 import {
   CANCEL_PROFILE_INFO_CHANGE,
   DELETE_USERPIC_REQUEST,
@@ -30,6 +31,7 @@ import {
   UPDATE_PROFILE_REQUEST,
 } from '../constants/profile';
 import { DELETE_ACCOUNT_REQUEST, UPLOAD_IMAGE_REQUEST, SAVE_COLOR_SCHEME } from '../constants/dashboard';
+import { SAVE_INPUT_VALUE_FOR_ACCOUNT } from '../constants/account';
 
 const urls = {
   updateAppSettings: '/api/settings',
@@ -38,6 +40,7 @@ const urls = {
   uploadAvatar: '/api/upload/avatar',
   deleteAccount: '/api/member/delete',
   deleteAvatar: '/api/member/avatar',
+  updateAccountName: '/api/accounts/name',
 };
 
 export function* sendProfileData() {
@@ -216,12 +219,35 @@ function* cancelInfoChange() {
   yield put(dropProfileInfo(userData));
 }
 
+export function* saveAccountName(action) {
+  const accessToken = localStorage.getItem('accessToken');
+  const data = yield select(state => state.account.changedAccountField);
+  if (Object.keys(data).length === 0) return false;
+  const url = urls.updateAccountName;
+  const options = {
+    headers: { 'x-access-token': accessToken },
+    method: 'PATCH',
+    data,
+  };
+
+  try {
+    const result = yield call(request, url, options);
+    yield put(clearInputValueForAccount());
+  } catch (err) {
+    yield put(setFieldInvalid(action.id, 'Fail to saving Account name.'));
+    yield delay(2000);
+    yield put(setFieldValid(action.id));
+    yield put(clearInputValueForAccount());
+  }
+}
+
 export default function* profileSaga() {
   yield all([
     takeLatest(UPDATE_PROFILE_REQUEST, sendProfileData),
     takeLatest(RESET_PASSWORD_REQUEST, resetPassword),
     takeLatest(DELETE_USERPIC_REQUEST, deleteUserpic),
     takeLatest(UPDATE_APP_SETTINGS_REQUEST, updateAppSettings),
+    takeEvery(SAVE_INPUT_VALUE_FOR_ACCOUNT, saveAccountName),
     takeEvery(UPLOAD_IMAGE_REQUEST, uploadImage),
     takeEvery(SAVE_COLOR_SCHEME, saveColorThem),
     takeEvery(DELETE_ACCOUNT_REQUEST, accountDelete),
