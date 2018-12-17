@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import Head from 'next/head';
 import Link from 'next/link';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { withReduxSaga } from '../store';
@@ -8,8 +9,14 @@ import Footer from '../components/registration/Footer';
 import stylesheet from '../assets/styles/main.scss';
 import { unblockAccountInit } from '../actions/auth';
 
+
 class Unblock extends React.PureComponent {
-  static async getInitialProps({ isServer, res, store, query }) {
+  static async getInitialProps({
+    isServer,
+    res,
+    store,
+    query,
+  }) {
     if (isServer && !query.code) return res.redirect('/');
     if (query.code) store.dispatch(unblockAccountInit(query.code));
     return { code: query.code };
@@ -26,7 +33,11 @@ class Unblock extends React.PureComponent {
   render() {
     return (
       <MuiThemeProvider>
-        <div>
+        <Fragment>
+          <Head>
+            <title>Empala - Investor Empowerment</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+          </Head>
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header />
           <div className="index_placeholder noselect">
@@ -40,7 +51,7 @@ class Unblock extends React.PureComponent {
             </div>
           </div>
           <Footer />
-        </div>
+        </Fragment>
       </MuiThemeProvider>
     );
   }

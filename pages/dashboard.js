@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import Head from 'next/head'
-import { withReduxSaga } from '../store'
+import React, { Component, Fragment } from 'react'
+import Head from 'next/head';
+import { withReduxSaga } from '../store';
 import { connect } from 'react-redux';
 import Header from '../components/dashboard/Header';
 import Body from '../components/dashboard/Body';
@@ -47,7 +47,7 @@ class Dashboard extends Component {
     });
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
+        <Fragment>
           <Head>
             <title>Dashboard - {activePageTitle[0].toUpperCase() + activePageTitle.slice(1)}</title>
             <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
@@ -60,7 +60,7 @@ class Dashboard extends Component {
             />
             <Body sidebarCollapsed={sidebarCollapsed} />
           </div>
-        </div>
+        </Fragment>
       </MuiThemeProvider>
     )
   }

@@ -24,6 +24,9 @@ import EmpalaTable from '../EmpalaTable';
 // TODO  remove later if unused
 
 
+// todo remove unused functions when all calculations right
+/* todo check what calculations could be used in other tables and move em to saga if possible */
+/* or remove if calculations will be processed on server */
 const getPositionsPLs = (positions) => {
   if (!positions) return false;
   const out = {};
@@ -34,12 +37,12 @@ const getPositionsPLs = (positions) => {
   return out;
 };
 
-const getPositionMark = (pos, quotes) => {
-   if (!pos || !quotes) return false;
-   return quotes[pos.sec_id].Mark
-};
-const calculateDayRPL = pos => pos && pos[19] ? pos[19] : false;
-const calculateDayPL = pos => calculateMarketValue(pos) - calculatePrevMarketValue(pos) + calculateDayRPL(pos);
+// const getPositionMark = (pos, quotes) => {
+//    if (!pos || !quotes) return false;
+//    return quotes[pos.sec_id].Mark
+// };
+// const calculateDayRPL = pos => pos && pos[19] ? pos[19] : false;
+// const calculateDayPL = pos => calculateMarketValue(pos) - calculatePrevMarketValue(pos) + calculateDayRPL(pos);
 
 class PositionsPortfolioTable extends React.Component {
   constructor(props) {
@@ -146,7 +149,7 @@ export default connect(
   state => ({
     positionsParsed: state.dashboard.parsedPositions ? state.dashboard.parsedPositions : [],
     // positions: state.dashboard.positions ? state.dashboard.positions : [],
-    quotes: state.dashboard.quotes,
+    quotes: state.dashboard.quotes || [],
   }),
   dispatch => ({
     subscribeQuotes: () => dispatch(subscribeQuotes()),

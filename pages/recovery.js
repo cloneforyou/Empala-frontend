@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import Head from 'next/head';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { FlatButton } from 'material-ui';
 import { withReduxSaga } from '../store';
@@ -80,7 +81,11 @@ class PasswordRecovery extends React.PureComponent {
   render() {
     return (
       <MuiThemeProvider>
-        <div>
+        <Fragment>
+          <Head>
+            <title>Empala - Investor Empowerment</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+          </Head>
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header />
           <div className="index_placeholder noselect">
@@ -135,7 +140,7 @@ class PasswordRecovery extends React.PureComponent {
             </div>
           </div>
           <Footer />
-        </div>
+        </Fragment>
       </MuiThemeProvider>
     );
   }

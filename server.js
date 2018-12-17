@@ -13,11 +13,17 @@ const handler = routes.getRequestHandler(app);
 app.prepare()
   .then(() => {
     const server = express();
-    server.use(handler)
+    const faviconOptions = {
+      root: __dirname + '/static/images/',
+    };
+    server.get('/favicon.ico', (req, res) => (
+      res.status(200).sendFile('icon-empala.ico', faviconOptions)
+    ));
+    server.use(handler);
+    // server.get('*', (req, res) => {
+    //   return handle(req, res)
+    // });
 
-    server.get('*', (req, res) => {
-      return handle(req, res)
-    })
 
     server.listen(3000, (err) => {
       if (err) throw err;
