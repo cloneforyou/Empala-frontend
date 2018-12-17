@@ -67,7 +67,7 @@ class OrdersTable extends React.Component {
         { value: order.values.order_quantity },
         { value: order.values.fill_quantity },
         { value: order.values.remain_quantity },
-        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 1) },
+        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 2) },
         { value: order.values.comission },
         { value: formatNumberWithFixedPoint(order.values.distance, 1) },
         { value: order.values.start_date },
@@ -87,7 +87,7 @@ class OrdersTable extends React.Component {
         { value: formatNumberWithFixedPoint(order.values.price, 2) },
         { value: order.values.order_quantity, color: order.values.order_quantity > 0 ? 'green' : 'red' },
         { value: order.values.fill_quantity },
-        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 1) }, // Notional
+        { value: formatNumberWithFixedPoint(order.values.notional_ammount, 2) }, // Notional
         { value: '--' }, // Exec fees
         { value: '--' }, // Reg fees
         { value: formatNumberWithFixedPoint(order.values.fill_quantity * order.values.price, 2) }, // $ proceeds
