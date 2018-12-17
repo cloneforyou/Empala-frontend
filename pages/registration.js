@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
+import Head from 'next/head';
 import Header from '../components/registration/Header';
 import Content from '../components/registration/Content';
 import Footer from '../components/registration/Footer';
@@ -15,9 +15,9 @@ const env = process !== 'undefined' ? process.env.SERVER : null;
 
 class Registration extends PureComponent {
   static async getInitialProps({ store, isServer }) {
-    console.log('registration', store);
+    // console.log('registration', store);
     const tabName = store.registration ? store.registration.tabName : 'member';
-    const tabIndex = store.registration ? store.registration.tabIndex : 1;
+    // const tabIndex = store.registration ? store.registration.tabIndex : 1;
     store.dispatch(getMenuItems(getMenuItemsByTabName(tabName)));
     return { env };
   }
@@ -33,12 +33,16 @@ class Registration extends PureComponent {
 
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <div>
+        <Fragment>
+          <Head>
+            <title>Empala - Investor Empowerment</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+          </Head>
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <Header />
           <Content {...this.props} />
           <Footer />
-        </div>
+        </Fragment>
       </MuiThemeProvider>
     );
   }

@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {Component} from 'react';
+import React, { Fragment } from 'react';
+import Head from 'next/head';
 import { withReduxSaga } from '../store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import stylesheet from '../assets/styles/main.scss';
@@ -14,12 +15,16 @@ class MFA extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div>
+        <Fragment>
+          <Head>
+            <title>Empala - Investor Empowerment</title>
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+          </Head>
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
           <div className="container-fluid">
             <AuthPhone />
           </div>
-        </div>
+        </Fragment>
       </MuiThemeProvider>
     );
   }
