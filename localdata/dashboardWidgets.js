@@ -711,7 +711,7 @@ export const widgetsPositionFirst = [
             align: 'right',
           },
           {
-            title: 'Day change',
+            title: 'Day % change',
             align: 'right',
           },
         ],
