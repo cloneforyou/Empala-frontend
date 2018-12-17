@@ -8,7 +8,7 @@ import {
   getWidgetAttributesByName,
 } from '../../../utils/dashboardUtils';
 
-
+const stub = '--';
 const getColorForNumericValue = (value) => {
   if (!value || Number.isNaN(value) || value === '--') return null;
   return value > 0 ? 'green' : 'red';
@@ -79,25 +79,26 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
       day_ch: (balance.ETNA.changePercent || {}).Value,
       color: getColorForNumericValue((balance.ETNA.changePercent || {}).Value),
     },
-    { name: 'Net position', value: calculateTotal(), day_ch: 0 },
-    { name: 'Adj net position', value: 0, day_ch: 0 },
-    { name: 'Gross position', value: 0, day_ch: 0 },
-    { name: 'Adj gross position', value: 0, day_ch: 0 },
-    { name: 'Estimated VAR', value: 0, day_ch: 0 },
-    { name: 'Annualized carry', value: 0, day_ch: 0 },
-    { name: 'Credit available', value: 0, day_ch: 0 },
+    { name: 'Net position', value: calculateTotal(), day_ch: 0.0 }, // todo how to calculate
+    { name: 'Adj net position', value: stub, day_ch: stub },
+    { name: 'Gross position', value: stub, day_ch: stub },
+    { name: 'Adj gross position', value: stub, day_ch: stub },
+    { name: 'Estimated VAR', value: stub, day_ch: stub },
+    { name: 'Annualized carry', value: stub, day_ch: stub },
+    { name: 'Credit available', value: stub, day_ch: stub },
   ];
   // Type names just a stub except CommonStock. todo investigate type names
+  // todo remove stubs when calculation will be possible
   const allocations = [
     { name: 'EMARA & MM', domestic: calculateDomesticByType('Emara'), foreign: calculateForeignByType('Emara') },
-    { name: 'Currencies & MM', domestic: calculateDomesticByType('Currencies'), foreign: calculateForeignByType('Currencies') },
+    { name: 'Currencies & MM', domestic: stub || calculateDomesticByType('Currencies'), foreign: stub || calculateForeignByType('Currencies') },
     { name: 'Stocks', domestic: balance.ETNA.marketValue.Value, foreign: calculateForeignByType('CommonStock') },
     // { name: 'Stocks', domestic: calculateDomesticByType('CommonStock'), foreign: calculateForeignByType('CommonStock') },
-    { name: 'Govt bonds', domestic: calculateDomesticByType('Bonds'), foreign: calculateForeignByType('Bonds') },
-    { name: 'Corp bonds', domestic: calculateDomesticByType('CorpBonds'), foreign: calculateForeignByType('CorpBonds') },
-    { name: 'Hybrid & others', domestic: calculateDomesticByType('Hybrid'), foreign: calculateForeignByType('Hybrid') },
-    { name: 'Commodities', domestic: calculateDomesticByType('Commodities'), foreign: calculateForeignByType('Commodities') },
-    { name: 'Private markets', domestic: calculateDomesticByType('Private'), foreign: calculateForeignByType('Private') },
+    { name: 'Govt bonds', domestic: stub || calculateDomesticByType('Bonds'), foreign: stub || calculateForeignByType('Bonds') },
+    { name: 'Corp bonds', domestic: stub || calculateDomesticByType('CorpBonds'), foreign: stub || calculateForeignByType('CorpBonds') },
+    { name: 'Hybrid & others', domestic: stub || calculateDomesticByType('Hybrid'), foreign: stub || calculateForeignByType('Hybrid') },
+    { name: 'Commodities', domestic: stub || calculateDomesticByType('Commodities'), foreign: stub || calculateForeignByType('Commodities') },
+    { name: 'Private markets', domestic: stub || calculateDomesticByType('Private'), foreign: stub || calculateForeignByType('Private') },
   ];
 
   // return getTableDataByName(tableName);
