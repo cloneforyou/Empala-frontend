@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
   CHOOSE_GROUP_COUNTRY,
   CLEAN_ERROR_TEXT,

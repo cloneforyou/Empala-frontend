@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment/moment';
 
 const parseDateString = (str, pattern) => {
-  if (!pattern) return moment(str).format('DD-MM-YYYY');
+  if (!pattern) return moment(str).format('MM/DD/YYYY');
   return moment(str).format(pattern);
 };
 

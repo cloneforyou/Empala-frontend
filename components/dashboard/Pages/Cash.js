@@ -11,7 +11,7 @@ import { getACHTransactionList } from '../../../actions/funding';
 const parsePositionsToTableData = positions => positions.map((pos) => {
   const avgPrice = ((pos.AverageClosePrice + pos.AverageOpenPrice) / 2).toFixed(2);
   return [
-    { value: parseDateString(pos.ModifyDate) },
+    { value: pos.ModifyDate, type: 'date' },
     { value: pos.Symbol },
     { value: pos.CompanyName },
     { value: pos.SecurityId },
@@ -39,7 +39,7 @@ const parsePositionsToTableData = positions => positions.map((pos) => {
 const parseTransactions = transactions => transactions
   .filter(transaction => transaction.transfer_state === 'COMPLETE')
   .map(transaction => [
-    { value: parseDateString(transaction.initiated_time) },
+    { value: transaction.initiated_time, type: 'date' },
     { value: '' },
     { value: transaction.institution_name },
     { value: '' },

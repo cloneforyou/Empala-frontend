@@ -45,28 +45,43 @@ export const calculateOrderDistance = (price, lastPrice) =>
 export const calculateOrderPrice = (symbolPrice, quantity) =>
   (Math.round(parseFloat(symbolPrice) * parseInt(quantity, 10) * 100) / 100);
 
-export const parseOrdersList = list => list.map(order => ({
-  status: order.ExecutionStatus,
-  id: order.Id,
-  side: order.Side,
-  values: {
-    id: Math.random(),
-    // sec_name: order.Name,
-    sec_name: order.SymbolDescription,
-    symbol: order.Symbol,
-    // date: parseOrderDate(order.Date),
-    currency: order.SecurityCurrency,
-    price: order.AveragePrice,
-    order_quantity: order.Quantity * (order.Side === 'Sell' ? -1 : 1),
-    fill_quantity: order.ExecutedQuantity,
-    remain_quantity: order.LeavesQuantity,
-    notional_ammount: calculateOrderPrice(order.AveragePrice, order.Quantity), // TODO find the way how to calculate
-    comission: '--', // TODO find the way how to calculate
-    distance: calculateOrderDistance(order.AveragePrice, order.LastPrice),
-    start_date: parseDateString(order.CreateDate, 'MM/DD/YY'),
-    oct: '--', // TODO Investigate how to calculate
-  },
-}));
+const getSymbolPriceByType = (order) => {
+  if (!order) return 0;
+  switch (order.Type) {
+    case 'Limit':
+      return order.Price;
+    case 'Stop':
+      return order.StopPrice;
+    default:
+      return order.AveragePrice;
+  }
+};
+
+export const parseOrdersList = list => list.map(order => {
+  const symbolPrice = getSymbolPriceByType(order);
+  return {
+    status: order.ExecutionStatus,
+    id: order.Id,
+    side: order.Side,
+    values: {
+      id: Math.random(),
+      // sec_name: order.Name,
+      sec_name: order.SymbolDescription,
+      symbol: order.Symbol,
+      // date: parseOrderDate(order.Date),
+      currency: order.SecurityCurrency,
+      price: symbolPrice,
+      order_quantity: order.Quantity * (order.Side === 'Sell' ? -1 : 1),
+      fill_quantity: order.ExecutedQuantity,
+      remain_quantity: order.LeavesQuantity,
+      notional_ammount: calculateOrderPrice(symbolPrice, order.Quantity), // TODO find the way how to calculate
+      comission: '--', // TODO find the way how to calculate
+      distance: calculateOrderDistance(symbolPrice, order.LastPrice),
+      start_date: parseDateString(order.CreateDate, 'MM/DD/YY'),
+      oct: '--', // TODO Investigate how to calculate
+    },
+  };
+});
 
 export const parseWatchList = list => ({
   id: list.Id,
