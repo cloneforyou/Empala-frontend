@@ -13,7 +13,7 @@ const handler = routes.getRequestHandler(app);
 app.prepare()
   .then(() => {
     const server = express();
-    server.use(favicon(path.join(__dirname, '/static/images/', 'icon-empala.svg')));
+    server.use(favicon(path.join(__dirname, '/static/images/', 'empala-icon.png')));
     server.use(handler);
     // server.get('*', (req, res) => {
     //   return handle(req, res)
