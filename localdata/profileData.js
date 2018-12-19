@@ -171,10 +171,40 @@ export const fieldsMembership = [
   {
     id: 'regulatory_identification_country_of_citizenship',
     label: 'Country of citizenship',
-    hint: 'Please select',
-    field: 'select',
-    options: countriesList,
-    autoWidth: true,
+    field: 'input',
+    type: 'text',
+    placeholder: '',
+    disabled: true,
+  },
+];
+
+export const fieldsResidencyStatus = [
+  {
+    id: 'regulatory_identification_residency_status',
+    label: 'Residency Status',
+    field: 'input',
+    type: 'text',
+    placeholder: '',
+    disabled: true,
+  },
+];
+
+export const fieldsVisaType = [
+  {
+    id: 'regulatory_identification_visa_type',
+    label: 'Visa type',
+    field: 'input',
+    type: 'text',
+    placeholder: '',
+    disabled: true,
+    col: 6,
+  },
+  {
+    id: 'regulatory_identification_visa_expiry_date',
+    field: 'date',
+    label: 'Visa expiry date',
+    disabled: true,
+    col: 6,
   },
 ];
 
