@@ -197,6 +197,7 @@ function* getENTAData(url, params) {
   }
 }
 
+//  calculations for ETNA orders only
 function calculateOCT(orders, positions) {
   if (!(orders && positions)) return;
   const positionsSymbols = [];
@@ -206,14 +207,18 @@ function calculateOCT(orders, positions) {
     positionsValues.push(pos.Quantity);
   });
   const processOrder = (order) => {
-    const i = positionsSymbols.findIndex((el) => el === order.values.symbol);
+    const i = positionsSymbols.findIndex(el => el === order.values.symbol);
     if (i !== -1) {
-      if (order.side === 'Buy') {
-        order.values.oct = 'O';
-      } else if (order.side === 'Sell') {
-        if (order.values.order_quantity <= positionsValues[i]) {
+      if (order.values.fill_quantity === 0) {
+        order.values.oct = '-';
+        return false;
+      }
+      if (order.side === 'Sell') {
+        order.values.oct = 'С';
+      } else if (order.side === 'Buy') {
+        if (order.values.fill_quantity <= positionsValues[i]) {
           order.values.oct = 'O';
-        } else if (order.values.order_quantity > positionsValues[i]){
+        } else if (order.values.fill_quantity > positionsValues[i]){
           order.values.oct = 'T';
         }
       }
