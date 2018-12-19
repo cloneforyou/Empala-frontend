@@ -8,6 +8,8 @@ import {
   fieldsMaillingAddress,
   fieldsPersonalWealth,
   fieldsMemberPersonal,
+  fieldsResidencyStatus,
+  fieldsVisaType,
 } from '../../../../../localdata/profileData';
 import { cleanErrorText, closeModal, openModal, setInputFieldValueById } from '../../../../../actions/dashboard';
 import DeleteAccountModal from './Components/DeleteAccountModal';
@@ -67,6 +69,7 @@ class Membership extends Component {
               errorText={this.props.fieldsErrors[item.id]}
               birthDay={item.birthDay}
               col={item.col}
+              disabled={item.disabled}
             />
           );
         case 'input':
@@ -100,6 +103,8 @@ class Membership extends Component {
             <div className="col-md-6">
               <div className="row margin-bt-30">
                 {fieldsMembership.map(item => this.mappingComponent(item, userData))}
+                {userData.regulatory_identification_country_of_citizenship !== 'United States' && fieldsResidencyStatus.map(item => this.mappingComponent(item, userData))}
+                {userData.regulatory_identification_residency_status === 'Business Visa' && fieldsVisaType.map(item => this.mappingComponent(item, userData))}
               </div>
             </div>
             <div className="col-md-6">
