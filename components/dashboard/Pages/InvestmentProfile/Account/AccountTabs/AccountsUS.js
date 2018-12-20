@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ActionConfirm from '../../../../Modal/ActionConfirm';
+import { formatNumberWithFixedPoint, generateId } from '../../../../../../utils/dashboardUtils';
 
 
 class AccountsUS extends Component {
@@ -12,12 +13,17 @@ class AccountsUS extends Component {
         funcSubmit: null,
         blockNewAccount: false,
       };
-  }
 
-  render() {
-    const { accounts, openModal, submitDelete } = this.props;
-    const textDeletingAcc = 'Are you sure to delete this account?';
-    const textCreatingAcc = 'Sorry... You are currently unable to create a new account.';
+    this.setInputValueForAccount = (account, name) => {
+      this.props.setInputValueForAccount(account, name);
+    };
+
+    this.textDeletingAcc = 'Are you sure to delete this account?';
+    this.textCreatingAcc = 'Sorry... You are currently unable to create a new account.';
+
+    this.saveChanging = (e) => {
+      this.props.saveInputValueForAccount(e.target.id);
+    };
 
     this.handleClick = (text, func) => {
       this.setState({
@@ -31,30 +37,37 @@ class AccountsUS extends Component {
         blockNewAccount: !prevState.blockNewAccount,
       }));
     };
-
-    this.mappingComponent = item => {
+    this.mappingComponent = (item, index) => {
+      const { fieldsErrors, accountBalance, submitDelete } = this.props;
       return (
-        <div className="d-flex" key={item.id}>
-          <div className="pseudo-input mw_208 mx-2 mt-12">
+        <div className="d-flex global-account_padding" key={generateId()}>
+          <div className="d-flex align-items-center mx-2">
+            <i className="icon-flag icon-flag_usa" />
+          </div>
+          <div className="pseudo-input mw_208 mx-2">
             <span className="pseudo-input__label">Account no</span>
             <input
               id="accounts_global_account_no"
               type="text"
               className="pseudo-input__input pseudo-input__input_dark"
-              value={item.creator_member_id}
+              value={item.apex_account_number}
               readOnly
             />
           </div>
-          <div className="pseudo-input mw_350 mx-2 mt-12">
+          <div className="pseudo-input mw_350 mx-2">
             <span className="pseudo-input__label">Account name</span>
             <input
-              id="accounts_global_account_name"
+              id={`accounts_global_account_name_${index}`}
               type="text"
               className="pseudo-input__input pseudo-input__input_dark"
-              readOnly
+              defaultValue={item.account_name}
+              onChange={e => this.setInputValueForAccount(item.apex_account_number, e.target.value, e.target.id)}
+              onBlur={this.saveChanging}
             />
+            {fieldsErrors[`accounts_global_account_name_${index}`] &&
+            <span className="text-error fs-12">{fieldsErrors[`accounts_global_account_name_${index}`]}</span>}
           </div>
-          <div className="pseudo-input mw_150 mx-2 mt-12">
+          <div className="pseudo-input mw_150 mx-2">
             <span className="pseudo-input__label">Customer Type</span>
             <input
               id="accounts_global_customer_type"
@@ -64,7 +77,7 @@ class AccountsUS extends Component {
               readOnly
             />
           </div>
-          <div className="pseudo-input mw_150 mx-2 mt-12">
+          <div className="pseudo-input mw_150 mx-2">
             <span className="pseudo-input__label">Account Type</span>
             <input
               id="accounts_global_account_type"
@@ -74,12 +87,13 @@ class AccountsUS extends Component {
               readOnly
             />
           </div>
-          <div className="pseudo-input mw_208 mx-2 mt-12">
+          <div className="pseudo-input mw_208 mx-2">
             <span className="pseudo-input__label">Net value</span>
             <input
               id="accounts_global_net_value"
               type="text"
               className="pseudo-input__input pseudo-input__input_dark"
+              value={formatNumberWithFixedPoint(this.getTotalBalance(accountBalance), 2)}
               readOnly
             />
           </div>
@@ -108,8 +122,8 @@ class AccountsUS extends Component {
                 type="button"
                 className="default-btn"
                 onClick={() => {
-                  this.handleClick(textDeletingAcc, submitDelete);
-                  openModal('actionModal');
+                  this.handleClick(this.textDeletingAcc, submitDelete);
+                  this.props.openModal('actionModal');
                 }}
               >
                 <i className="icon-trash" />
@@ -119,6 +133,15 @@ class AccountsUS extends Component {
         </div>
       );
     };
+  }
+  getTotalBalance(accountBalance) {
+    if (Object.keys(accountBalance).length === 0) return null;
+    return (accountBalance.cash.Value + accountBalance.stockLongMarketValue.Value)
+      - accountBalance.stockShortMarketValue.Value;
+  }
+
+  render() {
+    const { accounts, openModal } = this.props;
 
     return (
       <div>
@@ -127,7 +150,7 @@ class AccountsUS extends Component {
             Accounts
           </h2>
           {
-            [accounts].map(item => this.mappingComponent(item))
+            [accounts.account].map(item => this.mappingComponent(item))
           }
           <ActionConfirm
             text={this.state.textSubmit}
@@ -160,7 +183,7 @@ class AccountsUS extends Component {
               <button
                 className="profile-btn profile-btn_green mr-5"
                 onClick={() => {
-                  this.handleClick(textCreatingAcc);
+                  this.handleClick(this.textCreatingAcc);
                   openModal('actionModal');
                 }}
               >
