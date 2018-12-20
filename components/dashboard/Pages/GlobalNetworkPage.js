@@ -5,8 +5,8 @@ import { origin } from '../../../keys';
 
 const getUrl = originName => (
   originName === 'prod'
-    ? 'http://community.empala.com'
-    : 'http://socialenginealb-949568690.us-west-2.elb.amazonaws.com'
+    ? 'https://community-prd.empala.com'
+    : 'https://community-dev.empala.com'
 );
 
 function getUrlByPageName(pageName) {
