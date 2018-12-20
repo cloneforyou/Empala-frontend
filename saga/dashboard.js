@@ -181,9 +181,9 @@ function* getLeagueData() {
     }
   }
 }
-/*  --------- ETNA TEST API FUNCTIONS ---------- */
+/*  --------- ETNA API FUNCTIONS ---------- */
 const etnaConfig = {
-  api_path: '/api/etna_test',
+  api_path: '/api/etna',
 };
 
 function* getENTAData(url, params) {
