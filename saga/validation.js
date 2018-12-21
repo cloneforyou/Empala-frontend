@@ -14,9 +14,12 @@ import ignoredFields from '../localdata/noValidatedFiels';
 function* validatePasswordField(id) {
   const password = yield select(state => state.registration.registrationData['member_account_password']);
   const passwordConfirm = yield select(state => state.registration.registrationData['member_account_password_confirm']);
-  const newPassword = yield select(state => state.auth['recovery_password'] || state.profile.profileUserData['reset_password']);
-  const newPasswordConfirm = yield select(state => state.registration.registrationData['recovery_password_confirm'] ||
-    state.profile.profileUserData['reset_password_confirm']);
+  const newPassword = yield select(state => state.auth['recovery_password']
+    || state.profile.profileUserData['reset_password']
+    || '');
+  const newPasswordConfirm = yield select(state => state.registration.registrationData['recovery_password_confirm']
+    || state.profile.profileUserData['reset_password_confirm']
+    || '');
   if (id === 'member_account_password_confirm' || id === 'recovery_password_confirm' || id === 'reset_password_confirm') {
     if (id === 'member_account_password_confirm' && password === passwordConfirm) {
       yield put(setFieldValid('member_account_password_confirm'));
@@ -30,6 +33,7 @@ function* validatePasswordField(id) {
   } else if (id === 'member_account_password' || id === 'recovery_password' || id === 'reset_password') {
     let checkedPassword = password;
     if (id === 'recovery_password' || id === 'reset_password') checkedPassword = newPassword;
+    console.log('** PP', checkedPassword)
     if (checkedPassword.length < 8 || !/[A-Z]+/.test(checkedPassword) || !/\d+/.test(checkedPassword)) {
       yield put(setFieldInvalid(id, 'Passwords must contain at least 8 characters and have at least one Capital letter and numerical digit.'));
     } else {
