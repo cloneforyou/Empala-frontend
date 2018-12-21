@@ -365,6 +365,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
           const foreignValue = Number.isNaN(Number(calculatedForeign)) ? 0 : calculatedForeign;
           return domesticValue + foreignValue;
         };
+        console.log('type: ', type, calculatedDomestic, calculateTotal())
         const calculatedChange = getChangeByTitleAndType(title)(type);
         if (title === 'percent') {
           return {
@@ -372,7 +373,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
             exposure: getExposureByType(type),
             domestic: formatNumberWithFixedPoint((calculatedDomestic * 100) / totalBalance, 2) || stub,
             foreign: formatNumberWithFixedPoint((calculatedForeign * 100) / totalBalance, 2) || stub,
-            total: type === 'net' || type === 'stocks' ? formatNumberWithFixedPoint(100, 2) : stub,
+            total: ['net', 'stocks', 'currencies'].includes(type)
+              ? formatNumberWithFixedPoint((calculatedDomestic * 100) / totalBalance, 2) : stub,
             dayChange: formatNumberWithFixedPoint(calculatedChange, 2),
           };
         }
@@ -394,7 +396,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
           exposure: getExposureByType(type),
           domestic: formatNumberWithFixedPoint(calculatedDomestic, 2),
           foreign: formatNumberWithFixedPoint(calculatedForeign, 2),
-          total: type === 'net' || type === 'stocks' ? formatNumberWithFixedPoint(calculateTotal(), 2) : stub,
+          total: ['net', 'stocks', 'currencies'].includes(type)
+            ? formatNumberWithFixedPoint(calculateTotal(), 2) : stub,
           dayChange: formatNumberWithFixedPoint(calculatedChange, 2),
         };
       });
