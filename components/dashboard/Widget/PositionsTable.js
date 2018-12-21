@@ -40,7 +40,7 @@ const rawNames = {
   adjusted_gross_position_short: 'Adj gross position',
 };
 
-export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
+export const parsePositionsTablesData = (tables, positionsData, quotesData, balance) => {
   const getPositionMark = (pos) => {
     if (!pos || !quotesData || !quotesData[pos.SecurityId]) return false;
     return quotesData[pos.SecurityId].Mark;
@@ -64,6 +64,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
     const calculateDomestic = reduce(positionsData, (sum, value, index) => sum + calculateMarketValue(positionsData[index]), 0);
     const calculateDomesticByType = (type) => {
       if (!type) return calculateDomestic;
+      if (type === 'currencies') return ((balance.ETNA || {}).netCash || {}).Value || 0; // todo modify for multiple Broker Dealers
       return reduce(positionsData, (sum, value, index) => {
         // old calculation. TODO remove later if wrong
         // if (positionsData[index].SecurityType === type) return sum + positionsData[index].CostBasis;
@@ -92,12 +93,13 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
       return ((DayPLTotal + RPLTotal) / (accountValue - DayPLTotal - RPLTotal)) * 100; // percents
     };
 
+
     const domestic = {
       notional: {
-        net: calculateDomesticByType(),
+        net: calculateDomesticByType('CommonStock') + calculateDomesticByType('currencies'),
         stocks: calculateDomesticByType('CommonStock'),
         emara: stub,
-        currencies: stub,
+        currencies: calculateDomesticByType('currencies'),
         governmentBonds: stub,
         corporateBonds: stub,
         hybrids: stub,
@@ -105,8 +107,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         private: stub,
       },
       percent: {
-        net: calculateDomesticByType(),
-        stocks: calculateDomesticByType('CommonStock'),
+        net: calculateDomesticByType('CommonStock') + calculateDomesticByType('currencies'),
+        stocks: calculateDomesticByType('currencies'),
         emara: stub,
         currencies: stub,
         governmentBonds: stub,
@@ -404,7 +406,7 @@ const PositionsTable = props => (
     <WidgetTable
       widget={{
         ...widget,
-        tables: parsePositionsTablesData(widget.tables, props.positions, props.quotes),
+        tables: parsePositionsTablesData(widget.tables, props.positions, props.quotes, props.balance),
       }}
       key={widget.id}
 
@@ -414,4 +416,6 @@ const PositionsTable = props => (
 export default connect(state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
   quotes: state.dashboard.quotes,
+  balance: state.dashboard.accountBalance
+    || { ETNA: {} },
 }))(PositionsTable);
