@@ -57,6 +57,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
     if (!(positions && quotes)) return 0;
     return reduce(positions, (sum, pos) => sum + calculateDayPL(pos, quotes[pos.SecurityId]), 0);
   };
+  const totalBalance = ((balance.ETNA || {}).equityTotal || {}).Value || 0; // todo modify when add another brocker
 
   if (tables.length > 0) {
     // old calculation. TODO remove later if wrong
@@ -111,9 +112,9 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
       },
       percent: {
         net: calculateDomesticByType('CommonStock') + calculateDomesticByType('currencies'),
-        stocks: calculateDomesticByType('currencies'),
+        stocks: calculateDomesticByType('CommonStock'),
         emara: stub,
-        currencies: stub,
+        currencies: calculateDomesticByType('currencies'),
         governmentBonds: stub,
         corporateBonds: stub,
         hybrids: stub,
@@ -165,8 +166,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
     };
     const foreign = {
       notional: {
-        net: 0,
-        stocks: 0,
+        net: stub,
+        stocks: stub,
         emara: stub,
         currencies: stub,
         governmentBonds: stub,
@@ -176,8 +177,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
         private: stub,
       },
       percent: {
-        net: 0,
-        stocks: 0,
+        net: stub,
+        stocks: stub,
         emara: stub,
         currencies: stub,
         governmentBonds: stub,
@@ -369,8 +370,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData, bala
           return {
             id: uniqueId(),
             exposure: getExposureByType(type),
-            domestic: formatNumberWithFixedPoint((calculatedDomestic * 100) / calculateTotal(), 2) || stub,
-            foreign: formatNumberWithFixedPoint((calculatedForeign * 100) / calculateTotal(), 2) || stub,
+            domestic: formatNumberWithFixedPoint((calculatedDomestic * 100) / totalBalance, 2) || stub,
+            foreign: formatNumberWithFixedPoint((calculatedForeign * 100) / totalBalance, 2) || stub,
             total: type === 'net' || type === 'stocks' ? formatNumberWithFixedPoint(100, 2) : stub,
             dayChange: formatNumberWithFixedPoint(calculatedChange, 2),
           };
