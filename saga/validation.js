@@ -33,7 +33,6 @@ function* validatePasswordField(id) {
   } else if (id === 'member_account_password' || id === 'recovery_password' || id === 'reset_password') {
     let checkedPassword = password;
     if (id === 'recovery_password' || id === 'reset_password') checkedPassword = newPassword;
-    console.log('** PP', checkedPassword)
     if (checkedPassword.length < 8 || !/[A-Z]+/.test(checkedPassword) || !/\d+/.test(checkedPassword)) {
       yield put(setFieldInvalid(id, 'Passwords must contain at least 8 characters and have at least one Capital letter and numerical digit.'));
     } else {
