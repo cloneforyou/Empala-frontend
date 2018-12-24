@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import RightBlock from './RightBlock';
 import Search from './Search';
 import logo from '../../../static/images/logo.svg';
@@ -14,44 +16,51 @@ import {
   setActiveMarketPage,
 } from '../../../actions/dashboard';
 import { changeActiveTabProfile } from '../../../actions/profile';
+import Icons from '../../../constants/Icons';
+import DashboardIcon from '../DashboardIcon';
 
 
-class Header extends Component {
-  render() {
-    const {
-      sidebarCollapsed,
-      currentColorScheme,
-    } = this.props;
-    return (
-      <div
-        className={sidebarCollapsed ?
-          `navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_${currentColorScheme} dashboard-header_collapsed` :
-          `navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_${currentColorScheme}`
-        }
+const propTypes = {
+  sidebarCollapsed: PropTypes.bool.isRequired,
+  currentColorScheme: PropTypes.string.isRequired,
+  collapseMenu: PropTypes.func.isRequired,
+};
+
+const Header = ({
+  sidebarCollapsed, currentColorScheme, collapseMenu, ...props
+}) => (
+  <div
+    className={sidebarCollapsed ?
+      `navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_${currentColorScheme} dashboard-header_collapsed` :
+      `navbar fixed-top flex-md-nowrap p-0 dashboard-header dashboard-header_${currentColorScheme}`
+    }
+  >
+    <a className="navbar-brand mr-0 dashboard-header__logo" href="#">
+      {
+        sidebarCollapsed ?
+          <img src={logo} alt="" /> :
+          <img src={iconLogo} alt="" />
+      }
+    </a>
+    <div className="dashboard-header__main row justify-content-between">
+      <button
+        className="navbar-toggler collapsed dashboard-header__toggle"
+        onClick={collapseMenu}
       >
-        <a className="navbar-brand mr-0 dashboard-header__logo" href="#">
-          {
-            sidebarCollapsed ?
-              <img src={logo} alt="" /> :
-              <img src={iconLogo} alt="" />
-          }
-        </a>
-        <div className="dashboard-header__main row justify-content-between">
-          <button
-            className="navbar-toggler collapsed dashboard-header__toggle"
-            onClick={this.props.collapseMenu}
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <Search />
-          <RightBlock
-            {...this.props}
+        <span>
+          <DashboardIcon
+            name={Icons.iconHumburger.id}
+            viewBox={Icons.iconHumburger.viewBox}
           />
-        </div>
-      </div>
-    );
-  }
-}
+        </span>
+      </button>
+      <Search />
+      <RightBlock
+        {...props}
+      />
+    </div>
+  </div>
+);
 
 function mapStateToProps(state) {
   const fullNameFields = [
@@ -99,5 +108,7 @@ function mapDispatchToProps(dispatch) {
     setActiveMarketPage: page => dispatch(setActiveMarketPage(page)),
   };
 }
+
+Header.propTypes = propTypes;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

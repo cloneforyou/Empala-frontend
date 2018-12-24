@@ -18,13 +18,14 @@
 
 @mixin colorfulMenuItem($color) {
   .nav-list__icon {
-    &:before {
-      background-color: $color !important;
-    }
+    fill: $color;
   }
   &:hover, &:focus, &_active {
     a, span, .nav-list__link {
       color: $color !important;
+    }
+    .nav-list__icon {
+      fill: $color;
     }
   }
 

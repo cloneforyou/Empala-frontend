@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from '../../../routes';
+
 import DropdownMenu from './DropdownMenu';
 import NotificationsPopup from './NotificationsPopup';
 import NotificationsBlock from './NotificationsBlock';
 import avatar from '../../../static/images/default-avatar-of-user.svg';
+import Icons from '../../../constants/Icons';
+import DashboardIcon from '../DashboardIcon';
 
 
 const TIMER_INTERVAL = 5 * 60 * 1000;
@@ -122,7 +125,11 @@ export default class RightBlock extends Component {
                   route="dashboard"
                   params={{page: 'profile'}}
                 >
-                  <i className="user-nav__icon user-nav__icon_location background_light-gray"/>
+                  <DashboardIcon
+                    name={Icons.iconMarker.id}
+                    viewBox={Icons.iconMarker.viewBox}
+                    className="user-nav__icon user-nav__icon_location background_light-gray"
+                  />
                 </Link>
               </a>
               <span className="tooltiptext">Account 2</span>
@@ -134,7 +141,11 @@ export default class RightBlock extends Component {
                  onClick={this.setMarketAsActivePage}
               >
                 {/*TODO: Color of icon change depending on the selected MARKET ACCESS*/}
-                <i className="user-nav__icon user-nav__icon_location active-link_red" />
+                <DashboardIcon
+                  name={Icons.iconMarker.id}
+                  viewBox={Icons.iconMarker.viewBox}
+                  className="user-nav__icon user-nav__icon_location active-link_red"
+                />
               </a>
               <span className="tooltiptext">Account 1</span>
             </div>
@@ -142,7 +153,11 @@ export default class RightBlock extends Component {
           <li className="nav-item">
             <div className="nav-tooltipe">
               <a className="nav-link user-nav__link" href="#">
-                <i className="user-nav__icon user-nav__icon_chat"/>
+                <DashboardIcon
+                  name={Icons.iconChat.id}
+                  viewBox={Icons.iconChat.viewBox}
+                  className="user-nav__icon user-nav__icon_chat"
+                />
               </a>
               <span className="tooltiptext">Chat</span>
             </div>
@@ -152,9 +167,12 @@ export default class RightBlock extends Component {
               <a className="nav-link user-nav__link"
                  onClick={this.handleClickNotificationsPopup}
               >
-                <i className={`user-nav__icon user-nav__icon_notification
-                ${animationOfNotifications && 'icon-notifications_animation'}
-                ${animationAndRingOfNotifications && 'icon-notifications_animation'}`}
+                <DashboardIcon
+                  name={Icons.iconNotification.id}
+                  viewBox={Icons.iconNotification.viewBox}
+                  className={`user-nav__icon user-nav__icon_notification
+                  ${animationOfNotifications && 'icon-notifications_animation'}
+                  ${animationAndRingOfNotifications && 'icon-notifications_animation'}`}
                 />
                 {
                   notificationsCounter &&
@@ -189,7 +207,11 @@ export default class RightBlock extends Component {
                 route="dashboard"
                 params={{page: 'global portfolio'}}
               >
-                <i className="user-nav__icon user-nav__icon_wallet"/>
+                <DashboardIcon
+                  name={Icons.iconWallet.id}
+                  viewBox={Icons.iconWallet.viewBox}
+                  className="user-nav__icon user-nav__icon_wallet"
+                />
               </Link>
             </span>
               <span className="tooltiptext">Account</span>
@@ -198,7 +220,6 @@ export default class RightBlock extends Component {
           <li className="nav-item dropdown">
             <button
               className={menuAvatarShow ? "nav-link user-nav__dropdown-btn user-nav__dropdown-btn_open" : "nav-link user-nav__dropdown-btn"}
-              // onClick={this.toggleMenu}
               aria-owns={anchorEl ? 'simple-menu' : null}
               aria-haspopup="true"
               onClick={this.handleClick}

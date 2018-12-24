@@ -1,25 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
-  }
+import Icons from '../../../constants/Icons';
+import DashboardIcon from '../DashboardIcon';
 
 
-  render() {
-    return (
-      <div className="col dashboard-search justify-content-left">
-        <button className="dashboard-search__btn">
-          <i className="dashboard-search__icon" />
-        </button>
-        <input
-          className="form-control dashboard-search__input"
-          type="text"
-          placeholder="Search"
-        />
-      </div>
-    );
-  }
-}
+const Search = () => (
+  <div className="col dashboard-search justify-content-left">
+    <button className="dashboard-search__btn">
+      <DashboardIcon
+        name={Icons.iconSearch.id}
+        viewBox={Icons.iconSearch.viewBox}
+        className="dashboard-search__icon"
+      />
+    </button>
+    <input
+      className="form-control dashboard-search__input"
+      type="text"
+      placeholder="Search"
+    />
+  </div>
+);
 
 export default Search;
