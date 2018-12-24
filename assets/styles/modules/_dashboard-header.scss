@@ -33,21 +33,10 @@
     &:focus {
       outline: none !important;
     }
-    span {
-      position: relative;
-      &:before {
-        content: '';
-        mask: url($path-to-dashboard-icon + 'icon-humburger.svg');
-        mask-size: contain;
-        mask-repeat: no-repeat;
-        background-color: $main-color-text-grey;
-        width: 20px;
-        height: 14px;
-        position: absolute;
-        transform: translateY(-50%);
-        top: 50%;
-        left: 0;
-      }
+    span svg {
+      fill: $main-color-text-grey;
+      width: 20px;
+      height: 15px;
     }
   }
   &_light {
@@ -142,76 +131,44 @@
       .user-nav__icon_notification,
       .user-nav__icon_wallet
       {
-        &:before {
-          background-color: $green;
-        }
+        fill: $green;
+        stroke: $green;
       }
-      .user-nav__icon_location
-      {
-        &:before {
-          background-color: $silver;
-        }
+      .user-nav__icon_location {
+        fill: $silver;
       }
     }
   }
   &__icon {
-    position: relative;
-    display: block;
-    &:before {
-      content: '';
-      background-color: $main-color-text-grey;
-      position: absolute;
-      left: 0;
-    }
+    fill: $main-color-text-grey;
+    stroke: $main-color-text-grey;
     &_location {
       width: 18px;
       height: 20px;
-      &:before {
-        mask: url($path-to-dashboard-icon + 'icon-marker.svg');
-        mask-size: contain;
-        mask-repeat: no-repeat;
-        width: 18px;
-        height: 20px;
-      }
     }
     &_chat {
       width: 22px;
       height: 21px;
-      &:before {
-        mask: url($path-to-dashboard-icon + 'icon-chat.svg');
-        mask-size: contain;
-        mask-repeat: no-repeat;
-        width: 20px;
-        height: 21px;
-      }
     }
     &_notification {
       width: 16px;
       height: 20px;
-      position: relative;
-      &:before {
-        mask: url($path-to-dashboard-icon + 'icon-notification.svg');
-        mask-size: contain;
-        mask-repeat: no-repeat;
-        width: 16px;
-        height: 20px;
-      }
     }
     &_wallet {
       width: 20px;
       height: 21px;
-      &:before {
-        mask: url($path-to-dashboard-icon + 'icon-wallet.svg');
-        mask-size: contain;
-        mask-repeat: no-repeat;
-        width: 20px;
-        height: 21px;
-      }
     }
   }
   &__dropdown-menu {
     margin-right: 10px;
     margin-top: 6px;
+  }
+
+  .background_light-gray {
+    fill: $light-gray;
+  }
+  .active-link_red {
+    fill: $light-red;
   }
 }
 
@@ -227,18 +184,10 @@
     z-index: 0;
   }
   &__icon {
-    position: relative;
-    display: block;
-    &:before {
-      content: '';
-      background-color: $main-color-text-grey;
-      mask: url($path-to-dashboard-icon + 'icon-search.svg');
-      mask-size: contain;
-      mask-repeat: no-repeat;
-      width: 20px;
-      height: 19px;
-      display: block;
-    }
+    fill: $main-color-text-grey;
+    width: 20px;
+    height: 19px;
+    vertical-align: text-bottom;
   }
   &__input {
     border: none;
@@ -280,17 +229,6 @@
       visibility: visible;
     }
   }
-}
-
-.background_light-gray {
-  &:before {
-    background-color: $light-gray;
-  }
-}
-.active-link_red {
-  &:before {
-    background-color: $light-red;
-    }
 }
 
 .icon-notifications_animation {

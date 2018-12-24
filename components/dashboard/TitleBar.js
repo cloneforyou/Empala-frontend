@@ -2,48 +2,74 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import Icons from '../../constants/Icons';
+import DashboardIcon from './DashboardIcon';
+
+
 function mapStateToProps(state) {
   return {
     currentPage: state.dashboard.activePageDashboard,
   };
 }
 
-function TitleBar(props) {
+const propTypes = {
+  currentPage: PropTypes.string.isRequired,
+  iconAccountTitleBar: PropTypes.string,
+  currentSectionTitleBar: PropTypes.string,
+};
+
+const defaultProps = {
+  iconAccountTitleBar: null,
+  currentSectionTitleBar: null,
+};
+
+function TitleBar({ currentPage, iconAccountTitleBar, currentSectionTitleBar }) {
+  const titleBarIcon = `icon${currentPage.charAt(0).toUpperCase() + currentPage.slice(1)}`;
+
   return (
     <div className="titlebar">
-      {props.currentPage && (props.currentPage !== 'global portfolio') && (props.currentPage !== 'funding' && props.currentPage !== 'market') &&
+      {currentPage && (currentPage !== 'global portfolio') && (currentPage !== 'funding' && currentPage !== 'market') &&
       <div className="d-flex">
         <span>
-          <i className={`titlebar__icon titlebar__icon_${props.currentPage}`} />
+          <DashboardIcon
+            name={Icons[titleBarIcon].id}
+            viewBox={Icons[titleBarIcon].viewBox}
+            className="titlebar__icon"
+          />
         </span>
-        <span className="titlebar__title">{props.currentPage}</span>
+        <span className="titlebar__title">{currentPage}</span>
       </div>}
 
-      {props.currentPage && (props.currentPage === 'global portfolio') &&
+      {currentPage && (currentPage === 'global portfolio') &&
       <div className="d-flex">
         <span>
-          <i className="titlebar__icon titlebar__icon_wallet" />
-          {props.iconAccountTitleBar &&
-          <i className={`titlebar__icon-country_flag-${props.iconAccountTitleBar}`} />}
+          <DashboardIcon
+            name={Icons.iconWallet.id}
+            viewBox={Icons.iconWallet.viewBox}
+            className="titlebar__icon"
+          />
+          {iconAccountTitleBar &&
+          <i className={`titlebar__icon-country_flag-${iconAccountTitleBar}`} />}
         </span>
-        <span className="titlebar__title">{props.currentSectionTitleBar}</span>
+        <span className="titlebar__title">{currentSectionTitleBar}</span>
       </div>}
 
-      {props.currentPage && (props.currentPage === 'funding' || props.currentPage === 'market') &&
+      {currentPage && (currentPage === 'funding' || currentPage === 'market') &&
       <div className="d-flex">
         <span>
-          <i className="titlebar__icon titlebar__icon_wallet" />
+          <DashboardIcon
+            name={Icons.iconWallet.id}
+            viewBox={Icons.iconWallet.viewBox}
+            className="titlebar__icon"
+          />
         </span>
-        <span className="titlebar__title">{props.currentPage}</span>
+        <span className="titlebar__title">{currentPage}</span>
       </div>}
     </div>
   );
 }
 
-TitleBar.propTypes = {
-  currentPage: PropTypes.string.isRequired,
-  iconAccountTitleBar: PropTypes.string,
-  currentSectionTitleBar: PropTypes.string,
-};
+TitleBar.propTypes = propTypes;
+TitleBar.defaultProps = defaultProps;
 
 export default connect(mapStateToProps)(TitleBar);

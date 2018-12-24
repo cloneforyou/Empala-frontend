@@ -50,13 +50,12 @@
       text-align: left;
     }
     .nav-list__link {
-      display: block;
+      display: inline-block;
+      padding-left: 13px;
     }
     .nav-list__icon {
-      &:before {
-        transform: translateY(-50%);
-        left: 0;
-      }
+      transform: translateY(25%);
+      left: 0;
       &_file {
         &:before {
           left: 3px;
@@ -90,7 +89,6 @@
 
   &__item {
     position: relative;
-    padding-left: 35px;
     min-height: 17px;
     cursor: pointer;
     &:not(:last-child) {
@@ -104,9 +102,8 @@
         text-decoration: none;
       }
       .nav-list__icon {
-        &:before {
-          background-color: $white;
-        }
+        fill: $white;
+        stroke: $white;
       }
     }
 
@@ -122,21 +119,10 @@
   }
 
   &__icon {
-    &:before {
-      background-color: $main-color-text-grey;
+      fill: $main-color-text-grey;
+      stroke: $main-color-text-grey;
       width: 16px;
       height: 16px;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-    }
-    @each $item in $listItemsSidebar {
-      &_#{$item} {
-        @include iconDashboard($item);
-      }
-    }
-
   }
 }
 
