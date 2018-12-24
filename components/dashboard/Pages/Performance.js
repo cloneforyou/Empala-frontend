@@ -25,7 +25,7 @@ const PrivacyText = () => (
       Check your Application Settings to turn on this feature.
     </p>
   </div>
-)
+);
 class Performance extends Component {
   constructor(props) {
     super(props);

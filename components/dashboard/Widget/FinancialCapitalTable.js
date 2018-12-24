@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduce } from 'lodash';
@@ -50,6 +51,9 @@ const parsePerformanceData = (data, tableName) => {
 };
 
 const parsePositionsToTableData = (tableName, positions, balance) => {
+  /* calculations now are only available for ETNA data
+     some calculations could be incorrect and need to be updated.
+   */
   // todo maybe need to remove positions;
   // all data should be get from server?
   const calculateTotal = () => reduce(
@@ -60,9 +64,13 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
     reduce(positions, (sum, value, index) => sum + positions[index].CostBasis, 0);
   const calculateForeignByType = type => 0; // todo calculation workflow
   const calculateDomesticByType = (type) => {
+    // this is actual just for ETNA
+    // todo modify for another Broker dealers
     if (!type) return calculateDomestic;
     return reduce(positions, (sum, value, index) => {
-      if (type === 'CommonStock') return balance.ETNA.netLiquidity.Value;
+      if (type === 'CommonStock') return (balance.ETNA.netLiquidity || {}).Value;
+      if (type === 'Currencies') return (balance.ETNA.netCash || {}).Value;
+      if (type === 'Stocks') return (balance.ETNA.marketValue || {}).Value;
       if (positions[index].SecurityType === type) return sum + positions[index].CostBasis;
       return 0;
     }, 0);
@@ -72,14 +80,24 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
     const equities = Object.keys(balance).map(el => (balance[el].equityTotal || {}).Value || 0);
     return equities.reduce((a, b) => a + b, 0);
   };
+  /* calculates day change using formula
+      (unrealized p&l + realized p&l)/(account value - unrealized p&l - realized p&l) */
+  /* used for ETNA calculations */
+  const calculateETNATotalDayCh = () =>
+    (balance.ETNA.openPL.Value + balance.ETNA.closePL.Value)
+    / (balance.ETNA.equityTotal.Value - balance.ETNA.openPL.Value - balance.ETNA.closePL.Value);
   const exposures = [
     {
       name: 'Total a/c value',
       value: calculateTotalAcValue(),
-      day_ch: (balance.ETNA.changePercent || {}).Value,
-      color: getColorForNumericValue((balance.ETNA.changePercent || {}).Value),
+      day_ch: calculateETNATotalDayCh(),
+      color: getColorForNumericValue(calculateETNATotalDayCh()),
     },
-    { name: 'Net position', value: calculateTotal(), day_ch: 0.0 }, // todo how to calculate
+    {
+      name: 'Net position',
+      value: calculateDomesticByType('Stocks'),
+      day_ch: (balance.ETNA.changePercent || {}).Value,
+    }, // todo how to calculate
     { name: 'Adj net position', value: stub, day_ch: stub },
     { name: 'Gross position', value: stub, day_ch: stub },
     { name: 'Adj gross position', value: stub, day_ch: stub },
@@ -90,18 +108,49 @@ const parsePositionsToTableData = (tableName, positions, balance) => {
   // Type names just a stub except CommonStock. todo investigate type names
   // todo remove stubs when calculation will be possible
   const allocations = [
-    { name: 'EMARA & MM', domestic: calculateDomesticByType('Emara'), foreign: calculateForeignByType('Emara') },
-    { name: 'Currencies & MM', domestic: stub || calculateDomesticByType('Currencies'), foreign: stub || calculateForeignByType('Currencies') },
-    { name: 'Stocks', domestic: balance.ETNA.marketValue.Value, foreign: calculateForeignByType('CommonStock') },
+    {
+      name: 'EMARA & MM',
+      domestic: calculateDomesticByType('Emara'),
+      foreign: calculateForeignByType('Emara'),
+    },
+    {
+      name: 'Currencies & MM',
+      domestic: calculateDomesticByType('Currencies'),
+      foreign: stub || calculateForeignByType('Currencies'),
+    },
+    {
+      name: 'Stocks',
+      domestic: calculateDomesticByType('Stocks'),
+      foreign: calculateForeignByType('CommonStock'),
+    },
     // { name: 'Stocks', domestic: calculateDomesticByType('CommonStock'), foreign: calculateForeignByType('CommonStock') },
-    { name: 'Govt bonds', domestic: stub || calculateDomesticByType('Bonds'), foreign: stub || calculateForeignByType('Bonds') },
-    { name: 'Corp bonds', domestic: stub || calculateDomesticByType('CorpBonds'), foreign: stub || calculateForeignByType('CorpBonds') },
-    { name: 'Hybrid & others', domestic: stub || calculateDomesticByType('Hybrid'), foreign: stub || calculateForeignByType('Hybrid') },
-    { name: 'Commodities', domestic: stub || calculateDomesticByType('Commodities'), foreign: stub || calculateForeignByType('Commodities') },
-    { name: 'Private markets', domestic: stub || calculateDomesticByType('Private'), foreign: stub || calculateForeignByType('Private') },
+    {
+      name: 'Govt bonds',
+      domestic: stub || calculateDomesticByType('Bonds'),
+      foreign: stub || calculateForeignByType('Bonds'),
+    },
+    {
+      name: 'Corp bonds',
+      domestic: stub || calculateDomesticByType('CorpBonds'),
+      foreign: stub || calculateForeignByType('CorpBonds'),
+    },
+    {
+      name: 'Hybrid & others',
+      domestic: stub || calculateDomesticByType('Hybrid'),
+      foreign: stub || calculateForeignByType('Hybrid'),
+    },
+    {
+      name: 'Commodities',
+      domestic: stub || calculateDomesticByType('Commodities'),
+      foreign: stub || calculateForeignByType('Commodities'),
+    },
+    {
+      name: 'Private markets',
+      domestic: stub || calculateDomesticByType('Private'),
+      foreign: stub || calculateForeignByType('Private'),
+    },
   ];
 
-  // return getTableDataByName(tableName);
   return {
     exposures,
     allocations,
@@ -115,15 +164,15 @@ const getTableDataByName = (tableName, positions, balance, dayChange) => {
   if (tableName === 'overview_financial_capital_exposure') {
     return exposures.map(exp => [
       { value: exp.name },
-      { value: formatNumberWithFixedPoint(exp.value) },
-      { value: formatNumberWithFixedPoint(exp.day_ch, 1), color: exp.color },
+      { value: formatNumberWithFixedPoint(exp.value, 2) },
+      { value: formatNumberWithFixedPoint(exp.day_ch, 2), color: exp.color },
     ]);
   }
   if (tableName === 'overview_financial_capital_allocation') {
     return allocations.map(all => [
       { value: all.name },
-      { value: formatNumberWithFixedPoint(all.domestic) },
-      { value: formatNumberWithFixedPoint(all.foreign) },
+      { value: formatNumberWithFixedPoint(all.domestic, 2) },
+      { value: formatNumberWithFixedPoint(all.foreign, 2) },
     ]);
   }
   return [];

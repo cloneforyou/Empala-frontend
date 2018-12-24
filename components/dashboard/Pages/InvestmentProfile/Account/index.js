@@ -151,13 +151,16 @@ class Account extends Component {
         {
           value === 2 &&
           <USPortfolio
-          accounts={accounts}
+          accounts={accounts} // todo should be filtered with BD related to North America when we will receive account broker-dealer name
           globalData={GlobalPortfolioData}
           prefix={TABS[2].prefix}
           accountBalance={this.props.accountBalance.ETNA}
           currentColorScheme={currentColorScheme}
           openModal={openModal}
           submitDelete={submitDelete}
+          setInputValueForAccount={this.props.setInputValueForAccount}
+          saveInputValueForAccount={this.props.saveInputValueForAccount}
+          fieldsErrors={this.props.fieldsErrors}
           />
         }
         {value === 3 && <div className="account__container">Coming Spring 2019</div>}

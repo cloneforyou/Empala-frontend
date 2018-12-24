@@ -28,7 +28,7 @@ class Sidebar extends Component {
   };
 
   closeMenu = () => {
-    setTimeout(() => this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen })), 100);
+    setTimeout(() => this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen })), 200);
   };
 
   handleClick = (label, market) => {

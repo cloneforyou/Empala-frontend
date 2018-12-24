@@ -40,7 +40,7 @@ const rawNames = {
   adjusted_gross_position_short: 'Adj gross position',
 };
 
-export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
+export const parsePositionsTablesData = (tables, positionsData, quotesData, balance) => {
   const getPositionMark = (pos) => {
     if (!pos || !quotesData || !quotesData[pos.SecurityId]) return false;
     return quotesData[pos.SecurityId].Mark;
@@ -57,6 +57,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
     if (!(positions && quotes)) return 0;
     return reduce(positions, (sum, pos) => sum + calculateDayPL(pos, quotes[pos.SecurityId]), 0);
   };
+  const totalBalance = ((balance.ETNA || {}).equityTotal || {}).Value || 0; // todo modify when add another brocker
 
   if (tables.length > 0) {
     // old calculation. TODO remove later if wrong
@@ -64,6 +65,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
     const calculateDomestic = reduce(positionsData, (sum, value, index) => sum + calculateMarketValue(positionsData[index]), 0);
     const calculateDomesticByType = (type) => {
       if (!type) return calculateDomestic;
+      if (type === 'currencies') return ((balance.ETNA || {}).netCash || {}).Value || 0; // todo modify for multiple Broker Dealers
       return reduce(positionsData, (sum, value, index) => {
         // old calculation. TODO remove later if wrong
         // if (positionsData[index].SecurityType === type) return sum + positionsData[index].CostBasis;
@@ -82,22 +84,26 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
       }, 0);
     };
 
-    const calculateTotalDayChange = () => {
+    const calculateTotalDayChange = (type) => {
+      if (type === 'CommonStock') return balance.ETNA.changePercent.Value;
       /* calculates day change using formula
       (unrealized p&l + realized p&l)/(account value - unrealized p&l - realized p&l) */
       /* used for ETNA calculations */
-      const RPLTotal = calculateTotalRPL(positionsData);
-      const DayPLTotal = calculateTotalDayPL(positionsData, quotesData); // unrealised PL ?
-      const accountValue = calculateDomesticByType('CommonStock');
-      return ((DayPLTotal + RPLTotal) / (accountValue - DayPLTotal - RPLTotal)) * 100; // percents
+      // const RPLTotal = calculateTotalRPL(positionsData);
+      // const DayPLTotal = calculateTotalDayPL(positionsData, quotesData); // unrealised PL ?
+      // const accountValue = calculateDomesticByType('CommonStock');
+      // console.log(accountValue)
+      // return ((DayPLTotal + RPLTotal) / (accountValue - DayPLTotal - RPLTotal)) * 100; // percents
+      return (balance.ETNA.openPL.Value + balance.ETNA.closePL.Value)
+        / (balance.ETNA.equityTotal.Value - balance.ETNA.openPL.Value - balance.ETNA.closePL.Value);
     };
 
     const domestic = {
       notional: {
-        net: calculateDomesticByType(),
+        net: calculateDomesticByType('CommonStock') + calculateDomesticByType('currencies'),
         stocks: calculateDomesticByType('CommonStock'),
         emara: stub,
-        currencies: stub,
+        currencies: calculateDomesticByType('currencies'),
         governmentBonds: stub,
         corporateBonds: stub,
         hybrids: stub,
@@ -105,10 +111,10 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         private: stub,
       },
       percent: {
-        net: calculateDomesticByType(),
+        net: calculateDomesticByType('CommonStock') + calculateDomesticByType('currencies'),
         stocks: calculateDomesticByType('CommonStock'),
         emara: stub,
-        currencies: stub,
+        currencies: calculateDomesticByType('currencies'),
         governmentBonds: stub,
         corporateBonds: stub,
         hybrids: stub,
@@ -116,7 +122,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         private: stub,
       },
       adjusted: {
-        net: ' ',
+        net: stub,
         stocks: stub,
         emara: stub,
         currencies: stub,
@@ -160,8 +166,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
     };
     const foreign = {
       notional: {
-        net: 0,
-        stocks: 0,
+        net: stub,
+        stocks: stub,
         emara: stub,
         currencies: stub,
         governmentBonds: stub,
@@ -171,8 +177,8 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
         private: stub,
       },
       percent: {
-        net: 0,
-        stocks: 0,
+        net: stub,
+        stocks: stub,
         emara: stub,
         currencies: stub,
         governmentBonds: stub,
@@ -227,7 +233,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
     const change = {
       notional: {
         net: /*calculateChangeByType()*/ calculateTotalDayChange(), // todo check what calculation is right
-        stocks: calculateTotalDayChange(),
+        stocks: calculateTotalDayChange('CommonStock'),
         emara: stub,
         currencies: stub,
         governmentBonds: stub,
@@ -238,7 +244,7 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
       },
       percent: {
         net: /*calculateChangeByType()*/ calculateTotalDayChange(), // todo check what calculation is right
-        stocks: calculateTotalDayChange(),
+        stocks: calculateTotalDayChange('CommonStock'),
         emara: stub,
         currencies: stub,
         governmentBonds: stub,
@@ -354,38 +360,45 @@ export const parsePositionsTablesData = (tables, positionsData, quotesData) => {
       return types.map((type) => {
         const calculatedDomestic = getDomesticByTitleAndType(title)(type);
         const calculatedForeign = getForeignByTitleAndType(title)(type);
-        const calculatedTotal = !(Number.isNaN(Number(calculatedDomestic)) && Number.isNaN(Number(calculatedForeign)))
-          ? calculatedDomestic + calculatedForeign
-          : stub;
+        const calculateTotal = () => {
+          const domesticValue = Number.isNaN(Number(calculatedDomestic)) ? 0 : calculatedDomestic;
+          const foreignValue = Number.isNaN(Number(calculatedForeign)) ? 0 : calculatedForeign;
+          return domesticValue + foreignValue;
+        };
+        console.log('type: ', type, calculatedDomestic, calculateTotal())
         const calculatedChange = getChangeByTitleAndType(title)(type);
         if (title === 'percent') {
           return {
             id: uniqueId(),
             exposure: getExposureByType(type),
-            domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || stub,
-            foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || stub,
-            total: type === 'net' || type === 'stocks' ? formatNumberWithFixedPoint(100, 1) : stub,
-            dayChange: formatNumberWithFixedPoint(calculatedChange, 1),
+            domestic: formatNumberWithFixedPoint((calculatedDomestic * 100) / totalBalance, 2) || stub,
+            foreign: formatNumberWithFixedPoint((calculatedForeign * 100) / totalBalance, 2) || stub,
+            total: ['net', 'stocks', 'currencies'].includes(type)
+              ? formatNumberWithFixedPoint((calculatedDomestic * 100) / totalBalance, 2) : stub,
+            dayChange: formatNumberWithFixedPoint(calculatedChange, 2),
           };
         }
-        if (title === 'financialCapital') {
+        if (!([
+          'notional',
+          'percent',
+        ].includes(title))) {
           return {
             id: uniqueId(),
             exposure: getExposureByType(type),
-            value: calculatedTotal,
-            dayChange: getChangeByTitleAndType(title)(type),
-            allocation: 'allocation',
-            domestic: formatNumberWithFixedPoint((calculatedDomestic * 100 / calculatedTotal), 1) || stub,
-            foreign: formatNumberWithFixedPoint((calculatedForeign * 100 / calculatedTotal), 1) || stub,
+            domestic: stub,
+            foreign: stub,
+            total: stub,
+            dayChange: stub,
           };
         }
         return {
           id: uniqueId(),
           exposure: getExposureByType(type),
-          domestic: formatNumberWithFixedPoint(calculatedDomestic, 0),
-          foreign: formatNumberWithFixedPoint(calculatedForeign, 0),
-          total: formatNumberWithFixedPoint(calculatedTotal, 0),
-          dayChange: formatNumberWithFixedPoint(calculatedChange, 1),
+          domestic: formatNumberWithFixedPoint(calculatedDomestic, 2),
+          foreign: formatNumberWithFixedPoint(calculatedForeign, 2),
+          total: ['net', 'stocks', 'currencies'].includes(type)
+            ? formatNumberWithFixedPoint(calculateTotal(), 2) : stub,
+          dayChange: formatNumberWithFixedPoint(calculatedChange, 2),
         };
       });
     };
@@ -404,7 +417,7 @@ const PositionsTable = props => (
     <WidgetTable
       widget={{
         ...widget,
-        tables: parsePositionsTablesData(widget.tables, props.positions, props.quotes),
+        tables: parsePositionsTablesData(widget.tables, props.positions, props.quotes, props.balance),
       }}
       key={widget.id}
 
@@ -414,4 +427,6 @@ const PositionsTable = props => (
 export default connect(state => ({
   positions: state.dashboard.positions ? state.dashboard.positions : [],
   quotes: state.dashboard.quotes,
+  balance: state.dashboard.accountBalance
+    || { ETNA: {} },
 }))(PositionsTable);

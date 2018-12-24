@@ -127,8 +127,8 @@ export const tableHeaders = {
       width: [
         '93px',
         '60px',
-        '138px',
-        '118px',
+        '178px',
+        '78px',
         '90px',
         '90px',
         '102px',
