@@ -37,9 +37,7 @@ import PartialTransfer from './PartialTransfer';
 import CheckTransfer from './CheckTransfer';
 import ACHTransfer from './ACHTransfer';
 import PlusIcon from '../../../common/PlusIcon';
-
-// Todo move in saga after testing
-import request from '../../../../utils/request';
+// import SelectWithSearch from '../../../common/SelectWithSearch';
 
 const TransactionRow = props => {
   const [year, month, day] = props.initiated_time.split('T')[0].split('-');
@@ -333,14 +331,18 @@ class Funding extends PureComponent {
                       this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                       this.isSpecifiedTypeSelected('transfer_type') &&
                       <div className="row no-gutters funding-selection-form">
+                        {/*<SelectWithSearch*/}
+                        {/*/>*/}
                         <EmpalaSelect
                           id="brokerage_firm"
-                          options={[{ value: 'Charles Schwab', title: 'Charles Schwab' }]}
                           label="Brokerage firm"
-                          value="Charles Schwab"
+                          searchEnable="true"
+
+                          options={[{ value: 'Charles Schwab', title: 'Charles Schwab' }]}
+                          value=""
                           // errorText={this.props.fieldsErrors.funding}
                           hint="Choose brokerage firm"
-                          handleChange={()=>{}}
+                          handleChange={this.props.setSelectedValueById}
                         />
                       </div>
                     }
@@ -591,6 +593,7 @@ const mapStateToProps = state => ({
   selectedAccountForACH: state.funding.selected_account_for_ACH,
   currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex[0].account_number : '',
   transfer_direction_ACH: state.funding.transfer_direction_ACH,
+  DTCNumbers: state.dashboard.DTCNumbers,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {

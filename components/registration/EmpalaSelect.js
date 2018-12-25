@@ -64,6 +64,19 @@ const EmpalaSelect = (props) => {
         errorText={props.disabled ? '' : props.errorText}
         margin="none"
       >
+        {props.searchEnable && <div style={{ position: 'relative' }}>
+          <input className="w-100" />
+          <div
+            style={{
+              position: 'absolute',
+              width: '15px',
+              height: '15px',
+              background: 'red',
+              top: 0,
+              right: 0,
+            }}
+          />
+        </div>}
         {props.options.map(option => (
           <MenuItem
             key={option.value}
@@ -89,6 +102,7 @@ EmpalaSelect.propTypes = {
   value: PropTypes.string,
   infoButton: PropTypes.bool,
   openInfoPopup: PropTypes.func,
+  searchEnable: PropTypes.bool,
 };
 export default connect(
   state => ({
