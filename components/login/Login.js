@@ -14,7 +14,7 @@ import {
 } from '../../actions/auth';
 import GoogleAuth from '../social/auth/GoogleAuth';
 import RegistrationModal from './RegistrationModal';
-import logo from '../../static/images/login-logo.png';
+import logo from '../../static/images/login-logo2.svg';
 import FacebookAuth from '../social/auth/FaceBookAuth';
 import LinkedInAuth from '../social/auth/LinkedInAuth';
 import FaSpinner from 'react-icons/lib/fa/spinner';
