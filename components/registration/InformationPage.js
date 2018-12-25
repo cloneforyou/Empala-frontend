@@ -1,23 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import NavButtons from './NavButtons';
 
-const InformationPage = ({ annualFeesDisclaimer, accountId }) => {
-  let replacedAnnualFeesDisclaimer;
-  if (accountId && annualFeesDisclaimer) {
-    replacedAnnualFeesDisclaimer = annualFeesDisclaimer.replace(/%%MEMBER_ID%%/, accountId);
-  }
-  return (
-    <div className="information-container">
-      <div
-        className="h-100"
-        dangerouslySetInnerHTML={{ __html: replacedAnnualFeesDisclaimer || annualFeesDisclaimer }}
-      />
-      <NavButtons
-        tabName="info"
-        tabIndex={1}
-      />
-    </div>
-  );
+
+const propTypes = {
+  annualFeesDisclaimer: PropTypes.string.isRequired,
 };
+
+const InformationPage = ({ annualFeesDisclaimer }) => (
+  <div className="information-container">
+    <div
+      className="h-100"
+      dangerouslySetInnerHTML={{ __html: annualFeesDisclaimer }}
+    />
+    <NavButtons
+      tabName="info"
+      tabIndex={1}
+    />
+  </div>
+);
+
+InformationPage.propTypes = propTypes;
 
 export default InformationPage;
