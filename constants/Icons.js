@@ -31,4 +31,7 @@ export default {
   iconInformation: require('../static/images/dashboard-icons/icon-information.svg?sprite'),
   iconResources: require('../static/images/dashboard-icons/icon-resources.svg?sprite'),
   iconExternal: require('../static/images/dashboard-icons/icon-external.svg?sprite'),
+  //Widgets
+  iconEnvironmental: require('../static/images/dashboard-icons/icon-environmental.svg?sprite'),
+  iconDots: require('../static/images/dashboard-icons/icon-dots.svg?sprite'),
 };
