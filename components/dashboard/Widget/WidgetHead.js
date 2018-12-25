@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+
 import WidgetDotsMenu from './WidgetDotsMenu';
 import AssetAmountRange from './AssetAmountRange';
 import Switcher from './Switcher';
 import { openInfoPopup } from '../../../actions/dashboard';
-import DashboardInfoPopup from '../Modal/DashboardInfoPopup';
+import Icons from '../../../constants/Icons';
+import DashboardIcon from '../DashboardIcon';
+
 
 class WidgetHead extends PureComponent {
   constructor(props) {
@@ -21,12 +24,19 @@ class WidgetHead extends PureComponent {
   render() {
     const { widget } = this.props;
     const { fxButtonContent } = this.state;
+    const widgetIcon = widget.icon && `icon${widget.icon.charAt(0).toUpperCase() + widget.icon.slice(1)}`;
+
     return (
       <div className="widget__head">
 
         <div className="widget__title-row">
           {
-            widget.icon && <i className={`widget__icon widget__icon_${widget.icon}`} />
+            widget.icon &&
+            <DashboardIcon
+              name={Icons[widgetIcon].id}
+              viewBox={Icons[widgetIcon].viewBox}
+              className="widget__icon"
+            />
           }
           <h3 className="widget__title">{widget.title}</h3>
           {

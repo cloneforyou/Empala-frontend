@@ -1,6 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+
 import { setWatchListNumber, subscribeQuotes, unsubscribeQuotes } from '../../../actions/dashboard';
+import Icons from '../../../constants/Icons';
+import DashboardIcon from '../DashboardIcon';
 
 
 class WidgetDotsMenu extends PureComponent {
@@ -48,7 +51,12 @@ class WidgetDotsMenu extends PureComponent {
     const { name } = this.props;
     return (
       <div className="widget-menu">
-        <button className="widget-menu__btn" onClick={this.toggleMenu} />
+        <button className="widget-menu__btn" onClick={this.toggleMenu}>
+          <DashboardIcon
+            name={Icons.iconDots.id}
+            viewBox={Icons.iconDots.viewBox}
+          />
+        </button>
         {this.getMenuContentByWidgetName(name)}
       </div>
     );
