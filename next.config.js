@@ -1,8 +1,8 @@
 const path = require('path');
 const glob = require('glob');
-const withImages = require('next-images');
+const withOptimizedImages = require('next-optimized-images');
 
-module.exports = withImages({
+module.exports = withOptimizedImages({
   webpack: (config, { dev }) => {
     config.module.rules.push(
       {

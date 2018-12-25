@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import logo from '../../static/images/login_logo.png';
+import logo from '../../static/images/login-logo.png';
 import { loginRequest, toggleCodeResend, twoFactorAuthentication } from '../../actions/auth';
 import { ForgotPasswordForm, SuspendedForm } from './Login';
 

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Scrollbars } from 'react-custom-scrollbars';
+
 import { Link } from '../../routes';
 import { sidebarItems } from '../../localdata/dashboardSidebarMenuItems';
 import CountryMenu from './CountryMenu';
 import { setGroupCountry, setActivePage, setActiveMarketPage } from '../../actions/dashboard';
+import Icons from '../../constants/Icons';
+import DashboardIcon from './DashboardIcon';
 
 
 class Sidebar extends Component {
@@ -26,7 +29,6 @@ class Sidebar extends Component {
 
   closeMenu = () => {
     setTimeout(() => this.setState( prevState => ({ countryMenuIsOpen: !prevState.countryMenuIsOpen })), 200);
-    // this.setState( prevState => ({ countryMenuIsOpen: false }))
   };
 
   handleClick = (label, market) => {
@@ -71,7 +73,9 @@ class Sidebar extends Component {
                                 onClick={() => this.openMenu(item.label)}
                                 onBlur={this.closeMenu}
                               >
-                                <i
+                                <DashboardIcon
+                                  name={Icons[item.name].id}
+                                  viewBox={Icons[item.name].viewBox}
                                   className={`nav-list__icon nav-list__icon_${item.icon}`}
                                 />
                                 <span className="nav-list__link">{item.label}</span>
@@ -87,10 +91,12 @@ class Sidebar extends Component {
                             >
                               <Link route="dashboard" params={{ page: `${item.label.toLowerCase()}` }}>
                                 <span>
-                                  <i
+                                  <DashboardIcon
+                                    name={Icons[item.name].id}
+                                    viewBox={Icons[item.name].viewBox}
                                     className={`nav-list__icon nav-list__icon_${item.icon}`}
                                   />
-                                <span className="nav-list__link">{item.label}</span>
+                                  <span className="nav-list__link">{item.label}</span>
                                 </span>
                               </Link>
                             </li>

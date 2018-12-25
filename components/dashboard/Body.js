@@ -1,14 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import Sidebar from './Sidebar';
 import Main from './Main';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Footer from './Footer';
 
+
 class Body extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const { sidebarCollapsed, loadingPage, currentColorScheme, ETNASocketStarted } = this.props;
