@@ -43,8 +43,39 @@ import {
   CLOSE_MODAL_MICRO_DEPOSITS_APPROVE,
   CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID,
   APPROVE_MICRO_DEPOSITS_REQUEST,
+  GET_DTC_NUMBERS_REQUEST,
+  GET_DTC_NUMBERS_SUCCESS,
+  CLEAR_BROKERAGE_FIRM, // todo remove if not use
+  SELECT_BROKERAGE_FIRM,
 } from '../constants/funding';
 
+
+export function selectBrokerageFirm(value) {
+  return {
+    type: SELECT_BROKERAGE_FIRM,
+    value,
+  };
+}
+
+export function clearBrokerageFirm() {
+  return {
+    type: CLEAR_BROKERAGE_FIRM,
+  };
+}
+
+export function getDTCNumbersSuccess(data) {
+  return {
+    type: GET_DTC_NUMBERS_SUCCESS,
+    data,
+  };
+}
+
+export function getDTCNumbersRequest(query) {
+  return {
+    type: GET_DTC_NUMBERS_REQUEST,
+    query,
+  };
+}
 
 export function approveMicroDepositRequest({institutionId, value1, value2}) {
   return {

@@ -5,6 +5,7 @@ import DashboardInfoPopup from '../../Modal/DashboardInfoPopup';
 import TitleBar from '../../TitleBar';
 import { Link } from '../../../../routes';
 import EmpalaSelect from '../../../registration/EmpalaSelect';
+import _ from 'lodash';
 import {
   addInstitution,
   addNewSecurity,
@@ -29,6 +30,8 @@ import {
   closeModalAddManualBankAccount,
   openModalMicroDepositsApprove,
   closeModalMicroDepositsApprove,
+  getDTCNumbersRequest,
+  selectBrokerageFirm,
 } from '../../../../actions/funding';
 import EmpalaInput from '../../../registration/EmpalaInput';
 import FundingMemberInfo from './FundingMemberInfo';
@@ -37,7 +40,7 @@ import PartialTransfer from './PartialTransfer';
 import CheckTransfer from './CheckTransfer';
 import ACHTransfer from './ACHTransfer';
 import PlusIcon from '../../../common/PlusIcon';
-// import SelectWithSearch from '../../../common/SelectWithSearch';
+import SelectWithSearch from '../../../common/SelectWithSearch';
 
 const TransactionRow = props => {
   const [year, month, day] = props.initiated_time.split('T')[0].split('-');
@@ -166,12 +169,15 @@ class Funding extends PureComponent {
     this.interval = setInterval(()=> this.props.getACHTransactionList(), 15000);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !_.isEqual(nextProps, this.props);
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
   getAccountsDropdownOptions() {
-    console.log('apexAccount',this.props.apexAccounts )
     return this.props.apexAccounts.map(el => ({ title: el.account_number, value: el.account_number }));
   }
 
@@ -202,7 +208,7 @@ class Funding extends PureComponent {
 
   alpsTransferHandler() {
     // Todo add validate after
-    if (!this.props.account_no || !this.props.member_first_name ||
+    if (!this.props.account_no || !this.props.member_first_name || !this.props.brokerage_firm ||
       !this.props.member_last_name || (this.props.member_primary_ssn &&
         this.props.member_primary_ssn.replace(/-/g, '').length !== 9)) return;
 
@@ -213,6 +219,7 @@ class Funding extends PureComponent {
       deliveryAccount: this.props.account_no,
       deliveryPrimarySsnOrTaxId: this.props.member_primary_ssn.replace(/-/g, ''),
       deliveryAccountTittle: `${this.props.member_title} ${this.props.member_first_name} ${this.props.member_last_name}`,
+      participantNumber: this.props.brokerage_firm.value,
     };
 
     if (this.props.member_secondary_ssn) {
@@ -331,18 +338,13 @@ class Funding extends PureComponent {
                       this.isSpecifiedTypeSelected('funding_type', 'Account transfer') &&
                       this.isSpecifiedTypeSelected('transfer_type') &&
                       <div className="row no-gutters funding-selection-form">
-                        {/*<SelectWithSearch*/}
-                        {/*/>*/}
-                        <EmpalaSelect
-                          id="brokerage_firm"
+                        <SelectWithSearch
                           label="Brokerage firm"
-                          searchEnable="true"
-
-                          options={[{ value: 'Charles Schwab', title: 'Charles Schwab' }]}
-                          value=""
-                          // errorText={this.props.fieldsErrors.funding}
+                          options={this.props.DTCNumbers}
+                          value={this.props.brokerage_firm || ''}
                           hint="Choose brokerage firm"
-                          handleChange={this.props.setSelectedValueById}
+                          handleChange={this.props.selectBrokerageFirm}
+                          searchFunction={this.props.getDTCNumbersRequest}
                         />
                       </div>
                     }
@@ -593,7 +595,8 @@ const mapStateToProps = state => ({
   selectedAccountForACH: state.funding.selected_account_for_ACH,
   currentApexAccountNumber: state.funding.memberAccountsData ? state.funding.memberAccountsData.apex[0].account_number : '',
   transfer_direction_ACH: state.funding.transfer_direction_ACH,
-  DTCNumbers: state.dashboard.DTCNumbers,
+  DTCNumbers: state.funding.DTCNumbers,
+  brokerage_firm: state.funding.brokerage_firm,
 });
 const mapDispatchToProps = dispatch => ({
   setSelectedValueById: (id, value, index) => {
@@ -642,6 +645,8 @@ const mapDispatchToProps = dispatch => ({
   closeModalAddManualBankAccount: () => dispatch(closeModalAddManualBankAccount()),
   openModalMicroDepositsApprove: institutionId => dispatch(openModalMicroDepositsApprove(institutionId)),
   closeModalMicroDepositsApprove: () => dispatch(closeModalMicroDepositsApprove()),
+  getDTCNumbersRequest: query => dispatch(getDTCNumbersRequest(query)),
+  selectBrokerageFirm: value => dispatch(selectBrokerageFirm(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Funding);

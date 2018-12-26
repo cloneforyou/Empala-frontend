@@ -15,6 +15,7 @@ import {
   ACH_WITHDRAW_REQUEST,
   ADD_MANUAL_BANK_ACCOUNT,
   APPROVE_MICRO_DEPOSITS_REQUEST,
+  GET_DTC_NUMBERS_REQUEST,
 } from '../constants/funding';
 import {
   addInstitutionFail,
@@ -34,6 +35,7 @@ import {
   getAccountsFail,
   getACHTransactionList as actionGetACHTransactionList,
   closeModalMicroDepositsApprove,
+  getDTCNumbersSuccess,
 } from '../actions/funding';
 import { openInfoPopup } from '../actions/dashboard';
 
@@ -51,6 +53,7 @@ const urls = {
   cancelACHTransaction: '/api/funding/transactions/cancel',
   addManualBankAccount: '/api/funding/institution/addManual',
   approveMicroDeposits: '/api/funding/institution/addManual/approve',
+  dtc: '/api/funding/dtc',
 };
 
 export function* getAccountsData() {
@@ -325,7 +328,35 @@ export function* approveMicroDeposits({ institutionId, value1, value2 }) {
   } catch (e) {
     yield put(addInstitutionFail(e.message));
   }
+}
 
+export function* getDTCNumbers({ query }) {
+  try {
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-Access-Token': localStorage.getItem('accessToken'),
+      },
+    };
+
+    if (query.length >= 3) {
+      const resp = yield call(request, `${urls.dtc}?name=${query}`, options);
+
+      const result = [];
+      resp.data.data.forEach((item) => {
+        result.push({
+          title: item.participant_account_name,
+          value: item.DTC_number,
+        });
+      });
+
+      yield put(getDTCNumbersSuccess(result));
+    } else {
+      yield put(getDTCNumbersSuccess([]));
+    }
+  } catch (e) {
+    console.log('error dtc numbers', e);
+  }
 }
 
 export default function* fundingSaga() {
@@ -343,5 +374,6 @@ export default function* fundingSaga() {
     takeEvery(CANCEL_ACH_TRANSFER, cancelACHTransfers),
     takeEvery(ADD_MANUAL_BANK_ACCOUNT, addManualBank),
     takeEvery(APPROVE_MICRO_DEPOSITS_REQUEST, approveMicroDeposits),
+    takeLatest(GET_DTC_NUMBERS_REQUEST, getDTCNumbers),
   ]);
 }
