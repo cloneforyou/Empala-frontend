@@ -23,7 +23,7 @@ class Notifications extends Component {
   render() {
     const { allNotifications } = this.props;
     return (
-      <div className="notifications-container">
+      <div className="notifications-container dark-theme">
         <div className="notifications-container__header">
           <span className="title">Your Notifications</span>
           <span className="settings">Notification Settings</span>
