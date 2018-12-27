@@ -145,7 +145,7 @@ class AccountsUS extends Component {
 
     return (
       <div>
-        <div className="global-portfolio__container_payments">
+        <div className="global-portfolio__container_payments dark-theme">
           <h2 className="title-part mb-0">
             Accounts
           </h2>
@@ -159,7 +159,7 @@ class AccountsUS extends Component {
         </div>
         {
           !this.state.blockNewAccount &&
-          <div className="global-portfolio__container_payments d-flex justify-content-end">
+          <div className="global-portfolio__container_payments d-flex justify-content-end dark-theme">
             <button
               className="profile-btn profile-btn_green mr-10"
               onClick={() => {
@@ -173,7 +173,7 @@ class AccountsUS extends Component {
 
         {
           this.state.blockNewAccount &&
-          <div className="global-portfolio__container_payments mb-4">
+          <div className="global-portfolio__container_payments mb-4 dark-theme">
             <div className="mb-4">
               {
                 this.mappingComponent({})

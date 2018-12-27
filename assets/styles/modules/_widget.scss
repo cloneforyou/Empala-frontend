@@ -31,20 +31,11 @@
   }
 
   &__icon {
-    position: relative;
+    width: 16px;
+    height: 16px;
     margin-right: 7px;
-    &:before {
-      background-color: $green;
-      width: 16px;
-      height: 16px;
-      position: relative;
-      display: block;
-    }
-    @each $item in $listIconsTitleWidgets {
-      &_#{$item} {
-        @include iconDashboard($item);
-      }
-    }
+    fill: $green;
+    stroke: $green;
   }
 
   &__title {
@@ -132,22 +123,15 @@
   padding-right: 2px;
   float: right;
   &__btn {
+    height: 18px;
+    width: 4px;
     background: none;
     border: none;
-    height: 15px;
-    width: 4px;
-    position: relative;
     padding: 0;
     cursor: pointer;
-    &:before {
-      height: 18px;
-      width: 4px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      background-color: $main-color-text-grey;
+    svg {
+      fill: $main-color-text-grey;
     }
-    @include iconDashboard('dots')
   }
   &__list {
 

@@ -96,7 +96,7 @@
     justify-content: space-between;
     background-color: #f9fafa;
     border: solid 0.5px #e9e9e9;
-    margin: 0 -1px;
+    margin-left: -1px;
     line-height: 27px;
     padding: 0 10px 0 30px;
     .notifications-links {
@@ -117,12 +117,16 @@
     line-height: 27px;
     background-color: #f2f2f2;
     padding-left: 30px;
+    border: solid 0.5px #e9e9e9;
+    margin-left: -1px;
   }
   &__earlier {
     height: 27px;
     line-height: 27px;
     background-color: #f2f2f2;
     padding-left: 30px;
+    border: solid 0.5px #e9e9e9;
+    margin-left: -1px;
   }
   &__see-all {
     height: 27px;

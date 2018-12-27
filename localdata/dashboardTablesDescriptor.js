@@ -5,8 +5,8 @@ export const widgetAttributes = {
     icon: 'groups',
     col: 3,
     height: 390,
-    padding_left: 5,
-    padding_right: 35,
+    padding_left: 15,
+    padding_right: 25,
   },
   overview_financial_capital_exposure: {
     id: 'overview_financial_capital_exposure',

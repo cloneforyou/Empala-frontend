@@ -69,7 +69,15 @@
         }
       }
     }
-
+    .notifications-popup_dark {
+      background: $dark-blue;
+      .notifications-popup__news {
+        background: #383757;
+      }
+      .notifications-popup__earlier {
+        background: #383757;
+      }
+    }
   }
 }
 

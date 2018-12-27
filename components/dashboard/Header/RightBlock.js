@@ -106,6 +106,7 @@ export default class RightBlock extends Component {
       changeActiveTabProfile,
       animationAndRingOfNotifications,
       animationOfNotifications,
+      currentColorScheme,
     } = this.props;
     const {
       menuAvatarShow,
@@ -242,6 +243,7 @@ export default class RightBlock extends Component {
             </button>
             <DropdownMenu
               {...this.props}
+              currentColorScheme={currentColorScheme}
               closeMenu={this.closeMenu}
               userPic={userPic}
               anchorEl={anchorEl}

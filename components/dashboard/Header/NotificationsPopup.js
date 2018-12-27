@@ -52,10 +52,10 @@ class NotificationsPopup extends Component {
       lastNotifications,
     } = this.props;
     return (
-      <div className="notifications-popup"
+      <div className="notifications-popup notifications-popup_dark"
            ref={node => this.notificationsPopup = node}
       >
-        <div className="notifications-popup__notifications">
+        <div className="notifications-popup__notifications notifications-popup_dark">
           <span className="green fw-600">Notifications</span>
           <div className="notifications-links">
             <a href="#"
