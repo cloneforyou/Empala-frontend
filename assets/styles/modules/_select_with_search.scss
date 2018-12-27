@@ -1,0 +1,109 @@
+.select-with-search {
+  width: 100%;
+
+  &__label {
+    font-size: 12px;
+    font-weight: normal;
+    color: #b2d56b;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  &__dropdown-container {
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  &__dropdown-value {
+    height: 33px;
+    background: white;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 34px;
+    letter-spacing: 0.5px;
+    color: #7a7a7c;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 0 25px 0 10px;
+  }
+
+  &__arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #808895 transparent transparent transparent;
+    position: absolute;
+    top: 15px;
+    right: 11px;
+
+    &--inverse {
+      border-style: solid;
+      border-width: 0 5px 5px 5px;
+      border-color: transparent transparent #808895 transparent;
+    }
+  }
+
+  &__dropdown-menu {
+    position: absolute;
+    z-index: 2;
+    background: white;
+    box-shadow: 2px 4px 20px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 10px 0;
+    width: 100%;
+    bottom: -1px;
+    transform: translateY(100%);
+  }
+
+  &__input {
+    width: calc(100% - 20px);
+    border-radius: 5px;
+    border: 1px solid rgb(152, 199, 58);;
+    font-size: 16px;
+    color: #7a7a7c;
+    padding-left: 10px;
+    font-weight: 300;
+    margin-left: 10px;
+  }
+
+  &__nothing-found {
+    font-size: 16px;
+    color: #7a7a7c;
+    margin: 10px 0 0 10px;
+  }
+
+  &__options-container {
+    max-height: 200px;
+    margin-top: 10px;
+    overflow: auto;
+  }
+
+  &__options-item {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    color: #7a7a7c;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 32px;
+    padding-left: 10px;
+
+    &:hover {
+      background-color: rgba(0,0,0,0.1);
+    }
+
+    &--active {
+      color: rgb(152, 199, 58);
+    }
+  }
+
+
+
+}

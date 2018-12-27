@@ -30,6 +30,9 @@ import {
   OPEN_MODAL_MICRO_DEPOSITS_APPROVE,
   CLOSE_MODAL_MICRO_DEPOSITS_APPROVE,
   CHANGE_MODAL_MICRO_DEPOSITS_APPROVE_VALUE_BY_ID,
+  GET_DTC_NUMBERS_SUCCESS,
+  CLEAR_BROKERAGE_FIRM, // todo remove if not use
+  SELECT_BROKERAGE_FIRM,
 } from '../constants/funding';
 
 const initialState = {
@@ -79,6 +82,8 @@ const initialState = {
     institutionMask: '',
     institutionType: '',
   },
+  brokerage_firm: false,
+  DTCNumbers: [],
 };
 
 function funding(state = initialState, action) {
@@ -103,6 +108,7 @@ function funding(state = initialState, action) {
         transferSubmitted: false,
         selected_account_for_ACH: false,
         transfer_direction_ACH: '',
+        brokerage_firm: false,
       };
     case SET_FIELD_VALUE:
       if (action.id === 'funding_type') {
@@ -285,6 +291,21 @@ function funding(state = initialState, action) {
           ...state.modalMicroDepositsApprove,
           [action.id]: action.value,
         },
+      };
+    case GET_DTC_NUMBERS_SUCCESS:
+      return {
+        ...state,
+        DTCNumbers: action.data,
+      };
+    case CLEAR_BROKERAGE_FIRM:
+      return {
+        ...state,
+        brokerage_firm: false,
+      };
+    case SELECT_BROKERAGE_FIRM:
+      return {
+        ...state,
+        brokerage_firm: action.value,
       };
     default:
       return state;
