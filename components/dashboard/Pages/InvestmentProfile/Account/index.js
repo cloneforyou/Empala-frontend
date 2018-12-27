@@ -163,12 +163,42 @@ class Account extends Component {
           fieldsErrors={this.props.fieldsErrors}
           />
         }
-        {value === 3 && <div className="account__container">Coming Spring 2019</div>}
-        {value === 4 && <div className="account__container">Coming as part of phase 2</div>}
-        {value === 5 && <div className="account__container">Coming as part of phase 2</div>}
-        {value === 6 && <div className="account__container">Coming as part of phase 2</div>}
-        {value === 7 && <div className="account__container">Coming as part of phase 2</div>}
-        {value === 8 && <div className="account__container">Coming as part of phase 3</div>}
+        {value === 3 &&
+        <div
+          className="account__container"
+          style={{backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE}}>
+          Coming Spring 2019
+        </div>}
+        {value === 4 &&
+        <div
+          className="account__container"
+          style={{backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE}}>
+          Coming as part of phase 2
+        </div>}
+        {value === 5 &&
+        <div
+          className="account__container"
+          style={{backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE}}>
+          Coming as part of phase 2
+        </div>}
+        {value === 6 &&
+        <div
+          className="account__container"
+          style={{backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE}}>
+          Coming as part of phase 2
+        </div>}
+        {value === 7 &&
+        <div
+          className="account__container"
+          style={{backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE}}>
+          Coming as part of phase 2
+        </div>}
+        {value === 8 &&
+        <div
+          className="account__container"
+          style={{backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE}}>
+          Coming as part of phase 3
+        </div>}
       </div>
     );
   }

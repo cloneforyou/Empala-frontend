@@ -57,6 +57,7 @@ const Header = ({
       <Search />
       <RightBlock
         {...props}
+        currentColorScheme={currentColorScheme}
       />
     </div>
   </div>

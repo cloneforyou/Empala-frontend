@@ -12,7 +12,7 @@ export default class USPortfolio extends Component {
         <div className="global-portfolio__container">
           <PortfolioValue {...this.props} />
           <AccountsUS {...this.props} />
-          <Graphics />
+          <Graphics {...this.props} />
         </div>
       </div>
     );

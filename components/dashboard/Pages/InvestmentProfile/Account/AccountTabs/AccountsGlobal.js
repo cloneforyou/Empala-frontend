@@ -100,7 +100,7 @@ class AccountsGlobal extends Component {
     } = this.props.accounts;
 
     return (
-      <div className="global-portfolio__container_payments">
+      <div className="global-portfolio__container_payments dark-theme">
         <h2 className="title-part">
           Accounts
         </h2>
