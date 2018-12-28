@@ -42,7 +42,7 @@ const Header = ({
           <img src={iconLogo} alt="" />
       }
     </a>
-    <div className="dashboard-header__main row justify-content-between">
+    <div className={`dashboard-header__main row justify-content-between ${currentColorScheme === 'dark' ? 'dashboard-header__main--dark' : ''}`}>
       <button
         className="navbar-toggler collapsed dashboard-header__toggle"
         onClick={collapseMenu}

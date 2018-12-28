@@ -68,7 +68,7 @@
     }
   }
   &_dark {
-    border-color: #EFEFEF;
+    border-color: $dark-bg-blue;
     background: $dark-bg-blue;
     .widget {
       background: $dark-blue;

@@ -11,6 +11,10 @@
       height: 100%;
       border-bottom: 1px solid #EDEDED;
       align-items: center;
+
+      &--dark {
+        border-bottom: 1px solid #292844;
+      }
     }
   }
   &__logo {
