@@ -9,6 +9,11 @@ import { setGroupCountry, setActivePage, setActiveMarketPage } from '../../actio
 import Icons from '../../constants/Icons';
 import DashboardIcon from './DashboardIcon';
 
+function getStrokeFillClassByName(name) {
+  return [
+    'iconChart', 'iconCase', 'iconTimeline', 'iconCommunity', 'iconGroups',
+  ].includes(name) ? 'nav-list__icon--stroke' : '';
+}
 
 class Sidebar extends Component {
   constructor(props) {
@@ -76,7 +81,7 @@ class Sidebar extends Component {
                                 <DashboardIcon
                                   name={Icons[item.name].id}
                                   viewBox={Icons[item.name].viewBox}
-                                  className={`nav-list__icon nav-list__icon_${item.icon}`}
+                                  className={`nav-list__icon nav-list__icon_${item.icon} ${getStrokeFillClassByName(item.name)}`}
                                 />
                                 <span className="nav-list__link">{item.label}</span>
                               </button>
@@ -94,7 +99,7 @@ class Sidebar extends Component {
                                   <DashboardIcon
                                     name={Icons[item.name].id}
                                     viewBox={Icons[item.name].viewBox}
-                                    className={`nav-list__icon nav-list__icon_${item.icon}`}
+                                    className={`nav-list__icon nav-list__icon_${item.icon} ${getStrokeFillClassByName(item.name)}`}
                                   />
                                   <span className="nav-list__link">{item.label}</span>
                                 </span>

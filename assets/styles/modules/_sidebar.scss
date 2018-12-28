@@ -101,9 +101,8 @@
         color: $white;
         text-decoration: none;
       }
-      .nav-list__icon {
-        fill: $white;
-        stroke: $white;
+      span .nav-list__icon {
+        filter: brightness(3);
       }
     }
 
@@ -119,10 +118,14 @@
   }
 
   &__icon {
-    fill: $main-color-text-grey;
-    stroke: $main-color-text-grey;
     width: 16px;
     height: 16px;
+    fill: $main-color-text-grey;
+  }
+  &__icon--stroke {
+    width: 16px;
+    height: 16px;
+    stroke: $main-color-text-grey;
   }
 }
 

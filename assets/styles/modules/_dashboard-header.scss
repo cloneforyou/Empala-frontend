@@ -173,9 +173,11 @@
   }
 
   .background_light-gray {
+    stroke: $light-gray;
     fill: $light-gray;
   }
   .active-link_red {
+    stroke: $light-red;
     fill: $light-red;
   }
 }
