@@ -12,7 +12,7 @@ class Footer extends PureComponent {
         if (item.country === 'USA' && item.page === 'Platform Disclaimer Footer') {
           platformDisclaimerFooter = item.text;
         }
-      })
+      });
     }
     return (
       <div className={
