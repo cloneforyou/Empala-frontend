@@ -147,7 +147,11 @@ class Account extends Component {
           fieldsErrors={this.props.fieldsErrors}
           />
         }
-        {value === 1 && <div className="account__container">Coming Spring 2019</div>}
+        {value === 1 &&
+        <div
+          className="account__container"
+          style={{backgroundColor: currentColorScheme === 'light' ? CONCRETE : MIRAGE}}>
+          Coming Spring 2019</div>}
         {
           value === 2 &&
           <USPortfolio
