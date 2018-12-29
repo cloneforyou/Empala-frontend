@@ -8,6 +8,7 @@ import {
   MAIN_COLOR_TEXT_GRAY,
   TORCH_RED,
   WHITE,
+  DARK,
 } from '../../constants/colors';
 
 const style = {
@@ -91,8 +92,11 @@ const style = {
     right: '12px',
     color: GREEN,
   },
-  menuItemStyle: {
+  menuItemStyleLight: {
     color: MAIN_COLOR_TEXT_GRAY,
+  },
+  menuItemStyleDark: {
+    color: WHITE,
   },
   selectedMenuItemStyle: {
     color: GREEN,
@@ -102,6 +106,11 @@ const style = {
     width: '40px',
     padding: '6px 0 0 7px',
     fill: MAIN_COLOR_TEXT_GRAY,
+  },
+  selectMenuStyle: {
+    menuStyle: {
+      background: DARK,
+    },
   },
   panoramaFishEyeIcon: {
     height: '25px',

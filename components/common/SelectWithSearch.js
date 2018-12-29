@@ -17,7 +17,6 @@ class SelectWithSearch extends React.Component {
   };
 
   handleToggleDropdown = (e) => {
-    console.log('click')
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     this.setState({ isOpen: !this.state.isOpen });
@@ -106,10 +105,6 @@ class SelectWithSearch extends React.Component {
 
           </div>}
         </div>
-
-
-
-
       </div>
     );
   }

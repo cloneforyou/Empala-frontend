@@ -49,13 +49,14 @@ const EmpalaSelect = (props) => {
         }
         style={style.selectFieldStyle}
         iconStyle={style.iconSelectStyle}
-        menuItemStyle={style.menuItemStyle}
+        menuItemStyle={currentColorScheme === 'dark' ? style.menuItemStyleDark : style.menuItemStyleLight}
         selectedMenuItemStyle={style.selectedMenuItemStyle}
         underlineStyle={style.underlineStyle}
         underlineShow={false}
         underlineDisabledStyle={{
           border: 'none',
         }}
+        dropDownMenuProps={currentColorScheme === 'dark' ? style.selectMenuStyle : null}
         maxHeight={300}
         onChange={(e, i, v) => {
           props.handleChange(props.id, v);
