@@ -43,8 +43,6 @@ import {
   CLOSE_POPUP_PIN,
   SET_FIELD_VALUE,
   SET_APP_SETTINGS,
-  SET_SESSION_TIME_REMAIN,
-  RESTART_SESSION_TIMEOUT,
   REFRESH_TOKENS,
   ADD_NOTIFICATION,
   DROP_NOTIFICATION,
@@ -372,18 +370,6 @@ export function setAppSettings(data) {
   };
 }
 
-export function setSessionTimeRemain(time) {
-  return {
-    type: SET_SESSION_TIME_REMAIN,
-    time,
-  };
-}
-
-export function restartSessionTimeout() {
-  return {
-    type: RESTART_SESSION_TIMEOUT,
-  };
-}
 
 export function addNotification(notification) {
   return {

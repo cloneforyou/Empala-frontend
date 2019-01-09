@@ -89,7 +89,6 @@ export function* updateAppSettings() {
     const response = yield call(request, url, options);
     if (response.data.info === 'SETTINGS_UPDATED') {
       yield put(setAppSettings(response.data.data));
-      yield put(restartSessionTimeout());
     }
   } catch (err) {
     yield put(updateSettingsFail('Error while update settings'));

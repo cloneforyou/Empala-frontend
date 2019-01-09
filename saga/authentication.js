@@ -7,7 +7,6 @@ import {
 import request from '../utils/request';
 import {
   openModal,
-  restartSessionTimeout,
   setAccessToken,
   setUserData,
   startSocket,
@@ -31,7 +30,7 @@ import {
 } from '../actions/auth';
 import { setFieldInvalid } from '../actions/registration';
 import { setColorScheme } from '../actions/dashboard';
-import { selectETNADataRequest, getNews, sessionTimeout, getExternalNews, balancesUpdates } from './dashboard';
+import { selectETNADataRequest, getNews, getExternalNews, balancesUpdates } from './dashboard';
 
 
 /* todo remove when actual data been available */
@@ -272,7 +271,6 @@ export function* getUserData() {
     if (data.data.data.profile.should_update_password) {
       yield put(openModal('passwordReminder'));
     }
-    yield put(restartSessionTimeout());
     yield getExternalNews();
     yield all([
       getNews(),

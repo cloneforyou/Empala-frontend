@@ -16,7 +16,6 @@ import {
   LOGOUT,
   MUTE_NOTIFICATIONS,
   REFRESH_TOKEN_REQUEST,
-  RESTART_SESSION_TIMEOUT,
   START_WEBSOCKET,
   STOP_WEBSOCKET,
   GET_NOTIFICATIONS,
@@ -35,7 +34,6 @@ import {
   setAppSettings,
   setOrdersList,
   setPositions,
-  setSessionTimeRemain,
   setWatchLists,
   updateNews,
   setAllNotifications,
@@ -69,18 +67,6 @@ const urls = {
   eDocuments: '/api/documents',
 };
 
-export function* sessionTimeout() {
-  let timeout = yield select(state => state.dashboard.appSettings.session_timeout || 600);
-  timeout += 30;
-  yield put(setSessionTimeRemain(timeout));
-  while (timeout > 0) {
-    yield delay(1000);
-    yield timeout -= 1;
-    yield put(setSessionTimeRemain(timeout));
-    if (timeout === 120) yield put(openModal('sessionExpire'));
-  }
-  return yield logout();
-}
 
 export function* callAnimationAndAudioForNotifications() {
   yield put(updateNotificationReceived(false));
@@ -493,7 +479,6 @@ export default function* dashboardSaga() {
     takeEvery(GET_NOTIFICATIONS, getNotifications),
     takeEvery(SET_COMPLETE_ACTION, setCompleteAction),
     takeEvery(CHECK_UNREAD_NOTIFICATIONS, callAnimationForNotifications),
-    takeLatest(RESTART_SESSION_TIMEOUT, sessionTimeout),
     takeLatest(REFRESH_TOKEN_REQUEST, refreshTokens),
     takeLatest(GET_LEAGUE_DATA, getLeagueData),
     takeEvery(GET_EDOCUMENTS_LIST_REQUEST, getEDocumentsList),
