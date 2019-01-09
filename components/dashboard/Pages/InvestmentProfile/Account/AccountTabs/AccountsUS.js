@@ -50,7 +50,7 @@ class AccountsUS extends Component {
               id="accounts_global_account_no"
               type="text"
               className="pseudo-input__input pseudo-input__input_dark"
-              value={item.apex_account_number}
+              value={item.accountNo}
               readOnly
             />
           </div>
@@ -61,7 +61,7 @@ class AccountsUS extends Component {
               type="text"
               className="pseudo-input__input pseudo-input__input_dark"
               defaultValue={item.account_name}
-              onChange={e => this.setInputValueForAccount(item.apex_account_number, e.target.value, e.target.id)}
+              onChange={e => this.setInputValueForAccount(item.accountNo, e.target.value, e.target.id)}
               onBlur={this.saveChanging}
             />
             {fieldsErrors[`accounts_global_account_name_${index}`] &&
@@ -150,7 +150,10 @@ class AccountsUS extends Component {
             Accounts
           </h2>
           {
-            [accounts.account].map(item => this.mappingComponent(item))
+            [{
+              ...accounts.account,
+              accountNo: (accounts.apex || {}).account_number || '',
+            }].map(item => this.mappingComponent(item))
           }
           <ActionConfirm
             text={this.state.textSubmit}
