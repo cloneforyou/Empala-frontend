@@ -5,7 +5,6 @@ import profile from './reducers/profile';
 import auth from './reducers/auth';
 import funding from './reducers/funding';
 import account from './reducers/account';
-import timeout from './reducers/timeout';
 
 export const InitialState = {
 };
@@ -20,7 +19,6 @@ function reducer(state = InitialState, action) {
 export default combineReducers({
   dashboard,
   auth,
-  timeout,
   registration,
   profile,
   funding,
