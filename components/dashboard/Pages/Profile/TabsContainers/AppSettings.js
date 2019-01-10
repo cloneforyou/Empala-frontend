@@ -5,6 +5,7 @@ import Footer from './Components/Footer';
 import { toggleCheckboxById } from '../../../../../actions/registration';
 import { saveColorTheme, setInputFieldValueById } from '../../../../../actions/dashboard';
 
+const timeouts = [5, 10, 15, 30, 45, 60];
 const options = {
   colorTheme: [
     {
@@ -16,6 +17,10 @@ const options = {
       title: 'Dark',
     },
   ],
+  sessionTimeout: timeouts.map(el => ({
+    value: (el * 60).toString(),
+    title: el === 0 ? 'Unlimited (not recommended)' : `${el} minutes`,
+  })),
 };
 
 class AppSettings extends Component {
@@ -88,6 +93,15 @@ class AppSettings extends Component {
                   handleChange={(id, value) => saveColorTheme(value)}
                   errorText={fieldsErrors.app_settings_theme}
                   hint="Current color scheme"
+                />
+                <EmpalaSelect
+                  id="app_settings_session_timeout"
+                  options={options.sessionTimeout}
+                  label="Default session timeout"
+                  value={appSettings.app_settings_session_timeout.toString() || ''}
+                  handleChange={setSelectedValueById}
+                  errorText={fieldsErrors.app_settings_theme}
+                  hint="Session timeout"
                 />
               </div>
             </div>

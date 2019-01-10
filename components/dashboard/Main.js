@@ -6,6 +6,7 @@ import Performance from './Pages/Performance';
 import Cash from './Pages/Cash'
 import Orders from "./Pages/Orders";
 import Profile from "./Pages/Profile";
+import Footer from './Footer';
 import GlobalNetworkPage from './Pages/GlobalNetworkPage';
 import PasswordReminderModal from './PasswordReminderModal';
 import { closeModal } from '../../actions/dashboard';
@@ -13,6 +14,7 @@ import MarketAccessPage from './Pages/MarketAccessPage';
 import Funding from './Pages/InvestmentProfile/Funding';
 import Account from './Pages/InvestmentProfile/Account';
 import PopupPIN from '../registration/PopupPIN';
+import SessionExpire from './Modal/SessionExpire';
 import ShowPageOrRejection from './ShowPageOrRejection';
 
 class Main extends Component {
@@ -120,6 +122,7 @@ class Main extends Component {
           handleClose={this.props.closeModal}
           open={this.props.reminderModalOpen}
          />
+        <SessionExpire />
         {
           showPopupPIN && <PopupPIN
             type={popupPINType}
