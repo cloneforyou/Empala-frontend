@@ -28,7 +28,6 @@
     padding: 10px 10px 10px;
     padding-left: calc(#{$sidebar-width} + 20px);
     transition: .4s;
-    //border-top: 1px solid;
     &_full {
       padding-left: calc(#{$sidebar-width-full} + 20px);
     }
@@ -81,6 +80,7 @@
     }
     .emp-table__th {
       color: #7a7697;
+      background-color: $dark-blue;
     }
     .emp-table__td,
     .emp-table.table-striped-row .emp-table__table-cell {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
 import EmpalaTable from '../EmpalaTable';
-import { formatNumberWithFixedPoint, getTableHeaderByName, parseOrderDate, parseDateString } from '../../../utils/dashboardUtils';
+import { formatNumberWithFixedPoint, getTableHeaderByName } from '../../../utils/dashboardUtils';
 import WidgetHead from '../Widget/WidgetHead';
 import { initGA, logPageView } from '../../../utils/analytics';
 import { getACHTransactionList } from '../../../actions/funding';
@@ -75,7 +75,7 @@ class Cash extends Component {
         className={`widget-col col-lg-${widget.col}`}
         key={widget.id}
       >
-        <div className="widget" style={{ maxHeight: `${widget.height}px` }}>
+        <div className="widget">
           <WidgetHead
             widget={widget}
           />

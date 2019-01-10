@@ -1,10 +1,14 @@
 .emp-table {
+  position: relative;
   margin-bottom: 15px;
   &__th {
     @include fontSize(12px);
+    position: sticky;
+    top: 0;
     font-weight: normal;
     color: $dark-grey;
-    padding: 4px 0px 11px 10px !important;
+    background-color: $white;
+    padding: 4px 0 11px 10px !important;
     &:first-child {
       padding-left: 10px !important;
     }
@@ -15,9 +19,6 @@
       padding-right: 10px !important;
     }
     max-height: 30px;
-    //@media (max-width: 1500px) {
-    //  @include fontSize(10px);
-    //}
   }
   &__td {
     @include fontSize(12px);
@@ -58,9 +59,6 @@
     padding: 4px 0 4px 10px !important;
     font-weight: normal;
     color: $main-color-text-grey;
-    //@media (max-width: 1600px) {
-    //  @include fontSize(10px);
-    //}
     &_small {
       padding-top: 1px!important;
       padding-bottom: 1px!important;

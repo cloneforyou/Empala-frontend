@@ -82,7 +82,7 @@ export const tableHeaders = {
     id: 'dashboard_cash',
     title: 'Currency and money markets fund balance',
     col: 12,
-    height: 'auto',
+    height: 600,
     localFX: true,
     dots: true,
     headers: [
@@ -338,6 +338,7 @@ export const tableHeaders = {
     id: 'dashboard_positions_portfolio',
     title: 'Position portfolio',
     col: 12,
+    height: 600,
     dots: true,
     localFX: true,
     headers: [
