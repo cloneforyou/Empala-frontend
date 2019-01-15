@@ -28,20 +28,17 @@
     padding: 10px 10px 10px;
     padding-left: calc(#{$sidebar-width} + 20px);
     transition: .4s;
-    //border-top: 1px solid;
     &_full {
       padding-left: calc(#{$sidebar-width-full} + 20px);
     }
     &_light {
       background: $white;
-      //border-color: #EDEDED;
       .list-horizontal__link, .dashboard__copyright, .main-text-helvetica {
         color: #000;
       }
     }
     &_dark {
       background: $dark-bg-blue;
-      //border-color: $dark-bg-blue;
       color: $main-color-text-grey;
       .list-horizontal__link,
       .dashboard__copyright,

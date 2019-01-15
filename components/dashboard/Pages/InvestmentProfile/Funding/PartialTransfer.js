@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import EmpalaInput from '../../../registration/EmpalaInput';
+
+import EmpalaInput from '../../../../registration/EmpalaInput';
 import PatrialTransferSecurities from './PartialTransferSecurities';
+
 
 export default class PartialTransfer extends Component {
   constructor(props) {

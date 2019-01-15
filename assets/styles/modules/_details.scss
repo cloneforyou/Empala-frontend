@@ -135,6 +135,14 @@
   line-height: 15px;
 }
 
+.fs-18 {
+  @include fontSize(18px);
+}
+
+.mw-372 {
+  max-width: 372px;
+}
+
 .mw_330 {
   max-width: 330px;
   @media(max-width: 991px) {
@@ -146,12 +154,24 @@
   max-width: 350px;
 }
 
+.w-250 {
+  width: 250px;
+}
+
 .mw_210 {
   max-width: 210px;
 }
 
 .mw_208 {
   max-width: 208px;
+}
+
+.w-186 {
+  width: 186px;
+}
+
+.mw-186 {
+  max-width: 186px;
 }
 
 .mw_150 {

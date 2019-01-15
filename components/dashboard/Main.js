@@ -10,7 +10,7 @@ import GlobalNetworkPage from './Pages/GlobalNetworkPage';
 import PasswordReminderModal from './PasswordReminderModal';
 import { closeModal } from '../../actions/dashboard';
 import MarketAccessPage from './Pages/MarketAccessPage';
-import Funding from './Pages/InvestmentProfile/Funding';
+import Funding from './Pages/InvestmentProfile/Funding/Funding';
 import Account from './Pages/InvestmentProfile/Account';
 import PopupPIN from '../registration/PopupPIN';
 import ShowPageOrRejection from './ShowPageOrRejection';

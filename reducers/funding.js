@@ -33,10 +33,11 @@ import {
   GET_DTC_NUMBERS_SUCCESS,
   CLEAR_BROKERAGE_FIRM, // todo remove if not use
   SELECT_BROKERAGE_FIRM,
+  SET_ACTIVE_FUNDING_TAB,
 } from '../constants/funding';
 
 const initialState = {
-  global_accounts: {},
+  global_accounts: [],
   funding_type: false,
   transfer_type: false,
   account_type: 'Single',
@@ -64,7 +65,7 @@ const initialState = {
   member_last_name: '',
   ACHTransactionList: [],
   selected_account_for_ACH: false,
-  transfer_direction_ACH: '',
+  transfer_direction: '',
   isOpenModalChooseInstituteAdding: false,
   isOpenModalAddManualBankAccount: false,
   modalCreateBankAccount: {
@@ -102,12 +103,11 @@ function funding(state = initialState, action) {
         account_no: false,
         funding_comments: false,
         errorALPS: '',
-        // transfer_type: false,  // remove after testing,
         check_amount: false,
         check_memo: false,
         transferSubmitted: false,
         selected_account_for_ACH: false,
-        transfer_direction_ACH: '',
+        transfer_direction: '',
         brokerage_firm: false,
       };
     case SET_FIELD_VALUE:
@@ -118,6 +118,7 @@ function funding(state = initialState, action) {
           ACHTransactionList: state.ACHTransactionList,
           account_number: state.account_number,
           [action.id]: action.value,
+          global_accounts: state.global_accounts,
         };
       }
       return {
@@ -218,7 +219,8 @@ function funding(state = initialState, action) {
       };
     case ADD_ACCOUNTS:
       return {
-        global_accounts: action.accounts,
+        ...state,
+        global_accounts: [action.accounts],
       };
     case SET_PAYMENT_ACCOUNT:
       return {
@@ -306,6 +308,11 @@ function funding(state = initialState, action) {
       return {
         ...state,
         brokerage_firm: action.value,
+      };
+    case SET_ACTIVE_FUNDING_TAB:
+      return {
+        ...state,
+        transfer_direction: action.transferDirection,
       };
     default:
       return state;

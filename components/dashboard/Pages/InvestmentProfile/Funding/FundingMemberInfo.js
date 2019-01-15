@@ -1,24 +1,46 @@
 import React, { Component } from 'react';
-import EmpalaInput from '../../../registration/EmpalaInput';
+
+import EmpalaInput from '../../../../registration/EmpalaInput';
+import EmpalaSelect from '../../../../registration/EmpalaSelect';
+
 
 export default class FundingMemberInfo extends Component {
   constructor(props) {
     super(props);
     this.ssnMask = '999-99-9999';
+    this.suffix = [
+      {
+        value: 'Mr',
+        title: 'Mr',
+      },
+      {
+        value: 'Mrs',
+        title: 'Mrs',
+      },
+      {
+        value: 'Ms',
+        title: 'Ms',
+      },
+      {
+        value: 'Dr',
+        title: 'Dr',
+      },
+    ];
   }
   isSpecifiedTypeSelected(type, value) {
     return value ? this.props[type] === value : this.props[type];
   }
   render() {
     return (
-      <div className="d-flex flex-wrap">
+      <div className="row no-gutters">
         <div className="pr-2 no-gutters" style={{ width: '104px', marginBottom: '12px' }} >
-          <EmpalaInput
+          <EmpalaSelect
             id="member_title"
+            options={this.suffix}
             label="Account name"
+            hint="Mr"
             value={this.props.member_title || ''}
             handleChange={this.props.setInputValueById}
-            // readOnly
           />
         </div>
         <div className="pr-2 no-gutters text-truncate" style={{ width: '176px', paddingTop: '22px' }} >
@@ -53,7 +75,6 @@ export default class FundingMemberInfo extends Component {
               value={this.props.member_primary_ssn || ''}
               handleChange={this.props.setInputValueById}
               mask={this.ssnMask}
-              // readOnly
             />
           </div>
           <div
@@ -67,7 +88,6 @@ export default class FundingMemberInfo extends Component {
               value={this.props.member_secondary_ssn || ''}
               handleChange={this.props.setInputValueById}
               mask={this.ssnMask}
-              // placeholder="123-45-6789"
             />
           </div>
         </div>

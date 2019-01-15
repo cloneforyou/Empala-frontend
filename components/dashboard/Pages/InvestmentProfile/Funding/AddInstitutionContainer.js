@@ -1,8 +1,8 @@
 import React from 'react';
 import PlaidLink from 'react-plaid-link';
 // import { Plaid } from '../../../../keys';
-import ChooseInstituteAdding from '../../Modal/ChooseInstituteAdding';
-import AddManualBankAccount from '../../Modal/AddManualBankAccount';
+import ChooseInstituteAdding from '../../../Modal/ChooseInstituteAdding';
+import AddManualBankAccount from '../../../Modal/AddManualBankAccount';
 
 
 const handleOnSuccess = (token, metadata) => {
