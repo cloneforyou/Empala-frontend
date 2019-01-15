@@ -242,7 +242,7 @@ export function* getGlobalAccounts() {
   };
   try {
     const response = yield call(request, urls.getGlobalAccounts, options);
-    yield put(addAccounts(response));
+    yield put(addAccounts((response.data || {}).data));
   } catch (err) {
     console.error(' ** GLOBAL ACCOUNTS ERROR =======>', err);
   }

@@ -103,15 +103,18 @@
       color: rgb(152, 199, 58);
     }
   }
+}
 
-  .dashboard_dark
-  &__dropdown-value,
-  &__dropdown-menu,
-  &__dropdown-menu input {
-    background-color: $dark-blue;
-    color: $white;
-  }
-  &__nothing-found {
-    color: $white;
+.dashboard_dark {
+  .select-with-search {
+    &__dropdown-value,
+    &__dropdown-menu,
+    &__dropdown-menu input {
+      background-color: $dark-blue;
+      color: $white;
+    }
+    &__nothing-found {
+      color: $white;
+    }
   }
 }

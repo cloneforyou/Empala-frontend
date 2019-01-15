@@ -1,0 +1,13 @@
+.funding-wire-payment-box {
+  width: 549px;
+  border-radius: 10px;
+  box-shadow: 1px 2px 15px 0 rgba(0, 0, 0, 0.1);
+  background-color: $white;
+  border: solid 1px $light-gray;
+  margin: 0 auto;
+  padding: 35px;
+
+  & div {
+    padding: 0;
+  }
+}

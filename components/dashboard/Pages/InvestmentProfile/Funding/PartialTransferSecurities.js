@@ -1,7 +1,9 @@
 import React from 'react';
-import EmpalaInput from '../../../registration/EmpalaInput';
-import EmpalaSelect from '../../../registration/EmpalaSelect';
-import { formatNumberWithFixedPoint } from '../../../../utils/dashboardUtils';
+
+import EmpalaInput from '../../../../registration/EmpalaInput';
+import EmpalaSelect from '../../../../registration/EmpalaSelect';
+import { formatNumberWithFixedPoint } from '../../../../../utils/dashboardUtils';
+
 
 const SecuritiesRow = props => (
   <div className="funding-partial-securities-content-row">

@@ -47,6 +47,7 @@ import {
   GET_DTC_NUMBERS_SUCCESS,
   CLEAR_BROKERAGE_FIRM, // todo remove if not use
   SELECT_BROKERAGE_FIRM,
+  SET_ACTIVE_FUNDING_TAB,
 } from '../constants/funding';
 
 
@@ -374,5 +375,12 @@ export function addAccounts(accounts) {
   return {
     type: ADD_ACCOUNTS,
     accounts,
+  };
+}
+
+export function setActiveFundingTab(transferDirection) {
+  return {
+    type: SET_ACTIVE_FUNDING_TAB,
+    transferDirection,
   };
 }
