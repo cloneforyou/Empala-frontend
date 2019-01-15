@@ -123,9 +123,8 @@ class PositionsPortfolioTable extends React.Component {
     return (
       <div
         className={`widget-col col-lg-${this.widget.col}`}
-        // key={this.widget.id}
       >
-        <div className="widget" style={{ maxHeight: `${this.widget.height}px` }}>
+        <div className="widget">
           <WidgetHead
             widget={this.widget}
           />
